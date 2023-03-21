@@ -16,17 +16,14 @@ import (
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in the
 // Amazon Elastic Compute Cloud User Guide. Modifies the VPC peering connection
 // options on one side of a VPC peering connection. You can do the following:
-//
-// *
+// -
 // Enable/disable communication over the peering connection between an EC2-Classic
 // instance that's linked to your VPC (using ClassicLink) and instances in the peer
 // VPC.
-//
-// * Enable/disable communication over the peering connection between
+// - Enable/disable communication over the peering connection between
 // instances in your VPC and an EC2-Classic instance that's linked to the peer
 // VPC.
-//
-// * Enable/disable the ability to resolve public DNS hostnames to private IP
+// - Enable/disable the ability to resolve public DNS hostnames to private IP
 // addresses when queried from instances in the peer VPC.
 //
 // If the peered VPCs are

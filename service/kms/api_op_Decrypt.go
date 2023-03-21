@@ -13,17 +13,12 @@ import (
 
 // Decrypts ciphertext that was encrypted by a KMS key using any of the following
 // operations:
-//
-// * Encrypt
-//
-// * GenerateDataKey
-//
-// * GenerateDataKeyPair
-//
-// *
+// - Encrypt
+// - GenerateDataKey
+// - GenerateDataKeyPair
+// -
 // GenerateDataKeyWithoutPlaintext
-//
-// * GenerateDataKeyPairWithoutPlaintext
+// - GenerateDataKeyPairWithoutPlaintext
 //
 // You can
 // use this operation to decrypt ciphertext that was encrypted under a symmetric
@@ -73,15 +68,11 @@ import (
 // permissions: kms:Decrypt
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (key policy) Related operations:
-//
-// * Encrypt
-//
-// * GenerateDataKey
-//
-// *
+// - Encrypt
+// - GenerateDataKey
+// -
 // GenerateDataKeyPair
-//
-// * ReEncrypt
+// - ReEncrypt
 func (c *Client) Decrypt(ctx context.Context, params *DecryptInput, optFns ...func(*Options)) (*DecryptOutput, error) {
 	if params == nil {
 		params = &DecryptInput{}
@@ -148,17 +139,13 @@ type DecryptInput struct {
 	// alias ARN. When using an alias name, prefix it with "alias/". To specify a KMS
 	// key in a different Amazon Web Services account, you must use the key ARN or
 	// alias ARN. For example:
-	//
-	// * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// * Key
+	// - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	// - Key
 	// ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// *
+	// -
 	// Alias name: alias/ExampleAlias
-	//
-	// * Alias ARN:
+	// - Alias ARN:
 	// arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
 	//
 	// To get the key ID and key

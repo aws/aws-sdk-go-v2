@@ -46,17 +46,13 @@ type AssociateFileSystemAliasesInput struct {
 
 	// An array of one or more DNS alias names to associate with the file system. The
 	// alias name has to comply with the following formatting requirements:
-	//
-	// *
-	// Formatted as a fully-qualified domain name (FQDN), hostname.domain , for
-	// example, accounting.corp.example.com.
-	//
-	// * Can contain alphanumeric characters and
-	// the hyphen (-).
-	//
-	// * Cannot start or end with a hyphen.
-	//
-	// * Can start with a
+	// - Formatted
+	// as a fully-qualified domain name (FQDN), hostname.domain , for example,
+	// accounting.corp.example.com.
+	// - Can contain alphanumeric characters and the
+	// hyphen (-).
+	// - Cannot start or end with a hyphen.
+	// - Can start with a
 	// numeric.
 	//
 	// For DNS alias names, Amazon FSx stores alphabetic characters as

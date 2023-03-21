@@ -32,29 +32,23 @@ import (
 // the Key Management Service Developer Guide. Cross-account use: No. You cannot
 // perform this operation on a KMS key in a different Amazon Web Services account.
 // Required permissions
-//
-// * kms:UpdateAlias
+// - kms:UpdateAlias
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // on the alias (IAM policy).
-//
-// * kms:UpdateAlias
+// - kms:UpdateAlias
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // on the current KMS key (key policy).
-//
-// * kms:UpdateAlias
+// - kms:UpdateAlias
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // on the new KMS key (key policy).
 //
 // For details, see Controlling access to aliases
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-alias.html#alias-access)
 // in the Key Management Service Developer Guide. Related operations:
-//
-// *
+// -
 // CreateAlias
-//
-// * DeleteAlias
-//
-// * ListAliases
+// - DeleteAlias
+// - ListAliases
 func (c *Client) UpdateAlias(ctx context.Context, params *UpdateAliasInput, optFns ...func(*Options)) (*UpdateAliasOutput, error) {
 	if params == nil {
 		params = &UpdateAliasInput{}
@@ -88,11 +82,9 @@ type UpdateAliasInput struct {
 	// alias. Also, the new target KMS key must be the same type as the current target
 	// KMS key (both symmetric or both asymmetric or both HMAC) and they must have the
 	// same key usage. Specify the key ID or key ARN of the KMS key. For example:
-	//
-	// *
-	// Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// * Key ARN:
+	// - Key
+	// ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	// - Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// To

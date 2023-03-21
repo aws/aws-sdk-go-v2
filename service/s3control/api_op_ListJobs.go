@@ -20,19 +20,15 @@ import (
 // information, see S3 Batch Operations
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops.html) in the
 // Amazon S3 User Guide. Related actions include:
-//
-// * CreateJob
+// - CreateJob
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html)
-//
-// *
+// -
 // DescribeJob
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html)
-//
-// *
+// -
 // UpdateJobPriority
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobPriority.html)
-//
-// *
+// -
 // UpdateJobStatus
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html)
 func (c *Client) ListJobs(ctx context.Context, params *ListJobsInput, optFns ...func(*Options)) (*ListJobsOutput, error) {

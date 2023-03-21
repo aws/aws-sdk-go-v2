@@ -49,13 +49,10 @@ type DescribePlaceIndexOutput struct {
 	CreateTime *time.Time
 
 	// The data provider of geospatial data. Values can be one of the following:
-	//
-	// *
+	// -
 	// Esri
-	//
-	// * Grab
-	//
-	// * Here
+	// - Grab
+	// - Here
 	//
 	// For more information about data providers, see Amazon
 	// Location Service data providers
@@ -76,8 +73,7 @@ type DescribePlaceIndexOutput struct {
 
 	// The Amazon Resource Name (ARN) for the place index resource. Used to specify a
 	// resource across Amazon Web Services.
-	//
-	// * Format example:
+	// - Format example:
 	// arn:aws:geo:region:account-id:place-index/ExamplePlaceIndex
 	//
 	// This member is required.

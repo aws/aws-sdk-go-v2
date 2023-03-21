@@ -20,15 +20,12 @@ import (
 // it's still used in any Rules or if it still includes any countries. If you just
 // want to remove a GeoMatchSet from a Rule, use UpdateRule. To permanently delete
 // a GeoMatchSet from AWS WAF, perform the following steps:
-//
-// * Update the
+// - Update the
 // GeoMatchSet to remove any countries. For more information, see
 // UpdateGeoMatchSet.
-//
-// * Use GetChangeToken to get the change token that you
-// provide in the ChangeToken parameter of a DeleteGeoMatchSet request.
-//
-// * Submit a
+// - Use GetChangeToken to get the change token that you provide
+// in the ChangeToken parameter of a DeleteGeoMatchSet request.
+// - Submit a
 // DeleteGeoMatchSet request.
 func (c *Client) DeleteGeoMatchSet(ctx context.Context, params *DeleteGeoMatchSetInput, optFns ...func(*Options)) (*DeleteGeoMatchSetOutput, error) {
 	if params == nil {

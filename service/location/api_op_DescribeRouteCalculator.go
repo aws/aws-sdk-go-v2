@@ -43,8 +43,7 @@ type DescribeRouteCalculatorOutput struct {
 
 	// The Amazon Resource Name (ARN) for the Route calculator resource. Use the ARN
 	// when you specify a resource across Amazon Web Services.
-	//
-	// * Format example:
+	// - Format example:
 	// arn:aws:geo:region:account-id:route-calculator/ExampleCalculator
 	//
 	// This member is required.
@@ -58,20 +57,16 @@ type DescribeRouteCalculatorOutput struct {
 	// The timestamp when the route calculator resource was created in ISO 8601
 	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
 	// YYYY-MM-DDThh:mm:ss.sssZ.
-	//
-	// * For example, 2020–07-2T12:15:20.000Z+01:00
+	// - For example, 2020–07-2T12:15:20.000Z+01:00
 	//
 	// This member is required.
 	CreateTime *time.Time
 
 	// The data provider of traffic and road network data. Indicates one of the
 	// available providers:
-	//
-	// * Esri
-	//
-	// * Grab
-	//
-	// * Here
+	// - Esri
+	// - Grab
+	// - Here
 	//
 	// For more information about data
 	// providers, see Amazon Location Service data providers
@@ -88,8 +83,7 @@ type DescribeRouteCalculatorOutput struct {
 	// The timestamp when the route calculator resource was last updated in ISO 8601
 	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
 	// YYYY-MM-DDThh:mm:ss.sssZ.
-	//
-	// * For example, 2020–07-2T12:15:20.000Z+01:00
+	// - For example, 2020–07-2T12:15:20.000Z+01:00
 	//
 	// This member is required.
 	UpdateTime *time.Time

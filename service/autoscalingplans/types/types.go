@@ -74,15 +74,13 @@ type CustomizedLoadMetricSpecification struct {
 // Represents a CloudWatch metric of your choosing that can be used for dynamic
 // scaling as part of a target tracking scaling policy. To create your customized
 // scaling metric specification:
-//
-// * Add values for each required parameter from
+// - Add values for each required parameter from
 // CloudWatch. You can use an existing metric, or a new metric that you create. To
 // use your own metric, you must first publish the metric to CloudWatch. For more
 // information, see Publish Custom Metrics
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html)
 // in the Amazon CloudWatch User Guide.
-//
-// * Choose a metric that changes
+// - Choose a metric that changes
 // proportionally with capacity. The value of the metric should increase or
 // decrease in inverse proportion to the number of capacity units. That is, the
 // value of the metric should decrease when capacity increases.
@@ -167,12 +165,10 @@ type PredefinedLoadMetricSpecification struct {
 	// group. You create the resource label by appending the final portion of the load
 	// balancer ARN and the final portion of the target group ARN into a single value,
 	// separated by a forward slash (/). The format is app///targetgroup//, where:
-	//
-	// *
+	// -
 	// app// is the final portion of the load balancer ARN
-	//
-	// * targetgroup// is the
-	// final portion of the target group ARN.
+	// - targetgroup// is the final
+	// portion of the target group ARN.
 	//
 	// This is an example:
 	// app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d.
@@ -204,14 +200,12 @@ type PredefinedScalingMetricSpecification struct {
 	// appending the final portion of the load balancer ARN and the final portion of
 	// the target group ARN into a single value, separated by a forward slash (/). The
 	// format is app///targetgroup//, where:
-	//
-	// * app// is the final portion of the load
+	// - app// is the final portion of the load
 	// balancer ARN
+	// - targetgroup// is the final portion of the target group ARN.
 	//
-	// * targetgroup// is the final portion of the target group
-	// ARN.
-	//
-	// This is an example:
+	// This
+	// is an example:
 	// app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d.
 	// To find the ARN for an Application Load Balancer, use the DescribeLoadBalancers
 	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html)
@@ -257,28 +251,22 @@ type ScalingInstruction struct {
 
 	// The ID of the resource. This string consists of the resource type and unique
 	// identifier.
-	//
-	// * Auto Scaling group - The resource type is autoScalingGroup and
-	// the unique identifier is the name of the Auto Scaling group. Example:
+	// - Auto Scaling group - The resource type is autoScalingGroup and the
+	// unique identifier is the name of the Auto Scaling group. Example:
 	// autoScalingGroup/my-asg.
-	//
-	// * ECS service - The resource type is service and the
+	// - ECS service - The resource type is service and the
 	// unique identifier is the cluster name and service name. Example:
 	// service/default/sample-webapp.
-	//
-	// * Spot Fleet request - The resource type is
+	// - Spot Fleet request - The resource type is
 	// spot-fleet-request and the unique identifier is the Spot Fleet request ID.
 	// Example: spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE.
-	//
-	// *
-	// DynamoDB table - The resource type is table and the unique identifier is the
-	// resource ID. Example: table/my-table.
-	//
-	// * DynamoDB global secondary index - The
-	// resource type is index and the unique identifier is the resource ID. Example:
+	// - DynamoDB
+	// table - The resource type is table and the unique identifier is the resource ID.
+	// Example: table/my-table.
+	// - DynamoDB global secondary index - The resource type
+	// is index and the unique identifier is the resource ID. Example:
 	// table/my-table/index/my-table-index.
-	//
-	// * Aurora DB cluster - The resource type is
+	// - Aurora DB cluster - The resource type is
 	// cluster and the unique identifier is the cluster name. Example:
 	// cluster:my-db-cluster.
 	//
@@ -286,31 +274,23 @@ type ScalingInstruction struct {
 	ResourceId *string
 
 	// The scalable dimension associated with the resource.
-	//
-	// *
+	// -
 	// autoscaling:autoScalingGroup:DesiredCapacity - The desired capacity of an Auto
 	// Scaling group.
-	//
-	// * ecs:service:DesiredCount - The desired task count of an ECS
+	// - ecs:service:DesiredCount - The desired task count of an ECS
 	// service.
-	//
-	// * ec2:spot-fleet-request:TargetCapacity - The target capacity of a
-	// Spot Fleet request.
-	//
-	// * dynamodb:table:ReadCapacityUnits - The provisioned read
+	// - ec2:spot-fleet-request:TargetCapacity - The target capacity of a Spot
+	// Fleet request.
+	// - dynamodb:table:ReadCapacityUnits - The provisioned read
 	// capacity for a DynamoDB table.
-	//
-	// * dynamodb:table:WriteCapacityUnits - The
+	// - dynamodb:table:WriteCapacityUnits - The
 	// provisioned write capacity for a DynamoDB table.
-	//
-	// *
+	// -
 	// dynamodb:index:ReadCapacityUnits - The provisioned read capacity for a DynamoDB
 	// global secondary index.
-	//
-	// * dynamodb:index:WriteCapacityUnits - The provisioned
+	// - dynamodb:index:WriteCapacityUnits - The provisioned
 	// write capacity for a DynamoDB global secondary index.
-	//
-	// *
+	// -
 	// rds:cluster:ReadReplicaCount - The count of Aurora Replicas in an Aurora DB
 	// cluster. Available for Aurora MySQL-compatible edition and Aurora
 	// PostgreSQL-compatible edition.
@@ -348,17 +328,14 @@ type ScalingInstruction struct {
 	// Defines the behavior that should be applied if the forecast capacity approaches
 	// or exceeds the maximum capacity specified for the resource. The default value is
 	// SetForecastCapacityToMaxCapacity. The following are possible values:
-	//
-	// *
+	// -
 	// SetForecastCapacityToMaxCapacity - AWS Auto Scaling cannot scale resource
 	// capacity higher than the maximum capacity. The maximum capacity is enforced as a
 	// hard limit.
-	//
-	// * SetMaxCapacityToForecastCapacity - AWS Auto Scaling may scale
+	// - SetMaxCapacityToForecastCapacity - AWS Auto Scaling may scale
 	// resource capacity higher than the maximum capacity to equal but not exceed
 	// forecast capacity.
-	//
-	// * SetMaxCapacityAboveForecastCapacity - AWS Auto Scaling may
+	// - SetMaxCapacityAboveForecastCapacity - AWS Auto Scaling may
 	// scale resource capacity higher than the maximum capacity by a specified buffer
 	// value. The intention is to give the target tracking scaling policy extra
 	// capacity if unexpected traffic occurs.
@@ -432,29 +409,21 @@ type ScalingPlan struct {
 	ScalingPlanVersion *int64
 
 	// The status of the scaling plan.
-	//
-	// * Active - The scaling plan is active.
-	//
-	// *
+	// - Active - The scaling plan is active.
+	// -
 	// ActiveWithProblems - The scaling plan is active, but the scaling configuration
 	// for one or more resources could not be applied.
-	//
-	// * CreationInProgress - The
+	// - CreationInProgress - The
 	// scaling plan is being created.
-	//
-	// * CreationFailed - The scaling plan could not be
+	// - CreationFailed - The scaling plan could not be
 	// created.
-	//
-	// * DeletionInProgress - The scaling plan is being deleted.
-	//
-	// *
+	// - DeletionInProgress - The scaling plan is being deleted.
+	// -
 	// DeletionFailed - The scaling plan could not be deleted.
-	//
-	// * UpdateInProgress -
-	// The scaling plan is being updated.
-	//
-	// * UpdateFailed - The scaling plan could not
-	// be updated.
+	// - UpdateInProgress - The
+	// scaling plan is being updated.
+	// - UpdateFailed - The scaling plan could not be
+	// updated.
 	//
 	// This member is required.
 	StatusCode ScalingPlanStatusCode
@@ -476,28 +445,22 @@ type ScalingPlanResource struct {
 
 	// The ID of the resource. This string consists of the resource type and unique
 	// identifier.
-	//
-	// * Auto Scaling group - The resource type is autoScalingGroup and
-	// the unique identifier is the name of the Auto Scaling group. Example:
+	// - Auto Scaling group - The resource type is autoScalingGroup and the
+	// unique identifier is the name of the Auto Scaling group. Example:
 	// autoScalingGroup/my-asg.
-	//
-	// * ECS service - The resource type is service and the
+	// - ECS service - The resource type is service and the
 	// unique identifier is the cluster name and service name. Example:
 	// service/default/sample-webapp.
-	//
-	// * Spot Fleet request - The resource type is
+	// - Spot Fleet request - The resource type is
 	// spot-fleet-request and the unique identifier is the Spot Fleet request ID.
 	// Example: spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE.
-	//
-	// *
-	// DynamoDB table - The resource type is table and the unique identifier is the
-	// resource ID. Example: table/my-table.
-	//
-	// * DynamoDB global secondary index - The
-	// resource type is index and the unique identifier is the resource ID. Example:
+	// - DynamoDB
+	// table - The resource type is table and the unique identifier is the resource ID.
+	// Example: table/my-table.
+	// - DynamoDB global secondary index - The resource type
+	// is index and the unique identifier is the resource ID. Example:
 	// table/my-table/index/my-table-index.
-	//
-	// * Aurora DB cluster - The resource type is
+	// - Aurora DB cluster - The resource type is
 	// cluster and the unique identifier is the cluster name. Example:
 	// cluster:my-db-cluster.
 	//
@@ -505,31 +468,23 @@ type ScalingPlanResource struct {
 	ResourceId *string
 
 	// The scalable dimension for the resource.
-	//
-	// *
+	// -
 	// autoscaling:autoScalingGroup:DesiredCapacity - The desired capacity of an Auto
 	// Scaling group.
-	//
-	// * ecs:service:DesiredCount - The desired task count of an ECS
+	// - ecs:service:DesiredCount - The desired task count of an ECS
 	// service.
-	//
-	// * ec2:spot-fleet-request:TargetCapacity - The target capacity of a
-	// Spot Fleet request.
-	//
-	// * dynamodb:table:ReadCapacityUnits - The provisioned read
+	// - ec2:spot-fleet-request:TargetCapacity - The target capacity of a Spot
+	// Fleet request.
+	// - dynamodb:table:ReadCapacityUnits - The provisioned read
 	// capacity for a DynamoDB table.
-	//
-	// * dynamodb:table:WriteCapacityUnits - The
+	// - dynamodb:table:WriteCapacityUnits - The
 	// provisioned write capacity for a DynamoDB table.
-	//
-	// *
+	// -
 	// dynamodb:index:ReadCapacityUnits - The provisioned read capacity for a DynamoDB
 	// global secondary index.
-	//
-	// * dynamodb:index:WriteCapacityUnits - The provisioned
+	// - dynamodb:index:WriteCapacityUnits - The provisioned
 	// write capacity for a DynamoDB global secondary index.
-	//
-	// *
+	// -
 	// rds:cluster:ReadReplicaCount - The count of Aurora Replicas in an Aurora DB
 	// cluster. Available for Aurora MySQL-compatible edition and Aurora
 	// PostgreSQL-compatible edition.
@@ -548,15 +503,12 @@ type ScalingPlanResource struct {
 	ScalingPlanVersion *int64
 
 	// The scaling status of the resource.
-	//
-	// * Active - The scaling configuration is
+	// - Active - The scaling configuration is
 	// active.
-	//
-	// * Inactive - The scaling configuration is not active because the
-	// scaling plan is being created or the scaling configuration could not be applied.
-	// Check the status message for more information.
-	//
-	// * PartiallyActive - The scaling
+	// - Inactive - The scaling configuration is not active because the scaling
+	// plan is being created or the scaling configuration could not be applied. Check
+	// the status message for more information.
+	// - PartiallyActive - The scaling
 	// configuration is partially active because the scaling plan is being created or
 	// deleted or the scaling configuration could not be fully applied. Check the
 	// status message for more information.

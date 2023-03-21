@@ -23,22 +23,18 @@
 // monitor. Similar to error monitoring, if a deployment triggers an alarm,
 // AppConfig automatically rolls back to the previous version. AppConfig supports
 // multiple use cases. Here are some examples:
-//
-// * Feature flags: Use AppConfig to
+// - Feature flags: Use AppConfig to
 // turn on new features that require a timely deployment, such as a product launch
 // or announcement.
-//
-// * Application tuning: Use AppConfig to carefully introduce
+// - Application tuning: Use AppConfig to carefully introduce
 // changes to your application that can only be tested with production traffic.
+// -
+// Allow list: Use AppConfig to allow premium subscribers to access paid content.
+// -
+// Operational issues: Use AppConfig to reduce stress on your application when a
+// dependency or other external factor impacts the system.
 //
-// *
-// Allow list: Use AppConfig to allow premium subscribers to access paid
-// content.
-//
-// * Operational issues: Use AppConfig to reduce stress on your
-// application when a dependency or other external factor impacts the system.
-//
-// This
-// reference is intended to be used with the AppConfig User Guide
+// This reference is
+// intended to be used with the AppConfig User Guide
 // (http://docs.aws.amazon.com/appconfig/latest/userguide/what-is-appconfig.html).
 package appconfig

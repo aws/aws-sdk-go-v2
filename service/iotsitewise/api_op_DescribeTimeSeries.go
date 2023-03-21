@@ -15,17 +15,13 @@ import (
 
 // Retrieves information about a time series (data stream). To identify a time
 // series, do one of the following:
-//
-// * If the time series isn't associated with an
+// - If the time series isn't associated with an
 // asset property, specify the alias of the time series.
-//
-// * If the time series is
+// - If the time series is
 // associated with an asset property, specify one of the following:
-//
-// * The alias of
+// - The alias of
 // the time series.
-//
-// * The assetId and propertyId that identifies the asset
+// - The assetId and propertyId that identifies the asset
 // property.
 func (c *Client) DescribeTimeSeries(ctx context.Context, params *DescribeTimeSeriesInput, optFns ...func(*Options)) (*DescribeTimeSeriesOutput, error) {
 	if params == nil {

@@ -18,13 +18,10 @@ import (
 // Starts a bidirectional HTTP/2 or WebSocket stream where audio is streamed to
 // Amazon Transcribe Medical and the transcription results are streamed to your
 // application. The following parameters are required:
-//
-// * language-code
-//
-// *
+// - language-code
+// -
 // media-encoding
-//
-// * sample-rate
+// - sample-rate
 //
 // For more information on streaming with Amazon
 // Transcribe Medical, see Transcribing streaming audio
@@ -53,13 +50,10 @@ type StartMedicalStreamTranscriptionInput struct {
 	LanguageCode types.LanguageCode
 
 	// Specify the encoding used for the input audio. Supported formats are:
-	//
-	// * FLAC
-	//
-	// *
+	// - FLAC
+	// -
 	// OPUS-encoded audio in an Ogg container
-	//
-	// * PCM (only signed 16-bit little-endian
+	// - PCM (only signed 16-bit little-endian
 	// audio formats, which does not include WAV)
 	//
 	// For more information, see Media

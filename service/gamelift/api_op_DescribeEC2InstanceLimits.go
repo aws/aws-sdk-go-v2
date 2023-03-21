@@ -26,31 +26,26 @@ import (
 // explicitly or as your default settings). To get the limit for a remote location,
 // you must also specify the location. For example, the following requests all
 // return different results:
-//
-// * Request specifies the Region ap-northeast-1 with no
+// - Request specifies the Region ap-northeast-1 with no
 // location. The result is limits and usage data on all instance types that are
 // deployed in us-east-2, by all of the fleets that reside in ap-northeast-1.
-//
-// *
+// -
 // Request specifies the Region us-east-1 with location ca-central-1. The result is
 // limits and usage data on all instance types that are deployed in ca-central-1,
 // by all of the fleets that reside in us-east-2. These limits do not affect fleets
 // in any other Regions that deploy instances to ca-central-1.
-//
-// * Request specifies
+// - Request specifies
 // the Region eu-west-1 with location ca-central-1. The result is limits and usage
 // data on all instance types that are deployed in ca-central-1, by all of the
 // fleets that reside in eu-west-1.
 //
 // This operation can be used in the following
 // ways:
-//
-// * To get limit and usage data for all instance types that are deployed in
+// - To get limit and usage data for all instance types that are deployed in
 // an Amazon Web Services Region by fleets that reside in the same Region: Specify
 // the Region only. Optionally, specify a single instance type to retrieve
 // information for.
-//
-// * To get limit and usage data for all instance types that are
+// - To get limit and usage data for all instance types that are
 // deployed to a remote location by fleets that reside in different Amazon Web
 // Services Region: Provide both the Amazon Web Services Region and the remote
 // location. Optionally, specify a single instance type to retrieve information

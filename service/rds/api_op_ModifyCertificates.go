@@ -18,13 +18,11 @@ import (
 // provided by RDS. You can also use this operation to remove the override, so that
 // new DB instances use the default certificate provided by RDS. You might need to
 // override the default certificate in the following situations:
-//
-// * You already
+// - You already
 // migrated your applications to support the latest certificate authority (CA)
 // certificate, but the new CA certificate is not yet the RDS default CA
 // certificate for the specified Amazon Web Services Region.
-//
-// * RDS has already
+// - RDS has already
 // moved to a new default CA certificate for the specified Amazon Web Services
 // Region, but you are still in the process of supporting the new CA certificate.
 // In this case, you temporarily need additional time to finish your application

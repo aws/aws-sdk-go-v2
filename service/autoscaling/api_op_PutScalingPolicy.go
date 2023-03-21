@@ -111,15 +111,11 @@ type PutScalingPolicyInput struct {
 	MinAdjustmentStep *int32
 
 	// One of the following policy types:
-	//
-	// * TargetTrackingScaling
-	//
-	// * StepScaling
-	//
-	// *
+	// - TargetTrackingScaling
+	// - StepScaling
+	// -
 	// SimpleScaling (default)
-	//
-	// * PredictiveScaling
+	// - PredictiveScaling
 	PolicyType *string
 
 	// A predictive scaling policy. Provides support for predefined and custom metrics.
@@ -145,15 +141,11 @@ type PutScalingPolicyInput struct {
 
 	// A target tracking scaling policy. Provides support for predefined or custom
 	// metrics. The following predefined metrics are available:
-	//
-	// *
+	// -
 	// ASGAverageCPUUtilization
-	//
-	// * ASGAverageNetworkIn
-	//
-	// * ASGAverageNetworkOut
-	//
-	// *
+	// - ASGAverageNetworkIn
+	// - ASGAverageNetworkOut
+	// -
 	// ALBRequestCountPerTarget
 	//
 	// If you specify ALBRequestCountPerTarget for the

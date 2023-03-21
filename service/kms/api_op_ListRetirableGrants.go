@@ -30,15 +30,11 @@ import (
 // Required permissions: kms:ListRetirableGrants
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (IAM policy) in your Amazon Web Services account. Related operations:
-//
-// *
+// -
 // CreateGrant
-//
-// * ListGrants
-//
-// * RetireGrant
-//
-// * RevokeGrant
+// - ListGrants
+// - RetireGrant
+// - RevokeGrant
 func (c *Client) ListRetirableGrants(ctx context.Context, params *ListRetirableGrantsInput, optFns ...func(*Options)) (*ListRetirableGrantsOutput, error) {
 	if params == nil {
 		params = &ListRetirableGrantsInput{}

@@ -66,35 +66,23 @@ type ListBackupJobsInput struct {
 	ByResourceArn *string
 
 	// Returns only backup jobs for the specified resources:
-	//
-	// * Aurora for Amazon
+	// - Aurora for Amazon
 	// Aurora
-	//
-	// * DocumentDB for Amazon DocumentDB (with MongoDB compatibility)
-	//
-	// *
+	// - DocumentDB for Amazon DocumentDB (with MongoDB compatibility)
+	// -
 	// DynamoDB for Amazon DynamoDB
-	//
-	// * EBS for Amazon Elastic Block Store
-	//
-	// * EC2 for
+	// - EBS for Amazon Elastic Block Store
+	// - EC2 for
 	// Amazon Elastic Compute Cloud
-	//
-	// * EFS for Amazon Elastic File System
-	//
-	// * FSx for
+	// - EFS for Amazon Elastic File System
+	// - FSx for
 	// Amazon FSx
-	//
-	// * Neptune for Amazon Neptune
-	//
-	// * RDS for Amazon Relational Database
+	// - Neptune for Amazon Neptune
+	// - RDS for Amazon Relational Database
 	// Service
-	//
-	// * Storage Gateway for Storage Gateway
-	//
-	// * S3 for Amazon S3
-	//
-	// *
+	// - Storage Gateway for Storage Gateway
+	// - S3 for Amazon S3
+	// -
 	// VirtualMachine for virtual machines
 	ByResourceType *string
 

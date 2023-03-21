@@ -68,13 +68,9 @@ type CreateTrialComponentInput struct {
 	StartTime *time.Time
 
 	// The status of the component. States include:
-	//
-	// * InProgress
-	//
-	// * Completed
-	//
-	// *
-	// Failed
+	// - InProgress
+	// - Completed
+	// - Failed
 	Status *types.TrialComponentStatus
 
 	// A list of tags to associate with the component. You can use Search API to search

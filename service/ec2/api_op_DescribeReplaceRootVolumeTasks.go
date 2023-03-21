@@ -40,8 +40,7 @@ type DescribeReplaceRootVolumeTasksInput struct {
 	DryRun *bool
 
 	// Filter to use:
-	//
-	// * instance-id - The ID of the instance for which the root volume
+	// - instance-id - The ID of the instance for which the root volume
 	// replacement task was created.
 	Filters []types.Filter
 

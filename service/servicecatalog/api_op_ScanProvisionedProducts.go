@@ -31,12 +31,9 @@ func (c *Client) ScanProvisionedProducts(ctx context.Context, params *ScanProvis
 type ScanProvisionedProductsInput struct {
 
 	// The language code.
-	//
-	// * en - English (default)
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	// - en - English (default)
+	// - jp - Japanese
+	// - zh - Chinese
 	AcceptLanguage *string
 
 	// The access level to use to obtain results. The default is User.

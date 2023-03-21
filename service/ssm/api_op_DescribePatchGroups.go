@@ -32,12 +32,9 @@ type DescribePatchGroupsInput struct {
 
 	// Each element in the array is a structure containing a key-value pair. Supported
 	// keys for DescribePatchGroups include the following:
-	//
-	// * NAME_PREFIX Sample
-	// values: AWS- | My-.
-	//
-	// * OPERATING_SYSTEM Sample values: AMAZON_LINUX | SUSE |
-	// WINDOWS
+	// - NAME_PREFIX Sample values:
+	// AWS- | My-.
+	// - OPERATING_SYSTEM Sample values: AMAZON_LINUX | SUSE | WINDOWS
 	Filters []types.PatchOrchestratorFilter
 
 	// The maximum number of patch groups to return (per page).
@@ -53,11 +50,9 @@ type DescribePatchGroupsInput struct {
 type DescribePatchGroupsOutput struct {
 
 	// Each entry in the array contains:
-	//
-	// * PatchGroup: string (between 1 and 256
+	// - PatchGroup: string (between 1 and 256
 	// characters. Regex: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$)
-	//
-	// * PatchBaselineIdentity: A
+	// - PatchBaselineIdentity: A
 	// PatchBaselineIdentity element.
 	Mappings []types.PatchGroupPatchBaselineMapping
 

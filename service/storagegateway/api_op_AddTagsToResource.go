@@ -16,22 +16,16 @@ import (
 // categorize resources by purpose, owner, environment, or team. Each tag consists
 // of a key and a value, which you define. You can add tags to the following
 // Storage Gateway resources:
+// - Storage gateways of all types
+// - Storage volumes
+// -
+// Virtual tapes
+// - NFS and SMB file shares
+// - File System associations
 //
-// * Storage gateways of all types
-//
-// * Storage
-// volumes
-//
-// * Virtual tapes
-//
-// * NFS and SMB file shares
-//
-// * File System
-// associations
-//
-// You can create a maximum of 50 tags for each resource. Virtual
-// tapes and storage volumes that are recovered to a new gateway maintain their
-// tags.
+// You can
+// create a maximum of 50 tags for each resource. Virtual tapes and storage volumes
+// that are recovered to a new gateway maintain their tags.
 func (c *Client) AddTagsToResource(ctx context.Context, params *AddTagsToResourceInput, optFns ...func(*Options)) (*AddTagsToResourceOutput, error) {
 	if params == nil {
 		params = &AddTagsToResourceInput{}

@@ -22,12 +22,10 @@ import (
 // bucket. With S3 Versioning, you can save multiple distinct copies of your
 // objects and recover from unintended user actions and application failures. You
 // can set the versioning state to one of the following:
-//
-// * Enabled - Enables
+// - Enabled - Enables
 // versioning for the objects in the bucket. All objects added to the bucket
 // receive a unique version ID.
-//
-// * Suspended - Suspends versioning for the objects
+// - Suspended - Suspends versioning for the objects
 // in the bucket. All objects added to the bucket receive the version ID null.
 //
 // If
@@ -56,15 +54,12 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketVersioning.html#API_control_PutBucketVersioning_Examples)
 // section. The following operations are related to PutBucketVersioning for S3 on
 // Outposts.
-//
-// * GetBucketVersioning
+// - GetBucketVersioning
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketVersioning.html)
-//
-// *
+// -
 // PutBucketLifecycleConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html)
-//
-// *
+// -
 // GetBucketLifecycleConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html)
 func (c *Client) PutBucketVersioning(ctx context.Context, params *PutBucketVersioningInput, optFns ...func(*Options)) (*PutBucketVersioningOutput, error) {

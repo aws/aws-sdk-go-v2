@@ -20,11 +20,9 @@ import (
 // exists, and the parameters don't match, this operation returns
 // IncompatibleParameterError. If a snapshot with the specified client request
 // token doesn't exist, CreateSnapshot does the following:
-//
-// * Creates a new OpenZFS
+// - Creates a new OpenZFS
 // snapshot with an assigned ID, and an initial lifecycle state of CREATING.
-//
-// *
+// -
 // Returns the description of the snapshot.
 //
 // By using the idempotent operation, you

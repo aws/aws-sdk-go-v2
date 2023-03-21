@@ -20,13 +20,10 @@ import (
 // PutObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
 // in the Amazon Simple Storage Service API Reference. The following restrictions
 // apply to this action:
-//
-// * Maximum size of an individual evidence file: 100 MB
-//
-// *
+// - Maximum size of an individual evidence file: 100 MB
+// -
 // Number of daily manual evidence uploads per control: 100
-//
-// * Supported file
+// - Supported file
 // formats: See Supported file types for manual evidence
 // (https://docs.aws.amazon.com/audit-manager/latest/userguide/upload-evidence.html#supported-manual-evidence-files)
 // in the Audit Manager User Guide

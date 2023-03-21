@@ -63,24 +63,18 @@ type DescribeEventsInput struct {
 
 	// The identifier of the event source for which events are returned. If not
 	// specified, then all sources are included in the response. Constraints:
-	//
-	// * If
+	// - If
 	// SourceIdentifier is supplied, SourceType must also be provided.
-	//
-	// * If the source
+	// - If the source
 	// type is DBInstance, then a DBInstanceIdentifier must be supplied.
-	//
-	// * If the
+	// - If the
 	// source type is DBSecurityGroup, a DBSecurityGroupName must be supplied.
-	//
-	// * If
-	// the source type is DBParameterGroup, a DBParameterGroupName must be supplied.
-	//
-	// *
-	// If the source type is DBSnapshot, a DBSnapshotIdentifier must be supplied.
-	//
-	// *
-	// Cannot end with a hyphen or contain two consecutive hyphens.
+	// - If the
+	// source type is DBParameterGroup, a DBParameterGroupName must be supplied.
+	// - If
+	// the source type is DBSnapshot, a DBSnapshotIdentifier must be supplied.
+	// - Cannot
+	// end with a hyphen or contain two consecutive hyphens.
 	SourceIdentifier *string
 
 	// The event source to retrieve events for. If no value is specified, all events

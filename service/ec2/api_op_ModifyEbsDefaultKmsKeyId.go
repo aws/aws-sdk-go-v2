@@ -42,17 +42,13 @@ type ModifyEbsDefaultKmsKeyIdInput struct {
 	// encryption. If this parameter is not specified, your KMS key for Amazon EBS is
 	// used. If KmsKeyId is specified, the encrypted state must be true. You can
 	// specify the KMS key using any of the following:
-	//
-	// * Key ID. For example,
+	// - Key ID. For example,
 	// 1234abcd-12ab-34cd-56ef-1234567890ab.
-	//
-	// * Key alias. For example,
+	// - Key alias. For example,
 	// alias/ExampleAlias.
-	//
-	// * Key ARN. For example,
+	// - Key ARN. For example,
 	// arn:aws:kms:us-east-1:012345678910:key/1234abcd-12ab-34cd-56ef-1234567890ab.
-	//
-	// *
+	// -
 	// Alias ARN. For example,
 	// arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
 	//

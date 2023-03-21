@@ -34,16 +34,14 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html)
 // in the Amazon S3 User Guide. Access Permissions You can set access permissions
 // using one of the following methods:
-//
-// * Specify a canned ACL with the x-amz-acl
+// - Specify a canned ACL with the x-amz-acl
 // request header. Amazon S3 supports a set of predefined ACLs, known as canned
 // ACLs. Each canned ACL has a predefined set of grantees and permissions. Specify
 // the canned ACL name as the value of x-amz-acl. If you use this header, you
 // cannot use other access control-specific headers in your request. For more
 // information, see Canned ACL
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL).
-//
-// *
+// -
 // Specify access permissions explicitly with the x-amz-grant-read,
 // x-amz-grant-read-acp, x-amz-grant-write-acp, and x-amz-grant-full-control
 // headers. When using these headers, you specify explicit access permissions and
@@ -54,35 +52,24 @@ import (
 // (ACL) Overview
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html). You specify
 // each grantee as a type=value pair, where the type is one of the following:
-//
-// * id
+// - id
 // – if the value specified is the canonical user ID of an Amazon Web Services
 // account
-//
-// * uri – if you are granting permissions to a predefined group
-//
-// *
+// - uri – if you are granting permissions to a predefined group
+// -
 // emailAddress – if the value specified is the email address of an Amazon Web
 // Services account Using email addresses to specify a grantee is only supported in
 // the following Amazon Web Services Regions:
-//
-// * US East (N. Virginia)
-//
-// * US West
-// (N. California)
-//
-// * US West (Oregon)
-//
-// * Asia Pacific (Singapore)
-//
-// * Asia Pacific
+// - US East (N. Virginia)
+// - US West (N.
+// California)
+// - US West (Oregon)
+// - Asia Pacific (Singapore)
+// - Asia Pacific
 // (Sydney)
-//
-// * Asia Pacific (Tokyo)
-//
-// * Europe (Ireland)
-//
-// * South America (São
+// - Asia Pacific (Tokyo)
+// - Europe (Ireland)
+// - South America (São
 // Paulo)
 //
 // For a list of all the Amazon S3 supported Regions and endpoints, see
@@ -99,37 +86,26 @@ import (
 // a canned ACL or specify access permissions explicitly. You cannot do both.
 // Grantee Values You can specify the person (grantee) to whom you're assigning
 // access rights (using request elements) in the following ways:
-//
-// * By the person's
+// - By the person's
 // ID: <>ID<><>GranteesEmail<>  DisplayName is optional and ignored in the
 // request.
-//
-// * By URI:
+// - By URI:
 // <>http://acs.amazonaws.com/groups/global/AuthenticatedUsers<>
-//
-// * By Email
+// - By Email
 // address: <>Grantees@email.com<>lt;/Grantee> The grantee is resolved to the
 // CanonicalUser and, in a response to a GET Object acl request, appears as the
 // CanonicalUser. Using email addresses to specify a grantee is only supported in
 // the following Amazon Web Services Regions:
-//
-// * US East (N. Virginia)
-//
-// * US West
-// (N. California)
-//
-// * US West (Oregon)
-//
-// * Asia Pacific (Singapore)
-//
-// * Asia Pacific
+// - US East (N. Virginia)
+// - US West (N.
+// California)
+// - US West (Oregon)
+// - Asia Pacific (Singapore)
+// - Asia Pacific
 // (Sydney)
-//
-// * Asia Pacific (Tokyo)
-//
-// * Europe (Ireland)
-//
-// * South America (São
+// - Asia Pacific (Tokyo)
+// - Europe (Ireland)
+// - South America (São
 // Paulo)
 //
 // For a list of all the Amazon S3 supported Regions and endpoints, see
@@ -141,11 +117,9 @@ import (
 // at the object version level. By default, PUT sets the ACL of the current version
 // of an object. To set the ACL of a different version, use the versionId
 // subresource. Related Resources
-//
-// * CopyObject
+// - CopyObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html)
-//
-// *
+// -
 // GetObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
 func (c *Client) PutObjectAcl(ctx context.Context, params *PutObjectAclInput, optFns ...func(*Options)) (*PutObjectAclOutput, error) {
 	if params == nil {

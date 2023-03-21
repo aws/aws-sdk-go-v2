@@ -24,17 +24,14 @@ import (
 // set, in addition to the number of resources included in each stack. Once the
 // operation has completed, use the following actions to return drift
 // information:
-//
-// * Use DescribeStackSet to return detailed information about the
+// - Use DescribeStackSet to return detailed information about the
 // stack set, including detailed information about the last completed drift
 // operation performed on the stack set. (Information about drift operations that
 // are in progress isn't included.)
-//
-// * Use ListStackInstances to return a list of
+// - Use ListStackInstances to return a list of
 // stack instances belonging to the stack set, including the drift status and last
 // drift time checked of each instance.
-//
-// * Use DescribeStackInstance to return
+// - Use DescribeStackInstance to return
 // detailed information about a specific stack instance, including its drift status
 // and last drift time checked.
 //
@@ -70,11 +67,9 @@ type DetectStackSetDriftInput struct {
 	// administrator in the organization's management account or as a delegated
 	// administrator in a member account. By default, SELF is specified. Use SELF for
 	// stack sets with self-managed permissions.
-	//
-	// * If you are signed in to the
+	// - If you are signed in to the
 	// management account, specify SELF.
-	//
-	// * If you are signed in to a delegated
+	// - If you are signed in to a delegated
 	// administrator account, specify DELEGATED_ADMIN. Your Amazon Web Services account
 	// must be registered as a delegated administrator in the management account. For
 	// more information, see Register a delegated administrator

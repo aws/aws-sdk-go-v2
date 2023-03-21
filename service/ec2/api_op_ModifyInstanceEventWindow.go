@@ -44,22 +44,16 @@ type ModifyInstanceEventWindowInput struct {
 
 	// The cron expression of the event window, for example, * 0-4,20-23 * * 1,5.
 	// Constraints:
-	//
-	// * Only hour and day of the week values are supported.
-	//
-	// * For day
-	// of the week values, you can specify either integers 0 through 6, or alternative
+	// - Only hour and day of the week values are supported.
+	// - For day of
+	// the week values, you can specify either integers 0 through 6, or alternative
 	// single values SUN through SAT.
-	//
-	// * The minute, month, and year must be specified
+	// - The minute, month, and year must be specified
 	// by *.
-	//
-	// * The hour value must be one or a multiple range, for example, 0-4 or
+	// - The hour value must be one or a multiple range, for example, 0-4 or
 	// 0-4,20-23.
-	//
-	// * Each hour range must be >= 2 hours, for example, 0-2 or 20-23.
-	//
-	// *
+	// - Each hour range must be >= 2 hours, for example, 0-2 or 20-23.
+	// -
 	// The event window must be >= 4 hours. The combined total time ranges in the event
 	// window must be >= 4 hours.
 	//

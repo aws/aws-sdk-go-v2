@@ -35,17 +35,12 @@ type ListImagesInput struct {
 	ByName bool
 
 	// Use the following filters to streamline results:
-	//
-	// * name
-	//
-	// * osVersion
-	//
-	// *
-	// platform
-	//
-	// * type
-	//
-	// * version
+	// - name
+	// - osVersion
+	// - platform
+	// -
+	// type
+	// - version
 	Filters []types.Filter
 
 	// Includes deprecated images in the response list.

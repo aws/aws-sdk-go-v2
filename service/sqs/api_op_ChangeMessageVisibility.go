@@ -20,17 +20,14 @@ import (
 // ChangeMessageVisibility to extend the visibility timeout to the maximum allowed
 // time. If you try to extend the visibility timeout beyond the maximum, your
 // request is rejected. An Amazon SQS message has three basic states:
-//
-// * Sent to a
+// - Sent to a
 // queue by a producer.
+// - Received from the queue by a consumer.
+// - Deleted from the
+// queue.
 //
-// * Received from the queue by a consumer.
-//
-// * Deleted from
-// the queue.
-//
-// A message is considered to be stored after it is sent to a queue by
-// a producer, but not yet received from the queue by a consumer (that is, between
+// A message is considered to be stored after it is sent to a queue by a
+// producer, but not yet received from the queue by a consumer (that is, between
 // states 1 and 2). There is no limit to the number of stored messages. A message
 // is considered to be in flight after it is received from a queue by a consumer,
 // but not yet deleted from the queue (that is, between states 2 and 3). There is a

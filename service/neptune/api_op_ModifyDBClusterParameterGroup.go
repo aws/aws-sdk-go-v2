@@ -60,13 +60,10 @@ type ModifyDBClusterParameterGroupInput struct {
 type ModifyDBClusterParameterGroupOutput struct {
 
 	// The name of the DB cluster parameter group. Constraints:
-	//
-	// * Must be 1 to 255
+	// - Must be 1 to 255
 	// letters or numbers.
-	//
-	// * First character must be a letter
-	//
-	// * Cannot end with a
+	// - First character must be a letter
+	// - Cannot end with a
 	// hyphen or contain two consecutive hyphens
 	//
 	// This value is stored as a lowercase

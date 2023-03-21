@@ -47,39 +47,29 @@ type DescribeInstanceEventWindowsInput struct {
 	DryRun *bool
 
 	// One or more filters.
-	//
-	// * dedicated-host-id - The event windows associated with
-	// the specified Dedicated Host ID.
-	//
-	// * event-window-name - The event windows
-	// associated with the specified names.
-	//
-	// * instance-id - The event windows
-	// associated with the specified instance ID.
-	//
-	// * instance-tag - The event windows
-	// associated with the specified tag and value.
-	//
-	// * instance-tag-key - The event
-	// windows associated with the specified tag key, regardless of the value.
-	//
-	// *
-	// instance-tag-value - The event windows associated with the specified tag value,
-	// regardless of the key.
-	//
-	// * tag: - The key/value combination of a tag assigned to
-	// the event window. Use the tag key in the filter name and the tag value as the
-	// filter value. For example, to find all resources that have a tag with the key
-	// Owner and the value CMX, specify tag:Owner for the filter name and CMX for the
-	// filter value.
-	//
-	// * tag-key - The key of a tag assigned to the event window. Use
-	// this filter to find all event windows that have a tag with a specific key,
-	// regardless of the tag value.
-	//
-	// * tag-value - The value of a tag assigned to the
-	// event window. Use this filter to find all event windows that have a tag with a
-	// specific value, regardless of the tag key.
+	// - dedicated-host-id - The event windows associated with the
+	// specified Dedicated Host ID.
+	// - event-window-name - The event windows associated
+	// with the specified names.
+	// - instance-id - The event windows associated with the
+	// specified instance ID.
+	// - instance-tag - The event windows associated with the
+	// specified tag and value.
+	// - instance-tag-key - The event windows associated with
+	// the specified tag key, regardless of the value.
+	// - instance-tag-value - The event
+	// windows associated with the specified tag value, regardless of the key.
+	// - tag: -
+	// The key/value combination of a tag assigned to the event window. Use the tag key
+	// in the filter name and the tag value as the filter value. For example, to find
+	// all resources that have a tag with the key Owner and the value CMX, specify
+	// tag:Owner for the filter name and CMX for the filter value.
+	// - tag-key - The key
+	// of a tag assigned to the event window. Use this filter to find all event windows
+	// that have a tag with a specific key, regardless of the tag value.
+	// - tag-value -
+	// The value of a tag assigned to the event window. Use this filter to find all
+	// event windows that have a tag with a specific value, regardless of the tag key.
 	Filters []types.Filter
 
 	// The IDs of the event windows.

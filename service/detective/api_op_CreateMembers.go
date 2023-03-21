@@ -24,17 +24,15 @@ import (
 // the accounts. The organization accounts do not receive invitations. The request
 // provides the behavior graph ARN and the list of accounts to invite or to enable.
 // The response separates the requested accounts into two lists:
-//
-// * The accounts
+// - The accounts
 // that CreateMembers was able to process. For invited accounts, includes member
 // accounts that are being verified, that have passed verification and are to be
 // invited, and that have failed verification. For organization accounts in the
 // organization behavior graph, includes accounts that can be enabled and that
 // cannot be enabled.
-//
-// * The accounts that CreateMembers was unable to process.
-// This list includes accounts that were already invited to be member accounts in
-// the behavior graph.
+// - The accounts that CreateMembers was unable to process. This
+// list includes accounts that were already invited to be member accounts in the
+// behavior graph.
 func (c *Client) CreateMembers(ctx context.Context, params *CreateMembersInput, optFns ...func(*Options)) (*CreateMembersOutput, error) {
 	if params == nil {
 		params = &CreateMembersInput{}

@@ -36,17 +36,13 @@ type AccountTakeoverActionType struct {
 
 	// The action to take in response to the account takeover action. Valid values are
 	// as follows:
-	//
-	// * BLOCK Choosing this action will block the request.
-	//
-	// *
+	// - BLOCK Choosing this action will block the request.
+	// -
 	// MFA_IF_CONFIGURED Present an MFA challenge if user has configured it, else allow
 	// the request.
-	//
-	// * MFA_REQUIRED Present an MFA challenge if user has configured it,
+	// - MFA_REQUIRED Present an MFA challenge if user has configured it,
 	// else block the request.
-	//
-	// * NO_ACTION Allow the user to sign in.
+	// - NO_ACTION Allow the user to sign in.
 	//
 	// This member is required.
 	EventAction AccountTakeoverEventActionType
@@ -525,18 +521,16 @@ type EmailConfigurationType struct {
 	// The ARN of a verified email address in Amazon SES. Amazon Cognito uses this
 	// email address in one of the following ways, depending on the value that you
 	// specify for the EmailSendingAccount parameter:
+	// - If you specify COGNITO_DEFAULT,
+	// Amazon Cognito uses this address as the custom FROM address when it emails your
+	// users using its built-in email account.
+	// - If you specify DEVELOPER, Amazon
+	// Cognito emails your users with this address by calling Amazon SES on your
+	// behalf.
 	//
-	// * If you specify
-	// COGNITO_DEFAULT, Amazon Cognito uses this address as the custom FROM address
-	// when it emails your users using its built-in email account.
-	//
-	// * If you specify
-	// DEVELOPER, Amazon Cognito emails your users with this address by calling Amazon
-	// SES on your behalf.
-	//
-	// The Region value of the SourceArn parameter must indicate a
-	// supported Amazon Web Services Region of your user pool. Typically, the Region in
-	// the SourceArn and the user pool Region are the same. For more information, see
+	// The Region value of the SourceArn parameter must indicate a supported
+	// Amazon Web Services Region of your user pool. Typically, the Region in the
+	// SourceArn and the user pool Region are the same. For more information, see
 	// Amazon SES email configuration regions
 	// (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-email.html#user-pool-email-developer-region-mapping)
 	// in the Amazon Cognito Developer Guide
@@ -669,79 +663,53 @@ type IdentityProviderType struct {
 
 	// The IdP details. The following list describes the provider detail keys for each
 	// IdP type.
-	//
-	// * For Google and Login with Amazon:
-	//
-	// * client_id
-	//
-	// * client_secret
-	//
-	// *
+	// - For Google and Login with Amazon:
+	// - client_id
+	// - client_secret
+	// -
 	// authorize_scopes
 	//
-	// * For Facebook:
-	//
-	// * client_id
-	//
-	// * client_secret
-	//
-	// *
+	// - For Facebook:
+	// - client_id
+	// - client_secret
+	// -
 	// authorize_scopes
+	// - api_version
 	//
-	// * api_version
-	//
-	// * For Sign in with Apple:
-	//
-	// * client_id
-	//
-	// *
+	// - For Sign in with Apple:
+	// - client_id
+	// -
 	// team_id
-	//
-	// * key_id
-	//
-	// * private_key You can submit a private_key when you add or
+	// - key_id
+	// - private_key You can submit a private_key when you add or
 	// update an IdP. Describe operations don't return the private key.
-	//
-	// *
+	// -
 	// authorize_scopes
 	//
-	// * For OIDC providers:
-	//
-	// * client_id
-	//
-	// * client_secret
-	//
-	// *
+	// - For OIDC providers:
+	// - client_id
+	// - client_secret
+	// -
 	// attributes_request_method
-	//
-	// * oidc_issuer
-	//
-	// * authorize_scopes
-	//
-	// * The following
-	// keys are only present if Amazon Cognito didn't discover them at the oidc_issuer
+	// - oidc_issuer
+	// - authorize_scopes
+	// - The following keys
+	// are only present if Amazon Cognito didn't discover them at the oidc_issuer
 	// URL.
+	// - authorize_url
+	// - token_url
+	// - attributes_url
+	// - jwks_uri
 	//
-	// * authorize_url
+	// - Amazon Cognito
+	// sets the value of the following keys automatically. They are read-only.
+	// -
+	// attributes_url_add_attributes
 	//
-	// * token_url
-	//
-	// * attributes_url
-	//
-	// * jwks_uri
-	//
-	// * Amazon
-	// Cognito sets the value of the following keys automatically. They are
-	// read-only.
-	//
-	// * attributes_url_add_attributes
-	//
-	// * For SAML providers:
-	//
-	// *
-	// MetadataFile or MetadataURL
-	//
-	// * IDPSignout optional
+	// - For SAML providers:
+	// - MetadataFile or
+	// MetadataURL
+	// - IDPSignout optional
 	ProviderDetails map[string]string
 
 	// The IdP name.
@@ -1367,28 +1335,20 @@ type UserImportJobType struct {
 	StartDate *time.Time
 
 	// The status of the user import job. One of the following:
-	//
-	// * Created - The job
-	// was created but not started.
-	//
-	// * Pending - A transition state. You have started
-	// the job, but it has not begun importing users yet.
-	//
-	// * InProgress - The job has
+	// - Created - The job was
+	// created but not started.
+	// - Pending - A transition state. You have started the
+	// job, but it has not begun importing users yet.
+	// - InProgress - The job has
 	// started, and users are being imported.
-	//
-	// * Stopping - You have stopped the job,
+	// - Stopping - You have stopped the job,
 	// but the job has not stopped importing users yet.
-	//
-	// * Stopped - You have stopped
+	// - Stopped - You have stopped
 	// the job, and the job has stopped importing users.
-	//
-	// * Succeeded - The job has
+	// - Succeeded - The job has
 	// completed successfully.
-	//
-	// * Failed - The job has stopped due to an error.
-	//
-	// *
+	// - Failed - The job has stopped due to an error.
+	// -
 	// Expired - You created a job, but did not start the job within 24-48 hours. All
 	// data associated with the job was deleted, and the job can't be started.
 	Status UserImportJobStatusType
@@ -1489,14 +1449,11 @@ type UserPoolClientType struct {
 	AuthSessionValidity *int32
 
 	// A list of allowed redirect (callback) URLs for the IdPs. A redirect URI must:
-	//
-	// *
+	// -
 	// Be an absolute URI.
-	//
-	// * Be registered with the authorization server.
-	//
-	// * Not
-	// include a fragment component.
+	// - Be registered with the authorization server.
+	// - Not include
+	// a fragment component.
 	//
 	// See OAuth 2.0 - Redirection Endpoint
 	// (https://tools.ietf.org/html/rfc6749#section-3.1.2). Amazon Cognito requires
@@ -1518,13 +1475,10 @@ type UserPoolClientType struct {
 
 	// The default redirect URI. Must be in the CallbackURLs list. A redirect URI
 	// must:
-	//
-	// * Be an absolute URI.
-	//
-	// * Be registered with the authorization server.
-	//
-	// *
-	// Not include a fragment component.
+	// - Be an absolute URI.
+	// - Be registered with the authorization server.
+	// - Not
+	// include a fragment component.
 	//
 	// See OAuth 2.0 - Redirection Endpoint
 	// (https://tools.ietf.org/html/rfc6749#section-3.1.2). Amazon Cognito requires
@@ -1562,25 +1516,20 @@ type UserPoolClientType struct {
 	// that you define with Lambda functions. If you don't specify a value for
 	// ExplicitAuthFlows, your user client supports ALLOW_REFRESH_TOKEN_AUTH,
 	// ALLOW_USER_SRP_AUTH, and ALLOW_CUSTOM_AUTH. Valid values include:
-	//
-	// *
+	// -
 	// ALLOW_ADMIN_USER_PASSWORD_AUTH: Enable admin based user password authentication
 	// flow ADMIN_USER_PASSWORD_AUTH. This setting replaces the ADMIN_NO_SRP_AUTH
 	// setting. With this authentication flow, your app passes a user name and password
 	// to Amazon Cognito in the request, instead of using the Secure Remote Password
 	// (SRP) protocol to securely transmit the password.
-	//
-	// * ALLOW_CUSTOM_AUTH: Enable
+	// - ALLOW_CUSTOM_AUTH: Enable
 	// Lambda trigger based authentication.
-	//
-	// * ALLOW_USER_PASSWORD_AUTH: Enable user
+	// - ALLOW_USER_PASSWORD_AUTH: Enable user
 	// password-based authentication. In this flow, Amazon Cognito receives the
-	// password in the request instead of using the SRP protocol to verify
-	// passwords.
-	//
-	// * ALLOW_USER_SRP_AUTH: Enable SRP-based authentication.
-	//
-	// *
+	// password in the request instead of using the SRP protocol to verify passwords.
+	// -
+	// ALLOW_USER_SRP_AUTH: Enable SRP-based authentication.
+	// -
 	// ALLOW_REFRESH_TOKEN_AUTH: Enable authflow to refresh tokens.
 	//
 	// In some
@@ -1614,11 +1563,9 @@ type UserPoolClientType struct {
 	// indicating a code was sent to a simulated destination. When set to LEGACY, those
 	// APIs return a UserNotFoundException exception if the user doesn't exist in the
 	// user pool. Valid values include:
-	//
-	// * ENABLED - This prevents user
+	// - ENABLED - This prevents user
 	// existence-related errors.
-	//
-	// * LEGACY - This represents the old behavior of Amazon
+	// - LEGACY - This represents the old behavior of Amazon
 	// Cognito where user existence related errors aren't prevented.
 	PreventUserExistenceErrors PreventUserExistenceErrorTypes
 
@@ -1771,16 +1718,13 @@ type UserPoolType struct {
 	LastModifiedDate *time.Time
 
 	// Can be one of the following values:
-	//
-	// * OFF - MFA tokens aren't required and
-	// can't be specified during user registration.
-	//
-	// * ON - MFA tokens are required for
-	// all user registrations. You can only specify required when you're initially
-	// creating a user pool.
-	//
-	// * OPTIONAL - Users have the option when registering to
-	// create an MFA token.
+	// - OFF - MFA tokens aren't required and can't
+	// be specified during user registration.
+	// - ON - MFA tokens are required for all
+	// user registrations. You can only specify required when you're initially creating
+	// a user pool.
+	// - OPTIONAL - Users have the option when registering to create an
+	// MFA token.
 	MfaConfiguration UserPoolMfaType
 
 	// The name of the user pool.
@@ -1876,25 +1820,18 @@ type UserType struct {
 	UserLastModifiedDate *time.Time
 
 	// The user status. This can be one of the following:
-	//
-	// * UNCONFIRMED - User has
-	// been created but not confirmed.
-	//
-	// * CONFIRMED - User has been confirmed.
-	//
-	// *
+	// - UNCONFIRMED - User has been
+	// created but not confirmed.
+	// - CONFIRMED - User has been confirmed.
+	// -
 	// EXTERNAL_PROVIDER - User signed in with a third-party IdP.
-	//
-	// * ARCHIVED - User is
+	// - ARCHIVED - User is
 	// no longer active.
-	//
-	// * UNKNOWN - User status isn't known.
-	//
-	// * RESET_REQUIRED - User
+	// - UNKNOWN - User status isn't known.
+	// - RESET_REQUIRED - User
 	// is confirmed, but the user must request a code and reset their password before
 	// they can sign in.
-	//
-	// * FORCE_CHANGE_PASSWORD - The user is confirmed and the user
+	// - FORCE_CHANGE_PASSWORD - The user is confirmed and the user
 	// can sign in using a temporary password, but on first sign-in, the user must
 	// change their password to a new value before doing anything else.
 	UserStatus UserStatusType

@@ -82,12 +82,9 @@ type ContactChannel struct {
 
 	// The type of the contact channel. Incident Manager supports three contact
 	// methods:
-	//
-	// * SMS
-	//
-	// * VOICE
-	//
-	// * EMAIL
+	// - SMS
+	// - VOICE
+	// - EMAIL
 	Type ChannelType
 
 	noSmithyDocumentSerde
@@ -99,14 +96,11 @@ type ContactChannelAddress struct {
 
 	// The format is dependent on the type of the contact channel. The following are
 	// the expected formats:
-	//
-	// * SMS - '+' followed by the country code and phone
+	// - SMS - '+' followed by the country code and phone
 	// number
-	//
-	// * VOICE - '+' followed by the country code and phone number
-	//
-	// * EMAIL -
-	// any standard email format
+	// - VOICE - '+' followed by the country code and phone number
+	// - EMAIL - any
+	// standard email format
 	SimpleAddress *string
 
 	noSmithyDocumentSerde

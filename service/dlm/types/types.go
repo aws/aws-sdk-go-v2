@@ -50,11 +50,9 @@ type ArchiveRule struct {
 
 // [Snapshot and AMI policies only] Specifies when the policy should create
 // snapshots or AMIs.
-//
-// * You must specify either CronExpression, or Interval,
+// - You must specify either CronExpression, or Interval,
 // IntervalUnit, and Times.
-//
-// * If you need to specify an ArchiveRule for the
+// - If you need to specify an ArchiveRule for the
 // schedule, then you must specify a creation frequency of at least 28 days.
 type CreateRule struct {
 
@@ -455,14 +453,12 @@ type PolicyDetails struct {
 // standard to the archive tier. For snapshot policies that do not have an
 // ArchiveRule, snapshots are permanently deleted when this retention threshold is
 // met. You can retain snapshots based on either a count or a time interval.
-//
-// *
+// -
 // Count-based retention You must specify Count. If you specify an ArchiveRule for
 // the schedule, then you can specify a retention count of 0 to archive snapshots
 // immediately after creation. If you specify a FastRestoreRule, ShareRule, or a
 // CrossRegionCopyRule, then you must specify a retention count of 1 or more.
-//
-// *
+// -
 // Age-based retention You must specify Interval and IntervalUnit. If you specify
 // an ArchiveRule for the schedule, then you can specify a retention interval of 0
 // days to archive snapshots immediately after creation. If you specify a

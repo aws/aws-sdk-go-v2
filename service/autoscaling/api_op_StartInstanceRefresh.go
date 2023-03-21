@@ -75,13 +75,10 @@ type StartInstanceRefreshInput struct {
 	// percentage, and the behaviors that you want Amazon EC2 Auto Scaling to use if
 	// instances that are in Standby state or protected from scale in are found. You
 	// can also choose to enable additional features, such as the following:
-	//
-	// * Auto
+	// - Auto
 	// rollback
-	//
-	// * Checkpoints
-	//
-	// * Skip matching
+	// - Checkpoints
+	// - Skip matching
 	Preferences *types.RefreshPreferences
 
 	// The strategy to use for the instance refresh. The only valid value is Rolling.

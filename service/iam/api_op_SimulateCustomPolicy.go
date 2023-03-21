@@ -76,16 +76,13 @@ type SimulateCustomPolicyInput struct {
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html#reference_iam-quotas-entity-length).
 	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
 	// parameter is a string of characters consisting of the following:
-	//
-	// * Any
-	// printable ASCII character ranging from the space character (\u0020) through the
-	// end of the ASCII character range
-	//
-	// * The printable characters in the Basic Latin
-	// and Latin-1 Supplement character set (through \u00FF)
-	//
-	// * The special characters
-	// tab (\u0009), line feed (\u000A), and carriage return (\u000D)
+	// - Any printable
+	// ASCII character ranging from the space character (\u0020) through the end of the
+	// ASCII character range
+	// - The printable characters in the Basic Latin and Latin-1
+	// Supplement character set (through \u00FF)
+	// - The special characters tab (\u0009),
+	// line feed (\u000A), and carriage return (\u000D)
 	//
 	// This member is required.
 	PolicyInputList []string
@@ -131,16 +128,13 @@ type SimulateCustomPolicyInput struct {
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html#reference_iam-quotas-entity-length).
 	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
 	// parameter is a string of characters consisting of the following:
-	//
-	// * Any
-	// printable ASCII character ranging from the space character (\u0020) through the
-	// end of the ASCII character range
-	//
-	// * The printable characters in the Basic Latin
-	// and Latin-1 Supplement character set (through \u00FF)
-	//
-	// * The special characters
-	// tab (\u0009), line feed (\u000A), and carriage return (\u000D)
+	// - Any printable
+	// ASCII character ranging from the space character (\u0020) through the end of the
+	// ASCII character range
+	// - The printable characters in the Basic Latin and Latin-1
+	// Supplement character set (through \u00FF)
+	// - The special characters tab (\u0009),
+	// line feed (\u000A), and carriage return (\u000D)
 	PermissionsBoundaryPolicyInputList []string
 
 	// A list of ARNs of Amazon Web Services resources to include in the simulation. If
@@ -175,17 +169,13 @@ type SimulateCustomPolicyInput struct {
 	// options, see Supported platforms
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html)
 	// in the Amazon EC2 User Guide.
-	//
-	// * EC2-VPC-InstanceStore instance, image, security
+	// - EC2-VPC-InstanceStore instance, image, security
 	// group, network interface
-	//
-	// * EC2-VPC-InstanceStore-Subnet instance, image,
+	// - EC2-VPC-InstanceStore-Subnet instance, image,
 	// security group, network interface, subnet
-	//
-	// * EC2-VPC-EBS instance, image,
+	// - EC2-VPC-EBS instance, image,
 	// security group, network interface, volume
-	//
-	// * EC2-VPC-EBS-Subnet instance, image,
+	// - EC2-VPC-EBS-Subnet instance, image,
 	// security group, network interface, subnet, volume
 	ResourceHandlingOption *string
 
@@ -212,19 +202,16 @@ type SimulateCustomPolicyInput struct {
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html#reference_iam-quotas-entity-length).
 	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
 	// parameter is a string of characters consisting of the following:
+	// - Any printable
+	// ASCII character ranging from the space character (\u0020) through the end of the
+	// ASCII character range
+	// - The printable characters in the Basic Latin and Latin-1
+	// Supplement character set (through \u00FF)
+	// - The special characters tab (\u0009),
+	// line feed (\u000A), and carriage return (\u000D)
 	//
-	// * Any
-	// printable ASCII character ranging from the space character (\u0020) through the
-	// end of the ASCII character range
-	//
-	// * The printable characters in the Basic Latin
-	// and Latin-1 Supplement character set (through \u00FF)
-	//
-	// * The special characters
-	// tab (\u0009), line feed (\u000A), and carriage return (\u000D)
-	//
-	// Simulation of
-	// resource-based policies isn't supported for IAM roles.
+	// Simulation of resource-based
+	// policies isn't supported for IAM roles.
 	ResourcePolicy *string
 
 	noSmithyDocumentSerde

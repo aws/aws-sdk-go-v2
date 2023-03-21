@@ -43,23 +43,18 @@ type DescribeClassicLinkInstancesInput struct {
 	DryRun *bool
 
 	// One or more filters.
-	//
-	// * group-id - The ID of a VPC security group that's
+	// - group-id - The ID of a VPC security group that's
 	// associated with the instance.
-	//
-	// * instance-id - The ID of the instance.
-	//
-	// * tag: -
+	// - instance-id - The ID of the instance.
+	// - tag: -
 	// The key/value combination of a tag assigned to the resource. Use the tag key in
 	// the filter name and the tag value as the filter value. For example, to find all
 	// resources that have a tag with the key Owner and the value TeamA, specify
 	// tag:Owner for the filter name and TeamA for the filter value.
-	//
-	// * tag-key - The
+	// - tag-key - The
 	// key of a tag assigned to the resource. Use this filter to find all resources
 	// assigned a tag with a specific key, regardless of the tag value.
-	//
-	// * vpc-id - The
+	// - vpc-id - The
 	// ID of the VPC to which the instance is linked. vpc-id - The ID of the VPC that
 	// the instance is linked to.
 	Filters []types.Filter

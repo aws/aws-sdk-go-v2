@@ -42,15 +42,12 @@ type ListFirewallRulesInput struct {
 	// Optional additional filter for the rules to retrieve. The action that DNS
 	// Firewall should take on a DNS query when it matches one of the domains in the
 	// rule's domain list:
-	//
-	// * ALLOW - Permit the request to go through.
-	//
-	// * ALERT -
-	// Permit the request to go through but send an alert to the logs.
-	//
-	// * BLOCK -
-	// Disallow the request. If this is specified, additional handling details are
-	// provided in the rule's BlockResponse setting.
+	// - ALLOW - Permit the request to go through.
+	// - ALERT - Permit
+	// the request to go through but send an alert to the logs.
+	// - BLOCK - Disallow the
+	// request. If this is specified, additional handling details are provided in the
+	// rule's BlockResponse setting.
 	Action types.Action
 
 	// The maximum number of objects that you want Resolver to return for this request.

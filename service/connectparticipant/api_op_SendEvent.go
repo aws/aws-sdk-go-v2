@@ -38,17 +38,13 @@ type SendEventInput struct {
 	ConnectionToken *string
 
 	// The content type of the request. Supported types are:
-	//
-	// *
+	// -
 	// application/vnd.amazonaws.connect.event.typing
-	//
-	// *
+	// -
 	// application/vnd.amazonaws.connect.event.connection.acknowledged
-	//
-	// *
+	// -
 	// application/vnd.amazonaws.connect.event.message.delivered
-	//
-	// *
+	// -
 	// application/vnd.amazonaws.connect.event.message.read
 	//
 	// This member is required.

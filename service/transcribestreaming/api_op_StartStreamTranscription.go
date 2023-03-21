@@ -18,13 +18,10 @@ import (
 // Starts a bidirectional HTTP/2 or WebSocket stream where audio is streamed to
 // Amazon Transcribe and the transcription results are streamed to your
 // application. The following parameters are required:
-//
-// * language-code or
+// - language-code or
 // identify-language
-//
-// * media-encoding
-//
-// * sample-rate
+// - media-encoding
+// - sample-rate
 //
 // For more information on
 // streaming with Amazon Transcribe, see Transcribing streaming audio
@@ -47,13 +44,10 @@ func (c *Client) StartStreamTranscription(ctx context.Context, params *StartStre
 type StartStreamTranscriptionInput struct {
 
 	// Specify the encoding of your input audio. Supported formats are:
-	//
-	// * FLAC
-	//
-	// *
+	// - FLAC
+	// -
 	// OPUS-encoded audio in an Ogg container
-	//
-	// * PCM (only signed 16-bit little-endian
+	// - PCM (only signed 16-bit little-endian
 	// audio formats, which does not include WAV)
 	//
 	// For more information, see Media

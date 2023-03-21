@@ -46,16 +46,11 @@ type PutAnomalyDetectorInput struct {
 	// The metric math anomaly detector to be created. When using
 	// MetricMathAnomalyDetector, you cannot include the following parameters in the
 	// same operation:
-	//
-	// * Dimensions
-	//
-	// * MetricName
-	//
-	// * Namespace
-	//
-	// * Stat
-	//
-	// * the
+	// - Dimensions
+	// - MetricName
+	// - Namespace
+	// - Stat
+	// - the
 	// SingleMetricAnomalyDetector parameters of PutAnomalyDetectorInput
 	//
 	// Instead,
@@ -76,16 +71,11 @@ type PutAnomalyDetectorInput struct {
 	// A single metric anomaly detector to be created. When using
 	// SingleMetricAnomalyDetector, you cannot include the following parameters in the
 	// same operation:
-	//
-	// * Dimensions
-	//
-	// * MetricName
-	//
-	// * Namespace
-	//
-	// * Stat
-	//
-	// * the
+	// - Dimensions
+	// - MetricName
+	// - Namespace
+	// - Stat
+	// - the
 	// MetricMatchAnomalyDetector parameters of PutAnomalyDetectorInput
 	//
 	// Instead,

@@ -42,21 +42,18 @@ type CreatePlaceIndexInput struct {
 	// Specifies the geospatial data provider for the new place index. This field is
 	// case-sensitive. Enter the valid values as shown. For example, entering HERE
 	// returns an error. Valid values include:
-	//
-	// * Esri – For additional information
+	// - Esri – For additional information
 	// about Esri
 	// (https://docs.aws.amazon.com/location/latest/developerguide/esri.html)'s
 	// coverage in your region of interest, see Esri details on geocoding coverage
 	// (https://developers.arcgis.com/rest/geocode/api-reference/geocode-coverage.htm).
-	//
-	// *
+	// -
 	// Grab – Grab provides place index functionality for Southeast Asia. For
 	// additional information about GrabMaps
 	// (https://docs.aws.amazon.com/location/latest/developerguide/grab.html)'
 	// coverage, see GrabMaps countries and areas covered
 	// (https://docs.aws.amazon.com/location/latest/developerguide/grab.html#grab-coverage-area).
-	//
-	// *
+	// -
 	// Here – For additional information about HERE Technologies
 	// (https://docs.aws.amazon.com/location/latest/developerguide/HERE.html)' coverage
 	// in your region of interest, see HERE details on goecoding coverage
@@ -76,14 +73,11 @@ type CreatePlaceIndexInput struct {
 	DataSource *string
 
 	// The name of the place index resource. Requirements:
-	//
-	// * Contain only alphanumeric
+	// - Contain only alphanumeric
 	// characters (A–Z, a–z, 0–9), hyphens (-), periods (.), and underscores (_).
-	//
-	// *
+	// -
 	// Must be a unique place index resource name.
-	//
-	// * No spaces allowed. For example,
+	// - No spaces allowed. For example,
 	// ExamplePlaceIndex.
 	//
 	// This member is required.
@@ -104,23 +98,16 @@ type CreatePlaceIndexInput struct {
 	// Applies one or more tags to the place index resource. A tag is a key-value pair
 	// that helps you manage, identify, search, and filter your resources. Format:
 	// "key" : "value" Restrictions:
-	//
-	// * Maximum 50 tags per resource.
-	//
-	// * Each tag key
+	// - Maximum 50 tags per resource.
+	// - Each tag key
 	// must be unique and must have exactly one associated value.
-	//
-	// * Maximum key
-	// length: 128 Unicode characters in UTF-8.
-	//
-	// * Maximum value length: 256 Unicode
-	// characters in UTF-8.
-	//
-	// * Can use alphanumeric characters (A–Z, a–z, 0–9), and the
-	// following characters: + - = . _ : / @
-	//
-	// * Cannot use "aws:" as a prefix for a
-	// key.
+	// - Maximum key length:
+	// 128 Unicode characters in UTF-8.
+	// - Maximum value length: 256 Unicode characters
+	// in UTF-8.
+	// - Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
+	// characters: + - = . _ : / @
+	// - Cannot use "aws:" as a prefix for a key.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -137,8 +124,7 @@ type CreatePlaceIndexOutput struct {
 
 	// The Amazon Resource Name (ARN) for the place index resource. Used to specify a
 	// resource across Amazon Web Services.
-	//
-	// * Format example:
+	// - Format example:
 	// arn:aws:geo:region:account-id:place-index/ExamplePlaceIndex
 	//
 	// This member is required.

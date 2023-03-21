@@ -145,15 +145,12 @@ type CreateExperimentTemplateTargetInput struct {
 	// Scopes the identified resources to a specific count of the resources at random,
 	// or a percentage of the resources. All identified resources are included in the
 	// target.
-	//
-	// * ALL - Run the action on all identified targets. This is the
-	// default.
-	//
-	// * COUNT(n) - Run the action on the specified number of targets, chosen
-	// from the identified targets at random. For example, COUNT(1) selects one of the
+	// - ALL - Run the action on all identified targets. This is the default.
+	// -
+	// COUNT(n) - Run the action on the specified number of targets, chosen from the
+	// identified targets at random. For example, COUNT(1) selects one of the
 	// targets.
-	//
-	// * PERCENT(n) - Run the action on the specified percentage of targets,
+	// - PERCENT(n) - Run the action on the specified percentage of targets,
 	// chosen from the identified targets at random. For example, PERCENT(25) selects
 	// 25% of the targets.
 	//

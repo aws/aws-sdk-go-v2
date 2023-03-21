@@ -66,21 +66,15 @@ type DescribePrincipalMappingOutput struct {
 
 	// Shows the following information on the processing of PUT and DELETE actions for
 	// mapping users to their groups:
-	//
-	// * Status – the status can be either PROCESSING,
+	// - Status – the status can be either PROCESSING,
 	// SUCCEEDED, DELETING, DELETED, or FAILED.
-	//
-	// * Last updated – the last date-time an
+	// - Last updated – the last date-time an
 	// action was updated.
-	//
-	// * Received – the last date-time an action was received or
+	// - Received – the last date-time an action was received or
 	// submitted.
-	//
-	// * Ordering ID – the latest action that should process and apply
-	// after other actions.
-	//
-	// * Failure reason – the reason an action could not be
-	// processed.
+	// - Ordering ID – the latest action that should process and apply after
+	// other actions.
+	// - Failure reason – the reason an action could not be processed.
 	GroupOrderingIdSummaries []types.GroupOrderingIdSummary
 
 	// Shows the identifier of the index to see information on the processing of PUT

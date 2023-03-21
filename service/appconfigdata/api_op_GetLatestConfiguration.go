@@ -17,14 +17,12 @@ import (
 // configuration
 // (http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-retrieving-the-configuration)
 // in the AppConfig User Guide. Note the following important information.
-//
-// * Each
+// - Each
 // configuration token is only valid for one call to GetLatestConfiguration. The
 // GetLatestConfiguration response includes a NextPollConfigurationToken that
 // should always replace the token used for the just-completed call in preparation
 // for the next one.
-//
-// * GetLatestConfiguration is a priced call. For more
+// - GetLatestConfiguration is a priced call. For more
 // information, see Pricing (https://aws.amazon.com/systems-manager/pricing/).
 func (c *Client) GetLatestConfiguration(ctx context.Context, params *GetLatestConfigurationInput, optFns ...func(*Options)) (*GetLatestConfigurationOutput, error) {
 	if params == nil {

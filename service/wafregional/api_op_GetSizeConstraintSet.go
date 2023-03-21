@@ -49,16 +49,13 @@ type GetSizeConstraintSetOutput struct {
 
 	// Information about the SizeConstraintSet that you specified in the
 	// GetSizeConstraintSet request. For more information, see the following topics:
-	//
-	// *
+	// -
 	// SizeConstraintSet: Contains SizeConstraintSetId, SizeConstraints, and Name
-	//
-	// *
+	// -
 	// SizeConstraints: Contains an array of SizeConstraint objects. Each
 	// SizeConstraint object contains FieldToMatch, TextTransformation,
 	// ComparisonOperator, and Size
-	//
-	// * FieldToMatch: Contains Data and Type
+	// - FieldToMatch: Contains Data and Type
 	SizeConstraintSet *types.SizeConstraintSet
 
 	// Metadata pertaining to the operation's result.

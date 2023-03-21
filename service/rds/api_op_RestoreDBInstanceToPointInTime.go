@@ -41,14 +41,11 @@ func (c *Client) RestoreDBInstanceToPointInTime(ctx context.Context, params *Res
 type RestoreDBInstanceToPointInTimeInput struct {
 
 	// The name of the new DB instance to be created. Constraints:
-	//
-	// * Must contain from
+	// - Must contain from
 	// 1 to 63 letters, numbers, or hyphens
-	//
-	// * First character must be a letter
-	//
-	// *
-	// Can't end with a hyphen or contain two consecutive hyphens
+	// - First character must be a letter
+	// - Can't
+	// end with a hyphen or contain two consecutive hyphens
 	//
 	// This member is required.
 	TargetDBInstanceIdentifier *string
@@ -85,14 +82,11 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	// The instance profile associated with the underlying Amazon EC2 instance of an
 	// RDS Custom DB instance. The instance profile must meet the following
 	// requirements:
-	//
-	// * The profile must exist in your account.
-	//
-	// * The profile must
-	// have an IAM role that Amazon EC2 has permissions to assume.
-	//
-	// * The instance
-	// profile name and the associated IAM role name must start with the prefix
+	// - The profile must exist in your account.
+	// - The profile must have
+	// an IAM role that Amazon EC2 has permissions to assume.
+	// - The instance profile
+	// name and the associated IAM role name must start with the prefix
 	// AWSRDSCustom.
 	//
 	// For the list of permissions required for the IAM role, see
@@ -118,17 +112,13 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	// not specify a value for DBParameterGroupName, then the default DBParameterGroup
 	// for the specified DB engine is used. This setting doesn't apply to RDS Custom.
 	// Constraints:
-	//
-	// * If supplied, must match the name of an existing
+	// - If supplied, must match the name of an existing
 	// DBParameterGroup.
-	//
-	// * Must be 1 to 255 letters, numbers, or hyphens.
-	//
-	// * First
+	// - Must be 1 to 255 letters, numbers, or hyphens.
+	// - First
 	// character must be a letter.
-	//
-	// * Can't end with a hyphen or contain two
-	// consecutive hyphens.
+	// - Can't end with a hyphen or contain two consecutive
+	// hyphens.
 	DBParameterGroupName *string
 
 	// The DB subnet group name to use for the new instance. Constraints: If supplied,
@@ -188,30 +178,19 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	// The database engine to use for the new instance. This setting doesn't apply to
 	// RDS Custom. Default: The same as source Constraint: Must be compatible with the
 	// engine of the source Valid Values:
-	//
-	// * mariadb
-	//
-	// * mysql
-	//
-	// * oracle-ee
-	//
-	// *
+	// - mariadb
+	// - mysql
+	// - oracle-ee
+	// -
 	// oracle-ee-cdb
-	//
-	// * oracle-se2
-	//
-	// * oracle-se2-cdb
-	//
-	// * postgres
-	//
-	// * sqlserver-ee
-	//
-	// *
+	// - oracle-se2
+	// - oracle-se2-cdb
+	// - postgres
+	// - sqlserver-ee
+	// -
 	// sqlserver-se
-	//
-	// * sqlserver-ex
-	//
-	// * sqlserver-web
+	// - sqlserver-ex
+	// - sqlserver-web
 	Engine *string
 
 	// The amount of Provisioned IOPS (input/output operations per second) to be
@@ -239,10 +218,8 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	MultiAZ *bool
 
 	// The network type of the DB instance. Valid values:
-	//
-	// * IPV4
-	//
-	// * DUAL
+	// - IPV4
+	// - DUAL
 	//
 	// The network
 	// type is determined by the DBSubnetGroup specified for the DB instance. A
@@ -280,11 +257,9 @@ type RestoreDBInstanceToPointInTimeInput struct {
 
 	// The date and time to restore from. Valid Values: Value must be a time in
 	// Universal Coordinated Time (UTC) format Constraints:
-	//
-	// * Must be before the
-	// latest restorable time for the DB instance
-	//
-	// * Can't be specified if the
+	// - Must be before the latest
+	// restorable time for the DB instance
+	// - Can't be specified if the
 	// UseLatestRestorableTime parameter is enabled
 	//
 	// Example: 2009-09-07T23:45:00Z
@@ -297,8 +272,7 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	SourceDBInstanceAutomatedBackupsArn *string
 
 	// The identifier of the source DB instance from which to restore. Constraints:
-	//
-	// *
+	// -
 	// Must match the identifier of an existing DB instance.
 	SourceDBInstanceIdentifier *string
 

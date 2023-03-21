@@ -57,17 +57,12 @@ import (
 // permissions: kms:GenerateDataKeyPair
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (key policy) Related operations:
-//
-// * Decrypt
-//
-// * Encrypt
-//
-// * GenerateDataKey
-//
-// *
+// - Decrypt
+// - Encrypt
+// - GenerateDataKey
+// -
 // GenerateDataKeyPairWithoutPlaintext
-//
-// * GenerateDataKeyWithoutPlaintext
+// - GenerateDataKeyWithoutPlaintext
 func (c *Client) GenerateDataKeyPair(ctx context.Context, params *GenerateDataKeyPairInput, optFns ...func(*Options)) (*GenerateDataKeyPairOutput, error) {
 	if params == nil {
 		params = &GenerateDataKeyPairInput{}
@@ -92,16 +87,12 @@ type GenerateDataKeyPairInput struct {
 	// ARN. When using an alias name, prefix it with "alias/". To specify a KMS key in
 	// a different Amazon Web Services account, you must use the key ARN or alias ARN.
 	// For example:
-	//
-	// * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// * Key ARN:
+	// - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	// - Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// *
+	// -
 	// Alias name: alias/ExampleAlias
-	//
-	// * Alias ARN:
+	// - Alias ARN:
 	// arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
 	//
 	// To get the key ID and key

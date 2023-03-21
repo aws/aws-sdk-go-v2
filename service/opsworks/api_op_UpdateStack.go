@@ -38,24 +38,22 @@ type UpdateStackInput struct {
 	// This member is required.
 	StackId *string
 
-	// The default AWS OpsWorks Stacks agent version. You have the following
-	// options:
+	// The default AWS OpsWorks Stacks agent version. You have the following options:
+	// -
+	// Auto-update - Set this parameter to LATEST. AWS OpsWorks Stacks automatically
+	// installs new agent versions on the stack's instances as soon as they are
+	// available.
+	// - Fixed version - Set this parameter to your preferred agent version.
+	// To update the agent version, you must edit the stack configuration and specify a
+	// new version. AWS OpsWorks Stacks then automatically installs that version on the
+	// stack's instances.
 	//
-	// * Auto-update - Set this parameter to LATEST. AWS OpsWorks Stacks
-	// automatically installs new agent versions on the stack's instances as soon as
-	// they are available.
-	//
-	// * Fixed version - Set this parameter to your preferred
-	// agent version. To update the agent version, you must edit the stack
-	// configuration and specify a new version. AWS OpsWorks Stacks then automatically
-	// installs that version on the stack's instances.
-	//
-	// The default setting is LATEST.
-	// To specify an agent version, you must use the complete version number, not the
-	// abbreviated number shown on the console. For a list of available agent version
-	// numbers, call DescribeAgentVersions. AgentVersion cannot be set to Chef 12.2.
-	// You can also specify an agent version when you create or update an instance,
-	// which overrides the stack's default setting.
+	// The default setting is LATEST. To specify an agent version,
+	// you must use the complete version number, not the abbreviated number shown on
+	// the console. For a list of available agent version numbers, call
+	// DescribeAgentVersions. AgentVersion cannot be set to Chef 12.2. You can also
+	// specify an agent version when you create or update an instance, which overrides
+	// the stack's default setting.
 	AgentVersion *string
 
 	// One or more user-defined key-value pairs to be added to the stack attributes.
@@ -101,29 +99,23 @@ type UpdateStackInput struct {
 	DefaultInstanceProfileArn *string
 
 	// The stack's operating system, which must be set to one of the following:
-	//
-	// * A
+	// - A
 	// supported Linux operating system: An Amazon Linux version, such as Amazon Linux
 	// 2018.03, Amazon Linux 2017.09, Amazon Linux 2017.03, Amazon Linux 2016.09,
 	// Amazon Linux 2016.03, Amazon Linux 2015.09, or Amazon Linux 2015.03.
-	//
-	// * A
+	// - A
 	// supported Ubuntu operating system, such as Ubuntu 16.04 LTS, Ubuntu 14.04 LTS,
 	// or Ubuntu 12.04 LTS.
-	//
-	// * CentOS Linux 7
-	//
-	// * Red Hat Enterprise Linux 7
-	//
-	// * A
-	// supported Windows operating system, such as Microsoft Windows Server 2012 R2
-	// Base, Microsoft Windows Server 2012 R2 with SQL Server Express, Microsoft
-	// Windows Server 2012 R2 with SQL Server Standard, or Microsoft Windows Server
-	// 2012 R2 with SQL Server Web.
-	//
-	// * A custom AMI: Custom. You specify the custom AMI
-	// you want to use when you create instances. For more information about how to use
-	// custom AMIs with OpsWorks, see Using Custom AMIs
+	// - CentOS Linux 7
+	// - Red Hat Enterprise Linux 7
+	// - A supported
+	// Windows operating system, such as Microsoft Windows Server 2012 R2 Base,
+	// Microsoft Windows Server 2012 R2 with SQL Server Express, Microsoft Windows
+	// Server 2012 R2 with SQL Server Standard, or Microsoft Windows Server 2012 R2
+	// with SQL Server Web.
+	// - A custom AMI: Custom. You specify the custom AMI you want
+	// to use when you create instances. For more information about how to use custom
+	// AMIs with OpsWorks, see Using Custom AMIs
 	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html).
 	//
 	// The
@@ -162,35 +154,23 @@ type UpdateStackInput struct {
 	// is used to generate host names for the stack's instances. By default,
 	// HostnameTheme is set to Layer_Dependent, which creates host names by appending
 	// integers to the layer's short name. The other themes are:
-	//
-	// * Baked_Goods
-	//
-	// *
+	// - Baked_Goods
+	// -
 	// Clouds
-	//
-	// * Europe_Cities
-	//
-	// * Fruits
-	//
-	// * Greek_Deities_and_Titans
-	//
-	// *
+	// - Europe_Cities
+	// - Fruits
+	// - Greek_Deities_and_Titans
+	// -
 	// Legendary_creatures_from_Japan
-	//
-	// * Planets_and_Moons
-	//
-	// * Roman_Deities
-	//
-	// *
+	// - Planets_and_Moons
+	// - Roman_Deities
+	// -
 	// Scottish_Islands
+	// - US_Cities
+	// - Wild_Cats
 	//
-	// * US_Cities
-	//
-	// * Wild_Cats
-	//
-	// To obtain a generated host name,
-	// call GetHostNameSuggestion, which returns a host name based on the current
-	// theme.
+	// To obtain a generated host name, call
+	// GetHostNameSuggestion, which returns a host name based on the current theme.
 	HostnameTheme *string
 
 	// The stack's new name.
@@ -208,13 +188,11 @@ type UpdateStackInput struct {
 	// UseOpsworksSecurityGroups allows you to provide your own custom security groups
 	// instead of using the built-in groups. UseOpsworksSecurityGroups has the
 	// following settings:
-	//
-	// * True - AWS OpsWorks Stacks automatically associates the
+	// - True - AWS OpsWorks Stacks automatically associates the
 	// appropriate built-in security group with each layer (default setting). You can
 	// associate additional security groups with a layer after you create it, but you
 	// cannot delete the built-in security group.
-	//
-	// * False - AWS OpsWorks Stacks does
+	// - False - AWS OpsWorks Stacks does
 	// not associate built-in security groups with layers. You must create appropriate
 	// EC2 security groups and associate a security group with each layer that you
 	// create. However, you can still manually associate a built-in security group with

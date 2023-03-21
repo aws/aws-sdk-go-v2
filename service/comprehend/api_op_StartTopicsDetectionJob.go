@@ -72,11 +72,9 @@ type StartTopicsDetectionJobInput struct {
 	// encrypt data on the storage volume attached to the ML compute instance(s) that
 	// process the analysis job. The VolumeKmsKeyId can be either of the following
 	// formats:
-	//
-	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
-	//
-	// * Amazon
-	// Resource Name (ARN) of a KMS Key:
+	// - KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// - Amazon Resource
+	// Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 
@@ -103,18 +101,14 @@ type StartTopicsDetectionJobOutput struct {
 	JobId *string
 
 	// The status of the job:
-	//
-	// * SUBMITTED - The job has been received and is queued
-	// for processing.
-	//
-	// * IN_PROGRESS - Amazon Comprehend is processing the job.
-	//
-	// *
-	// COMPLETED - The job was successfully completed and the output is available.
-	//
-	// *
-	// FAILED - The job did not complete. To get details, use the
-	// DescribeTopicDetectionJob operation.
+	// - SUBMITTED - The job has been received and is queued for
+	// processing.
+	// - IN_PROGRESS - Amazon Comprehend is processing the job.
+	// - COMPLETED
+	// - The job was successfully completed and the output is available.
+	// - FAILED - The
+	// job did not complete. To get details, use the DescribeTopicDetectionJob
+	// operation.
 	JobStatus types.JobStatus
 
 	// Metadata pertaining to the operation's result.

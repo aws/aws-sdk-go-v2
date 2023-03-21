@@ -52,23 +52,18 @@ type DescribeDBInstanceAutomatedBackupsInput struct {
 
 	// A filter that specifies which resources to return based on status. Supported
 	// filters are the following:
-	//
-	// * status
-	//
-	// * active - automated backups for current
+	// - status
+	// - active - automated backups for current
 	// instances
-	//
-	// * retained - automated backups for deleted instances and after backup
+	// - retained - automated backups for deleted instances and after backup
 	// replication is stopped
-	//
-	// * creating - automated backups that are waiting for the
+	// - creating - automated backups that are waiting for the
 	// first automated snapshot to be available
 	//
-	// * db-instance-id - Accepts DB instance
+	// - db-instance-id - Accepts DB instance
 	// identifiers and Amazon Resource Names (ARNs). The results list includes only
 	// information about the DB instance automated backups identified by these ARNs.
-	//
-	// *
+	// -
 	// dbi-resource-id - Accepts DB resource identifiers and Amazon Resource Names
 	// (ARNs). The results list includes only information about the DB instance
 	// resources identified by these ARNs.

@@ -43,20 +43,15 @@ type GetCredentialsInput struct {
 
 	// The name of the database to get temporary authorization to log on to.
 	// Constraints:
-	//
-	// * Must be 1 to 64 alphanumeric characters or hyphens.
-	//
-	// * Must
+	// - Must be 1 to 64 alphanumeric characters or hyphens.
+	// - Must
 	// contain only uppercase or lowercase letters, numbers, underscore, plus sign,
 	// period (dot), at symbol (@), or hyphen.
-	//
-	// * The first character must be a
+	// - The first character must be a
 	// letter.
-	//
-	// * Must not contain a colon ( : ) or slash ( / ).
-	//
-	// * Cannot be a
-	// reserved word. A list of reserved words can be found in Reserved Words
+	// - Must not contain a colon ( : ) or slash ( / ).
+	// - Cannot be a reserved
+	// word. A list of reserved words can be found in Reserved Words
 	// (https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html) in the
 	// Amazon Redshift Database Developer Guide
 	DbName *string

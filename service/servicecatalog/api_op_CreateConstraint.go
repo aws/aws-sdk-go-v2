@@ -77,28 +77,20 @@ type CreateConstraintInput struct {
 	ProductId *string
 
 	// The type of constraint.
-	//
-	// * LAUNCH
-	//
-	// * NOTIFICATION
-	//
-	// * RESOURCE_UPDATE
-	//
-	// *
-	// STACKSET
-	//
-	// * TEMPLATE
+	// - LAUNCH
+	// - NOTIFICATION
+	// - RESOURCE_UPDATE
+	// - STACKSET
+	// -
+	// TEMPLATE
 	//
 	// This member is required.
 	Type *string
 
 	// The language code.
-	//
-	// * en - English (default)
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	// - en - English (default)
+	// - jp - Japanese
+	// - zh - Chinese
 	AcceptLanguage *string
 
 	// The description of the constraint.

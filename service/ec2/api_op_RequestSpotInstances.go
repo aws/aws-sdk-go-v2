@@ -117,12 +117,10 @@ type RequestSpotInstancesInput struct {
 	ValidFrom *time.Time
 
 	// The end date of the request, in UTC format (YYYY-MM-DDTHH:MM:SSZ).
-	//
-	// * For a
+	// - For a
 	// persistent request, the request remains active until the ValidUntil date and
 	// time is reached. Otherwise, the request remains active until you cancel it.
-	//
-	// *
+	// -
 	// For a one-time request, the request remains active until all instances launch,
 	// the request is canceled, or the ValidUntil date and time is reached. By default,
 	// the request is valid for 7 days from the date the request was created.

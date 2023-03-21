@@ -34,25 +34,20 @@ import (
 // Key Management Service Developer Guide. Cross-account use: No. You cannot
 // perform this operation on an alias in a different Amazon Web Services account.
 // Required permissions
-//
-// * kms:CreateAlias
+// - kms:CreateAlias
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // on the alias (IAM policy).
-//
-// * kms:CreateAlias
+// - kms:CreateAlias
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // on the KMS key (key policy).
 //
 // For details, see Controlling access to aliases
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-alias.html#alias-access)
 // in the Key Management Service Developer Guide. Related operations:
-//
-// *
+// -
 // DeleteAlias
-//
-// * ListAliases
-//
-// * UpdateAlias
+// - ListAliases
+// - UpdateAlias
 func (c *Client) CreateAlias(ctx context.Context, params *CreateAliasInput, optFns ...func(*Options)) (*CreateAliasOutput, error) {
 	if params == nil {
 		params = &CreateAliasInput{}
@@ -88,10 +83,8 @@ type CreateAliasInput struct {
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/viewing-keys.html#find-cmk-id-arn)
 	// in the Key Management Service Developer Guide . Specify the key ID or key ARN of
 	// the KMS key. For example:
-	//
-	// * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// * Key
+	// - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	// - Key
 	// ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//

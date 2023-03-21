@@ -41,16 +41,12 @@ type ListAvailableResourceMetricsInput struct {
 
 	// The types of metrics to return in the response. Valid values in the array
 	// include the following:
-	//
-	// * os (OS counter metrics) - All engines
-	//
-	// * db (DB load
+	// - os (OS counter metrics) - All engines
+	// - db (DB load
 	// metrics) - All engines except for Amazon DocumentDB
-	//
-	// * db.sql.stats (per-SQL
+	// - db.sql.stats (per-SQL
 	// metrics) - All engines except for Amazon DocumentDB
-	//
-	// * db.sql_tokenized.stats
+	// - db.sql_tokenized.stats
 	// (per-SQL digest metrics) - All engines except for Amazon DocumentDB
 	//
 	// This member is required.

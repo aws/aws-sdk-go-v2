@@ -105,14 +105,11 @@ type DescribeSecretOutput struct {
 	PrimaryRegion *string
 
 	// A list of the replicas of this secret and their status:
-	//
-	// * Failed, which
+	// - Failed, which
 	// indicates that the replica was not created.
-	//
-	// * InProgress, which indicates that
+	// - InProgress, which indicates that
 	// Secrets Manager is in the process of creating the replica.
-	//
-	// * InSync, which
+	// - InSync, which
 	// indicates that the replica was created.
 	ReplicationStatus []types.ReplicationStatusType
 
@@ -138,17 +135,14 @@ type DescribeSecretOutput struct {
 	// that don't have staging labels are considered deprecated and Secrets Manager can
 	// delete them. Secrets Manager uses staging labels to indicate the status of a
 	// secret version during rotation. The three staging labels for rotation are:
-	//
-	// *
+	// -
 	// AWSCURRENT, which indicates the current version of the secret.
-	//
-	// * AWSPENDING,
+	// - AWSPENDING,
 	// which indicates the version of the secret that contains new secret information
 	// that will become the next current version when rotation finishes. During
 	// rotation, Secrets Manager creates an AWSPENDING version ID before creating the
 	// new secret version. To check if a secret version exists, call GetSecretValue.
-	//
-	// *
+	// -
 	// AWSPREVIOUS, which indicates the previous current version of the secret. You can
 	// use this as the last known good version.
 	//

@@ -34,13 +34,10 @@ func (c *Client) ListVersionsByFunction(ctx context.Context, params *ListVersion
 type ListVersionsByFunctionInput struct {
 
 	// The name of the Lambda function. Name formats
-	//
-	// * Function name - MyFunction.
-	//
-	// *
+	// - Function name - MyFunction.
+	// -
 	// Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.
-	//
-	// *
+	// -
 	// Partial ARN - 123456789012:function:MyFunction.
 	//
 	// The length constraint applies

@@ -94,20 +94,16 @@ type GetJobOutputInput struct {
 	// have 1 GB of job output you want to download and you decide to download 128 MB
 	// chunks of data at a time, which is a total of eight Get Job Output requests. You
 	// use the following process to download the job output:
-	//
-	// * Download a 128 MB chunk
+	// - Download a 128 MB chunk
 	// of output by specifying the appropriate byte range. Verify that all 128 MB of
 	// data was received.
-	//
-	// * Along with the data, the response includes a SHA256 tree
+	// - Along with the data, the response includes a SHA256 tree
 	// hash of the payload. You compute the checksum of the payload on the client and
 	// compare it with the checksum you received in the response to ensure you received
 	// all the expected data.
-	//
-	// * Repeat steps 1 and 2 for all the eight 128 MB chunks
-	// of output data, each time specifying the appropriate byte range.
-	//
-	// * After
+	// - Repeat steps 1 and 2 for all the eight 128 MB chunks of
+	// output data, each time specifying the appropriate byte range.
+	// - After
 	// downloading all the parts of the job output, you have a list of eight checksum
 	// values. Compute the tree hash of these values to find the checksum of the entire
 	// output. Using the DescribeJob API, obtain job information of the job that
@@ -136,16 +132,13 @@ type GetJobOutputOutput struct {
 	// The checksum of the data in the response. This header is returned only when
 	// retrieving the output for an archive retrieval job. Furthermore, this header
 	// appears only under the following conditions:
-	//
-	// * You get the entire range of the
+	// - You get the entire range of the
 	// archive.
-	//
-	// * You request a range to return of the archive that starts and ends on
+	// - You request a range to return of the archive that starts and ends on
 	// a multiple of 1 MB. For example, if you have an 3.1 MB archive and you specify a
 	// range to return that starts at 1 MB and ends at 2 MB, then the
 	// x-amz-sha256-tree-hash is returned as a response header.
-	//
-	// * You request a range
+	// - You request a range
 	// of the archive to return that starts on a multiple of 1 MB and goes to the end
 	// of the archive. For example, if you have a 3.1 MB archive and you specify a
 	// range that starts at 2 MB and ends at 3.1 MB (the end of the archive), then the

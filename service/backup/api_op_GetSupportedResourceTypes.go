@@ -33,31 +33,21 @@ type GetSupportedResourceTypesInput struct {
 type GetSupportedResourceTypesOutput struct {
 
 	// Contains a string with the supported Amazon Web Services resource types:
-	//
-	// *
+	// -
 	// Aurora for Amazon Aurora
-	//
-	// * DynamoDB for Amazon DynamoDB
-	//
-	// * EBS for Amazon
-	// Elastic Block Store
-	//
-	// * EC2 for Amazon Elastic Compute Cloud
-	//
-	// * EFS for Amazon
-	// Elastic File System
-	//
-	// * FSX for Amazon FSx
-	//
-	// * RDS for Amazon Relational Database
-	// Service
-	//
-	// * Storage Gateway for Storage Gateway
-	//
-	// * DocDB for Amazon DocumentDB
-	// (with MongoDB compatibility)
-	//
-	// * Neptune for Amazon Neptune
+	// - DynamoDB for Amazon DynamoDB
+	// - EBS for Amazon Elastic
+	// Block Store
+	// - EC2 for Amazon Elastic Compute Cloud
+	// - EFS for Amazon Elastic File
+	// System
+	// - FSX for Amazon FSx
+	// - RDS for Amazon Relational Database Service
+	// -
+	// Storage Gateway for Storage Gateway
+	// - DocDB for Amazon DocumentDB (with MongoDB
+	// compatibility)
+	// - Neptune for Amazon Neptune
 	ResourceTypes []string
 
 	// Metadata pertaining to the operation's result.

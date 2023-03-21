@@ -611,47 +611,37 @@ type ProductInformation struct {
 	// ProductInformationFilterName are listed here along with descriptions and valid
 	// options for ProductInformationFilterComparator. The following filters and are
 	// supported when the resource type is SSM_MANAGED:
-	//
-	// * Application Name - The name
+	// - Application Name - The name
 	// of the application. Logical operator is EQUALS.
-	//
-	// * Application Publisher - The
+	// - Application Publisher - The
 	// publisher of the application. Logical operator is EQUALS.
-	//
-	// * Application Version
+	// - Application Version
 	// - The version of the application. Logical operator is EQUALS.
-	//
-	// * Platform Name -
+	// - Platform Name -
 	// The name of the platform. Logical operator is EQUALS.
-	//
-	// * Platform Type - The
+	// - Platform Type - The
 	// platform type. Logical operator is EQUALS.
+	// - Tag:key - The key of a tag attached
+	// to an Amazon Web Services resource you wish to exclude from automated discovery.
+	// Logical operator is NOT_EQUALS. The key for your tag must be appended to Tag:
+	// following the example: Tag:name-of-your-key. ProductInformationFilterValue is
+	// optional if you are not using values for the key.
+	// - AccountId - The 12-digit ID
+	// of an Amazon Web Services account you wish to exclude from automated discovery.
+	// Logical operator is NOT_EQUALS.
+	// - License Included - The type of license
+	// included. Logical operators are EQUALS and NOT_EQUALS. Possible values are:
+	// sql-server-enterprise | sql-server-standard | sql-server-web |
+	// windows-server-datacenter.
 	//
-	// * Tag:key - The key of a tag
-	// attached to an Amazon Web Services resource you wish to exclude from automated
-	// discovery. Logical operator is NOT_EQUALS. The key for your tag must be appended
-	// to Tag: following the example: Tag:name-of-your-key.
-	// ProductInformationFilterValue is optional if you are not using values for the
-	// key.
-	//
-	// * AccountId - The 12-digit ID of an Amazon Web Services account you wish
-	// to exclude from automated discovery. Logical operator is NOT_EQUALS.
-	//
-	// * License
-	// Included - The type of license included. Logical operators are EQUALS and
-	// NOT_EQUALS. Possible values are: sql-server-enterprise | sql-server-standard |
-	// sql-server-web | windows-server-datacenter.
-	//
-	// The following filters and logical
-	// operators are supported when the resource type is RDS:
-	//
-	// * Engine Edition - The
-	// edition of the database engine. Logical operator is EQUALS. Possible values are:
-	// oracle-ee | oracle-se | oracle-se1 | oracle-se2.
-	//
-	// * License Pack - The license
-	// pack. Logical operator is EQUALS. Possible values are: data guard | diagnostic
-	// pack sqlt | tuning pack sqlt | ols | olap.
+	// The following filters and logical operators are
+	// supported when the resource type is RDS:
+	// - Engine Edition - The edition of the
+	// database engine. Logical operator is EQUALS. Possible values are: oracle-ee |
+	// oracle-se | oracle-se1 | oracle-se2.
+	// - License Pack - The license pack. Logical
+	// operator is EQUALS. Possible values are: data guard | diagnostic pack sqlt |
+	// tuning pack sqlt | ols | olap.
 	//
 	// This member is required.
 	ProductInformationFilterList []ProductInformationFilter

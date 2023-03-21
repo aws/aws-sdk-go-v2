@@ -22,17 +22,13 @@ import (
 // for use
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-using-volumes.html). If
 // a volume has an Amazon Web Services Marketplace product code:
-//
-// * The volume can
+// - The volume can
 // be attached only to a stopped instance.
-//
-// * Amazon Web Services Marketplace
+// - Amazon Web Services Marketplace
 // product codes are copied from the volume to the instance.
-//
-// * You must be
+// - You must be
 // subscribed to the product.
-//
-// * The instance type and operating system of the
+// - The instance type and operating system of the
 // instance must support the product. For example, you can't detach a volume from a
 // Windows instance and attach it to a Linux instance.
 //

@@ -65,11 +65,9 @@ type CreateHsmInput struct {
 	SubnetId *string
 
 	// Specifies the type of subscription for the HSM.
-	//
-	// * PRODUCTION - The HSM is being
+	// - PRODUCTION - The HSM is being
 	// used in a production environment.
-	//
-	// * TRIAL - The HSM is being used in a product
+	// - TRIAL - The HSM is being used in a product
 	// trial.
 	//
 	// This member is required.

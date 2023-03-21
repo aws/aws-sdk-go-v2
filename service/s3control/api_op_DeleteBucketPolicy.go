@@ -42,12 +42,10 @@ import (
 // access point ARN, see the Examples
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html#API_control_DeleteBucketPolicy_Examples)
 // section. The following actions are related to DeleteBucketPolicy:
-//
-// *
+// -
 // GetBucketPolicy
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html)
-//
-// *
+// -
 // PutBucketPolicy
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html)
 func (c *Client) DeleteBucketPolicy(ctx context.Context, params *DeleteBucketPolicyInput, optFns ...func(*Options)) (*DeleteBucketPolicyOutput, error) {

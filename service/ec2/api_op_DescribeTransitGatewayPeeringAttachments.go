@@ -37,32 +37,25 @@ type DescribeTransitGatewayPeeringAttachmentsInput struct {
 	DryRun *bool
 
 	// One or more filters. The possible values are:
-	//
-	// * transit-gateway-attachment-id -
+	// - transit-gateway-attachment-id -
 	// The ID of the transit gateway attachment.
-	//
-	// * local-owner-id - The ID of your
+	// - local-owner-id - The ID of your
 	// Amazon Web Services account.
-	//
-	// * remote-owner-id - The ID of the Amazon Web
+	// - remote-owner-id - The ID of the Amazon Web
 	// Services account in the remote Region that owns the transit gateway.
-	//
-	// * state -
+	// - state -
 	// The state of the peering attachment. Valid values are available | deleted |
 	// deleting | failed | failing | initiatingRequest | modifying | pendingAcceptance
 	// | pending | rollingBack | rejected | rejecting).
-	//
-	// * tag: - The key/value
+	// - tag: - The key/value
 	// combination of a tag assigned to the resource. Use the tag key in the filter
 	// name and the tag value as the filter value. For example, to find all resources
 	// that have a tag with the key Owner and the value TeamA, specify tag:Owner for
 	// the filter name and TeamA for the filter value.
-	//
-	// * tag-key - The key of a tag
+	// - tag-key - The key of a tag
 	// assigned to the resource. Use this filter to find all resources that have a tag
 	// with a specific key, regardless of the tag value.
-	//
-	// * transit-gateway-id - The ID
+	// - transit-gateway-id - The ID
 	// of the transit gateway.
 	Filters []types.Filter
 

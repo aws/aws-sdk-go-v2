@@ -22,12 +22,10 @@ import (
 // provide a set of game session configuration settings. The fleet must be in
 // ACTIVE status before a game session can be created in it. This operation can be
 // used in the following ways:
-//
-// * To create a game session on an instance in a
+// - To create a game session on an instance in a
 // fleet's home Region, provide a fleet or alias ID along with your game session
 // configuration.
-//
-// * To create a game session on an instance in a fleet's remote
+// - To create a game session on an instance in a fleet's remote
 // location, provide a fleet or alias ID and a location name, along with your game
 // session configuration.
 //

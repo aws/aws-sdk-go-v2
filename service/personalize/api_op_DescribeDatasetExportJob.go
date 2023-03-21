@@ -43,15 +43,11 @@ type DescribeDatasetExportJobOutput struct {
 
 	// Information about the dataset export job, including the status. The status is
 	// one of the following values:
-	//
-	// * CREATE PENDING
-	//
-	// * CREATE IN_PROGRESS
-	//
-	// *
-	// ACTIVE
-	//
-	// * CREATE FAILED
+	// - CREATE PENDING
+	// - CREATE IN_PROGRESS
+	// - ACTIVE
+	// -
+	// CREATE FAILED
 	DatasetExportJob *types.DatasetExportJob
 
 	// Metadata pertaining to the operation's result.

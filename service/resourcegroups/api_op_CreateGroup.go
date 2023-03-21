@@ -20,8 +20,7 @@ import (
 // and service configurations, see Service configurations for Resource Groups
 // (https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html). Minimum
 // permissions To run this command, you must have the following permissions:
-//
-// *
+// -
 // resource-groups:CreateGroup
 func (c *Client) CreateGroup(ctx context.Context, params *CreateGroupInput, optFns ...func(*Options)) (*CreateGroupOutput, error) {
 	if params == nil {

@@ -62,22 +62,18 @@ type UpdateAnomalySubscriptionInput struct {
 	// nested expression types are AND and OR. The match option GREATER_THAN_OR_EQUAL
 	// is required. Values must be numbers between 0 and 10,000,000,000. The following
 	// are examples of valid ThresholdExpressions:
-	//
-	// * Absolute threshold: {
+	// - Absolute threshold: {
 	// "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [
 	// "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }
-	//
-	// * Percentage threshold: {
+	// - Percentage threshold: {
 	// "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [
 	// "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }
-	//
-	// * AND two thresholds
+	// - AND two thresholds
 	// together: { "And": [ { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE",
 	// "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }, {
 	// "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [
 	// "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } } ] }
-	//
-	// * OR two thresholds
+	// - OR two thresholds
 	// together: { "Or": [ { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE",
 	// "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }, {
 	// "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [

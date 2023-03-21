@@ -28,15 +28,12 @@ import (
 // in the Amazon S3 User Guide. Grantee Values You can specify the person (grantee)
 // to whom you're assigning access rights (using request elements) in the following
 // ways:
-//
-// * By the person's ID: <>ID<><>GranteesEmail<>  DisplayName is optional
-// and ignored in the request.
-//
-// * By Email address:  <>Grantees@email.com<> The
-// grantee is resolved to the CanonicalUser and, in a response to a GET Object acl
-// request, appears as the CanonicalUser.
-//
-// * By URI:
+// - By the person's ID: <>ID<><>GranteesEmail<>  DisplayName is optional and
+// ignored in the request.
+// - By Email address:  <>Grantees@email.com<> The grantee
+// is resolved to the CanonicalUser and, in a response to a GET Object acl request,
+// appears as the CanonicalUser.
+// - By URI:
 // <>http://acs.amazonaws.com/groups/global/AuthenticatedUsers<>
 //
 // To enable
@@ -51,19 +48,15 @@ import (
 // GetBucketLogging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLogging.html). The
 // following operations are related to PutBucketLogging:
-//
-// * PutObject
+// - PutObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
-//
-// *
+// -
 // DeleteBucket
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html)
-//
-// *
+// -
 // CreateBucket
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
-//
-// *
+// -
 // GetBucketLogging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLogging.html)
 func (c *Client) PutBucketLogging(ctx context.Context, params *PutBucketLoggingInput, optFns ...func(*Options)) (*PutBucketLoggingOutput, error) {

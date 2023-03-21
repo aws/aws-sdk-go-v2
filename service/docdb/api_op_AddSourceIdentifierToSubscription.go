@@ -31,18 +31,14 @@ func (c *Client) AddSourceIdentifierToSubscription(ctx context.Context, params *
 type AddSourceIdentifierToSubscriptionInput struct {
 
 	// The identifier of the event source to be added:
-	//
-	// * If the source type is an
+	// - If the source type is an
 	// instance, a DBInstanceIdentifier must be provided.
-	//
-	// * If the source type is a
+	// - If the source type is a
 	// security group, a DBSecurityGroupName must be provided.
-	//
-	// * If the source type is
+	// - If the source type is
 	// a parameter group, a DBParameterGroupName must be provided.
-	//
-	// * If the source
-	// type is a snapshot, a DBSnapshotIdentifier must be provided.
+	// - If the source type
+	// is a snapshot, a DBSnapshotIdentifier must be provided.
 	//
 	// This member is required.
 	SourceIdentifier *string

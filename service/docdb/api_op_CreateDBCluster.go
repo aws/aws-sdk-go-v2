@@ -34,13 +34,10 @@ type CreateDBClusterInput struct {
 
 	// The cluster identifier. This parameter is stored as a lowercase string.
 	// Constraints:
-	//
-	// * Must contain from 1 to 63 letters, numbers, or hyphens.
-	//
-	// * The
+	// - Must contain from 1 to 63 letters, numbers, or hyphens.
+	// - The
 	// first character must be a letter.
-	//
-	// * Cannot end with a hyphen or contain two
+	// - Cannot end with a hyphen or contain two
 	// consecutive hyphens.
 	//
 	// Example: my-cluster
@@ -59,8 +56,7 @@ type CreateDBClusterInput struct {
 
 	// The number of days for which automated backups are retained. You must specify a
 	// minimum value of 1. Default: 1 Constraints:
-	//
-	// * Must be a value from 1 to 35.
+	// - Must be a value from 1 to 35.
 	BackupRetentionPeriod *int32
 
 	// The name of the cluster parameter group to associate with this cluster.
@@ -98,8 +94,7 @@ type CreateDBClusterInput struct {
 	// key that is used to encrypt the new cluster, you can use the KMS key alias
 	// instead of the ARN for the KMS encryption key. If an encryption key is not
 	// specified in KmsKeyId:
-	//
-	// * If the StorageEncrypted parameter is true, Amazon
+	// - If the StorageEncrypted parameter is true, Amazon
 	// DocumentDB uses your default encryption key.
 	//
 	// KMS creates the default encryption
@@ -113,13 +108,10 @@ type CreateDBClusterInput struct {
 	MasterUserPassword *string
 
 	// The name of the master user for the cluster. Constraints:
-	//
-	// * Must be from 1 to
-	// 63 letters or numbers.
-	//
-	// * The first character must be a letter.
-	//
-	// * Cannot be a
+	// - Must be from 1 to 63
+	// letters or numbers.
+	// - The first character must be a letter.
+	// - Cannot be a
 	// reserved word for the chosen database engine.
 	MasterUsername *string
 
@@ -133,16 +125,12 @@ type CreateDBClusterInput struct {
 	// backups are enabled using the BackupRetentionPeriod parameter. The default is a
 	// 30-minute window selected at random from an 8-hour block of time for each Amazon
 	// Web Services Region. Constraints:
-	//
-	// * Must be in the format hh24:mi-hh24:mi.
-	//
-	// *
+	// - Must be in the format hh24:mi-hh24:mi.
+	// -
 	// Must be in Universal Coordinated Time (UTC).
-	//
-	// * Must not conflict with the
+	// - Must not conflict with the
 	// preferred maintenance window.
-	//
-	// * Must be at least 30 minutes.
+	// - Must be at least 30 minutes.
 	PreferredBackupWindow *string
 
 	// The weekly time range during which system maintenance can occur, in Universal

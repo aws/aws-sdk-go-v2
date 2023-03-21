@@ -58,8 +58,7 @@ func (c *Client) CreateDBClusterParameterGroup(ctx context.Context, params *Crea
 type CreateDBClusterParameterGroupInput struct {
 
 	// The name of the DB cluster parameter group. Constraints:
-	//
-	// * Must not match the
+	// - Must not match the
 	// name of an existing DB cluster parameter group.
 	//
 	// This value is stored as a
@@ -81,18 +80,13 @@ type CreateDBClusterParameterGroupInput struct {
 	// use the following command: aws rds describe-db-engine-versions --query
 	// "DBEngineVersions[].DBParameterGroupFamily" --engine aurora-postgresql The
 	// output contains duplicates. The following are the valid DB engine values:
-	//
-	// *
+	// -
 	// aurora (for MySQL 5.6-compatible Aurora)
-	//
-	// * aurora-mysql (for MySQL
+	// - aurora-mysql (for MySQL
 	// 5.7-compatible and MySQL 8.0-compatible Aurora)
-	//
-	// * aurora-postgresql
-	//
-	// * mysql
-	//
-	// *
+	// - aurora-postgresql
+	// - mysql
+	// -
 	// postgres
 	//
 	// This member is required.

@@ -12,12 +12,9 @@ import (
 
 // Ends the specified contact. This call does not work for the following initiation
 // methods:
-//
-// * DISCONNECT
-//
-// * TRANSFER
-//
-// * QUEUE_TRANSFER
+// - DISCONNECT
+// - TRANSFER
+// - QUEUE_TRANSFER
 func (c *Client) StopContact(ctx context.Context, params *StopContactInput, optFns ...func(*Options)) (*StopContactOutput, error) {
 	if params == nil {
 		params = &StopContactInput{}

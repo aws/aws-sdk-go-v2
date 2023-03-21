@@ -39,27 +39,21 @@ func (c *Client) CopyClusterSnapshot(ctx context.Context, params *CopyClusterSna
 type CopyClusterSnapshotInput struct {
 
 	// The identifier for the source snapshot. Constraints:
-	//
-	// * Must be the identifier
+	// - Must be the identifier
 	// for a valid automated snapshot whose state is available.
 	//
 	// This member is required.
 	SourceSnapshotIdentifier *string
 
 	// The identifier given to the new manual snapshot. Constraints:
-	//
-	// * Cannot be null,
+	// - Cannot be null,
 	// empty, or blank.
-	//
-	// * Must contain from 1 to 255 alphanumeric characters or
+	// - Must contain from 1 to 255 alphanumeric characters or
 	// hyphens.
-	//
-	// * First character must be a letter.
-	//
-	// * Cannot end with a hyphen or
+	// - First character must be a letter.
+	// - Cannot end with a hyphen or
 	// contain two consecutive hyphens.
-	//
-	// * Must be unique for the Amazon Web Services
+	// - Must be unique for the Amazon Web Services
 	// account that is making the request.
 	//
 	// This member is required.
@@ -74,8 +68,7 @@ type CopyClusterSnapshotInput struct {
 	// parameter is required if your IAM user or role has a policy containing a
 	// snapshot resource element that specifies anything other than * for the cluster
 	// name. Constraints:
-	//
-	// * Must be the identifier for a valid cluster.
+	// - Must be the identifier for a valid cluster.
 	SourceSnapshotClusterIdentifier *string
 
 	noSmithyDocumentSerde

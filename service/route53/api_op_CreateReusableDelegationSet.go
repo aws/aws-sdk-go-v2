@@ -23,42 +23,33 @@ import (
 // The process for migrating existing hosted zones to use a reusable delegation set
 // is comparable to the process for configuring white label name servers. You need
 // to perform the following steps:
-//
-// * Create a reusable delegation set.
-//
-// * Recreate
+// - Create a reusable delegation set.
+// - Recreate
 // hosted zones, and reduce the TTL to 60 seconds or less.
-//
-// * Recreate resource
+// - Recreate resource
 // record sets in the new hosted zones.
-//
-// * Change the registrar's name servers to
+// - Change the registrar's name servers to
 // use the name servers for the new hosted zones.
+// - Monitor traffic for the website
+// or application.
+// - Change TTLs back to their original values.
 //
-// * Monitor traffic for the
-// website or application.
-//
-// * Change TTLs back to their original values.
-//
-// If you
-// want to migrate existing hosted zones to use a reusable delegation set, the
-// existing hosted zones can't use any of the name servers that are assigned to the
-// reusable delegation set. If one or more hosted zones do use one or more name
-// servers that are assigned to the reusable delegation set, you can do one of the
-// following:
-//
-// * For small numbers of hosted zones—up to a few hundred—it's
-// relatively easy to create reusable delegation sets until you get one that has
-// four name servers that don't overlap with any of the name servers in your hosted
-// zones.
-//
-// * For larger numbers of hosted zones, the easiest solution is to use
-// more than one reusable delegation set.
-//
-// * For larger numbers of hosted zones,
-// you can also migrate hosted zones that have overlapping name servers to hosted
-// zones that don't have overlapping name servers, then migrate the hosted zones
-// again to use the reusable delegation set.
+// If you want to
+// migrate existing hosted zones to use a reusable delegation set, the existing
+// hosted zones can't use any of the name servers that are assigned to the reusable
+// delegation set. If one or more hosted zones do use one or more name servers that
+// are assigned to the reusable delegation set, you can do one of the following:
+// -
+// For small numbers of hosted zones—up to a few hundred—it's relatively easy to
+// create reusable delegation sets until you get one that has four name servers
+// that don't overlap with any of the name servers in your hosted zones.
+// - For
+// larger numbers of hosted zones, the easiest solution is to use more than one
+// reusable delegation set.
+// - For larger numbers of hosted zones, you can also
+// migrate hosted zones that have overlapping name servers to hosted zones that
+// don't have overlapping name servers, then migrate the hosted zones again to use
+// the reusable delegation set.
 func (c *Client) CreateReusableDelegationSet(ctx context.Context, params *CreateReusableDelegationSetInput, optFns ...func(*Options)) (*CreateReusableDelegationSetOutput, error) {
 	if params == nil {
 		params = &CreateReusableDelegationSetInput{}

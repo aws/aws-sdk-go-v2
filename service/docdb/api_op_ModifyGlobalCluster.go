@@ -35,8 +35,7 @@ type ModifyGlobalClusterInput struct {
 
 	// The identifier for the global cluster being modified. This parameter isn't
 	// case-sensitive. Constraints:
-	//
-	// * Must match the identifier of an existing global
+	// - Must match the identifier of an existing global
 	// cluster.
 	//
 	// This member is required.
@@ -48,8 +47,7 @@ type ModifyGlobalClusterInput struct {
 
 	// The new identifier for a global cluster when you modify a global cluster. This
 	// value is stored as a lowercase string.
-	//
-	// * Must contain from 1 to 63 letters,
+	// - Must contain from 1 to 63 letters,
 	// numbers, or hyphens The first character must be a letter Can't end with a hyphen
 	// or contain two consecutive hyphens
 	//

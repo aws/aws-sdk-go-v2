@@ -55,8 +55,7 @@ type UpdatePlaceIndexOutput struct {
 
 	// The Amazon Resource Name (ARN) of the upated place index resource. Used to
 	// specify a resource across Amazon Web Services.
-	//
-	// * Format example:
+	// - Format example:
 	// arn:aws:geo:region:account-id:place- index/ExamplePlaceIndex
 	//
 	// This member is required.

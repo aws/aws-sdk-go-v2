@@ -29,16 +29,13 @@ import (
 // automatically optimizing frequently and infrequently accessed objects
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html#sc-dynamic-data-access).
 // Operations related to PutBucketIntelligentTieringConfiguration include:
-//
-// *
+// -
 // DeleteBucketIntelligentTieringConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketIntelligentTieringConfiguration.html)
-//
-// *
+// -
 // GetBucketIntelligentTieringConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketIntelligentTieringConfiguration.html)
-//
-// *
+// -
 // ListBucketIntelligentTieringConfigurations
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketIntelligentTieringConfigurations.html)
 //
@@ -46,29 +43,22 @@ import (
 // only need S3 Intelligent-Tiering enabled on a bucket if you want to
 // automatically move objects stored in the S3 Intelligent-Tiering storage class to
 // the Archive Access or Deep Archive Access tier. Special Errors
-//
-// * HTTP 400 Bad
+// - HTTP 400 Bad
 // Request Error
+// - Code: InvalidArgument
+// - Cause: Invalid Argument
 //
-// * Code: InvalidArgument
-//
-// * Cause: Invalid Argument
-//
-// * HTTP 400
-// Bad Request Error
-//
-// * Code: TooManyConfigurations
-//
-// * Cause: You are attempting to
+// - HTTP 400 Bad
+// Request Error
+// - Code: TooManyConfigurations
+// - Cause: You are attempting to
 // create a new configuration but have already reached the 1,000-configuration
 // limit.
 //
-// * HTTP 403 Forbidden Error
-//
-// * Code: AccessDenied
-//
-// * Cause: You are not
-// the owner of the specified bucket, or you do not have the
+// - HTTP 403 Forbidden Error
+// - Code: AccessDenied
+// - Cause: You are not the
+// owner of the specified bucket, or you do not have the
 // s3:PutIntelligentTieringConfiguration bucket permission to set the configuration
 // on the bucket.
 func (c *Client) PutBucketIntelligentTieringConfiguration(ctx context.Context, params *PutBucketIntelligentTieringConfigurationInput, optFns ...func(*Options)) (*PutBucketIntelligentTieringConfigurationOutput, error) {

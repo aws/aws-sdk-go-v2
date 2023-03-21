@@ -56,21 +56,14 @@ type ListUniqueProblemsOutput struct {
 	NextToken *string
 
 	// Information about the unique problems. Allowed values include:
-	//
-	// * PENDING
-	//
-	// *
+	// - PENDING
+	// -
 	// PASSED
-	//
-	// * WARNED
-	//
-	// * FAILED
-	//
-	// * SKIPPED
-	//
-	// * ERRORED
-	//
-	// * STOPPED
+	// - WARNED
+	// - FAILED
+	// - SKIPPED
+	// - ERRORED
+	// - STOPPED
 	UniqueProblems map[string][]types.UniqueProblem
 
 	// Metadata pertaining to the operation's result.

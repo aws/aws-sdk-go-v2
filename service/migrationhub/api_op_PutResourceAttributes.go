@@ -14,14 +14,12 @@ import (
 // Provides identifying details of the resource being migrated so that it can be
 // associated in the Application Discovery Service repository. This association
 // occurs asynchronously after PutResourceAttributes returns.
-//
-// * Keep in mind that
+// - Keep in mind that
 // subsequent calls to PutResourceAttributes will override previously stored
 // attributes. For example, if it is first called with a MAC address, but later, it
 // is desired to add an IP address, it will then be required to call it with both
 // the IP and MAC addresses to prevent overriding the MAC address.
-//
-// * Note the
+// - Note the
 // instructions regarding the special use case of the ResourceAttributeList
 // (https://docs.aws.amazon.com/migrationhub/latest/ug/API_PutResourceAttributes.html#migrationhub-PutResourceAttributes-request-ResourceAttributeList)
 // parameter when specifying any "VM" related value.
@@ -65,16 +63,14 @@ type PutResourceAttributesInput struct {
 	// VM_MANAGER_ID | VM_MANAGED_OBJECT_REFERENCE | VM_NAME | VM_PATH | BIOS_ID |
 	// MOTHERBOARD_SERIAL_NUMBER where the identifying value can be a string up to 256
 	// characters.
-	//
-	// * If any "VM" related value is set for a ResourceAttribute object,
+	// - If any "VM" related value is set for a ResourceAttribute object,
 	// it is required that VM_MANAGER_ID, as a minimum, is always set. If VM_MANAGER_ID
 	// is not set, then all "VM" fields will be discarded and "VM" fields will not be
 	// used for matching the migration task to a server in Application Discovery
 	// Service repository. See the Example
 	// (https://docs.aws.amazon.com/migrationhub/latest/ug/API_PutResourceAttributes.html#API_PutResourceAttributes_Examples)
 	// section below for a use case of specifying "VM" related values.
-	//
-	// * If a server
+	// - If a server
 	// you are trying to match has multiple IP or MAC addresses, you should provide as
 	// many as you know in separate type/value pairs passed to the
 	// ResourceAttributeList parameter to maximize the chances of matching.

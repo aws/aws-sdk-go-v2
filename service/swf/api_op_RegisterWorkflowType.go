@@ -18,23 +18,17 @@ import (
 // type once it is registered and it must be registered as a new version. Access
 // Control You can use IAM policies to control this action's access to Amazon SWF
 // resources as follows:
-//
-// * Use a Resource element with the domain name to limit
-// the action to only specified domains.
-//
-// * Use an Action element to allow or deny
+// - Use a Resource element with the domain name to limit the
+// action to only specified domains.
+// - Use an Action element to allow or deny
 // permission to call this action.
-//
-// * Constrain the following parameters by using a
+// - Constrain the following parameters by using a
 // Condition element with the appropriate keys.
-//
-// * defaultTaskList.name: String
+// - defaultTaskList.name: String
 // constraint. The key is swf:defaultTaskList.name.
-//
-// * name: String constraint. The
+// - name: String constraint. The
 // key is swf:name.
-//
-// * version: String constraint. The key is swf:version.
+// - version: String constraint. The key is swf:version.
 //
 // If the
 // caller doesn't have sufficient permissions to invoke the action, or the
@@ -90,16 +84,13 @@ type RegisterWorkflowTypeInput struct {
 	// default can be overridden when starting a workflow execution using the
 	// StartWorkflowExecution action or the StartChildWorkflowExecutionDecision. The
 	// supported child policies are:
-	//
-	// * TERMINATE – The child executions are
+	// - TERMINATE – The child executions are
 	// terminated.
-	//
-	// * REQUEST_CANCEL – A request to cancel is attempted for each child
+	// - REQUEST_CANCEL – A request to cancel is attempted for each child
 	// execution by recording a WorkflowExecutionCancelRequested event in its history.
 	// It is up to the decider to take appropriate actions when it receives an
 	// execution history with this event.
-	//
-	// * ABANDON – No action is taken. The child
+	// - ABANDON – No action is taken. The child
 	// executions continue to run.
 	DefaultChildPolicy types.ChildPolicy
 

@@ -27,19 +27,15 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html)
 // in the Amazon S3 User Guide. The following operations are related to
 // GetObjectAcl:
-//
-// * GetObject
+// - GetObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
-//
-// *
+// -
 // GetObjectAttributes
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAttributes.html)
-//
-// *
+// -
 // DeleteObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html)
-//
-// *
+// -
 // PutObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
 func (c *Client) GetObjectAcl(ctx context.Context, params *GetObjectAclInput, optFns ...func(*Options)) (*GetObjectAclOutput, error) {
 	if params == nil {

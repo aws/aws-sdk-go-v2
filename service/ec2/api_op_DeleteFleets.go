@@ -19,14 +19,12 @@ import (
 // interrupted or you terminate them manually. For instant fleets, EC2 Fleet must
 // terminate the instances when the fleet is deleted. A deleted instant fleet with
 // running instances is not supported. Restrictions
-//
-// * You can delete up to 25
+// - You can delete up to 25
 // instant fleets in a single request. If you exceed this number, no instant fleets
 // are deleted and an error is returned. There is no restriction on the number of
 // fleets of type maintain or request that can be deleted in a single request.
-//
-// *
-// Up to 1000 instances can be terminated in a single request to delete instant
+// - Up
+// to 1000 instances can be terminated in a single request to delete instant
 // fleets.
 //
 // For more information, see Delete an EC2 Fleet

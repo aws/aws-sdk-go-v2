@@ -16,15 +16,13 @@ import (
 // launch in the VPC to use this set of DHCP options. The following are the
 // individual DHCP options you can specify. For more information about the options,
 // see RFC 2132 (http://www.ietf.org/rfc/rfc2132.txt).
-//
-// * domain-name-servers - The
+// - domain-name-servers - The
 // IP addresses of up to four domain name servers, or AmazonProvidedDNS. The
 // default DHCP option set specifies AmazonProvidedDNS. If specifying more than one
 // domain name server, specify the IP addresses in a single parameter, separated by
 // commas. To have your instance receive a custom DNS hostname as specified in
 // domain-name, you must set domain-name-servers to a custom DNS server.
-//
-// *
+// -
 // domain-name - If you're using AmazonProvidedDNS in us-east-1, specify
 // ec2.internal. If you're using AmazonProvidedDNS in another Region, specify
 // region.compute.internal (for example, ap-northeast-1.compute.internal).
@@ -34,15 +32,12 @@ import (
 // other Linux operating systems treat the value as a single domain, which results
 // in unexpected behavior. If your DHCP options set is associated with a VPC that
 // has instances with multiple operating systems, specify only one domain name.
-//
-// *
+// -
 // ntp-servers - The IP addresses of up to four Network Time Protocol (NTP)
 // servers.
-//
-// * netbios-name-servers - The IP addresses of up to four NetBIOS name
+// - netbios-name-servers - The IP addresses of up to four NetBIOS name
 // servers.
-//
-// * netbios-node-type - The NetBIOS node type (1, 2, 4, or 8). We
+// - netbios-node-type - The NetBIOS node type (1, 2, 4, or 8). We
 // recommend that you specify 2 (broadcast and multicast are not currently
 // supported). For more information about these node types, see RFC 2132
 // (http://www.ietf.org/rfc/rfc2132.txt).

@@ -80,11 +80,9 @@ type StartReplicationTaskAssessmentRunInput struct {
 	// Encryption mode that you can specify to encrypt the results of this assessment
 	// run. If you don't specify this request parameter, DMS stores the assessment run
 	// results without encryption. You can specify one of the options following:
-	//
-	// *
+	// -
 	// "SSE_S3" – The server-side encryption provided as a default by Amazon S3.
-	//
-	// *
+	// -
 	// "SSE_KMS" – Key Management Service (KMS) encryption. This encryption can use
 	// either a custom KMS encryption key that you specify or the default KMS
 	// encryption key that DMS provides.

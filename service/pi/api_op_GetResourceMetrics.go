@@ -62,10 +62,8 @@ type GetResourceMetricsInput struct {
 
 	// The Amazon Web Services service for which Performance Insights returns metrics.
 	// Valid values are as follows:
-	//
-	// * RDS
-	//
-	// * DOCDB
+	// - RDS
+	// - DOCDB
 	//
 	// This member is required.
 	ServiceType types.ServiceType
@@ -97,17 +95,12 @@ type GetResourceMetricsInput struct {
 	// The granularity, in seconds, of the data points returned from Performance
 	// Insights. A period can be as short as one second, or as long as one day (86400
 	// seconds). Valid values are:
-	//
-	// * 1 (one second)
-	//
-	// * 60 (one minute)
-	//
-	// * 300 (five
+	// - 1 (one second)
+	// - 60 (one minute)
+	// - 300 (five
 	// minutes)
-	//
-	// * 3600 (one hour)
-	//
-	// * 86400 (twenty-four hours)
+	// - 3600 (one hour)
+	// - 86400 (twenty-four hours)
 	//
 	// If you don't specify
 	// PeriodInSeconds, then Performance Insights will choose a value for you, with a

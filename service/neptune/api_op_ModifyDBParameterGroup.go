@@ -44,8 +44,7 @@ func (c *Client) ModifyDBParameterGroup(ctx context.Context, params *ModifyDBPar
 type ModifyDBParameterGroupInput struct {
 
 	// The name of the DB parameter group. Constraints:
-	//
-	// * If supplied, must match the
+	// - If supplied, must match the
 	// name of an existing DBParameterGroup.
 	//
 	// This member is required.

@@ -48,8 +48,7 @@ import (
 // x-amz-sns-test-message-id header containing the message ID of the test
 // notification sent to the topic. The following action is related to
 // PutBucketNotificationConfiguration:
-//
-// * GetBucketNotificationConfiguration
+// - GetBucketNotificationConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketNotificationConfiguration.html)
 func (c *Client) PutBucketNotificationConfiguration(ctx context.Context, params *PutBucketNotificationConfigurationInput, optFns ...func(*Options)) (*PutBucketNotificationConfigurationOutput, error) {
 	if params == nil {

@@ -19,10 +19,8 @@
 // specific products that you're interested in, such as an AmazonEC2 instance, with
 // a Provisioned IOPSvolumeType. Service Endpoint Amazon Web Services Price List
 // service API provides the following two endpoints:
-//
-// *
+// -
 // https://api.pricing.us-east-1.amazonaws.com
-//
-// *
+// -
 // https://api.pricing.ap-south-1.amazonaws.com
 package pricing

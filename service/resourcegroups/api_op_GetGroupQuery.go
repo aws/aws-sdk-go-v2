@@ -17,8 +17,7 @@ import (
 // (https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag).
 // Minimum permissions To run this command, you must have the following
 // permissions:
-//
-// * resource-groups:GetGroupQuery
+// - resource-groups:GetGroupQuery
 func (c *Client) GetGroupQuery(ctx context.Context, params *GetGroupQueryInput, optFns ...func(*Options)) (*GetGroupQueryOutput, error) {
 	if params == nil {
 		params = &GetGroupQueryInput{}

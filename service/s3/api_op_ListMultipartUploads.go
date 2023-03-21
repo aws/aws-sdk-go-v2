@@ -32,24 +32,18 @@ import (
 // Multipart Upload and Permissions
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html). The
 // following operations are related to ListMultipartUploads:
-//
-// *
+// -
 // CreateMultipartUpload
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html)
-//
-// *
+// -
 // UploadPart
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)
-//
-// *
+// -
 // CompleteMultipartUpload
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html)
-//
-// *
-// ListParts
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html)
-//
-// *
+// -
+// ListParts (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html)
+// -
 // AbortMultipartUpload
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html)
 func (c *Client) ListMultipartUploads(ctx context.Context, params *ListMultipartUploadsInput, optFns ...func(*Options)) (*ListMultipartUploadsOutput, error) {

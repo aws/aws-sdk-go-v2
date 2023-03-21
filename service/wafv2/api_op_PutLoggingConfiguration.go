@@ -16,20 +16,16 @@ import (
 // mutable specifications that you already have for a logging configuration with
 // the ones that you provide to this call. To modify an existing logging
 // configuration, do the following:
-//
-// * Retrieve it by calling
+// - Retrieve it by calling
 // GetLoggingConfiguration
-//
-// * Update its settings as needed
-//
-// * Provide the complete
+// - Update its settings as needed
+// - Provide the complete
 // logging configuration specification to this call
 //
 // You can define one logging
 // destination per web ACL. You can access information about the traffic that WAF
 // inspects using the following steps:
-//
-// * Create your logging destination. You can
+// - Create your logging destination. You can
 // use an Amazon CloudWatch Logs log group, an Amazon Simple Storage Service
 // (Amazon S3) bucket, or an Amazon Kinesis Data Firehose. The name that you give
 // the destination must start with aws-waf-logs-. Depending on the type of
@@ -38,8 +34,7 @@ import (
 // see Logging web ACL traffic
 // (https://docs.aws.amazon.com/waf/latest/developerguide/logging.html) in the WAF
 // Developer Guide.
-//
-// * Associate your logging destination to your web ACL using a
+// - Associate your logging destination to your web ACL using a
 // PutLoggingConfiguration request.
 //
 // When you successfully enable logging using a

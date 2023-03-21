@@ -56,15 +56,12 @@ type UpdateScheduledActionInput struct {
 	DomainName *string
 
 	// When to schedule the action.
-	//
-	// * NOW - Immediately schedules the update to happen
+	// - NOW - Immediately schedules the update to happen
 	// in the current hour if there's capacity available.
-	//
-	// * TIMESTAMP - Lets you
+	// - TIMESTAMP - Lets you
 	// specify a custom date and time to apply the update. If you specify this value,
 	// you must also provide a value for DesiredStartTime.
-	//
-	// * OFF_PEAK_WINDOW - Marks
+	// - OFF_PEAK_WINDOW - Marks
 	// the action to be picked up during an upcoming off-peak window. There's no
 	// guarantee that the change will be implemented during the next immediate window.
 	// Depending on capacity, it might happen in subsequent days.

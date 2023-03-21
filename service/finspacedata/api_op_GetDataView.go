@@ -88,27 +88,19 @@ type GetDataViewOutput struct {
 	SortColumns []string
 
 	// The status of a Dataview creation.
-	//
-	// * RUNNING – Dataview creation is running.
-	//
-	// *
+	// - RUNNING – Dataview creation is running.
+	// -
 	// STARTING – Dataview creation is starting.
-	//
-	// * FAILED – Dataview creation has
+	// - FAILED – Dataview creation has
 	// failed.
-	//
-	// * CANCELLED – Dataview creation has been cancelled.
-	//
-	// * TIMEOUT –
-	// Dataview creation has timed out.
-	//
-	// * SUCCESS – Dataview creation has
-	// succeeded.
-	//
-	// * PENDING – Dataview creation is pending.
-	//
-	// * FAILED_CLEANUP_FAILED –
-	// Dataview creation failed and resource cleanup failed.
+	// - CANCELLED – Dataview creation has been cancelled.
+	// - TIMEOUT – Dataview
+	// creation has timed out.
+	// - SUCCESS – Dataview creation has succeeded.
+	// - PENDING –
+	// Dataview creation is pending.
+	// - FAILED_CLEANUP_FAILED – Dataview creation failed
+	// and resource cleanup failed.
 	Status types.DataViewStatus
 
 	// Metadata pertaining to the operation's result.

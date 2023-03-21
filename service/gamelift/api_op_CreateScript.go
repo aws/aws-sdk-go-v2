@@ -18,11 +18,9 @@ import (
 // session. To create a new script record, specify a script name and provide the
 // script file(s). The script files and all dependencies must be zipped into a
 // single file. You can pull the zip file from either of these locations:
-//
-// * A
+// - A
 // locally available directory. Use the ZipFile parameter for this option.
-//
-// * An
+// - An
 // Amazon Simple Storage Service (Amazon S3) bucket under your Amazon Web Services
 // account. Use the StorageLocation parameter for this option. You'll need to have
 // an Identity Access Management (IAM) role that allows the Amazon GameLift service

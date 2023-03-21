@@ -18,9 +18,8 @@ import (
 // index
 // (https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region.html)
 // in the Amazon Web Services Resource Explorer User Guide.
-//
-// * AGGREGATOR index
-// type The index contains information about resources from all Amazon Web Services
+// - AGGREGATOR index type
+// The index contains information about resources from all Amazon Web Services
 // Regions in the Amazon Web Services account in which you've created a Resource
 // Explorer index. Resource information from all other Regions is replicated to
 // this Region's index. When you change the index type to AGGREGATOR, Resource
@@ -37,8 +36,7 @@ import (
 // index per Amazon Web Services account. Before you can promote a different index
 // to be the aggregator index for the account, you must first demote the existing
 // aggregator index to type LOCAL.
-//
-// * LOCAL index type The index contains
+// - LOCAL index type The index contains
 // information about resources in only the Amazon Web Services Region in which the
 // index exists. If an aggregator index in another Region exists, then information
 // in this local index is replicated to the aggregator index. When you change the

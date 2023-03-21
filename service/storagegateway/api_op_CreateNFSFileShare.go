@@ -150,14 +150,11 @@ type CreateNFSFileShareInput struct {
 	RequesterPays *bool
 
 	// A value that maps a user to anonymous user. Valid values are the following:
-	//
-	// *
+	// -
 	// RootSquash: Only root is mapped to anonymous user.
-	//
-	// * NoSquash: No one is mapped
+	// - NoSquash: No one is mapped
 	// to anonymous user.
-	//
-	// * AllSquash: Everyone is mapped to anonymous user.
+	// - AllSquash: Everyone is mapped to anonymous user.
 	Squash *string
 
 	// A list of up to 50 tags that can be assigned to the NFS file share. Each tag is

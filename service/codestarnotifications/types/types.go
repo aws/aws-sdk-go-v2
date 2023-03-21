@@ -107,11 +107,9 @@ type Target struct {
 	TargetAddress *string
 
 	// The target type. Can be an Chatbot topic or Chatbot client.
-	//
-	// * Chatbot topics
-	// are specified as SNS.
-	//
-	// * Chatbot clients are specified as AWSChatbotSlack.
+	// - Chatbot topics are
+	// specified as SNS.
+	// - Chatbot clients are specified as AWSChatbotSlack.
 	TargetType *string
 
 	noSmithyDocumentSerde
@@ -127,11 +125,9 @@ type TargetSummary struct {
 	TargetStatus TargetStatus
 
 	// The type of the target (for example, SNS).
-	//
-	// * Chatbot topics are specified as
+	// - Chatbot topics are specified as
 	// SNS.
-	//
-	// * Chatbot clients are specified as AWSChatbotSlack.
+	// - Chatbot clients are specified as AWSChatbotSlack.
 	TargetType *string
 
 	noSmithyDocumentSerde

@@ -34,41 +34,34 @@ import (
 // and Managing Access Permissions to Your Amazon S3 Resources
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
 // PutBucketTagging has the following special errors:
-//
-// * Error code:
+// - Error code:
 // InvalidTagError
-//
-// * Description: The tag provided was not a valid tag. This error
+// - Description: The tag provided was not a valid tag. This error
 // can occur if the tag did not pass input validation. For information about tag
 // restrictions, see User-Defined Tag Restrictions
 // (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html)
 // and Amazon Web Services-Generated Cost Allocation Tag Restrictions
 // (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/aws-tag-restrictions.html).
 //
-// *
+// -
 // Error code: MalformedXMLError
+// - Description: The XML provided does not match the
+// schema.
 //
-// * Description: The XML provided does not match
-// the schema.
-//
-// * Error code: OperationAbortedError
-//
-// * Description: A conflicting
+// - Error code: OperationAbortedError
+// - Description: A conflicting
 // conditional action is currently in progress against this resource. Please try
 // again.
 //
-// * Error code: InternalError
-//
-// * Description: The service was unable to
+// - Error code: InternalError
+// - Description: The service was unable to
 // apply the provided tag to the bucket.
 //
 // The following operations are related to
 // PutBucketTagging:
-//
-// * GetBucketTagging
+// - GetBucketTagging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketTagging.html)
-//
-// *
+// -
 // DeleteBucketTagging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketTagging.html)
 func (c *Client) PutBucketTagging(ctx context.Context, params *PutBucketTaggingInput, optFns ...func(*Options)) (*PutBucketTaggingOutput, error) {

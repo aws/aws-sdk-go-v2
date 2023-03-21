@@ -46,41 +46,34 @@ type CustomKeyStoresListEntry struct {
 	// errors, see How to Fix a Connection Failure
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#fix-keystore-failed)
 	// in Key Management Service Developer Guide. All custom key stores:
-	//
-	// *
+	// -
 	// INTERNAL_ERROR — KMS could not complete the request due to an internal error.
 	// Retry the request. For ConnectCustomKeyStore requests, disconnect the custom key
 	// store before trying to connect again.
-	//
-	// * NETWORK_ERRORS — Network errors are
+	// - NETWORK_ERRORS — Network errors are
 	// preventing KMS from connecting the custom key store to its backing key
 	// store.
 	//
 	// CloudHSM key stores:
-	//
-	// * CLUSTER_NOT_FOUND — KMS cannot find the CloudHSM
+	// - CLUSTER_NOT_FOUND — KMS cannot find the CloudHSM
 	// cluster with the specified cluster ID.
-	//
-	// * INSUFFICIENT_CLOUDHSM_HSMS — The
+	// - INSUFFICIENT_CLOUDHSM_HSMS — The
 	// associated CloudHSM cluster does not contain any active HSMs. To connect a
 	// custom key store to its CloudHSM cluster, the cluster must contain at least one
 	// active HSM.
-	//
-	// * INSUFFICIENT_FREE_ADDRESSES_IN_SUBNET — At least one private
+	// - INSUFFICIENT_FREE_ADDRESSES_IN_SUBNET — At least one private
 	// subnet associated with the CloudHSM cluster doesn't have any available IP
 	// addresses. A CloudHSM key store connection requires one free IP address in each
 	// of the associated private subnets, although two are preferable. For details, see
 	// How to Fix a Connection Failure
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#fix-keystore-failed)
 	// in the Key Management Service Developer Guide.
-	//
-	// * INVALID_CREDENTIALS — The
+	// - INVALID_CREDENTIALS — The
 	// KeyStorePassword for the custom key store doesn't match the current password of
 	// the kmsuser crypto user in the CloudHSM cluster. Before you can connect your
 	// custom key store to its CloudHSM cluster, you must change the kmsuser account
 	// password and update the KeyStorePassword value for the custom key store.
-	//
-	// *
+	// -
 	// SUBNET_NOT_FOUND — A subnet in the CloudHSM cluster configuration was deleted.
 	// If KMS cannot find all of the subnets in the cluster configuration, attempts to
 	// connect the custom key store to the CloudHSM cluster fail. To fix this error,
@@ -89,14 +82,12 @@ type CustomKeyStoresListEntry struct {
 	// subnets.) For details, see How to Fix a Connection Failure
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#fix-keystore-failed)
 	// in the Key Management Service Developer Guide.
-	//
-	// * USER_LOCKED_OUT — The kmsuser
+	// - USER_LOCKED_OUT — The kmsuser
 	// CU account is locked out of the associated CloudHSM cluster due to too many
 	// failed password attempts. Before you can connect your custom key store to its
 	// CloudHSM cluster, you must change the kmsuser account password and update the
 	// key store password value for the custom key store.
-	//
-	// * USER_LOGGED_IN — The
+	// - USER_LOGGED_IN — The
 	// kmsuser CU account is logged into the associated CloudHSM cluster. This prevents
 	// KMS from rotating the kmsuser account password and logging into the cluster.
 	// Before you can connect your custom key store to its CloudHSM cluster, you must
@@ -105,33 +96,27 @@ type CustomKeyStoresListEntry struct {
 	// the custom key store. For help, see How to Log Out and Reconnect
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#login-kmsuser-2)
 	// in the Key Management Service Developer Guide.
-	//
-	// * USER_NOT_FOUND — KMS cannot
+	// - USER_NOT_FOUND — KMS cannot
 	// find a kmsuser CU account in the associated CloudHSM cluster. Before you can
 	// connect your custom key store to its CloudHSM cluster, you must create a kmsuser
 	// CU account in the cluster, and then update the key store password value for the
 	// custom key store.
 	//
 	// External key stores:
-	//
-	// * INVALID_CREDENTIALS — One or both of
+	// - INVALID_CREDENTIALS — One or both of
 	// the XksProxyAuthenticationCredential values is not valid on the specified
 	// external key store proxy.
-	//
-	// * XKS_PROXY_ACCESS_DENIED — KMS requests are denied
+	// - XKS_PROXY_ACCESS_DENIED — KMS requests are denied
 	// access to the external key store proxy. If the external key store proxy has
 	// authorization rules, verify that they permit KMS to communicate with the proxy
 	// on your behalf.
-	//
-	// * XKS_PROXY_INVALID_CONFIGURATION — A configuration error is
+	// - XKS_PROXY_INVALID_CONFIGURATION — A configuration error is
 	// preventing the external key store from connecting to its proxy. Verify the value
 	// of the XksProxyUriPath.
-	//
-	// * XKS_PROXY_INVALID_RESPONSE — KMS cannot interpret the
+	// - XKS_PROXY_INVALID_RESPONSE — KMS cannot interpret the
 	// response from the external key store proxy. If you see this connection error
 	// code repeatedly, notify your external key store proxy vendor.
-	//
-	// *
+	// -
 	// XKS_PROXY_INVALID_TLS_CONFIGURATION — KMS cannot connect to the external key
 	// store proxy because the TLS configuration is invalid. Verify that the XKS proxy
 	// supports TLS 1.2 or 1.3. Also, verify that the TLS certificate is not expired,
@@ -140,53 +125,43 @@ type CustomKeyStoresListEntry struct {
 	// Authorities
 	// (https://github.com/aws/aws-kms-xksproxy-api-spec/blob/main/TrustedCertificateAuthorities)
 	// list.
-	//
-	// * XKS_PROXY_NOT_REACHABLE — KMS can't communicate with your external key
+	// - XKS_PROXY_NOT_REACHABLE — KMS can't communicate with your external key
 	// store proxy. Verify that the XksProxyUriEndpoint and XksProxyUriPath are
 	// correct. Use the tools for your external key store proxy to verify that the
 	// proxy is active and available on its network. Also, verify that your external
 	// key manager instances are operating properly. Connection attempts fail with this
 	// connection error code if the proxy reports that all external key manager
 	// instances are unavailable.
-	//
-	// * XKS_PROXY_TIMED_OUT — KMS can connect to the
+	// - XKS_PROXY_TIMED_OUT — KMS can connect to the
 	// external key store proxy, but the proxy does not respond to KMS in the time
 	// allotted. If you see this connection error code repeatedly, notify your external
 	// key store proxy vendor.
-	//
-	// * XKS_VPC_ENDPOINT_SERVICE_INVALID_CONFIGURATION — The
+	// - XKS_VPC_ENDPOINT_SERVICE_INVALID_CONFIGURATION — The
 	// Amazon VPC endpoint service configuration doesn't conform to the requirements
 	// for an KMS external key store.
-	//
-	// * The VPC endpoint service must be an endpoint
+	// - The VPC endpoint service must be an endpoint
 	// service for interface endpoints in the caller's Amazon Web Services account.
-	//
-	// *
+	// -
 	// It must have a network load balancer (NLB) connected to at least two subnets,
 	// each in a different Availability Zone.
-	//
-	// * The Allow principals list must include
+	// - The Allow principals list must include
 	// the KMS service principal for the Region, cks.kms..amazonaws.com, such as
 	// cks.kms.us-east-1.amazonaws.com.
-	//
-	// * It must not require acceptance
+	// - It must not require acceptance
 	// (https://docs.aws.amazon.com/vpc/latest/privatelink/create-endpoint-service.html)
 	// of connection requests.
-	//
-	// * It must have a private DNS name. The private DNS name
+	// - It must have a private DNS name. The private DNS name
 	// for an external key store with VPC_ENDPOINT_SERVICE connectivity must be unique
 	// in its Amazon Web Services Region.
-	//
-	// * The domain of the private DNS name must
+	// - The domain of the private DNS name must
 	// have a verification status
 	// (https://docs.aws.amazon.com/vpc/latest/privatelink/verify-domains.html) of
 	// verified.
-	//
-	// * The TLS certificate
+	// - The TLS certificate
 	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html)
 	// specifies the private DNS hostname at which the endpoint is reachable.
 	//
-	// *
+	// -
 	// XKS_VPC_ENDPOINT_SERVICE_NOT_FOUND — KMS can't find the VPC endpoint service
 	// that it uses to communicate with the external key store proxy. Verify that the
 	// XksProxyVpcEndpointServiceName is correct and the KMS service principal has
@@ -444,15 +419,12 @@ type KeyMetadata struct {
 	// Lists the primary and replica keys in same multi-Region key. This field is
 	// present only when the value of the MultiRegion field is True. For more
 	// information about any listed KMS key, use the DescribeKey operation.
-	//
-	// *
+	// -
 	// MultiRegionKeyType indicates whether the KMS key is a PRIMARY or REPLICA key.
-	//
-	// *
+	// -
 	// PrimaryKey displays the key ARN and Region of the primary key. This field
 	// displays the current KMS key if it is the primary key.
-	//
-	// * ReplicaKeys displays
+	// - ReplicaKeys displays
 	// the key ARNs and Regions of all replica keys. This field includes the current
 	// KMS key if it is a replica key.
 	MultiRegionConfiguration *MultiRegionConfiguration

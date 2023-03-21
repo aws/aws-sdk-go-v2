@@ -36,21 +36,14 @@ type TestEventPatternInput struct {
 	// follow the format specified in Amazon Web Services Events
 	// (https://docs.aws.amazon.com/eventbridge/latest/userguide/aws-events.html), and
 	// the following fields are mandatory:
-	//
-	// * id
-	//
-	// * account
-	//
-	// * source
-	//
-	// * time
-	//
-	// *
-	// region
-	//
-	// * resources
-	//
-	// * detail-type
+	// - id
+	// - account
+	// - source
+	// - time
+	// - region
+	// -
+	// resources
+	// - detail-type
 	//
 	// This member is required.
 	Event *string

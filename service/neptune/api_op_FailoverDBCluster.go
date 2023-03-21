@@ -38,8 +38,7 @@ type FailoverDBClusterInput struct {
 
 	// A DB cluster identifier to force a failover for. This parameter is not
 	// case-sensitive. Constraints:
-	//
-	// * Must match the identifier of an existing
+	// - Must match the identifier of an existing
 	// DBCluster.
 	DBClusterIdentifier *string
 

@@ -26,11 +26,9 @@ import (
 // with the NextToken parameter set to the value of the last NextToken value until
 // a response has no NextToken. When using this operation, keep the following in
 // mind:
-//
-// * The implementation might return fewer than MaxResults file system
+// - The implementation might return fewer than MaxResults file system
 // descriptions while still including a NextToken value.
-//
-// * The order of file
+// - The order of file
 // systems returned in the response of one DescribeFileSystems call and the order
 // of file systems returned across the responses of a multicall iteration is
 // unspecified.

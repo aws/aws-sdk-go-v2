@@ -30,18 +30,12 @@ func (c *Client) ListDistributedGrants(ctx context.Context, params *ListDistribu
 type ListDistributedGrantsInput struct {
 
 	// Filters to scope the results. The following filters are supported:
-	//
-	// *
+	// -
 	// LicenseArn
-	//
-	// * GrantStatus
-	//
-	// * GranteePrincipalARN
-	//
-	// * ProductSKU
-	//
-	// *
-	// LicenseIssuerName
+	// - GrantStatus
+	// - GranteePrincipalARN
+	// - ProductSKU
+	// - LicenseIssuerName
 	Filters []types.Filter
 
 	// Amazon Resource Names (ARNs) of the grants.

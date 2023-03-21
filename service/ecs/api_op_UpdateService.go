@@ -46,16 +46,14 @@ import (
 // service scheduler uses the deployment configuration parameters,
 // minimumHealthyPercent and maximumPercent, to determine the deployment
 // strategy.
-//
-// * If minimumHealthyPercent is below 100%, the scheduler can ignore
+// - If minimumHealthyPercent is below 100%, the scheduler can ignore
 // desiredCount temporarily during a deployment. For example, if desiredCount is
 // four tasks, a minimum of 50% allows the scheduler to stop two existing tasks
 // before starting two new tasks. Tasks for services that don't use a load balancer
 // are considered healthy if they're in the RUNNING state. Tasks for services that
 // use a load balancer are considered healthy if they're in the RUNNING state and
 // are reported as healthy by the load balancer.
-//
-// * The maximumPercent parameter
+// - The maximumPercent parameter
 // represents an upper limit on the number of running tasks during a deployment.
 // You can use it to define the deployment batch size. For example, if desiredCount
 // is four tasks, a maximum of 200% starts four new tasks before stopping the four
@@ -69,37 +67,31 @@ import (
 // and exits within 30 seconds from receiving it, no SIGKILL is sent. When the
 // service scheduler launches new tasks, it determines task placement in your
 // cluster with the following logic.
-//
-// * Determine which of the container instances
+// - Determine which of the container instances
 // in your cluster can support your service's task definition. For example, they
 // have the required CPU, memory, ports, and container instance attributes.
-//
-// * By
+// - By
 // default, the service scheduler attempts to balance tasks across Availability
 // Zones in this manner even though you can choose a different placement
 // strategy.
-//
-// * Sort the valid container instances by the fewest number of running
+// - Sort the valid container instances by the fewest number of running
 // tasks for this service in the same Availability Zone as the instance. For
 // example, if zone A has one running service task and zones B and C each have
 // zero, valid container instances in either zone B or C are considered optimal for
 // placement.
-//
-// * Place the new service task on a valid container instance in an
+// - Place the new service task on a valid container instance in an
 // optimal Availability Zone (based on the previous steps), favoring container
 // instances with the fewest number of running tasks for this service.
 //
 // When the
 // service scheduler stops running tasks, it attempts to maintain balance across
 // the Availability Zones in your cluster using the following logic:
-//
-// * Sort the
+// - Sort the
 // container instances by the largest number of running tasks for this service in
 // the same Availability Zone as the instance. For example, if zone A has one
 // running service task and zones B and C each have two, container instances in
 // either zone B or C are considered optimal for termination.
-//
-// * Stop the task on a
+// - Stop the task on a
 // container instance in an optimal Availability Zone (based on the previous
 // steps), favoring container instances with the largest number of running tasks
 // for this service.
@@ -112,10 +104,8 @@ import (
 // information, see Service-linked roles
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html)
 // in the Amazon Elastic Container Service Developer Guide.
-//
-// * loadBalancers,
-//
-// *
+// - loadBalancers,
+// -
 // serviceRegistries
 func (c *Client) UpdateService(ctx context.Context, params *UpdateServiceInput, optFns ...func(*Options)) (*UpdateServiceOutput, error) {
 	if params == nil {

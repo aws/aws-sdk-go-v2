@@ -59,14 +59,11 @@ type DeletePackageInput struct {
 
 	// The namespace of the package to delete. The package component that specifies its
 	// namespace depends on its type. For example:
-	//
-	// * The namespace of a Maven package
+	// - The namespace of a Maven package
 	// is its groupId. The namespace is required when deleting Maven package
 	// versions.
-	//
-	// * The namespace of an npm package is its scope.
-	//
-	// * Python and NuGet
+	// - The namespace of an npm package is its scope.
+	// - Python and NuGet
 	// packages do not contain corresponding components, packages of those formats do
 	// not have a namespace.
 	Namespace *string

@@ -99,63 +99,50 @@ type AnomalyMonitor struct {
 	// Use Expression to filter in various Cost Explorer APIs. Not all Expression types
 	// are supported in each API. Refer to the documentation for each specific API to
 	// see what is supported. There are two patterns:
-	//
-	// * Simple dimension values.
-	//
-	// *
+	// - Simple dimension values.
+	// -
 	// There are three types of simple dimension values: CostCategories, Tags, and
 	// Dimensions.
-	//
-	// * Specify the CostCategories field to define a filter that acts on
+	// - Specify the CostCategories field to define a filter that acts on
 	// Cost Categories.
-	//
-	// * Specify the Tags field to define a filter that acts on Cost
+	// - Specify the Tags field to define a filter that acts on Cost
 	// Allocation Tags.
-	//
-	// * Specify the Dimensions field to define a filter that acts on
+	// - Specify the Dimensions field to define a filter that acts on
 	// the DimensionValues
 	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html).
 	//
-	// *
+	// -
 	// For each filter type, you can set the dimension name and values for the filters
 	// that you plan to use.
-	//
-	// * For example, you can filter for REGION==us-east-1 OR
+	// - For example, you can filter for REGION==us-east-1 OR
 	// REGION==us-west-1. For GetRightsizingRecommendation, the Region is a full name
 	// (for example, REGION==US East (N. Virginia).
-	//
-	// * The corresponding Expression for
+	// - The corresponding Expression for
 	// this example is as follows: { "Dimensions": { "Key": "REGION", "Values": [
 	// "us-east-1", “us-west-1” ] } }
-	//
-	// * As shown in the previous example, lists of
+	// - As shown in the previous example, lists of
 	// dimension values are combined with OR when applying the filter.
 	//
-	// * You can also
+	// - You can also
 	// set different match options to further control how the filter behaves. Not all
 	// APIs support match options. Refer to the documentation for each specific API to
 	// see what is supported.
-	//
-	// * For example, you can filter for linked account names
+	// - For example, you can filter for linked account names
 	// that start with “a”.
-	//
-	// * The corresponding Expression for this example is as
+	// - The corresponding Expression for this example is as
 	// follows: { "Dimensions": { "Key": "LINKED_ACCOUNT_NAME", "MatchOptions": [
 	// "STARTS_WITH" ], "Values": [ "a" ] } }
 	//
-	// * Compound Expression types with logical
+	// - Compound Expression types with logical
 	// operations.
-	//
-	// * You can use multiple Expression types and the logical operators
+	// - You can use multiple Expression types and the logical operators
 	// AND/OR/NOT to create a list of one or more Expression objects. By doing this,
 	// you can filter by more advanced options.
-	//
-	// * For example, you can filter by
+	// - For example, you can filter by
 	// ((REGION == us-east-1 OR REGION == us-west-1) OR (TAG.Type == Type1)) AND
 	// (USAGE_TYPE != DataTransfer).
-	//
-	// * The corresponding Expression for this example
-	// is as follows: { "And": [ {"Or": [ {"Dimensions": { "Key": "REGION", "Values": [
+	// - The corresponding Expression for this example is
+	// as follows: { "And": [ {"Or": [ {"Dimensions": { "Key": "REGION", "Values": [
 	// "us-east-1", "us-west-1" ] }}, {"Tags": { "Key": "TagName", "Values": ["Value1"]
 	// } } ]}, {"Not": {"Dimensions": { "Key": "USAGE_TYPE", "Values": ["DataTransfer"]
 	// }}} ] }
@@ -245,22 +232,18 @@ type AnomalySubscription struct {
 	// is required. Values must be numbers between 0 and 10,000,000,000. One of
 	// Threshold or ThresholdExpression is required for this resource. The following
 	// are examples of valid ThresholdExpressions:
-	//
-	// * Absolute threshold: {
+	// - Absolute threshold: {
 	// "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [
 	// "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }
-	//
-	// * Percentage threshold: {
+	// - Percentage threshold: {
 	// "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [
 	// "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }
-	//
-	// * AND two thresholds
+	// - AND two thresholds
 	// together: { "And": [ { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE",
 	// "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }, {
 	// "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [
 	// "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } } ] }
-	//
-	// * OR two thresholds
+	// - OR two thresholds
 	// together: { "Or": [ { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE",
 	// "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }, {
 	// "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [
@@ -919,63 +902,50 @@ type ESInstanceDetails struct {
 // Use Expression to filter in various Cost Explorer APIs. Not all Expression types
 // are supported in each API. Refer to the documentation for each specific API to
 // see what is supported. There are two patterns:
-//
-// * Simple dimension values.
-//
-// *
+// - Simple dimension values.
+// -
 // There are three types of simple dimension values: CostCategories, Tags, and
 // Dimensions.
-//
-// * Specify the CostCategories field to define a filter that acts on
+// - Specify the CostCategories field to define a filter that acts on
 // Cost Categories.
-//
-// * Specify the Tags field to define a filter that acts on Cost
+// - Specify the Tags field to define a filter that acts on Cost
 // Allocation Tags.
-//
-// * Specify the Dimensions field to define a filter that acts on
+// - Specify the Dimensions field to define a filter that acts on
 // the DimensionValues
 // (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html).
 //
-// *
+// -
 // For each filter type, you can set the dimension name and values for the filters
 // that you plan to use.
-//
-// * For example, you can filter for REGION==us-east-1 OR
+// - For example, you can filter for REGION==us-east-1 OR
 // REGION==us-west-1. For GetRightsizingRecommendation, the Region is a full name
 // (for example, REGION==US East (N. Virginia).
-//
-// * The corresponding Expression for
+// - The corresponding Expression for
 // this example is as follows: { "Dimensions": { "Key": "REGION", "Values": [
 // "us-east-1", “us-west-1” ] } }
-//
-// * As shown in the previous example, lists of
+// - As shown in the previous example, lists of
 // dimension values are combined with OR when applying the filter.
 //
-// * You can also
+// - You can also
 // set different match options to further control how the filter behaves. Not all
 // APIs support match options. Refer to the documentation for each specific API to
 // see what is supported.
-//
-// * For example, you can filter for linked account names
+// - For example, you can filter for linked account names
 // that start with “a”.
-//
-// * The corresponding Expression for this example is as
+// - The corresponding Expression for this example is as
 // follows: { "Dimensions": { "Key": "LINKED_ACCOUNT_NAME", "MatchOptions": [
 // "STARTS_WITH" ], "Values": [ "a" ] } }
 //
-// * Compound Expression types with logical
+// - Compound Expression types with logical
 // operations.
-//
-// * You can use multiple Expression types and the logical operators
+// - You can use multiple Expression types and the logical operators
 // AND/OR/NOT to create a list of one or more Expression objects. By doing this,
 // you can filter by more advanced options.
-//
-// * For example, you can filter by
+// - For example, you can filter by
 // ((REGION == us-east-1 OR REGION == us-west-1) OR (TAG.Type == Type1)) AND
 // (USAGE_TYPE != DataTransfer).
-//
-// * The corresponding Expression for this example
-// is as follows: { "And": [ {"Or": [ {"Dimensions": { "Key": "REGION", "Values": [
+// - The corresponding Expression for this example is
+// as follows: { "And": [ {"Or": [ {"Dimensions": { "Key": "REGION", "Values": [
 // "us-east-1", "us-west-1" ] }}, {"Tags": { "Key": "TagName", "Values": ["Value1"]
 // } } ]}, {"Not": {"Dimensions": { "Key": "USAGE_TYPE", "Values": ["DataTransfer"]
 // }}} ] }

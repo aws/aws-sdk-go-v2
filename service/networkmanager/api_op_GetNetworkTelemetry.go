@@ -58,40 +58,27 @@ type GetNetworkTelemetryInput struct {
 
 	// The resource type. The following are the supported resource types for Direct
 	// Connect:
+	// - dxcon
+	// - dx-gateway
+	// - dx-vif
 	//
-	// * dxcon
+	// The following are the supported resource
+	// types for Network Manager:
+	// - connection
+	// - device
+	// - link
+	// - site
 	//
-	// * dx-gateway
-	//
-	// * dx-vif
-	//
-	// The following are the supported
-	// resource types for Network Manager:
-	//
-	// * connection
-	//
-	// * device
-	//
-	// * link
-	//
-	// * site
-	//
-	// The
-	// following are the supported resource types for Amazon VPC:
-	//
-	// *
-	// customer-gateway
-	//
-	// * transit-gateway
-	//
-	// * transit-gateway-attachment
-	//
-	// *
-	// transit-gateway-connect-peer
-	//
-	// * transit-gateway-route-table
-	//
-	// * vpn-connection
+	// The following
+	// are the supported resource types for Amazon VPC:
+	// - customer-gateway
+	// -
+	// transit-gateway
+	// - transit-gateway-attachment
+	// - transit-gateway-connect-peer
+	// -
+	// transit-gateway-route-table
+	// - vpn-connection
 	ResourceType *string
 
 	noSmithyDocumentSerde

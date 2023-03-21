@@ -50,12 +50,10 @@ type ListAliasesInput struct {
 	// The routing type to filter results on. Use this parameter to retrieve only
 	// aliases with a certain routing type. To retrieve all aliases, leave this
 	// parameter empty. Possible routing types include the following:
-	//
-	// * SIMPLE -- The
+	// - SIMPLE -- The
 	// alias resolves to one specific fleet. Use this type when routing to active
 	// fleets.
-	//
-	// * TERMINAL -- The alias does not resolve to a fleet but instead can be
+	// - TERMINAL -- The alias does not resolve to a fleet but instead can be
 	// used to display a message to the user. A terminal alias throws a
 	// TerminalRoutingStrategyException with the RoutingStrategy
 	// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_RoutingStrategy.html)

@@ -57,12 +57,9 @@ type CreateProductInput struct {
 	ProductType types.ProductType
 
 	// The language code.
-	//
-	// * en - English (default)
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	// - en - English (default)
+	// - jp - Japanese
+	// - zh - Chinese
 	AcceptLanguage *string
 
 	// The description of the product.
@@ -78,10 +75,8 @@ type CreateProductInput struct {
 	// the connection source artifact. This automatically manages the product's
 	// artifacts based on changes to the source. The SourceConnection parameter
 	// consists of the following sub-fields.
-	//
-	// * Type
-	//
-	// * ConnectionParamters
+	// - Type
+	// - ConnectionParamters
 	SourceConnection *types.SourceConnection
 
 	// The support information about the product.

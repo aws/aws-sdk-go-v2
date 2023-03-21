@@ -63,12 +63,9 @@ type CreateServiceActionInput struct {
 	Name *string
 
 	// The language code.
-	//
-	// * en - English (default)
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	// - en - English (default)
+	// - jp - Japanese
+	// - zh - Chinese
 	AcceptLanguage *string
 
 	// The self-service action description.

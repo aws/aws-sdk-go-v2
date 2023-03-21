@@ -77,24 +77,18 @@ type CreateEnvironmentEC2Input struct {
 	// available when you specify an AMI for your instance. Amazon Linux 2 will then
 	// become the default AMI, which is used to launch your instance if no parameter is
 	// explicitly defined. AMI aliases
+	// - Amazon Linux (default): amazonlinux-1-x86_64
+	// -
+	// Amazon Linux 2: amazonlinux-2-x86_64
+	// - Ubuntu 18.04: ubuntu-18.04-x86_64
 	//
-	// * Amazon Linux (default):
-	// amazonlinux-1-x86_64
-	//
-	// * Amazon Linux 2: amazonlinux-2-x86_64
-	//
-	// * Ubuntu 18.04:
-	// ubuntu-18.04-x86_64
-	//
-	// SSM paths
-	//
-	// * Amazon Linux (default):
+	// SSM
+	// paths
+	// - Amazon Linux (default):
 	// resolve:ssm:/aws/service/cloud9/amis/amazonlinux-1-x86_64
-	//
-	// * Amazon Linux 2:
+	// - Amazon Linux 2:
 	// resolve:ssm:/aws/service/cloud9/amis/amazonlinux-2-x86_64
-	//
-	// * Ubuntu 18.04:
+	// - Ubuntu 18.04:
 	// resolve:ssm:/aws/service/cloud9/amis/ubuntu-18.04-x86_64
 	ImageId *string
 

@@ -15,12 +15,10 @@ import (
 // Returns all the tagged or previously tagged resources that are located in the
 // specified Amazon Web Services Region for the account. Depending on what
 // information you want returned, you can also specify the following:
-//
-// * Filters
+// - Filters
 // that specify what tags and resource types you want returned. The response
 // includes all tags that are associated with the requested resources.
-//
-// *
+// -
 // Information about compliance with the account's effective tag policy. For more
 // information on tag policies, see Tag Policies
 // (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
@@ -104,36 +102,28 @@ type GetResourcesInput struct {
 	// specified values. Each TagFilter must contain a key with values optional. A
 	// request can include up to 50 keys, and each key can include up to 20 values.
 	// Note the following when deciding how to use TagFilters:
-	//
-	// * If you don't specify
-	// a TagFilter, the response includes all resources that are currently tagged or
-	// ever had a tag. Resources that currently don't have tags are shown with an empty
-	// tag set, like this: "Tags": [].
-	//
-	// * If you specify more than one filter in a
-	// single request, the response returns only those resources that satisfy all
-	// filters.
-	//
-	// * If you specify a filter that contains more than one value for a key,
-	// the response returns resources that match any of the specified values for that
+	// - If you don't specify a
+	// TagFilter, the response includes all resources that are currently tagged or ever
+	// had a tag. Resources that currently don't have tags are shown with an empty tag
+	// set, like this: "Tags": [].
+	// - If you specify more than one filter in a single
+	// request, the response returns only those resources that satisfy all filters.
+	// -
+	// If you specify a filter that contains more than one value for a key, the
+	// response returns resources that match any of the specified values for that
 	// key.
-	//
-	// * If you don't specify a value for a key, the response returns all
+	// - If you don't specify a value for a key, the response returns all
 	// resources that are tagged with that key, with any or no value. For example, for
 	// the following filters: filter1= {keyA,{value1}},
 	// filter2={keyB,{value2,value3,value4}}, filter3= {keyC}:
-	//
-	// *
+	// -
 	// GetResources({filter1}) returns resources tagged with key1=value1
-	//
-	// *
+	// -
 	// GetResources({filter2}) returns resources tagged with key2=value2 or key2=value3
 	// or key2=value4
-	//
-	// * GetResources({filter3}) returns resources tagged with any tag
+	// - GetResources({filter3}) returns resources tagged with any tag
 	// with the key key3, and with any or no value
-	//
-	// *
+	// -
 	// GetResources({filter1,filter2,filter3}) returns resources tagged with
 	// (key1=value1) and (key2=value2 or key2=value3 or key2=value4) and (key3, any or
 	// no value)

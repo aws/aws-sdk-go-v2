@@ -57,15 +57,12 @@ type GetChangesetOutput struct {
 	ActiveUntilTimestamp *int64
 
 	// Type that indicates how a Changeset is applied to a Dataset.
-	//
-	// * REPLACE –
+	// - REPLACE –
 	// Changeset is considered as a replacement to all prior loaded Changesets.
-	//
-	// *
+	// -
 	// APPEND – Changeset is considered as an addition to the end of all prior loaded
 	// Changesets.
-	//
-	// * MODIFY – Changeset is considered as a replacement to a specific
+	// - MODIFY – Changeset is considered as a replacement to a specific
 	// prior ingested Changeset.
 	ChangeType types.ChangeType
 

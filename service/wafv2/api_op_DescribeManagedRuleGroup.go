@@ -41,11 +41,9 @@ type DescribeManagedRuleGroupInput struct {
 	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
 	// user pool, or an App Runner service. To work with CloudFront, you must also
 	// specify the Region US East (N. Virginia) as follows:
-	//
-	// * CLI - Specify the Region
+	// - CLI - Specify the Region
 	// when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.
-	//
-	// * API
+	// - API
 	// and SDKs - For all calls, use the Region endpoint us-east-1.
 	//
 	// This member is required.
@@ -86,11 +84,9 @@ type DescribeManagedRuleGroupOutput struct {
 
 	// The label namespace prefix for this rule group. All labels added by rules in
 	// this rule group have this prefix.
-	//
-	// * The syntax for the label namespace prefix
+	// - The syntax for the label namespace prefix
 	// for a managed rule group is the following: awswaf:managed:::
-	//
-	// * When a rule with
+	// - When a rule with
 	// a label matches a web request, WAF adds the fully qualified label to the
 	// request. A fully qualified label is made up of the label namespace from the rule
 	// group or web ACL where the rule is defined and the label from the rule,

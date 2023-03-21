@@ -12,11 +12,9 @@ import (
 )
 
 // Starts recording the contact:
-//
-// * If the API is called before the agent joins the
+// - If the API is called before the agent joins the
 // call, recording starts when the agent joins the call.
-//
-// * If the API is called
+// - If the API is called
 // after the agent joins the call, recording starts at the time of the API
 // call.
 //

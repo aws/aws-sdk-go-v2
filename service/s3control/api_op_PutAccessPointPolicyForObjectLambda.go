@@ -19,11 +19,9 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/olap-create.html#olap-create-cli)
 // in the Amazon S3 User Guide. The following actions are related to
 // PutAccessPointPolicyForObjectLambda:
-//
-// * DeleteAccessPointPolicyForObjectLambda
+// - DeleteAccessPointPolicyForObjectLambda
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicyForObjectLambda.html)
-//
-// *
+// -
 // GetAccessPointPolicyForObjectLambda
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointPolicyForObjectLambda.html)
 func (c *Client) PutAccessPointPolicyForObjectLambda(ctx context.Context, params *PutAccessPointPolicyForObjectLambdaInput, optFns ...func(*Options)) (*PutAccessPointPolicyForObjectLambdaOutput, error) {

@@ -258,19 +258,13 @@ type LaunchProfileInitializationScript struct {
 // from your studio identity source who is granted permissions to a launch profile.
 // A launch profile member (type USER) provides the following permissions to that
 // launch profile:
-//
-// * GetLaunchProfile
-//
-// * GetLaunchProfileInitialization
-//
-// *
+// - GetLaunchProfile
+// - GetLaunchProfileInitialization
+// -
 // GetLaunchProfileMembers
-//
-// * GetLaunchProfileMember
-//
-// * CreateStreamingSession
-//
-// *
+// - GetLaunchProfileMember
+// - CreateStreamingSession
+// -
 // GetLaunchProfileDetails
 type LaunchProfileMembership struct {
 
@@ -391,12 +385,10 @@ type StreamConfiguration struct {
 	// Indicates if a streaming session created from this launch profile should be
 	// terminated automatically or retained without termination after being in a
 	// STOPPED state.
-	//
-	// * When ACTIVATED, the streaming session is scheduled for
+	// - When ACTIVATED, the streaming session is scheduled for
 	// termination after being in the STOPPED state for the time specified in
 	// maxStoppedSessionLengthInMinutes.
-	//
-	// * When DEACTIVATED, the streaming session can
+	// - When DEACTIVATED, the streaming session can
 	// remain in the STOPPED state indefinitely.
 	//
 	// This parameter is only allowed when
@@ -467,12 +459,10 @@ type StreamConfigurationCreate struct {
 	// Indicates if a streaming session created from this launch profile should be
 	// terminated automatically or retained without termination after being in a
 	// STOPPED state.
-	//
-	// * When ACTIVATED, the streaming session is scheduled for
+	// - When ACTIVATED, the streaming session is scheduled for
 	// termination after being in the STOPPED state for the time specified in
 	// maxStoppedSessionLengthInMinutes.
-	//
-	// * When DEACTIVATED, the streaming session can
+	// - When DEACTIVATED, the streaming session can
 	// remain in the STOPPED state indefinitely.
 	//
 	// This parameter is only allowed when
@@ -632,12 +622,10 @@ type StreamingSession struct {
 	// Indicates if a streaming session created from this launch profile should be
 	// terminated automatically or retained without termination after being in a
 	// STOPPED state.
-	//
-	// * When ACTIVATED, the streaming session is scheduled for
+	// - When ACTIVATED, the streaming session is scheduled for
 	// termination after being in the STOPPED state for the time specified in
 	// maxStoppedSessionLengthInMinutes.
-	//
-	// * When DEACTIVATED, the streaming session can
+	// - When DEACTIVATED, the streaming session can
 	// remain in the STOPPED state indefinitely.
 	//
 	// This parameter is only allowed when

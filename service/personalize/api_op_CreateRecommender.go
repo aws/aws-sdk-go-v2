@@ -35,34 +35,26 @@ import (
 // minRecommendationRequestsPerSecond, track your usage using Amazon CloudWatch
 // metrics, and then increase the minRecommendationRequestsPerSecond as necessary.
 // Status A recommender can be in one of the following states:
-//
-// * CREATE PENDING >
+// - CREATE PENDING >
 // CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
+// - STOP PENDING > STOP IN_PROGRESS
+// > INACTIVE > START PENDING > START IN_PROGRESS > ACTIVE
+// - DELETE PENDING >
+// DELETE IN_PROGRESS
 //
-// * STOP PENDING > STOP
-// IN_PROGRESS > INACTIVE > START PENDING > START IN_PROGRESS > ACTIVE
-//
-// * DELETE
-// PENDING > DELETE IN_PROGRESS
-//
-// To get the recommender status, call
-// DescribeRecommender
+// To get the recommender status, call DescribeRecommender
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeRecommender.html).
 // Wait until the status of the recommender is ACTIVE before asking the recommender
 // for recommendations. Related APIs
-//
-// * ListRecommenders
+// - ListRecommenders
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_ListRecommenders.html)
-//
-// *
+// -
 // DescribeRecommender
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeRecommender.html)
-//
-// *
+// -
 // UpdateRecommender
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_UpdateRecommender.html)
-//
-// *
+// -
 // DeleteRecommender
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteRecommender.html)
 func (c *Client) CreateRecommender(ctx context.Context, params *CreateRecommenderInput, optFns ...func(*Options)) (*CreateRecommenderOutput, error) {

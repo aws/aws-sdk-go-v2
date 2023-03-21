@@ -38,11 +38,9 @@ type SendMessageInput struct {
 	ConnectionToken *string
 
 	// The content of the message.
-	//
-	// * For text/plain and text/markdown, the Length
+	// - For text/plain and text/markdown, the Length
 	// Constraints are Minimum of 1, Maximum of 1024.
-	//
-	// * For application/json, the
+	// - For application/json, the
 	// Length Constraints are Minimum of 1, Maximum of 12000.
 	//
 	// This member is required.

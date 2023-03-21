@@ -68,16 +68,13 @@ type GetComplianceSummaryInput struct {
 	// name and resource type is the same as that embedded in a resource's Amazon
 	// Resource Name (ARN). Consult the Amazon Web Services General Reference
 	// (https://docs.aws.amazon.com/general/latest/gr/) for the following:
-	//
-	// * For a
-	// list of service name strings, see Amazon Web Services Service Namespaces
+	// - For a list
+	// of service name strings, see Amazon Web Services Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces).
-	//
-	// *
+	// -
 	// For resource type strings, see Example ARNs
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arns-syntax).
-	//
-	// *
+	// -
 	// For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web
 	// Services Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).

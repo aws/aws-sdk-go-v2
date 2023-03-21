@@ -35,15 +35,12 @@ type Domain struct {
 	// The type of lifecycle management for apps in the domain. This value indicates
 	// whether apps in this domain are managed (SimSpace Weaver starts and stops the
 	// apps) or unmanaged (you must start and stop the apps). Lifecycle types
-	//
-	// *
+	// -
 	// PerWorker – Managed: SimSpace Weaver starts 1 app on each worker
-	//
-	// *
+	// -
 	// BySpatialSubdivision – Managed: SimSpace Weaver starts 1 app for each spatial
 	// partition
-	//
-	// * ByRequest – Unmanaged: You use the StartApp API to start the apps
+	// - ByRequest – Unmanaged: You use the StartApp API to start the apps
 	// and use the StopApp API to stop the apps.
 	//
 	// The lifecycle types will change when

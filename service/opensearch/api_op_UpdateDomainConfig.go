@@ -41,25 +41,21 @@ type UpdateDomainConfigInput struct {
 
 	// Key-value pairs to specify advanced configuration options. The following
 	// key-value pairs are supported:
-	//
-	// * "rest.action.multi.allow_explicit_index":
+	// - "rest.action.multi.allow_explicit_index":
 	// "true" | "false" - Note the use of a string rather than a boolean. Specifies
 	// whether explicit references to indexes are allowed inside the body of HTTP
 	// requests. If you want to configure access policies for domain sub-resources,
 	// such as specific indexes and domain APIs, you must disable this property.
 	// Default is true.
-	//
-	// * "indices.fielddata.cache.size": "80"  - Note the use of a
+	// - "indices.fielddata.cache.size": "80"  - Note the use of a
 	// string rather than a boolean. Specifies the percentage of heap space allocated
 	// to field data. Default is unbounded.
-	//
-	// * "indices.query.bool.max_clause_count":
+	// - "indices.query.bool.max_clause_count":
 	// "1024" - Note the use of a string rather than a boolean. Specifies the maximum
 	// number of clauses allowed in a Lucene boolean query. Default is 1,024. Queries
 	// with more than the permitted number of clauses result in a TooManyClauses
 	// error.
-	//
-	// * "override_main_response_version": "true" | "false" - Note the use of a
+	// - "override_main_response_version": "true" | "false" - Note the use of a
 	// string rather than a boolean. Specifies whether the domain reports its version
 	// as 7.10 to allow Elasticsearch OSS clients and plugins to continue working with
 	// it. Default is false when creating a domain and true when upgrading a
@@ -93,13 +89,11 @@ type UpdateDomainConfigInput struct {
 	DryRun *bool
 
 	// The type of dry run to perform.
-	//
-	// * Basic only returns the type of deployment
+	// - Basic only returns the type of deployment
 	// (blue/green or dynamic) that the update will cause.
-	//
-	// * Verbose runs an
-	// additional check to validate the changes you're making. For more information,
-	// see Validating a domain update
+	// - Verbose runs an additional
+	// check to validate the changes you're making. For more information, see
+	// Validating a domain update
 	// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-configuration-changes#validation-check).
 	DryRunMode types.DryRunMode
 

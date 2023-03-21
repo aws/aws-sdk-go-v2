@@ -34,12 +34,9 @@ type DeleteProvisionedProductPlanInput struct {
 	PlanId *string
 
 	// The language code.
-	//
-	// * en - English (default)
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	// - en - English (default)
+	// - jp - Japanese
+	// - zh - Chinese
 	AcceptLanguage *string
 
 	// If set to true, Service Catalog stops managing the specified provisioned product

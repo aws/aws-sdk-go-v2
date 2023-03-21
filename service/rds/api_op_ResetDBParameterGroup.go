@@ -36,8 +36,7 @@ func (c *Client) ResetDBParameterGroup(ctx context.Context, params *ResetDBParam
 type ResetDBParameterGroupInput struct {
 
 	// The name of the DB parameter group. Constraints:
-	//
-	// * Must match the name of an
+	// - Must match the name of an
 	// existing DBParameterGroup.
 	//
 	// This member is required.

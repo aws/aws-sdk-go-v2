@@ -18,15 +18,12 @@ import (
 // LogDestinationConfig at a time inside the retrieved LoggingConfiguration object.
 // You can perform only one of the following actions in any call to
 // UpdateLoggingConfiguration:
-//
-// * Create a new log destination object by adding a
+// - Create a new log destination object by adding a
 // single LogDestinationConfig array element to LogDestinationConfigs.
-//
-// * Delete a
+// - Delete a
 // log destination object by removing a single LogDestinationConfig array element
 // from LogDestinationConfigs.
-//
-// * Change the LogDestination setting in a single
+// - Change the LogDestination setting in a single
 // LogDestinationConfig array element.
 //
 // You can't change the LogDestinationType or

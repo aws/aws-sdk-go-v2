@@ -32,21 +32,15 @@ type DescribeFleetAdvisorDatabasesInput struct {
 
 	// If you specify any of the following filters, the output includes information for
 	// only those databases that meet the filter criteria:
-	//
-	// * database-id – The ID of
+	// - database-id – The ID of
 	// the database.
-	//
-	// * database-name – The name of the database.
-	//
-	// * database-engine –
+	// - database-name – The name of the database.
+	// - database-engine –
 	// The name of the database engine.
-	//
-	// * server-ip-address – The IP address of the
+	// - server-ip-address – The IP address of the
 	// database server.
-	//
-	// * database-ip-address – The IP address of the database.
-	//
-	// *
+	// - database-ip-address – The IP address of the database.
+	// -
 	// collector-name – The name of the associated Fleet Advisor collector.
 	//
 	// An example

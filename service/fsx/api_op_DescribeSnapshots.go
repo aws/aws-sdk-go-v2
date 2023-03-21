@@ -25,12 +25,10 @@ import (
 // continues to be called with the NextToken parameter set to the value of the last
 // NextToken value until a response has no NextToken value. When using this
 // operation, keep the following in mind:
-//
-// * The operation might return fewer than
+// - The operation might return fewer than
 // the MaxResults value of snapshot descriptions while still including a NextToken
 // value.
-//
-// * The order of snapshots returned in the response of one
+// - The order of snapshots returned in the response of one
 // DescribeSnapshots call and the order of backups returned across the responses of
 // a multi-call iteration is unspecified.
 func (c *Client) DescribeSnapshots(ctx context.Context, params *DescribeSnapshotsInput, optFns ...func(*Options)) (*DescribeSnapshotsOutput, error) {

@@ -32,30 +32,19 @@ type CreateOptionGroupInput struct {
 
 	// Specifies the name of the engine that this option group should be associated
 	// with. Valid Values:
-	//
-	// * mariadb
-	//
-	// * mysql
-	//
-	// * oracle-ee
-	//
-	// * oracle-ee-cdb
-	//
-	// *
-	// oracle-se2
-	//
-	// * oracle-se2-cdb
-	//
-	// * postgres
-	//
-	// * sqlserver-ee
-	//
-	// * sqlserver-se
-	//
-	// *
-	// sqlserver-ex
-	//
-	// * sqlserver-web
+	// - mariadb
+	// - mysql
+	// - oracle-ee
+	// - oracle-ee-cdb
+	// - oracle-se2
+	// -
+	// oracle-se2-cdb
+	// - postgres
+	// - sqlserver-ee
+	// - sqlserver-se
+	// - sqlserver-ex
+	// -
+	// sqlserver-web
 	//
 	// This member is required.
 	EngineName *string
@@ -72,13 +61,10 @@ type CreateOptionGroupInput struct {
 	OptionGroupDescription *string
 
 	// Specifies the name of the option group to be created. Constraints:
-	//
-	// * Must be 1
+	// - Must be 1
 	// to 255 letters, numbers, or hyphens
-	//
-	// * First character must be a letter
-	//
-	// * Can't
+	// - First character must be a letter
+	// - Can't
 	// end with a hyphen or contain two consecutive hyphens
 	//
 	// Example: myoptiongroup

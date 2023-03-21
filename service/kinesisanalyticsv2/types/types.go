@@ -417,12 +417,9 @@ type CheckpointConfiguration struct {
 	// parameters. If this value is set to DEFAULT, the application will use the
 	// following values, even if they are set to other values using APIs or application
 	// code:
-	//
-	// * CheckpointingEnabled: true
-	//
-	// * CheckpointInterval: 60000
-	//
-	// *
+	// - CheckpointingEnabled: true
+	// - CheckpointInterval: 60000
+	// -
 	// MinPauseBetweenCheckpoints: 5000
 	//
 	// This member is required.
@@ -475,12 +472,9 @@ type CheckpointConfigurationDescription struct {
 	// Kinesis Data Analytics. If this value is set to DEFAULT, the application will
 	// use the following values, even if they are set to other values using APIs or
 	// application code:
-	//
-	// * CheckpointingEnabled: true
-	//
-	// * CheckpointInterval: 60000
-	//
-	// *
+	// - CheckpointingEnabled: true
+	// - CheckpointInterval: 60000
+	// -
 	// MinPauseBetweenCheckpoints: 5000
 	ConfigurationType ConfigurationType
 
@@ -516,13 +510,10 @@ type CheckpointConfigurationUpdate struct {
 	// MinPauseBetweenCheckpoints parameters. If this value is set to DEFAULT, the
 	// application will use the following values, even if they are set to other values
 	// using APIs or application code:
-	//
-	// * CheckpointingEnabled: true
-	//
-	// *
+	// - CheckpointingEnabled: true
+	// -
 	// CheckpointInterval: 60000
-	//
-	// * MinPauseBetweenCheckpoints: 5000
+	// - MinPauseBetweenCheckpoints: 5000
 	ConfigurationTypeUpdate ConfigurationType
 
 	// Describes updates to the minimum time in milliseconds after a checkpoint
@@ -1135,16 +1126,13 @@ type InputSchemaUpdate struct {
 type InputStartingPositionConfiguration struct {
 
 	// The starting position on the stream.
-	//
-	// * NOW - Start reading just after the most
+	// - NOW - Start reading just after the most
 	// recent record in the stream, and start at the request timestamp that the
 	// customer issued.
-	//
-	// * TRIM_HORIZON - Start reading at the last untrimmed record in
+	// - TRIM_HORIZON - Start reading at the last untrimmed record in
 	// the stream, which is the oldest record available in the stream. This option is
 	// not available for an Amazon Kinesis Data Firehose delivery stream.
-	//
-	// *
+	// -
 	// LAST_STOPPED_POINT - Resume reading from where the application last stopped
 	// reading.
 	InputStartingPosition InputStartingPosition

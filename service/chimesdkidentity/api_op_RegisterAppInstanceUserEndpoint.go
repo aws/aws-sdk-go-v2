@@ -53,14 +53,11 @@ type RegisterAppInstanceUserEndpointInput struct {
 	ResourceArn *string
 
 	// The type of the AppInstanceUserEndpoint. Supported types:
-	//
-	// * APNS: The mobile
+	// - APNS: The mobile
 	// notification service for an Apple device.
-	//
-	// * APNS_SANDBOX: The sandbox
+	// - APNS_SANDBOX: The sandbox
 	// environment of the mobile notification service for an Apple device.
-	//
-	// * GCM: The
+	// - GCM: The
 	// mobile notification service for an Android device.
 	//
 	// Populate the ResourceArn

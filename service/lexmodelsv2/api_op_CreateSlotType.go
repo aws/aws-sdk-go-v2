@@ -78,12 +78,10 @@ type CreateSlotTypeInput struct {
 
 	// Determines the strategy that Amazon Lex uses to select a value from the list of
 	// possible values. The field can be set to one of the following values:
-	//
-	// *
+	// -
 	// OriginalValue - Returns the value entered by the user, if the user value is
 	// similar to the slot value.
-	//
-	// * TopResolution - If there is a resolution list for
+	// - TopResolution - If there is a resolution list for
 	// the slot, return the first value in the resolution list. If there is no
 	// resolution list, return null.
 	//

@@ -95,13 +95,10 @@ type DescribeFlowOutput struct {
 	// The version number of your data schema. Amazon AppFlow assigns this version
 	// number. The version number increases by one when you change any of the following
 	// settings in your flow configuration:
-	//
-	// * Source-to-destination field mappings
-	//
-	// *
+	// - Source-to-destination field mappings
+	// -
 	// Field data types
-	//
-	// * Partition keys
+	// - Partition keys
 	SchemaVersion *int64
 
 	// The configuration that controls how Amazon AppFlow retrieves data from the

@@ -13,12 +13,10 @@ import (
 
 // Updates a custom connector that you've previously registered. This operation
 // updates the connector with one of the following:
-//
-// * The latest version of the
-// AWS Lambda function that's assigned to the connector
-//
-// * A new AWS Lambda
-// function that you specify
+// - The latest version of the AWS
+// Lambda function that's assigned to the connector
+// - A new AWS Lambda function
+// that you specify
 func (c *Client) UpdateConnectorRegistration(ctx context.Context, params *UpdateConnectorRegistrationInput, optFns ...func(*Options)) (*UpdateConnectorRegistrationOutput, error) {
 	if params == nil {
 		params = &UpdateConnectorRegistrationInput{}

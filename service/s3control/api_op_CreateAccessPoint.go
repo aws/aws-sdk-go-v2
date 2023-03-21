@@ -30,16 +30,13 @@ import (
 // x-amz-outpost-id derived by using the access point ARN, see the Examples
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html#API_control_CreateAccessPoint_Examples)
 // section. The following actions are related to CreateAccessPoint:
-//
-// *
+// -
 // GetAccessPoint
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html)
-//
-// *
+// -
 // DeleteAccessPoint
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html)
-//
-// *
+// -
 // ListAccessPoints
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html)
 func (c *Client) CreateAccessPoint(ctx context.Context, params *CreateAccessPointInput, optFns ...func(*Options)) (*CreateAccessPointOutput, error) {

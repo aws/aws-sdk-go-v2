@@ -102,24 +102,16 @@ type EnhancedMetrics struct {
 
 	// List of shard-level metrics. The following are the valid shard-level metrics.
 	// The value "ALL" enhances every metric.
-	//
-	// * IncomingBytes
-	//
-	// * IncomingRecords
-	//
-	// *
+	// - IncomingBytes
+	// - IncomingRecords
+	// -
 	// OutgoingBytes
-	//
-	// * OutgoingRecords
-	//
-	// * WriteProvisionedThroughputExceeded
-	//
-	// *
+	// - OutgoingRecords
+	// - WriteProvisionedThroughputExceeded
+	// -
 	// ReadProvisionedThroughputExceeded
-	//
-	// * IteratorAgeMilliseconds
-	//
-	// * ALL
+	// - IteratorAgeMilliseconds
+	// - ALL
 	//
 	// For more
 	// information, see Monitoring the Amazon Kinesis Data Streams Service with Amazon
@@ -231,10 +223,8 @@ type Record struct {
 
 	// The encryption type used on the record. This parameter can be one of the
 	// following values:
-	//
-	// * NONE: Do not encrypt the records in the stream.
-	//
-	// * KMS: Use
+	// - NONE: Do not encrypt the records in the stream.
+	// - KMS: Use
 	// server-side encryption on the records in the stream using a customer-managed
 	// Amazon Web Services KMS key.
 	EncryptionType EncryptionType
@@ -291,29 +281,23 @@ type ShardFilter struct {
 	// The shard type specified in the ShardFilter parameter. This is a required
 	// property of the ShardFilter parameter. You can specify the following valid
 	// values:
-	//
-	// * AFTER_SHARD_ID - the response includes all the shards, starting with
+	// - AFTER_SHARD_ID - the response includes all the shards, starting with
 	// the shard whose ID immediately follows the ShardId that you provided.
-	//
-	// *
+	// -
 	// AT_TRIM_HORIZON - the response includes all the shards that were open at
 	// TRIM_HORIZON.
-	//
-	// * FROM_TRIM_HORIZON - (default), the response includes all the
+	// - FROM_TRIM_HORIZON - (default), the response includes all the
 	// shards within the retention period of the data stream (trim to tip).
-	//
-	// *
-	// AT_LATEST - the response includes only the currently open shards of the data
-	// stream.
-	//
-	// * AT_TIMESTAMP - the response includes all shards whose start timestamp
-	// is less than or equal to the given timestamp and end timestamp is greater than
-	// or equal to the given timestamp or still open.
-	//
-	// * FROM_TIMESTAMP - the response
-	// incldues all closed shards whose end timestamp is greater than or equal to the
-	// given timestamp and also all open shards. Corrected to TRIM_HORIZON of the data
-	// stream if FROM_TIMESTAMP is less than the TRIM_HORIZON value.
+	// - AT_LATEST
+	// - the response includes only the currently open shards of the data stream.
+	// -
+	// AT_TIMESTAMP - the response includes all shards whose start timestamp is less
+	// than or equal to the given timestamp and end timestamp is greater than or equal
+	// to the given timestamp or still open.
+	// - FROM_TIMESTAMP - the response incldues
+	// all closed shards whose end timestamp is greater than or equal to the given
+	// timestamp and also all open shards. Corrected to TRIM_HORIZON of the data stream
+	// if FROM_TIMESTAMP is less than the TRIM_HORIZON value.
 	//
 	// This member is required.
 	Type ShardFilterType
@@ -405,20 +389,16 @@ type StreamDescription struct {
 
 	// The current status of the stream being described. The stream status is one of
 	// the following states:
-	//
-	// * CREATING - The stream is being created. Kinesis Data
+	// - CREATING - The stream is being created. Kinesis Data
 	// Streams immediately returns and sets StreamStatus to CREATING.
-	//
-	// * DELETING - The
+	// - DELETING - The
 	// stream is being deleted. The specified stream is in the DELETING state until
 	// Kinesis Data Streams completes the deletion.
-	//
-	// * ACTIVE - The stream exists and
-	// is ready for read and write operations or deletion. You should perform read and
+	// - ACTIVE - The stream exists and is
+	// ready for read and write operations or deletion. You should perform read and
 	// write operations only on an ACTIVE stream.
-	//
-	// * UPDATING - Shards in the stream
-	// are being merged or split. Read and write operations continue to work while the
+	// - UPDATING - Shards in the stream are
+	// being merged or split. Read and write operations continue to work while the
 	// stream is in the UPDATING state.
 	//
 	// This member is required.
@@ -426,10 +406,8 @@ type StreamDescription struct {
 
 	// The server-side encryption type used on the stream. This parameter can be one of
 	// the following values:
-	//
-	// * NONE: Do not encrypt the records in the stream.
-	//
-	// * KMS:
+	// - NONE: Do not encrypt the records in the stream.
+	// - KMS:
 	// Use server-side encryption on the records in the stream using a customer-managed
 	// Amazon Web Services KMS key.
 	EncryptionType EncryptionType
@@ -439,20 +417,15 @@ type StreamDescription struct {
 	// ARN to either an alias or a key, or an alias name prefixed by "alias/".You can
 	// also use a master key owned by Kinesis Data Streams by specifying the alias
 	// aws/kinesis.
-	//
-	// * Key ARN example:
+	// - Key ARN example:
 	// arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
-	//
-	// *
+	// -
 	// Alias ARN example: arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
-	//
-	// *
+	// -
 	// Globally unique key ID example: 12345678-1234-1234-1234-123456789012
-	//
-	// * Alias
+	// - Alias
 	// name example: alias/MyAliasName
-	//
-	// * Master key owned by Kinesis Data Streams:
+	// - Master key owned by Kinesis Data Streams:
 	// alias/aws/kinesis
 	KeyId *string
 
@@ -499,20 +472,16 @@ type StreamDescriptionSummary struct {
 
 	// The current status of the stream being described. The stream status is one of
 	// the following states:
-	//
-	// * CREATING - The stream is being created. Kinesis Data
+	// - CREATING - The stream is being created. Kinesis Data
 	// Streams immediately returns and sets StreamStatus to CREATING.
-	//
-	// * DELETING - The
+	// - DELETING - The
 	// stream is being deleted. The specified stream is in the DELETING state until
 	// Kinesis Data Streams completes the deletion.
-	//
-	// * ACTIVE - The stream exists and
-	// is ready for read and write operations or deletion. You should perform read and
+	// - ACTIVE - The stream exists and is
+	// ready for read and write operations or deletion. You should perform read and
 	// write operations only on an ACTIVE stream.
-	//
-	// * UPDATING - Shards in the stream
-	// are being merged or split. Read and write operations continue to work while the
+	// - UPDATING - Shards in the stream are
+	// being merged or split. Read and write operations continue to work while the
 	// stream is in the UPDATING state.
 	//
 	// This member is required.
@@ -522,10 +491,8 @@ type StreamDescriptionSummary struct {
 	ConsumerCount *int32
 
 	// The encryption type used. This value is one of the following:
-	//
-	// * KMS
-	//
-	// * NONE
+	// - KMS
+	// - NONE
 	EncryptionType EncryptionType
 
 	// The GUID for the customer-managed Amazon Web Services KMS key to use for
@@ -533,20 +500,15 @@ type StreamDescriptionSummary struct {
 	// ARN to either an alias or a key, or an alias name prefixed by "alias/".You can
 	// also use a master key owned by Kinesis Data Streams by specifying the alias
 	// aws/kinesis.
-	//
-	// * Key ARN example:
+	// - Key ARN example:
 	// arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
-	//
-	// *
+	// -
 	// Alias ARN example:  arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
-	//
-	// *
+	// -
 	// Globally unique key ID example: 12345678-1234-1234-1234-123456789012
-	//
-	// * Alias
+	// - Alias
 	// name example: alias/MyAliasName
-	//
-	// * Master key owned by Kinesis Data Streams:
+	// - Master key owned by Kinesis Data Streams:
 	// alias/aws/kinesis
 	KeyId *string
 

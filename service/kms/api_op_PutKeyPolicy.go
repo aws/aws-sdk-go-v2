@@ -43,10 +43,8 @@ type PutKeyPolicyInput struct {
 
 	// Sets the key policy on the specified KMS key. Specify the key ID or key ARN of
 	// the KMS key. For example:
-	//
-	// * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// * Key
+	// - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	// - Key
 	// ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
@@ -58,17 +56,15 @@ type PutKeyPolicyInput struct {
 
 	// The key policy to attach to the KMS key. The key policy must meet the following
 	// criteria:
-	//
-	// * The key policy must allow the calling principal to make a
-	// subsequent PutKeyPolicy request on the KMS key. This reduces the risk that the
-	// KMS key becomes unmanageable. For more information, see Default key policy
+	// - The key policy must allow the calling principal to make a subsequent
+	// PutKeyPolicy request on the KMS key. This reduces the risk that the KMS key
+	// becomes unmanageable. For more information, see Default key policy
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-default.html#prevent-unmanageable-key)
 	// in the Key Management Service Developer Guide. (To omit this condition, set
 	// BypassPolicyLockoutSafetyCheck to true.)
-	//
-	// * Each statement in the key policy
-	// must contain one or more principals. The principals in the key policy must exist
-	// and be visible to KMS. When you create a new Amazon Web Services principal, you
+	// - Each statement in the key policy must
+	// contain one or more principals. The principals in the key policy must exist and
+	// be visible to KMS. When you create a new Amazon Web Services principal, you
 	// might need to enforce a delay before including the new principal in a key policy
 	// because the new principal might not be immediately visible to KMS. For more
 	// information, see Changes that I make are not always immediately visible
@@ -77,15 +73,12 @@ type PutKeyPolicyInput struct {
 	//
 	// A key
 	// policy document can include only the following characters:
-	//
-	// * Printable ASCII
+	// - Printable ASCII
 	// characters from the space character (\u0020) through the end of the ASCII
 	// character range.
-	//
-	// * Printable characters in the Basic Latin and Latin-1
+	// - Printable characters in the Basic Latin and Latin-1
 	// Supplement character set (through \u00FF).
-	//
-	// * The tab (\u0009), line feed
+	// - The tab (\u0009), line feed
 	// (\u000A), and carriage return (\u000D) special characters
 	//
 	// For information about

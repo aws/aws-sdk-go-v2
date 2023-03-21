@@ -61,11 +61,9 @@ type CreateRestoreImageTaskInput struct {
 
 	// The tags to apply to the AMI and snapshots on restoration. You can tag the AMI,
 	// the snapshots, or both.
-	//
-	// * To tag the AMI, the value for ResourceType must be
+	// - To tag the AMI, the value for ResourceType must be
 	// image.
-	//
-	// * To tag the snapshots, the value for ResourceType must be snapshot. The
+	// - To tag the snapshots, the value for ResourceType must be snapshot. The
 	// same tag is applied to all of the snapshots that are created.
 	TagSpecifications []types.TagSpecification
 

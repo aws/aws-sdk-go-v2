@@ -216,13 +216,10 @@ type NotificationSpecification struct {
 
 	// The target for notification messages. The Destination’s format is determined by
 	// the specified Transport:
-	//
-	// * When Transport is Email, the Destination is your
+	// - When Transport is Email, the Destination is your
 	// email address.
-	//
-	// * When Transport is SQS, the Destination is your queue URL.
-	//
-	// *
+	// - When Transport is SQS, the Destination is your queue URL.
+	// -
 	// When Transport is SNS, the Destination is the ARN of your topic.
 	//
 	// This member is required.

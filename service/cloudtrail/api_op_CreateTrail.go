@@ -33,20 +33,15 @@ type CreateTrailInput struct {
 
 	// Specifies the name of the trail. The name must meet the following
 	// requirements:
-	//
-	// * Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods
+	// - Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods
 	// (.), underscores (_), or dashes (-)
-	//
-	// * Start with a letter or number, and end
+	// - Start with a letter or number, and end
 	// with a letter or number
-	//
-	// * Be between 3 and 128 characters
-	//
-	// * Have no adjacent
+	// - Be between 3 and 128 characters
+	// - Have no adjacent
 	// periods, underscores or dashes. Names like my-_namespace and my--namespace are
 	// not valid.
-	//
-	// * Not be in IP address format (for example, 192.168.5.4)
+	// - Not be in IP address format (for example, 192.168.5.4)
 	//
 	// This member is required.
 	Name *string
@@ -103,16 +98,12 @@ type CreateTrailInput struct {
 	// multi-Region keys, see Using multi-Region keys
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html)
 	// in the Key Management Service Developer Guide. Examples:
-	//
-	// * alias/MyAliasName
-	//
-	// *
+	// - alias/MyAliasName
+	// -
 	// arn:aws:kms:us-east-2:123456789012:alias/MyAliasName
-	//
-	// *
+	// -
 	// arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012
-	//
-	// *
+	// -
 	// 12345678-1234-1234-1234-123456789012
 	KmsKeyId *string
 

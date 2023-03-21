@@ -27,19 +27,15 @@ import (
 // bucket or an object public, see The Meaning of "Public"
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status).
 // Related Resources
-//
-// * GetPublicAccessBlock
+// - GetPublicAccessBlock
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetPublicAccessBlock.html)
-//
-// *
+// -
 // DeletePublicAccessBlock
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeletePublicAccessBlock.html)
-//
-// *
+// -
 // GetBucketPolicyStatus
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketPolicyStatus.html)
-//
-// *
+// -
 // Using Amazon S3 Block Public Access
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html)
 func (c *Client) PutPublicAccessBlock(ctx context.Context, params *PutPublicAccessBlockInput, optFns ...func(*Options)) (*PutPublicAccessBlockOutput, error) {

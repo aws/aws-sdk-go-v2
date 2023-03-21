@@ -570,12 +570,10 @@ type TargetPlatform struct {
 	// Vision uses the CPU for compilation and we highly recommend that you use the
 	// GreengrassConfiguration$CompilerOptions field. For example, you can use the
 	// following compiler options for CPU:
-	//
-	// * mcpu: CPU micro-architecture. For
-	// example, {'mcpu': 'skylake-avx512'}
-	//
-	// * mattr: CPU flags. For example, {'mattr':
-	// ['+neon', '+vfpv4']}
+	// - mcpu: CPU micro-architecture. For example,
+	// {'mcpu': 'skylake-avx512'}
+	// - mattr: CPU flags. For example, {'mattr': ['+neon',
+	// '+vfpv4']}
 	Accelerator TargetPlatformAccelerator
 
 	noSmithyDocumentSerde

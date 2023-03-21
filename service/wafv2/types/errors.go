@@ -180,17 +180,13 @@ func (e *WAFInvalidOperationException) ErrorFault() smithy.ErrorFault { return s
 
 // The operation failed because WAF didn't recognize a parameter in the request.
 // For example:
-//
-// * You specified a parameter name or value that isn't valid.
-//
-// *
-// Your nested statement isn't valid. You might have tried to nest a statement that
+// - You specified a parameter name or value that isn't valid.
+// - Your
+// nested statement isn't valid. You might have tried to nest a statement that
 // can’t be nested.
-//
-// * You tried to update a WebACL with a DefaultAction that isn't
+// - You tried to update a WebACL with a DefaultAction that isn't
 // among the types available at DefaultAction.
-//
-// * Your request references an ARN
+// - Your request references an ARN
 // that is malformed, or corresponds to a resource with which a web ACL can't be
 // associated.
 type WAFInvalidParameterException struct {
@@ -224,22 +220,17 @@ func (e *WAFInvalidParameterException) ErrorFault() smithy.ErrorFault { return s
 
 // The operation failed because the specified policy isn't in the proper format.
 // The policy specifications must conform to the following:
-//
-// * The policy must be
+// - The policy must be
 // composed using IAM Policy version 2012-10-17 or version 2015-01-01.
-//
-// * The
-// policy must include specifications for Effect, Action, and Principal.
-//
-// * Effect
-// must specify Allow.
-//
-// * Action must specify wafv2:CreateWebACL,
-// wafv2:UpdateWebACL, and wafv2:PutFirewallManagerRuleGroups and may optionally
-// specify wafv2:GetRuleGroup. WAF rejects any extra actions or wildcard actions in
-// the policy.
-//
-// * The policy must not include a Resource parameter.
+// - The policy
+// must include specifications for Effect, Action, and Principal.
+// - Effect must
+// specify Allow.
+// - Action must specify wafv2:CreateWebACL, wafv2:UpdateWebACL, and
+// wafv2:PutFirewallManagerRuleGroups and may optionally specify
+// wafv2:GetRuleGroup. WAF rejects any extra actions or wildcard actions in the
+// policy.
+// - The policy must not include a Resource parameter.
 //
 // For more
 // information, see IAM Policies

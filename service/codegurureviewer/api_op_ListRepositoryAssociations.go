@@ -72,30 +72,24 @@ type ListRepositoryAssociationsInput struct {
 
 	// List of repository association states to use as a filter. The valid repository
 	// association states are:
-	//
-	// * Associated: The repository association is
-	// complete.
-	//
-	// * Associating: CodeGuru Reviewer is:
-	//
-	// * Setting up pull request
-	// notifications. This is required for pull requests to trigger a CodeGuru Reviewer
-	// review. If your repository ProviderType is GitHub, GitHub Enterprise Server, or
-	// Bitbucket, CodeGuru Reviewer creates webhooks in your repository to trigger
-	// CodeGuru Reviewer reviews. If you delete these webhooks, reviews of code in your
+	// - Associated: The repository association is complete.
+	// -
+	// Associating: CodeGuru Reviewer is:
+	// - Setting up pull request notifications. This
+	// is required for pull requests to trigger a CodeGuru Reviewer review. If your
+	// repository ProviderType is GitHub, GitHub Enterprise Server, or Bitbucket,
+	// CodeGuru Reviewer creates webhooks in your repository to trigger CodeGuru
+	// Reviewer reviews. If you delete these webhooks, reviews of code in your
 	// repository cannot be triggered.
-	//
-	// * Setting up source code access. This is
+	// - Setting up source code access. This is
 	// required for CodeGuru Reviewer to securely clone code in your repository.
 	//
-	// *
+	// -
 	// Failed: The repository failed to associate or disassociate.
-	//
-	// * Disassociating:
+	// - Disassociating:
 	// CodeGuru Reviewer is removing the repository's pull request notifications and
 	// source code access.
-	//
-	// * Disassociated: CodeGuru Reviewer successfully
+	// - Disassociated: CodeGuru Reviewer successfully
 	// disassociated the repository. You can create a new association with this
 	// repository if you want to review source code in it later. You can control access
 	// to code reviews created in anassociated repository with tags after it has been

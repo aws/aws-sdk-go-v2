@@ -29,12 +29,10 @@ import (
 // in the Amazon Route 53 Application Recovery Controller Developer Guide. Learn
 // more about working with routing controls in the following topics in the Amazon
 // Route 53 Application Recovery Controller Developer Guide:
-//
-// * Viewing and
-// updating routing control states
+// - Viewing and updating
+// routing control states
 // (https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.update.html)
-//
-// *
+// -
 // Working with routing controls in Route 53 ARC
 // (https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.html)
 func (c *Client) GetRoutingControlState(ctx context.Context, params *GetRoutingControlStateInput, optFns ...func(*Options)) (*GetRoutingControlStateOutput, error) {

@@ -46,8 +46,7 @@ func (c *Client) CreateBlueGreenDeployment(ctx context.Context, params *CreateBl
 type CreateBlueGreenDeploymentInput struct {
 
 	// The name of the blue/green deployment. Constraints:
-	//
-	// * Can't be the same as an
+	// - Can't be the same as an
 	// existing blue/green deployment name in the same account and Amazon Web Services
 	// Region.
 	//

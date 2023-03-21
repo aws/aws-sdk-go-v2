@@ -801,16 +801,12 @@ type BehaviorCriteria struct {
 
 	// The operator that relates the thing measured (metric) to the criteria
 	// (containing a value or statisticalThreshold). Valid operators include:
-	//
-	// *
+	// -
 	// string-list: in-set and not-in-set
-	//
-	// * number-list: in-set and not-in-set
-	//
-	// *
+	// - number-list: in-set and not-in-set
+	// -
 	// ip-address-list: in-cidr-set and not-in-cidr-set
-	//
-	// * number: less-than,
+	// - number: less-than,
 	// less-than-equals, greater-than, and greater-than-equals
 	ComparisonOperator ComparisonOperator
 
@@ -1391,12 +1387,9 @@ type DocumentParameter struct {
 // associated with an Amazon Web Services-managed domain (for example,
 // dbc123defghijk.iot.us-west-2.amazonaws.com), a customer managed domain, or a
 // default endpoint.
-//
-// * Data
-//
-// * Jobs
-//
-// * CredentialProvider
+// - Data
+// - Jobs
+// - CredentialProvider
 type DomainConfigurationSummary struct {
 
 	// The ARN of the domain configuration.
@@ -3838,14 +3831,11 @@ type ThingGroupProperties struct {
 type ThingIndexingConfiguration struct {
 
 	// Thing indexing mode. Valid values are:
-	//
-	// * REGISTRY – Your thing index contains
+	// - REGISTRY – Your thing index contains
 	// registry data only.
-	//
-	// * REGISTRY_AND_SHADOW - Your thing index contains registry
+	// - REGISTRY_AND_SHADOW - Your thing index contains registry
 	// and shadow data.
-	//
-	// * OFF - Thing indexing is disabled.
+	// - OFF - Thing indexing is disabled.
 	//
 	// This member is required.
 	ThingIndexingMode ThingIndexingMode
@@ -3854,12 +3844,10 @@ type ThingIndexingConfiguration struct {
 	CustomFields []Field
 
 	// Device Defender indexing mode. Valid values are:
-	//
-	// * VIOLATIONS – Your thing
-	// index contains Device Defender violations. To enable Device Defender indexing,
+	// - VIOLATIONS – Your thing index
+	// contains Device Defender violations. To enable Device Defender indexing,
 	// deviceDefenderIndexingMode must not be set to OFF.
-	//
-	// * OFF - Device Defender
+	// - OFF - Device Defender
 	// indexing is disabled.
 	//
 	// For more information about Device Defender violations,
@@ -3878,12 +3866,10 @@ type ThingIndexingConfiguration struct {
 	ManagedFields []Field
 
 	// Named shadow indexing mode. Valid values are:
-	//
-	// * ON – Your thing index contains
+	// - ON – Your thing index contains
 	// named shadow. To enable thing named shadow indexing, namedShadowIndexingMode
 	// must not be set to OFF.
-	//
-	// * OFF - Named shadow indexing is disabled.
+	// - OFF - Named shadow indexing is disabled.
 	//
 	// For more
 	// information about Shadows, see IoT Device Shadow service.
@@ -3891,12 +3877,10 @@ type ThingIndexingConfiguration struct {
 	NamedShadowIndexingMode NamedShadowIndexingMode
 
 	// Thing connectivity indexing mode. Valid values are:
-	//
-	// * STATUS – Your thing index
+	// - STATUS – Your thing index
 	// contains connectivity status. To enable thing connectivity indexing,
 	// thingIndexMode must not be set to OFF.
-	//
-	// * OFF - Thing connectivity status
+	// - OFF - Thing connectivity status
 	// indexing is disabled.
 	ThingConnectivityIndexingMode ThingConnectivityIndexingMode
 

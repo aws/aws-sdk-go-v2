@@ -43,20 +43,15 @@ type GetTransitGatewayMulticastDomainAssociationsInput struct {
 	DryRun *bool
 
 	// One or more filters. The possible values are:
-	//
-	// * resource-id - The ID of the
+	// - resource-id - The ID of the
 	// resource.
-	//
-	// * resource-type - The type of resource. The valid value is: vpc.
-	//
-	// *
+	// - resource-type - The type of resource. The valid value is: vpc.
+	// -
 	// state - The state of the subnet association. Valid values are associated |
 	// associating | disassociated | disassociating.
-	//
-	// * subnet-id - The ID of the
+	// - subnet-id - The ID of the
 	// subnet.
-	//
-	// * transit-gateway-attachment-id - The id of the transit gateway
+	// - transit-gateway-attachment-id - The id of the transit gateway
 	// attachment.
 	Filters []types.Filter
 

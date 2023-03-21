@@ -103,11 +103,9 @@ type JournalS3ExportDescription struct {
 
 	// The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for
 	// a journal export job to do the following:
-	//
-	// * Write objects into your Amazon
+	// - Write objects into your Amazon
 	// Simple Storage Service (Amazon S3) bucket.
-	//
-	// * (Optional) Use your customer
+	// - (Optional) Use your customer
 	// managed key in Key Management Service (KMS) for server-side encryption of your
 	// exported data.
 	//
@@ -164,16 +162,13 @@ type LedgerEncryptionDescription struct {
 
 	// The current state of encryption at rest for the ledger. This can be one of the
 	// following values:
-	//
-	// * ENABLED: Encryption is fully enabled using the specified
+	// - ENABLED: Encryption is fully enabled using the specified
 	// key.
-	//
-	// * UPDATING: The ledger is actively processing the specified key change.
-	// Key changes in QLDB are asynchronous. The ledger is fully accessible without any
+	// - UPDATING: The ledger is actively processing the specified key change. Key
+	// changes in QLDB are asynchronous. The ledger is fully accessible without any
 	// performance impact while the key change is being processed. The amount of time
 	// it takes to update a key varies depending on the ledger size.
-	//
-	// *
+	// -
 	// KMS_KEY_INACCESSIBLE: The specified customer managed KMS key is not accessible,
 	// and the ledger is impaired. Either the key was disabled or deleted, or the
 	// grants on the key were revoked. When a ledger is impaired, it is not accessible
@@ -264,13 +259,10 @@ type S3ExportConfiguration struct {
 	// restrictions. For more information, see Object Key and Metadata
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html) in the
 	// Amazon S3 Developer Guide. The following are examples of valid Prefix values:
-	//
-	// *
+	// -
 	// JournalExports-ForMyLedger/Testing/
-	//
-	// * JournalExports
-	//
-	// * My:Tests/
+	// - JournalExports
+	// - My:Tests/
 	//
 	// This member is required.
 	Prefix *string

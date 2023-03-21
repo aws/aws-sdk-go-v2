@@ -68,14 +68,12 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html).
 // Access Permissions When copying an object, you can optionally specify the
 // accounts or groups that should be granted specific permissions on the new
-// object. There are two ways to grant the permissions using the request
-// headers:
-//
-// * Specify a canned ACL with the x-amz-acl request header. For more
-// information, see Canned ACL
+// object. There are two ways to grant the permissions using the request headers:
+// -
+// Specify a canned ACL with the x-amz-acl request header. For more information,
+// see Canned ACL
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL).
-//
-// *
+// -
 // Specify access permissions explicitly with the x-amz-grant-read,
 // x-amz-grant-read-acp, x-amz-grant-write-acp, and x-amz-grant-full-control
 // headers. These parameters map to the set of permissions that Amazon S3 supports
@@ -90,19 +88,15 @@ import (
 // writes it to disks in its data centers and decrypts it when you access it. The
 // option you use depends on whether you want to use Amazon Web Services managed
 // encryption keys or provide your own encryption key.
-//
-// * Use encryption keys
+// - Use encryption keys
 // managed by Amazon S3 or customer managed key stored in Amazon Web Services Key
 // Management Service (Amazon Web Services KMS) – If you want Amazon Web Services
 // to manage the keys used to encrypt data, specify the following headers in the
 // request.
-//
-// * x-amz-server-side-encryption
-//
-// *
+// - x-amz-server-side-encryption
+// -
 // x-amz-server-side-encryption-aws-kms-key-id
-//
-// *
+// -
 // x-amz-server-side-encryption-context
 //
 // If you specify
@@ -114,18 +108,14 @@ import (
 // server-side encryption with KMS key (SSE-KMS), see Protecting Data Using
 // Server-Side Encryption with KMS keys
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html).
-//
-// *
-// Use customer-provided encryption keys – If you want to manage your own
-// encryption keys, provide all the following headers in the request.
-//
-// *
+// - Use
+// customer-provided encryption keys – If you want to manage your own encryption
+// keys, provide all the following headers in the request.
+// -
 // x-amz-server-side-encryption-customer-algorithm
-//
-// *
+// -
 // x-amz-server-side-encryption-customer-key
-//
-// *
+// -
 // x-amz-server-side-encryption-customer-key-MD5
 //
 // For more information about
@@ -143,13 +133,11 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/S3_ACLs_UsingACLs.html). With
 // this operation, you can grant access permissions using one of the following two
 // methods:
-//
-// * Specify a canned ACL (x-amz-acl) — Amazon S3 supports a set of
+// - Specify a canned ACL (x-amz-acl) — Amazon S3 supports a set of
 // predefined ACLs, known as canned ACLs. Each canned ACL has a predefined set of
 // grantees and permissions. For more information, see Canned ACL
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL).
-//
-// *
+// -
 // Specify access permissions explicitly — To explicitly grant access permissions
 // to specific Amazon Web Services accounts or groups, use the following headers.
 // Each header maps to specific permissions that Amazon S3 supports in an ACL. For
@@ -157,53 +145,37 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html). In the
 // header, you specify a list of grantees who get the specific permission. To grant
 // permissions explicitly, use:
-//
-// * x-amz-grant-read
-//
-// * x-amz-grant-write
-//
-// *
+// - x-amz-grant-read
+// - x-amz-grant-write
+// -
 // x-amz-grant-read-acp
-//
-// * x-amz-grant-write-acp
-//
-// * x-amz-grant-full-control
+// - x-amz-grant-write-acp
+// - x-amz-grant-full-control
 //
 // You
 // specify each grantee as a type=value pair, where the type is one of the
 // following:
-//
-// * id – if the value specified is the canonical user ID of an Amazon
+// - id – if the value specified is the canonical user ID of an Amazon
 // Web Services account
-//
-// * uri – if you are granting permissions to a predefined
+// - uri – if you are granting permissions to a predefined
 // group
-//
-// * emailAddress – if the value specified is the email address of an Amazon
+// - emailAddress – if the value specified is the email address of an Amazon
 // Web Services account Using email addresses to specify a grantee is only
 // supported in the following Amazon Web Services Regions:
-//
-// * US East (N.
+// - US East (N.
 // Virginia)
-//
-// * US West (N. California)
-//
-// * US West (Oregon)
-//
-// * Asia Pacific
+// - US West (N. California)
+// - US West (Oregon)
+// - Asia Pacific
 // (Singapore)
+// - Asia Pacific (Sydney)
+// - Asia Pacific (Tokyo)
+// - Europe (Ireland)
+// -
+// South America (São Paulo)
 //
-// * Asia Pacific (Sydney)
-//
-// * Asia Pacific (Tokyo)
-//
-// * Europe
-// (Ireland)
-//
-// * South America (São Paulo)
-//
-// For a list of all the Amazon S3
-// supported Regions and endpoints, see Regions and Endpoints
+// For a list of all the Amazon S3 supported Regions and
+// endpoints, see Regions and Endpoints
 // (https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the
 // Amazon Web Services General Reference.
 //
@@ -214,23 +186,17 @@ import (
 //
 // The following operations are related to
 // CreateMultipartUpload:
-//
-// * UploadPart
+// - UploadPart
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)
-//
-// *
+// -
 // CompleteMultipartUpload
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html)
-//
-// *
+// -
 // AbortMultipartUpload
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html)
-//
-// *
-// ListParts
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html)
-//
-// *
+// -
+// ListParts (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html)
+// -
 // ListMultipartUploads
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html)
 func (c *Client) CreateMultipartUpload(ctx context.Context, params *CreateMultipartUploadInput, optFns ...func(*Options)) (*CreateMultipartUploadOutput, error) {

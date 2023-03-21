@@ -16,12 +16,10 @@ import (
 // the permissions necessary to gather findings from other services that are
 // integrated with Security Hub. When you use the EnableSecurityHub operation to
 // enable Security Hub, you also automatically enable the following standards:
-//
-// *
+// -
 // Center for Internet Security (CIS) Amazon Web Services Foundations Benchmark
 // v1.2.0
-//
-// * Amazon Web Services Foundational Security Best Practices
+// - Amazon Web Services Foundational Security Best Practices
 //
 // Other
 // standards are not automatically enabled. To opt out of automatically enabled

@@ -45,22 +45,19 @@ type UpdateGameServerGroupInput struct {
 
 	// Indicates how GameLift FleetIQ balances the use of Spot Instances and On-Demand
 	// Instances in the game server group. Method options include the following:
-	//
-	// *
+	// -
 	// SPOT_ONLY - Only Spot Instances are used in the game server group. If Spot
 	// Instances are unavailable or not viable for game hosting, the game server group
 	// provides no hosting capacity until Spot Instances can again be used. Until then,
 	// no new instances are started, and the existing nonviable Spot Instances are
 	// terminated (after current gameplay ends) and are not replaced.
-	//
-	// * SPOT_PREFERRED
+	// - SPOT_PREFERRED
 	// - (default value) Spot Instances are used whenever available in the game server
 	// group. If Spot Instances are unavailable, the game server group continues to
 	// provide hosting capacity by falling back to On-Demand Instances. Existing
 	// nonviable Spot Instances are terminated (after current gameplay ends) and are
 	// replaced with new On-Demand Instances.
-	//
-	// * ON_DEMAND_ONLY - Only On-Demand
+	// - ON_DEMAND_ONLY - Only On-Demand
 	// Instances are used in the game server group. No Spot Instances are used, even
 	// when available, while this balancing strategy is in force.
 	BalancingStrategy types.BalancingStrategy

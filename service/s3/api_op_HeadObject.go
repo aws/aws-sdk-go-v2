@@ -29,80 +29,65 @@ import (
 // customer-provided encryption keys (SSE-C) when you store the object in Amazon
 // S3, then when you retrieve the metadata from the object, you must use the
 // following headers:
-//
-// * x-amz-server-side-encryption-customer-algorithm
-//
-// *
+// - x-amz-server-side-encryption-customer-algorithm
+// -
 // x-amz-server-side-encryption-customer-key
-//
-// *
+// -
 // x-amz-server-side-encryption-customer-key-MD5
 //
 // For more information about SSE-C,
 // see Server-Side Encryption (Using Customer-Provided Encryption Keys)
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html).
-//
-// *
+// -
 // Encryption request headers, like x-amz-server-side-encryption, should not be
 // sent for GET requests if your object uses server-side encryption with KMS keys
 // (SSE-KMS) or server-side encryption with Amazon S3–managed encryption keys
 // (SSE-S3). If your object does use these types of keys, you’ll get an HTTP 400
 // BadRequest error.
-//
-// * The last modified property in this case is the creation
-// date of the object.
+// - The last modified property in this case is the creation date
+// of the object.
 //
 // Request headers are limited to 8 KB in size. For more
 // information, see Common Request Headers
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTCommonRequestHeaders.html).
 // Consider the following when using request headers:
-//
-// * Consideration 1 – If both
+// - Consideration 1 – If both
 // of the If-Match and If-Unmodified-Since headers are present in the request as
 // follows:
-//
-// * If-Match condition evaluates to true, and;
-//
-// * If-Unmodified-Since
+// - If-Match condition evaluates to true, and;
+// - If-Unmodified-Since
 // condition evaluates to false;
 //
 // Then Amazon S3 returns 200 OK and the data
 // requested.
-//
-// * Consideration 2 – If both of the If-None-Match and
+// - Consideration 2 – If both of the If-None-Match and
 // If-Modified-Since headers are present in the request as follows:
+// - If-None-Match
+// condition evaluates to false, and;
+// - If-Modified-Since condition evaluates to
+// true;
 //
-// *
-// If-None-Match condition evaluates to false, and;
+// Then Amazon S3 returns the 304 Not Modified response code.
 //
-// * If-Modified-Since condition
-// evaluates to true;
-//
-// Then Amazon S3 returns the 304 Not Modified response
-// code.
-//
-// For more information about conditional requests, see RFC 7232
+// For more
+// information about conditional requests, see RFC 7232
 // (https://tools.ietf.org/html/rfc7232). Permissions You need the relevant read
 // object (or version) permission for this operation. For more information, see
 // Specifying Permissions in a Policy
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html). If
 // the object you request does not exist, the error Amazon S3 returns depends on
 // whether you also have the s3:ListBucket permission.
-//
-// * If you have the
+// - If you have the
 // s3:ListBucket permission on the bucket, Amazon S3 returns an HTTP status code
 // 404 ("no such key") error.
-//
-// * If you don’t have the s3:ListBucket permission,
+// - If you don’t have the s3:ListBucket permission,
 // Amazon S3 returns an HTTP status code 403 ("access denied") error.
 //
 // The
 // following actions are related to HeadObject:
-//
-// * GetObject
+// - GetObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
-//
-// *
+// -
 // GetObjectAttributes
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAttributes.html)
 func (c *Client) HeadObject(ctx context.Context, params *HeadObjectInput, optFns ...func(*Options)) (*HeadObjectOutput, error) {
@@ -337,8 +322,7 @@ type HeadObjectOutput struct {
 	// buckets where Amazon S3 stores object replicas. When you request an object
 	// (GetObject) or object metadata (HeadObject) from these buckets, Amazon S3 will
 	// return the x-amz-replication-status header in the response as follows:
-	//
-	// * If
+	// - If
 	// requesting an object from the source bucket, Amazon S3 will return the
 	// x-amz-replication-status header if the object in your request is eligible for
 	// replication. For example, suppose that in your replication configuration, you
@@ -347,14 +331,12 @@ type HeadObjectOutput struct {
 	// TaxDocs/document1.pdf, are eligible for replication. For any object request with
 	// this key name prefix, Amazon S3 will return the x-amz-replication-status header
 	// with value PENDING, COMPLETED or FAILED indicating object replication status.
-	//
-	// *
+	// -
 	// If requesting an object from a destination bucket, Amazon S3 will return the
 	// x-amz-replication-status header with value REPLICA if the object in your request
 	// is a replica that Amazon S3 created and there is no replica modification
 	// replication in progress.
-	//
-	// * When replicating objects to multiple destination
+	// - When replicating objects to multiple destination
 	// buckets, the x-amz-replication-status header acts differently. The header of the
 	// source object will only return a value of COMPLETED when replication is
 	// successful to all destinations. The header will remain at value PENDING until

@@ -49,11 +49,9 @@ type CreateCustomLogSourceInput struct {
 
 	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
 	// to be used by the Glue crawler. The recommended IAM policies are:
-	//
-	// * The managed
+	// - The managed
 	// policy AWSGlueServiceRole
-	//
-	// * A custom policy granting access to your Amazon S3
+	// - A custom policy granting access to your Amazon S3
 	// Data Lake
 	//
 	// This member is required.

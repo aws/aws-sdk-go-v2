@@ -87,31 +87,25 @@ type CallAnalyticsJob struct {
 	// If CallAnalyticsJobStatus is FAILED, FailureReason contains information about
 	// why the Call Analytics job request failed. The FailureReason field contains one
 	// of the following values:
-	//
-	// * Unsupported media format. The media format specified
+	// - Unsupported media format. The media format specified
 	// in MediaFormat isn't valid. Refer to MediaFormat for a list of supported
 	// formats.
-	//
-	// * The media format provided does not match the detected media format.
+	// - The media format provided does not match the detected media format.
 	// The media format specified in MediaFormat doesn't match the format of the input
 	// file. Check the media format of your media file and correct the specified
 	// value.
-	//
-	// * Invalid sample rate for audio file. The sample rate specified in
+	// - Invalid sample rate for audio file. The sample rate specified in
 	// MediaSampleRateHertz isn't valid. The sample rate must be between 8,000 and
 	// 48,000 hertz.
-	//
-	// * The sample rate provided does not match the detected sample
+	// - The sample rate provided does not match the detected sample
 	// rate. The sample rate specified in MediaSampleRateHertz doesn't match the sample
 	// rate detected in your input media file. Check the sample rate of your media file
 	// and correct the specified value.
-	//
-	// * Invalid file size: file size too large. The
+	// - Invalid file size: file size too large. The
 	// size of your media file is larger than what Amazon Transcribe can process. For
 	// more information, refer to Guidelines and quotas
 	// (https://docs.aws.amazon.com/transcribe/latest/dg/limits-guidelines.html#limits).
-	//
-	// *
+	// -
 	// Invalid number of channels: number of channels too large. Your audio contains
 	// more channels than Amazon Transcribe is able to process. For more information,
 	// refer to Guidelines and quotas
@@ -384,16 +378,12 @@ type InputDataConfig struct {
 
 // Flag the presence or absence of interruptions in your Call Analytics
 // transcription output. Rules using InterruptionFilter are designed to match:
-//
-// *
+// -
 // Instances where an agent interrupts a customer
-//
-// * Instances where a customer
+// - Instances where a customer
 // interrupts an agent
-//
-// * Either participant interrupting the other
-//
-// * A lack of
+// - Either participant interrupting the other
+// - A lack of
 // interruptions
 //
 // See Rule criteria for post-call categories
@@ -524,26 +514,18 @@ type LanguageIdSettings struct {
 }
 
 // Provides information about a custom language model, including:
-//
-// * The base model
+// - The base model
 // name
-//
-// * When the model was created
-//
-// * The location of the files used to train
-// the model
-//
-// * When the model was last modified
-//
-// * The name you chose for the
+// - When the model was created
+// - The location of the files used to train the
 // model
-//
-// * The model's language
-//
-// * The model's processing state
-//
-// * Any available
-// upgrades for the base model
+// - When the model was last modified
+// - The name you chose for the model
+// -
+// The model's language
+// - The model's processing state
+// - Any available upgrades for
+// the base model
 type LanguageModel struct {
 
 	// The Amazon Transcribe standard language model, or base model, used to create
@@ -609,11 +591,9 @@ type LanguageModel struct {
 type Media struct {
 
 	// The Amazon S3 location of the media file you want to transcribe. For example:
-	//
-	// *
+	// -
 	// s3://DOC-EXAMPLE-BUCKET/my-media-file.flac
-	//
-	// *
+	// -
 	// s3://DOC-EXAMPLE-BUCKET/media-files/my-media-file.flac
 	//
 	// Note that the Amazon S3
@@ -622,11 +602,9 @@ type Media struct {
 	MediaFileUri *string
 
 	// The Amazon S3 location of the media file you want to redact. For example:
-	//
-	// *
+	// -
 	// s3://DOC-EXAMPLE-BUCKET/my-media-file.flac
-	//
-	// *
+	// -
 	// s3://DOC-EXAMPLE-BUCKET/media-files/my-media-file.flac
 	//
 	// Note that the Amazon S3
@@ -678,31 +656,25 @@ type MedicalTranscriptionJob struct {
 	// If TranscriptionJobStatus is FAILED, FailureReason contains information about
 	// why the transcription job request failed. The FailureReason field contains one
 	// of the following values:
-	//
-	// * Unsupported media format. The media format specified
+	// - Unsupported media format. The media format specified
 	// in MediaFormat isn't valid. Refer to MediaFormat for a list of supported
 	// formats.
-	//
-	// * The media format provided does not match the detected media format.
+	// - The media format provided does not match the detected media format.
 	// The media format specified in MediaFormat doesn't match the format of the input
 	// file. Check the media format of your media file and correct the specified
 	// value.
-	//
-	// * Invalid sample rate for audio file. The sample rate specified in
+	// - Invalid sample rate for audio file. The sample rate specified in
 	// MediaSampleRateHertz isn't valid. The sample rate must be between 16,000 and
 	// 48,000 hertz.
-	//
-	// * The sample rate provided does not match the detected sample
+	// - The sample rate provided does not match the detected sample
 	// rate. The sample rate specified in MediaSampleRateHertz doesn't match the sample
 	// rate detected in your input media file. Check the sample rate of your media file
 	// and correct the specified value.
-	//
-	// * Invalid file size: file size too large. The
+	// - Invalid file size: file size too large. The
 	// size of your media file is larger than what Amazon Transcribe can process. For
 	// more information, refer to Guidelines and quotas
 	// (https://docs.aws.amazon.com/transcribe/latest/dg/limits-guidelines.html#limits).
-	//
-	// *
+	// -
 	// Invalid number of channels: number of channels too large. Your audio contains
 	// more channels than Amazon Transcribe is able to process. For more information,
 	// refer to Guidelines and quotas
@@ -911,15 +883,13 @@ type ModelSettings struct {
 
 // Flag the presence or absence of periods of silence in your Call Analytics
 // transcription output. Rules using NonTalkTimeFilter are designed to match:
+// - The
+// presence of silence at specified periods throughout the call
+// - The presence of
+// speech at specified periods throughout the call
 //
-// *
-// The presence of silence at specified periods throughout the call
-//
-// * The presence
-// of speech at specified periods throughout the call
-//
-// See Rule criteria for
-// post-call categories
+// See Rule criteria for post-call
+// categories
 // (https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html#tca-rules-batch)
 // for usage examples.
 type NonTalkTimeFilter struct {
@@ -1041,18 +1011,14 @@ func (*RuleMemberTranscriptFilter) isRule() {}
 // Flag the presence or absence of specific sentiments detected in your Call
 // Analytics transcription output. Rules using SentimentFilter are designed to
 // match:
-//
-// * The presence or absence of a positive sentiment felt by the customer,
+// - The presence or absence of a positive sentiment felt by the customer,
 // agent, or both at specified points in the call
-//
-// * The presence or absence of a
+// - The presence or absence of a
 // negative sentiment felt by the customer, agent, or both at specified points in
 // the call
-//
-// * The presence or absence of a neutral sentiment felt by the customer,
+// - The presence or absence of a neutral sentiment felt by the customer,
 // agent, or both at specified points in the call
-//
-// * The presence or absence of a
+// - The presence or absence of a
 // mixed sentiment felt by the customer, the agent, or both at specified points in
 // the call
 //
@@ -1262,13 +1228,10 @@ type Transcript struct {
 // Flag the presence or absence of specific words or phrases detected in your Call
 // Analytics transcription output. Rules using TranscriptFilter are designed to
 // match:
-//
-// * Custom words or phrases spoken by the agent, the customer, or both
-//
-// *
+// - Custom words or phrases spoken by the agent, the customer, or both
+// -
 // Custom words or phrases not spoken by the agent, the customer, or either
-//
-// *
+// -
 // Custom words or phrases that occur at a specific time frame
 //
 // See Rule criteria
@@ -1342,31 +1305,25 @@ type TranscriptionJob struct {
 	// If TranscriptionJobStatus is FAILED, FailureReason contains information about
 	// why the transcription job request failed. The FailureReason field contains one
 	// of the following values:
-	//
-	// * Unsupported media format. The media format specified
+	// - Unsupported media format. The media format specified
 	// in MediaFormat isn't valid. Refer to MediaFormat for a list of supported
 	// formats.
-	//
-	// * The media format provided does not match the detected media format.
+	// - The media format provided does not match the detected media format.
 	// The media format specified in MediaFormat doesn't match the format of the input
 	// file. Check the media format of your media file and correct the specified
 	// value.
-	//
-	// * Invalid sample rate for audio file. The sample rate specified in
+	// - Invalid sample rate for audio file. The sample rate specified in
 	// MediaSampleRateHertz isn't valid. The sample rate must be between 8,000 and
 	// 48,000 hertz.
-	//
-	// * The sample rate provided does not match the detected sample
+	// - The sample rate provided does not match the detected sample
 	// rate. The sample rate specified in MediaSampleRateHertz doesn't match the sample
 	// rate detected in your input media file. Check the sample rate of your media file
 	// and correct the specified value.
-	//
-	// * Invalid file size: file size too large. The
+	// - Invalid file size: file size too large. The
 	// size of your media file is larger than what Amazon Transcribe can process. For
 	// more information, refer to Guidelines and quotas
 	// (https://docs.aws.amazon.com/transcribe/latest/dg/limits-guidelines.html#limits).
-	//
-	// *
+	// -
 	// Invalid number of channels: number of channels too large. Your audio contains
 	// more channels than Amazon Transcribe is able to process. For more information,
 	// refer to Guidelines and quotas

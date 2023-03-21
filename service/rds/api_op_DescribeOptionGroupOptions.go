@@ -32,29 +32,18 @@ type DescribeOptionGroupOptionsInput struct {
 
 	// A required parameter. Options available for the given engine name are described.
 	// Valid Values:
-	//
-	// * mariadb
-	//
-	// * mysql
-	//
-	// * oracle-ee
-	//
-	// * oracle-ee-cdb
-	//
-	// * oracle-se2
-	//
-	// *
+	// - mariadb
+	// - mysql
+	// - oracle-ee
+	// - oracle-ee-cdb
+	// - oracle-se2
+	// -
 	// oracle-se2-cdb
-	//
-	// * postgres
-	//
-	// * sqlserver-ee
-	//
-	// * sqlserver-se
-	//
-	// * sqlserver-ex
-	//
-	// *
+	// - postgres
+	// - sqlserver-ee
+	// - sqlserver-se
+	// - sqlserver-ex
+	// -
 	// sqlserver-web
 	//
 	// This member is required.

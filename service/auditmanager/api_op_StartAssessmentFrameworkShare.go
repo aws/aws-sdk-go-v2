@@ -20,16 +20,12 @@ import (
 // same snapshot in the US West (Oregon) Amazon Web Services Region. Audit Manager
 // deletes the snapshot and the backup snapshot when one of the following events
 // occurs:
-//
-// * The sender revokes the share request.
-//
-// * The recipient declines the
+// - The sender revokes the share request.
+// - The recipient declines the
 // share request.
-//
-// * The recipient encounters an error and doesn't successfully
+// - The recipient encounters an error and doesn't successfully
 // accept the share request.
-//
-// * The share request expires before the recipient
+// - The share request expires before the recipient
 // responds to the request.
 //
 // When a sender resends a share request

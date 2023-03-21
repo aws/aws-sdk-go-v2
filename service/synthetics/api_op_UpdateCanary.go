@@ -57,22 +57,15 @@ type UpdateCanaryInput struct {
 	// The ARN of the IAM role to be used to run the canary. This role must already
 	// exist, and must include lambda.amazonaws.com as a principal in the trust policy.
 	// The role must also have the following permissions:
-	//
-	// * s3:PutObject
-	//
-	// *
+	// - s3:PutObject
+	// -
 	// s3:GetBucketLocation
-	//
-	// * s3:ListAllMyBuckets
-	//
-	// * cloudwatch:PutMetricData
-	//
-	// *
+	// - s3:ListAllMyBuckets
+	// - cloudwatch:PutMetricData
+	// -
 	// logs:CreateLogGroup
-	//
-	// * logs:CreateLogStream
-	//
-	// * logs:CreateLogStream
+	// - logs:CreateLogStream
+	// - logs:CreateLogStream
 	ExecutionRoleArn *string
 
 	// The number of days to retain data about failed runs of this canary.

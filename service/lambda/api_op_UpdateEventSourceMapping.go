@@ -16,74 +16,57 @@ import (
 // invokes, or pause invocation and resume later from the same location. For
 // details about how to configure different event sources, see the following
 // topics.
-//
-// * Amazon DynamoDB Streams
+// - Amazon DynamoDB Streams
 // (https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-dynamodb-eventsourcemapping)
-//
-// *
+// -
 // Amazon Kinesis
 // (https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-eventsourcemapping)
-//
-// *
+// -
 // Amazon SQS
 // (https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#events-sqs-eventsource)
-//
-// *
+// -
 // Amazon MQ and RabbitMQ
 // (https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-eventsourcemapping)
-//
-// *
+// -
 // Amazon MSK (https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html)
-//
-// *
-// Apache Kafka (https://docs.aws.amazon.com/lambda/latest/dg/kafka-smaa.html)
+// - Apache
+// Kafka (https://docs.aws.amazon.com/lambda/latest/dg/kafka-smaa.html)
 //
 // The
 // following error handling options are available only for stream sources (DynamoDB
 // and Kinesis):
-//
-// * BisectBatchOnFunctionError – If the function returns an error,
+// - BisectBatchOnFunctionError – If the function returns an error,
 // split the batch in two and retry.
-//
-// * DestinationConfig – Send discarded records
+// - DestinationConfig – Send discarded records
 // to an Amazon SQS queue or Amazon SNS topic.
-//
-// * MaximumRecordAgeInSeconds –
+// - MaximumRecordAgeInSeconds –
 // Discard records older than the specified age. The default value is infinite
 // (-1). When set to infinite (-1), failed records are retried until the record
 // expires
-//
-// * MaximumRetryAttempts – Discard records after the specified number of
+// - MaximumRetryAttempts – Discard records after the specified number of
 // retries. The default value is infinite (-1). When set to infinite (-1), failed
 // records are retried until the record expires.
-//
-// * ParallelizationFactor – Process
+// - ParallelizationFactor – Process
 // multiple batches from each shard concurrently.
 //
 // For information about which
-// configuration parameters apply to each event source, see the following
-// topics.
-//
-// * Amazon DynamoDB Streams
+// configuration parameters apply to each event source, see the following topics.
+// -
+// Amazon DynamoDB Streams
 // (https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html#services-ddb-params)
-//
-// *
+// -
 // Amazon Kinesis
 // (https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html#services-kinesis-params)
-//
-// *
+// -
 // Amazon SQS
 // (https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html#services-sqs-params)
-//
-// *
+// -
 // Amazon MQ and RabbitMQ
 // (https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html#services-mq-params)
-//
-// *
+// -
 // Amazon MSK
 // (https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-parms)
-//
-// *
+// -
 // Apache Kafka
 // (https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-kafka-parms)
 func (c *Client) UpdateEventSourceMapping(ctx context.Context, params *UpdateEventSourceMappingInput, optFns ...func(*Options)) (*UpdateEventSourceMappingOutput, error) {
@@ -112,23 +95,17 @@ type UpdateEventSourceMappingInput struct {
 	// or queue and sends to your function. Lambda passes all of the records in the
 	// batch to the function in a single call, up to the payload limit for synchronous
 	// invocation (6 MB).
-	//
-	// * Amazon Kinesis – Default 100. Max 10,000.
-	//
-	// * Amazon
-	// DynamoDB Streams – Default 100. Max 10,000.
-	//
-	// * Amazon Simple Queue Service –
-	// Default 10. For standard queues the max is 10,000. For FIFO queues the max is
-	// 10.
-	//
-	// * Amazon Managed Streaming for Apache Kafka – Default 100. Max 10,000.
-	//
-	// *
-	// Self-managed Apache Kafka – Default 100. Max 10,000.
-	//
-	// * Amazon MQ (ActiveMQ and
-	// RabbitMQ) – Default 100. Max 10,000.
+	// - Amazon Kinesis – Default 100. Max 10,000.
+	// - Amazon DynamoDB
+	// Streams – Default 100. Max 10,000.
+	// - Amazon Simple Queue Service – Default 10.
+	// For standard queues the max is 10,000. For FIFO queues the max is 10.
+	// - Amazon
+	// Managed Streaming for Apache Kafka – Default 100. Max 10,000.
+	// - Self-managed
+	// Apache Kafka – Default 100. Max 10,000.
+	// - Amazon MQ (ActiveMQ and RabbitMQ) –
+	// Default 100. Max 10,000.
 	BatchSize *int32
 
 	// (Streams only) If the function returns an error, split the batch in two and
@@ -152,17 +129,13 @@ type UpdateEventSourceMappingInput struct {
 	FilterCriteria *types.FilterCriteria
 
 	// The name of the Lambda function. Name formats
-	//
-	// * Function name – MyFunction.
-	//
-	// *
+	// - Function name – MyFunction.
+	// -
 	// Function ARN – arn:aws:lambda:us-west-2:123456789012:function:MyFunction.
-	//
-	// *
+	// -
 	// Version or Alias ARN –
 	// arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD.
-	//
-	// * Partial ARN –
+	// - Partial ARN –
 	// 123456789012:function:MyFunction.
 	//
 	// The length constraint applies only to the

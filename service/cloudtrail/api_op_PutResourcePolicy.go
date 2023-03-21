@@ -42,14 +42,11 @@ type PutResourcePolicyInput struct {
 
 	// A JSON-formatted string for an Amazon Web Services resource-based policy. The
 	// following are requirements for the resource policy:
-	//
-	// * Contains only one action:
+	// - Contains only one action:
 	// cloudtrail-data:PutAuditEvents
-	//
-	// * Contains at least one statement. The policy
-	// can have a maximum of 20 statements.
-	//
-	// * Each statement contains at least one
+	// - Contains at least one statement. The policy can
+	// have a maximum of 20 statements.
+	// - Each statement contains at least one
 	// principal. A statement can have a maximum of 50 principals.
 	//
 	// This member is required.

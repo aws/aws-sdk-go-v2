@@ -122,15 +122,12 @@ type GetMLTransformOutput struct {
 
 	// The type of predefined worker that is allocated when this task runs. Accepts a
 	// value of Standard, G.1X, or G.2X.
-	//
-	// * For the Standard worker type, each worker
+	// - For the Standard worker type, each worker
 	// provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.
-	//
-	// *
+	// -
 	// For the G.1X worker type, each worker provides 4 vCPU, 16 GB of memory and a
 	// 64GB disk, and 1 executor per worker.
-	//
-	// * For the G.2X worker type, each worker
+	// - For the G.2X worker type, each worker
 	// provides 8 vCPU, 32 GB of memory and a 128GB disk, and 1 executor per worker.
 	WorkerType types.WorkerType
 

@@ -29,24 +29,19 @@ type AgentConfiguration struct {
 	ShouldProfile *bool
 
 	// Parameters used by the profiler. The valid parameters are:
-	//
-	// * MaxStackDepth -
-	// The maximum depth of the stacks in the code that is represented in the profile.
-	// For example, if CodeGuru Profiler finds a method A, which calls method B, which
+	// - MaxStackDepth - The
+	// maximum depth of the stacks in the code that is represented in the profile. For
+	// example, if CodeGuru Profiler finds a method A, which calls method B, which
 	// calls method C, which calls method D, then the depth is 4. If the maxDepth is
 	// set to 2, then the profiler evaluates A and B.
-	//
-	// * MemoryUsageLimitPercent - The
+	// - MemoryUsageLimitPercent - The
 	// percentage of memory that is used by the profiler.
-	//
-	// *
+	// -
 	// MinimumTimeForReportingInMilliseconds - The minimum time in milliseconds between
 	// sending reports.
-	//
-	// * ReportingIntervalInMilliseconds - The reporting interval in
+	// - ReportingIntervalInMilliseconds - The reporting interval in
 	// milliseconds used to report profiles.
-	//
-	// * SamplingIntervalInMilliseconds - The
+	// - SamplingIntervalInMilliseconds - The
 	// sampling interval in milliseconds that is used to profile samples.
 	AgentParameters map[string]string
 
@@ -77,13 +72,10 @@ type AggregatedProfileTime struct {
 	// The aggregation period. This indicates the period during which an aggregation
 	// profile collects posted agent profiles for a profiling group. Use one of three
 	// valid durations that are specified using the ISO 8601 format.
-	//
-	// * P1D — 1 day
-	//
-	// *
+	// - P1D — 1 day
+	// -
 	// PT1H — 1 hour
-	//
-	// * PT5M — 5 minutes
+	// - PT5M — 5 minutes
 	Period AggregationPeriod
 
 	// The time that aggregation of posted agent profiles for a profiling group starts.

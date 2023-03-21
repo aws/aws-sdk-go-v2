@@ -19,15 +19,13 @@ import (
 // This helper command combines two tasks: (1) it uploads your build files from a
 // file directory to a GameLift Amazon S3 location, and (2) it creates a new build
 // resource. You can use the operation in the following scenarios:
-//
-// * To create a
+// - To create a
 // new game build with build files that are in an Amazon S3 location under an
 // Amazon Web Services account that you control. To use this option, you give
 // Amazon GameLift access to the Amazon S3 bucket. With permissions in place,
 // specify a build name, operating system, and the Amazon S3 storage location of
 // your game build.
-//
-// * To directly upload your build files to a GameLift Amazon S3
+// - To directly upload your build files to a GameLift Amazon S3
 // location. To use this option, specify a build name and operating system. This
 // operation creates a new build resource and also returns an Amazon S3 location
 // with temporary access credentials. Use the credentials to manually upload your

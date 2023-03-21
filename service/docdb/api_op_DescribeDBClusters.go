@@ -39,14 +39,12 @@ type DescribeDBClustersInput struct {
 	// The user-provided cluster identifier. If this parameter is specified,
 	// information from only the specific cluster is returned. This parameter isn't
 	// case sensitive. Constraints:
-	//
-	// * If provided, must match an existing
+	// - If provided, must match an existing
 	// DBClusterIdentifier.
 	DBClusterIdentifier *string
 
 	// A filter that specifies one or more clusters to describe. Supported filters:
-	//
-	// *
+	// -
 	// db-cluster-id - Accepts cluster identifiers and cluster Amazon Resource Names
 	// (ARNs). The results list only includes information about the clusters identified
 	// by these ARNs.

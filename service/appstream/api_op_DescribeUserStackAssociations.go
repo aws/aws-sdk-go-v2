@@ -13,12 +13,10 @@ import (
 
 // Retrieves a list that describes the UserStackAssociation objects. You must
 // specify either or both of the following:
-//
-// * The stack name
-//
-// * The user name
-// (email address of the user associated with the stack) and the authentication
-// type for the user
+// - The stack name
+// - The user name (email
+// address of the user associated with the stack) and the authentication type for
+// the user
 func (c *Client) DescribeUserStackAssociations(ctx context.Context, params *DescribeUserStackAssociationsInput, optFns ...func(*Options)) (*DescribeUserStackAssociationsOutput, error) {
 	if params == nil {
 		params = &DescribeUserStackAssociationsInput{}

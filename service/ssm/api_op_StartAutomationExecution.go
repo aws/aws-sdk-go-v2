@@ -81,11 +81,9 @@ type StartAutomationExecutionInput struct {
 	// different ways, such as by purpose, owner, or environment. For example, you
 	// might want to tag an automation to identify an environment or operating system.
 	// In this case, you could specify the following key-value pairs:
-	//
-	// *
+	// -
 	// Key=environment,Value=test
-	//
-	// * Key=OS,Value=Windows
+	// - Key=OS,Value=Windows
 	//
 	// To add tags to an existing
 	// automation, use the AddTagsToResource operation.

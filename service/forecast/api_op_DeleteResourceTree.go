@@ -16,16 +16,12 @@ import (
 // the forecast is the child resource and the predictor is the parent resource.
 // Amazon Forecast resources possess the following parent-child resource
 // hierarchies:
-//
-// * Dataset: dataset import jobs
-//
-// * Dataset Group: predictors,
+// - Dataset: dataset import jobs
+// - Dataset Group: predictors,
 // predictor backtest export jobs, forecasts, forecast export jobs
-//
-// * Predictor:
+// - Predictor:
 // predictor backtest export jobs, forecasts, forecast export jobs
-//
-// * Forecast:
+// - Forecast:
 // forecast export jobs
 //
 // DeleteResourceTree will only delete Amazon Forecast

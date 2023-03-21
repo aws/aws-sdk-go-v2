@@ -27,14 +27,11 @@ import (
 // analysis. If using OutputConfig to specify an Amazon S3 bucket, the output will
 // be contained within the specified prefix in a directory labeled with the job-id.
 // In the directory there are 3 sub-directories:
-//
-// * detailedResponse (contains the
+// - detailedResponse (contains the
 // GetLendingAnalysis response)
-//
-// * summaryResponse (for the
+// - summaryResponse (for the
 // GetLendingAnalysisSummary response)
-//
-// * splitDocuments (documents split across
+// - splitDocuments (documents split across
 // logical boundaries)
 func (c *Client) StartLendingAnalysis(ctx context.Context, params *StartLendingAnalysisInput, optFns ...func(*Options)) (*StartLendingAnalysisOutput, error) {
 	if params == nil {

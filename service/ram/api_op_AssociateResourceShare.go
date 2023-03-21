@@ -53,23 +53,18 @@ type AssociateResourceShareInput struct {
 	// resources in the share is determined by the RAM permissions that you associate
 	// with the resource share. See AssociateResourceSharePermission. You can include
 	// the following values:
-	//
-	// * An Amazon Web Services account ID, for example:
+	// - An Amazon Web Services account ID, for example:
 	// 123456789012
-	//
-	// * An Amazon Resoure Name (ARN)
+	// - An Amazon Resoure Name (ARN)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
 	// an organization in Organizations, for example:
 	// organizations::123456789012:organization/o-exampleorgid
-	//
-	// * An ARN of an
+	// - An ARN of an
 	// organizational unit (OU) in Organizations, for example:
 	// organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123
-	//
-	// *
+	// -
 	// An ARN of an IAM role, for example: iam::123456789012:role/rolename
-	//
-	// * An ARN of
+	// - An ARN of
 	// an IAM user, for example: iam::123456789012user/username
 	//
 	// Not all resource types

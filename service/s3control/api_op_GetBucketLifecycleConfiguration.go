@@ -40,25 +40,19 @@ import (
 // derived by using the access point ARN, see the Examples
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html#API_control_GetBucketLifecycleConfiguration_Examples)
 // section. GetBucketLifecycleConfiguration has the following special error:
-//
-// *
+// -
 // Error code: NoSuchLifecycleConfiguration
-//
-// * Description: The lifecycle
+// - Description: The lifecycle
 // configuration does not exist.
-//
-// * HTTP Status Code: 404 Not Found
-//
-// * SOAP Fault
+// - HTTP Status Code: 404 Not Found
+// - SOAP Fault
 // Code Prefix: Client
 //
 // The following actions are related to
 // GetBucketLifecycleConfiguration:
-//
-// * PutBucketLifecycleConfiguration
+// - PutBucketLifecycleConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html)
-//
-// *
+// -
 // DeleteBucketLifecycleConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketLifecycleConfiguration.html)
 func (c *Client) GetBucketLifecycleConfiguration(ctx context.Context, params *GetBucketLifecycleConfigurationInput, optFns ...func(*Options)) (*GetBucketLifecycleConfigurationOutput, error) {

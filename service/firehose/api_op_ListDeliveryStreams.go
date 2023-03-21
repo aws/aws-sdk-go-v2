@@ -37,11 +37,9 @@ func (c *Client) ListDeliveryStreams(ctx context.Context, params *ListDeliverySt
 type ListDeliveryStreamsInput struct {
 
 	// The delivery stream type. This can be one of the following values:
-	//
-	// * DirectPut:
+	// - DirectPut:
 	// Provider applications access the delivery stream directly.
-	//
-	// *
+	// -
 	// KinesisStreamAsSource: The delivery stream uses a Kinesis data stream as a
 	// source.
 	//

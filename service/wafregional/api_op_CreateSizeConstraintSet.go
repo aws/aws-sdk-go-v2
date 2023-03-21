@@ -24,18 +24,14 @@ import (
 // have a query string that is longer than 100 bytes. You can then configure AWS
 // WAF to reject those requests. To create and configure a SizeConstraintSet,
 // perform the following steps:
-//
-// * Use GetChangeToken to get the change token that
-// you provide in the ChangeToken parameter of a CreateSizeConstraintSet
-// request.
-//
-// * Submit a CreateSizeConstraintSet request.
-//
-// * Use GetChangeToken to
-// get the change token that you provide in the ChangeToken parameter of an
+// - Use GetChangeToken to get the change token that
+// you provide in the ChangeToken parameter of a CreateSizeConstraintSet request.
+// -
+// Submit a CreateSizeConstraintSet request.
+// - Use GetChangeToken to get the change
+// token that you provide in the ChangeToken parameter of an
 // UpdateSizeConstraintSet request.
-//
-// * Submit an UpdateSizeConstraintSet request to
+// - Submit an UpdateSizeConstraintSet request to
 // specify the part of the request that you want AWS WAF to inspect (for example,
 // the header or the URI) and the value that you want AWS WAF to watch for.
 //

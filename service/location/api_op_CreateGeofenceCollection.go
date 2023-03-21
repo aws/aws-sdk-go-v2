@@ -32,14 +32,11 @@ func (c *Client) CreateGeofenceCollection(ctx context.Context, params *CreateGeo
 type CreateGeofenceCollectionInput struct {
 
 	// A custom name for the geofence collection. Requirements:
-	//
-	// * Contain only
+	// - Contain only
 	// alphanumeric characters (A–Z, a–z, 0–9), hyphens (-), periods (.), and
 	// underscores (_).
-	//
-	// * Must be a unique geofence collection name.
-	//
-	// * No spaces
+	// - Must be a unique geofence collection name.
+	// - No spaces
 	// allowed. For example, ExampleGeofenceCollection.
 	//
 	// This member is required.
@@ -67,22 +64,16 @@ type CreateGeofenceCollectionInput struct {
 	// Applies one or more tags to the geofence collection. A tag is a key-value pair
 	// helps manage, identify, search, and filter your resources by labelling them.
 	// Format: "key" : "value" Restrictions:
-	//
-	// * Maximum 50 tags per resource
-	//
-	// * Each
+	// - Maximum 50 tags per resource
+	// - Each
 	// resource tag must be unique with a maximum of one value.
-	//
-	// * Maximum key length:
+	// - Maximum key length:
 	// 128 Unicode characters in UTF-8
-	//
-	// * Maximum value length: 256 Unicode characters
+	// - Maximum value length: 256 Unicode characters
 	// in UTF-8
-	//
-	// * Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
+	// - Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
 	// characters: + - = . _ : / @.
-	//
-	// * Cannot use "aws:" as a prefix for a key.
+	// - Cannot use "aws:" as a prefix for a key.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -92,9 +83,7 @@ type CreateGeofenceCollectionOutput struct {
 
 	// The Amazon Resource Name (ARN) for the geofence collection resource. Used when
 	// you need to specify a resource across all Amazon Web Services.
-	//
-	// * Format
-	// example:
+	// - Format example:
 	// arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollection
 	//
 	// This member is required.

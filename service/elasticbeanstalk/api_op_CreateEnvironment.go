@@ -159,18 +159,14 @@ type CreateEnvironmentOutput struct {
 
 	// Describes the health status of the environment. AWS Elastic Beanstalk indicates
 	// the failure levels for a running environment:
-	//
-	// * Red: Indicates the environment
+	// - Red: Indicates the environment
 	// is not responsive. Occurs when three or more consecutive failures occur for an
 	// environment.
-	//
-	// * Yellow: Indicates that something is wrong. Occurs when two
+	// - Yellow: Indicates that something is wrong. Occurs when two
 	// consecutive failures occur for an environment.
-	//
-	// * Green: Indicates the
+	// - Green: Indicates the
 	// environment is healthy and fully functional.
-	//
-	// * Grey: Default health for a new
+	// - Grey: Default health for a new
 	// environment. The environment is not fully launched and health checks have not
 	// started or health checks are suspended during an UpdateEnvironment or
 	// RestartEnvironment request.
@@ -199,21 +195,16 @@ type CreateEnvironmentOutput struct {
 	SolutionStackName *string
 
 	// The current operational status of the environment:
-	//
-	// * Launching: Environment is
+	// - Launching: Environment is
 	// in the process of initial deployment.
-	//
-	// * Updating: Environment is in the process
+	// - Updating: Environment is in the process
 	// of updating its configuration settings or application version.
-	//
-	// * Ready:
+	// - Ready:
 	// Environment is available to have an action performed on it, such as update or
 	// terminate.
-	//
-	// * Terminating: Environment is in the shut-down process.
-	//
-	// *
-	// Terminated: Environment is not running.
+	// - Terminating: Environment is in the shut-down process.
+	// - Terminated:
+	// Environment is not running.
 	Status types.EnvironmentStatus
 
 	// The name of the configuration template used to originally launch this

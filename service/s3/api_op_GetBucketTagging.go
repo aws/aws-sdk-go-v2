@@ -16,19 +16,15 @@ import (
 // have permission to perform the s3:GetBucketTagging action. By default, the
 // bucket owner has this permission and can grant this permission to others.
 // GetBucketTagging has the following special error:
-//
-// * Error code: NoSuchTagSet
-//
-// *
+// - Error code: NoSuchTagSet
+// -
 // Description: There is no tag set associated with the bucket.
 //
 // The following
 // operations are related to GetBucketTagging:
-//
-// * PutBucketTagging
+// - PutBucketTagging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketTagging.html)
-//
-// *
+// -
 // DeleteBucketTagging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketTagging.html)
 func (c *Client) GetBucketTagging(ctx context.Context, params *GetBucketTaggingInput, optFns ...func(*Options)) (*GetBucketTaggingOutput, error) {

@@ -73,12 +73,10 @@ type CopyImageInput struct {
 
 	// Indicates whether to include your user-defined AMI tags when copying the AMI.
 	// The following tags will not be copied:
-	//
-	// * System tags (prefixed with aws:)
-	//
-	// *
-	// For public and shared AMIs, user-defined tags that are attached by other Amazon
-	// Web Services accounts
+	// - System tags (prefixed with aws:)
+	// - For
+	// public and shared AMIs, user-defined tags that are attached by other Amazon Web
+	// Services accounts
 	//
 	// Default: Your user-defined AMI tags are not copied.
 	CopyImageTags *bool
@@ -116,17 +114,12 @@ type CopyImageInput struct {
 	// Services managed KMS key for Amazon EBS is used. If you specify a KMS key, you
 	// must also set the encrypted state to true. You can specify a KMS key using any
 	// of the following:
-	//
-	// * Key ID. For example,
-	// 1234abcd-12ab-34cd-56ef-1234567890ab.
-	//
-	// * Key alias. For example,
-	// alias/ExampleAlias.
-	//
-	// * Key ARN. For example,
+	// - Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.
+	// -
+	// Key alias. For example, alias/ExampleAlias.
+	// - Key ARN. For example,
 	// arn:aws:kms:us-east-1:012345678910:key/1234abcd-12ab-34cd-56ef-1234567890ab.
-	//
-	// *
+	// -
 	// Alias ARN. For example,
 	// arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
 	//

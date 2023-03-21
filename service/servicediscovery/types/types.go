@@ -108,21 +108,16 @@ type DnsRecord struct {
 	// The type of the resource, which indicates the type of value that Route 53
 	// returns in response to DNS queries. You can specify values for Type in the
 	// following combinations:
+	// - A
+	// - AAAA
+	// - A and AAAA
+	// - SRV
+	// - CNAME
 	//
-	// * A
-	//
-	// * AAAA
-	//
-	// * A and AAAA
-	//
-	// * SRV
-	//
-	// * CNAME
-	//
-	// If you want
-	// Cloud Map to create a Route 53 alias record when you register an instance,
-	// specify A or AAAA for Type. You specify other settings, such as the IP address
-	// for A and AAAA records, when you register an instance. For more information, see
+	// If you want Cloud
+	// Map to create a Route 53 alias record when you register an instance, specify A
+	// or AAAA for Type. You specify other settings, such as the IP address for A and
+	// AAAA records, when you register an instance. For more information, see
 	// RegisterInstance
 	// (https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html).
 	// The following values are supported: A Route 53 returns the IP address of the
@@ -130,60 +125,49 @@ type DnsRecord struct {
 	// address of the resource in IPv6 format, such as
 	// 2001:0db8:85a3:0000:0000:abcd:0001:2345. CNAME Route 53 returns the domain name
 	// of the resource, such as www.example.com. Note the following:
-	//
-	// * You specify the
+	// - You specify the
 	// domain name that you want to route traffic to when you register an instance. For
 	// more information, see Attributes
 	// (https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html#cloudmap-RegisterInstance-request-Attributes)
 	// in the topic RegisterInstance
 	// (https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html).
-	//
-	// *
+	// -
 	// You must specify WEIGHTED for the value of RoutingPolicy.
-	//
-	// * You can't specify
+	// - You can't specify
 	// both CNAME for Type and settings for HealthCheckConfig. If you do, the request
 	// will fail with an InvalidInput error.
 	//
 	// SRV Route 53 returns the value for an SRV
 	// record. The value for an SRV record uses the following values: priority weight
 	// port service-hostname Note the following about the values:
-	//
-	// * The values of
+	// - The values of
 	// priority and weight are both set to 1 and can't be changed.
-	//
-	// * The value of port
+	// - The value of port
 	// comes from the value that you specify for the AWS_INSTANCE_PORT attribute when
 	// you submit a RegisterInstance
 	// (https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html)
 	// request.
-	//
-	// * The value of service-hostname is a concatenation of the following
+	// - The value of service-hostname is a concatenation of the following
 	// values:
-	//
-	// * The value that you specify for InstanceId when you register an
+	// - The value that you specify for InstanceId when you register an
 	// instance.
+	// - The name of the service.
+	// - The name of the namespace.
 	//
-	// * The name of the service.
+	// For example,
+	// if the value of InstanceId is test, the name of the service is backend, and the
+	// name of the namespace is example.com, the value of service-hostname is the
+	// following: test.backend.example.com
 	//
-	// * The name of the namespace.
-	//
-	// For
-	// example, if the value of InstanceId is test, the name of the service is backend,
-	// and the name of the namespace is example.com, the value of service-hostname is
-	// the following: test.backend.example.com
-	//
-	// If you specify settings for an SRV
-	// record, note the following:
-	//
-	// * If you specify values for AWS_INSTANCE_IPV4,
+	// If you specify settings for an SRV record,
+	// note the following:
+	// - If you specify values for AWS_INSTANCE_IPV4,
 	// AWS_INSTANCE_IPV6, or both in the RegisterInstance request, Cloud Map
 	// automatically creates A and/or AAAA records that have the same name as the value
 	// of service-hostname in the SRV record. You can ignore these records.
-	//
-	// * If
-	// you're using a system that requires a specific SRV format, such as HAProxy, see
-	// the Name
+	// - If you're
+	// using a system that requires a specific SRV format, such as HAProxy, see the
+	// Name
 	// (https://docs.aws.amazon.com/cloud-map/latest/api/API_CreateService.html#cloudmap-CreateService-request-Name)
 	// element in the documentation about CreateService for information about how to
 	// specify the correct name format.
@@ -220,14 +204,12 @@ type DnsRecord struct {
 // Alias records When you register an instance, if you include the
 // AWS_ALIAS_DNS_NAME attribute, Cloud Map creates a Route 53 alias record. Note
 // the following:
-//
-// * Route 53 automatically sets EvaluateTargetHealth to true for
+// - Route 53 automatically sets EvaluateTargetHealth to true for
 // alias records. When EvaluateTargetHealth is true, the alias record inherits the
 // health of the referenced Amazon Web Services resource. such as an ELB load
 // balancer. For more information, see EvaluateTargetHealth
 // (https://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html#Route53-Type-AliasTarget-EvaluateTargetHealth).
-//
-// *
+// -
 // If you include HealthCheckConfig and then use the service to register an
 // instance that creates an alias record, Route 53 doesn't create the health
 // check.
@@ -242,17 +224,14 @@ type HealthCheckConfig struct {
 	// determines whether an endpoint is healthy. You can't change the value of Type
 	// after you create a health check. You can create the following types of health
 	// checks:
-	//
-	// * HTTP: Route 53 tries to establish a TCP connection. If successful,
+	// - HTTP: Route 53 tries to establish a TCP connection. If successful,
 	// Route 53 submits an HTTP request and waits for an HTTP status code of 200 or
 	// greater and less than 400.
-	//
-	// * HTTPS: Route 53 tries to establish a TCP
+	// - HTTPS: Route 53 tries to establish a TCP
 	// connection. If successful, Route 53 submits an HTTPS request and waits for an
 	// HTTP status code of 200 or greater and less than 400. If you specify HTTPS for
 	// the value of Type, the endpoint must support TLS v1.0 or later.
-	//
-	// * TCP: Route 53
+	// - TCP: Route 53
 	// tries to establish a TCP connection. If you specify TCP for Type, don't specify
 	// a value for ResourcePath.
 	//
@@ -287,14 +266,12 @@ type HealthCheckConfig struct {
 // A custom health check, which requires that you use a third-party health checker
 // to evaluate the health of your resources, is useful in the following
 // circumstances:
-//
-// * You can't use a health check that's defined by
+// - You can't use a health check that's defined by
 // HealthCheckConfig because the resource isn't available over the internet. For
 // example, you can use a custom health check when the instance is in an Amazon
 // VPC. (To check the health of resources in a VPC, the health checker must also be
 // in the VPC.)
-//
-// * You want to use a third-party health checker regardless of where
+// - You want to use a third-party health checker regardless of where
 // your resources are located.
 //
 // If you specify a health check configuration, you
@@ -304,28 +281,21 @@ type HealthCheckConfig struct {
 // of the resource, it just keeps a record of the status specified in the most
 // recent UpdateInstanceCustomHealthStatus request. Here's how custom health checks
 // work:
-//
-// * You create a service.
-//
-// * You register an instance.
-//
-// * You configure a
+// - You create a service.
+// - You register an instance.
+// - You configure a
 // third-party health checker to monitor the resource that's associated with the
 // new instance. Cloud Map doesn't check the health of the resource directly.
-//
-// *
-// The third-party health-checker determines that the resource is unhealthy and
+// - The
+// third-party health-checker determines that the resource is unhealthy and
 // notifies your application.
-//
-// * Your application submits an
+// - Your application submits an
 // UpdateInstanceCustomHealthStatus request.
-//
-// * Cloud Map waits for 30 seconds.
-//
-// *
-// If another UpdateInstanceCustomHealthStatus request doesn't arrive during that
-// time to change the status back to healthy, Cloud Map stops routing traffic to
-// the resource.
+// - Cloud Map waits for 30 seconds.
+// - If
+// another UpdateInstanceCustomHealthStatus request doesn't arrive during that time
+// to change the status back to healthy, Cloud Map stops routing traffic to the
+// resource.
 type HealthCheckCustomConfig struct {
 
 	// This parameter is no longer supported and is always set to 1. Cloud Map waits
@@ -398,20 +368,16 @@ type Instance struct {
 
 	// An identifier that you want to associate with the instance. Note the
 	// following:
-	//
-	// * If the service that's specified by ServiceId includes settings for
+	// - If the service that's specified by ServiceId includes settings for
 	// an SRV record, the value of InstanceId is automatically included as part of the
 	// value for the SRV record. For more information, see DnsRecord > Type
 	// (https://docs.aws.amazon.com/cloud-map/latest/api/API_DnsRecord.html#cloudmap-Type-DnsRecord-Type).
-	//
-	// *
+	// -
 	// You can use this value to update an existing instance.
-	//
-	// * To register a new
+	// - To register a new
 	// instance, you must specify a value that's unique among instances that you
 	// register by using the same service.
-	//
-	// * If you specify an existing InstanceId and
+	// - If you specify an existing InstanceId and
 	// ServiceId, Cloud Map updates the existing DNS records. If there's also an
 	// existing health check, Cloud Map deletes the old health check and creates a new
 	// one. The health check isn't deleted immediately, so it will still appear for a
@@ -422,11 +388,9 @@ type Instance struct {
 
 	// A string map that contains the following information for the service that you
 	// specify in ServiceId:
-	//
-	// * The attributes that apply to the records that are
+	// - The attributes that apply to the records that are
 	// defined in the service.
-	//
-	// * For each attribute, the applicable value.
+	// - For each attribute, the applicable value.
 	//
 	// Do not
 	// include sensitive information in the attributes if the namespace is discoverable
@@ -437,23 +401,18 @@ type Instance struct {
 	// DNS name, see AliasTarget->DNSName
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html#Route53-Type-AliasTarget-DNSName)
 	// in the Route 53 API Reference. Note the following:
-	//
-	// * The configuration for the
+	// - The configuration for the
 	// service that's specified by ServiceId must include settings for an A record, an
 	// AAAA record, or both.
-	//
-	// * In the service that's specified by ServiceId, the value
+	// - In the service that's specified by ServiceId, the value
 	// of RoutingPolicy must be WEIGHTED.
-	//
-	// * If the service that's specified by
+	// - If the service that's specified by
 	// ServiceId includes HealthCheckConfig settings, Cloud Map creates the health
 	// check, but it won't associate the health check with the alias record.
-	//
-	// * Auto
+	// - Auto
 	// naming currently doesn't support creating alias records that route traffic to
 	// Amazon Web Services resources other than ELB load balancers.
-	//
-	// * If you specify a
+	// - If you specify a
 	// value for AWS_ALIAS_DNS_NAME, don't specify values for any of the AWS_INSTANCE
 	// attributes.
 	//
@@ -501,11 +460,9 @@ type Instance struct {
 type InstanceSummary struct {
 
 	// A string map that contains the following information:
-	//
-	// * The attributes that are
+	// - The attributes that are
 	// associated with the instance.
-	//
-	// * For each attribute, the applicable
+	// - For each attribute, the applicable
 	// value.
 	//
 	// Supported attribute keys include the following: AWS_ALIAS_DNS_NAME For
@@ -583,28 +540,22 @@ type Namespace struct {
 type NamespaceFilter struct {
 
 	// Specify the namespaces that you want to get using one of the following.
-	//
-	// * TYPE:
+	// - TYPE:
 	// Gets the namespaces of the specified type.
-	//
-	// * NAME: Gets the namespaces with the
+	// - NAME: Gets the namespaces with the
 	// specified name.
-	//
-	// * HTTP_NAME: Gets the namespaces with the specified HTTP name.
+	// - HTTP_NAME: Gets the namespaces with the specified HTTP name.
 	//
 	// This member is required.
 	Name NamespaceFilterName
 
-	// Specify the values that are applicable to the value that you specify for
-	// Name.
-	//
-	// * TYPE: Specify HTTP, DNS_PUBLIC, or DNS_PRIVATE.
-	//
-	// * NAME: Specify the
-	// name of the namespace, which is found in Namespace.Name.
-	//
-	// * HTTP_NAME: Specify
-	// the HTTP name of the namespace, which is found in
+	// Specify the values that are applicable to the value that you specify for Name.
+	// -
+	// TYPE: Specify HTTP, DNS_PUBLIC, or DNS_PRIVATE.
+	// - NAME: Specify the name of the
+	// namespace, which is found in Namespace.Name.
+	// - HTTP_NAME: Specify the HTTP name
+	// of the namespace, which is found in
 	// Namespace.Properties.HttpProperties.HttpName.
 	//
 	// This member is required.
@@ -613,12 +564,10 @@ type NamespaceFilter struct {
 	// Specify the operator that you want to use to determine whether a namespace
 	// matches the specified value. Valid values for Condition are one of the
 	// following.
-	//
-	// * EQ: When you specify EQ for Condition, you can specify only one
+	// - EQ: When you specify EQ for Condition, you can specify only one
 	// value. EQ is supported for TYPE, NAME, and HTTP_NAME. EQ is the default
 	// condition and can be omitted.
-	//
-	// * BEGINS_WITH: When you specify BEGINS_WITH for
+	// - BEGINS_WITH: When you specify BEGINS_WITH for
 	// Condition, you can specify only one value. BEGINS_WITH is supported for TYPE,
 	// NAME, and HTTP_NAME.
 	Condition FilterCondition
@@ -682,21 +631,14 @@ type Operation struct {
 
 	// The code associated with ErrorMessage. Values for ErrorCode include the
 	// following:
-	//
-	// * ACCESS_DENIED
-	//
-	// * CANNOT_CREATE_HOSTED_ZONE
-	//
-	// * EXPIRED_TOKEN
-	//
-	// *
+	// - ACCESS_DENIED
+	// - CANNOT_CREATE_HOSTED_ZONE
+	// - EXPIRED_TOKEN
+	// -
 	// HOSTED_ZONE_NOT_FOUND
-	//
-	// * INTERNAL_FAILURE
-	//
-	// * INVALID_CHANGE_BATCH
-	//
-	// *
+	// - INTERNAL_FAILURE
+	// - INVALID_CHANGE_BATCH
+	// -
 	// THROTTLED_REQUEST
 	ErrorCode *string
 
@@ -734,40 +676,30 @@ type Operation struct {
 type OperationFilter struct {
 
 	// Specify the operations that you want to get:
-	//
-	// * NAMESPACE_ID: Gets operations
+	// - NAMESPACE_ID: Gets operations
 	// related to specified namespaces.
-	//
-	// * SERVICE_ID: Gets operations related to
+	// - SERVICE_ID: Gets operations related to
 	// specified services.
-	//
-	// * STATUS: Gets operations based on the status of the
+	// - STATUS: Gets operations based on the status of the
 	// operations: SUBMITTED, PENDING, SUCCEED, or FAIL.
-	//
-	// * TYPE: Gets specified types
+	// - TYPE: Gets specified types
 	// of operation.
-	//
-	// * UPDATE_DATE: Gets operations that changed status during a
+	// - UPDATE_DATE: Gets operations that changed status during a
 	// specified date/time range.
 	//
 	// This member is required.
 	Name OperationFilterName
 
 	// Specify values that are applicable to the value that you specify for Name:
-	//
-	// *
+	// -
 	// NAMESPACE_ID: Specify one namespace ID.
-	//
-	// * SERVICE_ID: Specify one service
-	// ID.
-	//
-	// * STATUS: Specify one or more statuses: SUBMITTED, PENDING, SUCCEED, or
-	// FAIL.
-	//
-	// * TYPE: Specify one or more of the following types: CREATE_NAMESPACE,
+	// - SERVICE_ID: Specify one service ID.
+	// -
+	// STATUS: Specify one or more statuses: SUBMITTED, PENDING, SUCCEED, or FAIL.
+	// -
+	// TYPE: Specify one or more of the following types: CREATE_NAMESPACE,
 	// DELETE_NAMESPACE, UPDATE_SERVICE, REGISTER_INSTANCE, or DEREGISTER_INSTANCE.
-	//
-	// *
+	// -
 	// UPDATE_DATE: Specify a start date and an end date in Unix date/time format and
 	// Coordinated Universal Time (UTC). The start date must be the first value.
 	//
@@ -776,17 +708,14 @@ type OperationFilter struct {
 
 	// The operator that you want to use to determine whether an operation matches the
 	// specified value. Valid values for condition include:
-	//
-	// * EQ: When you specify EQ
+	// - EQ: When you specify EQ
 	// for the condition, you can specify only one value. EQ is supported for
 	// NAMESPACE_ID, SERVICE_ID, STATUS, and TYPE. EQ is the default condition and can
 	// be omitted.
-	//
-	// * IN: When you specify IN for the condition, you can specify a list
+	// - IN: When you specify IN for the condition, you can specify a list
 	// of one or more values. IN is supported for STATUS and TYPE. An operation must
 	// match one of the specified values to be returned in the response.
-	//
-	// * BETWEEN:
+	// - BETWEEN:
 	// Specify a start date and an end date in Unix date/time format and Coordinated
 	// Universal Time (UTC). The start date must be the first value. BETWEEN is
 	// supported for UPDATE_DATE.
@@ -805,16 +734,12 @@ type OperationSummary struct {
 	Id *string
 
 	// The status of the operation. Values include the following:
-	//
-	// * SUBMITTED: This is
+	// - SUBMITTED: This is
 	// the initial state immediately after you submit a request.
-	//
-	// * PENDING: Cloud Map
+	// - PENDING: Cloud Map
 	// is performing the operation.
-	//
-	// * SUCCESS: The operation succeeded.
-	//
-	// * FAIL: The
+	// - SUCCESS: The operation succeeded.
+	// - FAIL: The
 	// operation failed. For the failure reason, see ErrorMessage.
 	Status OperationStatus
 
@@ -1035,8 +960,7 @@ type ServiceFilter struct {
 
 	// The operator that you want to use to determine whether a service is returned by
 	// ListServices. Valid values for Condition include the following:
-	//
-	// * EQ: When you
+	// - EQ: When you
 	// specify EQ, specify one namespace ID for Values. EQ is the default condition and
 	// can be omitted.
 	Condition FilterCondition
@@ -1069,14 +993,12 @@ type ServiceSummary struct {
 	// Information about an optional custom health check. A custom health check, which
 	// requires that you use a third-party health checker to evaluate the health of
 	// your resources, is useful in the following circumstances:
-	//
-	// * You can't use a
+	// - You can't use a
 	// health check that's defined by HealthCheckConfig because the resource isn't
 	// available over the internet. For example, you can use a custom health check when
 	// the instance is in an Amazon VPC. (To check the health of resources in a VPC,
 	// the health checker must also be in the VPC.)
-	//
-	// * You want to use a third-party
+	// - You want to use a third-party
 	// health checker regardless of where your resources are located.
 	//
 	// If you specify a

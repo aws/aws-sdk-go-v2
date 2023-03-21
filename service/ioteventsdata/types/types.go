@@ -80,29 +80,22 @@ type AlarmState struct {
 
 	// The name of the alarm state. The state name can be one of the following
 	// values:
-	//
-	// * DISABLED - When the alarm is in the DISABLED state, it isn't ready to
+	// - DISABLED - When the alarm is in the DISABLED state, it isn't ready to
 	// evaluate data. To enable the alarm, you must change the alarm to the NORMAL
 	// state.
-	//
-	// * NORMAL - When the alarm is in the NORMAL state, it's ready to evaluate
+	// - NORMAL - When the alarm is in the NORMAL state, it's ready to evaluate
 	// data.
-	//
-	// * ACTIVE - If the alarm is in the ACTIVE state, the alarm is invoked.
-	//
-	// *
+	// - ACTIVE - If the alarm is in the ACTIVE state, the alarm is invoked.
+	// -
 	// ACKNOWLEDGED - When the alarm is in the ACKNOWLEDGED state, the alarm was
 	// invoked and you acknowledged the alarm.
-	//
-	// * SNOOZE_DISABLED - When the alarm is
-	// in the SNOOZE_DISABLED state, the alarm is disabled for a specified period of
-	// time. After the snooze time, the alarm automatically changes to the NORMAL
-	// state.
-	//
-	// * LATCHED - When the alarm is in the LATCHED state, the alarm was
-	// invoked. However, the data that the alarm is currently evaluating is within the
-	// specified range. To change the alarm to the NORMAL state, you must acknowledge
-	// the alarm.
+	// - SNOOZE_DISABLED - When the alarm is in
+	// the SNOOZE_DISABLED state, the alarm is disabled for a specified period of time.
+	// After the snooze time, the alarm automatically changes to the NORMAL state.
+	// -
+	// LATCHED - When the alarm is in the LATCHED state, the alarm was invoked.
+	// However, the data that the alarm is currently evaluating is within the specified
+	// range. To change the alarm to the NORMAL state, you must acknowledge the alarm.
 	StateName AlarmStateName
 
 	// Contains information about alarm state changes.
@@ -133,53 +126,41 @@ type AlarmSummary struct {
 
 	// The name of the alarm state. The state name can be one of the following
 	// values:
-	//
-	// * DISABLED - When the alarm is in the DISABLED state, it isn't ready to
+	// - DISABLED - When the alarm is in the DISABLED state, it isn't ready to
 	// evaluate data. To enable the alarm, you must change the alarm to the NORMAL
 	// state.
-	//
-	// * NORMAL - When the alarm is in the NORMAL state, it's ready to evaluate
+	// - NORMAL - When the alarm is in the NORMAL state, it's ready to evaluate
 	// data.
-	//
-	// * ACTIVE - If the alarm is in the ACTIVE state, the alarm is invoked.
-	//
-	// *
+	// - ACTIVE - If the alarm is in the ACTIVE state, the alarm is invoked.
+	// -
 	// ACKNOWLEDGED - When the alarm is in the ACKNOWLEDGED state, the alarm was
 	// invoked and you acknowledged the alarm.
-	//
-	// * SNOOZE_DISABLED - When the alarm is
-	// in the SNOOZE_DISABLED state, the alarm is disabled for a specified period of
-	// time. After the snooze time, the alarm automatically changes to the NORMAL
-	// state.
-	//
-	// * LATCHED - When the alarm is in the LATCHED state, the alarm was
-	// invoked. However, the data that the alarm is currently evaluating is within the
-	// specified range. To change the alarm to the NORMAL state, you must acknowledge
-	// the alarm.
+	// - SNOOZE_DISABLED - When the alarm is in
+	// the SNOOZE_DISABLED state, the alarm is disabled for a specified period of time.
+	// After the snooze time, the alarm automatically changes to the NORMAL state.
+	// -
+	// LATCHED - When the alarm is in the LATCHED state, the alarm was invoked.
+	// However, the data that the alarm is currently evaluating is within the specified
+	// range. To change the alarm to the NORMAL state, you must acknowledge the alarm.
 	StateName AlarmStateName
 
 	noSmithyDocumentSerde
 }
 
 // Contains error messages associated with one of the following requests:
-//
-// *
+// -
 // BatchAcknowledgeAlarm
 // (https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchAcknowledgeAlarm.html)
-//
-// *
+// -
 // BatchDisableAlarm
 // (https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchDisableAlarm.html)
-//
-// *
+// -
 // BatchEnableAlarm
 // (https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchEnableAlarm.html)
-//
-// *
+// -
 // BatchResetAlarm
 // (https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchResetAlarm.html)
-//
-// *
+// -
 // BatchSnoozeAlarm
 // (https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchSnoozeAlarm.html)
 type BatchAlarmActionErrorEntry struct {
@@ -253,21 +234,16 @@ type CustomerAction struct {
 	AcknowledgeActionConfiguration *AcknowledgeActionConfiguration
 
 	// The name of the action. The action name can be one of the following values:
-	//
-	// *
+	// -
 	// SNOOZE - When you snooze the alarm, the alarm state changes to
 	// SNOOZE_DISABLED.
-	//
-	// * ENABLE - When you enable the alarm, the alarm state changes
+	// - ENABLE - When you enable the alarm, the alarm state changes
 	// to NORMAL.
-	//
-	// * DISABLE - When you disable the alarm, the alarm state changes to
+	// - DISABLE - When you disable the alarm, the alarm state changes to
 	// DISABLED.
-	//
-	// * ACKNOWLEDGE - When you acknowledge the alarm, the alarm state
+	// - ACKNOWLEDGE - When you acknowledge the alarm, the alarm state
 	// changes to ACKNOWLEDGED.
-	//
-	// * RESET - When you reset the alarm, the alarm state
+	// - RESET - When you reset the alarm, the alarm state
 	// changes to NORMAL.
 	//
 	// For more information, see the AlarmState

@@ -18,32 +18,20 @@ import (
 // associated member accounts. This supports dimensions, Cost Categories, and
 // nested expressions. For any time period, you can filter data about reservation
 // usage by the following dimensions:
-//
-// * AZ
-//
-// * CACHE_ENGINE
-//
-// * DATABASE_ENGINE
-//
-// *
+// - AZ
+// - CACHE_ENGINE
+// - DATABASE_ENGINE
+// -
 // DEPLOYMENT_OPTION
-//
-// * INSTANCE_TYPE
-//
-// * LINKED_ACCOUNT
-//
-// * OPERATING_SYSTEM
-//
-// *
+// - INSTANCE_TYPE
+// - LINKED_ACCOUNT
+// - OPERATING_SYSTEM
+// -
 // PLATFORM
-//
-// * REGION
-//
-// * SERVICE
-//
-// * TAG
-//
-// * TENANCY
+// - REGION
+// - SERVICE
+// - TAG
+// - TENANCY
 //
 // To determine valid values for a
 // dimension, use the GetDimensionValues operation.
@@ -78,32 +66,20 @@ type GetReservationCoverageInput struct {
 
 	// Filters utilization data by dimensions. You can filter by the following
 	// dimensions:
-	//
-	// * AZ
-	//
-	// * CACHE_ENGINE
-	//
-	// * DATABASE_ENGINE
-	//
-	// * DEPLOYMENT_OPTION
-	//
-	// *
+	// - AZ
+	// - CACHE_ENGINE
+	// - DATABASE_ENGINE
+	// - DEPLOYMENT_OPTION
+	// -
 	// INSTANCE_TYPE
-	//
-	// * LINKED_ACCOUNT
-	//
-	// * OPERATING_SYSTEM
-	//
-	// * PLATFORM
-	//
-	// * REGION
-	//
-	// *
+	// - LINKED_ACCOUNT
+	// - OPERATING_SYSTEM
+	// - PLATFORM
+	// - REGION
+	// -
 	// SERVICE
-	//
-	// * TAG
-	//
-	// * TENANCY
+	// - TAG
+	// - TENANCY
 	//
 	// GetReservationCoverage uses the same Expression
 	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
@@ -121,30 +97,19 @@ type GetReservationCoverageInput struct {
 	Granularity types.Granularity
 
 	// You can group the data by the following attributes:
-	//
-	// * AZ
-	//
-	// * CACHE_ENGINE
-	//
-	// *
+	// - AZ
+	// - CACHE_ENGINE
+	// -
 	// DATABASE_ENGINE
-	//
-	// * DEPLOYMENT_OPTION
-	//
-	// * INSTANCE_TYPE
-	//
-	// * INVOICING_ENTITY
-	//
-	// *
+	// - DEPLOYMENT_OPTION
+	// - INSTANCE_TYPE
+	// - INVOICING_ENTITY
+	// -
 	// LINKED_ACCOUNT
-	//
-	// * OPERATING_SYSTEM
-	//
-	// * PLATFORM
-	//
-	// * REGION
-	//
-	// * TENANCY
+	// - OPERATING_SYSTEM
+	// - PLATFORM
+	// - REGION
+	// - TENANCY
 	GroupBy []types.GroupDefinition
 
 	// The maximum number of objects that you returned for this request. If more
@@ -164,32 +129,22 @@ type GetReservationCoverageInput struct {
 
 	// The value by which you want to sort the data. The following values are supported
 	// for Key:
-	//
-	// * OnDemandCost
-	//
-	// * CoverageHoursPercentage
-	//
-	// * OnDemandHours
-	//
-	// *
+	// - OnDemandCost
+	// - CoverageHoursPercentage
+	// - OnDemandHours
+	// -
 	// ReservedHours
-	//
-	// * TotalRunningHours
-	//
-	// * CoverageNormalizedUnitsPercentage
-	//
-	// *
+	// - TotalRunningHours
+	// - CoverageNormalizedUnitsPercentage
+	// -
 	// OnDemandNormalizedUnits
-	//
-	// * ReservedNormalizedUnits
-	//
-	// *
+	// - ReservedNormalizedUnits
+	// -
 	// TotalRunningNormalizedUnits
+	// - Time
 	//
-	// * Time
-	//
-	// Supported values for SortOrder are
-	// ASCENDING or DESCENDING.
+	// Supported values for SortOrder are ASCENDING
+	// or DESCENDING.
 	SortBy *types.SortDefinition
 
 	noSmithyDocumentSerde

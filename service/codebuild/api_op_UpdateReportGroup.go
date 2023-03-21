@@ -35,11 +35,9 @@ type UpdateReportGroupInput struct {
 	Arn *string
 
 	// Used to specify an updated export type. Valid values are:
-	//
-	// * S3: The report
+	// - S3: The report
 	// results are exported to an S3 bucket.
-	//
-	// * NO_EXPORT: The report results are not
+	// - NO_EXPORT: The report results are not
 	// exported.
 	ExportConfig *types.ReportExportConfig
 

@@ -26,20 +26,16 @@ import (
 // provides a response, it provides a token that you can use to monitor the status
 // of the request with DescribeMultiRegionAccessPointOperation. The following
 // actions are related to DeleteMultiRegionAccessPoint:
-//
-// *
+// -
 // CreateMultiRegionAccessPoint
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html)
-//
-// *
+// -
 // DescribeMultiRegionAccessPointOperation
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html)
-//
-// *
+// -
 // GetMultiRegionAccessPoint
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPoint.html)
-//
-// *
+// -
 // ListMultiRegionAccessPoints
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListMultiRegionAccessPoints.html)
 func (c *Client) DeleteMultiRegionAccessPoint(ctx context.Context, params *DeleteMultiRegionAccessPointInput, optFns ...func(*Options)) (*DeleteMultiRegionAccessPointOutput, error) {

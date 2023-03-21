@@ -125,21 +125,16 @@ type Invitation struct {
 	NetworkSummary *NetworkSummary
 
 	// The status of the invitation:
-	//
-	// * PENDING - The invitee hasn't created a member
-	// to join the network, and the invitation hasn't yet expired.
-	//
-	// * ACCEPTING - The
+	// - PENDING - The invitee hasn't created a member to
+	// join the network, and the invitation hasn't yet expired.
+	// - ACCEPTING - The
 	// invitee has begun creating a member, and creation hasn't yet completed.
-	//
-	// *
+	// -
 	// ACCEPTED - The invitee created a member and joined the network using the
 	// InvitationID.
-	//
-	// * REJECTED - The invitee rejected the invitation.
-	//
-	// * EXPIRED -
-	// The invitee neither created a member nor rejected the invitation before the
+	// - REJECTED - The invitee rejected the invitation.
+	// - EXPIRED - The
+	// invitee neither created a member nor rejected the invitation before the
 	// ExpirationDate.
 	Status InvitationStatus
 
@@ -218,31 +213,24 @@ type Member struct {
 	NetworkId *string
 
 	// The status of a member.
-	//
-	// * CREATING - The Amazon Web Services account is in the
+	// - CREATING - The Amazon Web Services account is in the
 	// process of creating a member.
-	//
-	// * AVAILABLE - The member has been created and can
+	// - AVAILABLE - The member has been created and can
 	// participate in the network.
-	//
-	// * CREATE_FAILED - The Amazon Web Services account
+	// - CREATE_FAILED - The Amazon Web Services account
 	// attempted to create a member and creation failed.
-	//
-	// * UPDATING - The member is in
+	// - UPDATING - The member is in
 	// the process of being updated.
-	//
-	// * DELETING - The member and all associated
+	// - DELETING - The member and all associated
 	// resources are in the process of being deleted. Either the Amazon Web Services
 	// account that owns the member deleted it, or the member is being deleted as the
 	// result of an APPROVEDPROPOSAL to remove the member.
-	//
-	// * DELETED - The member can
+	// - DELETED - The member can
 	// no longer participate on the network and all associated resources are deleted.
 	// Either the Amazon Web Services account that owns the member deleted it, or the
 	// member is being deleted as the result of an APPROVEDPROPOSAL to remove the
 	// member.
-	//
-	// * INACCESSIBLE_ENCRYPTION_KEY - The member is impaired and might not
+	// - INACCESSIBLE_ENCRYPTION_KEY - The member is impaired and might not
 	// function as expected because it cannot access the specified customer managed key
 	// in KMS for encryption at rest. Either the KMS key was disabled or deleted, or
 	// the grants on the key were revoked. The effect of disabling or deleting a key or
@@ -285,12 +273,10 @@ type MemberConfiguration struct {
 	// (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/managed-blockchain-encryption-at-rest.html)
 	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide. Use one of
 	// the following options to specify this parameter:
-	//
-	// * Undefined or empty string -
+	// - Undefined or empty string -
 	// By default, use an KMS key that is owned and managed by Amazon Web Services on
 	// your behalf.
-	//
-	// * A valid symmetric customer managed KMS key - Use the specified
+	// - A valid symmetric customer managed KMS key - Use the specified
 	// KMS key in your account that you create, own, and manage. Amazon Managed
 	// Blockchain doesn't support asymmetric keys. For more information, see Using
 	// symmetric and asymmetric keys
@@ -423,34 +409,27 @@ type MemberSummary struct {
 	Name *string
 
 	// The status of the member.
-	//
-	// * CREATING - The Amazon Web Services account is in
-	// the process of creating a member.
-	//
-	// * AVAILABLE - The member has been created and
-	// can participate in the network.
-	//
-	// * CREATE_FAILED - The Amazon Web Services
-	// account attempted to create a member and creation failed.
-	//
-	// * UPDATING - The
-	// member is in the process of being updated.
-	//
-	// * DELETING - The member and all
-	// associated resources are in the process of being deleted. Either the Amazon Web
-	// Services account that owns the member deleted it, or the member is being deleted
-	// as the result of an APPROVEDPROPOSAL to remove the member.
-	//
-	// * DELETED - The
-	// member can no longer participate on the network and all associated resources are
-	// deleted. Either the Amazon Web Services account that owns the member deleted it,
-	// or the member is being deleted as the result of an APPROVEDPROPOSAL to remove
-	// the member.
-	//
-	// * INACCESSIBLE_ENCRYPTION_KEY - The member is impaired and might
-	// not function as expected because it cannot access the specified customer managed
-	// key in Key Management Service (KMS) for encryption at rest. Either the KMS key
-	// was disabled or deleted, or the grants on the key were revoked. The effect of
+	// - CREATING - The Amazon Web Services account is in the
+	// process of creating a member.
+	// - AVAILABLE - The member has been created and can
+	// participate in the network.
+	// - CREATE_FAILED - The Amazon Web Services account
+	// attempted to create a member and creation failed.
+	// - UPDATING - The member is in
+	// the process of being updated.
+	// - DELETING - The member and all associated
+	// resources are in the process of being deleted. Either the Amazon Web Services
+	// account that owns the member deleted it, or the member is being deleted as the
+	// result of an APPROVEDPROPOSAL to remove the member.
+	// - DELETED - The member can
+	// no longer participate on the network and all associated resources are deleted.
+	// Either the Amazon Web Services account that owns the member deleted it, or the
+	// member is being deleted as the result of an APPROVEDPROPOSAL to remove the
+	// member.
+	// - INACCESSIBLE_ENCRYPTION_KEY - The member is impaired and might not
+	// function as expected because it cannot access the specified customer managed key
+	// in Key Management Service (KMS) for encryption at rest. Either the KMS key was
+	// disabled or deleted, or the grants on the key were revoked. The effect of
 	// disabling or deleting a key or of revoking a grant isn't immediate. It might
 	// take some time for the member resource to discover that the key is inaccessible.
 	// When a resource is in this state, we recommend deleting and recreating the
@@ -517,14 +496,10 @@ type NetworkEthereumAttributes struct {
 
 	// The Ethereum CHAIN_ID associated with the Ethereum network. Chain IDs are as
 	// follows:
-	//
-	// * mainnet = 1
-	//
-	// * goerli = 5
-	//
-	// * rinkeby = 4
-	//
-	// * ropsten = 3
+	// - mainnet = 1
+	// - goerli = 5
+	// - rinkeby = 4
+	// - ropsten = 3
 	ChainId *string
 
 	noSmithyDocumentSerde
@@ -666,34 +641,25 @@ type Node struct {
 	StateDB StateDBType
 
 	// The status of the node.
-	//
-	// * CREATING - The Amazon Web Services account is in the
+	// - CREATING - The Amazon Web Services account is in the
 	// process of creating a node.
-	//
-	// * AVAILABLE - The node has been created and can
+	// - AVAILABLE - The node has been created and can
 	// participate in the network.
-	//
-	// * UNHEALTHY - The node is impaired and might not
+	// - UNHEALTHY - The node is impaired and might not
 	// function as expected. Amazon Managed Blockchain automatically finds nodes in
 	// this state and tries to recover them. If a node is recoverable, it returns to
 	// AVAILABLE. Otherwise, it moves to FAILED status.
-	//
-	// * CREATE_FAILED - The Amazon
+	// - CREATE_FAILED - The Amazon
 	// Web Services account attempted to create a node and creation failed.
-	//
-	// * UPDATING
+	// - UPDATING
 	// - The node is in the process of being updated.
-	//
-	// * DELETING - The node is in the
+	// - DELETING - The node is in the
 	// process of being deleted.
-	//
-	// * DELETED - The node can no longer participate on the
+	// - DELETED - The node can no longer participate on the
 	// network.
-	//
-	// * FAILED - The node is no longer functional, cannot be recovered, and
+	// - FAILED - The node is no longer functional, cannot be recovered, and
 	// must be deleted.
-	//
-	// * INACCESSIBLE_ENCRYPTION_KEY - The node is impaired and might
+	// - INACCESSIBLE_ENCRYPTION_KEY - The node is impaired and might
 	// not function as expected because it cannot access the specified customer managed
 	// key in KMS for encryption at rest. Either the KMS key was disabled or deleted,
 	// or the grants on the key were revoked. The effect of disabling or deleting a key
@@ -891,24 +857,19 @@ type Proposal struct {
 	ProposedByMemberName *string
 
 	// The status of the proposal. Values are as follows:
-	//
-	// * IN_PROGRESS - The proposal
+	// - IN_PROGRESS - The proposal
 	// is active and open for member voting.
-	//
-	// * APPROVED - The proposal was approved
+	// - APPROVED - The proposal was approved
 	// with sufficient YES votes among members according to the VotingPolicy specified
 	// for the Network. The specified proposal actions are carried out.
-	//
-	// * REJECTED -
+	// - REJECTED -
 	// The proposal was rejected with insufficient YES votes among members according to
 	// the VotingPolicy specified for the Network. The specified ProposalActions aren't
 	// carried out.
-	//
-	// * EXPIRED - Members didn't cast the number of votes required to
+	// - EXPIRED - Members didn't cast the number of votes required to
 	// determine the proposal outcome before the proposal expired. The specified
 	// ProposalActions aren't carried out.
-	//
-	// * ACTION_FAILED - One or more of the
+	// - ACTION_FAILED - One or more of the
 	// specified ProposalActions in a proposal that was approved couldn't be completed
 	// because of an error. The ACTION_FAILED status occurs even if only one
 	// ProposalAction fails and other actions are successful.
@@ -976,24 +937,19 @@ type ProposalSummary struct {
 	ProposedByMemberName *string
 
 	// The status of the proposal. Values are as follows:
-	//
-	// * IN_PROGRESS - The proposal
+	// - IN_PROGRESS - The proposal
 	// is active and open for member voting.
-	//
-	// * APPROVED - The proposal was approved
+	// - APPROVED - The proposal was approved
 	// with sufficient YES votes among members according to the VotingPolicy specified
 	// for the Network. The specified proposal actions are carried out.
-	//
-	// * REJECTED -
+	// - REJECTED -
 	// The proposal was rejected with insufficient YES votes among members according to
 	// the VotingPolicy specified for the Network. The specified ProposalActions aren't
 	// carried out.
-	//
-	// * EXPIRED - Members didn't cast the number of votes required to
+	// - EXPIRED - Members didn't cast the number of votes required to
 	// determine the proposal outcome before the proposal expired. The specified
 	// ProposalActions aren't carried out.
-	//
-	// * ACTION_FAILED - One or more of the
+	// - ACTION_FAILED - One or more of the
 	// specified ProposalActions in a proposal that was approved couldn't be completed
 	// because of an error.
 	Status ProposalStatus

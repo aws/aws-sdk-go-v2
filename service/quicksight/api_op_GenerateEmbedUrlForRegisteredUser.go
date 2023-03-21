@@ -16,19 +16,16 @@ import (
 // Amazon QuickSight account. Before you use this action, make sure that you have
 // configured the relevant Amazon QuickSight resource and permissions. The
 // following rules apply to the generated URL:
-//
-// * It contains a temporary bearer
+// - It contains a temporary bearer
 // token. It is valid for 5 minutes after it is generated. Once redeemed within
 // this period, it cannot be re-used again.
-//
-// * The URL validity period should not
-// be confused with the actual session lifetime that can be customized using the
+// - The URL validity period should not be
+// confused with the actual session lifetime that can be customized using the
 // SessionLifetimeInMinutes
 // (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForRegisteredUser.html#QS-GenerateEmbedUrlForRegisteredUser-request-SessionLifetimeInMinutes)
 // parameter. The resulting user session is valid for 15 minutes (minimum) to 10
 // hours (maximum). The default session duration is 10 hours.
-//
-// * You are charged
+// - You are charged
 // only when the URL is used or there is interaction with Amazon QuickSight.
 //
 // For

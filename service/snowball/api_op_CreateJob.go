@@ -22,66 +22,49 @@ import (
 // Services
 // (https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/?p=ngi&loc=4).
 // Snow Family devices and their capacities.
+// - Snow Family device type: SNC1_SSD
+// -
+// Capacity: T14
+// - Description: Snowcone
 //
-// * Snow Family device type:
-// SNC1_SSD
+// - Snow Family device type: SNC1_HDD
+// -
+// Capacity: T8
+// - Description: Snowcone
 //
-// * Capacity: T14
+// - Device type: EDGE_S
+// - Capacity: T98
+// -
+// Description: Snowball Edge Storage Optimized for data transfer only
 //
-// * Description: Snowcone
+// - Device
+// type: EDGE_CG
+// - Capacity: T42
+// - Description: Snowball Edge Compute Optimized
+// with GPU
 //
-// * Snow Family device type:
-// SNC1_HDD
+// - Device type: EDGE_C
+// - Capacity: T42
+// - Description: Snowball Edge
+// Compute Optimized without GPU
 //
-// * Capacity: T8
+// - Device type: EDGE
+// - Capacity: T100
+// -
+// Description: Snowball Edge Storage Optimized with EC2 Compute
 //
-// * Description: Snowcone
+// - Device type:
+// STANDARD
+// - Capacity: T50
+// - Description: Original Snowball device This device is
+// only available in the Ningxia, Beijing, and Singapore Amazon Web Services
+// Region
 //
-// * Device type: EDGE_S
-//
-// *
-// Capacity: T98
-//
-// * Description: Snowball Edge Storage Optimized for data transfer
-// only
-//
-// * Device type: EDGE_CG
-//
-// * Capacity: T42
-//
-// * Description: Snowball Edge
-// Compute Optimized with GPU
-//
-// * Device type: EDGE_C
-//
-// * Capacity: T42
-//
-// *
-// Description: Snowball Edge Compute Optimized without GPU
-//
-// * Device type: EDGE
-//
-// *
-// Capacity: T100
-//
-// * Description: Snowball Edge Storage Optimized with EC2
-// Compute
-//
-// * Device type: STANDARD
-//
-// * Capacity: T50
-//
-// * Description: Original
-// Snowball device This device is only available in the Ningxia, Beijing, and
-// Singapore Amazon Web Services Region
-//
-// * Device type: STANDARD
-//
-// * Capacity:
-// T80
-//
-// * Description: Original Snowball device This device is only available in
-// the Ningxia, Beijing, and Singapore Amazon Web Services Region.
+// - Device type: STANDARD
+// - Capacity: T80
+// - Description: Original Snowball
+// device This device is only available in the Ningxia, Beijing, and Singapore
+// Amazon Web Services Region.
 func (c *Client) CreateJob(ctx context.Context, params *CreateJobInput, optFns ...func(*Options)) (*CreateJobOutput, error) {
 	if params == nil {
 		params = &CreateJobInput{}
@@ -168,21 +151,17 @@ type CreateJobInput struct {
 	// The shipping speed for this job. This speed doesn't dictate how soon you'll get
 	// the Snow device, rather it represents how quickly the Snow device moves to its
 	// destination while in transit. Regional shipping speeds are as follows:
-	//
-	// * In
+	// - In
 	// Australia, you have access to express shipping. Typically, Snow devices shipped
 	// express are delivered in about a day.
-	//
-	// * In the European Union (EU), you have
+	// - In the European Union (EU), you have
 	// access to express shipping. Typically, Snow devices shipped express are
 	// delivered in about a day. In addition, most countries in the EU have access to
 	// standard shipping, which typically takes less than a week, one way.
-	//
-	// * In India,
+	// - In India,
 	// Snow devices are delivered in one to seven days.
-	//
-	// * In the US, you have access
-	// to one-day shipping and two-day shipping.
+	// - In the US, you have access to
+	// one-day shipping and two-day shipping.
 	ShippingOption types.ShippingOption
 
 	// If your job is being created in one of the US regions, you have the option of

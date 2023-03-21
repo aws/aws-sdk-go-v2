@@ -53,16 +53,13 @@ type CreateStorageVirtualMachineInput struct {
 
 	// The security style of the root volume of the SVM. Specify one of the following
 	// values:
-	//
-	// * UNIX if the file system is managed by a UNIX administrator, the
+	// - UNIX if the file system is managed by a UNIX administrator, the
 	// majority of users are NFS clients, and an application accessing the data uses a
 	// UNIX user as the service account.
-	//
-	// * NTFS if the file system is managed by a
+	// - NTFS if the file system is managed by a
 	// Windows administrator, the majority of users are SMB clients, and an application
 	// accessing the data uses a Windows user as the service account.
-	//
-	// * MIXED if the
+	// - MIXED if the
 	// file system is managed by both UNIX and Windows administrators and users consist
 	// of both NFS and SMB clients.
 	RootVolumeSecurityStyle types.StorageVirtualMachineRootVolumeSecurityStyle

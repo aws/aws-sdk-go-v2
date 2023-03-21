@@ -16,14 +16,11 @@
 // load balancers: Application Load Balancers, Network Load Balancers, Gateway Load
 // Balancers, and Classic Load Balancers. This reference covers the following load
 // balancer types:
-//
-// * Application Load Balancer - Operates at the application layer
+// - Application Load Balancer - Operates at the application layer
 // (layer 7) and supports HTTP and HTTPS.
-//
-// * Network Load Balancer - Operates at
-// the transport layer (layer 4) and supports TCP, TLS, and UDP.
-//
-// * Gateway Load
+// - Network Load Balancer - Operates at the
+// transport layer (layer 4) and supports TCP, TLS, and UDP.
+// - Gateway Load
 // Balancer - Operates at the network layer (layer 3).
 //
 // For more information, see

@@ -17,14 +17,10 @@ import (
 // a different Amazon Web Services account. Required permissions: kms:ListKeys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (IAM policy) Related operations:
-//
-// * CreateKey
-//
-// * DescribeKey
-//
-// * ListAliases
-//
-// *
+// - CreateKey
+// - DescribeKey
+// - ListAliases
+// -
 // ListResourceTags
 func (c *Client) ListKeys(ctx context.Context, params *ListKeysInput, optFns ...func(*Options)) (*ListKeysOutput, error) {
 	if params == nil {

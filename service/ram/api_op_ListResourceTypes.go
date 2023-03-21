@@ -49,14 +49,11 @@ type ListResourceTypesInput struct {
 
 	// Specifies that you want the results to include only resources that have the
 	// specified scope.
-	//
-	// * ALL – the results include both global and regional resources
+	// - ALL – the results include both global and regional resources
 	// or resource types.
-	//
-	// * GLOBAL – the results include only global resources or
+	// - GLOBAL – the results include only global resources or
 	// resource types.
-	//
-	// * REGIONAL – the results include only regional resources or
+	// - REGIONAL – the results include only regional resources or
 	// resource types.
 	//
 	// The default value is ALL.

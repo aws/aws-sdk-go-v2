@@ -10,15 +10,14 @@
 // existing corporate directory and control both the keys that encrypt your data
 // and the location in which your data is stored. The WorkMail API is designed for
 // the following scenarios:
+// - Listing and describing organizations
 //
-// * Listing and describing organizations
-//
-// * Managing
+// - Managing
 // users
 //
-// * Managing groups
+// - Managing groups
 //
-// * Managing resources
+// - Managing resources
 //
 // All WorkMail API operations are
 // Amazon-authenticated and certificate-signed. They not only require the use of

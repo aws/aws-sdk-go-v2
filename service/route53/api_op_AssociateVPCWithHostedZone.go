@@ -22,13 +22,10 @@ import (
 // hosted zone and the Amazon VPC must belong to the same partition. A partition is
 // a group of Amazon Web Services Regions. Each Amazon Web Services account is
 // scoped to one partition. The following are the supported partitions:
-//
-// * aws -
+// - aws -
 // Amazon Web Services Regions
-//
-// * aws-cn - China Regions
-//
-// * aws-us-gov - Amazon Web
+// - aws-cn - China Regions
+// - aws-us-gov - Amazon Web
 // Services GovCloud (US) Region
 //
 // For more information, see Access Management

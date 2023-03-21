@@ -22,13 +22,11 @@ import (
 // continues to be called with the NextToken parameter set to the value of the last
 // NextToken value until a response has no NextToken. When using this action, keep
 // the following in mind:
-//
-// * The implementation might return fewer than MaxResults
+// - The implementation might return fewer than MaxResults
 // file system descriptions while still including a NextToken value.
-//
-// * The order
-// of tags returned in the response of one ListTagsForResource call and the order
-// of tags returned across the responses of a multi-call iteration is unspecified.
+// - The order of
+// tags returned in the response of one ListTagsForResource call and the order of
+// tags returned across the responses of a multi-call iteration is unspecified.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

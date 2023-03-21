@@ -15,12 +15,10 @@ import (
 // a retrieval of this archive will fail. Archive retrievals that are in progress
 // for this archive ID may or may not succeed according to the following
 // scenarios:
-//
-// * If the archive retrieval job is actively preparing the data for
+// - If the archive retrieval job is actively preparing the data for
 // download when Amazon S3 Glacier receives the delete archive request, the
 // archival retrieval operation might fail.
-//
-// * If the archive retrieval job has
+// - If the archive retrieval job has
 // successfully prepared the archive for download when Amazon S3 Glacier receives
 // the delete archive request, you will be able to download the output.
 //

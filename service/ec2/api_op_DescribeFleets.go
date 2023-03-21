@@ -40,23 +40,18 @@ type DescribeFleetsInput struct {
 	DryRun *bool
 
 	// The filters.
-	//
-	// * activity-status - The progress of the EC2 Fleet ( error |
+	// - activity-status - The progress of the EC2 Fleet ( error |
 	// pending-fulfillment | pending-termination | fulfilled).
-	//
-	// *
+	// -
 	// excess-capacity-termination-policy - Indicates whether to terminate running
 	// instances if the target capacity is decreased below the current EC2 Fleet size
 	// (true | false).
-	//
-	// * fleet-state - The state of the EC2 Fleet (submitted | active
-	// | deleted | failed | deleted-running | deleted-terminating | modifying).
-	//
-	// *
+	// - fleet-state - The state of the EC2 Fleet (submitted | active |
+	// deleted | failed | deleted-running | deleted-terminating | modifying).
+	// -
 	// replace-unhealthy-instances - Indicates whether EC2 Fleet should replace
 	// unhealthy instances (true | false).
-	//
-	// * type - The type of request (instant |
+	// - type - The type of request (instant |
 	// request | maintain).
 	Filters []types.Filter
 

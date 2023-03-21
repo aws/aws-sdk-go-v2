@@ -19,11 +19,9 @@ import (
 // parameter in the request. You will need permission for the
 // s3:DeleteObjectVersionTagging action. The following operations are related to
 // DeleteBucketMetricsConfiguration:
-//
-// * PutObjectTagging
+// - PutObjectTagging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObjectTagging.html)
-//
-// *
+// -
 // GetObjectTagging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectTagging.html)
 func (c *Client) DeleteObjectTagging(ctx context.Context, params *DeleteObjectTaggingInput, optFns ...func(*Options)) (*DeleteObjectTaggingOutput, error) {

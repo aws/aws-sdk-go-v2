@@ -15,11 +15,9 @@ import (
 // Returns the logging status of a bucket and the permissions users have to view
 // and modify that status. To use GET, you must be the bucket owner. The following
 // operations are related to GetBucketLogging:
-//
-// * CreateBucket
+// - CreateBucket
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
-//
-// *
+// -
 // PutBucketLogging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLogging.html)
 func (c *Client) GetBucketLogging(ctx context.Context, params *GetBucketLoggingInput, optFns ...func(*Options)) (*GetBucketLoggingOutput, error) {

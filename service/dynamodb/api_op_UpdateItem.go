@@ -60,15 +60,12 @@ type UpdateItemInput struct {
 
 	// A condition that must be satisfied in order for a conditional update to succeed.
 	// An expression can contain any of the following:
-	//
-	// * Functions: attribute_exists |
+	// - Functions: attribute_exists |
 	// attribute_not_exists | attribute_type | contains | begins_with | size These
 	// function names are case-sensitive.
-	//
-	// * Comparison operators: = | <> | < | > | <=
-	// | >= | BETWEEN | IN
-	//
-	// * Logical operators: AND | OR | NOT
+	// - Comparison operators: = | <> | < | > | <= |
+	// >= | BETWEEN | IN
+	// - Logical operators: AND | OR | NOT
 	//
 	// For more information
 	// about condition expressions, see Specifying Conditions
@@ -90,36 +87,29 @@ type UpdateItemInput struct {
 
 	// One or more substitution tokens for attribute names in an expression. The
 	// following are some use cases for using ExpressionAttributeNames:
-	//
-	// * To access an
+	// - To access an
 	// attribute whose name conflicts with a DynamoDB reserved word.
-	//
-	// * To create a
+	// - To create a
 	// placeholder for repeating occurrences of an attribute name in an expression.
-	//
-	// *
+	// -
 	// To prevent special characters in an attribute name from being misinterpreted in
 	// an expression.
 	//
 	// Use the # character in an expression to dereference an attribute
 	// name. For example, consider the following attribute name:
+	// - Percentile
 	//
-	// * Percentile
-	//
-	// The
-	// name of this attribute conflicts with a reserved word, so it cannot be used
-	// directly in an expression. (For the complete list of reserved words, see
-	// Reserved Words
+	// The name
+	// of this attribute conflicts with a reserved word, so it cannot be used directly
+	// in an expression. (For the complete list of reserved words, see Reserved Words
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html)
 	// in the Amazon DynamoDB Developer Guide.) To work around this, you could specify
 	// the following for ExpressionAttributeNames:
-	//
-	// * {"#P":"Percentile"}
+	// - {"#P":"Percentile"}
 	//
 	// You could
 	// then use this substitution in an expression, as in this example:
-	//
-	// * #P =
+	// - #P =
 	// :val
 	//
 	// Tokens that begin with the : character are expression attribute values,
@@ -144,18 +134,15 @@ type UpdateItemInput struct {
 
 	// Determines the level of detail about either provisioned or on-demand throughput
 	// consumption that is returned in the response:
-	//
-	// * INDEXES - The response includes
+	// - INDEXES - The response includes
 	// the aggregate ConsumedCapacity for the operation, together with ConsumedCapacity
 	// for each table and secondary index that was accessed. Note that some operations,
 	// such as GetItem and BatchGetItem, do not access any indexes at all. In these
 	// cases, specifying INDEXES will only return ConsumedCapacity information for
 	// table(s).
-	//
-	// * TOTAL - The response includes only the aggregate ConsumedCapacity
+	// - TOTAL - The response includes only the aggregate ConsumedCapacity
 	// for the operation.
-	//
-	// * NONE - No ConsumedCapacity details are included in the
+	// - NONE - No ConsumedCapacity details are included in the
 	// response.
 	ReturnConsumedCapacity types.ReturnConsumedCapacity
 
@@ -167,61 +154,50 @@ type UpdateItemInput struct {
 
 	// Use ReturnValues if you want to get the item attributes as they appear before or
 	// after they are successfully updated. For UpdateItem, the valid values are:
-	//
-	// *
+	// -
 	// NONE - If ReturnValues is not specified, or if its value is NONE, then nothing
 	// is returned. (This setting is the default for ReturnValues.)
+	// - ALL_OLD - Returns
+	// all of the attributes of the item, as they appeared before the UpdateItem
+	// operation.
+	// - UPDATED_OLD - Returns only the updated attributes, as they appeared
+	// before the UpdateItem operation.
+	// - ALL_NEW - Returns all of the attributes of
+	// the item, as they appear after the UpdateItem operation.
+	// - UPDATED_NEW - Returns
+	// only the updated attributes, as they appear after the UpdateItem
+	// operation.
 	//
-	// * ALL_OLD -
-	// Returns all of the attributes of the item, as they appeared before the
-	// UpdateItem operation.
-	//
-	// * UPDATED_OLD - Returns only the updated attributes, as
-	// they appeared before the UpdateItem operation.
-	//
-	// * ALL_NEW - Returns all of the
-	// attributes of the item, as they appear after the UpdateItem operation.
-	//
-	// *
-	// UPDATED_NEW - Returns only the updated attributes, as they appear after the
-	// UpdateItem operation.
-	//
-	// There is no additional cost associated with requesting a
-	// return value aside from the small network and processing overhead of receiving a
-	// larger response. No read capacity units are consumed. The values returned are
-	// strongly consistent.
+	// There is no additional cost associated with requesting a return
+	// value aside from the small network and processing overhead of receiving a larger
+	// response. No read capacity units are consumed. The values returned are strongly
+	// consistent.
 	ReturnValues types.ReturnValue
 
 	// An expression that defines one or more attributes to be updated, the action to
 	// be performed on them, and new values for them. The following action values are
 	// available for UpdateExpression.
-	//
-	// * SET - Adds one or more attributes and values
+	// - SET - Adds one or more attributes and values
 	// to an item. If any of these attributes already exist, they are replaced by the
 	// new values. You can also use SET to add or subtract from an attribute that is of
 	// type Number. For example: SET myNum = myNum + :valSET supports the following
 	// functions:
-	//
-	// * if_not_exists (path, operand) - if the item does not contain an
+	// - if_not_exists (path, operand) - if the item does not contain an
 	// attribute at the specified path, then if_not_exists evaluates to operand;
 	// otherwise, it evaluates to path. You can use this function to avoid overwriting
 	// an attribute that may already be present in the item.
-	//
-	// * list_append (operand,
+	// - list_append (operand,
 	// operand) - evaluates to a list with a new element added to it. You can append
 	// the new element to the start or the end of the list by reversing the order of
 	// the operands.
 	//
 	// These function names are case-sensitive.
-	//
-	// * REMOVE - Removes one
+	// - REMOVE - Removes one
 	// or more attributes from an item.
-	//
-	// * ADD - Adds the specified value to the item,
+	// - ADD - Adds the specified value to the item,
 	// if the attribute does not already exist. If the attribute does exist, then the
 	// behavior of ADD depends on the data type of the attribute:
-	//
-	// * If the existing
+	// - If the existing
 	// attribute is a number, and if Value is also a number, then Value is
 	// mathematically added to the existing attribute. If Value is a negative number,
 	// then it is subtracted from the existing attribute. If you use ADD to increment
@@ -233,8 +209,7 @@ type UpdateItemInput struct {
 	// ADD the number 3 to this attribute anyway. DynamoDB will create the itemcount
 	// attribute, set its initial value to 0, and finally add 3 to it. The result will
 	// be a new itemcount attribute in the item, with a value of 3.
-	//
-	// * If the existing
+	// - If the existing
 	// data type is a set and if Value is also a set, then Value is added to the
 	// existing set. For example, if the attribute value is the set [1,2], and the ADD
 	// action specified [3], then the final attribute value is [1,2,3]. An error occurs
@@ -246,8 +221,7 @@ type UpdateItemInput struct {
 	// The ADD action only supports Number
 	// and set data types. In addition, ADD can only be used on top-level attributes,
 	// not nested attributes.
-	//
-	// * DELETE - Deletes an element from a set. If a set of
+	// - DELETE - Deletes an element from a set. If a set of
 	// values is specified, then those values are subtracted from the old set. For
 	// example, if the attribute value was the set [a,b,c] and the DELETE action
 	// specifies [a,c], then the final attribute value is [b]. Specifying an empty set
@@ -288,12 +262,10 @@ type UpdateItemOutput struct {
 	// ReturnItemCollectionMetrics parameter was specified. If the table does not have
 	// any local secondary indexes, this information is not returned in the response.
 	// Each ItemCollectionMetrics element consists of:
-	//
-	// * ItemCollectionKey - The
+	// - ItemCollectionKey - The
 	// partition key value of the item collection. This is the same as the partition
 	// key value of the item itself.
-	//
-	// * SizeEstimateRangeGB - An estimate of item
+	// - SizeEstimateRangeGB - An estimate of item
 	// collection size, in gigabytes. This value is a two-element array containing a
 	// lower bound and an upper bound for the estimate. The estimate includes the size
 	// of all the items in the table, plus the size of all attributes projected into

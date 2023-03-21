@@ -44,18 +44,13 @@ type CreateServerInput struct {
 	// (https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-private.html)
 	// in the Certificate Manager User Guide. Certificates with the following
 	// cryptographic algorithms and key sizes are supported:
-	//
-	// * 2048-bit RSA
+	// - 2048-bit RSA
 	// (RSA_2048)
-	//
-	// * 4096-bit RSA (RSA_4096)
-	//
-	// * Elliptic Prime Curve 256 bit
+	// - 4096-bit RSA (RSA_4096)
+	// - Elliptic Prime Curve 256 bit
 	// (EC_prime256v1)
-	//
-	// * Elliptic Prime Curve 384 bit (EC_secp384r1)
-	//
-	// * Elliptic Prime
+	// - Elliptic Prime Curve 384 bit (EC_secp384r1)
+	// - Elliptic Prime
 	// Curve 521 bit (EC_secp521r1)
 	//
 	// The certificate must be a valid SSL/TLS X.509
@@ -154,62 +149,50 @@ type CreateServerInput struct {
 	PreAuthenticationLoginBanner *string
 
 	// The protocol settings that are configured for your server.
-	//
-	// * To indicate
-	// passive mode (for FTP and FTPS protocols), use the PassiveIp parameter. Enter a
-	// single dotted-quad IPv4 address, such as the external IP address of a firewall,
-	// router, or load balancer.
-	//
-	// * To ignore the error that is generated when the
-	// client attempts to use the SETSTAT command on a file that you are uploading to
-	// an Amazon S3 bucket, use the SetStatOption parameter. To have the Transfer
-	// Family server ignore the SETSTAT command and upload files without needing to
-	// make any changes to your SFTP client, set the value to ENABLE_NO_OP. If you set
-	// the SetStatOption parameter to ENABLE_NO_OP, Transfer Family generates a log
-	// entry to Amazon CloudWatch Logs, so that you can determine when the client is
-	// making a SETSTAT call.
-	//
-	// * To determine whether your Transfer Family server
-	// resumes recent, negotiated sessions through a unique session ID, use the
+	// - To indicate passive
+	// mode (for FTP and FTPS protocols), use the PassiveIp parameter. Enter a single
+	// dotted-quad IPv4 address, such as the external IP address of a firewall, router,
+	// or load balancer.
+	// - To ignore the error that is generated when the client
+	// attempts to use the SETSTAT command on a file that you are uploading to an
+	// Amazon S3 bucket, use the SetStatOption parameter. To have the Transfer Family
+	// server ignore the SETSTAT command and upload files without needing to make any
+	// changes to your SFTP client, set the value to ENABLE_NO_OP. If you set the
+	// SetStatOption parameter to ENABLE_NO_OP, Transfer Family generates a log entry
+	// to Amazon CloudWatch Logs, so that you can determine when the client is making a
+	// SETSTAT call.
+	// - To determine whether your Transfer Family server resumes recent,
+	// negotiated sessions through a unique session ID, use the
 	// TlsSessionResumptionMode parameter.
-	//
-	// * As2Transports indicates the transport
+	// - As2Transports indicates the transport
 	// method for the AS2 messages. Currently, only HTTP is supported.
 	ProtocolDetails *types.ProtocolDetails
 
 	// Specifies the file transfer protocol or protocols over which your file transfer
 	// protocol client can connect to your server's endpoint. The available protocols
 	// are:
-	//
-	// * SFTP (Secure Shell (SSH) File Transfer Protocol): File transfer over
+	// - SFTP (Secure Shell (SSH) File Transfer Protocol): File transfer over
 	// SSH
+	// - FTPS (File Transfer Protocol Secure): File transfer with TLS encryption
+	// -
+	// FTP (File Transfer Protocol): Unencrypted file transfer
+	// - AS2 (Applicability
+	// Statement 2): used for transporting structured business-to-business data
 	//
-	// * FTPS (File Transfer Protocol Secure): File transfer with TLS
-	// encryption
-	//
-	// * FTP (File Transfer Protocol): Unencrypted file transfer
-	//
-	// * AS2
-	// (Applicability Statement 2): used for transporting structured
-	// business-to-business data
-	//
-	// * If you select FTPS, you must choose a certificate
-	// stored in Certificate Manager (ACM) which is used to identify your server when
-	// clients connect to it over FTPS.
-	//
-	// * If Protocol includes either FTP or FTPS,
-	// then the EndpointType must be VPC and the IdentityProviderType must be either
-	// AWS_DIRECTORY_SERVICE, AWS_LAMBDA, or API_GATEWAY.
-	//
-	// * If Protocol includes FTP,
-	// then AddressAllocationIds cannot be associated.
-	//
-	// * If Protocol is set only to
-	// SFTP, the EndpointType can be set to PUBLIC and the IdentityProviderType can be
-	// set any of the supported identity types: SERVICE_MANAGED, AWS_DIRECTORY_SERVICE,
+	// - If
+	// you select FTPS, you must choose a certificate stored in Certificate Manager
+	// (ACM) which is used to identify your server when clients connect to it over
+	// FTPS.
+	// - If Protocol includes either FTP or FTPS, then the EndpointType must be
+	// VPC and the IdentityProviderType must be either AWS_DIRECTORY_SERVICE,
 	// AWS_LAMBDA, or API_GATEWAY.
-	//
-	// * If Protocol includes AS2, then the EndpointType
+	// - If Protocol includes FTP, then
+	// AddressAllocationIds cannot be associated.
+	// - If Protocol is set only to SFTP,
+	// the EndpointType can be set to PUBLIC and the IdentityProviderType can be set
+	// any of the supported identity types: SERVICE_MANAGED, AWS_DIRECTORY_SERVICE,
+	// AWS_LAMBDA, or API_GATEWAY.
+	// - If Protocol includes AS2, then the EndpointType
 	// must be VPC, and domain must be Amazon S3.
 	Protocols []types.Protocol
 

@@ -40,18 +40,14 @@ type CreateClientVpnRouteInput struct {
 
 	// The IPv4 address range, in CIDR notation, of the route destination. For
 	// example:
-	//
-	// * To add a route for Internet access, enter 0.0.0.0/0
-	//
-	// * To add a
-	// route for a peered VPC, enter the peered VPC's IPv4 CIDR range
-	//
-	// * To add a route
-	// for an on-premises network, enter the Amazon Web Services Site-to-Site VPN
-	// connection's IPv4 CIDR range
-	//
-	// * To add a route for the local network, enter the
-	// client CIDR range
+	// - To add a route for Internet access, enter 0.0.0.0/0
+	// - To add a route
+	// for a peered VPC, enter the peered VPC's IPv4 CIDR range
+	// - To add a route for an
+	// on-premises network, enter the Amazon Web Services Site-to-Site VPN connection's
+	// IPv4 CIDR range
+	// - To add a route for the local network, enter the client CIDR
+	// range
 	//
 	// This member is required.
 	DestinationCidrBlock *string

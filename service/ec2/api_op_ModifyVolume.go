@@ -67,13 +67,10 @@ type ModifyVolumeInput struct {
 
 	// The target IOPS rate of the volume. This parameter is valid only for gp3, io1,
 	// and io2 volumes. The following are the supported values for each volume type:
-	//
-	// *
+	// -
 	// gp3: 3,000-16,000 IOPS
-	//
-	// * io1: 100-64,000 IOPS
-	//
-	// * io2: 100-64,000 IOPS
+	// - io1: 100-64,000 IOPS
+	// - io2: 100-64,000 IOPS
 	//
 	// Default:
 	// The existing value is retained if you keep the same volume type. If you change
@@ -92,15 +89,11 @@ type ModifyVolumeInput struct {
 	// The target size of the volume, in GiB. The target volume size must be greater
 	// than or equal to the existing size of the volume. The following are the
 	// supported volumes sizes for each volume type:
-	//
-	// * gp2 and gp3: 1-16,384
-	//
-	// * io1
-	// and io2: 4-16,384
-	//
-	// * st1 and sc1: 125-16,384
-	//
-	// * standard: 1-1,024
+	// - gp2 and gp3: 1-16,384
+	// - io1 and
+	// io2: 4-16,384
+	// - st1 and sc1: 125-16,384
+	// - standard: 1-1,024
 	//
 	// Default: The
 	// existing size is retained.

@@ -20,12 +20,10 @@ import (
 // add an account in the resource policy, you then run the following Resource
 // Access Manager (RAM) operations to access and accept the shared rule group or
 // firewall policy.
-//
-// * GetResourceShareInvitations
+// - GetResourceShareInvitations
 // (https://docs.aws.amazon.com/ram/latest/APIReference/API_GetResourceShareInvitations.html)
 // - Returns the Amazon Resource Names (ARNs) of the resource share invitations.
-//
-// *
+// -
 // AcceptResourceShareInvitation
 // (https://docs.aws.amazon.com/ram/latest/APIReference/API_AcceptResourceShareInvitation.html)
 // - Accepts the share invitation for a specified resource share.
@@ -54,27 +52,20 @@ type PutResourcePolicyInput struct {
 	// rule group or firewall policy with and the operations that you want the accounts
 	// to be able to perform. For a rule group resource, you can specify the following
 	// operations in the Actions section of the statement:
-	//
-	// *
+	// -
 	// network-firewall:CreateFirewallPolicy
+	// - network-firewall:UpdateFirewallPolicy
+	// -
+	// network-firewall:ListRuleGroups
 	//
-	// *
-	// network-firewall:UpdateFirewallPolicy
-	//
-	// * network-firewall:ListRuleGroups
-	//
-	// For a
-	// firewall policy resource, you can specify the following operations in the
-	// Actions section of the statement:
-	//
-	// * network-firewall:CreateFirewall
-	//
-	// *
-	// network-firewall:UpdateFirewall
-	//
-	// * network-firewall:AssociateFirewallPolicy
-	//
-	// *
+	// For a firewall policy resource, you can specify
+	// the following operations in the Actions section of the statement:
+	// -
+	// network-firewall:CreateFirewall
+	// - network-firewall:UpdateFirewall
+	// -
+	// network-firewall:AssociateFirewallPolicy
+	// -
 	// network-firewall:ListFirewallPolicies
 	//
 	// In the Resource section of the statement,

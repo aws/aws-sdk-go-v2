@@ -52,12 +52,10 @@ type CreateLicenseManagerReportGeneratorInput struct {
 	ReportGeneratorName *string
 
 	// Type of reports to generate. The following report types an be generated:
-	//
-	// *
+	// -
 	// License configuration report - Reports the number and details of consumed
 	// licenses for a license configuration.
-	//
-	// * Resource report - Reports the tracked
+	// - Resource report - Reports the tracked
 	// licenses and resource consumption for a license configuration.
 	//
 	// This member is required.

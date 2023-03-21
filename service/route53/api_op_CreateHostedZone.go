@@ -21,20 +21,17 @@ import (
 // with the same name and create new resource record sets. For more information
 // about charges for hosted zones, see Amazon Route 53 Pricing
 // (http://aws.amazon.com/route53/pricing/). Note the following:
-//
-// * You can't
-// create a hosted zone for a top-level domain (TLD) such as .com.
-//
-// * For public
-// hosted zones, Route 53 automatically creates a default SOA record and four NS
-// records for the zone. For more information about SOA and NS records, see NS and
-// SOA Records that Route 53 Creates for a Hosted Zone
+// - You can't create
+// a hosted zone for a top-level domain (TLD) such as .com.
+// - For public hosted
+// zones, Route 53 automatically creates a default SOA record and four NS records
+// for the zone. For more information about SOA and NS records, see NS and SOA
+// Records that Route 53 Creates for a Hosted Zone
 // (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/SOA-NSrecords.html)
 // in the Amazon Route 53 Developer Guide. If you want to use the same name servers
 // for multiple public hosted zones, you can optionally associate a reusable
 // delegation set with the hosted zone. See the DelegationSetId element.
-//
-// * If your
+// - If your
 // domain is registered with a registrar other than Route 53, you must update the
 // name servers with your registrar to make Route 53 the DNS service for the
 // domain. For more information, see Migrating DNS Service for an Existing Domain
@@ -52,12 +49,9 @@ import (
 // partition is a group of Amazon Web Services Regions. Each Amazon Web Services
 // account is scoped to one partition. The following are the supported
 // partitions:
-//
-// * aws - Amazon Web Services Regions
-//
-// * aws-cn - China Regions
-//
-// *
+// - aws - Amazon Web Services Regions
+// - aws-cn - China Regions
+// -
 // aws-us-gov - Amazon Web Services GovCloud (US) Region
 //
 // For more information, see
@@ -112,12 +106,10 @@ type CreateHostedZoneInput struct {
 	DelegationSetId *string
 
 	// (Optional) A complex type that contains the following optional values:
-	//
-	// * For
+	// - For
 	// public and private hosted zones, an optional comment
-	//
-	// * For private hosted
-	// zones, an optional PrivateZone element
+	// - For private hosted zones,
+	// an optional PrivateZone element
 	//
 	// If you don't specify a comment or the
 	// PrivateZone element, omit HostedZoneConfig and the other elements.

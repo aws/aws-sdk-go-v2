@@ -15,18 +15,15 @@ import (
 // Retrieves a set of one or more game sessions in a specific fleet location. You
 // can optionally filter the results by current game session status. This operation
 // can be used in the following ways:
-//
-// * To retrieve all game sessions that are
+// - To retrieve all game sessions that are
 // currently running on all locations in a fleet, provide a fleet or alias ID, with
 // an optional status filter. This approach returns all game sessions in the
 // fleet's home Region and all remote locations.
-//
-// * To retrieve all game sessions
+// - To retrieve all game sessions
 // that are currently running on a specific fleet location, provide a fleet or
 // alias ID and a location name, with optional status filter. The location can be
 // the fleet's home Region or any remote location.
-//
-// * To retrieve a specific game
+// - To retrieve a specific game
 // session, provide the game session ID. This approach looks for the game session
 // ID in all fleets that reside in the Amazon Web Services Region defined in the
 // request.

@@ -38,11 +38,9 @@ type UpdateEnvironmentInput struct {
 	Description *string
 
 	// Authentication mode for the environment.
-	//
-	// * FEDERATED - Users access FinSpace
+	// - FEDERATED - Users access FinSpace
 	// through Single Sign On (SSO) via your Identity provider.
-	//
-	// * LOCAL - Users access
+	// - LOCAL - Users access
 	// FinSpace via email and password managed within the FinSpace environment.
 	FederationMode types.FederationMode
 

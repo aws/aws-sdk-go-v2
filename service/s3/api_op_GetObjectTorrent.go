@@ -22,8 +22,7 @@ import (
 // To use GET, you must have READ access to the object. This action is not
 // supported by Amazon S3 on Outposts. The following action is related to
 // GetObjectTorrent:
-//
-// * GetObject
+// - GetObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
 func (c *Client) GetObjectTorrent(ctx context.Context, params *GetObjectTorrentInput, optFns ...func(*Options)) (*GetObjectTorrentOutput, error) {
 	if params == nil {

@@ -52,14 +52,12 @@ type ListLedgersOutput struct {
 	Ledgers []types.LedgerSummary
 
 	// A pagination token, indicating whether there are more results available:
-	//
-	// * If
+	// - If
 	// NextToken is empty, then the last page of results has been processed and there
 	// are no more results to be retrieved.
-	//
-	// * If NextToken is not empty, then there
-	// are more results available. To retrieve the next page of results, use the value
-	// of NextToken in a subsequent ListLedgers call.
+	// - If NextToken is not empty, then there are
+	// more results available. To retrieve the next page of results, use the value of
+	// NextToken in a subsequent ListLedgers call.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

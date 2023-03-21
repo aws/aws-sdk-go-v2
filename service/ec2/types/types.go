@@ -492,22 +492,17 @@ type AnalysisRouteTableRoute struct {
 	NetworkInterfaceId *string
 
 	// Describes how the route was created. The following are the possible values:
-	//
-	// *
+	// -
 	// CreateRouteTable - The route was automatically created when the route table was
 	// created.
-	//
-	// * CreateRoute - The route was manually added to the route table.
-	//
-	// *
+	// - CreateRoute - The route was manually added to the route table.
+	// -
 	// EnableVgwRoutePropagation - The route was propagated by route propagation.
 	Origin *string
 
 	// The state. The following are the possible values:
-	//
-	// * active
-	//
-	// * blackhole
+	// - active
+	// - blackhole
 	State *string
 
 	// The ID of a transit gateway.
@@ -526,10 +521,8 @@ type AnalysisSecurityGroupRule struct {
 	Cidr *string
 
 	// The direction. The following are the possible values:
-	//
-	// * egress
-	//
-	// * ingress
+	// - egress
+	// - ingress
 	Direction *string
 
 	// The port range.
@@ -1021,11 +1014,9 @@ type CapacityReservation struct {
 
 	// Indicates the way in which the Capacity Reservation ends. A Capacity Reservation
 	// can have one of the following end types:
-	//
-	// * unlimited - The Capacity Reservation
+	// - unlimited - The Capacity Reservation
 	// remains active until you explicitly cancel it.
-	//
-	// * limited - The Capacity
+	// - limited - The Capacity
 	// Reservation expires automatically at a specified date and time.
 	EndDateType EndDateType
 
@@ -1034,13 +1025,11 @@ type CapacityReservation struct {
 
 	// Indicates the type of instance launches that the Capacity Reservation accepts.
 	// The options include:
-	//
-	// * open - The Capacity Reservation accepts all instances
+	// - open - The Capacity Reservation accepts all instances
 	// that have matching attributes (instance type, platform, and Availability Zone).
 	// Instances that have matching attributes launch into the Capacity Reservation
 	// automatically without specifying any additional parameters.
-	//
-	// * targeted - The
+	// - targeted - The
 	// Capacity Reservation only accepts instances that have matching attributes
 	// (instance type, platform, and Availability Zone), and explicitly target the
 	// Capacity Reservation. This ensures that only permitted instances can use the
@@ -1073,22 +1062,17 @@ type CapacityReservation struct {
 
 	// The current state of the Capacity Reservation. A Capacity Reservation can be in
 	// one of the following states:
-	//
-	// * active - The Capacity Reservation is active and
+	// - active - The Capacity Reservation is active and
 	// the capacity is available for your use.
-	//
-	// * expired - The Capacity Reservation
+	// - expired - The Capacity Reservation
 	// expired automatically at the date and time specified in your request. The
 	// reserved capacity is no longer available for your use.
-	//
-	// * cancelled - The
+	// - cancelled - The
 	// Capacity Reservation was cancelled. The reserved capacity is no longer available
 	// for your use.
-	//
-	// * pending - The Capacity Reservation request was successful but
+	// - pending - The Capacity Reservation request was successful but
 	// the capacity provisioning is still pending.
-	//
-	// * failed - The Capacity Reservation
+	// - failed - The Capacity Reservation
 	// request has failed. A request might fail due to invalid request parameters,
 	// capacity constraints, or instance limit constraints. Failed requests are
 	// retained for 60 minutes.
@@ -1099,13 +1083,11 @@ type CapacityReservation struct {
 
 	// Indicates the tenancy of the Capacity Reservation. A Capacity Reservation can
 	// have one of the following tenancy settings:
-	//
-	// * default - The Capacity
-	// Reservation is created on hardware that is shared with other Amazon Web Services
-	// accounts.
-	//
-	// * dedicated - The Capacity Reservation is created on single-tenant
-	// hardware that is dedicated to a single Amazon Web Services account.
+	// - default - The Capacity Reservation
+	// is created on hardware that is shared with other Amazon Web Services accounts.
+	// -
+	// dedicated - The Capacity Reservation is created on single-tenant hardware that
+	// is dedicated to a single Amazon Web Services account.
 	Tenancy CapacityReservationTenancy
 
 	// The total number of instances for which the Capacity Reservation reserves
@@ -1150,56 +1132,45 @@ type CapacityReservationFleet struct {
 	InstanceTypeSpecifications []FleetCapacityReservation
 
 	// The state of the Capacity Reservation Fleet. Possible states include:
-	//
-	// *
+	// -
 	// submitted - The Capacity Reservation Fleet request has been submitted and Amazon
 	// Elastic Compute Cloud is preparing to create the Capacity Reservations.
-	//
-	// *
+	// -
 	// modifying - The Capacity Reservation Fleet is being modified. The Fleet remains
 	// in this state until the modification is complete.
-	//
-	// * active - The Capacity
+	// - active - The Capacity
 	// Reservation Fleet has fulfilled its total target capacity and it is attempting
 	// to maintain this capacity. The Fleet remains in this state until it is modified
 	// or deleted.
-	//
-	// * partially_fulfilled - The Capacity Reservation Fleet has
-	// partially fulfilled its total target capacity. There is insufficient Amazon EC2
-	// to fulfill the total target capacity. The Fleet is attempting to asynchronously
-	// fulfill its total target capacity.
-	//
-	// * expiring - The Capacity Reservation Fleet
-	// has reach its end date and it is in the process of expiring. One or more of its
+	// - partially_fulfilled - The Capacity Reservation Fleet has partially
+	// fulfilled its total target capacity. There is insufficient Amazon EC2 to fulfill
+	// the total target capacity. The Fleet is attempting to asynchronously fulfill its
+	// total target capacity.
+	// - expiring - The Capacity Reservation Fleet has reach its
+	// end date and it is in the process of expiring. One or more of its Capacity
+	// reservations might still be active.
+	// - expired - The Capacity Reservation Fleet
+	// has reach its end date. The Fleet and its Capacity Reservations are expired. The
+	// Fleet can't create new Capacity Reservations.
+	// - cancelling - The Capacity
+	// Reservation Fleet is in the process of being cancelled. One or more of its
 	// Capacity reservations might still be active.
-	//
-	// * expired - The Capacity
-	// Reservation Fleet has reach its end date. The Fleet and its Capacity
-	// Reservations are expired. The Fleet can't create new Capacity Reservations.
-	//
-	// *
-	// cancelling - The Capacity Reservation Fleet is in the process of being
-	// cancelled. One or more of its Capacity reservations might still be active.
-	//
-	// *
-	// cancelled - The Capacity Reservation Fleet has been manually cancelled. The
-	// Fleet and its Capacity Reservations are cancelled and the Fleet can't create new
-	// Capacity Reservations.
-	//
-	// * failed - The Capacity Reservation Fleet failed to
-	// reserve capacity for the specified instance types.
+	// - cancelled - The Capacity
+	// Reservation Fleet has been manually cancelled. The Fleet and its Capacity
+	// Reservations are cancelled and the Fleet can't create new Capacity
+	// Reservations.
+	// - failed - The Capacity Reservation Fleet failed to reserve
+	// capacity for the specified instance types.
 	State CapacityReservationFleetState
 
 	// The tags assigned to the Capacity Reservation Fleet.
 	Tags []Tag
 
 	// The tenancy of the Capacity Reservation Fleet. Tenancies include:
-	//
-	// * default -
+	// - default -
 	// The Capacity Reservation Fleet is created on hardware that is shared with other
 	// Amazon Web Services accounts.
-	//
-	// * dedicated - The Capacity Reservation Fleet is
+	// - dedicated - The Capacity Reservation Fleet is
 	// created on single-tenant hardware that is dedicated to a single Amazon Web
 	// Services account.
 	Tenancy FleetCapacityReservationTenancy
@@ -1307,13 +1278,11 @@ type CapacityReservationSpecification struct {
 
 	// Indicates the instance's Capacity Reservation preferences. Possible preferences
 	// include:
-	//
-	// * open - The instance can run in any open Capacity Reservation that
-	// has matching attributes (instance type, platform, Availability Zone).
-	//
-	// * none -
-	// The instance avoids running in a Capacity Reservation even if one is available.
-	// The instance runs as an On-Demand Instance.
+	// - open - The instance can run in any open Capacity Reservation that has
+	// matching attributes (instance type, platform, Availability Zone).
+	// - none - The
+	// instance avoids running in a Capacity Reservation even if one is available. The
+	// instance runs as an On-Demand Instance.
 	CapacityReservationPreference CapacityReservationPreference
 
 	// Information about the target Capacity Reservation or Capacity Reservation group.
@@ -1333,13 +1302,11 @@ type CapacityReservationSpecificationResponse struct {
 
 	// Describes the instance's Capacity Reservation preferences. Possible preferences
 	// include:
-	//
-	// * open - The instance can run in any open Capacity Reservation that
-	// has matching attributes (instance type, platform, Availability Zone).
-	//
-	// * none -
-	// The instance avoids running in a Capacity Reservation even if one is available.
-	// The instance runs in On-Demand capacity.
+	// - open - The instance can run in any open Capacity Reservation that has
+	// matching attributes (instance type, platform, Availability Zone).
+	// - none - The
+	// instance avoids running in a Capacity Reservation even if one is available. The
+	// instance runs in On-Demand capacity.
 	CapacityReservationPreference CapacityReservationPreference
 
 	// Information about the targeted Capacity Reservation or Capacity Reservation
@@ -1813,21 +1780,17 @@ type ClientVpnEndpointAttributeStatus struct {
 type ClientVpnEndpointStatus struct {
 
 	// The state of the Client VPN endpoint. Possible states include:
-	//
-	// *
+	// -
 	// pending-associate - The Client VPN endpoint has been created but no target
 	// networks have been associated. The Client VPN endpoint cannot accept
 	// connections.
-	//
-	// * available - The Client VPN endpoint has been created and a
-	// target network has been associated. The Client VPN endpoint can accept
-	// connections.
-	//
-	// * deleting - The Client VPN endpoint is being deleted. The Client
-	// VPN endpoint cannot accept connections.
-	//
-	// * deleted - The Client VPN endpoint has
-	// been deleted. The Client VPN endpoint cannot accept connections.
+	// - available - The Client VPN endpoint has been created and a target
+	// network has been associated. The Client VPN endpoint can accept connections.
+	// -
+	// deleting - The Client VPN endpoint is being deleted. The Client VPN endpoint
+	// cannot accept connections.
+	// - deleted - The Client VPN endpoint has been deleted.
+	// The Client VPN endpoint cannot accept connections.
 	Code ClientVpnEndpointStatusCode
 
 	// A message about the status of the Client VPN endpoint.
@@ -2578,12 +2541,10 @@ type DescribeFastSnapshotRestoreSuccessItem struct {
 	State FastSnapshotRestoreStateCode
 
 	// The reason for the state transition. The possible values are as follows:
-	//
-	// *
+	// -
 	// Client.UserInitiated - The state successfully transitioned to enabling or
 	// disabling.
-	//
-	// * Client.UserInitiated - Lifecycle state transition - The state
+	// - Client.UserInitiated - Lifecycle state transition - The state
 	// successfully transitioned to optimizing, enabled, or disabled.
 	StateTransitionReason *string
 
@@ -2804,12 +2765,10 @@ type DisableFastSnapshotRestoreSuccessItem struct {
 	State FastSnapshotRestoreStateCode
 
 	// The reason for the state transition. The possible values are as follows:
-	//
-	// *
+	// -
 	// Client.UserInitiated - The state successfully transitioned to enabling or
 	// disabling.
-	//
-	// * Client.UserInitiated - Lifecycle state transition - The state
+	// - Client.UserInitiated - Lifecycle state transition - The state
 	// successfully transitioned to optimizing, enabled, or disabled.
 	StateTransitionReason *string
 
@@ -2987,24 +2946,20 @@ type EbsBlockDevice struct {
 	// This parameter is not returned by DescribeImageAttribute. For CreateImage and
 	// RegisterImage, whether you can include this parameter, and the allowed values
 	// differ depending on the type of block device mapping you are creating.
-	//
-	// * If you
+	// - If you
 	// are creating a block device mapping for a new (empty) volume, you can include
 	// this parameter, and specify either true for an encrypted volume, or false for an
 	// unencrypted volume. If you omit this parameter, it defaults to false
 	// (unencrypted).
-	//
-	// * If you are creating a block device mapping from an existing
+	// - If you are creating a block device mapping from an existing
 	// encrypted or unencrypted snapshot, you must omit this parameter. If you include
 	// this parameter, the request will fail, regardless of the value that you
 	// specify.
-	//
-	// * If you are creating a block device mapping from an existing
+	// - If you are creating a block device mapping from an existing
 	// unencrypted volume, you can include this parameter, but you must specify false.
 	// If you specify true, the request will fail. In this case, we recommend that you
 	// omit the parameter.
-	//
-	// * If you are creating a block device mapping from an
+	// - If you are creating a block device mapping from an
 	// existing encrypted volume, you can include this parameter, and specify either
 	// true or false. However, if you specify false, the parameter is ignored and the
 	// block device mapping is always encrypted. In this case, we recommend that you
@@ -3016,13 +2971,10 @@ type EbsBlockDevice struct {
 	// volumes, this represents the baseline performance of the volume and the rate at
 	// which the volume accumulates I/O credits for bursting. The following are the
 	// supported values for each volume type:
-	//
-	// * gp3: 3,000-16,000 IOPS
-	//
-	// * io1:
+	// - gp3: 3,000-16,000 IOPS
+	// - io1:
 	// 100-64,000 IOPS
-	//
-	// * io2: 100-64,000 IOPS
+	// - io2: 100-64,000 IOPS
 	//
 	// For io1 and io2 volumes, we guarantee
 	// 64,000 IOPS only for Instances built on the Nitro System
@@ -3058,15 +3010,11 @@ type EbsBlockDevice struct {
 	// volume size. If you specify a snapshot, the default is the snapshot size. You
 	// can specify a volume size that is equal to or larger than the snapshot size. The
 	// following are the supported volumes sizes for each volume type:
-	//
-	// * gp2 and
+	// - gp2 and
 	// gp3:1-16,384
-	//
-	// * io1 and io2: 4-16,384
-	//
-	// * st1 and sc1: 125-16,384
-	//
-	// * standard:
+	// - io1 and io2: 4-16,384
+	// - st1 and sc1: 125-16,384
+	// - standard:
 	// 1-1,024
 	VolumeSize *int32
 
@@ -3371,12 +3319,10 @@ type EnableFastSnapshotRestoreSuccessItem struct {
 	State FastSnapshotRestoreStateCode
 
 	// The reason for the state transition. The possible values are as follows:
-	//
-	// *
+	// -
 	// Client.UserInitiated - The state successfully transitioned to enabling or
 	// disabling.
-	//
-	// * Client.UserInitiated - Lifecycle state transition - The state
+	// - Client.UserInitiated - Lifecycle state transition - The state
 	// successfully transitioned to optimizing, enabled, or disabled.
 	StateTransitionReason *string
 
@@ -3451,93 +3397,73 @@ type EventInformation struct {
 	EventDescription *string
 
 	// The event. error events:
-	//
-	// * iamFleetRoleInvalid - The EC2 Fleet or Spot Fleet
+	// - iamFleetRoleInvalid - The EC2 Fleet or Spot Fleet
 	// does not have the required permissions either to launch or terminate an
 	// instance.
-	//
-	// * allLaunchSpecsTemporarilyBlacklisted - None of the configurations
+	// - allLaunchSpecsTemporarilyBlacklisted - None of the configurations
 	// are valid, and several attempts to launch instances have failed. For more
 	// information, see the description of the event.
-	//
-	// * spotInstanceCountLimitExceeded
+	// - spotInstanceCountLimitExceeded
 	// - You've reached the limit on the number of Spot Instances that you can
 	// launch.
+	// - spotFleetRequestConfigurationInvalid - The configuration is not valid.
+	// For more information, see the description of the event.
 	//
-	// * spotFleetRequestConfigurationInvalid - The configuration is not
-	// valid. For more information, see the description of the
-	// event.
-	//
-	// fleetRequestChange events:
-	//
-	// * active - The EC2 Fleet or Spot Fleet
-	// request has been validated and Amazon EC2 is attempting to maintain the target
-	// number of running instances.
-	//
-	// * deleted (EC2 Fleet) / cancelled (Spot Fleet) -
-	// The EC2 Fleet is deleted or the Spot Fleet request is canceled and has no
-	// running instances. The EC2 Fleet or Spot Fleet will be deleted two days after
-	// its instances are terminated.
-	//
-	// * deleted_running (EC2 Fleet) / cancelled_running
-	// (Spot Fleet) - The EC2 Fleet is deleted or the Spot Fleet request is canceled
-	// and does not launch additional instances. Its existing instances continue to run
-	// until they are interrupted or terminated. The request remains in this state
-	// until all instances are interrupted or terminated.
-	//
-	// * deleted_terminating (EC2
-	// Fleet) / cancelled_terminating (Spot Fleet) - The EC2 Fleet is deleted or the
-	// Spot Fleet request is canceled and its instances are terminating. The request
-	// remains in this state until all instances are terminated.
-	//
-	// * expired - The EC2
-	// Fleet or Spot Fleet request has expired. If the request was created with
+	// fleetRequestChange
+	// events:
+	// - active - The EC2 Fleet or Spot Fleet request has been validated and
+	// Amazon EC2 is attempting to maintain the target number of running instances.
+	// -
+	// deleted (EC2 Fleet) / cancelled (Spot Fleet) - The EC2 Fleet is deleted or the
+	// Spot Fleet request is canceled and has no running instances. The EC2 Fleet or
+	// Spot Fleet will be deleted two days after its instances are terminated.
+	// -
+	// deleted_running (EC2 Fleet) / cancelled_running (Spot Fleet) - The EC2 Fleet is
+	// deleted or the Spot Fleet request is canceled and does not launch additional
+	// instances. Its existing instances continue to run until they are interrupted or
+	// terminated. The request remains in this state until all instances are
+	// interrupted or terminated.
+	// - deleted_terminating (EC2 Fleet) /
+	// cancelled_terminating (Spot Fleet) - The EC2 Fleet is deleted or the Spot Fleet
+	// request is canceled and its instances are terminating. The request remains in
+	// this state until all instances are terminated.
+	// - expired - The EC2 Fleet or Spot
+	// Fleet request has expired. If the request was created with
 	// TerminateInstancesWithExpiration set, a subsequent terminated event indicates
 	// that the instances are terminated.
-	//
-	// * modify_in_progress - The EC2 Fleet or Spot
+	// - modify_in_progress - The EC2 Fleet or Spot
 	// Fleet request is being modified. The request remains in this state until the
 	// modification is fully processed.
-	//
-	// * modify_succeeded - The EC2 Fleet or Spot
+	// - modify_succeeded - The EC2 Fleet or Spot
 	// Fleet request was modified.
-	//
-	// * submitted - The EC2 Fleet or Spot Fleet request
-	// is being evaluated and Amazon EC2 is preparing to launch the target number of
+	// - submitted - The EC2 Fleet or Spot Fleet request is
+	// being evaluated and Amazon EC2 is preparing to launch the target number of
 	// instances.
-	//
-	// * progress - The EC2 Fleet or Spot Fleet request is in the process
-	// of being fulfilled.
+	// - progress - The EC2 Fleet or Spot Fleet request is in the process of
+	// being fulfilled.
 	//
 	// instanceChange events:
-	//
-	// * launched - A new instance was
+	// - launched - A new instance was
 	// launched.
-	//
-	// * terminated - An instance was terminated by the user.
-	//
-	// *
+	// - terminated - An instance was terminated by the user.
+	// -
 	// termination_notified - An instance termination notification was sent when a Spot
 	// Instance was terminated by Amazon EC2 during scale-down, when the target
 	// capacity of the fleet was modified down, for example, from a target capacity of
 	// 4 to a target capacity of 3.
 	//
 	// Information events:
-	//
-	// * fleetProgressHalted - The
+	// - fleetProgressHalted - The
 	// price in every launch specification is not valid because it is below the Spot
 	// price (all the launch specifications have produced launchSpecUnusable events). A
 	// launch specification might become valid if the Spot price changes.
-	//
-	// *
+	// -
 	// launchSpecTemporarilyBlacklisted - The configuration is not valid and several
 	// attempts to launch instances have failed. For more information, see the
 	// description of the event.
-	//
-	// * launchSpecUnusable - The price in a launch
+	// - launchSpecUnusable - The price in a launch
 	// specification is not valid because it is below the Spot price.
-	//
-	// *
+	// -
 	// registerWithLoadBalancersFailed - An attempt to register instances with load
 	// balancers failed. For more information, see the description of the event.
 	EventSubType *string
@@ -3597,10 +3523,8 @@ type Explanation struct {
 	DestinationVpc *AnalysisComponent
 
 	// The direction. The following are the possible values:
-	//
-	// * egress
-	//
-	// * ingress
+	// - egress
+	// - ingress
 	Direction *string
 
 	// The load balancer listener.
@@ -4639,16 +4563,12 @@ type FpgaImageAttribute struct {
 type FpgaImageState struct {
 
 	// The state. The following are the possible values:
-	//
-	// * pending - AFI bitstream
+	// - pending - AFI bitstream
 	// generation is in progress.
-	//
-	// * available - The AFI is available for use.
-	//
-	// *
-	// failed - AFI bitstream generation failed.
-	//
-	// * unavailable - The AFI is no longer
+	// - available - The AFI is available for use.
+	// - failed
+	// - AFI bitstream generation failed.
+	// - unavailable - The AFI is no longer
 	// available for use.
 	Code FpgaImageStateCode
 
@@ -4759,16 +4679,12 @@ type HistoryRecord struct {
 	EventInformation *EventInformation
 
 	// The event type.
-	//
-	// * error - An error with the Spot Fleet request.
-	//
-	// *
+	// - error - An error with the Spot Fleet request.
+	// -
 	// fleetRequestChange - A change in the status or configuration of the Spot Fleet
 	// request.
-	//
-	// * instanceChange - An instance was launched or terminated.
-	//
-	// *
+	// - instanceChange - An instance was launched or terminated.
+	// -
 	// Information - An informational event.
 	EventType EventType
 
@@ -6030,20 +5946,18 @@ type InstanceMetadataOptionsRequest struct {
 	// IMDSv2 uses token-backed sessions. Set the use of HTTP tokens to optional (in
 	// other words, set the use of IMDSv2 to optional) or required (in other words, set
 	// the use of IMDSv2 to required).
-	//
-	// * optional - When IMDSv2 is optional, you can
+	// - optional - When IMDSv2 is optional, you can
 	// choose to retrieve instance metadata with or without a session token in your
 	// request. If you retrieve the IAM role credentials without a token, the IMDSv1
 	// role credentials are returned. If you retrieve the IAM role credentials using a
 	// valid session token, the IMDSv2 role credentials are returned.
+	// - required - When
+	// IMDSv2 is required, you must send a session token with any instance metadata
+	// retrieval requests. In this state, retrieving the IAM role credentials always
+	// returns IMDSv2 credentials; IMDSv1 credentials are not available.
 	//
-	// * required -
-	// When IMDSv2 is required, you must send a session token with any instance
-	// metadata retrieval requests. In this state, retrieving the IAM role credentials
-	// always returns IMDSv2 credentials; IMDSv1 credentials are not
-	// available.
-	//
-	// Default: optional
+	// Default:
+	// optional
 	HttpTokens HttpTokensState
 
 	// Set to enabled to allow access to instance tags from the instance metadata. Set
@@ -6075,15 +5989,13 @@ type InstanceMetadataOptionsResponse struct {
 	// IMDSv2 uses token-backed sessions. Indicates whether the use of HTTP tokens is
 	// optional (in other words, indicates whether the use of IMDSv2 is optional) or
 	// required (in other words, indicates whether the use of IMDSv2 is required).
-	//
-	// *
+	// -
 	// optional - When IMDSv2 is optional, you can choose to retrieve instance metadata
 	// with or without a session token in your request. If you retrieve the IAM role
 	// credentials without a token, the IMDSv1 role credentials are returned. If you
 	// retrieve the IAM role credentials using a valid session token, the IMDSv2 role
 	// credentials are returned.
-	//
-	// * required - When IMDSv2 is required, you must send a
+	// - required - When IMDSv2 is required, you must send a
 	// session token with any instance metadata retrieval requests. In this state,
 	// retrieving the IAM role credentials always returns IMDSv2 credentials; IMDSv1
 	// credentials are not available.
@@ -6363,12 +6275,10 @@ type InstancePrivateIpAddress struct {
 // types that satisfy any of the specified values. To limit the list of instance
 // types from which Amazon EC2 can identify matching instance types, you can use
 // one of the following parameters, but not both in the same request:
-//
-// *
+// -
 // AllowedInstanceTypes - The instance types to include in the list. All other
 // instance types are ignored, even if they match your specified attributes.
-//
-// *
+// -
 // ExcludedInstanceTypes - The instance types to exclude from the list, even if
 // they match your specified attributes.
 //
@@ -6391,47 +6301,34 @@ type InstanceRequirements struct {
 
 	// Indicates whether instance types must have accelerators by specific
 	// manufacturers.
-	//
-	// * For instance types with NVIDIA devices, specify nvidia.
-	//
-	// * For
+	// - For instance types with NVIDIA devices, specify nvidia.
+	// - For
 	// instance types with AMD devices, specify amd.
-	//
-	// * For instance types with Amazon
+	// - For instance types with Amazon
 	// Web Services devices, specify amazon-web-services.
-	//
-	// * For instance types with
+	// - For instance types with
 	// Xilinx devices, specify xilinx.
 	//
 	// Default: Any manufacturer
 	AcceleratorManufacturers []AcceleratorManufacturer
 
 	// The accelerators that must be on the instance type.
-	//
-	// * For instance types with
+	// - For instance types with
 	// NVIDIA A100 GPUs, specify a100.
-	//
-	// * For instance types with NVIDIA V100 GPUs,
+	// - For instance types with NVIDIA V100 GPUs,
 	// specify v100.
-	//
-	// * For instance types with NVIDIA K80 GPUs, specify k80.
-	//
-	// * For
+	// - For instance types with NVIDIA K80 GPUs, specify k80.
+	// - For
 	// instance types with NVIDIA T4 GPUs, specify t4.
-	//
-	// * For instance types with
-	// NVIDIA M60 GPUs, specify m60.
-	//
-	// * For instance types with AMD Radeon Pro V520
-	// GPUs, specify radeon-pro-v520.
-	//
-	// * For instance types with Xilinx VU9P FPGAs,
-	// specify vu9p.
-	//
-	// * For instance types with Amazon Web Services Inferentia chips,
-	// specify inferentia.
-	//
-	// * For instance types with NVIDIA GRID K520 GPUs, specify
+	// - For instance types with NVIDIA
+	// M60 GPUs, specify m60.
+	// - For instance types with AMD Radeon Pro V520 GPUs,
+	// specify radeon-pro-v520.
+	// - For instance types with Xilinx VU9P FPGAs, specify
+	// vu9p.
+	// - For instance types with Amazon Web Services Inferentia chips, specify
+	// inferentia.
+	// - For instance types with NVIDIA GRID K520 GPUs, specify
 	// k520.
 	//
 	// Default: Any accelerator
@@ -6442,15 +6339,12 @@ type InstanceRequirements struct {
 	AcceleratorTotalMemoryMiB *AcceleratorTotalMemoryMiB
 
 	// The accelerator types that must be on the instance type.
-	//
-	// * For instance types
+	// - For instance types
 	// with GPU accelerators, specify gpu.
-	//
-	// * For instance types with FPGA
-	// accelerators, specify fpga.
-	//
-	// * For instance types with inference accelerators,
-	// specify inference.
+	// - For instance types with FPGA accelerators,
+	// specify fpga.
+	// - For instance types with inference accelerators, specify
+	// inference.
 	//
 	// Default: Any accelerator type
 	AcceleratorTypes []AcceleratorType
@@ -6468,14 +6362,11 @@ type InstanceRequirements struct {
 
 	// Indicates whether bare metal instance types must be included, excluded, or
 	// required.
-	//
-	// * To include bare metal instance types, specify included.
-	//
-	// * To
-	// require only bare metal instance types, specify required.
-	//
-	// * To exclude bare
-	// metal instance types, specify excluded.
+	// - To include bare metal instance types, specify included.
+	// - To require
+	// only bare metal instance types, specify required.
+	// - To exclude bare metal
+	// instance types, specify excluded.
 	//
 	// Default: excluded
 	BareMetal BareMetal
@@ -6489,27 +6380,21 @@ type InstanceRequirements struct {
 	// Indicates whether burstable performance T instance types are included, excluded,
 	// or required. For more information, see Burstable performance instances
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html).
-	//
-	// *
+	// -
 	// To include burstable performance instance types, specify included.
-	//
-	// * To require
+	// - To require
 	// only burstable performance instance types, specify required.
-	//
-	// * To exclude
+	// - To exclude
 	// burstable performance instance types, specify excluded.
 	//
 	// Default: excluded
 	BurstablePerformance BurstablePerformance
 
 	// The CPU manufacturers to include.
-	//
-	// * For instance types with Intel CPUs, specify
+	// - For instance types with Intel CPUs, specify
 	// intel.
-	//
-	// * For instance types with AMD CPUs, specify amd.
-	//
-	// * For instance types
+	// - For instance types with AMD CPUs, specify amd.
+	// - For instance types
 	// with Amazon Web Services CPUs, specify amazon-web-services.
 	//
 	// Don't confuse the
@@ -6542,25 +6427,20 @@ type InstanceRequirements struct {
 	// excluded, or required. For more information, Amazon EC2 instance store
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html) in
 	// the Amazon EC2 User Guide.
-	//
-	// * To include instance types with instance store
+	// - To include instance types with instance store
 	// volumes, specify included.
-	//
-	// * To require only instance types with instance store
+	// - To require only instance types with instance store
 	// volumes, specify required.
-	//
-	// * To exclude instance types with instance store
+	// - To exclude instance types with instance store
 	// volumes, specify excluded.
 	//
 	// Default: included
 	LocalStorage LocalStorage
 
 	// The type of local storage that is required.
-	//
-	// * For instance types with hard disk
+	// - For instance types with hard disk
 	// drive (HDD) storage, specify hdd.
-	//
-	// * For instance types with solid state drive
+	// - For instance types with solid state drive
 	// (SSD) storage, specify ssd.
 	//
 	// Default: hdd and ssd
@@ -6636,12 +6516,10 @@ type InstanceRequirements struct {
 // types that satisfy any of the specified values. To limit the list of instance
 // types from which Amazon EC2 can identify matching instance types, you can use
 // one of the following parameters, but not both in the same request:
-//
-// *
+// -
 // AllowedInstanceTypes - The instance types to include in the list. All other
 // instance types are ignored, even if they match your specified attributes.
-//
-// *
+// -
 // ExcludedInstanceTypes - The instance types to exclude from the list, even if
 // they match your specified attributes.
 //
@@ -6674,47 +6552,34 @@ type InstanceRequirementsRequest struct {
 
 	// Indicates whether instance types must have accelerators by specific
 	// manufacturers.
-	//
-	// * For instance types with NVIDIA devices, specify nvidia.
-	//
-	// * For
+	// - For instance types with NVIDIA devices, specify nvidia.
+	// - For
 	// instance types with AMD devices, specify amd.
-	//
-	// * For instance types with Amazon
+	// - For instance types with Amazon
 	// Web Services devices, specify amazon-web-services.
-	//
-	// * For instance types with
+	// - For instance types with
 	// Xilinx devices, specify xilinx.
 	//
 	// Default: Any manufacturer
 	AcceleratorManufacturers []AcceleratorManufacturer
 
 	// The accelerators that must be on the instance type.
-	//
-	// * For instance types with
+	// - For instance types with
 	// NVIDIA A100 GPUs, specify a100.
-	//
-	// * For instance types with NVIDIA V100 GPUs,
+	// - For instance types with NVIDIA V100 GPUs,
 	// specify v100.
-	//
-	// * For instance types with NVIDIA K80 GPUs, specify k80.
-	//
-	// * For
+	// - For instance types with NVIDIA K80 GPUs, specify k80.
+	// - For
 	// instance types with NVIDIA T4 GPUs, specify t4.
-	//
-	// * For instance types with
-	// NVIDIA M60 GPUs, specify m60.
-	//
-	// * For instance types with AMD Radeon Pro V520
-	// GPUs, specify radeon-pro-v520.
-	//
-	// * For instance types with Xilinx VU9P FPGAs,
-	// specify  vu9p.
-	//
-	// * For instance types with Amazon Web Services Inferentia chips,
-	// specify inferentia.
-	//
-	// * For instance types with NVIDIA GRID K520 GPUs, specify
+	// - For instance types with NVIDIA
+	// M60 GPUs, specify m60.
+	// - For instance types with AMD Radeon Pro V520 GPUs,
+	// specify radeon-pro-v520.
+	// - For instance types with Xilinx VU9P FPGAs, specify
+	// vu9p.
+	// - For instance types with Amazon Web Services Inferentia chips, specify
+	// inferentia.
+	// - For instance types with NVIDIA GRID K520 GPUs, specify
 	// k520.
 	//
 	// Default: Any accelerator
@@ -6725,14 +6590,11 @@ type InstanceRequirementsRequest struct {
 	AcceleratorTotalMemoryMiB *AcceleratorTotalMemoryMiBRequest
 
 	// The accelerator types that must be on the instance type.
-	//
-	// * To include instance
+	// - To include instance
 	// types with GPU hardware, specify gpu.
-	//
-	// * To include instance types with FPGA
+	// - To include instance types with FPGA
 	// hardware, specify fpga.
-	//
-	// * To include instance types with inference hardware,
+	// - To include instance types with inference hardware,
 	// specify inference.
 	//
 	// Default: Any accelerator type
@@ -6751,14 +6613,11 @@ type InstanceRequirementsRequest struct {
 
 	// Indicates whether bare metal instance types must be included, excluded, or
 	// required.
-	//
-	// * To include bare metal instance types, specify included.
-	//
-	// * To
-	// require only bare metal instance types, specify required.
-	//
-	// * To exclude bare
-	// metal instance types, specify excluded.
+	// - To include bare metal instance types, specify included.
+	// - To require
+	// only bare metal instance types, specify required.
+	// - To exclude bare metal
+	// instance types, specify excluded.
 	//
 	// Default: excluded
 	BareMetal BareMetal
@@ -6772,27 +6631,21 @@ type InstanceRequirementsRequest struct {
 	// Indicates whether burstable performance T instance types are included, excluded,
 	// or required. For more information, see Burstable performance instances
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html).
-	//
-	// *
+	// -
 	// To include burstable performance instance types, specify included.
-	//
-	// * To require
+	// - To require
 	// only burstable performance instance types, specify required.
-	//
-	// * To exclude
+	// - To exclude
 	// burstable performance instance types, specify excluded.
 	//
 	// Default: excluded
 	BurstablePerformance BurstablePerformance
 
 	// The CPU manufacturers to include.
-	//
-	// * For instance types with Intel CPUs, specify
+	// - For instance types with Intel CPUs, specify
 	// intel.
-	//
-	// * For instance types with AMD CPUs, specify amd.
-	//
-	// * For instance types
+	// - For instance types with AMD CPUs, specify amd.
+	// - For instance types
 	// with Amazon Web Services CPUs, specify amazon-web-services.
 	//
 	// Don't confuse the
@@ -6825,25 +6678,20 @@ type InstanceRequirementsRequest struct {
 	// excluded, or required. For more information, Amazon EC2 instance store
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html) in
 	// the Amazon EC2 User Guide.
-	//
-	// * To include instance types with instance store
+	// - To include instance types with instance store
 	// volumes, specify included.
-	//
-	// * To require only instance types with instance store
+	// - To require only instance types with instance store
 	// volumes, specify required.
-	//
-	// * To exclude instance types with instance store
+	// - To exclude instance types with instance store
 	// volumes, specify excluded.
 	//
 	// Default: included
 	LocalStorage LocalStorage
 
 	// The type of local storage that is required.
-	//
-	// * For instance types with hard disk
+	// - For instance types with hard disk
 	// drive (HDD) storage, specify hdd.
-	//
-	// * For instance types with solid state drive
+	// - For instance types with solid state drive
 	// (SSD) storage, specify ssd.
 	//
 	// Default: hdd and ssd
@@ -6954,23 +6802,17 @@ type InstanceState struct {
 	// ignored. The low byte is all of the bits between 2^0 and (2^8)-1, which equals
 	// decimal values between 0 and 255. The valid values for instance-state-code will
 	// all be in the range of the low byte and they are:
+	// - 0 : pending
+	// - 16 : running
+	// -
+	// 32 : shutting-down
+	// - 48 : terminated
+	// - 64 : stopping
+	// - 80 : stopped
 	//
-	// * 0 : pending
-	//
-	// * 16 :
-	// running
-	//
-	// * 32 : shutting-down
-	//
-	// * 48 : terminated
-	//
-	// * 64 : stopping
-	//
-	// * 80 :
-	// stopped
-	//
-	// You can ignore the high byte value by zeroing out all of the bits above
-	// 2^8 or 256 in decimal.
+	// You can
+	// ignore the high byte value by zeroing out all of the bits above 2^8 or 256 in
+	// decimal.
 	Code *int32
 
 	// The current state of the instance.
@@ -7441,18 +7283,15 @@ type IpamDiscoveredResourceCidr struct {
 
 	// The percentage of IP address space in use. To convert the decimal to a
 	// percentage, multiply the decimal by 100. Note the following:
-	//
-	// * For resources
+	// - For resources
 	// that are VPCs, this is the percentage of IP address space in the VPC that's
 	// taken up by subnet CIDRs.
-	//
-	// * For resources that are subnets, if the subnet has
-	// an IPv4 CIDR provisioned to it, this is the percentage of IPv4 address space in
-	// the subnet that's in use. If the subnet has an IPv6 CIDR provisioned to it, the
+	// - For resources that are subnets, if the subnet has an
+	// IPv4 CIDR provisioned to it, this is the percentage of IPv4 address space in the
+	// subnet that's in use. If the subnet has an IPv6 CIDR provisioned to it, the
 	// percentage of IPv6 address space in use is not represented. The percentage of
 	// IPv6 address space in use cannot currently be calculated.
-	//
-	// * For resources that
+	// - For resources that
 	// are public IPv4 pools, this is the percentage of IP address space in the pool
 	// that's been allocated to Elastic IP addresses (EIPs).
 	IpUsage *float64
@@ -7491,24 +7330,19 @@ type IpamDiscoveredResourceCidr struct {
 type IpamDiscoveryFailureReason struct {
 
 	// The discovery failure code.
-	//
-	// * assume-role-failure - IPAM could not assume the
+	// - assume-role-failure - IPAM could not assume the
 	// Amazon Web Services IAM service-linked role. This could be because of any of the
 	// following:
-	//
-	// * SLR has not been created yet and IPAM is still creating it.
-	//
-	// * You
+	// - SLR has not been created yet and IPAM is still creating it.
+	// - You
 	// have opted-out of the IPAM home Region.
-	//
-	// * Account you are using as your IPAM
+	// - Account you are using as your IPAM
 	// account has been suspended.
 	//
-	// * throttling-failure - IPAM account is already
+	// - throttling-failure - IPAM account is already
 	// using the allotted transactions per second and IPAM is receiving a throttling
 	// error when assuming the Amazon Web Services IAM SLR.
-	//
-	// * unauthorized-failure -
+	// - unauthorized-failure -
 	// Amazon Web Services account making the request is not authorized. For more
 	// information, see AuthFailure
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html) in
@@ -7742,18 +7576,15 @@ type IpamResourceCidr struct {
 
 	// The percentage of IP address space in use. To convert the decimal to a
 	// percentage, multiply the decimal by 100. Note the following:
-	//
-	// * For resources
+	// - For resources
 	// that are VPCs, this is the percentage of IP address space in the VPC that's
 	// taken up by subnet CIDRs.
-	//
-	// * For resources that are subnets, if the subnet has
-	// an IPv4 CIDR provisioned to it, this is the percentage of IPv4 address space in
-	// the subnet that's in use. If the subnet has an IPv6 CIDR provisioned to it, the
+	// - For resources that are subnets, if the subnet has an
+	// IPv4 CIDR provisioned to it, this is the percentage of IPv4 address space in the
+	// subnet that's in use. If the subnet has an IPv6 CIDR provisioned to it, the
 	// percentage of IPv6 address space in use is not represented. The percentage of
 	// IPv6 address space in use cannot currently be calculated.
-	//
-	// * For resources that
+	// - For resources that
 	// are public IPv4 pools, this is the percentage of IP address space in the pool
 	// that's been allocated to Elastic IP addresses (EIPs).
 	IpUsage *float64
@@ -7837,40 +7668,28 @@ type IpamResourceDiscovery struct {
 	OwnerId *string
 
 	// The lifecycle state of the resource discovery.
-	//
-	// * create-in-progress - Resource
+	// - create-in-progress - Resource
 	// discovery is being created.
-	//
-	// * create-complete - Resource discovery creation is
+	// - create-complete - Resource discovery creation is
 	// complete.
-	//
-	// * create-failed - Resource discovery creation has failed.
-	//
-	// *
+	// - create-failed - Resource discovery creation has failed.
+	// -
 	// modify-in-progress - Resource discovery is being modified.
-	//
-	// * modify-complete -
+	// - modify-complete -
 	// Resource discovery modification is complete.
-	//
-	// * modify-failed - Resource
+	// - modify-failed - Resource
 	// discovery modification has failed.
-	//
-	// * delete-in-progress - Resource discovery is
+	// - delete-in-progress - Resource discovery is
 	// being deleted.
-	//
-	// * delete-complete - Resource discovery deletion is complete.
-	//
-	// *
+	// - delete-complete - Resource discovery deletion is complete.
+	// -
 	// delete-failed - Resource discovery deletion has failed.
-	//
-	// * isolate-in-progress -
+	// - isolate-in-progress -
 	// Amazon Web Services account that created the resource discovery has been removed
 	// and the resource discovery is being isolated.
-	//
-	// * isolate-complete - Resource
+	// - isolate-complete - Resource
 	// discovery isolation is complete.
-	//
-	// * restore-in-progress - Amazon Web Services
+	// - restore-in-progress - Amazon Web Services
 	// account that created the resource discovery and was isolated has been restored.
 	State IpamResourceDiscoveryState
 
@@ -7914,11 +7733,9 @@ type IpamResourceDiscoveryAssociation struct {
 	OwnerId *string
 
 	// The resource discovery status.
-	//
-	// * active - Connection or permissions required to
+	// - active - Connection or permissions required to
 	// read the results of the resource discovery are intact.
-	//
-	// * not-found - Connection
+	// - not-found - Connection
 	// or permissions required to read the results of the resource discovery are
 	// broken. This may happen if the owner of the resource discovery stopped sharing
 	// it or deleted the resource discovery. Verify the resource discovery still exists
@@ -7927,33 +7744,24 @@ type IpamResourceDiscoveryAssociation struct {
 
 	// The lifecycle state of the association when you associate or disassociate a
 	// resource discovery.
-	//
-	// * associate-in-progress - Resource discovery is being
+	// - associate-in-progress - Resource discovery is being
 	// associated.
-	//
-	// * associate-complete - Resource discovery association is
-	// complete.
-	//
-	// * associate-failed - Resource discovery association has failed.
-	//
-	// *
+	// - associate-complete - Resource discovery association is complete.
+	// -
+	// associate-failed - Resource discovery association has failed.
+	// -
 	// disassociate-in-progress - Resource discovery is being disassociated.
-	//
-	// *
+	// -
 	// disassociate-complete - Resource discovery disassociation is complete.
-	//
-	// *
+	// -
 	// disassociate-failed  - Resource discovery disassociation has failed.
-	//
-	// *
+	// -
 	// isolate-in-progress - Amazon Web Services account that created the resource
 	// discovery association has been removed and the resource discovery associatation
 	// is being isolated.
-	//
-	// * isolate-complete - Resource discovery isolation is
+	// - isolate-complete - Resource discovery isolation is
 	// complete..
-	//
-	// * restore-in-progress - Resource discovery is being restored.
+	// - restore-in-progress - Resource discovery is being restored.
 	State IpamResourceDiscoveryAssociationState
 
 	// A tag is a label that you assign to an Amazon Web Services resource. Each tag
@@ -8209,22 +8017,18 @@ type KeyPairInfo struct {
 	CreateTime *time.Time
 
 	// If you used CreateKeyPair to create the key pair:
-	//
-	// * For RSA key pairs, the key
+	// - For RSA key pairs, the key
 	// fingerprint is the SHA-1 digest of the DER encoded private key.
-	//
-	// * For ED25519
+	// - For ED25519
 	// key pairs, the key fingerprint is the base64-encoded SHA-256 digest, which is
 	// the default for OpenSSH, starting with OpenSSH 6.8
 	// (http://www.openssh.com/txt/release-6.8).
 	//
 	// If you used ImportKeyPair to provide
 	// Amazon Web Services the public key:
-	//
-	// * For RSA key pairs, the key fingerprint is
+	// - For RSA key pairs, the key fingerprint is
 	// the MD5 public key fingerprint as specified in section 4 of RFC4716.
-	//
-	// * For
+	// - For
 	// ED25519 key pairs, the key fingerprint is the base64-encoded SHA-256 digest,
 	// which is the default for OpenSSH, starting with OpenSSH 6.8
 	// (http://www.openssh.com/txt/release-6.8).
@@ -8443,13 +8247,11 @@ type LaunchTemplateCapacityReservationSpecificationRequest struct {
 
 	// Indicates the instance's Capacity Reservation preferences. Possible preferences
 	// include:
-	//
-	// * open - The instance can run in any open Capacity Reservation that
-	// has matching attributes (instance type, platform, Availability Zone).
-	//
-	// * none -
-	// The instance avoids running in a Capacity Reservation even if one is available.
-	// The instance runs in On-Demand capacity.
+	// - open - The instance can run in any open Capacity Reservation that has
+	// matching attributes (instance type, platform, Availability Zone).
+	// - none - The
+	// instance avoids running in a Capacity Reservation even if one is available. The
+	// instance runs in On-Demand capacity.
 	CapacityReservationPreference CapacityReservationPreference
 
 	// Information about the target Capacity Reservation or Capacity Reservation group.
@@ -8463,13 +8265,11 @@ type LaunchTemplateCapacityReservationSpecificationResponse struct {
 
 	// Indicates the instance's Capacity Reservation preferences. Possible preferences
 	// include:
-	//
-	// * open - The instance can run in any open Capacity Reservation that
-	// has matching attributes (instance type, platform, Availability Zone).
-	//
-	// * none -
-	// The instance avoids running in a Capacity Reservation even if one is available.
-	// The instance runs in On-Demand capacity.
+	// - open - The instance can run in any open Capacity Reservation that has
+	// matching attributes (instance type, platform, Availability Zone).
+	// - none - The
+	// instance avoids running in a Capacity Reservation even if one is available. The
+	// instance runs in On-Demand capacity.
 	CapacityReservationPreference CapacityReservationPreference
 
 	// Information about the target Capacity Reservation or Capacity Reservation group.
@@ -8563,13 +8363,10 @@ type LaunchTemplateEbsBlockDeviceRequest struct {
 	// volumes, this represents the baseline performance of the volume and the rate at
 	// which the volume accumulates I/O credits for bursting. The following are the
 	// supported values for each volume type:
-	//
-	// * gp3: 3,000-16,000 IOPS
-	//
-	// * io1:
+	// - gp3: 3,000-16,000 IOPS
+	// - io1:
 	// 100-64,000 IOPS
-	//
-	// * io2: 100-64,000 IOPS
+	// - io2: 100-64,000 IOPS
 	//
 	// For io1 and io2 volumes, we guarantee
 	// 64,000 IOPS only for Instances built on the Nitro System
@@ -8592,15 +8389,11 @@ type LaunchTemplateEbsBlockDeviceRequest struct {
 	// The size of the volume, in GiBs. You must specify either a snapshot ID or a
 	// volume size. The following are the supported volumes sizes for each volume
 	// type:
-	//
-	// * gp2 and gp3: 1-16,384
-	//
-	// * io1 and io2: 4-16,384
-	//
-	// * st1 and sc1:
+	// - gp2 and gp3: 1-16,384
+	// - io1 and io2: 4-16,384
+	// - st1 and sc1:
 	// 125-16,384
-	//
-	// * standard: 1-1,024
+	// - standard: 1-1,024
 	VolumeSize *int32
 
 	// The volume type. For more information, see Amazon EBS volume types
@@ -8826,20 +8619,18 @@ type LaunchTemplateInstanceMetadataOptionsRequest struct {
 	// IMDSv2 uses token-backed sessions. Set the use of HTTP tokens to optional (in
 	// other words, set the use of IMDSv2 to optional) or required (in other words, set
 	// the use of IMDSv2 to required).
-	//
-	// * optional - When IMDSv2 is optional, you can
+	// - optional - When IMDSv2 is optional, you can
 	// choose to retrieve instance metadata with or without a session token in your
 	// request. If you retrieve the IAM role credentials without a token, the IMDSv1
 	// role credentials are returned. If you retrieve the IAM role credentials using a
 	// valid session token, the IMDSv2 role credentials are returned.
+	// - required - When
+	// IMDSv2 is required, you must send a session token with any instance metadata
+	// retrieval requests. In this state, retrieving the IAM role credentials always
+	// returns IMDSv2 credentials; IMDSv1 credentials are not available.
 	//
-	// * required -
-	// When IMDSv2 is required, you must send a session token with any instance
-	// metadata retrieval requests. In this state, retrieving the IAM role credentials
-	// always returns IMDSv2 credentials; IMDSv1 credentials are not
-	// available.
-	//
-	// Default: optional
+	// Default:
+	// optional
 	HttpTokens LaunchTemplateHttpTokensState
 
 	// Set to enabled to allow access to instance tags from the instance metadata. Set
@@ -9271,12 +9062,10 @@ type LaunchTemplateSpotMarketOptionsRequest struct {
 
 	// The end date of the request, in UTC format (YYYY-MM-DDTHH:MM:SSZ). Supported
 	// only for persistent requests.
-	//
-	// * For a persistent request, the request remains
+	// - For a persistent request, the request remains
 	// active until the ValidUntil date and time is reached. Otherwise, the request
 	// remains active until you cancel it.
-	//
-	// * For a one-time request, ValidUntil is not
+	// - For a one-time request, ValidUntil is not
 	// supported. The request remains active until all instances launch or you cancel
 	// the request.
 	//
@@ -9940,22 +9729,15 @@ type ModifyVpnTunnelOptionsSpecification struct {
 	// must be unique across all VPN connections that use the same virtual private
 	// gateway. Constraints: A size /30 CIDR block from the 169.254.0.0/16 range. The
 	// following CIDR blocks are reserved and cannot be used:
-	//
-	// * 169.254.0.0/30
-	//
-	// *
+	// - 169.254.0.0/30
+	// -
 	// 169.254.1.0/30
-	//
-	// * 169.254.2.0/30
-	//
-	// * 169.254.3.0/30
-	//
-	// * 169.254.4.0/30
-	//
-	// *
+	// - 169.254.2.0/30
+	// - 169.254.3.0/30
+	// - 169.254.4.0/30
+	// -
 	// 169.254.5.0/30
-	//
-	// * 169.254.169.252/30
+	// - 169.254.169.252/30
 	TunnelInsideCidr *string
 
 	// The range of inside IPv6 addresses for the tunnel. Any specified CIDR blocks
@@ -10013,27 +9795,21 @@ type NatGateway struct {
 
 	// If the NAT gateway could not be created, specifies the error message for the
 	// failure, that corresponds to the error code.
-	//
-	// * For
+	// - For
 	// InsufficientFreeAddressesInSubnet: "Subnet has insufficient free addresses to
 	// create this NAT gateway"
-	//
-	// * For Gateway.NotAttached: "Network vpc-xxxxxxxx has
-	// no Internet gateway attached"
-	//
-	// * For InvalidAllocationID.NotFound: "Elastic IP
+	// - For Gateway.NotAttached: "Network vpc-xxxxxxxx has no
+	// Internet gateway attached"
+	// - For InvalidAllocationID.NotFound: "Elastic IP
 	// address eipalloc-xxxxxxxx could not be associated with this NAT gateway"
-	//
-	// * For
+	// - For
 	// Resource.AlreadyAssociated: "Elastic IP address eipalloc-xxxxxxxx is already
 	// associated"
-	//
-	// * For InternalError: "Network interface eni-xxxxxxxx, created and
-	// used internally by this NAT gateway is in an invalid state. Please try
-	// again."
-	//
-	// * For InvalidSubnetID.NotFound: "The specified subnet subnet-xxxxxxxx
-	// does not exist or could not be found."
+	// - For InternalError: "Network interface eni-xxxxxxxx, created and
+	// used internally by this NAT gateway is in an invalid state. Please try again."
+	// -
+	// For InvalidSubnetID.NotFound: "The specified subnet subnet-xxxxxxxx does not
+	// exist or could not be found."
 	FailureMessage *string
 
 	// Information about the IP addresses and network interface associated with the NAT
@@ -10049,23 +9825,18 @@ type NatGateway struct {
 	ProvisionedBandwidth *ProvisionedBandwidth
 
 	// The state of the NAT gateway.
-	//
-	// * pending: The NAT gateway is being created and
-	// is not ready to process traffic.
-	//
-	// * failed: The NAT gateway could not be
-	// created. Check the failureCode and failureMessage fields for the reason.
-	//
-	// *
-	// available: The NAT gateway is able to process traffic. This status remains until
-	// you delete the NAT gateway, and does not indicate the health of the NAT
-	// gateway.
-	//
-	// * deleting: The NAT gateway is in the process of being terminated and
-	// may still be processing traffic.
-	//
-	// * deleted: The NAT gateway has been terminated
-	// and is no longer processing traffic.
+	// - pending: The NAT gateway is being created and is
+	// not ready to process traffic.
+	// - failed: The NAT gateway could not be created.
+	// Check the failureCode and failureMessage fields for the reason.
+	// - available: The
+	// NAT gateway is able to process traffic. This status remains until you delete the
+	// NAT gateway, and does not indicate the health of the NAT gateway.
+	// - deleting:
+	// The NAT gateway is in the process of being terminated and may still be
+	// processing traffic.
+	// - deleted: The NAT gateway has been terminated and is no
+	// longer processing traffic.
 	State NatGatewayState
 
 	// The ID of the subnet in which the NAT gateway is located.
@@ -11874,29 +11645,21 @@ type ReplaceRootVolumeTask struct {
 	Tags []Tag
 
 	// The state of the task. The task can be in one of the following states:
-	//
-	// *
-	// pending - the replacement volume is being created.
-	//
-	// * in-progress - the original
-	// volume is being detached and the replacement volume is being attached.
-	//
-	// *
-	// succeeded - the replacement volume has been successfully attached to the
-	// instance and the instance is available.
-	//
-	// * failing - the replacement task is in
-	// the process of failing.
-	//
-	// * failed - the replacement task has failed but the
-	// original root volume is still attached.
-	//
-	// * failing-detached - the replacement
-	// task is in the process of failing. The instance might have no root volume
-	// attached.
-	//
-	// * failed-detached - the replacement task has failed and the instance
-	// has no root volume attached.
+	// - pending
+	// - the replacement volume is being created.
+	// - in-progress - the original volume
+	// is being detached and the replacement volume is being attached.
+	// - succeeded -
+	// the replacement volume has been successfully attached to the instance and the
+	// instance is available.
+	// - failing - the replacement task is in the process of
+	// failing.
+	// - failed - the replacement task has failed but the original root volume
+	// is still attached.
+	// - failing-detached - the replacement task is in the process
+	// of failing. The instance might have no root volume attached.
+	// - failed-detached -
+	// the replacement task has failed and the instance has no root volume attached.
 	TaskState ReplaceRootVolumeTaskState
 
 	noSmithyDocumentSerde
@@ -11996,16 +11759,12 @@ type RequestLaunchTemplateData struct {
 
 	// The ID of the AMI. Alternatively, you can specify a Systems Manager parameter,
 	// which will resolve to an AMI ID on launch. Valid formats:
-	//
-	// *
+	// -
 	// ami-17characters00000
-	//
-	// * resolve:ssm:parameter-name
-	//
-	// *
+	// - resolve:ssm:parameter-name
+	// -
 	// resolve:ssm:parameter-name:version-number
-	//
-	// *
+	// -
 	// resolve:ssm:parameter-name:label
 	//
 	// For more information, see Use a Systems
@@ -12093,17 +11852,12 @@ type RequestLaunchTemplateData struct {
 
 	// The tags to apply to the resources that are created during instance launch. You
 	// can specify tags for the following resources only:
-	//
-	// * Instances
-	//
-	// * Volumes
-	//
-	// *
+	// - Instances
+	// - Volumes
+	// -
 	// Elastic graphics
-	//
-	// * Spot Instance requests
-	//
-	// * Network interfaces
+	// - Spot Instance requests
+	// - Network interfaces
 	//
 	// To tag a
 	// resource after it has been created, see CreateTags
@@ -12644,16 +12398,13 @@ type ResponseLaunchTemplateData struct {
 	// The ID of the AMI or a Systems Manager parameter. The Systems Manager parameter
 	// will resolve to the ID of the AMI at instance launch. The value depends on what
 	// you specified in the request. The possible values are:
-	//
-	// * If an AMI ID was
+	// - If an AMI ID was
 	// specified in the request, then this is the AMI ID.
-	//
-	// * If a Systems Manager
+	// - If a Systems Manager
 	// parameter was specified in the request, and ResolveAlias was configured as true,
 	// then this is the AMI ID that the parameter is mapped to in the Parameter
 	// Store.
-	//
-	// * If a Systems Manager parameter was specified in the request, and
+	// - If a Systems Manager parameter was specified in the request, and
 	// ResolveAlias was configured as false, then this is the parameter value.
 	//
 	// For
@@ -12766,14 +12517,11 @@ type Route struct {
 	NetworkInterfaceId *string
 
 	// Describes how the route was created.
-	//
-	// * CreateRouteTable - The route was
+	// - CreateRouteTable - The route was
 	// automatically created when the route table was created.
-	//
-	// * CreateRoute - The
+	// - CreateRoute - The
 	// route was manually added to the route table.
-	//
-	// * EnableVgwRoutePropagation - The
+	// - EnableVgwRoutePropagation - The
 	// route was propagated by route propagation.
 	Origin RouteOrigin
 
@@ -13445,14 +13193,10 @@ type SecurityGroupRuleDescription struct {
 
 // Describes a security group rule. You must specify exactly one of the following
 // parameters, based on the rule type:
-//
-// * CidrIpv4
-//
-// * CidrIpv6
-//
-// * PrefixListId
-//
-// *
+// - CidrIpv4
+// - CidrIpv6
+// - PrefixListId
+// -
 // ReferencedGroupId
 //
 // When you modify a rule, you cannot change the rule type. For
@@ -14419,12 +14163,10 @@ type SpotInstanceRequest struct {
 	ValidFrom *time.Time
 
 	// The end date of the request, in UTC format (YYYY-MM-DDTHH:MM:SSZ).
-	//
-	// * For a
+	// - For a
 	// persistent request, the request remains active until the validUntil date and
 	// time is reached. Otherwise, the request remains active until you cancel it.
-	//
-	// *
+	// -
 	// For a one-time request, the request remains active until all instances launch,
 	// the request is canceled, or the validUntil date and time is reached. By default,
 	// the request is valid for 7 days from the date the request was created.
@@ -14501,12 +14243,10 @@ type SpotMarketOptions struct {
 
 	// The end date of the request, in UTC format (YYYY-MM-DDTHH:MM:SSZ). Supported
 	// only for persistent requests.
-	//
-	// * For a persistent request, the request remains
+	// - For a persistent request, the request remains
 	// active until the ValidUntil date and time is reached. Otherwise, the request
 	// remains active until you cancel it.
-	//
-	// * For a one-time request, ValidUntil is not
+	// - For a one-time request, ValidUntil is not
 	// supported. The request remains active until all instances launch or you cancel
 	// the request.
 	ValidUntil *time.Time
@@ -14801,49 +14541,37 @@ type StateReason struct {
 	Code *string
 
 	// The message for the state change.
-	//
-	// * Server.InsufficientInstanceCapacity: There
+	// - Server.InsufficientInstanceCapacity: There
 	// was insufficient capacity available to satisfy the launch request.
-	//
-	// *
+	// -
 	// Server.InternalError: An internal error caused the instance to terminate during
 	// launch.
-	//
-	// * Server.ScheduledStop: The instance was stopped due to a scheduled
+	// - Server.ScheduledStop: The instance was stopped due to a scheduled
 	// retirement.
-	//
-	// * Server.SpotInstanceShutdown: The instance was stopped because the
+	// - Server.SpotInstanceShutdown: The instance was stopped because the
 	// number of Spot requests with a maximum price equal to or higher than the Spot
-	// price exceeded available capacity or because of an increase in the Spot
-	// price.
-	//
-	// * Server.SpotInstanceTermination: The instance was terminated because
-	// the number of Spot requests with a maximum price equal to or higher than the
-	// Spot price exceeded available capacity or because of an increase in the Spot
-	// price.
-	//
-	// * Client.InstanceInitiatedShutdown: The instance was shut down using the
-	// shutdown -h command from the instance.
-	//
-	// * Client.InstanceTerminated: The
-	// instance was terminated or rebooted during AMI creation.
-	//
-	// *
-	// Client.InternalError: A client error caused the instance to terminate during
-	// launch.
-	//
-	// * Client.InvalidSnapshot.NotFound: The specified snapshot was not
-	// found.
-	//
-	// * Client.UserInitiatedHibernate: Hibernation was initiated on the
-	// instance.
-	//
-	// * Client.UserInitiatedShutdown: The instance was shut down using the
-	// Amazon EC2 API.
-	//
-	// * Client.VolumeLimitExceeded: The limit on the number of EBS
-	// volumes or total storage was exceeded. Decrease usage or request an increase in
-	// your account limits.
+	// price exceeded available capacity or because of an increase in the Spot price.
+	// -
+	// Server.SpotInstanceTermination: The instance was terminated because the number
+	// of Spot requests with a maximum price equal to or higher than the Spot price
+	// exceeded available capacity or because of an increase in the Spot price.
+	// -
+	// Client.InstanceInitiatedShutdown: The instance was shut down using the shutdown
+	// -h command from the instance.
+	// - Client.InstanceTerminated: The instance was
+	// terminated or rebooted during AMI creation.
+	// - Client.InternalError: A client
+	// error caused the instance to terminate during launch.
+	// -
+	// Client.InvalidSnapshot.NotFound: The specified snapshot was not found.
+	// -
+	// Client.UserInitiatedHibernate: Hibernation was initiated on the instance.
+	// -
+	// Client.UserInitiatedShutdown: The instance was shut down using the Amazon EC2
+	// API.
+	// - Client.VolumeLimitExceeded: The limit on the number of EBS volumes or
+	// total storage was exceeded. Decrease usage or request an increase in your
+	// account limits.
 	Message *string
 
 	noSmithyDocumentSerde
@@ -16386,10 +16114,8 @@ type TransitGatewayRouteTableRoute struct {
 	ResourceType *string
 
 	// The route origin. The following are the possible values:
-	//
-	// * static
-	//
-	// * propagated
+	// - static
+	// - propagated
 	RouteOrigin *string
 
 	// The state of the route.
@@ -18039,22 +17765,15 @@ type VpnTunnelOptionsSpecification struct {
 	// must be unique across all VPN connections that use the same virtual private
 	// gateway. Constraints: A size /30 CIDR block from the 169.254.0.0/16 range. The
 	// following CIDR blocks are reserved and cannot be used:
-	//
-	// * 169.254.0.0/30
-	//
-	// *
+	// - 169.254.0.0/30
+	// -
 	// 169.254.1.0/30
-	//
-	// * 169.254.2.0/30
-	//
-	// * 169.254.3.0/30
-	//
-	// * 169.254.4.0/30
-	//
-	// *
+	// - 169.254.2.0/30
+	// - 169.254.3.0/30
+	// - 169.254.4.0/30
+	// -
 	// 169.254.5.0/30
-	//
-	// * 169.254.169.252/30
+	// - 169.254.169.252/30
 	TunnelInsideCidr *string
 
 	// The range of inside IPv6 addresses for the tunnel. Any specified CIDR blocks

@@ -35,8 +35,7 @@ type DescribeCertificatesInput struct {
 	// information for only the specified certificate is returned. If this parameter is
 	// omitted, a list of up to MaxRecords certificates is returned. This parameter is
 	// not case sensitive. Constraints
-	//
-	// * Must match an existing CertificateIdentifier.
+	// - Must match an existing CertificateIdentifier.
 	CertificateIdentifier *string
 
 	// This parameter is not currently supported.
@@ -51,10 +50,8 @@ type DescribeCertificatesInput struct {
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so that the remaining results can be retrieved.
 	// Default: 100 Constraints:
-	//
-	// * Minimum: 20
-	//
-	// * Maximum: 100
+	// - Minimum: 20
+	// - Maximum: 100
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
@@ -155,10 +152,8 @@ type DescribeCertificatesPaginatorOptions struct {
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so that the remaining results can be retrieved.
 	// Default: 100 Constraints:
-	//
-	// * Minimum: 20
-	//
-	// * Maximum: 100
+	// - Minimum: 20
+	// - Maximum: 100
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

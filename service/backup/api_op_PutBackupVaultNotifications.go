@@ -34,17 +34,13 @@ type PutBackupVaultNotificationsInput struct {
 	// track Backup events
 	// (https://docs.aws.amazon.com/aws-backup/latest/devguide/sns-notifications.html).
 	// The following events are supported:
-	//
-	// * BACKUP_JOB_STARTED |
+	// - BACKUP_JOB_STARTED |
 	// BACKUP_JOB_COMPLETED
-	//
-	// * COPY_JOB_STARTED | COPY_JOB_SUCCESSFUL |
+	// - COPY_JOB_STARTED | COPY_JOB_SUCCESSFUL |
 	// COPY_JOB_FAILED
-	//
-	// * RESTORE_JOB_STARTED | RESTORE_JOB_COMPLETED |
+	// - RESTORE_JOB_STARTED | RESTORE_JOB_COMPLETED |
 	// RECOVERY_POINT_MODIFIED
-	//
-	// * S3_BACKUP_OBJECT_FAILED |
+	// - S3_BACKUP_OBJECT_FAILED |
 	// S3_RESTORE_OBJECT_FAILED
 	//
 	// The list below shows items that are deprecated events

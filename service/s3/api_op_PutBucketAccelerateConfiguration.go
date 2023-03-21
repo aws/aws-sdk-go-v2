@@ -25,10 +25,8 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
 // The Transfer Acceleration state of a bucket can be set to one of the following
 // two values:
-//
-// * Enabled – Enables accelerated data transfers to the bucket.
-//
-// *
+// - Enabled – Enables accelerated data transfers to the bucket.
+// -
 // Suspended – Disables accelerated data transfers to the bucket.
 //
 // The
@@ -42,12 +40,10 @@ import (
 // Acceleration
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html).
 // The following operations are related to PutBucketAccelerateConfiguration:
-//
-// *
+// -
 // GetBucketAccelerateConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketAccelerateConfiguration.html)
-//
-// *
+// -
 // CreateBucket
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
 func (c *Client) PutBucketAccelerateConfiguration(ctx context.Context, params *PutBucketAccelerateConfigurationInput, optFns ...func(*Options)) (*PutBucketAccelerateConfigurationOutput, error) {

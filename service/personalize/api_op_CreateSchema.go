@@ -19,15 +19,12 @@ import (
 // You specify a schema when you call CreateDataset
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html).
 // Related APIs
-//
-// * ListSchemas
+// - ListSchemas
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_ListSchemas.html)
-//
-// *
+// -
 // DescribeSchema
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSchema.html)
-//
-// *
+// -
 // DeleteSchema
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteSchema.html)
 func (c *Client) CreateSchema(ctx context.Context, params *CreateSchemaInput, optFns ...func(*Options)) (*CreateSchemaOutput, error) {

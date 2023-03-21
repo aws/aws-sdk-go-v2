@@ -92,67 +92,39 @@ type CreateWorkloadInput struct {
 
 	// The industry type for the workload. If specified, must be one of the
 	// following:
-	//
-	// * Agriculture
-	//
-	// * Automobile
-	//
-	// * Defense
-	//
-	// * Design and Engineering
-	//
-	// *
+	// - Agriculture
+	// - Automobile
+	// - Defense
+	// - Design and Engineering
+	// -
 	// Digital Advertising
-	//
-	// * Education
-	//
-	// * Environmental Protection
-	//
-	// * Financial
+	// - Education
+	// - Environmental Protection
+	// - Financial
 	// Services
-	//
-	// * Gaming
-	//
-	// * General Public Services
-	//
-	// * Healthcare
-	//
-	// * Hospitality
-	//
-	// *
+	// - Gaming
+	// - General Public Services
+	// - Healthcare
+	// - Hospitality
+	// -
 	// InfoTech
-	//
-	// * Justice and Public Safety
-	//
-	// * Life Sciences
-	//
-	// * Manufacturing
-	//
-	// * Media
-	// & Entertainment
-	//
-	// * Mining & Resources
-	//
-	// * Oil & Gas
-	//
-	// * Power & Utilities
-	//
-	// *
+	// - Justice and Public Safety
+	// - Life Sciences
+	// - Manufacturing
+	// - Media &
+	// Entertainment
+	// - Mining & Resources
+	// - Oil & Gas
+	// - Power & Utilities
+	// -
 	// Professional Services
-	//
-	// * Real Estate & Construction
-	//
-	// * Retail & Wholesale
-	//
-	// *
-	// Social Protection
-	//
-	// * Telecommunications
-	//
-	// * Travel, Transportation & Logistics
-	//
-	// *
-	// Other
+	// - Real Estate & Construction
+	// - Retail & Wholesale
+	// - Social
+	// Protection
+	// - Telecommunications
+	// - Travel, Transportation & Logistics
+	// - Other
 	IndustryType *string
 
 	// The list of non-Amazon Web Services Regions associated with the workload.

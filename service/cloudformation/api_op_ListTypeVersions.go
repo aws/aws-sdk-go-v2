@@ -37,12 +37,10 @@ type ListTypeVersionsInput struct {
 
 	// The deprecation status of the extension versions that you want to get summary
 	// information about. Valid values include:
-	//
-	// * LIVE: The extension version is
+	// - LIVE: The extension version is
 	// registered and can be used in CloudFormation operations, dependent on its
 	// provisioning behavior and visibility scope.
-	//
-	// * DEPRECATED: The extension version
+	// - DEPRECATED: The extension version
 	// has been deregistered and can no longer be used in CloudFormation
 	// operations.
 	//

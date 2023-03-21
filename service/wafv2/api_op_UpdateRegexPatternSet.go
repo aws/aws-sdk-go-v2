@@ -15,27 +15,24 @@ import (
 // mutable specifications that you already have for the regex pattern set with the
 // ones that you provide to this call. To modify a regex pattern set, do the
 // following:
+// - Retrieve it by calling GetRegexPatternSet
+// - Update its settings as
+// needed
+// - Provide the complete regex pattern set specification to this call
 //
-// * Retrieve it by calling GetRegexPatternSet
-//
-// * Update its settings
-// as needed
-//
-// * Provide the complete regex pattern set specification to this
-// call
-//
-// When you make changes to web ACLs or web ACL components, like rules and
-// rule groups, WAF propagates the changes everywhere that the web ACL and its
-// components are stored and used. Your changes are applied within seconds, but
-// there might be a brief period of inconsistency when the changes have arrived in
-// some places and not in others. So, for example, if you change a rule action
-// setting, the action might be the old action in one area and the new action in
-// another area. Or if you add an IP address to an IP set used in a blocking rule,
-// the new address might briefly be blocked in one area while still allowed in
-// another. This temporary inconsistency can occur when you first associate a web
-// ACL with an Amazon Web Services resource and when you change a web ACL that is
-// already associated with a resource. Generally, any inconsistencies of this type
-// last only a few seconds.
+// When
+// you make changes to web ACLs or web ACL components, like rules and rule groups,
+// WAF propagates the changes everywhere that the web ACL and its components are
+// stored and used. Your changes are applied within seconds, but there might be a
+// brief period of inconsistency when the changes have arrived in some places and
+// not in others. So, for example, if you change a rule action setting, the action
+// might be the old action in one area and the new action in another area. Or if
+// you add an IP address to an IP set used in a blocking rule, the new address
+// might briefly be blocked in one area while still allowed in another. This
+// temporary inconsistency can occur when you first associate a web ACL with an
+// Amazon Web Services resource and when you change a web ACL that is already
+// associated with a resource. Generally, any inconsistencies of this type last
+// only a few seconds.
 func (c *Client) UpdateRegexPatternSet(ctx context.Context, params *UpdateRegexPatternSetInput, optFns ...func(*Options)) (*UpdateRegexPatternSetOutput, error) {
 	if params == nil {
 		params = &UpdateRegexPatternSetInput{}
@@ -85,11 +82,9 @@ type UpdateRegexPatternSetInput struct {
 	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
 	// user pool, or an App Runner service. To work with CloudFront, you must also
 	// specify the Region US East (N. Virginia) as follows:
-	//
-	// * CLI - Specify the Region
+	// - CLI - Specify the Region
 	// when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.
-	//
-	// * API
+	// - API
 	// and SDKs - For all calls, use the Region endpoint us-east-1.
 	//
 	// This member is required.

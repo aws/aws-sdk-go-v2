@@ -67,11 +67,9 @@ type ExportJournalToS3Input struct {
 
 	// The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for
 	// a journal export job to do the following:
-	//
-	// * Write objects into your Amazon
+	// - Write objects into your Amazon
 	// Simple Storage Service (Amazon S3) bucket.
-	//
-	// * (Optional) Use your customer
+	// - (Optional) Use your customer
 	// managed key in Key Management Service (KMS) for server-side encryption of your
 	// exported data.
 	//

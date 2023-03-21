@@ -55,13 +55,10 @@ type GetExportInput struct {
 type GetExportOutput struct {
 
 	// The status of the export.
-	//
-	// * IN_PROGRESS - The export is in progress.
-	//
-	// * READY -
+	// - IN_PROGRESS - The export is in progress.
+	// - READY -
 	// The export is complete.
-	//
-	// * FAILED - The export could not be completed.
+	// - FAILED - The export could not be completed.
 	ExportStatus types.ExportStatus
 
 	// The format of the exported data.

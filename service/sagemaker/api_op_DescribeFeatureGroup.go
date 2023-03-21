@@ -91,12 +91,9 @@ type DescribeFeatureGroupOutput struct {
 
 	// The reason that the FeatureGroup failed to be replicated in the OfflineStore.
 	// This is failure can occur because:
-	//
-	// * The FeatureGroup could not be created in
+	// - The FeatureGroup could not be created in
 	// the OfflineStore.
-	//
-	// * The FeatureGroup could not be deleted from the
-	// OfflineStore.
+	// - The FeatureGroup could not be deleted from the OfflineStore.
 	FailureReason *string
 
 	// The status of the feature group.
@@ -110,19 +107,14 @@ type DescribeFeatureGroupOutput struct {
 
 	// The configuration of the offline store. It includes the following
 	// configurations:
-	//
-	// * Amazon S3 location of the offline store.
-	//
-	// * Configuration of
+	// - Amazon S3 location of the offline store.
+	// - Configuration of
 	// the Glue data catalog.
-	//
-	// * Table format of the offline store.
-	//
-	// * Option to
-	// disable the automatic creation of a Glue table for the offline store.
-	//
-	// *
-	// Encryption configuration.
+	// - Table format of the offline store.
+	// - Option to disable
+	// the automatic creation of a Glue table for the offline store.
+	// - Encryption
+	// configuration.
 	OfflineStoreConfig *types.OfflineStoreConfig
 
 	// The status of the OfflineStore. Notifies you if replicating data into the

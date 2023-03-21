@@ -16,14 +16,12 @@ import (
 // use to access server processes in the fleet. Game sessions that are running on
 // instances in the fleet must use connections that fall in this range. This
 // operation can be used in the following ways:
-//
-// * To retrieve the inbound
+// - To retrieve the inbound
 // connection permissions for a fleet, identify the fleet's unique identifier.
-//
-// *
-// To check the status of recent updates to a fleet remote location, specify the
-// fleet ID and a location. Port setting updates can take time to propagate across
-// all locations.
+// - To
+// check the status of recent updates to a fleet remote location, specify the fleet
+// ID and a location. Port setting updates can take time to propagate across all
+// locations.
 //
 // If successful, a set of IpPermission objects is returned for the
 // requested fleet ID. When a location is specified, a pending status is included.

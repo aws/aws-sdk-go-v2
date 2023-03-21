@@ -17,20 +17,16 @@ import (
 // Amazon S3 bucket; you can then specify the Amazon S3 location of the file using
 // the Media parameter. You must include the following parameters in your
 // StartTranscriptionJob request:
-//
-// * region: The Amazon Web Services Region where
+// - region: The Amazon Web Services Region where
 // you are making your request. For a list of Amazon Web Services Regions supported
 // with Amazon Transcribe, refer to Amazon Transcribe endpoints and quotas
 // (https://docs.aws.amazon.com/general/latest/gr/transcribe.html).
-//
-// *
+// -
 // TranscriptionJobName: A custom name you create for your transcription job that
 // is unique within your Amazon Web Services account.
-//
-// * Media (MediaFileUri): The
+// - Media (MediaFileUri): The
 // Amazon S3 location of your media file.
-//
-// * One of LanguageCode, IdentifyLanguage,
+// - One of LanguageCode, IdentifyLanguage,
 // or IdentifyMultipleLanguages: If you know the language of your media file,
 // specify it using the LanguageCode parameter; you can find all valid language
 // codes in the Supported languages
@@ -207,30 +203,24 @@ type StartTranscriptionJobInput struct {
 	// The KMS key you want to use to encrypt your transcription output. If using a key
 	// located in the current Amazon Web Services account, you can specify your KMS key
 	// in one of four ways:
-	//
-	// * Use the KMS key ID itself. For example,
+	// - Use the KMS key ID itself. For example,
 	// 1234abcd-12ab-34cd-56ef-1234567890ab.
-	//
-	// * Use an alias for the KMS key ID. For
+	// - Use an alias for the KMS key ID. For
 	// example, alias/ExampleAlias.
-	//
-	// * Use the Amazon Resource Name (ARN) for the KMS
+	// - Use the Amazon Resource Name (ARN) for the KMS
 	// key ID. For example,
 	// arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab.
-	//
-	// * Use
+	// - Use
 	// the ARN for the KMS key alias. For example,
 	// arn:aws:kms:region:account-ID:alias/ExampleAlias.
 	//
 	// If using a key located in a
 	// different Amazon Web Services account than the current Amazon Web Services
 	// account, you can specify your KMS key in one of two ways:
-	//
-	// * Use the ARN for the
+	// - Use the ARN for the
 	// KMS key ID. For example,
 	// arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab.
-	//
-	// * Use
+	// - Use
 	// the ARN for the KMS key alias. For example,
 	// arn:aws:kms:region:account-ID:alias/ExampleAlias.
 	//
@@ -246,23 +236,19 @@ type StartTranscriptionJobInput struct {
 	// for your transcription output is the same as the name you specified for your
 	// transcription job (TranscriptionJobName). Here are some examples of how you can
 	// use OutputKey:
-	//
-	// * If you specify 'DOC-EXAMPLE-BUCKET' as the OutputBucketName
-	// and 'my-transcript.json' as the OutputKey, your transcription output path is
+	// - If you specify 'DOC-EXAMPLE-BUCKET' as the OutputBucketName and
+	// 'my-transcript.json' as the OutputKey, your transcription output path is
 	// s3://DOC-EXAMPLE-BUCKET/my-transcript.json.
-	//
-	// * If you specify
+	// - If you specify
 	// 'my-first-transcription' as the TranscriptionJobName, 'DOC-EXAMPLE-BUCKET' as
 	// the OutputBucketName, and 'my-transcript' as the OutputKey, your transcription
 	// output path is
 	// s3://DOC-EXAMPLE-BUCKET/my-transcript/my-first-transcription.json.
-	//
-	// * If you
+	// - If you
 	// specify 'DOC-EXAMPLE-BUCKET' as the OutputBucketName and
 	// 'test-files/my-transcript.json' as the OutputKey, your transcription output path
 	// is s3://DOC-EXAMPLE-BUCKET/test-files/my-transcript.json.
-	//
-	// * If you specify
+	// - If you specify
 	// 'my-first-transcription' as the TranscriptionJobName, 'DOC-EXAMPLE-BUCKET' as
 	// the OutputBucketName, and 'test-files/my-transcript' as the OutputKey, your
 	// transcription output path is

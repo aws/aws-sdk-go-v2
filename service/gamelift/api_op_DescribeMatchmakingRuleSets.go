@@ -17,8 +17,7 @@ import (
 // names. When requesting multiple items, use the pagination parameters to retrieve
 // results as a set of sequential pages. If successful, a rule set is returned for
 // each requested name. Learn more
-//
-// * Build a rule set
+// - Build a rule set
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-rulesets.html)
 func (c *Client) DescribeMatchmakingRuleSets(ctx context.Context, params *DescribeMatchmakingRuleSetsInput, optFns ...func(*Options)) (*DescribeMatchmakingRuleSetsOutput, error) {
 	if params == nil {

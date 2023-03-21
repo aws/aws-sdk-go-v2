@@ -35,11 +35,9 @@ type CopyDBClusterSnapshotInput struct {
 
 	// The identifier of the DB cluster snapshot to copy. This parameter is not
 	// case-sensitive. Constraints:
-	//
-	// * Must specify a valid system snapshot in the
+	// - Must specify a valid system snapshot in the
 	// "available" state.
-	//
-	// * Specify a valid DB snapshot identifier.
+	// - Specify a valid DB snapshot identifier.
 	//
 	// Example:
 	// my-cluster-snapshot1
@@ -49,17 +47,14 @@ type CopyDBClusterSnapshotInput struct {
 
 	// The identifier of the new DB cluster snapshot to create from the source DB
 	// cluster snapshot. This parameter is not case-sensitive. Constraints:
-	//
-	// * Must
+	// - Must
 	// contain from 1 to 63 letters, numbers, or hyphens.
-	//
-	// * First character must be a
+	// - First character must be a
 	// letter.
+	// - Cannot end with a hyphen or contain two consecutive hyphens.
 	//
-	// * Cannot end with a hyphen or contain two consecutive
-	// hyphens.
-	//
-	// Example: my-cluster-snapshot2
+	// Example:
+	// my-cluster-snapshot2
 	//
 	// This member is required.
 	TargetDBClusterSnapshotIdentifier *string

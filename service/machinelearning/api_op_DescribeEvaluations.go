@@ -40,29 +40,21 @@ type DescribeEvaluationsInput struct {
 	EQ *string
 
 	// Use one of the following variable to filter a list of Evaluation objects:
-	//
-	// *
+	// -
 	// CreatedAt - Sets the search criteria to the Evaluation creation date.
-	//
-	// * Status
-	// - Sets the search criteria to the Evaluation status.
-	//
-	// * Name - Sets the search
+	// - Status -
+	// Sets the search criteria to the Evaluation status.
+	// - Name - Sets the search
 	// criteria to the contents of EvaluationName.
-	//
-	// * IAMUser - Sets the search
-	// criteria to the user account that invoked an Evaluation.
-	//
-	// * MLModelId - Sets the
-	// search criteria to the MLModel that was evaluated.
-	//
-	// * DataSourceId - Sets the
-	// search criteria to the DataSource used in Evaluation.
-	//
-	// * DataUri - Sets the
-	// search criteria to the data file(s) used in Evaluation. The URL can identify
-	// either a file or an Amazon Simple Storage Solution (Amazon S3) bucket or
-	// directory.
+	// - IAMUser - Sets the search criteria
+	// to the user account that invoked an Evaluation.
+	// - MLModelId - Sets the search
+	// criteria to the MLModel that was evaluated.
+	// - DataSourceId - Sets the search
+	// criteria to the DataSource used in Evaluation.
+	// - DataUri - Sets the search
+	// criteria to the data file(s) used in Evaluation. The URL can identify either a
+	// file or an Amazon Simple Storage Solution (Amazon S3) bucket or directory.
 	FilterVariable types.EvaluationFilterVariable
 
 	// The greater than or equal to operator. The Evaluation results will have
@@ -97,20 +89,15 @@ type DescribeEvaluationsInput struct {
 	// example, an Evaluation could have the Name2014-09-09-HolidayGiftMailer. To
 	// search for this Evaluation, select Name for the FilterVariable and any of the
 	// following strings for the Prefix:
-	//
-	// * 2014-09
-	//
-	// * 2014-09-09
-	//
-	// * 2014-09-09-Holiday
+	// - 2014-09
+	// - 2014-09-09
+	// - 2014-09-09-Holiday
 	Prefix *string
 
 	// A two-value parameter that determines the sequence of the resulting list of
 	// Evaluation.
-	//
-	// * asc - Arranges the list in ascending order (A-Z, 0-9).
-	//
-	// * dsc -
+	// - asc - Arranges the list in ascending order (A-Z, 0-9).
+	// - dsc -
 	// Arranges the list in descending order (Z-A, 9-0).
 	//
 	// Results are sorted by

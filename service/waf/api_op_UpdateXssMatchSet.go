@@ -19,18 +19,15 @@ import (
 // the latest version, AWS WAF has a single set of endpoints for regional and
 // global use. Inserts or deletes XssMatchTuple objects (filters) in an
 // XssMatchSet. For each XssMatchTuple object, you specify the following values:
-//
-// *
+// -
 // Action: Whether to insert the object into or delete the object from the array.
 // To change an XssMatchTuple, you delete the existing object and add a new one.
-//
-// *
+// -
 // FieldToMatch: The part of web requests that you want AWS WAF to inspect and, if
 // you want AWS WAF to inspect a header or custom query parameter, the name of the
 // header or parameter.
-//
-// * TextTransformation: Which text transformation, if any,
-// to perform on the web request before inspecting the request for cross-site
+// - TextTransformation: Which text transformation, if any, to
+// perform on the web request before inspecting the request for cross-site
 // scripting attacks. You can only specify a single type of
 // TextTransformation.
 //
@@ -40,14 +37,11 @@ import (
 // and you want to block the requests, you can create an XssMatchSet with the
 // applicable settings, and then configure AWS WAF to block the requests. To create
 // and configure an XssMatchSet, perform the following steps:
-//
-// * Submit a
+// - Submit a
 // CreateXssMatchSet request.
-//
-// * Use GetChangeToken to get the change token that
-// you provide in the ChangeToken parameter of an UpdateIPSet request.
-//
-// * Submit an
+// - Use GetChangeToken to get the change token that you
+// provide in the ChangeToken parameter of an UpdateIPSet request.
+// - Submit an
 // UpdateXssMatchSet request to specify the parts of web requests that you want AWS
 // WAF to inspect for cross-site scripting attacks.
 //
@@ -79,14 +73,11 @@ type UpdateXssMatchSetInput struct {
 
 	// An array of XssMatchSetUpdate objects that you want to insert into or delete
 	// from an XssMatchSet. For more information, see the applicable data types:
-	//
-	// *
+	// -
 	// XssMatchSetUpdate: Contains Action and XssMatchTuple
-	//
-	// * XssMatchTuple: Contains
+	// - XssMatchTuple: Contains
 	// FieldToMatch and TextTransformation
-	//
-	// * FieldToMatch: Contains Data and Type
+	// - FieldToMatch: Contains Data and Type
 	//
 	// This member is required.
 	Updates []types.XssMatchSetUpdate

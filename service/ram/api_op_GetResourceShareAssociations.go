@@ -33,11 +33,9 @@ type GetResourceShareAssociationsInput struct {
 
 	// Specifies whether you want to retrieve the associations that involve a specified
 	// resource or principal.
-	//
-	// * PRINCIPAL – list the principals that are associated
+	// - PRINCIPAL – list the principals that are associated
 	// with the specified resource share.
-	//
-	// * RESOURCE – list the resources that are
+	// - RESOURCE – list the resources that are
 	// associated with the specified resource share.
 	//
 	// This member is required.

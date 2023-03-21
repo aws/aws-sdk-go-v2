@@ -56,50 +56,33 @@ type CreateDBParameterGroupInput struct {
 	// the following command: aws rds describe-db-engine-versions --query
 	// "DBEngineVersions[].DBParameterGroupFamily" --engine mysql The output contains
 	// duplicates. The following are the valid DB engine values:
-	//
-	// * aurora (for MySQL
+	// - aurora (for MySQL
 	// 5.6-compatible Aurora)
-	//
-	// * aurora-mysql (for MySQL 5.7-compatible and MySQL
+	// - aurora-mysql (for MySQL 5.7-compatible and MySQL
 	// 8.0-compatible Aurora)
-	//
-	// * aurora-postgresql
-	//
-	// * mariadb
-	//
-	// * mysql
-	//
-	// * oracle-ee
-	//
-	// *
+	// - aurora-postgresql
+	// - mariadb
+	// - mysql
+	// - oracle-ee
+	// -
 	// oracle-ee-cdb
-	//
-	// * oracle-se2
-	//
-	// * oracle-se2-cdb
-	//
-	// * postgres
-	//
-	// * sqlserver-ee
-	//
-	// *
+	// - oracle-se2
+	// - oracle-se2-cdb
+	// - postgres
+	// - sqlserver-ee
+	// -
 	// sqlserver-se
-	//
-	// * sqlserver-ex
-	//
-	// * sqlserver-web
+	// - sqlserver-ex
+	// - sqlserver-web
 	//
 	// This member is required.
 	DBParameterGroupFamily *string
 
 	// The name of the DB parameter group. Constraints:
-	//
-	// * Must be 1 to 255 letters,
+	// - Must be 1 to 255 letters,
 	// numbers, or hyphens.
-	//
-	// * First character must be a letter
-	//
-	// * Can't end with a
+	// - First character must be a letter
+	// - Can't end with a
 	// hyphen or contain two consecutive hyphens
 	//
 	// This value is stored as a lowercase

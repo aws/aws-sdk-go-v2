@@ -174,22 +174,17 @@ type AuditContext struct {
 // failed and provide a limited number of partitions in the response, so that you
 // can fix the partitions at fault and try registering the index again. The most
 // common set of errors that can occur are categorized as follows:
-//
-// *
+// -
 // EncryptedPartitionError: The partitions are encrypted.
-//
-// *
+// -
 // InvalidPartitionTypeDataError: The partition value doesn't match the data type
 // for that partition column.
-//
-// * MissingPartitionValueError: The partitions are
+// - MissingPartitionValueError: The partitions are
 // encrypted.
-//
-// * UnsupportedPartitionCharacterError: Characters inside the
-// partition value are not supported. For example: U+0000 , U+0001, U+0002.
-//
-// *
-// InternalError: Any error which does not belong to other error codes.
+// - UnsupportedPartitionCharacterError: Characters inside the partition
+// value are not supported. For example: U+0000 , U+0001, U+0002.
+// - InternalError:
+// Any error which does not belong to other error codes.
 type BackfillError struct {
 
 	// The error code for an error that occurred when registering partition indexes for
@@ -341,17 +336,13 @@ type Blueprint struct {
 	ParameterSpec *string
 
 	// The status of the blueprint registration.
-	//
-	// * Creating — The blueprint
+	// - Creating — The blueprint
 	// registration is in progress.
-	//
-	// * Active — The blueprint has been successfully
+	// - Active — The blueprint has been successfully
 	// registered.
-	//
-	// * Updating — An update to the blueprint registration is in
+	// - Updating — An update to the blueprint registration is in
 	// progress.
-	//
-	// * Failed — The blueprint registration failed.
+	// - Failed — The blueprint registration failed.
 	Status BlueprintStatus
 
 	noSmithyDocumentSerde
@@ -402,17 +393,13 @@ type BlueprintRun struct {
 	StartedOn *time.Time
 
 	// The state of the blueprint run. Possible values are:
-	//
-	// * Running — The blueprint
+	// - Running — The blueprint
 	// run is in progress.
-	//
-	// * Succeeded — The blueprint run completed successfully.
-	//
-	// *
+	// - Succeeded — The blueprint run completed successfully.
+	// -
 	// Failed — The blueprint run failed and rollback is complete.
-	//
-	// * Rolling Back —
-	// The blueprint run failed and rollback is in progress.
+	// - Rolling Back — The
+	// blueprint run failed and rollback is in progress.
 	State BlueprintRunState
 
 	// The name of a workflow that is created as a result of a successful blueprint
@@ -1157,154 +1144,115 @@ type ConfusionMatrix struct {
 type Connection struct {
 
 	// These key-value pairs define parameters for the connection:
-	//
-	// * HOST - The host
+	// - HOST - The host
 	// URI: either the fully qualified domain name (FQDN) or the IPv4 address of the
 	// database host.
-	//
-	// * PORT - The port number, between 1024 and 65535, of the port on
+	// - PORT - The port number, between 1024 and 65535, of the port on
 	// which the database host is listening for database connections.
-	//
-	// * USER_NAME -
-	// The name under which to log in to the database. The value string for USER_NAME
-	// is "USERNAME".
-	//
-	// * PASSWORD - A password, if one is used, for the user name.
-	//
-	// *
+	// - USER_NAME - The
+	// name under which to log in to the database. The value string for USER_NAME is
+	// "USERNAME".
+	// - PASSWORD - A password, if one is used, for the user name.
+	// -
 	// ENCRYPTED_PASSWORD - When you enable connection password protection by setting
 	// ConnectionPasswordEncryption in the Data Catalog encryption settings, this field
 	// stores the encrypted password.
-	//
-	// * JDBC_DRIVER_JAR_URI - The Amazon Simple
-	// Storage Service (Amazon S3) path of the JAR file that contains the JDBC driver
-	// to use.
-	//
-	// * JDBC_DRIVER_CLASS_NAME - The class name of the JDBC driver to use.
-	//
-	// *
-	// JDBC_ENGINE - The name of the JDBC engine to use.
-	//
-	// * JDBC_ENGINE_VERSION - The
-	// version of the JDBC engine to use.
-	//
-	// * CONFIG_FILES - (Reserved for future
-	// use.)
-	//
-	// * INSTANCE_ID - The instance ID to use.
-	//
-	// * JDBC_CONNECTION_URL - The URL
-	// for connecting to a JDBC data source.
-	//
-	// * JDBC_ENFORCE_SSL - A Boolean string
-	// (true, false) specifying whether Secure Sockets Layer (SSL) with hostname
-	// matching is enforced for the JDBC connection on the client. The default is
-	// false.
-	//
-	// * CUSTOM_JDBC_CERT - An Amazon S3 location specifying the customer's
-	// root certificate. Glue uses this root certificate to validate the customer’s
-	// certificate when connecting to the customer database. Glue only handles X.509
-	// certificates. The certificate provided must be DER-encoded and supplied in
-	// Base64 encoding PEM format.
-	//
-	// * SKIP_CUSTOM_JDBC_CERT_VALIDATION - By default,
-	// this is false. Glue validates the Signature algorithm and Subject Public Key
-	// Algorithm for the customer certificate. The only permitted algorithms for the
-	// Signature algorithm are SHA256withRSA, SHA384withRSA or SHA512withRSA. For the
-	// Subject Public Key Algorithm, the key length must be at least 2048. You can set
-	// the value of this property to true to skip Glue’s validation of the customer
-	// certificate.
-	//
-	// * CUSTOM_JDBC_CERT_STRING - A custom JDBC certificate string which
-	// is used for domain match or distinguished name match to prevent a
-	// man-in-the-middle attack. In Oracle database, this is used as the
-	// SSL_SERVER_CERT_DN; in Microsoft SQL Server, this is used as the
-	// hostNameInCertificate.
-	//
-	// * CONNECTION_URL - The URL for connecting to a general
-	// (non-JDBC) data source.
-	//
-	// * SECRET_ID - The secret ID used for the secret manager
-	// of credentials.
-	//
-	// * CONNECTOR_URL - The connector URL for a MARKETPLACE or CUSTOM
-	// connection.
-	//
-	// * CONNECTOR_TYPE - The connector type for a MARKETPLACE or CUSTOM
-	// connection.
-	//
-	// * CONNECTOR_CLASS_NAME - The connector class name for a MARKETPLACE
-	// or CUSTOM connection.
-	//
-	// * KAFKA_BOOTSTRAP_SERVERS - A comma-separated list of
-	// host and port pairs that are the addresses of the Apache Kafka brokers in a
-	// Kafka cluster to which a Kafka client will connect to and bootstrap itself.
-	//
-	// *
-	// KAFKA_SSL_ENABLED - Whether to enable or disable SSL on an Apache Kafka
-	// connection. Default value is "true".
-	//
-	// * KAFKA_CUSTOM_CERT - The Amazon S3 URL
-	// for the private CA cert file (.pem format). The default is an empty string.
-	//
-	// *
-	// KAFKA_SKIP_CUSTOM_CERT_VALIDATION - Whether to skip the validation of the CA
-	// cert file or not. Glue validates for three algorithms: SHA256withRSA,
-	// SHA384withRSA and SHA512withRSA. Default value is "false".
-	//
-	// *
+	// - JDBC_DRIVER_JAR_URI - The Amazon Simple Storage
+	// Service (Amazon S3) path of the JAR file that contains the JDBC driver to use.
+	// -
+	// JDBC_DRIVER_CLASS_NAME - The class name of the JDBC driver to use.
+	// - JDBC_ENGINE
+	// - The name of the JDBC engine to use.
+	// - JDBC_ENGINE_VERSION - The version of the
+	// JDBC engine to use.
+	// - CONFIG_FILES - (Reserved for future use.)
+	// - INSTANCE_ID -
+	// The instance ID to use.
+	// - JDBC_CONNECTION_URL - The URL for connecting to a JDBC
+	// data source.
+	// - JDBC_ENFORCE_SSL - A Boolean string (true, false) specifying
+	// whether Secure Sockets Layer (SSL) with hostname matching is enforced for the
+	// JDBC connection on the client. The default is false.
+	// - CUSTOM_JDBC_CERT - An
+	// Amazon S3 location specifying the customer's root certificate. Glue uses this
+	// root certificate to validate the customer’s certificate when connecting to the
+	// customer database. Glue only handles X.509 certificates. The certificate
+	// provided must be DER-encoded and supplied in Base64 encoding PEM format.
+	// -
+	// SKIP_CUSTOM_JDBC_CERT_VALIDATION - By default, this is false. Glue validates the
+	// Signature algorithm and Subject Public Key Algorithm for the customer
+	// certificate. The only permitted algorithms for the Signature algorithm are
+	// SHA256withRSA, SHA384withRSA or SHA512withRSA. For the Subject Public Key
+	// Algorithm, the key length must be at least 2048. You can set the value of this
+	// property to true to skip Glue’s validation of the customer certificate.
+	// -
+	// CUSTOM_JDBC_CERT_STRING - A custom JDBC certificate string which is used for
+	// domain match or distinguished name match to prevent a man-in-the-middle attack.
+	// In Oracle database, this is used as the SSL_SERVER_CERT_DN; in Microsoft SQL
+	// Server, this is used as the hostNameInCertificate.
+	// - CONNECTION_URL - The URL
+	// for connecting to a general (non-JDBC) data source.
+	// - SECRET_ID - The secret ID
+	// used for the secret manager of credentials.
+	// - CONNECTOR_URL - The connector URL
+	// for a MARKETPLACE or CUSTOM connection.
+	// - CONNECTOR_TYPE - The connector type
+	// for a MARKETPLACE or CUSTOM connection.
+	// - CONNECTOR_CLASS_NAME - The connector
+	// class name for a MARKETPLACE or CUSTOM connection.
+	// - KAFKA_BOOTSTRAP_SERVERS - A
+	// comma-separated list of host and port pairs that are the addresses of the Apache
+	// Kafka brokers in a Kafka cluster to which a Kafka client will connect to and
+	// bootstrap itself.
+	// - KAFKA_SSL_ENABLED - Whether to enable or disable SSL on an
+	// Apache Kafka connection. Default value is "true".
+	// - KAFKA_CUSTOM_CERT - The
+	// Amazon S3 URL for the private CA cert file (.pem format). The default is an
+	// empty string.
+	// - KAFKA_SKIP_CUSTOM_CERT_VALIDATION - Whether to skip the
+	// validation of the CA cert file or not. Glue validates for three algorithms:
+	// SHA256withRSA, SHA384withRSA and SHA512withRSA. Default value is "false".
+	// -
 	// KAFKA_CLIENT_KEYSTORE - The Amazon S3 location of the client keystore file for
 	// Kafka client side authentication (Optional).
-	//
-	// * KAFKA_CLIENT_KEYSTORE_PASSWORD -
+	// - KAFKA_CLIENT_KEYSTORE_PASSWORD -
 	// The password to access the provided keystore (Optional).
-	//
-	// *
+	// -
 	// KAFKA_CLIENT_KEY_PASSWORD - A keystore can consist of multiple keys, so this is
 	// the password to access the client key to be used with the Kafka server side key
 	// (Optional).
-	//
-	// * ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD - The encrypted version
+	// - ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD - The encrypted version
 	// of the Kafka client keystore password (if the user has the Glue encrypt
 	// passwords setting selected).
-	//
-	// * ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD - The
+	// - ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD - The
 	// encrypted version of the Kafka client key password (if the user has the Glue
 	// encrypt passwords setting selected).
-	//
-	// * KAFKA_SASL_MECHANISM - "SCRAM-SHA-512",
+	// - KAFKA_SASL_MECHANISM - "SCRAM-SHA-512",
 	// "GSSAPI", or "AWS_MSK_IAM". These are the supported SASL Mechanisms
 	// (https://www.iana.org/assignments/sasl-mechanisms/sasl-mechanisms.xhtml).
-	//
-	// *
+	// -
 	// KAFKA_SASL_SCRAM_USERNAME - A plaintext username used to authenticate with the
 	// "SCRAM-SHA-512" mechanism.
-	//
-	// * KAFKA_SASL_SCRAM_PASSWORD - A plaintext password
+	// - KAFKA_SASL_SCRAM_PASSWORD - A plaintext password
 	// used to authenticate with the "SCRAM-SHA-512" mechanism.
-	//
-	// *
+	// -
 	// ENCRYPTED_KAFKA_SASL_SCRAM_PASSWORD - The encrypted version of the Kafka SASL
 	// SCRAM password (if the user has the Glue encrypt passwords setting selected).
-	//
-	// *
+	// -
 	// KAFKA_SASL_GSSAPI_KEYTAB - The S3 location of a Kerberos keytab file. A keytab
 	// stores long-term keys for one or more principals. For more information, see MIT
 	// Kerberos Documentation: Keytab
 	// (https://web.mit.edu/kerberos/krb5-latest/doc/basic/keytab_def.html).
-	//
-	// *
+	// -
 	// KAFKA_SASL_GSSAPI_KRB5_CONF - The S3 location of a Kerberos krb5.conf file. A
 	// krb5.conf stores Kerberos configuration information, such as the location of the
 	// KDC server. For more information, see MIT Kerberos Documentation: krb5.conf
 	// (https://web.mit.edu/kerberos/krb5-1.12/doc/admin/conf_files/krb5_conf.html).
-	//
-	// *
+	// -
 	// KAFKA_SASL_GSSAPI_SERVICE - The Kerberos service name, as set with
 	// sasl.kerberos.service.name in your Kafka Configuration
 	// (https://kafka.apache.org/documentation/#brokerconfigs_sasl.kerberos.service.name).
-	//
-	// *
+	// -
 	// KAFKA_SASL_GSSAPI_PRINCIPAL - The name of the Kerberos princial used by Glue.
 	// For more information, see Kafka Documentation: Configuring Kafka Brokers
 	// (https://kafka.apache.org/documentation/#security_sasl_kerberos_clientconfig).
@@ -1347,76 +1295,61 @@ type ConnectionInput struct {
 	ConnectionProperties map[string]string
 
 	// The type of the connection. Currently, these types are supported:
-	//
-	// * JDBC -
+	// - JDBC -
 	// Designates a connection to a database through Java Database Connectivity (JDBC).
 	// JDBC Connections use the following ConnectionParameters.
-	//
-	// * Required: All of
+	// - Required: All of
 	// (HOST, PORT, JDBC_ENGINE) or JDBC_CONNECTION_URL.
-	//
-	// * Required: All of (USERNAME,
+	// - Required: All of (USERNAME,
 	// PASSWORD) or SECRET_ID.
-	//
-	// * Optional: JDBC_ENFORCE_SSL, CUSTOM_JDBC_CERT,
+	// - Optional: JDBC_ENFORCE_SSL, CUSTOM_JDBC_CERT,
 	// CUSTOM_JDBC_CERT_STRING, SKIP_CUSTOM_JDBC_CERT_VALIDATION. These parameters are
 	// used to configure SSL with JDBC.
 	//
-	// * KAFKA - Designates a connection to an Apache
+	// - KAFKA - Designates a connection to an Apache
 	// Kafka streaming platform. KAFKA Connections use the following
 	// ConnectionParameters.
-	//
-	// * Required: KAFKA_BOOTSTRAP_SERVERS.
-	//
-	// * Optional:
+	// - Required: KAFKA_BOOTSTRAP_SERVERS.
+	// - Optional:
 	// KAFKA_SSL_ENABLED, KAFKA_CUSTOM_CERT, KAFKA_SKIP_CUSTOM_CERT_VALIDATION. These
 	// parameters are used to configure SSL with KAFKA.
-	//
-	// * Optional:
+	// - Optional:
 	// KAFKA_CLIENT_KEYSTORE, KAFKA_CLIENT_KEYSTORE_PASSWORD,
 	// KAFKA_CLIENT_KEY_PASSWORD, ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD,
 	// ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD. These parameters are used to configure TLS
 	// client configuration with SSL in KAFKA.
-	//
-	// * Optional: KAFKA_SASL_MECHANISM. Can
-	// be specified as SCRAM-SHA-512, GSSAPI, or AWS_MSK_IAM.
-	//
-	// * Optional:
+	// - Optional: KAFKA_SASL_MECHANISM. Can be
+	// specified as SCRAM-SHA-512, GSSAPI, or AWS_MSK_IAM.
+	// - Optional:
 	// KAFKA_SASL_SCRAM_USERNAME, KAFKA_SASL_SCRAM_PASSWORD,
 	// ENCRYPTED_KAFKA_SASL_SCRAM_PASSWORD. These parameters are used to configure
 	// SASL/SCRAM-SHA-512 authentication with KAFKA.
-	//
-	// * Optional:
+	// - Optional:
 	// KAFKA_SASL_GSSAPI_KEYTAB, KAFKA_SASL_GSSAPI_KRB5_CONF,
 	// KAFKA_SASL_GSSAPI_SERVICE, KAFKA_SASL_GSSAPI_PRINCIPAL. These parameters are
 	// used to configure SASL/GSSAPI authentication with KAFKA.
 	//
-	// * MONGODB - Designates
+	// - MONGODB - Designates
 	// a connection to a MongoDB document database. MONGODB Connections use the
 	// following ConnectionParameters.
-	//
-	// * Required: CONNECTION_URL.
-	//
-	// * Required: All of
+	// - Required: CONNECTION_URL.
+	// - Required: All of
 	// (USERNAME, PASSWORD) or SECRET_ID.
 	//
-	// * NETWORK - Designates a network connection
+	// - NETWORK - Designates a network connection
 	// to a data source within an Amazon Virtual Private Cloud environment (Amazon
 	// VPC). NETWORK Connections do not require ConnectionParameters. Instead, provide
 	// a PhysicalConnectionRequirements.
-	//
-	// * MARKETPLACE - Uses configuration settings
+	// - MARKETPLACE - Uses configuration settings
 	// contained in a connector purchased from Amazon Web Services Marketplace to read
 	// from and write to data stores that are not natively supported by Glue.
 	// MARKETPLACE Connections use the following ConnectionParameters.
-	//
-	// * Required:
+	// - Required:
 	// CONNECTOR_TYPE, CONNECTOR_URL, CONNECTOR_CLASS_NAME, CONNECTION_URL.
-	//
-	// * Required
+	// - Required
 	// for JDBCCONNECTOR_TYPE connections: All of (USERNAME, PASSWORD) or SECRET_ID.
 	//
-	// *
+	// -
 	// CUSTOM - Uses configuration settings contained in a custom connector to read
 	// from and write to data stores that are not natively supported by Glue.
 	//
@@ -1697,37 +1630,27 @@ type CrawlsFilter struct {
 
 	// A key used to filter the crawler runs for a specified crawler. Valid values for
 	// each of the field names are:
-	//
-	// * CRAWL_ID: A string representing the UUID
+	// - CRAWL_ID: A string representing the UUID
 	// identifier for a crawl.
-	//
-	// * STATE: A string representing the state of the
-	// crawl.
-	//
-	// * START_TIME and END_TIME: The epoch timestamp in milliseconds.
-	//
-	// *
-	// DPU_HOUR: The number of data processing unit (DPU) hours used for the crawl.
+	// - STATE: A string representing the state of the crawl.
+	// -
+	// START_TIME and END_TIME: The epoch timestamp in milliseconds.
+	// - DPU_HOUR: The
+	// number of data processing unit (DPU) hours used for the crawl.
 	FieldName FieldName
 
 	// The value provided for comparison on the crawl field.
 	FieldValue *string
 
 	// A defined comparator that operates on the value. The available operators are:
-	//
-	// *
+	// -
 	// GT: Greater than.
-	//
-	// * GE: Greater than or equal to.
-	//
-	// * LT: Less than.
-	//
-	// * LE: Less
+	// - GE: Greater than or equal to.
+	// - LT: Less than.
+	// - LE: Less
 	// than or equal to.
-	//
-	// * EQ: Equal to.
-	//
-	// * NE: Not equal to.
+	// - EQ: Equal to.
+	// - NE: Not equal to.
 	FilterOperator FilterOperator
 
 	noSmithyDocumentSerde
@@ -2406,8 +2329,7 @@ type DeltaTarget struct {
 type DevEndpoint struct {
 
 	// A map of arguments used to configure the DevEndpoint. Valid arguments are:
-	//
-	// *
+	// -
 	// "--enable-glue-datacatalog": ""
 	//
 	// You can specify a version of Python support for
@@ -2509,16 +2431,13 @@ type DevEndpoint struct {
 
 	// The type of predefined worker that is allocated to the development endpoint.
 	// Accepts a value of Standard, G.1X, or G.2X.
-	//
-	// * For the Standard worker type,
-	// each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors
-	// per worker.
-	//
-	// * For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16
-	// GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this
+	// - For the Standard worker type, each
+	// worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per
+	// worker.
+	// - For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of
+	// memory, 64 GB disk), and provides 1 executor per worker. We recommend this
 	// worker type for memory-intensive jobs.
-	//
-	// * For the G.2X worker type, each worker
+	// - For the G.2X worker type, each worker
 	// maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor
 	// per worker. We recommend this worker type for memory-intensive jobs.
 	//
@@ -3267,12 +3186,10 @@ type GlueTable struct {
 	TableName *string
 
 	// Additional options for the table. Currently there are two keys supported:
-	//
-	// *
+	// -
 	// pushDownPredicate: to filter on partitions without having to list and read all
 	// the files in your dataset.
-	//
-	// * catalogPartitionPredicate: to use server-side
+	// - catalogPartitionPredicate: to use server-side
 	// partition pruning using partition indexes in the Glue Data Catalog.
 	AdditionalOptions map[string]string
 
@@ -3621,12 +3538,10 @@ type Job struct {
 	// WorkerType and NumberOfWorkers. The value that can be allocated for MaxCapacity
 	// depends on whether you are running a Python shell job, an Apache Spark ETL job,
 	// or an Apache Spark streaming ETL job:
-	//
-	// * When you specify a Python shell job
+	// - When you specify a Python shell job
 	// (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The
 	// default is 0.0625 DPU.
-	//
-	// * When you specify an Apache Spark ETL job
+	// - When you specify an Apache Spark ETL job
 	// (JobCommand.Name="glueetl") or Apache Spark streaming ETL job
 	// (JobCommand.Name="gluestreaming"), you can allocate a minimum of 2 DPUs. The
 	// default is 10 DPUs. This job type cannot have a fractional DPU allocation.
@@ -3669,20 +3584,16 @@ type Job struct {
 
 	// The type of predefined worker that is allocated when a job runs. Accepts a value
 	// of Standard, G.1X, G.2X, or G.025X.
-	//
-	// * For the Standard worker type, each worker
+	// - For the Standard worker type, each worker
 	// provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.
-	//
-	// *
+	// -
 	// For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64
 	// GB disk), and provides 1 executor per worker. We recommend this worker type for
 	// memory-intensive jobs.
-	//
-	// * For the G.2X worker type, each worker maps to 2 DPU (8
+	// - For the G.2X worker type, each worker maps to 2 DPU (8
 	// vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We
 	// recommend this worker type for memory-intensive jobs.
-	//
-	// * For the G.025X worker
+	// - For the G.025X worker
 	// type, each worker maps to 0.25 DPU (2 vCPU, 4 GB of memory, 64 GB disk), and
 	// provides 1 executor per worker. We recommend this worker type for low volume
 	// streaming jobs. This worker type is only available for Glue version 3.0
@@ -3851,12 +3762,10 @@ type JobRun struct {
 	// Capacity if using WorkerType and NumberOfWorkers. The value that can be
 	// allocated for MaxCapacity depends on whether you are running a Python shell job
 	// or an Apache Spark ETL job:
-	//
-	// * When you specify a Python shell job
+	// - When you specify a Python shell job
 	// (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The
 	// default is 0.0625 DPU.
-	//
-	// * When you specify an Apache Spark ETL job
+	// - When you specify an Apache Spark ETL job
 	// (JobCommand.Name="glueetl"), you can allocate a minimum of 2 DPUs. The default
 	// is 10 DPUs. This job type cannot have a fractional DPU allocation.
 	MaxCapacity *float64
@@ -3892,18 +3801,14 @@ type JobRun struct {
 
 	// The type of predefined worker that is allocated when a job runs. Accepts a value
 	// of Standard, G.1X, G.2X, or G.025X.
-	//
-	// * For the Standard worker type, each worker
+	// - For the Standard worker type, each worker
 	// provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.
-	//
-	// *
+	// -
 	// For the G.1X worker type, each worker provides 4 vCPU, 16 GB of memory and a
 	// 64GB disk, and 1 executor per worker.
-	//
-	// * For the G.2X worker type, each worker
+	// - For the G.2X worker type, each worker
 	// provides 8 vCPU, 32 GB of memory and a 128GB disk, and 1 executor per worker.
-	//
-	// *
+	// -
 	// For the G.025X worker type, each worker maps to 0.25 DPU (2 vCPU, 4 GB of
 	// memory, 64 GB disk), and provides 1 executor per worker. We recommend this
 	// worker type for low volume streaming jobs. This worker type is only available
@@ -3982,11 +3887,9 @@ type JobUpdate struct {
 	// WorkerType and NumberOfWorkers. The value that can be allocated for MaxCapacity
 	// depends on whether you are running a Python shell job or an Apache Spark ETL
 	// job:
-	//
-	// * When you specify a Python shell job (JobCommand.Name="pythonshell"), you
+	// - When you specify a Python shell job (JobCommand.Name="pythonshell"), you
 	// can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.
-	//
-	// * When you
+	// - When you
 	// specify an Apache Spark ETL job (JobCommand.Name="glueetl") or Apache Spark
 	// streaming ETL job (JobCommand.Name="gluestreaming"), you can allocate a minimum
 	// of 2 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU
@@ -4027,20 +3930,16 @@ type JobUpdate struct {
 
 	// The type of predefined worker that is allocated when a job runs. Accepts a value
 	// of Standard, G.1X, G.2X, or G.025X.
-	//
-	// * For the Standard worker type, each worker
+	// - For the Standard worker type, each worker
 	// provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.
-	//
-	// *
+	// -
 	// For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64
 	// GB disk), and provides 1 executor per worker. We recommend this worker type for
 	// memory-intensive jobs.
-	//
-	// * For the G.2X worker type, each worker maps to 2 DPU (8
+	// - For the G.2X worker type, each worker maps to 2 DPU (8
 	// vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We
 	// recommend this worker type for memory-intensive jobs.
-	//
-	// * For the G.025X worker
+	// - For the G.025X worker
 	// type, each worker maps to 0.25 DPU (2 vCPU, 4 GB of memory, 64 GB disk), and
 	// provides 1 executor per worker. We recommend this worker type for low volume
 	// streaming jobs. This worker type is only available for Glue version 3.0
@@ -4395,11 +4294,9 @@ type LastCrawlInfo struct {
 type LineageConfiguration struct {
 
 	// Specifies whether data lineage is enabled for the crawler. Valid values are:
-	//
-	// *
+	// -
 	// ENABLE: enables data lineage for the crawler
-	//
-	// * DISABLE: disables data lineage
+	// - DISABLE: disables data lineage
 	// for the crawler
 	CrawlerLineageSettings CrawlerLineageSettings
 
@@ -4644,17 +4541,13 @@ type MLTransform struct {
 	// compute capacity and 16 GB of memory. For more information, see the Glue pricing
 	// page (http://aws.amazon.com/glue/pricing/). MaxCapacity is a mutually exclusive
 	// option with NumberOfWorkers and WorkerType.
-	//
-	// * If either NumberOfWorkers or
+	// - If either NumberOfWorkers or
 	// WorkerType is set, then MaxCapacity cannot be set.
-	//
-	// * If MaxCapacity is set then
+	// - If MaxCapacity is set then
 	// neither NumberOfWorkers or WorkerType can be set.
-	//
-	// * If WorkerType is set, then
+	// - If WorkerType is set, then
 	// NumberOfWorkers is required (and vice versa).
-	//
-	// * MaxCapacity and NumberOfWorkers
+	// - MaxCapacity and NumberOfWorkers
 	// must both be at least 1.
 	//
 	// When the WorkerType field is set to a value other than
@@ -4683,16 +4576,14 @@ type MLTransform struct {
 	// The name or Amazon Resource Name (ARN) of the IAM role with the required
 	// permissions. The required permissions include both Glue service role permissions
 	// to Glue resources, and Amazon S3 permissions required by the transform.
-	//
-	// * This
+	// - This
 	// role needs Glue service role permissions to allow access to resources in Glue.
 	// See Attach a Policy to IAM Users That Access Glue
 	// (https://docs.aws.amazon.com/glue/latest/dg/attach-policy-iam-user.html).
-	//
-	// *
-	// This role needs permission to your Amazon Simple Storage Service (Amazon S3)
-	// sources, targets, temporary directory, scripts, and any libraries used by the
-	// task run for this transform.
+	// - This
+	// role needs permission to your Amazon Simple Storage Service (Amazon S3) sources,
+	// targets, temporary directory, scripts, and any libraries used by the task run
+	// for this transform.
 	Role *string
 
 	// A map of key-value pairs representing the columns and data types that this
@@ -4716,31 +4607,24 @@ type MLTransform struct {
 
 	// The type of predefined worker that is allocated when a task of this transform
 	// runs. Accepts a value of Standard, G.1X, or G.2X.
-	//
-	// * For the Standard worker
+	// - For the Standard worker
 	// type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2
 	// executors per worker.
-	//
-	// * For the G.1X worker type, each worker provides 4 vCPU,
+	// - For the G.1X worker type, each worker provides 4 vCPU,
 	// 16 GB of memory and a 64GB disk, and 1 executor per worker.
-	//
-	// * For the G.2X
+	// - For the G.2X
 	// worker type, each worker provides 8 vCPU, 32 GB of memory and a 128GB disk, and
 	// 1 executor per worker.
 	//
 	// MaxCapacity is a mutually exclusive option with
 	// NumberOfWorkers and WorkerType.
-	//
-	// * If either NumberOfWorkers or WorkerType is
+	// - If either NumberOfWorkers or WorkerType is
 	// set, then MaxCapacity cannot be set.
-	//
-	// * If MaxCapacity is set then neither
+	// - If MaxCapacity is set then neither
 	// NumberOfWorkers or WorkerType can be set.
-	//
-	// * If WorkerType is set, then
+	// - If WorkerType is set, then
 	// NumberOfWorkers is required (and vice versa).
-	//
-	// * MaxCapacity and NumberOfWorkers
+	// - MaxCapacity and NumberOfWorkers
 	// must both be at least 1.
 	WorkerType WorkerType
 
@@ -4752,11 +4636,9 @@ type MLTransform struct {
 type MLUserDataEncryption struct {
 
 	// The encryption mode applied to user data. Valid values are:
-	//
-	// * DISABLED:
+	// - DISABLED:
 	// encryption is disabled
-	//
-	// * SSEKMS: use of server-side encryption with Key
+	// - SSEKMS: use of server-side encryption with Key
 	// Management Service (SSE-KMS) for user data stored in Amazon S3.
 	//
 	// This member is required.
@@ -5051,18 +4933,13 @@ type PartitionIndexDescriptor struct {
 	IndexName *string
 
 	// The status of the partition index. The possible statuses are:
-	//
-	// * CREATING: The
+	// - CREATING: The
 	// index is being created. When an index is in a CREATING state, the index or its
 	// table cannot be deleted.
-	//
-	// * ACTIVE: The index creation succeeds.
-	//
-	// * FAILED: The
+	// - ACTIVE: The index creation succeeds.
+	// - FAILED: The
 	// index creation fails.
-	//
-	// * DELETING: The index is deleted from the list of
-	// indexes.
+	// - DELETING: The index is deleted from the list of indexes.
 	//
 	// This member is required.
 	IndexStatus PartitionIndexStatus

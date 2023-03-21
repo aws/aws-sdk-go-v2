@@ -77,18 +77,14 @@ type UpdatePackageVersionsStatusInput struct {
 
 	// The namespace of the package version to be updated. The package version
 	// component that specifies its namespace depends on its type. For example:
-	//
-	// * The
+	// - The
 	// namespace of a Maven package version is its groupId.
-	//
-	// * The namespace of an npm
+	// - The namespace of an npm
 	// package version is its scope.
-	//
-	// * Python and NuGet package versions do not
-	// contain a corresponding component, package versions of those formats do not have
-	// a namespace.
-	//
-	// * The namespace of a generic package is it’s namespace.
+	// - Python and NuGet package versions do not contain
+	// a corresponding component, package versions of those formats do not have a
+	// namespace.
+	// - The namespace of a generic package is it’s namespace.
 	Namespace *string
 
 	// A map of package versions and package version revisions. The map key is the

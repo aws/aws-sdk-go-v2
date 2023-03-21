@@ -38,11 +38,9 @@ import (
 // and Managing Access Permissions to Your Amazon S3 Resources
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html)
 // in the Amazon S3 User Guide. Related Resources
-//
-// * GetBucketEncryption
+// - GetBucketEncryption
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketEncryption.html)
-//
-// *
+// -
 // DeleteBucketEncryption
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketEncryption.html)
 func (c *Client) PutBucketEncryption(ctx context.Context, params *PutBucketEncryptionInput, optFns ...func(*Options)) (*PutBucketEncryptionOutput, error) {

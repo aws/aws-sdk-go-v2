@@ -22,10 +22,8 @@ import (
 // If you add more than one predicate to a Rule, a request must match all of the
 // specifications to be allowed or blocked. For example, suppose that you add the
 // following to a Rule:
-//
-// * An IPSet that matches the IP address 192.0.2.44/32
-//
-// * A
+// - An IPSet that matches the IP address 192.0.2.44/32
+// - A
 // ByteMatchSet that matches BadBot in the User-Agent header
 //
 // You then add the Rule
@@ -33,25 +31,19 @@ import (
 // For a request to be blocked, it must come from the IP address 192.0.2.44 and the
 // User-Agent header in the request must contain the value BadBot. To create and
 // configure a Rule, perform the following steps:
-//
-// * Create and update the
+// - Create and update the
 // predicates that you want to include in the Rule. For more information, see
 // CreateByteMatchSet, CreateIPSet, and CreateSqlInjectionMatchSet.
-//
-// * Use
+// - Use
 // GetChangeToken to get the change token that you provide in the ChangeToken
 // parameter of a CreateRule request.
-//
-// * Submit a CreateRule request.
-//
-// * Use
+// - Submit a CreateRule request.
+// - Use
 // GetChangeToken to get the change token that you provide in the ChangeToken
 // parameter of an UpdateRule request.
-//
-// * Submit an UpdateRule request to specify
+// - Submit an UpdateRule request to specify
 // the predicates that you want to include in the Rule.
-//
-// * Create and update a
+// - Create and update a
 // WebACL that contains the Rule. For more information, see CreateWebACL.
 //
 // For more

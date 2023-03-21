@@ -34,8 +34,7 @@ type IncludedProperty struct {
 
 	// The name of the property that is included in this view. You can specify the
 	// following property names for this field:
-	//
-	// * Tags
+	// - Tags
 	//
 	// This member is required.
 	Name *string
@@ -64,12 +63,10 @@ type Index struct {
 	Region *string
 
 	// The type of index. It can be one of the following values:
-	//
-	// * LOCAL – The index
+	// - LOCAL – The index
 	// contains information about resources from only the same Amazon Web Services
 	// Region.
-	//
-	// * AGGREGATOR – Resource Explorer replicates copies of the indexed
+	// - AGGREGATOR – Resource Explorer replicates copies of the indexed
 	// information about resources in all other Amazon Web Services Regions to the
 	// aggregator index. This lets search results in the Region with the aggregator
 	// index to include resources from all Regions in the account where Resource
@@ -122,12 +119,10 @@ type ResourceCount struct {
 
 	// Indicates whether the TotalResources value represents an exhaustive count of
 	// search results.
-	//
-	// * If True, it indicates that the search was exhaustive. Every
+	// - If True, it indicates that the search was exhaustive. Every
 	// resource that matches the query was counted.
-	//
-	// * If False, then the search
-	// reached the limit of 1,000 matching results, and stopped counting.
+	// - If False, then the search reached
+	// the limit of 1,000 matching results, and stopped counting.
 	Complete *bool
 
 	// The number of resources that match the search query. This value can't exceed

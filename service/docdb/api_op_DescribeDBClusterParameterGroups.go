@@ -35,8 +35,7 @@ type DescribeDBClusterParameterGroupsInput struct {
 
 	// The name of a specific cluster parameter group to return details for.
 	// Constraints:
-	//
-	// * If provided, must match the name of an existing
+	// - If provided, must match the name of an existing
 	// DBClusterParameterGroup.
 	DBClusterParameterGroupName *string
 

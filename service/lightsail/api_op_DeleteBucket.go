@@ -40,21 +40,17 @@ type DeleteBucketInput struct {
 
 	// A Boolean value that indicates whether to force delete the bucket. You must
 	// force delete the bucket if it has one of the following conditions:
-	//
-	// * The bucket
+	// - The bucket
 	// is the origin of a distribution.
-	//
-	// * The bucket has instances that were granted
+	// - The bucket has instances that were granted
 	// access to it using the SetResourceAccessForBucket
 	// (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_SetResourceAccessForBucket.html)
 	// action.
+	// - The bucket has objects.
+	// - The bucket has access keys.
 	//
-	// * The bucket has objects.
-	//
-	// * The bucket has access keys.
-	//
-	// Force
-	// deleting a bucket might impact other resources that rely on the bucket, such as
+	// Force deleting
+	// a bucket might impact other resources that rely on the bucket, such as
 	// instances, distributions, or software that use the issued access keys.
 	ForceDelete *bool
 

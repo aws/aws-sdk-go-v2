@@ -40,18 +40,14 @@ type DescribeCapacityReservationFleetsInput struct {
 	DryRun *bool
 
 	// One or more filters.
-	//
-	// * state - The state of the Fleet (submitted | modifying |
+	// - state - The state of the Fleet (submitted | modifying |
 	// active | partially_fulfilled | expiring | expired | cancelling | cancelled |
 	// failed).
-	//
-	// * instance-match-criteria - The instance matching criteria for the
+	// - instance-match-criteria - The instance matching criteria for the
 	// Fleet. Only open is supported.
-	//
-	// * tenancy - The tenancy of the Fleet (default |
+	// - tenancy - The tenancy of the Fleet (default |
 	// dedicated).
-	//
-	// * allocation-strategy - The allocation strategy used by the Fleet.
+	// - allocation-strategy - The allocation strategy used by the Fleet.
 	// Only prioritized is supported.
 	Filters []types.Filter
 

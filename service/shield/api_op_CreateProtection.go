@@ -49,26 +49,20 @@ type CreateProtectionInput struct {
 
 	// The ARN (Amazon Resource Name) of the resource to be protected. The ARN should
 	// be in one of the following formats:
-	//
-	// * For an Application Load Balancer:
+	// - For an Application Load Balancer:
 	// arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
-	//
-	// *
+	// -
 	// For an Elastic Load Balancer (Classic Load Balancer):
 	// arn:aws:elasticloadbalancing:region:account-id:loadbalancer/load-balancer-name
-	//
-	// *
+	// -
 	// For an Amazon CloudFront distribution:
 	// arn:aws:cloudfront::account-id:distribution/distribution-id
-	//
-	// * For an Global
+	// - For an Global
 	// Accelerator standard accelerator:
 	// arn:aws:globalaccelerator::account-id:accelerator/accelerator-id
-	//
-	// * For Amazon
+	// - For Amazon
 	// Route 53: arn:aws:route53:::hostedzone/hosted-zone-id
-	//
-	// * For an Elastic IP
+	// - For an Elastic IP
 	// address: arn:aws:ec2:region:account-id:eip-allocation/allocation-id
 	//
 	// This member is required.

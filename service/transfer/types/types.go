@@ -26,12 +26,10 @@ type As2ConnectorConfig struct {
 	// Used for outbound requests (from an Transfer Family server to a partner AS2
 	// server) to determine whether the partner response for transfers is synchronous
 	// or asynchronous. Specify either of the following values:
-	//
-	// * SYNC: The system
+	// - SYNC: The system
 	// expects a synchronous MDN response, confirming that the file was transferred
 	// successfully (or not).
-	//
-	// * NONE: Specifies that no MDN response is required.
+	// - NONE: Specifies that no MDN response is required.
 	MdnResponse MdnResponse
 
 	// The signing algorithm for the MDN response. If set to DEFAULT (or not set at
@@ -57,16 +55,14 @@ type CopyStepDetails struct {
 	// Specifies the location for the file being copied. Use ${Transfer:username} or
 	// ${Transfer:UploadDate} in this field to parametrize the destination prefix by
 	// username or uploaded date.
-	//
-	// * Set the value of DestinationFileLocation to
+	// - Set the value of DestinationFileLocation to
 	// ${Transfer:username} to copy uploaded files to an Amazon S3 bucket that is
 	// prefixed with the name of the Transfer Family user that uploaded the file.
-	//
-	// *
-	// Set the value of DestinationFileLocation to ${Transfer:UploadDate} to copy
-	// uploaded files to an Amazon S3 bucket that is prefixed with the date of the
-	// upload. The system resolves UploadDate to a date format of YYYY-MM-DD, based on
-	// the date the file is uploaded.
+	// - Set
+	// the value of DestinationFileLocation to ${Transfer:UploadDate} to copy uploaded
+	// files to an Amazon S3 bucket that is prefixed with the date of the upload. The
+	// system resolves UploadDate to a date format of YYYY-MM-DD, based on the date the
+	// file is uploaded.
 	DestinationFileLocation *InputFileLocation
 
 	// The name of the step, used as an identifier.
@@ -78,13 +74,11 @@ type CopyStepDetails struct {
 
 	// Specifies which file to use as input to the workflow step: either the output
 	// from the previous step, or the originally uploaded file for the workflow.
-	//
-	// * To
+	// - To
 	// use the previous file as the input, enter ${previous.file}. In this case, this
 	// workflow step uses the output file from the previous workflow step as input.
 	// This is the default value.
-	//
-	// * To use the originally uploaded file location as
+	// - To use the originally uploaded file location as
 	// input for this step, enter ${original.file}.
 	SourceFileLocation *string
 
@@ -99,13 +93,11 @@ type CustomStepDetails struct {
 
 	// Specifies which file to use as input to the workflow step: either the output
 	// from the previous step, or the originally uploaded file for the workflow.
-	//
-	// * To
+	// - To
 	// use the previous file as the input, enter ${previous.file}. In this case, this
 	// workflow step uses the output file from the previous workflow step as input.
 	// This is the default value.
-	//
-	// * To use the originally uploaded file location as
+	// - To use the originally uploaded file location as
 	// input for this step, enter ${original.file}.
 	SourceFileLocation *string
 
@@ -140,13 +132,11 @@ type DecryptStepDetails struct {
 
 	// Specifies which file to use as input to the workflow step: either the output
 	// from the previous step, or the originally uploaded file for the workflow.
-	//
-	// * To
+	// - To
 	// use the previous file as the input, enter ${previous.file}. In this case, this
 	// workflow step uses the output file from the previous workflow step as input.
 	// This is the default value.
-	//
-	// * To use the originally uploaded file location as
+	// - To use the originally uploaded file location as
 	// input for this step, enter ${original.file}.
 	SourceFileLocation *string
 
@@ -161,13 +151,11 @@ type DeleteStepDetails struct {
 
 	// Specifies which file to use as input to the workflow step: either the output
 	// from the previous step, or the originally uploaded file for the workflow.
-	//
-	// * To
+	// - To
 	// use the previous file as the input, enter ${previous.file}. In this case, this
 	// workflow step uses the output file from the previous workflow step as input.
 	// This is the default value.
-	//
-	// * To use the originally uploaded file location as
+	// - To use the originally uploaded file location as
 	// input for this step, enter ${original.file}.
 	SourceFileLocation *string
 
@@ -449,17 +437,12 @@ type DescribedHostKey struct {
 
 	// The encryption algorithm that is used for the host key. The Type parameter is
 	// specified by using one of the following values:
-	//
-	// * ssh-rsa
-	//
-	// * ssh-ed25519
-	//
-	// *
+	// - ssh-rsa
+	// - ssh-ed25519
+	// -
 	// ecdsa-sha2-nistp256
-	//
-	// * ecdsa-sha2-nistp384
-	//
-	// * ecdsa-sha2-nistp521
+	// - ecdsa-sha2-nistp384
+	// - ecdsa-sha2-nistp521
 	Type *string
 
 	noSmithyDocumentSerde
@@ -603,62 +586,50 @@ type DescribedServer struct {
 	PreAuthenticationLoginBanner *string
 
 	// The protocol settings that are configured for your server.
-	//
-	// * To indicate
-	// passive mode (for FTP and FTPS protocols), use the PassiveIp parameter. Enter a
-	// single dotted-quad IPv4 address, such as the external IP address of a firewall,
-	// router, or load balancer.
-	//
-	// * To ignore the error that is generated when the
-	// client attempts to use the SETSTAT command on a file that you are uploading to
-	// an Amazon S3 bucket, use the SetStatOption parameter. To have the Transfer
-	// Family server ignore the SETSTAT command and upload files without needing to
-	// make any changes to your SFTP client, set the value to ENABLE_NO_OP. If you set
-	// the SetStatOption parameter to ENABLE_NO_OP, Transfer Family generates a log
-	// entry to Amazon CloudWatch Logs, so that you can determine when the client is
-	// making a SETSTAT call.
-	//
-	// * To determine whether your Transfer Family server
-	// resumes recent, negotiated sessions through a unique session ID, use the
+	// - To indicate passive
+	// mode (for FTP and FTPS protocols), use the PassiveIp parameter. Enter a single
+	// dotted-quad IPv4 address, such as the external IP address of a firewall, router,
+	// or load balancer.
+	// - To ignore the error that is generated when the client
+	// attempts to use the SETSTAT command on a file that you are uploading to an
+	// Amazon S3 bucket, use the SetStatOption parameter. To have the Transfer Family
+	// server ignore the SETSTAT command and upload files without needing to make any
+	// changes to your SFTP client, set the value to ENABLE_NO_OP. If you set the
+	// SetStatOption parameter to ENABLE_NO_OP, Transfer Family generates a log entry
+	// to Amazon CloudWatch Logs, so that you can determine when the client is making a
+	// SETSTAT call.
+	// - To determine whether your Transfer Family server resumes recent,
+	// negotiated sessions through a unique session ID, use the
 	// TlsSessionResumptionMode parameter.
-	//
-	// * As2Transports indicates the transport
+	// - As2Transports indicates the transport
 	// method for the AS2 messages. Currently, only HTTP is supported.
 	ProtocolDetails *ProtocolDetails
 
 	// Specifies the file transfer protocol or protocols over which your file transfer
 	// protocol client can connect to your server's endpoint. The available protocols
 	// are:
-	//
-	// * SFTP (Secure Shell (SSH) File Transfer Protocol): File transfer over
+	// - SFTP (Secure Shell (SSH) File Transfer Protocol): File transfer over
 	// SSH
+	// - FTPS (File Transfer Protocol Secure): File transfer with TLS encryption
+	// -
+	// FTP (File Transfer Protocol): Unencrypted file transfer
+	// - AS2 (Applicability
+	// Statement 2): used for transporting structured business-to-business data
 	//
-	// * FTPS (File Transfer Protocol Secure): File transfer with TLS
-	// encryption
-	//
-	// * FTP (File Transfer Protocol): Unencrypted file transfer
-	//
-	// * AS2
-	// (Applicability Statement 2): used for transporting structured
-	// business-to-business data
-	//
-	// * If you select FTPS, you must choose a certificate
-	// stored in Certificate Manager (ACM) which is used to identify your server when
-	// clients connect to it over FTPS.
-	//
-	// * If Protocol includes either FTP or FTPS,
-	// then the EndpointType must be VPC and the IdentityProviderType must be either
-	// AWS_DIRECTORY_SERVICE, AWS_LAMBDA, or API_GATEWAY.
-	//
-	// * If Protocol includes FTP,
-	// then AddressAllocationIds cannot be associated.
-	//
-	// * If Protocol is set only to
-	// SFTP, the EndpointType can be set to PUBLIC and the IdentityProviderType can be
-	// set any of the supported identity types: SERVICE_MANAGED, AWS_DIRECTORY_SERVICE,
+	// - If
+	// you select FTPS, you must choose a certificate stored in Certificate Manager
+	// (ACM) which is used to identify your server when clients connect to it over
+	// FTPS.
+	// - If Protocol includes either FTP or FTPS, then the EndpointType must be
+	// VPC and the IdentityProviderType must be either AWS_DIRECTORY_SERVICE,
 	// AWS_LAMBDA, or API_GATEWAY.
-	//
-	// * If Protocol includes AS2, then the EndpointType
+	// - If Protocol includes FTP, then
+	// AddressAllocationIds cannot be associated.
+	// - If Protocol is set only to SFTP,
+	// the EndpointType can be set to PUBLIC and the IdentityProviderType can be set
+	// any of the supported identity types: SERVICE_MANAGED, AWS_DIRECTORY_SERVICE,
+	// AWS_LAMBDA, or API_GATEWAY.
+	// - If Protocol includes AS2, then the EndpointType
 	// must be VPC, and domain must be Amazon S3.
 	Protocols []Protocol
 
@@ -865,34 +836,26 @@ type ExecutionError struct {
 	Message *string
 
 	// Specifies the error type.
-	//
-	// * ALREADY_EXISTS: occurs for a copy step, if the
+	// - ALREADY_EXISTS: occurs for a copy step, if the
 	// overwrite option is not selected and a file with the same name already exists in
 	// the target location.
-	//
-	// * BAD_REQUEST: a general bad request: for example, a step
+	// - BAD_REQUEST: a general bad request: for example, a step
 	// that attempts to tag an EFS file returns BAD_REQUEST, as only S3 files can be
 	// tagged.
-	//
-	// * CUSTOM_STEP_FAILED: occurs when the custom step provided a callback
+	// - CUSTOM_STEP_FAILED: occurs when the custom step provided a callback
 	// that indicates failure.
-	//
-	// * INTERNAL_SERVER_ERROR: a catch-all error that can
+	// - INTERNAL_SERVER_ERROR: a catch-all error that can
 	// occur for a variety of reasons.
-	//
-	// * NOT_FOUND: occurs when a requested entity,
-	// for example a source file for a copy step, does not exist.
-	//
-	// * PERMISSION_DENIED:
+	// - NOT_FOUND: occurs when a requested entity, for
+	// example a source file for a copy step, does not exist.
+	// - PERMISSION_DENIED:
 	// occurs if your policy does not contain the correct permissions to complete one
 	// or more of the steps in the workflow.
-	//
-	// * TIMEOUT: occurs when the execution
-	// times out. You can set the TimeoutSeconds for a custom step, anywhere from 1
-	// second to 1800 seconds (30 minutes).
-	//
-	// * THROTTLED: occurs if you exceed the new
-	// execution refill rate of one workflow per second.
+	// - TIMEOUT: occurs when the execution times
+	// out. You can set the TimeoutSeconds for a custom step, anywhere from 1 second to
+	// 1800 seconds (30 minutes).
+	// - THROTTLED: occurs if you exceed the new execution
+	// refill rate of one workflow per second.
 	//
 	// This member is required.
 	Type ExecutionErrorType
@@ -927,19 +890,14 @@ type ExecutionStepResult struct {
 	Outputs *string
 
 	// One of the available step types.
-	//
-	// * COPY - Copy the file to another location.
-	//
-	// *
+	// - COPY - Copy the file to another location.
+	// -
 	// CUSTOM - Perform a custom step with an Lambda function target.
-	//
-	// * DECRYPT -
+	// - DECRYPT -
 	// Decrypt a file that was encrypted before it was uploaded.
-	//
-	// * DELETE - Delete the
+	// - DELETE - Delete the
 	// file.
-	//
-	// * TAG - Add a tag to the file.
+	// - TAG - Add a tag to the file.
 	StepType WorkflowStepType
 
 	noSmithyDocumentSerde
@@ -1172,17 +1130,12 @@ type ListedHostKey struct {
 
 	// The encryption algorithm that is used for the host key. The Type parameter is
 	// specified by using one of the following values:
-	//
-	// * ssh-rsa
-	//
-	// * ssh-ed25519
-	//
-	// *
+	// - ssh-rsa
+	// - ssh-ed25519
+	// -
 	// ecdsa-sha2-nistp256
-	//
-	// * ecdsa-sha2-nistp384
-	//
-	// * ecdsa-sha2-nistp521
+	// - ecdsa-sha2-nistp384
+	// - ecdsa-sha2-nistp521
 	Type *string
 
 	noSmithyDocumentSerde
@@ -1420,24 +1373,21 @@ type ProtocolDetails struct {
 	// negotiated sessions through a unique session ID. This property is available
 	// during CreateServer and UpdateServer calls. If a TlsSessionResumptionMode value
 	// is not specified during CreateServer, it is set to ENFORCED by default.
-	//
-	// *
+	// -
 	// DISABLED: the server does not process TLS session resumption client requests and
 	// creates a new TLS session for each request.
-	//
-	// * ENABLED: the server processes and
+	// - ENABLED: the server processes and
 	// accepts clients that are performing TLS session resumption. The server doesn't
 	// reject client data connections that do not perform the TLS session resumption
 	// client processing.
-	//
-	// * ENFORCED: the server processes and accepts clients that
-	// are performing TLS session resumption. The server rejects client data
-	// connections that do not perform the TLS session resumption client processing.
-	// Before you set the value to ENFORCED, test your clients. Not all FTPS clients
-	// perform TLS session resumption. So, if you choose to enforce TLS session
-	// resumption, you prevent any connections from FTPS clients that don't perform the
-	// protocol negotiation. To determine whether or not you can use the ENFORCED
-	// value, you need to test your clients.
+	// - ENFORCED: the server processes and accepts clients that are
+	// performing TLS session resumption. The server rejects client data connections
+	// that do not perform the TLS session resumption client processing. Before you set
+	// the value to ENFORCED, test your clients. Not all FTPS clients perform TLS
+	// session resumption. So, if you choose to enforce TLS session resumption, you
+	// prevent any connections from FTPS clients that don't perform the protocol
+	// negotiation. To determine whether or not you can use the ENFORCED value, you
+	// need to test your clients.
 	TlsSessionResumptionMode TlsSessionResumptionMode
 
 	noSmithyDocumentSerde
@@ -1573,13 +1523,11 @@ type TagStepDetails struct {
 
 	// Specifies which file to use as input to the workflow step: either the output
 	// from the previous step, or the originally uploaded file for the workflow.
-	//
-	// * To
+	// - To
 	// use the previous file as the input, enter ${previous.file}. In this case, this
 	// workflow step uses the output file from the previous workflow step as input.
 	// This is the default value.
-	//
-	// * To use the originally uploaded file location as
+	// - To use the originally uploaded file location as
 	// input for this step, enter ${original.file}.
 	SourceFileLocation *string
 
@@ -1654,14 +1602,11 @@ type WorkflowStep struct {
 
 	// Details for a step that performs a file copy. Consists of the following
 	// values:
-	//
-	// * A description
-	//
-	// * An Amazon S3 location for the destination of the
-	// file copy.
-	//
-	// * A flag that indicates whether to overwrite an existing file of the
-	// same name. The default is FALSE.
+	// - A description
+	// - An Amazon S3 location for the destination of the file
+	// copy.
+	// - A flag that indicates whether to overwrite an existing file of the same
+	// name. The default is FALSE.
 	CopyStepDetails *CopyStepDetails
 
 	// Details for a step that invokes an Lambda function. Consists of the Lambda
@@ -1670,19 +1615,14 @@ type WorkflowStep struct {
 
 	// Details for a step that decrypts an encrypted file. Consists of the following
 	// values:
-	//
-	// * A descriptive name
-	//
-	// * An Amazon S3 or Amazon Elastic File System
+	// - A descriptive name
+	// - An Amazon S3 or Amazon Elastic File System
 	// (Amazon EFS) location for the source file to decrypt.
-	//
-	// * An S3 or Amazon EFS
+	// - An S3 or Amazon EFS
 	// location for the destination of the file decryption.
-	//
-	// * A flag that indicates
+	// - A flag that indicates
 	// whether to overwrite an existing file of the same name. The default is FALSE.
-	//
-	// *
+	// -
 	// The type of encryption that's used. Currently, only PGP encryption is supported.
 	DecryptStepDetails *DecryptStepDetails
 
@@ -1694,19 +1634,14 @@ type WorkflowStep struct {
 	TagStepDetails *TagStepDetails
 
 	// Currently, the following step types are supported.
-	//
-	// * COPY - Copy the file to
+	// - COPY - Copy the file to
 	// another location.
-	//
-	// * CUSTOM - Perform a custom step with an Lambda function
+	// - CUSTOM - Perform a custom step with an Lambda function
 	// target.
-	//
-	// * DECRYPT - Decrypt a file that was encrypted before it was
-	// uploaded.
-	//
-	// * DELETE - Delete the file.
-	//
-	// * TAG - Add a tag to the file.
+	// - DECRYPT - Decrypt a file that was encrypted before it was uploaded.
+	// -
+	// DELETE - Delete the file.
+	// - TAG - Add a tag to the file.
 	Type WorkflowStepType
 
 	noSmithyDocumentSerde

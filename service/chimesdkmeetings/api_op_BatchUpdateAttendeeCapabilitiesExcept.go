@@ -16,19 +16,16 @@ import (
 // control what the capabilities can do, such as SendReceive data. For more
 // information about those values, see . When using capabilities, be aware of these
 // corner cases:
-//
-// * You can't set content capabilities to SendReceive or Receive
+// - You can't set content capabilities to SendReceive or Receive
 // unless you also set video capabilities to SendReceive or Receive. If you don't
 // set the video capability to receive, the response will contain an HTTP 400 Bad
 // Request status code. However, you can set your video capability to receive and
 // you set your content capability to not receive.
-//
-// * When you change an audio
+// - When you change an audio
 // capability from None or Receive to Send or SendReceive , and if the attendee
 // left their microphone unmuted, audio will flow from the attendee to the other
 // meeting participants.
-//
-// * When you change a video or content capability from None
+// - When you change a video or content capability from None
 // or Receive to Send or SendReceive , and if the attendee turned on their video or
 // content streams, remote attendess can receive those streams, but only after
 // media renegotiation between the client and the Amazon Chime back-end server.

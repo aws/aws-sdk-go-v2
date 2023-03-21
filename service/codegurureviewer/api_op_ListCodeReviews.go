@@ -55,16 +55,12 @@ type ListCodeReviewsInput struct {
 	// List of states for filtering that needs to be applied before displaying the
 	// result. For example, states=[Pending] lists code reviews in the Pending state.
 	// The valid code review states are:
-	//
-	// * Completed: The code review is complete.
-	//
-	// *
+	// - Completed: The code review is complete.
+	// -
 	// Pending: The code review started and has not completed or failed.
-	//
-	// * Failed: The
+	// - Failed: The
 	// code review failed.
-	//
-	// * Deleting: The code review is being deleted.
+	// - Deleting: The code review is being deleted.
 	States []types.JobState
 
 	noSmithyDocumentSerde

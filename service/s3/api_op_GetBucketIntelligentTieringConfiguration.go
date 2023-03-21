@@ -28,16 +28,13 @@ import (
 // automatically optimizing frequently and infrequently accessed objects
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html#sc-dynamic-data-access).
 // Operations related to GetBucketIntelligentTieringConfiguration include:
-//
-// *
+// -
 // DeleteBucketIntelligentTieringConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketIntelligentTieringConfiguration.html)
-//
-// *
+// -
 // PutBucketIntelligentTieringConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketIntelligentTieringConfiguration.html)
-//
-// *
+// -
 // ListBucketIntelligentTieringConfigurations
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketIntelligentTieringConfigurations.html)
 func (c *Client) GetBucketIntelligentTieringConfiguration(ctx context.Context, params *GetBucketIntelligentTieringConfigurationInput, optFns ...func(*Options)) (*GetBucketIntelligentTieringConfigurationOutput, error) {

@@ -88,13 +88,9 @@ type DescribeTrialComponentOutput struct {
 	StartTime *time.Time
 
 	// The status of the component. States include:
-	//
-	// * InProgress
-	//
-	// * Completed
-	//
-	// *
-	// Failed
+	// - InProgress
+	// - Completed
+	// - Failed
 	Status *types.TrialComponentStatus
 
 	// The Amazon Resource Name (ARN) of the trial component.

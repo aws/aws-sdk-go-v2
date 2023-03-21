@@ -33,10 +33,8 @@ type ListResourcesInput struct {
 
 	// Specifies that you want to list only the resource shares that match the
 	// following:
-	//
-	// * SELF – resources that your account shares with other accounts
-	//
-	// *
+	// - SELF – resources that your account shares with other accounts
+	// -
 	// OTHER-ACCOUNTS – resources that other accounts share with your account
 	//
 	// This member is required.
@@ -70,14 +68,11 @@ type ListResourcesInput struct {
 
 	// Specifies that you want the results to include only resources that have the
 	// specified scope.
-	//
-	// * ALL – the results include both global and regional resources
+	// - ALL – the results include both global and regional resources
 	// or resource types.
-	//
-	// * GLOBAL – the results include only global resources or
+	// - GLOBAL – the results include only global resources or
 	// resource types.
-	//
-	// * REGIONAL – the results include only regional resources or
+	// - REGIONAL – the results include only regional resources or
 	// resource types.
 	//
 	// The default value is ALL.

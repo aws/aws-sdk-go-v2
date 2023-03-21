@@ -70,16 +70,14 @@ type StartMatchBackfillInput struct {
 	// session. This information is used by the matchmaker to find new players and add
 	// them to the existing game. You can include up to 199 Players in a
 	// StartMatchBackfill request.
-	//
-	// * PlayerID, PlayerAttributes, Team -- This
+	// - PlayerID, PlayerAttributes, Team -- This
 	// information is maintained in the GameSession object, MatchmakerData property,
 	// for all players who are currently assigned to the game session. The matchmaker
 	// data is in JSON syntax, formatted as a string. For more details, see  Match Data
 	// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-server.html#match-server-data).
 	// The backfill request must specify the team membership for every player. Do not
 	// specify team if you are not using backfill.
-	//
-	// * LatencyInMs -- If the matchmaker
+	// - LatencyInMs -- If the matchmaker
 	// uses player latency, include a latency value, in milliseconds, for the Region
 	// that the game session is currently in. Do not include latency values for any
 	// other Region.

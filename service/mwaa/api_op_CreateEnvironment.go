@@ -141,10 +141,8 @@ type CreateEnvironmentInput struct {
 
 	// The number of Apache Airflow schedulers to run in your environment. Valid
 	// values:
-	//
-	// * v2 - Accepts between 2 to 5. Defaults to 2.
-	//
-	// * v1 - Accepts 1.
+	// - v2 - Accepts between 2 to 5. Defaults to 2.
+	// - v1 - Accepts 1.
 	Schedulers *int32
 
 	// The key-value tag pairs you want to associate to your environment. For example,

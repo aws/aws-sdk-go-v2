@@ -42,10 +42,8 @@ type GetUserOutput struct {
 	// Indicates whether the user can use the GetProgrammaticAccessCredentials API to
 	// obtain credentials that can then be used to access other FinSpace Data API
 	// operations.
-	//
-	// * ENABLED – The user has permissions to use the APIs.
-	//
-	// * DISABLED –
+	// - ENABLED – The user has permissions to use the APIs.
+	// - DISABLED –
 	// The user does not have permissions to use any APIs.
 	ApiAccess types.ApiAccess
 
@@ -84,22 +82,18 @@ type GetUserOutput struct {
 	LastName *string
 
 	// The current status of the user account.
-	//
-	// * CREATING – The user account creation
+	// - CREATING – The user account creation
 	// is in progress.
-	//
-	// * ENABLED – The user account is created and is currently
+	// - ENABLED – The user account is created and is currently
 	// active.
-	//
-	// * DISABLED – The user account is currently inactive.
+	// - DISABLED – The user account is currently inactive.
 	Status types.UserStatus
 
 	// Indicates the type of user.
-	//
-	// * SUPER_USER – A user with permission to all the
+	// - SUPER_USER – A user with permission to all the
 	// functionality and data in FinSpace.
 	//
-	// * APP_USER – A user with specific
+	// - APP_USER – A user with specific
 	// permissions in FinSpace. The users are assigned permissions by adding them to a
 	// permission group.
 	Type types.UserType

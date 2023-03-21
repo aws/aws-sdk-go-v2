@@ -13,19 +13,13 @@ import (
 // selectors, see Logging data events for trails
 // (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html)
 // in the CloudTrail User Guide.
-//
-// * readOnly
-//
-// * eventSource
-//
-// * eventName
-//
-// *
+// - readOnly
+// - eventSource
+// - eventName
+// -
 // eventCategory
-//
-// * resources.type
-//
-// * resources.ARN
+// - resources.type
+// - resources.ARN
 //
 // You cannot apply both event
 // selectors and advanced event selectors to a trail.
@@ -54,77 +48,54 @@ type AdvancedFieldSelector struct {
 	// resources.type, and resources.ARN. For event data stores for Config
 	// configuration items, Audit Manager evidence, or non-Amazon Web Services events,
 	// the only supported field is eventCategory.
-	//
-	// * readOnly - Optional. Can be set to
+	// - readOnly - Optional. Can be set to
 	// Equals a value of true or false. If you do not add this field, CloudTrail logs
 	// both read and write events. A value of true logs only read events. A value of
 	// false logs only write events.
-	//
-	// * eventSource - For filtering management events
+	// - eventSource - For filtering management events
 	// only. This can be set only to NotEqualskms.amazonaws.com.
-	//
-	// * eventName - Can use
+	// - eventName - Can use
 	// any operator. You can use it to ﬁlter in or ﬁlter out any data event logged to
 	// CloudTrail, such as PutBucket or GetSnapshotBlock. You can have multiple values
 	// for this ﬁeld, separated by commas.
-	//
-	// * eventCategory - This is required and must
+	// - eventCategory - This is required and must
 	// be set to Equals.
-	//
-	// * For CloudTrail event records, the value must be Management
+	// - For CloudTrail event records, the value must be Management
 	// or Data.
-	//
-	// * For Config configuration items, the value must be
+	// - For Config configuration items, the value must be
 	// ConfigurationItem.
-	//
-	// * For Audit Manager evidence, the value must be Evidence.
-	//
-	// *
+	// - For Audit Manager evidence, the value must be Evidence.
+	// -
 	// For non-Amazon Web Services events, the value must be ActivityAuditLog.
 	//
-	// *
+	// -
 	// resources.type - This ﬁeld is required for CloudTrail data events.
 	// resources.type can only use the Equals operator, and the value can be one of the
 	// following:
-	//
-	// * AWS::CloudTrail::Channel
-	//
-	// * AWS::S3::Object
-	//
-	// *
+	// - AWS::CloudTrail::Channel
+	// - AWS::S3::Object
+	// -
 	// AWS::Lambda::Function
-	//
-	// * AWS::DynamoDB::Table
-	//
-	// * AWS::S3Outposts::Object
-	//
-	// *
+	// - AWS::DynamoDB::Table
+	// - AWS::S3Outposts::Object
+	// -
 	// AWS::ManagedBlockchain::Node
-	//
-	// * AWS::S3ObjectLambda::AccessPoint
-	//
-	// *
+	// - AWS::S3ObjectLambda::AccessPoint
+	// -
 	// AWS::EC2::Snapshot
-	//
-	// * AWS::S3::AccessPoint
-	//
-	// * AWS::DynamoDB::Stream
-	//
-	// *
+	// - AWS::S3::AccessPoint
+	// - AWS::DynamoDB::Stream
+	// -
 	// AWS::Glue::Table
-	//
-	// * AWS::FinSpace::Environment
-	//
-	// *
+	// - AWS::FinSpace::Environment
+	// -
 	// AWS::SageMaker::ExperimentTrialComponent
+	// - AWS::SageMaker::FeatureGroup
 	//
-	// * AWS::SageMaker::FeatureGroup
-	//
-	// You
-	// can have only one resources.type ﬁeld per selector. To log data events on more
-	// than one resource type, add another selector.
-	//
-	// * resources.ARN - You can use any
+	// You can
+	// have only one resources.type ﬁeld per selector. To log data events on more than
+	// one resource type, add another selector.
+	// - resources.ARN - You can use any
 	// operator with resources.ARN, but if you use Equals or NotEquals, the value must
 	// exactly match the ARN of a valid resource of the type you've speciﬁed in the
 	// template as the value of resources.type. For example, if resources.type equals
@@ -133,10 +104,8 @@ type AdvancedFieldSelector struct {
 	// operator, and include only the bucket ARN as the matching value. The trailing
 	// slash is intentional; do not exclude it. Replace the text between less than and
 	// greater than symbols (<>) with resource-specific information.
-	//
-	// * arn::s3:::/
-	//
-	// *
+	// - arn::s3:::/
+	// -
 	// arn::s3::://
 	//
 	// When resources.type equals AWS::S3::AccessPoint, and the operator
@@ -144,88 +113,73 @@ type AdvancedFieldSelector struct {
 	// To log events on all objects in an S3 access point, we recommend that you use
 	// only the access point ARN, don’t include the object path, and use the StartsWith
 	// or NotStartsWith operators.
-	//
-	// * arn::s3:::accesspoint/
-	//
-	// *
+	// - arn::s3:::accesspoint/
+	// -
 	// arn::s3:::accesspoint//object/
 	//
 	// When resources.type equals
 	// AWS::Lambda::Function, and the operator is set to Equals or NotEquals, the ARN
 	// must be in the following format:
-	//
-	// * arn::lambda:::function:
+	// - arn::lambda:::function:
 	//
 	// When resources.type
 	// equals AWS::DynamoDB::Table, and the operator is set to Equals or NotEquals, the
 	// ARN must be in the following format:
-	//
-	// * arn::dynamodb:::table/
+	// - arn::dynamodb:::table/
 	//
 	// When
 	// resources.type equals AWS::CloudTrail::Channel, and the operator is set to
 	// Equals or NotEquals, the ARN must be in the following format:
-	//
-	// *
+	// -
 	// arn::cloudtrail:::channel/
 	//
 	// When resources.type equals AWS::S3Outposts::Object,
 	// and the operator is set to Equals or NotEquals, the ARN must be in the following
 	// format:
-	//
-	// * arn::s3-outposts:::
+	// - arn::s3-outposts:::
 	//
 	// When resources.type equals
 	// AWS::ManagedBlockchain::Node, and the operator is set to Equals or NotEquals,
 	// the ARN must be in the following format:
+	// - arn::managedblockchain:::nodes/
 	//
-	// *
-	// arn::managedblockchain:::nodes/
-	//
-	// When resources.type equals
-	// AWS::S3ObjectLambda::AccessPoint, and the operator is set to Equals or
-	// NotEquals, the ARN must be in the following format:
-	//
-	// *
+	// When
+	// resources.type equals AWS::S3ObjectLambda::AccessPoint, and the operator is set
+	// to Equals or NotEquals, the ARN must be in the following format:
+	// -
 	// arn::s3-object-lambda:::accesspoint/
 	//
 	// When resources.type equals
 	// AWS::EC2::Snapshot, and the operator is set to Equals or NotEquals, the ARN must
 	// be in the following format:
-	//
-	// * arn::ec2:::snapshot/
+	// - arn::ec2:::snapshot/
 	//
 	// When resources.type equals
 	// AWS::DynamoDB::Stream, and the operator is set to Equals or NotEquals, the ARN
 	// must be in the following format:
-	//
-	// * arn::dynamodb:::table//stream/
+	// - arn::dynamodb:::table//stream/
 	//
 	// When
 	// resources.type equals AWS::Glue::Table, and the operator is set to Equals or
 	// NotEquals, the ARN must be in the following format:
-	//
-	// * arn::glue:::table//
+	// - arn::glue:::table//
 	//
 	// When
 	// resources.type equals AWS::FinSpace::Environment, and the operator is set to
 	// Equals or NotEquals, the ARN must be in the following format:
-	//
-	// *
+	// -
 	// arn::finspace:::environment/
 	//
 	// When resources.type equals
 	// AWS::SageMaker::ExperimentTrialComponent, and the operator is set to Equals or
 	// NotEquals, the ARN must be in the following format:
-	//
-	// *
+	// -
 	// arn::sagemaker:::experiment-trial-component/
 	//
 	// When resources.type equals
 	// AWS::SageMaker::FeatureGroup, and the operator is set to Equals or NotEquals,
 	// the ARN must be in the following format:
-	//
-	// * arn::sagemaker:::feature-group/
+	// - arn::sagemaker:::feature-group/
 	//
 	// This member is required.
 	Field *string
@@ -285,37 +239,30 @@ type Channel struct {
 // demonstrates how logging works when you configure logging of all data events for
 // an S3 bucket named bucket-1. In this example, the CloudTrail user specified an
 // empty prefix, and the option to log both Read and Write data events.
-//
-// * A user
+// - A user
 // uploads an image file to bucket-1.
-//
-// * The PutObject API operation is an Amazon
-// S3 object-level API. It is recorded as a data event in CloudTrail. Because the
+// - The PutObject API operation is an Amazon S3
+// object-level API. It is recorded as a data event in CloudTrail. Because the
 // CloudTrail user specified an S3 bucket with an empty prefix, events that occur
 // on any object in that bucket are logged. The trail processes and logs the
 // event.
-//
-// * A user uploads an object to an Amazon S3 bucket named
+// - A user uploads an object to an Amazon S3 bucket named
 // arn:aws:s3:::bucket-2.
-//
-// * The PutObject API operation occurred for an object in
+// - The PutObject API operation occurred for an object in
 // an S3 bucket that the CloudTrail user didn't specify for the trail. The trail
 // doesn’t log the event.
 //
 // The following example demonstrates how logging works
 // when you configure logging of Lambda data events for a Lambda function named
 // MyLambdaFunction, but not for all Lambda functions.
-//
-// * A user runs a script that
+// - A user runs a script that
 // includes a call to the MyLambdaFunction function and the MyOtherLambdaFunction
 // function.
-//
-// * The Invoke API operation on MyLambdaFunction is an Lambda API. It
-// is recorded as a data event in CloudTrail. Because the CloudTrail user specified
+// - The Invoke API operation on MyLambdaFunction is an Lambda API. It is
+// recorded as a data event in CloudTrail. Because the CloudTrail user specified
 // logging data events for MyLambdaFunction, any invocations of that function are
 // logged. The trail processes and logs the event.
-//
-// * The Invoke API operation on
+// - The Invoke API operation on
 // MyOtherLambdaFunction is an Lambda API. Because the CloudTrail user did not
 // specify logging data events for all Lambda functions, the Invoke operation for
 // MyOtherLambdaFunction does not match the function specified for the trail. The
@@ -324,83 +271,62 @@ type DataResource struct {
 
 	// The resource type in which you want to log data events. You can specify the
 	// following basic event selector resource types:
-	//
-	// * AWS::S3::Object
-	//
-	// *
+	// - AWS::S3::Object
+	// -
 	// AWS::Lambda::Function
-	//
-	// * AWS::DynamoDB::Table
+	// - AWS::DynamoDB::Table
 	//
 	// The following resource types are
 	// also available through advanced event selectors. Basic event selector resource
 	// types are valid in advanced event selectors, but advanced event selector
 	// resource types are not valid in basic event selectors. For more information, see
 	// AdvancedFieldSelector$Field.
-	//
-	// * AWS::CloudTrail::Channel
-	//
-	// *
+	// - AWS::CloudTrail::Channel
+	// -
 	// AWS::S3Outposts::Object
-	//
-	// * AWS::ManagedBlockchain::Node
-	//
-	// *
+	// - AWS::ManagedBlockchain::Node
+	// -
 	// AWS::S3ObjectLambda::AccessPoint
-	//
-	// * AWS::EC2::Snapshot
-	//
-	// *
-	// AWS::S3::AccessPoint
-	//
-	// * AWS::DynamoDB::Stream
-	//
-	// * AWS::Glue::Table
-	//
-	// *
-	// AWS::FinSpace::Environment
-	//
-	// * AWS::SageMaker::ExperimentTrialComponent
-	//
-	// *
-	// AWS::SageMaker::FeatureGroup
+	// - AWS::EC2::Snapshot
+	// - AWS::S3::AccessPoint
+	// -
+	// AWS::DynamoDB::Stream
+	// - AWS::Glue::Table
+	// - AWS::FinSpace::Environment
+	// -
+	// AWS::SageMaker::ExperimentTrialComponent
+	// - AWS::SageMaker::FeatureGroup
 	Type *string
 
 	// An array of Amazon Resource Name (ARN) strings or partial ARN strings for the
 	// specified objects.
-	//
-	// * To log data events for all objects in all S3 buckets in
+	// - To log data events for all objects in all S3 buckets in
 	// your Amazon Web Services account, specify the prefix as arn:aws:s3. This also
 	// enables logging of data event activity performed by any user or role in your
 	// Amazon Web Services account, even if that activity is performed on a bucket that
 	// belongs to another Amazon Web Services account.
-	//
-	// * To log data events for all
+	// - To log data events for all
 	// objects in an S3 bucket, specify the bucket and an empty object prefix such as
 	// arn:aws:s3:::bucket-1/. The trail logs data events for all objects in this S3
 	// bucket.
-	//
-	// * To log data events for specific objects, specify the S3 bucket and
+	// - To log data events for specific objects, specify the S3 bucket and
 	// object prefix such as arn:aws:s3:::bucket-1/example-images. The trail logs data
 	// events for objects in this S3 bucket that match the prefix.
-	//
-	// * To log data
-	// events for all Lambda functions in your Amazon Web Services account, specify the
-	// prefix as arn:aws:lambda. This also enables logging of Invoke activity performed
-	// by any user or role in your Amazon Web Services account, even if that activity
-	// is performed on a function that belongs to another Amazon Web Services
-	// account.
-	//
-	// * To log data events for a specific Lambda function, specify the
-	// function ARN. Lambda function ARNs are exact. For example, if you specify a
-	// function ARN arn:aws:lambda:us-west-2:111111111111:function:helloworld, data
-	// events will only be logged for
-	// arn:aws:lambda:us-west-2:111111111111:function:helloworld. They will not be
-	// logged for arn:aws:lambda:us-west-2:111111111111:function:helloworld2.
-	//
-	// * To log
-	// data events for all DynamoDB tables in your Amazon Web Services account, specify
-	// the prefix as arn:aws:dynamodb.
+	// - To log data events
+	// for all Lambda functions in your Amazon Web Services account, specify the prefix
+	// as arn:aws:lambda. This also enables logging of Invoke activity performed by any
+	// user or role in your Amazon Web Services account, even if that activity is
+	// performed on a function that belongs to another Amazon Web Services account.
+	// -
+	// To log data events for a specific Lambda function, specify the function ARN.
+	// Lambda function ARNs are exact. For example, if you specify a function ARN
+	// arn:aws:lambda:us-west-2:111111111111:function:helloworld, data events will only
+	// be logged for arn:aws:lambda:us-west-2:111111111111:function:helloworld. They
+	// will not be logged for
+	// arn:aws:lambda:us-west-2:111111111111:function:helloworld2.
+	// - To log data events
+	// for all DynamoDB tables in your Amazon Web Services account, specify the prefix
+	// as arn:aws:dynamodb.
 	Values []string
 
 	noSmithyDocumentSerde

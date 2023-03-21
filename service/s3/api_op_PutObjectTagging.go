@@ -31,36 +31,30 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html). Special
 // Errors
 //
-// * Code: InvalidTagError
-//
-// * Cause: The tag provided was not a valid tag.
+// - Code: InvalidTagError
+// - Cause: The tag provided was not a valid tag.
 // This error can occur if the tag did not pass input validation. For more
 // information, see Object Tagging
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html).
 //
-// * Code:
+// - Code:
 // MalformedXMLError
+// - Cause: The XML provided does not match the schema.
 //
-// * Cause: The XML provided does not match the schema.
-//
-// * Code:
+// - Code:
 // OperationAbortedError
-//
-// * Cause: A conflicting conditional action is currently in
+// - Cause: A conflicting conditional action is currently in
 // progress against this resource. Please try again.
 //
-// * Code: InternalError
-//
-// *
+// - Code: InternalError
+// -
 // Cause: The service was unable to apply the provided tag to the object.
 //
 // Related
 // Resources
-//
-// * GetObjectTagging
+// - GetObjectTagging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectTagging.html)
-//
-// *
+// -
 // DeleteObjectTagging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjectTagging.html)
 func (c *Client) PutObjectTagging(ctx context.Context, params *PutObjectTaggingInput, optFns ...func(*Options)) (*PutObjectTaggingOutput, error) {

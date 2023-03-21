@@ -58,22 +58,17 @@ type StartExecutionInput struct {
 	// Limits Related to State Machine Executions
 	// (https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions)
 	// in the Step Functions Developer Guide. A name must not contain:
+	// - white space
+	// -
+	// brackets < > { } [ ]
+	// - wildcard characters ? *
+	// - special characters " # % \ ^ |
+	// ~ ` $ & , ; : /
+	// - control characters (U+0000-001F, U+007F-009F)
 	//
-	// * white
-	// space
-	//
-	// * brackets < > { } [ ]
-	//
-	// * wildcard characters ? *
-	//
-	// * special characters "
-	// # % \ ^ | ~ ` $ & , ; : /
-	//
-	// * control characters (U+0000-001F, U+007F-009F)
-	//
-	// To
-	// enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z,
-	// - and _.
+	// To enable
+	// logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and
+	// _.
 	Name *string
 
 	// Passes the X-Ray trace header. The trace header can also be passed in the

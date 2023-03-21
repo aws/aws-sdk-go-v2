@@ -17,14 +17,12 @@ import (
 // definition language (DDL). This statement must be a single SQL statement.
 // Depending on the authorization method, use one of the following combinations of
 // request parameters:
-//
-// * Secrets Manager - when connecting to a cluster, specify
+// - Secrets Manager - when connecting to a cluster, specify
 // the Amazon Resource Name (ARN) of the secret, the database name, and the cluster
 // identifier that matches the cluster in the secret. When connecting to a
 // serverless workgroup, specify the Amazon Resource Name (ARN) of the secret and
 // the database name.
-//
-// * Temporary credentials - when connecting to a cluster,
+// - Temporary credentials - when connecting to a cluster,
 // specify the cluster identifier, the database name, and the database user name.
 // Also, permission to call the redshift:GetClusterCredentials operation is
 // required. When connecting to a serverless workgroup, specify the workgroup name

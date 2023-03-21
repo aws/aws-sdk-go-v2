@@ -14,17 +14,14 @@ import (
 
 // Returns a list of Batch jobs. You must specify only one of the following
 // items:
-//
-// * A job queue ID to return a list of jobs in that job queue
-//
-// * A
+// - A job queue ID to return a list of jobs in that job queue
+// - A
 // multi-node parallel job ID to return a list of nodes for that job
+// - An array job
+// ID to return a list of the children for that job
 //
-// * An array
-// job ID to return a list of the children for that job
-//
-// You can filter the results
-// by job status with the jobStatus parameter. If you don't specify a status, only
+// You can filter the results by
+// job status with the jobStatus parameter. If you don't specify a status, only
 // RUNNING jobs are returned.
 func (c *Client) ListJobs(ctx context.Context, params *ListJobsInput, optFns ...func(*Options)) (*ListJobsOutput, error) {
 	if params == nil {

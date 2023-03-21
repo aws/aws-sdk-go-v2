@@ -24,18 +24,14 @@ import (
 // User-Agent headers that match a RegexPatternSet with pattern B[a@]dB[o0]t. You
 // can then configure AWS WAF to reject those requests. To create and configure a
 // RegexMatchSet, perform the following steps:
-//
-// * Use GetChangeToken to get the
+// - Use GetChangeToken to get the
 // change token that you provide in the ChangeToken parameter of a
 // CreateRegexMatchSet request.
-//
-// * Submit a CreateRegexMatchSet request.
-//
-// * Use
+// - Submit a CreateRegexMatchSet request.
+// - Use
 // GetChangeToken to get the change token that you provide in the ChangeToken
 // parameter of an UpdateRegexMatchSet request.
-//
-// * Submit an UpdateRegexMatchSet
+// - Submit an UpdateRegexMatchSet
 // request to specify the part of the request that you want AWS WAF to inspect (for
 // example, the header or the URI) and the value, using a RegexPatternSet, that you
 // want AWS WAF to watch for.

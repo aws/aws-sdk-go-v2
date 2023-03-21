@@ -184,14 +184,11 @@ type AggregatedSourceStatus struct {
 	LastErrorMessage *string
 
 	// Filters the last updated status type.
-	//
-	// * Valid value FAILED indicates errors
+	// - Valid value FAILED indicates errors
 	// while moving data.
-	//
-	// * Valid value SUCCEEDED indicates the data was successfully
+	// - Valid value SUCCEEDED indicates the data was successfully
 	// moved.
-	//
-	// * Valid value OUTDATED indicates the data is not the most recent.
+	// - Valid value OUTDATED indicates the data is not the most recent.
 	LastUpdateStatus AggregatedSourceStatusType
 
 	// The time of the last update.
@@ -310,20 +307,15 @@ type BaseConfigurationItem struct {
 	ConfigurationItemCaptureTime *time.Time
 
 	// The configuration item status. The valid values are:
-	//
-	// * OK – The resource
+	// - OK – The resource
 	// configuration has been updated
-	//
-	// * ResourceDiscovered – The resource was newly
+	// - ResourceDiscovered – The resource was newly
 	// discovered
-	//
-	// * ResourceNotRecorded – The resource was discovered but its
+	// - ResourceNotRecorded – The resource was discovered but its
 	// configuration was not recorded since the recorder excludes the recording of
 	// resources of this type
-	//
-	// * ResourceDeleted – The resource was deleted
-	//
-	// *
+	// - ResourceDeleted – The resource was deleted
+	// -
 	// ResourceDeletedNotRecorded – The resource was deleted but its configuration was
 	// not recorded since the recorder excludes the recording of resources of this
 	// type
@@ -555,11 +547,9 @@ type ConfigRule struct {
 
 	// The maximum frequency with which Config runs evaluations for a rule. You can
 	// specify a value for MaximumExecutionFrequency when:
-	//
-	// * This is for an Config
+	// - This is for an Config
 	// managed rule that is triggered at a periodic frequency.
-	//
-	// * Your custom rule is
+	// - Your custom rule is
 	// triggered when Config delivers the configuration snapshot. For more information,
 	// see ConfigSnapshotDeliveryProperties.
 	//
@@ -632,12 +622,10 @@ type ConfigRuleEvaluationStatus struct {
 
 	// Indicates whether Config has evaluated your resources against the rule at least
 	// once.
-	//
-	// * true - Config has evaluated your Amazon Web Services resources against
+	// - true - Config has evaluated your Amazon Web Services resources against
 	// the rule at least once.
-	//
-	// * false - Config has not finished evaluating your
-	// Amazon Web Services resources against the rule at least once.
+	// - false - Config has not finished evaluating your Amazon
+	// Web Services resources against the rule at least once.
 	FirstEvaluationStarted bool
 
 	// The time that you last turned off the Config rule.
@@ -684,13 +672,11 @@ type ConfigRuleEvaluationStatus struct {
 // Amazon S3 bucket in your delivery channel. The frequency for a rule that
 // triggers evaluations for your resources when Config delivers the configuration
 // snapshot is set by one of two values, depending on which is less frequent:
-//
-// *
-// The value for the deliveryFrequency parameter within the delivery channel
+// - The
+// value for the deliveryFrequency parameter within the delivery channel
 // configuration, which sets how often Config delivers configuration snapshots.
 // This value also sets how often Config invokes evaluations for Config rules.
-//
-// *
+// -
 // The value for the MaximumExecutionFrequency parameter, which sets the maximum
 // frequency with which Config invokes evaluations for the rule. For more
 // information, see ConfigRule.
@@ -698,18 +684,14 @@ type ConfigRuleEvaluationStatus struct {
 // If the deliveryFrequency value is less frequent
 // than the MaximumExecutionFrequency value for a rule, Config invokes the rule
 // only as often as the deliveryFrequency value.
-//
-// * For example, you want your rule
+// - For example, you want your rule
 // to run evaluations when Config delivers the configuration snapshot.
-//
-// * You
+// - You
 // specify the MaximumExecutionFrequency value for Six_Hours.
-//
-// * You then specify
+// - You then specify
 // the delivery channel deliveryFrequency value for TwentyFour_Hours.
-//
-// * Because
-// the value for deliveryFrequency is less frequent than MaximumExecutionFrequency,
+// - Because the
+// value for deliveryFrequency is less frequent than MaximumExecutionFrequency,
 // Config invokes evaluations for the rule every 24 hours.
 //
 // You should set the
@@ -803,20 +785,15 @@ type ConfigurationItem struct {
 	ConfigurationItemMD5Hash *string
 
 	// The configuration item status. The valid values are:
-	//
-	// * OK – The resource
+	// - OK – The resource
 	// configuration has been updated
-	//
-	// * ResourceDiscovered – The resource was newly
+	// - ResourceDiscovered – The resource was newly
 	// discovered
-	//
-	// * ResourceNotRecorded – The resource was discovered but its
+	// - ResourceNotRecorded – The resource was discovered but its
 	// configuration was not recorded since the recorder excludes the recording of
 	// resources of this type
-	//
-	// * ResourceDeleted – The resource was deleted
-	//
-	// *
+	// - ResourceDeleted – The resource was deleted
+	// -
 	// ResourceDeletedNotRecorded – The resource was deleted but its configuration was
 	// not recorded since the recorder excludes the recording of resources of this
 	// type
@@ -1139,21 +1116,16 @@ type ConformancePackStatusDetail struct {
 
 	// Indicates deployment status of conformance pack. Config sets the state of the
 	// conformance pack to:
-	//
-	// * CREATE_IN_PROGRESS when a conformance pack creation is
-	// in progress for an account.
-	//
-	// * CREATE_COMPLETE when a conformance pack has been
+	// - CREATE_IN_PROGRESS when a conformance pack creation is in
+	// progress for an account.
+	// - CREATE_COMPLETE when a conformance pack has been
 	// successfully created in your account.
-	//
-	// * CREATE_FAILED when a conformance pack
+	// - CREATE_FAILED when a conformance pack
 	// creation failed in your account.
-	//
-	// * DELETE_IN_PROGRESS when a conformance pack
+	// - DELETE_IN_PROGRESS when a conformance pack
 	// deletion is in progress.
-	//
-	// * DELETE_FAILED when a conformance pack deletion
-	// failed in your account.
+	// - DELETE_FAILED when a conformance pack deletion failed
+	// in your account.
 	//
 	// This member is required.
 	ConformancePackState ConformancePackState
@@ -1553,32 +1525,23 @@ type MemberAccountStatus struct {
 	// management account deletes OrganizationConfigRule and disables service access
 	// for config-multiaccountsetup.amazonaws.com. Config sets the state of the rule
 	// to:
-	//
-	// * CREATE_SUCCESSFUL when Config rule has been created in the member
+	// - CREATE_SUCCESSFUL when Config rule has been created in the member
 	// account.
-	//
-	// * CREATE_IN_PROGRESS when Config rule is being created in the member
+	// - CREATE_IN_PROGRESS when Config rule is being created in the member
 	// account.
-	//
-	// * CREATE_FAILED when Config rule creation has failed in the member
+	// - CREATE_FAILED when Config rule creation has failed in the member
 	// account.
-	//
-	// * DELETE_FAILED when Config rule deletion has failed in the member
+	// - DELETE_FAILED when Config rule deletion has failed in the member
 	// account.
-	//
-	// * DELETE_IN_PROGRESS when Config rule is being deleted in the member
+	// - DELETE_IN_PROGRESS when Config rule is being deleted in the member
 	// account.
-	//
-	// * DELETE_SUCCESSFUL when Config rule has been deleted in the member
+	// - DELETE_SUCCESSFUL when Config rule has been deleted in the member
 	// account.
-	//
-	// * UPDATE_SUCCESSFUL when Config rule has been updated in the member
+	// - UPDATE_SUCCESSFUL when Config rule has been updated in the member
 	// account.
-	//
-	// * UPDATE_IN_PROGRESS when Config rule is being updated in the member
+	// - UPDATE_IN_PROGRESS when Config rule is being updated in the member
 	// account.
-	//
-	// * UPDATE_FAILED when Config rule deletion has failed in the member
+	// - UPDATE_FAILED when Config rule deletion has failed in the member
 	// account.
 	//
 	// This member is required.
@@ -1670,35 +1633,26 @@ type OrganizationConfigRuleStatus struct {
 	// status is deleted when the management account deletes OrganizationConfigRule in
 	// all the member accounts and disables service access for
 	// config-multiaccountsetup.amazonaws.com. Config sets the state of the rule to:
-	//
-	// *
+	// -
 	// CREATE_SUCCESSFUL when an organization Config rule has been successfully created
 	// in all the member accounts.
-	//
-	// * CREATE_IN_PROGRESS when an organization Config
+	// - CREATE_IN_PROGRESS when an organization Config
 	// rule creation is in progress.
-	//
-	// * CREATE_FAILED when an organization Config rule
+	// - CREATE_FAILED when an organization Config rule
 	// creation failed in one or more member accounts within that organization.
-	//
-	// *
+	// -
 	// DELETE_FAILED when an organization Config rule deletion failed in one or more
 	// member accounts within that organization.
-	//
-	// * DELETE_IN_PROGRESS when an
+	// - DELETE_IN_PROGRESS when an
 	// organization Config rule deletion is in progress.
-	//
-	// * DELETE_SUCCESSFUL when an
+	// - DELETE_SUCCESSFUL when an
 	// organization Config rule has been successfully deleted from all the member
 	// accounts.
-	//
-	// * UPDATE_SUCCESSFUL when an organization Config rule has been
+	// - UPDATE_SUCCESSFUL when an organization Config rule has been
 	// successfully updated in all the member accounts.
-	//
-	// * UPDATE_IN_PROGRESS when an
+	// - UPDATE_IN_PROGRESS when an
 	// organization Config rule update is in progress.
-	//
-	// * UPDATE_FAILED when an
+	// - UPDATE_FAILED when an
 	// organization Config rule update failed in one or more member accounts within
 	// that organization.
 	//
@@ -1779,33 +1733,24 @@ type OrganizationConformancePackDetailedStatus struct {
 	// OrganizationConformancePack and disables service access for
 	// config-multiaccountsetup.amazonaws.com. Config sets the state of the conformance
 	// pack to:
-	//
-	// * CREATE_SUCCESSFUL when conformance pack has been created in the
+	// - CREATE_SUCCESSFUL when conformance pack has been created in the
 	// member account.
-	//
-	// * CREATE_IN_PROGRESS when conformance pack is being created in
+	// - CREATE_IN_PROGRESS when conformance pack is being created in
 	// the member account.
-	//
-	// * CREATE_FAILED when conformance pack creation has failed
+	// - CREATE_FAILED when conformance pack creation has failed in
+	// the member account.
+	// - DELETE_FAILED when conformance pack deletion has failed in
+	// the member account.
+	// - DELETE_IN_PROGRESS when conformance pack is being deleted
 	// in the member account.
-	//
-	// * DELETE_FAILED when conformance pack deletion has
-	// failed in the member account.
-	//
-	// * DELETE_IN_PROGRESS when conformance pack is
-	// being deleted in the member account.
-	//
-	// * DELETE_SUCCESSFUL when conformance pack
-	// has been deleted in the member account.
-	//
-	// * UPDATE_SUCCESSFUL when conformance
-	// pack has been updated in the member account.
-	//
-	// * UPDATE_IN_PROGRESS when
-	// conformance pack is being updated in the member account.
-	//
-	// * UPDATE_FAILED when
-	// conformance pack deletion has failed in the member account.
+	// - DELETE_SUCCESSFUL when conformance pack has been
+	// deleted in the member account.
+	// - UPDATE_SUCCESSFUL when conformance pack has
+	// been updated in the member account.
+	// - UPDATE_IN_PROGRESS when conformance pack
+	// is being updated in the member account.
+	// - UPDATE_FAILED when conformance pack
+	// deletion has failed in the member account.
 	//
 	// This member is required.
 	Status OrganizationResourceDetailedStatus
@@ -1842,35 +1787,26 @@ type OrganizationConformancePackStatus struct {
 	// OrganizationConformancePack in all the member accounts and disables service
 	// access for config-multiaccountsetup.amazonaws.com. Config sets the state of the
 	// conformance pack to:
-	//
-	// * CREATE_SUCCESSFUL when an organization conformance pack
+	// - CREATE_SUCCESSFUL when an organization conformance pack
 	// has been successfully created in all the member accounts.
-	//
-	// * CREATE_IN_PROGRESS
+	// - CREATE_IN_PROGRESS
 	// when an organization conformance pack creation is in progress.
-	//
-	// * CREATE_FAILED
+	// - CREATE_FAILED
 	// when an organization conformance pack creation failed in one or more member
 	// accounts within that organization.
-	//
-	// * DELETE_FAILED when an organization
+	// - DELETE_FAILED when an organization
 	// conformance pack deletion failed in one or more member accounts within that
 	// organization.
-	//
-	// * DELETE_IN_PROGRESS when an organization conformance pack
+	// - DELETE_IN_PROGRESS when an organization conformance pack
 	// deletion is in progress.
-	//
-	// * DELETE_SUCCESSFUL when an organization conformance
+	// - DELETE_SUCCESSFUL when an organization conformance
 	// pack has been successfully deleted from all the member accounts.
-	//
-	// *
+	// -
 	// UPDATE_SUCCESSFUL when an organization conformance pack has been successfully
 	// updated in all the member accounts.
-	//
-	// * UPDATE_IN_PROGRESS when an organization
+	// - UPDATE_IN_PROGRESS when an organization
 	// conformance pack update is in progress.
-	//
-	// * UPDATE_FAILED when an organization
+	// - UPDATE_FAILED when an organization
 	// conformance pack update failed in one or more member accounts within that
 	// organization.
 	//
@@ -1933,11 +1869,9 @@ type OrganizationCustomPolicyRuleMetadata struct {
 	// The type of notification that initiates Config to run an evaluation for a rule.
 	// For Config Custom Policy rules, Config supports change-initiated notification
 	// types:
-	//
-	// * ConfigurationItemChangeNotification - Initiates an evaluation when
+	// - ConfigurationItemChangeNotification - Initiates an evaluation when
 	// Config delivers a configuration item as a result of a resource change.
-	//
-	// *
+	// -
 	// OversizedConfigurationItemChangeNotification - Initiates an evaluation when
 	// Config delivers an oversized configuration item. Config may generate this
 	// notification type when a resource changes and the notification exceeds the
@@ -1989,11 +1923,9 @@ type OrganizationCustomPolicyRuleMetadataNoPolicy struct {
 	// The type of notification that triggers Config to run an evaluation for a rule.
 	// For Config Custom Policy rules, Config supports change triggered notification
 	// types:
-	//
-	// * ConfigurationItemChangeNotification - Triggers an evaluation when
+	// - ConfigurationItemChangeNotification - Triggers an evaluation when
 	// Config delivers a configuration item as a result of a resource change.
-	//
-	// *
+	// -
 	// OversizedConfigurationItemChangeNotification - Triggers an evaluation when
 	// Config delivers an oversized configuration item. Config may generate this
 	// notification type when a resource changes and the notification exceeds the
@@ -2037,18 +1969,15 @@ type OrganizationCustomRuleMetadata struct {
 
 	// The type of notification that triggers Config to run an evaluation for a rule.
 	// You can specify the following notification types:
-	//
-	// *
+	// -
 	// ConfigurationItemChangeNotification - Triggers an evaluation when Config
 	// delivers a configuration item as a result of a resource change.
-	//
-	// *
+	// -
 	// OversizedConfigurationItemChangeNotification - Triggers an evaluation when
 	// Config delivers an oversized configuration item. Config may generate this
 	// notification type when a resource changes and the notification exceeds the
 	// maximum size allowed by Amazon SNS.
-	//
-	// * ScheduledNotification - Triggers a
+	// - ScheduledNotification - Triggers a
 	// periodic evaluation at the frequency specified for MaximumExecutionFrequency.
 	//
 	// This member is required.
@@ -2145,33 +2074,24 @@ type OrganizationResourceDetailedStatusFilters struct {
 	// OrganizationConformancePack and disables service access for
 	// config-multiaccountsetup.amazonaws.com. Config sets the state of the conformance
 	// pack to:
-	//
-	// * CREATE_SUCCESSFUL when conformance pack has been created in the
+	// - CREATE_SUCCESSFUL when conformance pack has been created in the
 	// member account.
-	//
-	// * CREATE_IN_PROGRESS when conformance pack is being created in
+	// - CREATE_IN_PROGRESS when conformance pack is being created in
 	// the member account.
-	//
-	// * CREATE_FAILED when conformance pack creation has failed
+	// - CREATE_FAILED when conformance pack creation has failed in
+	// the member account.
+	// - DELETE_FAILED when conformance pack deletion has failed in
+	// the member account.
+	// - DELETE_IN_PROGRESS when conformance pack is being deleted
 	// in the member account.
-	//
-	// * DELETE_FAILED when conformance pack deletion has
-	// failed in the member account.
-	//
-	// * DELETE_IN_PROGRESS when conformance pack is
-	// being deleted in the member account.
-	//
-	// * DELETE_SUCCESSFUL when conformance pack
-	// has been deleted in the member account.
-	//
-	// * UPDATE_SUCCESSFUL when conformance
-	// pack has been updated in the member account.
-	//
-	// * UPDATE_IN_PROGRESS when
-	// conformance pack is being updated in the member account.
-	//
-	// * UPDATE_FAILED when
-	// conformance pack deletion has failed in the member account.
+	// - DELETE_SUCCESSFUL when conformance pack has been
+	// deleted in the member account.
+	// - UPDATE_SUCCESSFUL when conformance pack has
+	// been updated in the member account.
+	// - UPDATE_IN_PROGRESS when conformance pack
+	// is being updated in the member account.
+	// - UPDATE_FAILED when conformance pack
+	// deletion has failed in the member account.
 	Status OrganizationResourceDetailedStatus
 
 	noSmithyDocumentSerde
@@ -2712,21 +2632,17 @@ type SourceDetail struct {
 
 	// The type of notification that triggers Config to run an evaluation for a rule.
 	// You can specify the following notification types:
-	//
-	// *
+	// -
 	// ConfigurationItemChangeNotification - Triggers an evaluation when Config
 	// delivers a configuration item as a result of a resource change.
-	//
-	// *
+	// -
 	// OversizedConfigurationItemChangeNotification - Triggers an evaluation when
 	// Config delivers an oversized configuration item. Config may generate this
 	// notification type when a resource changes and the notification exceeds the
 	// maximum size allowed by Amazon SNS.
-	//
-	// * ScheduledNotification - Triggers a
+	// - ScheduledNotification - Triggers a
 	// periodic evaluation at the frequency specified for MaximumExecutionFrequency.
-	//
-	// *
+	// -
 	// ConfigurationSnapshotDeliveryCompleted - Triggers a periodic evaluation when
 	// Config delivers a configuration snapshot.
 	//
@@ -2784,32 +2700,23 @@ type StatusDetailFilters struct {
 	// management account deletes OrganizationConfigRule and disables service access
 	// for config-multiaccountsetup.amazonaws.com. Config sets the state of the rule
 	// to:
-	//
-	// * CREATE_SUCCESSFUL when Config rule has been created in the member
+	// - CREATE_SUCCESSFUL when Config rule has been created in the member
 	// account.
-	//
-	// * CREATE_IN_PROGRESS when Config rule is being created in the member
+	// - CREATE_IN_PROGRESS when Config rule is being created in the member
 	// account.
-	//
-	// * CREATE_FAILED when Config rule creation has failed in the member
+	// - CREATE_FAILED when Config rule creation has failed in the member
 	// account.
-	//
-	// * DELETE_FAILED when Config rule deletion has failed in the member
+	// - DELETE_FAILED when Config rule deletion has failed in the member
 	// account.
-	//
-	// * DELETE_IN_PROGRESS when Config rule is being deleted in the member
+	// - DELETE_IN_PROGRESS when Config rule is being deleted in the member
 	// account.
-	//
-	// * DELETE_SUCCESSFUL when Config rule has been deleted in the member
+	// - DELETE_SUCCESSFUL when Config rule has been deleted in the member
 	// account.
-	//
-	// * UPDATE_SUCCESSFUL when Config rule has been updated in the member
+	// - UPDATE_SUCCESSFUL when Config rule has been updated in the member
 	// account.
-	//
-	// * UPDATE_IN_PROGRESS when Config rule is being updated in the member
+	// - UPDATE_IN_PROGRESS when Config rule is being updated in the member
 	// account.
-	//
-	// * UPDATE_FAILED when Config rule deletion has failed in the member
+	// - UPDATE_FAILED when Config rule deletion has failed in the member
 	// account.
 	MemberAccountRuleStatus MemberAccountRuleStatus
 

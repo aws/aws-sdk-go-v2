@@ -41,16 +41,13 @@ type DetachNetworkInterfaceInput struct {
 	DryRun *bool
 
 	// Specifies whether to force a detachment.
-	//
-	// * Use the Force parameter only as a
+	// - Use the Force parameter only as a
 	// last resort to detach a network interface from a failed instance.
-	//
-	// * If you use
+	// - If you use
 	// the Force parameter to detach a network interface, you might not be able to
 	// attach a different network interface to the same index on the instance without
 	// first stopping and starting the instance.
-	//
-	// * If you force the detachment of a
+	// - If you force the detachment of a
 	// network interface, the instance metadata
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html)
 	// might not get updated. This means that the attributes associated with the

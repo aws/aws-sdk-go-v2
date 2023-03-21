@@ -31,15 +31,11 @@ import (
 // permissions: kms:ListGrants
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (key policy) Related operations:
-//
-// * CreateGrant
-//
-// * ListRetirableGrants
-//
-// *
+// - CreateGrant
+// - ListRetirableGrants
+// -
 // RetireGrant
-//
-// * RevokeGrant
+// - RevokeGrant
 func (c *Client) ListGrants(ctx context.Context, params *ListGrantsInput, optFns ...func(*Options)) (*ListGrantsOutput, error) {
 	if params == nil {
 		params = &ListGrantsInput{}
@@ -60,11 +56,9 @@ type ListGrantsInput struct {
 	// Returns only grants for the specified KMS key. This parameter is required.
 	// Specify the key ID or key ARN of the KMS key. To specify a KMS key in a
 	// different Amazon Web Services account, you must use the key ARN. For example:
-	//
-	// *
+	// -
 	// Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// * Key ARN:
+	// - Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// To

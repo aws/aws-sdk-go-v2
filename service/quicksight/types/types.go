@@ -21,20 +21,15 @@ type AccountCustomization struct {
 }
 
 // A structure that contains the following account information elements:
-//
-// * Your
+// - Your
 // Amazon QuickSight account name.
-//
-// * The edition of Amazon QuickSight that your
+// - The edition of Amazon QuickSight that your
 // account is using.
-//
-// * The notification email address that is associated with the
+// - The notification email address that is associated with the
 // Amazon QuickSight account.
-//
-// * The authentication type of the Amazon QuickSight
+// - The authentication type of the Amazon QuickSight
 // account.
-//
-// * The status of the Amazon QuickSight account's subscription.
+// - The status of the Amazon QuickSight account's subscription.
 type AccountInfo struct {
 
 	// The account name that you provided for the Amazon QuickSight subscription in
@@ -120,25 +115,19 @@ type AdHocFilteringOption struct {
 type AggregationFunction struct {
 
 	// Aggregation for categorical values.
-	//
-	// * COUNT: Aggregate by the total number of
+	// - COUNT: Aggregate by the total number of
 	// values, including duplicates.
-	//
-	// * DISTINCT_COUNT: Aggregate by the total number
-	// of distinct values.
+	// - DISTINCT_COUNT: Aggregate by the total number of
+	// distinct values.
 	CategoricalAggregationFunction CategoricalAggregationFunction
 
 	// Aggregation for date values.
-	//
-	// * COUNT: Aggregate by the total number of values,
+	// - COUNT: Aggregate by the total number of values,
 	// including duplicates.
-	//
-	// * DISTINCT_COUNT: Aggregate by the total number of
+	// - DISTINCT_COUNT: Aggregate by the total number of
 	// distinct values.
-	//
-	// * MIN: Select the smallest date value.
-	//
-	// * MAX: Select the
+	// - MIN: Select the smallest date value.
+	// - MAX: Select the
 	// largest date value.
 	DateAggregationFunction DateAggregationFunction
 
@@ -162,10 +151,8 @@ type AggregationSortConfiguration struct {
 	Column *ColumnIdentifier
 
 	// The sort direction of values.
-	//
-	// * ASC: Sort in ascending order.
-	//
-	// * DESC: Sort in
+	// - ASC: Sort in ascending order.
+	// - DESC: Sort in
 	// descending order.
 	//
 	// This member is required.
@@ -303,32 +290,26 @@ type AnalysisSearchFilter struct {
 
 	// The name of the value that you want to use as a filter, for example "Name":
 	// "QUICKSIGHT_OWNER". Valid values are defined as follows:
-	//
-	// *
+	// -
 	// QUICKSIGHT_VIEWER_OR_OWNER: Provide an ARN of a user or group, and any analyses
 	// with that ARN listed as one of the analysis' owners or viewers are returned.
 	// Implicit permissions from folders or groups are considered.
-	//
-	// * QUICKSIGHT_OWNER:
+	// - QUICKSIGHT_OWNER:
 	// Provide an ARN of a user or group, and any analyses with that ARN listed as one
 	// of the owners of the analyses are returned. Implicit permissions from folders or
 	// groups are considered.
-	//
-	// * DIRECT_QUICKSIGHT_SOLE_OWNER: Provide an ARN of a user
+	// - DIRECT_QUICKSIGHT_SOLE_OWNER: Provide an ARN of a user
 	// or group, and any analyses with that ARN listed as the only owner of the
 	// analysis are returned. Implicit permissions from folders or groups are not
 	// considered.
-	//
-	// * DIRECT_QUICKSIGHT_OWNER: Provide an ARN of a user or group, and
+	// - DIRECT_QUICKSIGHT_OWNER: Provide an ARN of a user or group, and
 	// any analyses with that ARN listed as one of the owners of the analyses are
 	// returned. Implicit permissions from folders or groups are not considered.
-	//
-	// *
+	// -
 	// DIRECT_QUICKSIGHT_VIEWER_OR_OWNER: Provide an ARN of a user or group, and any
 	// analyses with that ARN listed as one of the owners or viewers of the analyses
 	// are returned. Implicit permissions from folders or groups are not considered.
-	//
-	// *
+	// -
 	// ANALYSIS_NAME: Any analyses whose names have a substring match to this value
 	// will be returned.
 	Name AnalysisFilterAttribute
@@ -407,8 +388,7 @@ type AnalysisSummary struct {
 type AnchorDateConfiguration struct {
 
 	// The options for the date configuration. Choose one of the options below:
-	//
-	// * NOW
+	// - NOW
 	AnchorOption AnchorOption
 
 	// The name of the parameter that is used for the anchor date configuration.
@@ -794,14 +774,12 @@ type BarChartConfiguration struct {
 
 	// The orientation of the bars in a bar chart visual. There are two valid values in
 	// this structure:
-	//
-	// * HORIZONTAL: Used for charts that have horizontal bars.
-	// Visuals that use this value are horizontal bar charts, horizontal stacked bar
-	// charts, and horizontal stacked 100% bar charts.
-	//
-	// * VERTICAL: Used for charts
-	// that have vertical bars. Visuals that use this value are vertical bar charts,
-	// vertical stacked bar charts, and vertical stacked 100% bar charts.
+	// - HORIZONTAL: Used for charts that have horizontal bars. Visuals
+	// that use this value are horizontal bar charts, horizontal stacked bar charts,
+	// and horizontal stacked 100% bar charts.
+	// - VERTICAL: Used for charts that have
+	// vertical bars. Visuals that use this value are vertical bar charts, vertical
+	// stacked bar charts, and vertical stacked 100% bar charts.
 	Orientation BarChartOrientation
 
 	// The reference line setup of the visual.
@@ -867,19 +845,13 @@ type BarChartSortConfiguration struct {
 // A bar chart. The BarChartVisual structure describes a visual that is a member of
 // the bar chart family. The following charts can be described using this
 // structure:
-//
-// * Horizontal bar chart
-//
-// * Vertical bar chart
-//
-// * Horizontal stacked
-// bar chart
-//
-// * Vertical stacked bar chart
-//
-// * Horizontal stacked 100% bar chart
-//
-// *
+// - Horizontal bar chart
+// - Vertical bar chart
+// - Horizontal stacked bar
+// chart
+// - Vertical stacked bar chart
+// - Horizontal stacked 100% bar chart
+// -
 // Vertical stacked 100% bar chart
 //
 // For more information, see Using bar charts
@@ -1326,10 +1298,8 @@ type ChartAxisLabelOptions struct {
 
 	// The visibility of an axis label on a chart. Choose one of the following
 	// options:
-	//
-	// * VISIBLE: Shows the axis.
-	//
-	// * HIDDEN: Hides the axis.
+	// - VISIBLE: Shows the axis.
+	// - HIDDEN: Hides the axis.
 	Visibility Visibility
 
 	noSmithyDocumentSerde
@@ -1576,13 +1546,10 @@ type ComboChartConfiguration struct {
 
 	// Determines the bar arrangement in a combo chart. The following are valid values
 	// in this structure:
-	//
-	// * CLUSTERED: For clustered bar combo charts.
-	//
-	// * STACKED: For
+	// - CLUSTERED: For clustered bar combo charts.
+	// - STACKED: For
 	// stacked bar combo charts.
-	//
-	// * STACKED_PERCENT: Do not use. If you use this value,
+	// - STACKED_PERCENT: Do not use. If you use this value,
 	// the operation returns a validation error.
 	BarsArrangement BarsArrangement
 
@@ -1705,13 +1672,10 @@ type ComparisonConfiguration struct {
 	ComparisonFormat *ComparisonFormatConfiguration
 
 	// The method of the comparison. Choose from the following options:
-	//
-	// *
-	// DIFFERENCE
-	//
-	// * PERCENT_DIFFERENCE
-	//
-	// * PERCENT
+	// - DIFFERENCE
+	// -
+	// PERCENT_DIFFERENCE
+	// - PERCENT
 	ComparisonMethod ComparisonMethod
 
 	noSmithyDocumentSerde
@@ -2009,13 +1973,10 @@ type CustomActionURLOperation struct {
 
 	// The target of the CustomActionURLOperation. Valid values are defined as
 	// follows:
-	//
-	// * NEW_TAB: Opens the target URL in a new browser tab.
-	//
-	// * NEW_WINDOW:
+	// - NEW_TAB: Opens the target URL in a new browser tab.
+	// - NEW_WINDOW:
 	// Opens the target URL in a new browser window.
-	//
-	// * SAME_TAB: Opens the target URL
+	// - SAME_TAB: Opens the target URL
 	// in the same browser tab.
 	//
 	// This member is required.
@@ -2091,14 +2052,11 @@ type CustomFilterConfiguration struct {
 	MatchOperator CategoryFilterMatchOperator
 
 	// This option determines how null values should be treated when filtering data.
-	//
-	// *
+	// -
 	// ALL_VALUES: Include null values in filtered results.
-	//
-	// * NULLS_ONLY: Only include
+	// - NULLS_ONLY: Only include
 	// null values in filtered results.
-	//
-	// * NON_NULLS_ONLY: Exclude null values from
+	// - NON_NULLS_ONLY: Exclude null values from
 	// filtered results.
 	//
 	// This member is required.
@@ -2113,8 +2071,7 @@ type CustomFilterConfiguration struct {
 	ParameterName *string
 
 	// Select all of the values. Null is not the assigned value of select all.
-	//
-	// *
+	// -
 	// FILTER_ALL_VALUES
 	SelectAllOptions CategoryFilterSelectAllOptions
 
@@ -2130,14 +2087,11 @@ type CustomFilterListConfiguration struct {
 	MatchOperator CategoryFilterMatchOperator
 
 	// This option determines how null values should be treated when filtering data.
-	//
-	// *
+	// -
 	// ALL_VALUES: Include null values in filtered results.
-	//
-	// * NULLS_ONLY: Only include
+	// - NULLS_ONLY: Only include
 	// null values in filtered results.
-	//
-	// * NON_NULLS_ONLY: Exclude null values from
+	// - NON_NULLS_ONLY: Exclude null values from
 	// filtered results.
 	//
 	// This member is required.
@@ -2147,8 +2101,7 @@ type CustomFilterListConfiguration struct {
 	CategoryValues []string
 
 	// Select all of the values. Null is not the assigned value of select all.
-	//
-	// *
+	// -
 	// FILTER_ALL_VALUES
 	SelectAllOptions CategoryFilterSelectAllOptions
 
@@ -2328,34 +2281,28 @@ type DashboardSearchFilter struct {
 
 	// The name of the value that you want to use as a filter, for example, "Name":
 	// "QUICKSIGHT_OWNER". Valid values are defined as follows:
-	//
-	// *
+	// -
 	// QUICKSIGHT_VIEWER_OR_OWNER: Provide an ARN of a user or group, and any
 	// dashboards with that ARN listed as one of the dashboards's owners or viewers are
 	// returned. Implicit permissions from folders or groups are considered.
-	//
-	// *
+	// -
 	// QUICKSIGHT_OWNER: Provide an ARN of a user or group, and any dashboards with
 	// that ARN listed as one of the owners of the dashboards are returned. Implicit
 	// permissions from folders or groups are considered.
-	//
-	// *
+	// -
 	// DIRECT_QUICKSIGHT_SOLE_OWNER: Provide an ARN of a user or group, and any
 	// dashboards with that ARN listed as the only owner of the dashboard are returned.
 	// Implicit permissions from folders or groups are not considered.
-	//
-	// *
+	// -
 	// DIRECT_QUICKSIGHT_OWNER: Provide an ARN of a user or group, and any dashboards
 	// with that ARN listed as one of the owners of the dashboards are returned.
 	// Implicit permissions from folders or groups are not considered.
-	//
-	// *
+	// -
 	// DIRECT_QUICKSIGHT_VIEWER_OR_OWNER: Provide an ARN of a user or group, and any
 	// dashboards with that ARN listed as one of the owners or viewers of the
 	// dashboards are returned. Implicit permissions from folders or groups are not
 	// considered.
-	//
-	// * DASHBOARD_NAME: Any dashboards whose names have a substring match
+	// - DASHBOARD_NAME: Any dashboards whose names have a substring match
 	// to this value will be returned.
 	Name DashboardFilterAttribute
 
@@ -2522,20 +2469,17 @@ type DashboardVersionSummary struct {
 }
 
 // A structure that contains the following elements:
-//
-// * The DashboardId of the
+// - The DashboardId of the
 // dashboard that has the visual that you want to embed.
+// - The SheetId of the sheet
+// that has the visual that you want to embed.
+// - The VisualId of the visual that
+// you want to embed.
 //
-// * The SheetId of the
-// sheet that has the visual that you want to embed.
-//
-// * The VisualId of the visual
-// that you want to embed.
-//
-// The DashboardId, SheetId, and VisualId can be found in
-// the IDs for developers section of the Embed visual pane of the visual's
-// on-visual menu of the Amazon QuickSight console. You can also get the
-// DashboardId with a ListDashboards API operation.
+// The DashboardId, SheetId, and VisualId can be found in the
+// IDs for developers section of the Embed visual pane of the visual's on-visual
+// menu of the Amazon QuickSight console. You can also get the DashboardId with a
+// ListDashboards API operation.
 type DashboardVisualId struct {
 
 	// The ID of the dashboard that has the visual that you want to embed. The
@@ -2932,32 +2876,26 @@ type DataSetSearchFilter struct {
 
 	// The name of the value that you want to use as a filter, for example, "Name":
 	// "QUICKSIGHT_OWNER". Valid values are defined as follows:
-	//
-	// *
+	// -
 	// QUICKSIGHT_VIEWER_OR_OWNER: Provide an ARN of a user or group, and any datasets
 	// with that ARN listed as one of the dataset owners or viewers are returned.
 	// Implicit permissions from folders or groups are considered.
-	//
-	// * QUICKSIGHT_OWNER:
+	// - QUICKSIGHT_OWNER:
 	// Provide an ARN of a user or group, and any datasets with that ARN listed as one
 	// of the owners of the dataset are returned. Implicit permissions from folders or
 	// groups are considered.
-	//
-	// * DIRECT_QUICKSIGHT_SOLE_OWNER: Provide an ARN of a user
+	// - DIRECT_QUICKSIGHT_SOLE_OWNER: Provide an ARN of a user
 	// or group, and any datasets with that ARN listed as the only owner of the dataset
 	// are returned. Implicit permissions from folders or groups are not considered.
-	//
-	// *
+	// -
 	// DIRECT_QUICKSIGHT_OWNER: Provide an ARN of a user or group, and any datasets
 	// with that ARN listed as one of the owners if the dataset are returned. Implicit
 	// permissions from folders or groups are not considered.
-	//
-	// *
+	// -
 	// DIRECT_QUICKSIGHT_VIEWER_OR_OWNER: Provide an ARN of a user or group, and any
 	// datasets with that ARN listed as one of the owners or viewers of the dataset are
 	// returned. Implicit permissions from folders or groups are not considered.
-	//
-	// *
+	// -
 	// DATASET_NAME: Any datasets whose names have a substring match to this value will
 	// be returned.
 	//
@@ -3375,23 +3313,19 @@ type DataSourceSearchFilter struct {
 
 	// The name of the value that you want to use as a filter, for example, "Name":
 	// "DIRECT_QUICKSIGHT_OWNER". Valid values are defined as follows:
-	//
-	// *
+	// -
 	// DIRECT_QUICKSIGHT_VIEWER_OR_OWNER: Provide an ARN of a user or group, and any
 	// data sources with that ARN listed as one of the owners or viewers of the data
 	// sources are returned. Implicit permissions from folders or groups are not
 	// considered.
-	//
-	// * DIRECT_QUICKSIGHT_OWNER: Provide an ARN of a user or group, and
+	// - DIRECT_QUICKSIGHT_OWNER: Provide an ARN of a user or group, and
 	// any data sources with that ARN listed as one of the owners if the data source
 	// are returned. Implicit permissions from folders or groups are not considered.
-	//
-	// *
+	// -
 	// DIRECT_QUICKSIGHT_SOLE_OWNER: Provide an ARN of a user or group, and any data
 	// sources with that ARN listed as the only owner of the data source are returned.
 	// Implicit permissions from folders or groups are not considered.
-	//
-	// *
+	// -
 	// DATASOURCE_NAME: Any data sources whose names have a substring match to the
 	// provided value are returned.
 	//
@@ -3472,25 +3406,16 @@ type DateDimensionField struct {
 
 	// The date granularity of the DateDimensionField. Choose one of the following
 	// options:
-	//
-	// * YEAR
-	//
-	// * QUARTER
-	//
-	// * MONTH
-	//
-	// * WEEK
-	//
-	// * DAY
-	//
-	// * HOUR
-	//
-	// * MINUTE
-	//
-	// *
-	// SECOND
-	//
-	// * MILLISECOND
+	// - YEAR
+	// - QUARTER
+	// - MONTH
+	// - WEEK
+	// - DAY
+	// - HOUR
+	// - MINUTE
+	// - SECOND
+	// -
+	// MILLISECOND
 	DateGranularity TimeGranularity
 
 	// The format configuration of the field.
@@ -3629,10 +3554,8 @@ type DateTimeValueWhenUnsetConfiguration struct {
 
 	// The built-in options for default values. The value can be one of the
 	// following:
-	//
-	// * RECOMMENDED: The recommended value.
-	//
-	// * NULL: The NULL value.
+	// - RECOMMENDED: The recommended value.
+	// - NULL: The NULL value.
 	ValueWhenUnsetOption ValueWhenUnsetOption
 
 	noSmithyDocumentSerde
@@ -3712,10 +3635,8 @@ type DecimalValueWhenUnsetConfiguration struct {
 
 	// The built-in options for default values. The value can be one of the
 	// following:
-	//
-	// * RECOMMENDED: The recommended value.
-	//
-	// * NULL: The NULL value.
+	// - RECOMMENDED: The recommended value.
+	// - NULL: The NULL value.
 	ValueWhenUnsetOption ValueWhenUnsetOption
 
 	noSmithyDocumentSerde
@@ -3848,17 +3769,13 @@ type DonutCenterOptions struct {
 // The options for configuring a donut chart or pie chart.
 type DonutOptions struct {
 
-	// The option for define the arc of the chart shape. Valid values are as
-	// follows:
-	//
-	// * WHOLE - A pie chart
-	//
-	// * SMALL- A small-sized donut chart
-	//
-	// * MEDIUM- A
-	// medium-sized donut chart
-	//
-	// * LARGE- A large-sized donut chart
+	// The option for define the arc of the chart shape. Valid values are as follows:
+	// -
+	// WHOLE - A pie chart
+	// - SMALL- A small-sized donut chart
+	// - MEDIUM- A medium-sized
+	// donut chart
+	// - LARGE- A large-sized donut chart
 	ArcOptions *ArcOptions
 
 	// The label options of the label that is displayed in the center of a donut chart.
@@ -3992,11 +3909,9 @@ type ExcludePeriodConfiguration struct {
 	Granularity TimeGranularity
 
 	// The status of the exclude period. Choose from the following options:
-	//
-	// *
-	// ENABLED
-	//
-	// * DISABLED
+	// - ENABLED
+	// -
+	// DISABLED
 	Status WidgetStatus
 
 	noSmithyDocumentSerde
@@ -4059,11 +3974,9 @@ type FieldBasedTooltip struct {
 	TooltipFields []TooltipItem
 
 	// The type for the >tooltip title. Choose one of the following options:
-	//
-	// * NONE:
+	// - NONE:
 	// Doesn't use the primary value as the title.
-	//
-	// * PRIMARY_VALUE: Uses primary value
+	// - PRIMARY_VALUE: Uses primary value
 	// as the title.
 	TooltipTitleType TooltipTitleType
 
@@ -4118,10 +4031,8 @@ type FieldSeriesItem struct {
 type FieldSort struct {
 
 	// The sort direction. Choose one of the following options:
-	//
-	// * ASC: Ascending
-	//
-	// *
+	// - ASC: Ascending
+	// -
 	// DESC: Descending
 	//
 	// This member is required.
@@ -4382,10 +4293,8 @@ type FilterDateTimePickerControl struct {
 
 	// The date time picker type of a FilterDateTimePickerControl. Choose one of the
 	// following options:
-	//
-	// * SINGLE_VALUED: The filter condition is a fixed date.
-	//
-	// *
+	// - SINGLE_VALUED: The filter condition is a fixed date.
+	// -
 	// DATE_RANGE: The filter condition is a date time range.
 	Type SheetControlDateTimePickerType
 
@@ -4422,11 +4331,9 @@ type FilterDropDownControl struct {
 	SelectableValues *FilterSelectableValues
 
 	// The type of the FilterDropDownControl. Choose one of the following options:
-	//
-	// *
+	// -
 	// MULTI_SELECT: The user can select multiple entries from a dropdown menu.
-	//
-	// *
+	// -
 	// SINGLE_SELECT: The user can select a single entry from a dropdown menu.
 	Type SheetControlListType
 
@@ -4442,10 +4349,8 @@ type FilterGroup struct {
 
 	// The filter new feature which can apply filter group to all data sets. Choose one
 	// of the following options:
-	//
-	// * ALL_DATASETS
-	//
-	// * SINGLE_DATASET
+	// - ALL_DATASETS
+	// - SINGLE_DATASET
 	//
 	// This member is required.
 	CrossDataset CrossDatasetTypes
@@ -4486,8 +4391,7 @@ type FilterListConfiguration struct {
 	CategoryValues []string
 
 	// Select all of the values. Null is not the assigned value of select all.
-	//
-	// *
+	// -
 	// FILTER_ALL_VALUES
 	SelectAllOptions CategoryFilterSelectAllOptions
 
@@ -4524,11 +4428,9 @@ type FilterListControl struct {
 	SelectableValues *FilterSelectableValues
 
 	// The type of FilterListControl. Choose one of the following options:
-	//
-	// *
+	// -
 	// MULTI_SELECT: The user can select multiple entries from the list.
-	//
-	// *
+	// -
 	// SINGLE_SELECT: The user can select a single entry from the list.
 	Type SheetControlListType
 
@@ -4554,8 +4456,7 @@ type FilterOperationSelectedFieldsConfiguration struct {
 
 	// A structure that contains the options that choose which fields are filtered in
 	// the CustomActionFilterOperation. Valid values are defined as follows:
-	//
-	// *
+	// -
 	// ALL_FIELDS: Applies the filter operation to all fields.
 	SelectedFieldOptions SelectedFieldOptions
 
@@ -4657,11 +4558,9 @@ type FilterSliderControl struct {
 	DisplayOptions *SliderControlDisplayOptions
 
 	// The type of FilterSliderControl. Choose one of the following options:
-	//
-	// *
+	// -
 	// SINGLE_POINT: Filter against(equals) a single data point.
-	//
-	// * RANGE: Filter data
+	// - RANGE: Filter data
 	// that is in a specified range.
 	Type SheetControlSliderType
 
@@ -4764,36 +4663,29 @@ type FolderSearchFilter struct {
 
 	// The name of a value that you want to use in the filter. For example, "Name":
 	// "QUICKSIGHT_OWNER". Valid values are defined as follows:
-	//
-	// *
+	// -
 	// QUICKSIGHT_VIEWER_OR_OWNER: Provide an ARN of a user or group, and any folders
 	// with that ARN listed as one of the folder's owners or viewers are returned.
 	// Implicit permissions from folders or groups are considered.
-	//
-	// * QUICKSIGHT_OWNER:
+	// - QUICKSIGHT_OWNER:
 	// Provide an ARN of a user or group, and any folders with that ARN listed as one
 	// of the owners of the folders are returned. Implicit permissions from folders or
 	// groups are considered.
-	//
-	// * DIRECT_QUICKSIGHT_SOLE_OWNER: Provide an ARN of a user
+	// - DIRECT_QUICKSIGHT_SOLE_OWNER: Provide an ARN of a user
 	// or group, and any folders with that ARN listed as the only owner of the folder
 	// are returned. Implicit permissions from folders or groups are not considered.
-	//
-	// *
+	// -
 	// DIRECT_QUICKSIGHT_OWNER: Provide an ARN of a user or group, and any folders with
 	// that ARN listed as one of the owners of the folders are returned. Implicit
 	// permissions from folders or groups are not considered.
-	//
-	// *
+	// -
 	// DIRECT_QUICKSIGHT_VIEWER_OR_OWNER: Provide an ARN of a user or group, and any
 	// folders with that ARN listed as one of the owners or viewers of the folders are
 	// returned. Implicit permissions from folders or groups are not considered.
-	//
-	// *
+	// -
 	// FOLDER_NAME: Any folders whose names have a substring match to this value will
 	// be returned.
-	//
-	// * PARENT_FOLDER_ARN: Provide an ARN of a folder, and any folders
+	// - PARENT_FOLDER_ARN: Provide an ARN of a folder, and any folders
 	// that are directly under that parent folder are returned. If you choose to use
 	// this option and leave the value blank, all root-level folders in the account are
 	// returned.
@@ -4924,10 +4816,8 @@ type ForecastComputation struct {
 
 	// The seasonality setup of a forecast computation. Choose one of the following
 	// options:
-	//
-	// * AUTOMATIC
-	//
-	// * CUSTOM: Checks the custom seasonality value.
+	// - AUTOMATIC
+	// - CUSTOM: Checks the custom seasonality value.
 	Seasonality ForecastComputationSeasonality
 
 	// The upper boundary setup of a forecast computation.
@@ -5613,14 +5503,12 @@ type GridLayoutElement struct {
 type GridLayoutScreenCanvasSizeOptions struct {
 
 	// This value determines the layout behavior when the viewport is resized.
-	//
-	// *
-	// FIXED: A fixed width will be used when optimizing the layout. In the Amazon
-	// QuickSight console, this option is called Classic.
-	//
-	// * RESPONSIVE: The width of
-	// the canvas will be responsive and optimized to the view port. In the Amazon
-	// QuickSight console, this option is called Tiled.
+	// - FIXED:
+	// A fixed width will be used when optimizing the layout. In the Amazon QuickSight
+	// console, this option is called Classic.
+	// - RESPONSIVE: The width of the canvas
+	// will be responsive and optimized to the view port. In the Amazon QuickSight
+	// console, this option is called Tiled.
 	//
 	// This member is required.
 	ResizeOption ResizeOption
@@ -6143,10 +6031,8 @@ type IntegerValueWhenUnsetConfiguration struct {
 
 	// The built-in options for default values. The value can be one of the
 	// following:
-	//
-	// * RECOMMENDED: The recommended value.
-	//
-	// * NULL: The NULL value.
+	// - RECOMMENDED: The recommended value.
+	// - NULL: The NULL value.
 	ValueWhenUnsetOption ValueWhenUnsetOption
 
 	noSmithyDocumentSerde
@@ -6160,11 +6046,9 @@ type ItemsLimitConfiguration struct {
 	ItemsLimit *int64
 
 	// The Show other of an axis in the chart. Choose one of the following options:
-	//
-	// *
+	// -
 	// INCLUDE
-	//
-	// * EXCLUDE
+	// - EXCLUDE
 	OtherCategories OtherCategories
 
 	noSmithyDocumentSerde
@@ -6427,15 +6311,11 @@ type LegendOptions struct {
 	Height *string
 
 	// The positions for the legend. Choose one of the following options:
-	//
-	// * AUTO
-	//
-	// *
+	// - AUTO
+	// -
 	// RIGHT
-	//
-	// * BOTTOM
-	//
-	// * LEFT
+	// - BOTTOM
+	// - LEFT
 	Position LegendPosition
 
 	// The custom title for the legend.
@@ -6563,23 +6443,17 @@ type LineChartFieldWells struct {
 type LineChartLineStyleSettings struct {
 
 	// Interpolation style for line series.
-	//
-	// * LINEAR: Show as default, linear
-	// style.
-	//
-	// * SMOOTH: Show as a smooth curve.
-	//
-	// * STEPPED: Show steps in line.
+	// - LINEAR: Show as default, linear style.
+	// -
+	// SMOOTH: Show as a smooth curve.
+	// - STEPPED: Show steps in line.
 	LineInterpolation LineInterpolation
 
 	// Line style for line series.
-	//
-	// * SOLID: Show as a solid line.
-	//
-	// * DOTTED: Show as a
+	// - SOLID: Show as a solid line.
+	// - DOTTED: Show as a
 	// dotted line.
-	//
-	// * DASHED: Show as a dashed line.
+	// - DASHED: Show as a dashed line.
 	LineStyle LineChartLineStyle
 
 	// Configuration option that determines whether to show the line for the series.
@@ -6598,18 +6472,13 @@ type LineChartMarkerStyleSettings struct {
 	MarkerColor *string
 
 	// Shape option for markers in the series.
-	//
-	// * CIRCLE: Show marker as a circle.
-	//
-	// *
+	// - CIRCLE: Show marker as a circle.
+	// -
 	// TRIANGLE: Show marker as a triangle.
-	//
-	// * SQUARE: Show marker as a square.
-	//
-	// *
+	// - SQUARE: Show marker as a square.
+	// -
 	// DIAMOND: Show marker as a diamond.
-	//
-	// * ROUNDED_SQUARE: Show marker as a rounded
+	// - ROUNDED_SQUARE: Show marker as a rounded
 	// square.
 	MarkerShape LineChartMarkerShape
 
@@ -6883,11 +6752,9 @@ type MaximumMinimumComputation struct {
 	Time *DimensionField
 
 	// The type of computation. Choose one of the following options:
-	//
-	// * MAXIMUM: A
+	// - MAXIMUM: A
 	// maximum computation.
-	//
-	// * MINIMUM: A minimum computation.
+	// - MINIMUM: A minimum computation.
 	//
 	// This member is required.
 	Type MaximumMinimumComputationType
@@ -6975,14 +6842,11 @@ type MissingDataConfiguration struct {
 
 	// The treatment option that determines how missing data should be rendered. Choose
 	// from the following options:
-	//
-	// * INTERPOLATE: Interpolate missing values between
+	// - INTERPOLATE: Interpolate missing values between
 	// the prior and the next known value.
-	//
-	// * SHOW_AS_ZERO: Show missing values as the
+	// - SHOW_AS_ZERO: Show missing values as the
 	// value 0.
-	//
-	// * SHOW_AS_BLANK: Display a blank space when rendering missing data.
+	// - SHOW_AS_BLANK: Display a blank space when rendering missing data.
 	TreatmentOption MissingDataTreatmentOption
 
 	noSmithyDocumentSerde
@@ -7110,36 +6974,25 @@ type NumericalAggregationFunction struct {
 	PercentileAggregation *PercentileAggregation
 
 	// Built-in aggregation functions for numerical values.
-	//
-	// * SUM: The sum of a
+	// - SUM: The sum of a
 	// dimension or measure.
-	//
-	// * AVERAGE: The average of a dimension or measure.
-	//
-	// * MIN:
+	// - AVERAGE: The average of a dimension or measure.
+	// - MIN:
 	// The minimum value of a dimension or measure.
-	//
-	// * MAX: The maximum value of a
+	// - MAX: The maximum value of a
 	// dimension or measure.
-	//
-	// * COUNT: The count of a dimension or measure.
-	//
-	// *
+	// - COUNT: The count of a dimension or measure.
+	// -
 	// DISTINCT_COUNT: The count of distinct values in a dimension or measure.
-	//
-	// * VAR:
+	// - VAR:
 	// The variance of a dimension or measure.
-	//
-	// * VARP: The partitioned variance of a
+	// - VARP: The partitioned variance of a
 	// dimension or measure.
-	//
-	// * STDEV: The standard deviation of a dimension or
+	// - STDEV: The standard deviation of a dimension or
 	// measure.
-	//
-	// * STDEVP: The partitioned standard deviation of a dimension or
+	// - STDEVP: The partitioned standard deviation of a dimension or
 	// measure.
-	//
-	// * MEDIAN: The median value of a dimension or measure.
+	// - MEDIAN: The median value of a dimension or measure.
 	SimpleNumericalAggregation SimpleNumericalAggregationFunction
 
 	noSmithyDocumentSerde
@@ -7237,14 +7090,11 @@ type NumericEqualityFilter struct {
 	MatchOperator NumericEqualityMatchOperator
 
 	// This option determines how null values should be treated when filtering data.
-	//
-	// *
+	// -
 	// ALL_VALUES: Include null values in filtered results.
-	//
-	// * NULLS_ONLY: Only include
+	// - NULLS_ONLY: Only include
 	// null values in filtered results.
-	//
-	// * NON_NULLS_ONLY: Exclude null values from
+	// - NON_NULLS_ONLY: Exclude null values from
 	// filtered results.
 	//
 	// This member is required.
@@ -7257,8 +7107,7 @@ type NumericEqualityFilter struct {
 	ParameterName *string
 
 	// Select all of the values. Null is not the assigned value of select all.
-	//
-	// *
+	// -
 	// FILTER_ALL_VALUES
 	SelectAllOptions NumericFilterSelectAllOptions
 
@@ -7300,14 +7149,11 @@ type NumericRangeFilter struct {
 	FilterId *string
 
 	// This option determines how null values should be treated when filtering data.
-	//
-	// *
+	// -
 	// ALL_VALUES: Include null values in filtered results.
-	//
-	// * NULLS_ONLY: Only include
+	// - NULLS_ONLY: Only include
 	// null values in filtered results.
-	//
-	// * NON_NULLS_ONLY: Exclude null values from
+	// - NON_NULLS_ONLY: Exclude null values from
 	// filtered results.
 	//
 	// This member is required.
@@ -7331,8 +7177,7 @@ type NumericRangeFilter struct {
 	RangeMinimum *NumericRangeFilterValue
 
 	// Select all of the values. Null is not the assigned value of select all.
-	//
-	// *
+	// -
 	// FILTER_ALL_VALUES
 	SelectAllOptions NumericFilterSelectAllOptions
 
@@ -7817,10 +7662,8 @@ type PeriodToDateComputation struct {
 
 	// The time granularity setup of period to date computation. Choose from the
 	// following options:
-	//
-	// * YEAR: Year to date.
-	//
-	// * MONTH: Month to date.
+	// - YEAR: Year to date.
+	// - MONTH: Month to date.
 	PeriodTimeGranularity TimeGranularity
 
 	// The value field that is used in a computation.
@@ -7955,16 +7798,14 @@ type PieChartSortConfiguration struct {
 // A pie or donut chart. The PieChartVisual structure describes a visual that is a
 // member of the pie chart family. The following charts can be described by using
 // this structure:
+// - Pie charts
+// - Donut charts
 //
-// * Pie charts
-//
-// * Donut charts
-//
-// For more information, see Using
-// pie charts (https://docs.aws.amazon.com/quicksight/latest/user/pie-chart.html)
-// in the Amazon QuickSight User Guide. For more information, see Using donut
-// charts (https://docs.aws.amazon.com/quicksight/latest/user/donut-chart.html) in
-// the Amazon QuickSight User Guide.
+// For more information, see Using pie
+// charts (https://docs.aws.amazon.com/quicksight/latest/user/pie-chart.html) in
+// the Amazon QuickSight User Guide. For more information, see Using donut charts
+// (https://docs.aws.amazon.com/quicksight/latest/user/donut-chart.html) in the
+// Amazon QuickSight User Guide.
 type PieChartVisual struct {
 
 	// The unique identifier of a visual. This identifier must be unique within the
@@ -8601,11 +8442,9 @@ type ReferenceLine struct {
 	LabelConfiguration *ReferenceLineLabelConfiguration
 
 	// The status of the reference line. Choose one of the following options:
-	//
-	// *
+	// -
 	// ENABLE
-	//
-	// * DISABLE
+	// - DISABLE
 	Status WidgetStatus
 
 	// The style configuration of the reference line.
@@ -8630,10 +8469,8 @@ type ReferenceLineDataConfiguration struct {
 
 	// The axis binding type of the reference line. Choose one of the following
 	// options:
-	//
-	// * PrimaryY
-	//
-	// * SecondaryY
+	// - PrimaryY
+	// - SecondaryY
 	AxisBinding AxisBinding
 
 	// The dynamic configuration of the reference line data configuration.
@@ -8680,12 +8517,9 @@ type ReferenceLineLabelConfiguration struct {
 
 	// The horizontal position configuration of the label in a reference line. Choose
 	// one of the following options:
-	//
-	// * LEFT
-	//
-	// * CENTER
-	//
-	// * RIGHT
+	// - LEFT
+	// - CENTER
+	// - RIGHT
 	HorizontalPosition ReferenceLineLabelHorizontalPosition
 
 	// The value label configuration of the label in a reference line.
@@ -8693,10 +8527,8 @@ type ReferenceLineLabelConfiguration struct {
 
 	// The vertical position configuration of the label in a reference line. Choose one
 	// of the following options:
-	//
-	// * ABOVE
-	//
-	// * BELOW
+	// - ABOVE
+	// - BELOW
 	VerticalPosition ReferenceLineLabelVerticalPosition
 
 	noSmithyDocumentSerde
@@ -8720,13 +8552,10 @@ type ReferenceLineStyleConfiguration struct {
 	Color *string
 
 	// The pattern type of the line style. Choose one of the following options:
-	//
-	// *
+	// -
 	// SOLID
-	//
-	// * DASHED
-	//
-	// * DOTTED
+	// - DASHED
+	// - DOTTED
 	Pattern ReferenceLinePatternType
 
 	noSmithyDocumentSerde
@@ -8738,12 +8567,10 @@ type ReferenceLineValueLabelConfiguration struct {
 	// The format configuration of the value label.
 	FormatConfiguration *NumericFormatConfiguration
 
-	// The relative position of the value label. Choose one of the following
-	// options:
-	//
-	// * BEFORE_CUSTOM_LABEL
-	//
-	// * AFTER_CUSTOM_LABEL
+	// The relative position of the value label. Choose one of the following options:
+	// -
+	// BEFORE_CUSTOM_LABEL
+	// - AFTER_CUSTOM_LABEL
 	RelativePosition ReferenceLineValueLabelRelativePosition
 
 	noSmithyDocumentSerde
@@ -8837,12 +8664,10 @@ type RegisteredUserEmbeddingExperienceConfiguration struct {
 	// API operation to add a new user with a custom permission profile attached. For
 	// more information, see the following sections in the Amazon QuickSight User
 	// Guide:
-	//
-	// * Embedding the Full Functionality of the Amazon QuickSight Console for
+	// - Embedding the Full Functionality of the Amazon QuickSight Console for
 	// Authenticated Users
 	// (https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-full-console-for-authenticated-users.html)
-	//
-	// *
+	// -
 	// Customizing Access to the Amazon QuickSight Console
 	// (https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html)
 	//
@@ -8879,21 +8704,15 @@ type RegisteredUserQuickSightConsoleEmbeddingConfiguration struct {
 
 	// The initial URL path for the Amazon QuickSight console. InitialPath is required.
 	// The entry point URL is constrained to the following paths:
-	//
-	// * /start
-	//
-	// *
+	// - /start
+	// -
 	// /start/analyses
-	//
-	// * /start/dashboards
-	//
-	// * /start/favorites
-	//
-	// *
+	// - /start/dashboards
+	// - /start/favorites
+	// -
 	// /dashboards/DashboardId. DashboardId is the actual ID key from the Amazon
 	// QuickSight console URL of the dashboard.
-	//
-	// * /analyses/AnalysisId. AnalysisId is
+	// - /analyses/AnalysisId. AnalysisId is
 	// the actual ID key from the Amazon QuickSight console URL of the analysis.
 	InitialPath *string
 
@@ -8947,31 +8766,23 @@ type RelativeDatesFilter struct {
 	FilterId *string
 
 	// This option determines how null values should be treated when filtering data.
-	//
-	// *
+	// -
 	// ALL_VALUES: Include null values in filtered results.
-	//
-	// * NULLS_ONLY: Only include
+	// - NULLS_ONLY: Only include
 	// null values in filtered results.
-	//
-	// * NON_NULLS_ONLY: Exclude null values from
+	// - NON_NULLS_ONLY: Exclude null values from
 	// filtered results.
 	//
 	// This member is required.
 	NullOption FilterNullOption
 
 	// The range date type of the filter. Choose one of the options below:
-	//
-	// *
-	// PREVIOUS
-	//
-	// * THIS
-	//
-	// * LAST
-	//
-	// * NOW
-	//
-	// * NEXT
+	// - PREVIOUS
+	// -
+	// THIS
+	// - LAST
+	// - NOW
+	// - NEXT
 	//
 	// This member is required.
 	RelativeDateType RelativeDateType
@@ -9034,15 +8845,12 @@ type ResourcePermission struct {
 
 	// The Amazon Resource Name (ARN) of the principal. This can be one of the
 	// following:
-	//
-	// * The ARN of an Amazon QuickSight user or group associated with a
+	// - The ARN of an Amazon QuickSight user or group associated with a
 	// data source or dataset. (This is common.)
-	//
-	// * The ARN of an Amazon QuickSight
+	// - The ARN of an Amazon QuickSight
 	// user, group, or namespace associated with an analysis, dashboard, template, or
 	// theme. (This is common.)
-	//
-	// * The ARN of an Amazon Web Services account root: This
+	// - The ARN of an Amazon Web Services account root: This
 	// is an IAM ARN rather than a QuickSight ARN. Use this option only to share
 	// resources (templates) across Amazon Web Services accounts. (This is less
 	// common.)
@@ -9217,8 +9025,7 @@ type SameSheetTargetVisualConfiguration struct {
 
 	// The options that choose the target visual in the same sheet. Valid values are
 	// defined as follows:
-	//
-	// * ALL_VISUALS: Applies the filter operation to all visuals
+	// - ALL_VISUALS: Applies the filter operation to all visuals
 	// in the same sheet.
 	TargetVisualOptions TargetVisualOptions
 
@@ -9505,10 +9312,8 @@ type SectionBasedLayoutPaperCanvasSizeOptions struct {
 
 	// The paper orientation that is used to define canvas dimensions. Choose one of
 	// the following options:
-	//
-	// * PORTRAIT
-	//
-	// * LANDSCAPE
+	// - PORTRAIT
+	// - LANDSCAPE
 	PaperOrientation PaperOrientation
 
 	// The paper size that is used to define canvas dimensions.
@@ -9694,11 +9499,9 @@ type SheetDefinition struct {
 	SheetId *string
 
 	// The layout content type of the sheet. Choose one of the following options:
-	//
-	// *
+	// -
 	// PAGINATED: Creates a sheet for a paginated report.
-	//
-	// * INTERACTIVE: Creates a
+	// - INTERACTIVE: Creates a
 	// sheet for an interactive dashboard.
 	ContentType SheetContentType
 
@@ -9748,10 +9551,8 @@ type SheetElementConfigurationOverrides struct {
 
 	// Determines whether or not the overrides are visible. Choose one of the following
 	// options:
-	//
-	// * VISIBLE
-	//
-	// * HIDDEN
+	// - VISIBLE
+	// - HIDDEN
 	Visibility Visibility
 
 	noSmithyDocumentSerde
@@ -9814,11 +9615,9 @@ type SheetTextBox struct {
 type SheetVisualScopingConfiguration struct {
 
 	// The scope of the applied entities. Choose one of the following options:
-	//
-	// *
+	// -
 	// ALL_VISUALS
-	//
-	// * SELECTED_VISUALS
+	// - SELECTED_VISUALS
 	//
 	// This member is required.
 	Scope FilterVisualScope
@@ -10078,10 +9877,8 @@ type StringValueWhenUnsetConfiguration struct {
 
 	// The built-in options for default values. The value can be one of the
 	// following:
-	//
-	// * RECOMMENDED: The recommended value.
-	//
-	// * NULL: The NULL value.
+	// - RECOMMENDED: The recommended value.
+	// - NULL: The NULL value.
 	ValueWhenUnsetOption ValueWhenUnsetOption
 
 	noSmithyDocumentSerde
@@ -10685,22 +10482,15 @@ type TemplateVersion struct {
 	SourceEntityArn *string
 
 	// The status that is associated with the template.
-	//
-	// * CREATION_IN_PROGRESS
-	//
-	// *
+	// - CREATION_IN_PROGRESS
+	// -
 	// CREATION_SUCCESSFUL
-	//
-	// * CREATION_FAILED
-	//
-	// * UPDATE_IN_PROGRESS
-	//
-	// *
-	// UPDATE_SUCCESSFUL
-	//
-	// * UPDATE_FAILED
-	//
-	// * DELETED
+	// - CREATION_FAILED
+	// - UPDATE_IN_PROGRESS
+	// - UPDATE_SUCCESSFUL
+	// -
+	// UPDATE_FAILED
+	// - DELETED
 	Status ResourceStatus
 
 	// The ARN of the theme associated with this version of the template.
@@ -11041,10 +10831,8 @@ type TimeBasedForecastProperties struct {
 
 	// The seasonality setup of a forecast computation. Choose one of the following
 	// options:
-	//
-	// * NULL: The input is set to NULL.
-	//
-	// * NON_NULL: The input is set to a
+	// - NULL: The input is set to NULL.
+	// - NON_NULL: The input is set to a
 	// custom value.
 	Seasonality *int32
 
@@ -11123,14 +10911,11 @@ type TimeRangeFilter struct {
 	FilterId *string
 
 	// This option determines how null values should be treated when filtering data.
-	//
-	// *
+	// -
 	// ALL_VALUES: Include null values in filtered results.
-	//
-	// * NULLS_ONLY: Only include
+	// - NULLS_ONLY: Only include
 	// null values in filtered results.
-	//
-	// * NON_NULLS_ONLY: Exclude null values from
+	// - NON_NULLS_ONLY: Exclude null values from
 	// filtered results.
 	//
 	// This member is required.
@@ -11196,11 +10981,9 @@ type TooltipOptions struct {
 	FieldBasedTooltip *FieldBasedTooltip
 
 	// The selected type for the tooltip. Choose one of the following options:
-	//
-	// *
-	// BASIC: A basic tooltip.
-	//
-	// * DETAILED: A detailed tooltip.
+	// - BASIC:
+	// A basic tooltip.
+	// - DETAILED: A detailed tooltip.
 	SelectedTooltipType SelectedTooltipType
 
 	// Determines whether or not the tooltip is visible.
@@ -11259,11 +11042,9 @@ type TopBottomMoversComputation struct {
 	Time *DimensionField
 
 	// The computation type. Choose from the following options:
-	//
-	// * TOP: Top movers
+	// - TOP: Top movers
 	// computation.
-	//
-	// * BOTTOM: Bottom movers computation.
+	// - BOTTOM: Bottom movers computation.
 	//
 	// This member is required.
 	Type TopBottomComputationType
@@ -11297,11 +11078,9 @@ type TopBottomRankedComputation struct {
 	ComputationId *string
 
 	// The computation type. Choose one of the following options:
-	//
-	// * TOP: A top ranked
+	// - TOP: A top ranked
 	// computation.
-	//
-	// * BOTTOM: A bottom ranked computation.
+	// - BOTTOM: A bottom ranked computation.
 	//
 	// This member is required.
 	Type TopBottomComputationType
@@ -11743,11 +11522,9 @@ type User struct {
 	// The type of supported external login provider that provides identity to let the
 	// user federate into Amazon QuickSight with an associated IAM role. The type can
 	// be one of the following.
-	//
-	// * COGNITO: Amazon Cognito. The provider URL is
+	// - COGNITO: Amazon Cognito. The provider URL is
 	// cognito-identity.amazonaws.com.
-	//
-	// * CUSTOM_OIDC: Custom OpenID Connect (OIDC)
+	// - CUSTOM_OIDC: Custom OpenID Connect (OIDC)
 	// provider.
 	ExternalLoginFederationProviderType *string
 
@@ -11765,19 +11542,14 @@ type User struct {
 
 	// The Amazon QuickSight role for the user. The user role can be one of the
 	// following:.
-	//
-	// * READER: A user who has read-only access to dashboards.
-	//
-	// * AUTHOR:
-	// A user who can create data sources, datasets, analyses, and dashboards.
-	//
-	// *
-	// ADMIN: A user who is an author, who can also manage Amazon Amazon QuickSight
-	// settings.
-	//
-	// * RESTRICTED_READER: This role isn't currently available for use.
-	//
-	// *
+	// - READER: A user who has read-only access to dashboards.
+	// - AUTHOR: A
+	// user who can create data sources, datasets, analyses, and dashboards.
+	// - ADMIN: A
+	// user who is an author, who can also manage Amazon Amazon QuickSight settings.
+	// -
+	// RESTRICTED_READER: This role isn't currently available for use.
+	// -
 	// RESTRICTED_AUTHOR: This role isn't currently available for use.
 	Role UserRole
 
@@ -11950,12 +11722,10 @@ type VisualCustomAction struct {
 	Name *string
 
 	// The trigger of the VisualCustomAction. Valid values are defined as follows:
-	//
-	// *
+	// -
 	// DATA_POINT_CLICK: Initiates a custom action by a left pointer click on a data
 	// point.
-	//
-	// * DATA_POINT_MENU: Initiates a custom action by right pointer click from
+	// - DATA_POINT_MENU: Initiates a custom action by right pointer click from
 	// the menu.
 	//
 	// This member is required.

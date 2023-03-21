@@ -38,11 +38,9 @@ type Ec2Config struct {
 	// Specifies the ARN of a subnet where DataSync creates the network interfaces
 	// (https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces)
 	// for managing traffic during your transfer. The subnet must be located:
-	//
-	// * In the
+	// - In the
 	// same virtual private cloud (VPC) as the Amazon EFS file system.
-	//
-	// * In the same
+	// - In the same
 	// Availability Zone as at least one mount target for the Amazon EFS file
 	// system.
 	//
@@ -111,24 +109,20 @@ type FsxProtocolSmb struct {
 	// Specifies a user name that can mount the location and access the files, folders,
 	// and metadata that you need in the SVM. If you provide a user in your Active
 	// Directory, note the following:
+	// - If you're using Directory Service for Microsoft
+	// Active Directory, the user must be a member of the Amazon Web Services Delegated
+	// FSx Administrators group.
+	// - If you're using a self-managed Active Directory, the
+	// user must be a member of either the Domain Admins group or a custom group that
+	// you specified for file system administration when you created your file
+	// system.
 	//
-	// * If you're using Directory Service for
-	// Microsoft Active Directory, the user must be a member of the Amazon Web Services
-	// Delegated FSx Administrators group.
-	//
-	// * If you're using a self-managed Active
-	// Directory, the user must be a member of either the Domain Admins group or a
-	// custom group that you specified for file system administration when you created
-	// your file system.
-	//
-	// Make sure that the user has the permissions it needs to copy
-	// the data you want:
-	//
-	// * SE_TCB_NAME: Required to set object ownership and file
-	// metadata. With this privilege, you also can copy NTFS discretionary access lists
+	// Make sure that the user has the permissions it needs to copy the data
+	// you want:
+	// - SE_TCB_NAME: Required to set object ownership and file metadata.
+	// With this privilege, you also can copy NTFS discretionary access lists
 	// (DACLs).
-	//
-	// * SE_SECURITY_NAME: May be needed to copy NTFS system access control
+	// - SE_SECURITY_NAME: May be needed to copy NTFS system access control
 	// lists (SACLs). This operation specifically requires the Windows privilege, which
 	// is granted to members of the Domain Admins group. If you configure your task to
 	// copy SACLs, make sure that the user has the required privileges. For information
@@ -232,17 +226,13 @@ type NfsMountOptions struct {
 	// Specifies the NFS version that you want DataSync to use when mounting your NFS
 	// share. If the server refuses to use the version specified, the task fails. You
 	// can specify the following options:
-	//
-	// * AUTOMATIC (default): DataSync chooses NFS
+	// - AUTOMATIC (default): DataSync chooses NFS
 	// version 4.1.
-	//
-	// * NFS3: Stateless protocol version that allows for asynchronous
+	// - NFS3: Stateless protocol version that allows for asynchronous
 	// writes on the server.
-	//
-	// * NFSv4_0: Stateful, firewall-friendly protocol version
+	// - NFSv4_0: Stateful, firewall-friendly protocol version
 	// that supports delegations and pseudo file systems.
-	//
-	// * NFSv4_1: Stateful protocol
+	// - NFSv4_1: Stateful protocol
 	// version that supports sessions, directory delegations, and parallel data
 	// processing. NFS version 4.1 also includes all features available in version
 	// 4.0.
@@ -365,32 +355,27 @@ type Options struct {
 	// (https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html).
 	// Default value: OWNER_DACLOWNER_DACL: For each copied object, DataSync copies the
 	// following metadata:
-	//
-	// * The object owner.
-	//
-	// * NTFS discretionary access control
+	// - The object owner.
+	// - NTFS discretionary access control
 	// lists (DACLs), which determine whether to grant access to an object. DataSync
 	// won't copy NTFS system access control lists (SACLs) with this
 	// option.
 	//
 	// OWNER_DACL_SACL: For each copied object, DataSync copies the following
 	// metadata:
+	// - The object owner.
+	// - NTFS discretionary access control lists (DACLs),
+	// which determine whether to grant access to an object.
+	// - SACLs, which are used by
+	// administrators to log attempts to access a secured object. Copying SACLs
+	// requires granting additional permissions to the Windows user that DataSync uses
+	// to access your SMB location. For information about choosing a user that ensures
+	// sufficient permissions to files, folders, and metadata, see user.
 	//
-	// * The object owner.
-	//
-	// * NTFS discretionary access control lists
-	// (DACLs), which determine whether to grant access to an object.
-	//
-	// * SACLs, which
-	// are used by administrators to log attempts to access a secured object. Copying
-	// SACLs requires granting additional permissions to the Windows user that DataSync
-	// uses to access your SMB location. For information about choosing a user that
-	// ensures sufficient permissions to files, folders, and metadata, see user.
-	//
-	// NONE:
-	// None of the SMB security descriptor components are copied. Destination objects
-	// are owned by the user that was provided for accessing the destination location.
-	// DACLs and SACLs are set based on the destination server’s configuration.
+	// NONE: None of
+	// the SMB security descriptor components are copied. Destination objects are owned
+	// by the user that was provided for accessing the destination location. DACLs and
+	// SACLs are set based on the destination server’s configuration.
 	SecurityDescriptorCopyFlags SmbSecurityDescriptorCopyFlags
 
 	// Specifies whether tasks should be queued before executing the tasks. The default
@@ -506,23 +491,18 @@ type SmbMountOptions struct {
 	// specific SMB version, but we recommend doing this only if DataSync has trouble
 	// negotiating with the SMB file server automatically. These are the following
 	// options for configuring the SMB version:
-	//
-	// * AUTOMATIC (default): DataSync and
-	// the SMB file server negotiate a protocol version that they mutually support.
+	// - AUTOMATIC (default): DataSync and the
+	// SMB file server negotiate a protocol version that they mutually support.
 	// (DataSync supports SMB versions 1.0 and later.) This is the recommended option.
 	// If you instead choose a specific version that your file server doesn't support,
 	// you may get an Operation Not Supported error.
-	//
-	// * SMB3: Restricts the protocol
+	// - SMB3: Restricts the protocol
 	// negotiation to only SMB version 3.0.2.
-	//
-	// * SMB2: Restricts the protocol
+	// - SMB2: Restricts the protocol
 	// negotiation to only SMB version 2.1.
-	//
-	// * SMB2_0: Restricts the protocol
+	// - SMB2_0: Restricts the protocol
 	// negotiation to only SMB version 2.0.
-	//
-	// * SMB1: Restricts the protocol negotiation
+	// - SMB1: Restricts the protocol negotiation
 	// to only SMB version 1.0. The SMB1 option isn't available when creating an Amazon
 	// FSx for NetApp ONTAP location
 	// (https://docs.aws.amazon.com/datasync/latest/userguide/API_CreateLocationFsxOntap.html).

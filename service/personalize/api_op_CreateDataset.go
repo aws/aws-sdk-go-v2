@@ -15,41 +15,32 @@ import (
 // CreateDatasetImportJob
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetImportJob.html)
 // to import your training data to a dataset. There are three types of datasets:
-//
-// *
+// -
 // Interactions
-//
-// * Items
-//
-// * Users
+// - Items
+// - Users
 //
 // Each dataset type has an associated schema with
 // required field types. Only the Interactions dataset is required in order to
 // train a model (also referred to as creating a solution). A dataset can be in one
 // of the following states:
-//
-// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or-
+// - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or-
 // CREATE FAILED
-//
-// * DELETE PENDING > DELETE IN_PROGRESS
+// - DELETE PENDING > DELETE IN_PROGRESS
 //
 // To get the status of the
 // dataset, call DescribeDataset
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDataset.html).
 // Related APIs
-//
-// * CreateDatasetGroup
+// - CreateDatasetGroup
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetGroup.html)
-//
-// *
+// -
 // ListDatasets
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_ListDatasets.html)
-//
-// *
+// -
 // DescribeDataset
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDataset.html)
-//
-// *
+// -
 // DeleteDataset
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteDataset.html)
 func (c *Client) CreateDataset(ctx context.Context, params *CreateDatasetInput, optFns ...func(*Options)) (*CreateDatasetOutput, error) {
@@ -75,13 +66,10 @@ type CreateDatasetInput struct {
 	DatasetGroupArn *string
 
 	// The type of dataset. One of the following (case insensitive) values:
-	//
-	// *
+	// -
 	// Interactions
-	//
-	// * Items
-	//
-	// * Users
+	// - Items
+	// - Users
 	//
 	// This member is required.
 	DatasetType *string

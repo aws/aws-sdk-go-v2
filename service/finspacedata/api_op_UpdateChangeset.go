@@ -45,16 +45,12 @@ type UpdateChangesetInput struct {
 	// type (formatType), header row (withHeader), data separation character
 	// (separator) and the type of compression (compression). formatType is a required
 	// attribute and can have the following values:
-	//
-	// * PARQUET – Parquet source file
+	// - PARQUET – Parquet source file
 	// format.
-	//
-	// * CSV – CSV source file format.
-	//
-	// * JSON – JSON source file format.
-	//
-	// *
-	// XML – XML source file format.
+	// - CSV – CSV source file format.
+	// - JSON – JSON source file format.
+	// - XML
+	// – XML source file format.
 	//
 	// Here is an example of how you could specify the
 	// formatParams:  "formatParams": { "formatType": "CSV", "withHeader": "true",

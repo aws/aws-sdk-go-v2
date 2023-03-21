@@ -36,8 +36,7 @@ type DeleteDBClusterInput struct {
 
 	// The DB cluster identifier for the DB cluster to be deleted. This parameter isn't
 	// case-sensitive. Constraints:
-	//
-	// * Must match an existing DBClusterIdentifier.
+	// - Must match an existing DBClusterIdentifier.
 	//
 	// This member is required.
 	DBClusterIdentifier *string
@@ -45,14 +44,11 @@ type DeleteDBClusterInput struct {
 	// The DB cluster snapshot identifier of the new DB cluster snapshot created when
 	// SkipFinalSnapshot is set to false. Specifying this parameter and also setting
 	// the SkipFinalShapshot parameter to true results in an error. Constraints:
-	//
-	// *
-	// Must be 1 to 255 letters, numbers, or hyphens.
-	//
-	// * First character must be a
-	// letter
-	//
-	// * Cannot end with a hyphen or contain two consecutive hyphens
+	// - Must
+	// be 1 to 255 letters, numbers, or hyphens.
+	// - First character must be a letter
+	// -
+	// Cannot end with a hyphen or contain two consecutive hyphens
 	FinalDBSnapshotIdentifier *string
 
 	// Determines whether a final DB cluster snapshot is created before the DB cluster

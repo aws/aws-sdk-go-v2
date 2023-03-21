@@ -60,12 +60,10 @@ type UpdateFleetAttributesInput struct {
 	// individual instances using UpdateGameSession
 	// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateGameSession.html)
 	// .
-	//
-	// * NoProtection -- The game session can be terminated during a scale-down
+	// - NoProtection -- The game session can be terminated during a scale-down
 	// event.
-	//
-	// * FullProtection -- If the game session is in an ACTIVE status, it
-	// cannot be terminated during a scale-down event.
+	// - FullProtection -- If the game session is in an ACTIVE status, it cannot
+	// be terminated during a scale-down event.
 	NewGameSessionProtectionPolicy types.ProtectionPolicy
 
 	// Policy settings that limit the number of game sessions an individual player can

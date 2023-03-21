@@ -101,36 +101,29 @@ type QueryInput struct {
 
 	// One or more substitution tokens for attribute names in an expression. The
 	// following are some use cases for using ExpressionAttributeNames:
-	//
-	// * To access an
+	// - To access an
 	// attribute whose name conflicts with a DynamoDB reserved word.
-	//
-	// * To create a
+	// - To create a
 	// placeholder for repeating occurrences of an attribute name in an expression.
-	//
-	// *
+	// -
 	// To prevent special characters in an attribute name from being misinterpreted in
 	// an expression.
 	//
 	// Use the # character in an expression to dereference an attribute
 	// name. For example, consider the following attribute name:
+	// - Percentile
 	//
-	// * Percentile
-	//
-	// The
-	// name of this attribute conflicts with a reserved word, so it cannot be used
-	// directly in an expression. (For the complete list of reserved words, see
-	// Reserved Words
+	// The name
+	// of this attribute conflicts with a reserved word, so it cannot be used directly
+	// in an expression. (For the complete list of reserved words, see Reserved Words
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html)
 	// in the Amazon DynamoDB Developer Guide). To work around this, you could specify
 	// the following for ExpressionAttributeNames:
-	//
-	// * {"#P":"Percentile"}
+	// - {"#P":"Percentile"}
 	//
 	// You could
 	// then use this substitution in an expression, as in this example:
-	//
-	// * #P =
+	// - #P =
 	// :val
 	//
 	// Tokens that begin with the : character are expression attribute values,
@@ -192,51 +185,41 @@ type QueryInput struct {
 	// =
 	//
 	// :sortkeyval Valid comparisons for the sort key condition are as follows:
-	//
-	// *
+	// -
 	// sortKeyName=:sortkeyval - true if the sort key value is equal to :sortkeyval.
-	//
-	// *
-	// sortKeyName<:sortkeyval - true if the sort key value is less than
+	// -
+	// sortKeyName<:sortkeyval - true if the sort key value is less than :sortkeyval.
+	// -
+	// sortKeyName<=:sortkeyval - true if the sort key value is less than or equal to
 	// :sortkeyval.
-	//
-	// * sortKeyName<=:sortkeyval - true if the sort key value is less
-	// than or equal to :sortkeyval.
-	//
-	// * sortKeyName>:sortkeyval - true if the sort key
-	// value is greater than :sortkeyval.
-	//
-	// * sortKeyName>= :sortkeyval - true if the
-	// sort key value is greater than or equal to :sortkeyval.
-	//
-	// *
+	// - sortKeyName>:sortkeyval - true if the sort key value is greater
+	// than :sortkeyval.
+	// - sortKeyName>= :sortkeyval - true if the sort key value is
+	// greater than or equal to :sortkeyval.
+	// -
 	// sortKeyNameBETWEEN:sortkeyval1AND:sortkeyval2 - true if the sort key value is
-	// greater than or equal to :sortkeyval1, and less than or equal to
-	// :sortkeyval2.
+	// greater than or equal to :sortkeyval1, and less than or equal to :sortkeyval2.
+	// -
+	// begins_with (sortKeyName, :sortkeyval) - true if the sort key value begins with
+	// a particular operand. (You cannot use this function with a sort key that is of
+	// type Number.) Note that the function name begins_with is case-sensitive.
 	//
-	// * begins_with (sortKeyName, :sortkeyval) - true if the sort key
-	// value begins with a particular operand. (You cannot use this function with a
-	// sort key that is of type Number.) Note that the function name begins_with is
-	// case-sensitive.
+	// Use
+	// the ExpressionAttributeValues parameter to replace tokens such as :partitionval
+	// and :sortval with actual values at runtime. You can optionally use the
+	// ExpressionAttributeNames parameter to replace the names of the partition key and
+	// sort key with placeholder tokens. This option might be necessary if an attribute
+	// name conflicts with a DynamoDB reserved word. For example, the following
+	// KeyConditionExpression parameter causes an error because Size is a reserved
+	// word:
+	// - Size = :myval
 	//
-	// Use the ExpressionAttributeValues parameter to replace tokens
-	// such as :partitionval and :sortval with actual values at runtime. You can
-	// optionally use the ExpressionAttributeNames parameter to replace the names of
-	// the partition key and sort key with placeholder tokens. This option might be
-	// necessary if an attribute name conflicts with a DynamoDB reserved word. For
-	// example, the following KeyConditionExpression parameter causes an error because
-	// Size is a reserved word:
+	// To work around this, define a placeholder (such a #S) to
+	// represent the attribute name Size. KeyConditionExpression then is as follows:
+	// -
+	// #S = :myval
 	//
-	// * Size = :myval
-	//
-	// To work around this, define a
-	// placeholder (such a #S) to represent the attribute name Size.
-	// KeyConditionExpression then is as follows:
-	//
-	// * #S = :myval
-	//
-	// For a list of
-	// reserved words, see Reserved Words
+	// For a list of reserved words, see Reserved Words
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html)
 	// in the Amazon DynamoDB Developer Guide. For more information on
 	// ExpressionAttributeNames and ExpressionAttributeValues, see Using Placeholders
@@ -282,18 +265,15 @@ type QueryInput struct {
 
 	// Determines the level of detail about either provisioned or on-demand throughput
 	// consumption that is returned in the response:
-	//
-	// * INDEXES - The response includes
+	// - INDEXES - The response includes
 	// the aggregate ConsumedCapacity for the operation, together with ConsumedCapacity
 	// for each table and secondary index that was accessed. Note that some operations,
 	// such as GetItem and BatchGetItem, do not access any indexes at all. In these
 	// cases, specifying INDEXES will only return ConsumedCapacity information for
 	// table(s).
-	//
-	// * TOTAL - The response includes only the aggregate ConsumedCapacity
+	// - TOTAL - The response includes only the aggregate ConsumedCapacity
 	// for the operation.
-	//
-	// * NONE - No ConsumedCapacity details are included in the
+	// - NONE - No ConsumedCapacity details are included in the
 	// response.
 	ReturnConsumedCapacity types.ReturnConsumedCapacity
 
@@ -312,26 +292,22 @@ type QueryInput struct {
 	// The attributes to be returned in the result. You can retrieve all item
 	// attributes, specific item attributes, the count of matching items, or in the
 	// case of an index, some or all of the attributes projected into the index.
-	//
-	// *
+	// -
 	// ALL_ATTRIBUTES - Returns all of the item attributes from the specified table or
 	// index. If you query a local secondary index, then for each matching item in the
 	// index, DynamoDB fetches the entire item from the parent table. If the index is
 	// configured to project all item attributes, then all of the data can be obtained
 	// from the local secondary index, and no fetching is required.
-	//
-	// *
+	// -
 	// ALL_PROJECTED_ATTRIBUTES - Allowed only when querying an index. Retrieves all
 	// attributes that have been projected into the index. If the index is configured
 	// to project all attributes, this return value is equivalent to specifying
 	// ALL_ATTRIBUTES.
-	//
-	// * COUNT - Returns the number of matching items, rather than the
+	// - COUNT - Returns the number of matching items, rather than the
 	// matching items themselves. Note that this uses the same quantity of read
 	// capacity units as getting the items, and is subject to the same item size
 	// calculations.
-	//
-	// * SPECIFIC_ATTRIBUTES - Returns only the attributes listed in
+	// - SPECIFIC_ATTRIBUTES - Returns only the attributes listed in
 	// ProjectionExpression. This return value is equivalent to specifying
 	// ProjectionExpression without specifying any value for Select. If you query or
 	// scan a local secondary index and request only attributes that are projected into

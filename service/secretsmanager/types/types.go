@@ -13,25 +13,18 @@ import (
 type Filter struct {
 
 	// The following are keys you can use:
-	//
-	// * description: Prefix match, not
+	// - description: Prefix match, not
 	// case-sensitive.
-	//
-	// * name: Prefix match, case-sensitive.
-	//
-	// * tag-key: Prefix match,
+	// - name: Prefix match, case-sensitive.
+	// - tag-key: Prefix match,
 	// case-sensitive.
-	//
-	// * tag-value: Prefix match, case-sensitive.
-	//
-	// * primary-region:
+	// - tag-value: Prefix match, case-sensitive.
+	// - primary-region:
 	// Prefix match, case-sensitive.
-	//
-	// * owning-service: Prefix match,
-	// case-sensitive.
-	//
-	// * all: Breaks the filter value string into words and then
-	// searches all attributes for matches. Not case-sensitive.
+	// - owning-service: Prefix match, case-sensitive.
+	// -
+	// all: Breaks the filter value string into words and then searches all attributes
+	// for matches. Not case-sensitive.
 	Key FilterNameStringType
 
 	// The keyword to filter for. You can prefix your search value with an exclamation

@@ -14,14 +14,11 @@ import (
 
 // Lists all, or filtered by resource name, migration tasks associated with the
 // user account making this call. This API has the following traits:
-//
-// * Can show a
+// - Can show a
 // summary list of the most recent migration tasks.
-//
-// * Can show a summary list of
+// - Can show a summary list of
 // migration tasks associated with a given discovered resource.
-//
-// * Lists migration
+// - Lists migration
 // tasks in a paginated interface.
 func (c *Client) ListMigrationTasks(ctx context.Context, params *ListMigrationTasksInput, optFns ...func(*Options)) (*ListMigrationTasksOutput, error) {
 	if params == nil {

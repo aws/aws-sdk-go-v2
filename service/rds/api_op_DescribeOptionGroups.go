@@ -32,30 +32,19 @@ type DescribeOptionGroupsInput struct {
 
 	// Filters the list of option groups to only include groups associated with a
 	// specific database engine. Valid Values:
-	//
-	// * mariadb
-	//
-	// * mysql
-	//
-	// * oracle-ee
-	//
-	// *
+	// - mariadb
+	// - mysql
+	// - oracle-ee
+	// -
 	// oracle-ee-cdb
-	//
-	// * oracle-se2
-	//
-	// * oracle-se2-cdb
-	//
-	// * postgres
-	//
-	// * sqlserver-ee
-	//
-	// *
+	// - oracle-se2
+	// - oracle-se2-cdb
+	// - postgres
+	// - sqlserver-ee
+	// -
 	// sqlserver-se
-	//
-	// * sqlserver-ex
-	//
-	// * sqlserver-web
+	// - sqlserver-ex
+	// - sqlserver-web
 	EngineName *string
 
 	// This parameter isn't currently supported.

@@ -13,10 +13,8 @@ import (
 
 // Creates a static route for the specified local gateway route table. You must
 // specify one of the following targets:
-//
-// * LocalGatewayVirtualInterfaceGroupId
-//
-// *
+// - LocalGatewayVirtualInterfaceGroupId
+// -
 // NetworkInterfaceId
 func (c *Client) CreateLocalGatewayRoute(ctx context.Context, params *CreateLocalGatewayRouteInput, optFns ...func(*Options)) (*CreateLocalGatewayRouteOutput, error) {
 	if params == nil {

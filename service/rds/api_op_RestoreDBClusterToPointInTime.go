@@ -47,14 +47,11 @@ func (c *Client) RestoreDBClusterToPointInTime(ctx context.Context, params *Rest
 type RestoreDBClusterToPointInTimeInput struct {
 
 	// The name of the new DB cluster to be created. Constraints:
-	//
-	// * Must contain from
-	// 1 to 63 letters, numbers, or hyphens
-	//
-	// * First character must be a letter
-	//
-	// *
-	// Can't end with a hyphen or contain two consecutive hyphens
+	// - Must contain from 1
+	// to 63 letters, numbers, or hyphens
+	// - First character must be a letter
+	// - Can't
+	// end with a hyphen or contain two consecutive hyphens
 	//
 	// Valid for: Aurora DB
 	// clusters and Multi-AZ DB clusters
@@ -63,8 +60,7 @@ type RestoreDBClusterToPointInTimeInput struct {
 	DBClusterIdentifier *string
 
 	// The identifier of the source DB cluster from which to restore. Constraints:
-	//
-	// *
+	// -
 	// Must match the identifier of an existing DBCluster.
 	//
 	// Valid for: Aurora DB
@@ -75,9 +71,8 @@ type RestoreDBClusterToPointInTimeInput struct {
 
 	// The target backtrack window, in seconds. To disable backtracking, set this value
 	// to 0. Default: 0 Constraints:
-	//
-	// * If specified, this value must be set to a
-	// number from 0 to 259,200 (72 hours).
+	// - If specified, this value must be set to a number
+	// from 0 to 259,200 (72 hours).
 	//
 	// Valid for: Aurora MySQL DB clusters only
 	BacktrackWindow *int64
@@ -99,16 +94,12 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// The name of the DB cluster parameter group to associate with this DB cluster. If
 	// this argument is omitted, the default DB cluster parameter group for the
 	// specified engine is used. Constraints:
-	//
-	// * If supplied, must match the name of an
+	// - If supplied, must match the name of an
 	// existing DB cluster parameter group.
-	//
-	// * Must be 1 to 255 letters, numbers, or
+	// - Must be 1 to 255 letters, numbers, or
 	// hyphens.
-	//
-	// * First character must be a letter.
-	//
-	// * Can't end with a hyphen or
+	// - First character must be a letter.
+	// - Can't end with a hyphen or
 	// contain two consecutive hyphens.
 	//
 	// Valid for: Aurora DB clusters and Multi-AZ DB
@@ -185,24 +176,20 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// cluster. The new DB cluster is encrypted with the KMS key identified by the
 	// KmsKeyId parameter. If you don't specify a value for the KmsKeyId parameter,
 	// then the following occurs:
-	//
-	// * If the DB cluster is encrypted, then the restored
+	// - If the DB cluster is encrypted, then the restored
 	// DB cluster is encrypted using the KMS key that was used to encrypt the source DB
 	// cluster.
+	// - If the DB cluster isn't encrypted, then the restored DB cluster isn't
+	// encrypted.
 	//
-	// * If the DB cluster isn't encrypted, then the restored DB cluster
-	// isn't encrypted.
-	//
-	// If DBClusterIdentifier refers to a DB cluster that isn't
-	// encrypted, then the restore request is rejected. Valid for: Aurora DB clusters
-	// and Multi-AZ DB clusters
+	// If DBClusterIdentifier refers to a DB cluster that isn't encrypted,
+	// then the restore request is rejected. Valid for: Aurora DB clusters and Multi-AZ
+	// DB clusters
 	KmsKeyId *string
 
 	// The network type of the DB cluster. Valid values:
-	//
-	// * IPV4
-	//
-	// * DUAL
+	// - IPV4
+	// - DUAL
 	//
 	// The network
 	// type is determined by the DBSubnetGroup specified for the DB cluster. A
@@ -232,22 +219,18 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// private IP address. Default: The default behavior varies depending on whether
 	// DBSubnetGroupName is specified. If DBSubnetGroupName isn't specified, and
 	// PubliclyAccessible isn't specified, the following applies:
-	//
-	// * If the default VPC
+	// - If the default VPC
 	// in the target Region doesn’t have an internet gateway attached to it, the DB
 	// cluster is private.
-	//
-	// * If the default VPC in the target Region has an internet
+	// - If the default VPC in the target Region has an internet
 	// gateway attached to it, the DB cluster is public.
 	//
 	// If DBSubnetGroupName is
 	// specified, and PubliclyAccessible isn't specified, the following applies:
-	//
-	// * If
+	// - If
 	// the subnets are part of a VPC that doesn’t have an internet gateway attached to
 	// it, the DB cluster is private.
-	//
-	// * If the subnets are part of a VPC that has an
+	// - If the subnets are part of a VPC that has an
 	// internet gateway attached to it, the DB cluster is public.
 	//
 	// Valid for: Multi-AZ
@@ -256,17 +239,13 @@ type RestoreDBClusterToPointInTimeInput struct {
 
 	// The date and time to restore the DB cluster to. Valid Values: Value must be a
 	// time in Universal Coordinated Time (UTC) format Constraints:
-	//
-	// * Must be before
+	// - Must be before
 	// the latest restorable time for the DB instance
-	//
-	// * Must be specified if
+	// - Must be specified if
 	// UseLatestRestorableTime parameter isn't provided
-	//
-	// * Can't be specified if the
+	// - Can't be specified if the
 	// UseLatestRestorableTime parameter is enabled
-	//
-	// * Can't be specified if the
+	// - Can't be specified if the
 	// RestoreType parameter is copy-on-write
 	//
 	// Example: 2015-03-07T23:45:00Z Valid for:
@@ -275,11 +254,9 @@ type RestoreDBClusterToPointInTimeInput struct {
 
 	// The type of restore to be performed. You can specify one of the following
 	// values:
-	//
-	// * full-copy - The new DB cluster is restored as a full copy of the
+	// - full-copy - The new DB cluster is restored as a full copy of the
 	// source DB cluster.
-	//
-	// * copy-on-write - The new DB cluster is restored as a clone
+	// - copy-on-write - The new DB cluster is restored as a clone
 	// of the source DB cluster.
 	//
 	// Constraints: You can't specify copy-on-write if the

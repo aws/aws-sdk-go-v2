@@ -37,13 +37,10 @@ type CreateDBSubnetGroupInput struct {
 
 	// The name for the DB subnet group. This value is stored as a lowercase string.
 	// Constraints:
-	//
-	// * Must contain no more than 255 letters, numbers, periods,
+	// - Must contain no more than 255 letters, numbers, periods,
 	// underscores, spaces, or hyphens.
-	//
-	// * Must not be default.
-	//
-	// * First character must
+	// - Must not be default.
+	// - First character must
 	// be a letter.
 	//
 	// Example: mydbsubnetgroup

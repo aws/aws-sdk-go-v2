@@ -40,10 +40,8 @@ type CreateResourceInput struct {
 	// consisting of that resource's properties and their desired values. Cloud Control
 	// API currently supports JSON as a structured data format. Specify the desired
 	// state as one of the following:
-	//
-	// * A JSON blob
-	//
-	// * A local path containing the
+	// - A JSON blob
+	// - A local path containing the
 	// desired state in JSON data format
 	//
 	// For more information, see Composing the

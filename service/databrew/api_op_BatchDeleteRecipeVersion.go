@@ -13,31 +13,22 @@ import (
 
 // Deletes one or more versions of a recipe at a time. The entire request will be
 // rejected if:
-//
-// * The recipe does not exist.
-//
-// * There is an invalid version
+// - The recipe does not exist.
+// - There is an invalid version
 // identifier in the list of versions.
-//
-// * The version list is empty.
-//
-// * The version
+// - The version list is empty.
+// - The version
 // list size exceeds 50.
-//
-// * The version list contains duplicate entries.
+// - The version list contains duplicate entries.
 //
 // The
 // request will complete successfully, but with partial failures, if:
-//
-// * A version
+// - A version
 // does not exist.
-//
-// * A version is being used by a job.
-//
-// * You specify
+// - A version is being used by a job.
+// - You specify
 // LATEST_WORKING, but it's being used by a project.
-//
-// * The version fails to be
+// - The version fails to be
 // deleted.
 //
 // The LATEST_WORKING version will only be deleted if the recipe has no

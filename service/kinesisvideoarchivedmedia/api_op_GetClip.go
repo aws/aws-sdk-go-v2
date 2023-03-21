@@ -19,24 +19,20 @@ import (
 // to using GetCLip API, you must obtain an endpoint using GetDataEndpoint,
 // specifying GET_CLIP for the APIName parameter. An Amazon Kinesis video stream
 // has the following requirements for providing data through MP4:
-//
-// * The media must
+// - The media must
 // contain h.264 or h.265 encoded video and, optionally, AAC or G.711 encoded
 // audio. Specifically, the codec ID of track 1 should be V_MPEG/ISO/AVC (for
 // h.264) or V_MPEGH/ISO/HEVC (for H.265). Optionally, the codec ID of track 2
 // should be A_AAC (for AAC) or A_MS/ACM (for G.711).
-//
-// * Data retention must be
+// - Data retention must be
 // greater than 0.
-//
-// * The video track of each fragment must contain codec private
+// - The video track of each fragment must contain codec private
 // data in the Advanced Video Coding (AVC) for H.264 format and HEVC for H.265
 // format. For more information, see MPEG-4 specification ISO/IEC 14496-15
 // (https://www.iso.org/standard/55980.html). For information about adapting stream
 // data to a given format, see NAL Adaptation Flags
 // (http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/producer-reference-nal.html).
-//
-// *
+// -
 // The audio track (if present) of each fragment must contain codec private data in
 // the AAC format (AAC specification ISO/IEC 13818-7
 // (https://www.iso.org/standard/43345.html)) or the MS Wave format

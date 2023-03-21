@@ -39,41 +39,32 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
 // Special Errors
 //
-// * HTTP Error: HTTP 400 Bad Request
-//
-// * Code: InvalidArgument
-//
-// *
+// - HTTP Error: HTTP 400 Bad Request
+// - Code: InvalidArgument
+// -
 // Cause: Invalid argument.
 //
-// * HTTP Error: HTTP 400 Bad Request
-//
-// * Code:
+// - HTTP Error: HTTP 400 Bad Request
+// - Code:
 // TooManyConfigurations
-//
-// * Cause: You are attempting to create a new configuration
+// - Cause: You are attempting to create a new configuration
 // but have already reached the 1,000-configuration limit.
 //
-// * HTTP Error: HTTP 403
+// - HTTP Error: HTTP 403
 // Forbidden
-//
-// * Code: AccessDenied
-//
-// * Cause: You are not the owner of the specified
+// - Code: AccessDenied
+// - Cause: You are not the owner of the specified
 // bucket, or you do not have the s3:PutAnalyticsConfiguration bucket permission to
 // set the configuration on the bucket.
 //
-// # Related Resources
-//
-// *
+// Related Resources
+// -
 // GetBucketAnalyticsConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketAnalyticsConfiguration.html)
-//
-// *
+// -
 // DeleteBucketAnalyticsConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketAnalyticsConfiguration.html)
-//
-// *
+// -
 // ListBucketAnalyticsConfigurations
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketAnalyticsConfigurations.html)
 func (c *Client) PutBucketAnalyticsConfiguration(ctx context.Context, params *PutBucketAnalyticsConfigurationInput, optFns ...func(*Options)) (*PutBucketAnalyticsConfigurationOutput, error) {

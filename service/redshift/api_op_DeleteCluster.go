@@ -44,16 +44,12 @@ func (c *Client) DeleteCluster(ctx context.Context, params *DeleteClusterInput, 
 type DeleteClusterInput struct {
 
 	// The identifier of the cluster to be deleted. Constraints:
-	//
-	// * Must contain
+	// - Must contain
 	// lowercase characters.
-	//
-	// * Must contain from 1 to 63 alphanumeric characters or
+	// - Must contain from 1 to 63 alphanumeric characters or
 	// hyphens.
-	//
-	// * First character must be a letter.
-	//
-	// * Cannot end with a hyphen or
+	// - First character must be a letter.
+	// - Cannot end with a hyphen or
 	// contain two consecutive hyphens.
 	//
 	// This member is required.
@@ -62,13 +58,10 @@ type DeleteClusterInput struct {
 	// The identifier of the final snapshot that is to be created immediately before
 	// deleting the cluster. If this parameter is provided, SkipFinalClusterSnapshot
 	// must be false. Constraints:
-	//
-	// * Must be 1 to 255 alphanumeric characters.
-	//
-	// *
-	// First character must be a letter.
-	//
-	// * Cannot end with a hyphen or contain two
+	// - Must be 1 to 255 alphanumeric characters.
+	// - First
+	// character must be a letter.
+	// - Cannot end with a hyphen or contain two
 	// consecutive hyphens.
 	FinalClusterSnapshotIdentifier *string
 

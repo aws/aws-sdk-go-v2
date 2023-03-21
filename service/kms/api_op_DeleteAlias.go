@@ -22,25 +22,20 @@ import (
 // To associate an existing alias with a different KMS key, call UpdateAlias.
 // Cross-account use: No. You cannot perform this operation on an alias in a
 // different Amazon Web Services account. Required permissions
-//
-// * kms:DeleteAlias
+// - kms:DeleteAlias
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // on the alias (IAM policy).
-//
-// * kms:DeleteAlias
+// - kms:DeleteAlias
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // on the KMS key (key policy).
 //
 // For details, see Controlling access to aliases
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-alias.html#alias-access)
 // in the Key Management Service Developer Guide. Related operations:
-//
-// *
+// -
 // CreateAlias
-//
-// * ListAliases
-//
-// * UpdateAlias
+// - ListAliases
+// - UpdateAlias
 func (c *Client) DeleteAlias(ctx context.Context, params *DeleteAliasInput, optFns ...func(*Options)) (*DeleteAliasOutput, error) {
 	if params == nil {
 		params = &DeleteAliasInput{}

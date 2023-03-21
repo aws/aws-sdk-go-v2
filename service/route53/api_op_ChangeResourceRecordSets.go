@@ -43,14 +43,11 @@ import (
 // (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/traffic-flow.html) in
 // the Amazon Route 53 Developer Guide. Create, Delete, and Upsert Use
 // ChangeResourceRecordsSetsRequest to perform the following actions:
-//
-// * CREATE:
+// - CREATE:
 // Creates a resource record set that has the specified values.
-//
-// * DELETE: Deletes
+// - DELETE: Deletes
 // an existing resource record set that has the specified values.
-//
-// * UPSERT: If a
+// - UPSERT: If a
 // resource set exists Route 53 updates it with the values in the
 // request.
 //

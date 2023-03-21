@@ -86,14 +86,11 @@ type CreateUserPoolClientInput struct {
 	AuthSessionValidity *int32
 
 	// A list of allowed redirect (callback) URLs for the IdPs. A redirect URI must:
-	//
-	// *
+	// -
 	// Be an absolute URI.
-	//
-	// * Be registered with the authorization server.
-	//
-	// * Not
-	// include a fragment component.
+	// - Be registered with the authorization server.
+	// - Not include
+	// a fragment component.
 	//
 	// See OAuth 2.0 - Redirection Endpoint
 	// (https://tools.ietf.org/html/rfc6749#section-3.1.2). Amazon Cognito requires
@@ -103,13 +100,10 @@ type CreateUserPoolClientInput struct {
 
 	// The default redirect URI. Must be in the CallbackURLs list. A redirect URI
 	// must:
-	//
-	// * Be an absolute URI.
-	//
-	// * Be registered with the authorization server.
-	//
-	// *
-	// Not include a fragment component.
+	// - Be an absolute URI.
+	// - Be registered with the authorization server.
+	// - Not
+	// include a fragment component.
 	//
 	// See OAuth 2.0 - Redirection Endpoint
 	// (https://tools.ietf.org/html/rfc6749#section-3.1.2). Amazon Cognito requires
@@ -141,25 +135,20 @@ type CreateUserPoolClientInput struct {
 	// that you define with Lambda functions. If you don't specify a value for
 	// ExplicitAuthFlows, your user client supports ALLOW_REFRESH_TOKEN_AUTH,
 	// ALLOW_USER_SRP_AUTH, and ALLOW_CUSTOM_AUTH. Valid values include:
-	//
-	// *
+	// -
 	// ALLOW_ADMIN_USER_PASSWORD_AUTH: Enable admin based user password authentication
 	// flow ADMIN_USER_PASSWORD_AUTH. This setting replaces the ADMIN_NO_SRP_AUTH
 	// setting. With this authentication flow, your app passes a user name and password
 	// to Amazon Cognito in the request, instead of using the Secure Remote Password
 	// (SRP) protocol to securely transmit the password.
-	//
-	// * ALLOW_CUSTOM_AUTH: Enable
+	// - ALLOW_CUSTOM_AUTH: Enable
 	// Lambda trigger based authentication.
-	//
-	// * ALLOW_USER_PASSWORD_AUTH: Enable user
+	// - ALLOW_USER_PASSWORD_AUTH: Enable user
 	// password-based authentication. In this flow, Amazon Cognito receives the
-	// password in the request instead of using the SRP protocol to verify
-	// passwords.
-	//
-	// * ALLOW_USER_SRP_AUTH: Enable SRP-based authentication.
-	//
-	// *
+	// password in the request instead of using the SRP protocol to verify passwords.
+	// -
+	// ALLOW_USER_SRP_AUTH: Enable SRP-based authentication.
+	// -
 	// ALLOW_REFRESH_TOKEN_AUTH: Enable authflow to refresh tokens.
 	//
 	// In some
@@ -194,11 +183,9 @@ type CreateUserPoolClientInput struct {
 	// indicating a code was sent to a simulated destination. When set to LEGACY, those
 	// APIs return a UserNotFoundException exception if the user doesn't exist in the
 	// user pool. Valid values include:
-	//
-	// * ENABLED - This prevents user
+	// - ENABLED - This prevents user
 	// existence-related errors.
-	//
-	// * LEGACY - This represents the early behavior of
+	// - LEGACY - This represents the early behavior of
 	// Amazon Cognito where user existence related errors aren't prevented.
 	PreventUserExistenceErrors types.PreventUserExistenceErrorTypes
 

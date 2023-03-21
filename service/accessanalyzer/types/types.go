@@ -31,15 +31,12 @@ type AccessPreview struct {
 	Id *string
 
 	// The status of the access preview.
-	//
-	// * Creating - The access preview creation is
-	// in progress.
-	//
-	// * Completed - The access preview is complete. You can preview
-	// findings for external access to the resource.
-	//
-	// * Failed - The access preview
-	// creation has failed.
+	// - Creating - The access preview creation is in
+	// progress.
+	// - Completed - The access preview is complete. You can preview findings
+	// for external access to the resource.
+	// - Failed - The access preview creation has
+	// failed.
 	//
 	// This member is required.
 	Status AccessPreviewStatus
@@ -58,14 +55,11 @@ type AccessPreviewFinding struct {
 
 	// Provides context on how the access preview finding compares to existing access
 	// identified in IAM Access Analyzer.
-	//
-	// * New - The finding is for newly-introduced
+	// - New - The finding is for newly-introduced
 	// access.
-	//
-	// * Unchanged - The preview finding is an existing finding that would
+	// - Unchanged - The preview finding is an existing finding that would
 	// remain unchanged.
-	//
-	// * Changed - The preview finding is an existing finding with a
+	// - Changed - The preview finding is an existing finding with a
 	// change in status.
 	//
 	// For example, a Changed finding with preview status Resolved
@@ -175,15 +169,12 @@ type AccessPreviewSummary struct {
 	Id *string
 
 	// The status of the access preview.
-	//
-	// * Creating - The access preview creation is
-	// in progress.
-	//
-	// * Completed - The access preview is complete and previews the
-	// findings for external access to the resource.
-	//
-	// * Failed - The access preview
-	// creation has failed.
+	// - Creating - The access preview creation is in
+	// progress.
+	// - Completed - The access preview is complete and previews the findings
+	// for external access to the resource.
+	// - Failed - The access preview creation has
+	// failed.
 	//
 	// This member is required.
 	Status AccessPreviewStatus
@@ -588,45 +579,37 @@ type EbsSnapshotConfiguration struct {
 
 	// The groups that have access to the Amazon EBS volume snapshot. If the value all
 	// is specified, then the Amazon EBS volume snapshot is public.
-	//
-	// * If the
+	// - If the
 	// configuration is for an existing Amazon EBS volume snapshot and you do not
 	// specify the groups, then the access preview uses the existing shared groups for
 	// the snapshot.
-	//
-	// * If the access preview is for a new resource and you do not
+	// - If the access preview is for a new resource and you do not
 	// specify the groups, then the access preview considers the snapshot without any
 	// groups.
-	//
-	// * To propose deletion of existing shared groups, you can specify an
+	// - To propose deletion of existing shared groups, you can specify an
 	// empty list for groups.
 	Groups []string
 
 	// The KMS key identifier for an encrypted Amazon EBS volume snapshot. The KMS key
 	// identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.
-	//
-	// *
+	// -
 	// If the configuration is for an existing Amazon EBS volume snapshot and you do
 	// not specify the kmsKeyId, or you specify an empty string, then the access
 	// preview uses the existing kmsKeyId of the snapshot.
-	//
-	// * If the access preview is
+	// - If the access preview is
 	// for a new resource and you do not specify the kmsKeyId, the access preview
 	// considers the snapshot as unencrypted.
 	KmsKeyId *string
 
 	// The IDs of the Amazon Web Services accounts that have access to the Amazon EBS
 	// volume snapshot.
-	//
-	// * If the configuration is for an existing Amazon EBS volume
+	// - If the configuration is for an existing Amazon EBS volume
 	// snapshot and you do not specify the userIds, then the access preview uses the
 	// existing shared userIds for the snapshot.
-	//
-	// * If the access preview is for a new
+	// - If the access preview is for a new
 	// resource and you do not specify the userIds, then the access preview considers
 	// the snapshot without any userIds.
-	//
-	// * To propose deletion of existing shared
+	// - To propose deletion of existing shared
 	// accountIds, you can specify an empty list for userIds.
 	UserIds []string
 
@@ -638,17 +621,14 @@ type EbsSnapshotConfiguration struct {
 // ECR repository that you own by specifying the Amazon ECR policy. For more
 // information, see Repository
 // (https://docs.aws.amazon.com/AmazonECR/latest/APIReference/API_Repository.html).
-//
-// *
+// -
 // If the configuration is for an existing Amazon ECR repository and you do not
 // specify the Amazon ECR policy, then the access preview uses the existing Amazon
 // ECR policy for the repository.
-//
-// * If the access preview is for a new resource
-// and you do not specify the policy, then the access preview assumes an Amazon ECR
+// - If the access preview is for a new resource and
+// you do not specify the policy, then the access preview assumes an Amazon ECR
 // repository without a policy.
-//
-// * To propose deletion of an existing Amazon ECR
+// - To propose deletion of an existing Amazon ECR
 // repository policy, you can specify an empty string for the Amazon ECR policy.
 type EcrRepositoryConfiguration struct {
 
@@ -666,17 +646,14 @@ type EcrRepositoryConfiguration struct {
 // EFS file system that you own by specifying the Amazon EFS policy. For more
 // information, see Using file systems in Amazon EFS
 // (https://docs.aws.amazon.com/efs/latest/ug/using-fs.html).
-//
-// * If the
+// - If the
 // configuration is for an existing Amazon EFS file system and you do not specify
 // the Amazon EFS policy, then the access preview uses the existing Amazon EFS
 // policy for the file system.
-//
-// * If the access preview is for a new resource and
+// - If the access preview is for a new resource and
 // you do not specify the policy, then the access preview assumes an Amazon EFS
 // file system without a policy.
-//
-// * To propose deletion of an existing Amazon EFS
+// - To propose deletion of an existing Amazon EFS
 // file system policy, you can specify an empty string for the Amazon EFS policy.
 type EfsFileSystemConfiguration struct {
 
@@ -1262,18 +1239,15 @@ type RdsDbClusterSnapshotAttributeValue interface {
 // cluster snapshot. If the value all is specified, then the Amazon RDS DB cluster
 // snapshot is public and can be copied or restored by all Amazon Web Services
 // accounts.
-//
-// * If the configuration is for an existing Amazon RDS DB cluster
+// - If the configuration is for an existing Amazon RDS DB cluster
 // snapshot and you do not specify the accountIds in
 // RdsDbClusterSnapshotAttributeValue, then the access preview uses the existing
 // shared accountIds for the snapshot.
-//
-// * If the access preview is for a new
+// - If the access preview is for a new
 // resource and you do not specify the specify the accountIds in
 // RdsDbClusterSnapshotAttributeValue, then the access preview considers the
 // snapshot without any attributes.
-//
-// * To propose deletion of existing shared
+// - To propose deletion of existing shared
 // accountIds, you can specify an empty list for accountIds in the
 // RdsDbClusterSnapshotAttributeValue.
 type RdsDbClusterSnapshotAttributeValueMemberAccountIds struct {
@@ -1301,12 +1275,10 @@ type RdsDbClusterSnapshotConfiguration struct {
 	// The KMS key identifier for an encrypted Amazon RDS DB cluster snapshot. The KMS
 	// key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS
 	// key.
-	//
-	// * If the configuration is for an existing Amazon RDS DB cluster snapshot
+	// - If the configuration is for an existing Amazon RDS DB cluster snapshot
 	// and you do not specify the kmsKeyId, or you specify an empty string, then the
 	// access preview uses the existing kmsKeyId of the snapshot.
-	//
-	// * If the access
+	// - If the access
 	// preview is for a new resource and you do not specify the specify the kmsKeyId,
 	// then the access preview considers the snapshot as unencrypted.
 	KmsKeyId *string
@@ -1328,18 +1300,15 @@ type RdsDbSnapshotAttributeValue interface {
 // The Amazon Web Services account IDs that have access to the manual Amazon RDS DB
 // snapshot. If the value all is specified, then the Amazon RDS DB snapshot is
 // public and can be copied or restored by all Amazon Web Services accounts.
-//
-// * If
+// - If
 // the configuration is for an existing Amazon RDS DB snapshot and you do not
 // specify the accountIds in RdsDbSnapshotAttributeValue, then the access preview
 // uses the existing shared accountIds for the snapshot.
-//
-// * If the access preview
-// is for a new resource and you do not specify the specify the accountIds in
+// - If the access preview is
+// for a new resource and you do not specify the specify the accountIds in
 // RdsDbSnapshotAttributeValue, then the access preview considers the snapshot
 // without any attributes.
-//
-// * To propose deletion of an existing shared accountIds,
+// - To propose deletion of an existing shared accountIds,
 // you can specify an empty list for accountIds in the RdsDbSnapshotAttributeValue.
 type RdsDbSnapshotAttributeValueMemberAccountIds struct {
 	Value []string
@@ -1364,14 +1333,12 @@ type RdsDbSnapshotConfiguration struct {
 
 	// The KMS key identifier for an encrypted Amazon RDS DB snapshot. The KMS key
 	// identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.
-	//
-	// *
+	// -
 	// If the configuration is for an existing Amazon RDS DB snapshot and you do not
 	// specify the kmsKeyId, or you specify an empty string, then the access preview
 	// uses the existing kmsKeyId of the snapshot.
-	//
-	// * If the access preview is for a
-	// new resource and you do not specify the specify the kmsKeyId, then the access
+	// - If the access preview is for a new
+	// resource and you do not specify the specify the kmsKeyId, then the access
 	// preview considers the snapshot as unencrypted.
 	KmsKeyId *string
 

@@ -36,12 +36,9 @@ type BatchAssociateServiceActionWithProvisioningArtifactInput struct {
 	ServiceActionAssociations []types.ServiceActionAssociation
 
 	// The language code.
-	//
-	// * en - English (default)
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	// - en - English (default)
+	// - jp - Japanese
+	// - zh - Chinese
 	AcceptLanguage *string
 
 	noSmithyDocumentSerde

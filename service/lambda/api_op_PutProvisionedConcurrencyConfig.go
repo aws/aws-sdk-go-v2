@@ -30,13 +30,10 @@ func (c *Client) PutProvisionedConcurrencyConfig(ctx context.Context, params *Pu
 type PutProvisionedConcurrencyConfigInput struct {
 
 	// The name of the Lambda function. Name formats
-	//
-	// * Function name – my-function.
-	//
-	// *
+	// - Function name – my-function.
+	// -
 	// Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function.
-	//
-	// *
+	// -
 	// Partial ARN – 123456789012:function:my-function.
 	//
 	// The length constraint applies

@@ -32,38 +32,31 @@ import (
 // Personalize doesn't support configuring the hpoObjective for solution
 // hyperparameter optimization at this time. Status A solution can be in one of the
 // following states:
-//
-// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
+// - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
 // FAILED
+// - DELETE PENDING > DELETE IN_PROGRESS
 //
-// * DELETE PENDING > DELETE IN_PROGRESS
-//
-// To get the status of the
-// solution, call DescribeSolution
+// To get the status of the solution,
+// call DescribeSolution
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html).
 // Wait until the status shows as ACTIVE before calling CreateSolutionVersion.
 // Related APIs
-//
-// * ListSolutions
+// - ListSolutions
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutions.html)
-//
-// *
+// -
 // CreateSolutionVersion
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolutionVersion.html)
-//
-// *
+// -
 // DescribeSolution
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html)
-//
-// *
+// -
 // DeleteSolution
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteSolution.html)
 //
-// *
+// -
 // ListSolutionVersions
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html)
-//
-// *
+// -
 // DescribeSolutionVersion
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html)
 func (c *Client) CreateSolution(ctx context.Context, params *CreateSolutionInput, optFns ...func(*Options)) (*CreateSolutionOutput, error) {

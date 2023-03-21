@@ -34,18 +34,13 @@ type DescribeInboundCrossClusterSearchConnectionsInput struct {
 
 	// A list of filters used to match properties for inbound cross-cluster search
 	// connection. Available Filter names for this operation are:
-	//
-	// *
+	// -
 	// cross-cluster-search-connection-id
-	//
-	// * source-domain-info.domain-name
-	//
-	// *
+	// - source-domain-info.domain-name
+	// -
 	// source-domain-info.owner-id
-	//
-	// * source-domain-info.region
-	//
-	// *
+	// - source-domain-info.region
+	// -
 	// destination-domain-info.domain-name
 	Filters []types.Filter
 

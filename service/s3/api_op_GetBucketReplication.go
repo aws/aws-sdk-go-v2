@@ -27,12 +27,10 @@ import (
 // List of replication-related error codes
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ReplicationErrorCodeList)
 // The following operations are related to GetBucketReplication:
-//
-// *
+// -
 // PutBucketReplication
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketReplication.html)
-//
-// *
+// -
 // DeleteBucketReplication
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketReplication.html)
 func (c *Client) GetBucketReplication(ctx context.Context, params *GetBucketReplicationInput, optFns ...func(*Options)) (*GetBucketReplicationOutput, error) {

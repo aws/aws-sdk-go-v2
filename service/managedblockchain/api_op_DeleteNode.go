@@ -31,15 +31,11 @@ type DeleteNodeInput struct {
 
 	// The unique identifier of the network that the node is on. Ethereum public
 	// networks have the following NetworkIds:
-	//
-	// * n-ethereum-mainnet
-	//
-	// *
+	// - n-ethereum-mainnet
+	// -
 	// n-ethereum-goerli
-	//
-	// * n-ethereum-rinkeby
-	//
-	// * n-ethereum-ropsten
+	// - n-ethereum-rinkeby
+	// - n-ethereum-ropsten
 	//
 	// This member is required.
 	NetworkId *string

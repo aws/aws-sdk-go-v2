@@ -42,11 +42,9 @@ type AggregatedVariablesImpactExplanation struct {
 
 	// The raw, uninterpreted value represented as log-odds of the fraud. These values
 	// are usually between -10 to +10, but range from -infinity to +infinity.
-	//
-	// * A
+	// - A
 	// positive value indicates that the variables drove the risk score up.
-	//
-	// * A
+	// - A
 	// negative value indicates that the variables drove the risk score down.
 	LogOddsImpact *float32
 
@@ -757,20 +755,16 @@ type LabelSchema struct {
 	LabelMapper map[string][]string
 
 	// The action to take for unlabeled events.
-	//
-	// * Use IGNORE if you want the unlabeled
+	// - Use IGNORE if you want the unlabeled
 	// events to be ignored. This is recommended when the majority of the events in the
 	// dataset are labeled.
-	//
-	// * Use FRAUD if you want to categorize all unlabeled events
+	// - Use FRAUD if you want to categorize all unlabeled events
 	// as “Fraud”. This is recommended when most of the events in your dataset are
 	// fraudulent.
-	//
-	// * Use LEGIT f you want to categorize all unlabeled events as
+	// - Use LEGIT f you want to categorize all unlabeled events as
 	// “Legit”. This is recommended when most of the events in your dataset are
 	// legitimate.
-	//
-	// * Use AUTO if you want Amazon Fraud Detector to decide how to use
+	// - Use AUTO if you want Amazon Fraud Detector to decide how to use
 	// the unlabeled data. This is recommended when there is significant unlabeled
 	// events in the dataset.
 	//
@@ -1432,12 +1426,10 @@ type VariableImpactExplanation struct {
 
 	// The raw, uninterpreted value represented as log-odds of the fraud. These values
 	// are usually between -10 to +10, but range from - infinity to + infinity.
-	//
-	// * A
+	// - A
 	// positive value indicates that the variable drove the risk score up.
-	//
-	// * A
-	// negative value indicates that the variable drove the risk score down.
+	// - A negative
+	// value indicates that the variable drove the risk score down.
 	LogOddsImpact *float32
 
 	// The event variable's relative impact in terms of magnitude on the prediction

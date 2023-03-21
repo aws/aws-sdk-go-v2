@@ -18,12 +18,10 @@ import (
 // depending on the Amazon Web Services service. Events that have impact beyond
 // that of the affected entities, or where the extent of impact is unknown, include
 // at least one entity indicating this. At least one event ARN is required.
-//
-// * This
+// - This
 // API operation uses pagination. Specify the nextToken parameter in the next
 // request to return more results.
-//
-// * This operation supports resource-level
+// - This operation supports resource-level
 // permissions. You can use this operation to allow or deny access to specific
 // Health events. For more information, see Resource- and action-based conditions
 // (https://docs.aws.amazon.com/health/latest/ug/security_iam_id-based-policy-examples.html#resource-action-based-conditions)

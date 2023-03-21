@@ -75,24 +75,20 @@ type GetExperimentResultsInput struct {
 	ReportNames []types.ExperimentReportName
 
 	// The statistics that you want to see in the returned results.
-	//
-	// * PValue specifies
+	// - PValue specifies
 	// to use p-values for the results. A p-value is used in hypothesis testing to
 	// measure how often you are willing to make a mistake in rejecting the null
 	// hypothesis. A general practice is to reject the null hypothesis and declare that
 	// the results are statistically significant when the p-value is less than 0.05.
-	//
-	// *
+	// -
 	// ConfidenceInterval specifies a confidence interval for the results. The
 	// confidence interval represents the range of values for the chosen metric that is
 	// likely to contain the true difference between the baseStat of a variation and
 	// the baseline. Evidently returns the 95% confidence interval.
-	//
-	// * TreatmentEffect
+	// - TreatmentEffect
 	// is the difference in the statistic specified by the baseStat parameter between
 	// each variation and the default variation.
-	//
-	// * BaseStat returns the statistical
+	// - BaseStat returns the statistical
 	// values collected for the metric for each variation. The statistic uses the same
 	// statistic specified in the baseStat parameter. Therefore, if baseStat is mean,
 	// this returns the mean of the values collected for each variation.

@@ -48,17 +48,15 @@ type ModifyEndpointInput struct {
 
 	// The settings in JSON format for the DMS transfer type of source endpoint.
 	// Attributes include the following:
-	//
-	// * serviceAccessRoleArn - The Amazon Resource
+	// - serviceAccessRoleArn - The Amazon Resource
 	// Name (ARN) used by the service access IAM role. The role must allow the
 	// iam:PassRole action.
+	// - BucketName - The name of the S3 bucket to use.
 	//
-	// * BucketName - The name of the S3 bucket to
-	// use.
-	//
-	// Shorthand syntax for these settings is as follows:
-	// ServiceAccessRoleArn=string ,BucketName=string JSON syntax for these settings is
-	// as follows: { "ServiceAccessRoleArn": "string", "BucketName": "string"}
+	// Shorthand
+	// syntax for these settings is as follows: ServiceAccessRoleArn=string
+	// ,BucketName=string JSON syntax for these settings is as follows: {
+	// "ServiceAccessRoleArn": "string", "BucketName": "string"}
 	DmsTransferSettings *types.DmsTransferSettings
 
 	// Settings in JSON format for the source DocumentDB endpoint. For more information
@@ -100,12 +98,10 @@ type ModifyEndpointInput struct {
 	// If this attribute is Y, the current call to ModifyEndpoint replaces all existing
 	// endpoint settings with the exact settings that you specify in this call. If this
 	// attribute is N, the current call to ModifyEndpoint does two things:
-	//
-	// * It
+	// - It
 	// replaces any endpoint settings that already exist with new values, for settings
 	// with the same names.
-	//
-	// * It creates new endpoint settings that you specify in the
+	// - It creates new endpoint settings that you specify in the
 	// call, for settings with different names.
 	//
 	// For example, if you call

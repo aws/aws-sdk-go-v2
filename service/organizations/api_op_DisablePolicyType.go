@@ -44,19 +44,15 @@ type DisablePolicyTypeInput struct {
 
 	// The policy type that you want to disable in this root. You can specify one of
 	// the following values:
-	//
-	// * AISERVICES_OPT_OUT_POLICY
+	// - AISERVICES_OPT_OUT_POLICY
 	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html)
-	//
-	// *
+	// -
 	// BACKUP_POLICY
 	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html)
-	//
-	// *
+	// -
 	// SERVICE_CONTROL_POLICY
 	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html)
-	//
-	// *
+	// -
 	// TAG_POLICY
 	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
 	//

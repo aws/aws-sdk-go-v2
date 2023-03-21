@@ -40,11 +40,9 @@ type ListOrdersInput struct {
 	NetworkArn *string
 
 	// The filters.
-	//
-	// * NETWORK_SITE - The Amazon Resource Name (ARN) of the network
+	// - NETWORK_SITE - The Amazon Resource Name (ARN) of the network
 	// site.
-	//
-	// * STATUS - The status (ACKNOWLEDGING | ACKNOWLEDGED |
+	// - STATUS - The status (ACKNOWLEDGING | ACKNOWLEDGED |
 	// UNACKNOWLEDGED).
 	//
 	// Filter values are case sensitive. If you specify multiple

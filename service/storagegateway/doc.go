@@ -10,29 +10,24 @@
 // upload data to the Amazon Web Services Cloud for cost effective backup and rapid
 // disaster recovery. Use the following links to get started using the Storage
 // Gateway Service API Reference:
-//
-// * Storage Gateway required request headers
+// - Storage Gateway required request headers
 // (https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewayHTTPRequestsHeaders):
 // Describes the required headers that you must send with every POST request to
 // Storage Gateway.
-//
-// * Signing requests
+// - Signing requests
 // (https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewaySigningRequests):
 // Storage Gateway requires that you authenticate every request you send; this
 // topic describes how sign such a request.
-//
-// * Error responses
+// - Error responses
 // (https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#APIErrorResponses):
 // Provides reference information about Storage Gateway errors.
-//
-// * Operations in
+// - Operations in
 // Storage Gateway
 // (https://docs.aws.amazon.com/storagegateway/latest/APIReference/API_Operations.html):
 // Contains detailed descriptions of all Storage Gateway operations, their request
 // parameters, response elements, possible errors, and examples of requests and
 // responses.
-//
-// * Storage Gateway endpoints and quotas
+// - Storage Gateway endpoints and quotas
 // (https://docs.aws.amazon.com/general/latest/gr/sg.html): Provides a list of each
 // Amazon Web Services Region and the endpoints available for use with Storage
 // Gateway.

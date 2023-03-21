@@ -19,12 +19,10 @@ import (
 // the specified client request token exists but the parameters don't match, this
 // call returns IncompatibleParameterError. If a file system with the specified
 // client request token doesn't exist, this operation does the following:
-//
-// *
-// Creates a new Amazon FSx file system from backup with an assigned ID, and an
-// initial lifecycle state of CREATING.
-//
-// * Returns the description of the file
+// - Creates
+// a new Amazon FSx file system from backup with an assigned ID, and an initial
+// lifecycle state of CREATING.
+// - Returns the description of the file
 // system.
 //
 // Parameters like the Active Directory, default share name, automatic
@@ -91,17 +89,13 @@ type CreateFileSystemFromBackupInput struct {
 
 	// Specifies the ID of the Key Management Service (KMS) key to use for encrypting
 	// data on Amazon FSx file systems, as follows:
-	//
-	// * Amazon FSx for Lustre
+	// - Amazon FSx for Lustre
 	// PERSISTENT_1 and PERSISTENT_2 deployment types only. SCRATCH_1 and SCRATCH_2
 	// types are encrypted using the Amazon FSx service KMS key for your account.
-	//
-	// *
+	// -
 	// Amazon FSx for NetApp ONTAP
-	//
-	// * Amazon FSx for OpenZFS
-	//
-	// * Amazon FSx for Windows
+	// - Amazon FSx for OpenZFS
+	// - Amazon FSx for Windows
 	// File Server
 	//
 	// If a KmsKeyId isn't specified, the Amazon FSx-managed KMS key for
@@ -114,15 +108,11 @@ type CreateFileSystemFromBackupInput struct {
 	// parameters are not supported for file systems with the Persistent_2 deployment
 	// type. Instead, use CreateDataRepositoryAssociation to create a data repository
 	// association to link your Lustre file system to a data repository.
-	//
-	// *
+	// -
 	// AutoImportPolicy
-	//
-	// * ExportPath
-	//
-	// * ImportedChunkSize
-	//
-	// * ImportPath
+	// - ExportPath
+	// - ImportedChunkSize
+	// - ImportPath
 	LustreConfiguration *types.CreateFileSystemLustreConfiguration
 
 	// The OpenZFS configuration for the file system that's being created.
@@ -146,12 +136,10 @@ type CreateFileSystemFromBackupInput struct {
 
 	// Sets the storage type for the Windows or OpenZFS file system that you're
 	// creating from a backup. Valid values are SSD and HDD.
-	//
-	// * Set to SSD to use solid
+	// - Set to SSD to use solid
 	// state drive storage. SSD is supported on all Windows and OpenZFS deployment
 	// types.
-	//
-	// * Set to HDD to use hard disk drive storage. HDD is supported on
+	// - Set to HDD to use hard disk drive storage. HDD is supported on
 	// SINGLE_AZ_2 and MULTI_AZ_1 FSx for Windows File Server file system deployment
 	// types.
 	//

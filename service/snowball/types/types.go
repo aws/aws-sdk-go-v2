@@ -135,21 +135,17 @@ type ClusterMetadata struct {
 	// The shipping speed for each node in this cluster. This speed doesn't dictate how
 	// soon you'll get each device, rather it represents how quickly each device moves
 	// to its destination while in transit. Regional shipping speeds are as follows:
-	//
-	// *
+	// -
 	// In Australia, you have access to express shipping. Typically, devices shipped
 	// express are delivered in about a day.
-	//
-	// * In the European Union (EU), you have
+	// - In the European Union (EU), you have
 	// access to express shipping. Typically, Snow devices shipped express are
 	// delivered in about a day. In addition, most countries in the EU have access to
 	// standard shipping, which typically takes less than a week, one way.
-	//
-	// * In India,
+	// - In India,
 	// Snow devices are delivered in one to seven days.
-	//
-	// * In the US, you have access
-	// to one-day shipping and two-day shipping.
+	// - In the US, you have access to
+	// one-day shipping and two-day shipping.
 	ShippingOption ShippingOption
 
 	// The type of Snowcone device to use for this cluster. For cluster jobs, Amazon
@@ -645,20 +641,16 @@ type ShippingDetails struct {
 	// you'll get the Snow device from the job's creation date. This speed represents
 	// how quickly it moves to its destination while in transit. Regional shipping
 	// speeds are as follows:
-	//
-	// * In Australia, you have access to express shipping.
+	// - In Australia, you have access to express shipping.
 	// Typically, Snow devices shipped express are delivered in about a day.
-	//
-	// * In the
+	// - In the
 	// European Union (EU), you have access to express shipping. Typically, Snow
 	// devices shipped express are delivered in about a day. In addition, most
 	// countries in the EU have access to standard shipping, which typically takes less
 	// than a week, one way.
-	//
-	// * In India, Snow devices are delivered in one to seven
+	// - In India, Snow devices are delivered in one to seven
 	// days.
-	//
-	// * In the United States of America (US), you have access to one-day
+	// - In the United States of America (US), you have access to one-day
 	// shipping and two-day shipping.
 	ShippingOption ShippingOption
 

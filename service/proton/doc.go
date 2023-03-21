@@ -56,13 +56,10 @@
 // request is made. If you retry the request with the expired token, a new resource
 // is created. If the original resource is deleted and you retry the request, a new
 // resource is created. Idempotent create APIs with a client token:
-//
-// *
+// -
 // CreateEnvironmentTemplateVersion
-//
-// * CreateServiceTemplateVersion
-//
-// *
+// - CreateServiceTemplateVersion
+// -
 // CreateEnvironmentAccountConnection
 //
 // Idempotent create APIs Given a request
@@ -73,33 +70,24 @@
 // throws a ConflictException. If you retry with different input parameters, the
 // retry throws a ValidationException with an IdempotentParameterMismatch error.
 // Idempotent create APIs:
-//
-// * CreateEnvironmentTemplate
-//
-// * CreateServiceTemplate
-//
-// *
+// - CreateEnvironmentTemplate
+// - CreateServiceTemplate
+// -
 // CreateEnvironment
+// - CreateService
 //
-// * CreateService
-//
-// Idempotent delete APIs Given a request
-// action that has succeeded: When you retry the request with an API from this
-// group and the resource was deleted, its metadata is returned in the response. If
-// you retry and the resource doesn't exist, the response is empty. In both cases,
-// the retry succeeds. Idempotent delete APIs:
-//
-// * DeleteEnvironmentTemplate
-//
-// *
+// Idempotent delete APIs Given a request action
+// that has succeeded: When you retry the request with an API from this group and
+// the resource was deleted, its metadata is returned in the response. If you retry
+// and the resource doesn't exist, the response is empty. In both cases, the retry
+// succeeds. Idempotent delete APIs:
+// - DeleteEnvironmentTemplate
+// -
 // DeleteEnvironmentTemplateVersion
-//
-// * DeleteServiceTemplate
-//
-// *
+// - DeleteServiceTemplate
+// -
 // DeleteServiceTemplateVersion
-//
-// * DeleteEnvironmentAccountConnection
+// - DeleteEnvironmentAccountConnection
 //
 // Asynchronous
 // idempotent delete APIs Given a request action that has succeeded: If you retry
@@ -108,8 +96,6 @@
 // data in the response without performing any further actions. If the original
 // request delete operation is complete, a retry returns an empty response.
 // Asynchronous idempotent delete APIs:
-//
-// * DeleteEnvironment
-//
-// * DeleteService
+// - DeleteEnvironment
+// - DeleteService
 package proton

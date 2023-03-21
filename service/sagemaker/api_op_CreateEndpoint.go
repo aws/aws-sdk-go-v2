@@ -53,13 +53,11 @@ import (
 // pane. Search the IAM role that you want to grant access to use the
 // CreateEndpoint and CreateEndpointConfig API operations, add the following
 // policies to the role.
-//
-// * Option 1: For a full SageMaker access, search and
-// attach the AmazonSageMakerFullAccess policy.
-//
-// * Option 2: For granting a limited
-// access to an IAM role, paste the following Action elements manually into the
-// JSON file of the IAM role: "Action": ["sagemaker:CreateEndpoint",
+// - Option 1: For a full SageMaker access, search and attach
+// the AmazonSageMakerFullAccess policy.
+// - Option 2: For granting a limited access
+// to an IAM role, paste the following Action elements manually into the JSON file
+// of the IAM role: "Action": ["sagemaker:CreateEndpoint",
 // "sagemaker:CreateEndpointConfig"]"Resource":
 // ["arn:aws:sagemaker:region:account-id:endpoint/endpointName""arn:aws:sagemaker:region:account-id:endpoint-config/endpointConfigName"]
 // For more information, see SageMaker API Permissions: Actions, Permissions, and

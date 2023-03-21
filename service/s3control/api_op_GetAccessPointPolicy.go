@@ -16,11 +16,9 @@ import (
 
 // Returns the access point policy associated with the specified access point. The
 // following actions are related to GetAccessPointPolicy:
-//
-// * PutAccessPointPolicy
+// - PutAccessPointPolicy
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicy.html)
-//
-// *
+// -
 // DeleteAccessPointPolicy
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicy.html)
 func (c *Client) GetAccessPointPolicy(ctx context.Context, params *GetAccessPointPolicyInput, optFns ...func(*Options)) (*GetAccessPointPolicyOutput, error) {

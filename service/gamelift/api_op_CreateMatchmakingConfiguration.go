@@ -104,14 +104,12 @@ type CreateMatchmakingConfigurationInput struct {
 
 	// Indicates whether this matchmaking configuration is being used with GameLift
 	// hosting or as a standalone matchmaking solution.
-	//
-	// * STANDALONE - FlexMatch forms
+	// - STANDALONE - FlexMatch forms
 	// matches and returns match information, including players and team assignments,
 	// in a  MatchmakingSucceeded
 	// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-events.html#match-events-matchmakingsucceeded)
 	// event.
-	//
-	// * WITH_QUEUE - FlexMatch forms matches and uses the specified GameLift
+	// - WITH_QUEUE - FlexMatch forms matches and uses the specified GameLift
 	// queue to start a game session for the match.
 	FlexMatchMode types.FlexMatchMode
 

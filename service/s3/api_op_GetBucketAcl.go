@@ -23,8 +23,7 @@ import (
 // disabling ACLs
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html)
 // in the Amazon S3 User Guide. Related Resources
-//
-// * ListObjects
+// - ListObjects
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjects.html)
 func (c *Client) GetBucketAcl(ctx context.Context, params *GetBucketAclInput, optFns ...func(*Options)) (*GetBucketAclOutput, error) {
 	if params == nil {

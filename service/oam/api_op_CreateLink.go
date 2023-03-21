@@ -42,13 +42,10 @@ type CreateLinkInput struct {
 	// Specify a friendly human-readable name to use to identify this source account
 	// when you are viewing data from it in the monitoring account. You can use a
 	// custom label or use the following variables:
-	//
-	// * $AccountName is the name of the
+	// - $AccountName is the name of the
 	// account
-	//
-	// * $AccountEmail is the globally unique email address of the account
-	//
-	// *
+	// - $AccountEmail is the globally unique email address of the account
+	// -
 	// $AccountEmailNoDomain is the email address of the account without the domain
 	// name
 	//

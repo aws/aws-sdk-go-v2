@@ -9,90 +9,72 @@ import (
 
 // Describes a quota for an Amazon Web Services account. The following are account
 // quotas:
-//
-// * AllocatedStorage - The total allocated storage per account, in GiB.
+// - AllocatedStorage - The total allocated storage per account, in GiB.
 // The used value is the total allocated storage in the account, in GiB.
-//
-// *
+// -
 // AuthorizationsPerDBSecurityGroup - The number of ingress rules per DB security
 // group. The used value is the highest number of ingress rules in a DB security
 // group in the account. Other DB security groups in the account might have a lower
 // number of ingress rules.
-//
-// * CustomEndpointsPerDBCluster - The number of custom
+// - CustomEndpointsPerDBCluster - The number of custom
 // endpoints per DB cluster. The used value is the highest number of custom
 // endpoints in a DB clusters in the account. Other DB clusters in the account
 // might have a lower number of custom endpoints.
-//
-// * DBClusterParameterGroups - The
+// - DBClusterParameterGroups - The
 // number of DB cluster parameter groups per account, excluding default parameter
 // groups. The used value is the count of nondefault DB cluster parameter groups in
 // the account.
-//
-// * DBClusterRoles - The number of associated Amazon Web Services
+// - DBClusterRoles - The number of associated Amazon Web Services
 // Identity and Access Management (IAM) roles per DB cluster. The used value is the
 // highest number of associated IAM roles for a DB cluster in the account. Other DB
 // clusters in the account might have a lower number of associated IAM roles.
-//
-// *
+// -
 // DBClusters - The number of DB clusters per account. The used value is the count
 // of DB clusters in the account.
-//
-// * DBInstanceRoles - The number of associated IAM
+// - DBInstanceRoles - The number of associated IAM
 // roles per DB instance. The used value is the highest number of associated IAM
 // roles for a DB instance in the account. Other DB instances in the account might
 // have a lower number of associated IAM roles.
-//
-// * DBInstances - The number of DB
+// - DBInstances - The number of DB
 // instances per account. The used value is the count of the DB instances in the
 // account. Amazon RDS DB instances, Amazon Aurora DB instances, Amazon Neptune
 // instances, and Amazon DocumentDB instances apply to this quota.
-//
-// *
+// -
 // DBParameterGroups - The number of DB parameter groups per account, excluding
 // default parameter groups. The used value is the count of nondefault DB parameter
 // groups in the account.
-//
-// * DBSecurityGroups - The number of DB security groups
+// - DBSecurityGroups - The number of DB security groups
 // (not VPC security groups) per account, excluding the default security group. The
 // used value is the count of nondefault DB security groups in the account.
-//
-// *
+// -
 // DBSubnetGroups - The number of DB subnet groups per account. The used value is
 // the count of the DB subnet groups in the account.
-//
-// * EventSubscriptions - The
+// - EventSubscriptions - The
 // number of event subscriptions per account. The used value is the count of the
 // event subscriptions in the account.
-//
-// * ManualClusterSnapshots - The number of
+// - ManualClusterSnapshots - The number of
 // manual DB cluster snapshots per account. The used value is the count of the
 // manual DB cluster snapshots in the account.
-//
-// * ManualSnapshots - The number of
+// - ManualSnapshots - The number of
 // manual DB instance snapshots per account. The used value is the count of the
 // manual DB instance snapshots in the account.
-//
-// * OptionGroups - The number of DB
+// - OptionGroups - The number of DB
 // option groups per account, excluding default option groups. The used value is
 // the count of nondefault DB option groups in the account.
+// - ReadReplicasPerMaster
+// - The number of read replicas per DB instance. The used value is the highest
+// number of read replicas for a DB instance in the account. Other DB instances in
+// the account might have a lower number of read replicas.
+// - ReservedDBInstances -
+// The number of reserved DB instances per account. The used value is the count of
+// the active reserved DB instances in the account.
+// - SubnetsPerDBSubnetGroup - The
+// number of subnets per DB subnet group. The used value is highest number of
+// subnets for a DB subnet group in the account. Other DB subnet groups in the
+// account might have a lower number of subnets.
 //
-// *
-// ReadReplicasPerMaster - The number of read replicas per DB instance. The used
-// value is the highest number of read replicas for a DB instance in the account.
-// Other DB instances in the account might have a lower number of read replicas.
-//
-// *
-// ReservedDBInstances - The number of reserved DB instances per account. The used
-// value is the count of the active reserved DB instances in the account.
-//
-// *
-// SubnetsPerDBSubnetGroup - The number of subnets per DB subnet group. The used
-// value is highest number of subnets for a DB subnet group in the account. Other
-// DB subnet groups in the account might have a lower number of subnets.
-//
-// For more
-// information, see Quotas for Amazon RDS
+// For more information, see Quotas
+// for Amazon RDS
 // (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html) in the
 // Amazon RDS User Guide and Quotas for Amazon Aurora
 // (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_Limits.html)
@@ -168,27 +150,20 @@ type BlueGreenDeployment struct {
 	Source *string
 
 	// The status of the blue/green deployment. Values:
-	//
-	// * PROVISIONING - Resources are
+	// - PROVISIONING - Resources are
 	// being created in the green environment.
-	//
-	// * AVAILABLE - Resources are available
-	// in the green environment.
-	//
-	// * SWITCHOVER_IN_PROGRESS - The deployment is being
+	// - AVAILABLE - Resources are available in
+	// the green environment.
+	// - SWITCHOVER_IN_PROGRESS - The deployment is being
 	// switched from the blue environment to the green environment.
-	//
-	// *
+	// -
 	// SWITCHOVER_COMPLETED - Switchover from the blue environment to the green
 	// environment is complete.
-	//
-	// * INVALID_CONFIGURATION - Resources in the green
+	// - INVALID_CONFIGURATION - Resources in the green
 	// environment are invalid, so switchover isn't possible.
-	//
-	// * SWITCHOVER_FAILED -
+	// - SWITCHOVER_FAILED -
 	// Switchover was attempted but failed.
-	//
-	// * DELETING - The blue/green deployment is
+	// - DELETING - The blue/green deployment is
 	// being deleted.
 	Status *string
 
@@ -227,17 +202,13 @@ type BlueGreenDeploymentTask struct {
 	Name *string
 
 	// The status of the blue/green deployment task. Values:
-	//
-	// * PENDING - The resources
+	// - PENDING - The resources
 	// are being prepared for deployment.
-	//
-	// * IN_PROGRESS - The resource is being
+	// - IN_PROGRESS - The resource is being
 	// deployed.
-	//
-	// * COMPLETED - The resource has been deployed.
-	//
-	// * FAILED - Deployment
-	// of the resource failed.
+	// - COMPLETED - The resource has been deployed.
+	// - FAILED - Deployment of
+	// the resource failed.
 	Status *string
 
 	noSmithyDocumentSerde
@@ -710,10 +681,8 @@ type DBCluster struct {
 	MultiAZ *bool
 
 	// The network type of the DB instance. Valid values:
-	//
-	// * IPV4
-	//
-	// * DUAL
+	// - IPV4
+	// - DUAL
 	//
 	// The network
 	// type is determined by the DBSubnetGroup specified for the DB cluster. A
@@ -743,27 +712,20 @@ type DBCluster struct {
 
 	// The number of days to retain Performance Insights data. The default is 7 days.
 	// The following values are valid:
-	//
-	// * 7
-	//
-	// * month * 31, where month is a number of
+	// - 7
+	// - month * 31, where month is a number of
 	// months from 1-23
-	//
-	// * 731
+	// - 731
 	//
 	// For example, the following values are valid:
-	//
-	// * 93 (3
+	// - 93 (3
 	// months * 31)
+	// - 341 (11 months * 31)
+	// - 589 (19 months * 31)
+	// - 731
 	//
-	// * 341 (11 months * 31)
-	//
-	// * 589 (19 months * 31)
-	//
-	// * 731
-	//
-	// This
-	// setting is only for non-Aurora Multi-AZ DB clusters.
+	// This setting
+	// is only for non-Aurora Multi-AZ DB clusters.
 	PerformanceInsightsRetentionPeriod *int32
 
 	// Specifies the port that the database engine is listening on.
@@ -863,17 +825,13 @@ type DBClusterBacktrack struct {
 
 	// The status of the backtrack. This property returns one of the following
 	// values:
-	//
-	// * applying - The backtrack is currently being applied to or rolled back
+	// - applying - The backtrack is currently being applied to or rolled back
 	// from the DB cluster.
-	//
-	// * completed - The backtrack has successfully been applied
+	// - completed - The backtrack has successfully been applied
 	// to or rolled back from the DB cluster.
-	//
-	// * failed - An error occurred while the
+	// - failed - An error occurred while the
 	// backtrack was applied to or rolled back from the DB cluster.
-	//
-	// * pending - The
+	// - pending - The
 	// backtrack is currently pending application to or rollback from the DB cluster.
 	Status *string
 
@@ -883,15 +841,11 @@ type DBClusterBacktrack struct {
 // This data type represents the information you need to connect to an Amazon
 // Aurora DB cluster. This data type is used as a response element in the following
 // actions:
-//
-// * CreateDBClusterEndpoint
-//
-// * DescribeDBClusterEndpoints
-//
-// *
+// - CreateDBClusterEndpoint
+// - DescribeDBClusterEndpoints
+// -
 // ModifyDBClusterEndpoint
-//
-// * DeleteDBClusterEndpoint
+// - DeleteDBClusterEndpoint
 //
 // For the data structure that
 // represents Amazon RDS DB instance endpoints, see Endpoint.
@@ -1009,15 +963,12 @@ type DBClusterRole struct {
 
 	// Describes the state of association between the IAM role and the DB cluster. The
 	// Status property returns one of the following values:
-	//
-	// * ACTIVE - the IAM role
-	// ARN is associated with the DB cluster and can be used to access other Amazon Web
+	// - ACTIVE - the IAM role ARN
+	// is associated with the DB cluster and can be used to access other Amazon Web
 	// Services on your behalf.
-	//
-	// * PENDING - the IAM role ARN is being associated with
+	// - PENDING - the IAM role ARN is being associated with
 	// the DB cluster.
-	//
-	// * INVALID - the IAM role ARN is associated with the DB cluster,
+	// - INVALID - the IAM role ARN is associated with the DB cluster,
 	// but the DB cluster is unable to assume the IAM role in order to access other
 	// Amazon Web Services on your behalf.
 	Status *string
@@ -1098,12 +1049,9 @@ type DBClusterSnapshot struct {
 
 	// Specifies the status of this DB cluster snapshot. Valid statuses are the
 	// following:
-	//
-	// * available
-	//
-	// * copying
-	//
-	// * creating
+	// - available
+	// - copying
+	// - creating
 	Status *string
 
 	// Specifies whether the DB cluster snapshot is encrypted.
@@ -1383,14 +1331,11 @@ type DBInstance struct {
 	// The instance profile associated with the underlying Amazon EC2 instance of an
 	// RDS Custom DB instance. The instance profile must meet the following
 	// requirements:
-	//
-	// * The profile must exist in your account.
-	//
-	// * The profile must
-	// have an IAM role that Amazon EC2 has permissions to assume.
-	//
-	// * The instance
-	// profile name and the associated IAM role name must start with the prefix
+	// - The profile must exist in your account.
+	// - The profile must have
+	// an IAM role that Amazon EC2 has permissions to assume.
+	// - The instance profile
+	// name and the associated IAM role name must start with the prefix
 	// AWSRDSCustom.
 	//
 	// For the list of permissions required for the IAM role, see
@@ -1502,15 +1447,12 @@ type DBInstance struct {
 	// True if mapping of Amazon Web Services Identity and Access Management (IAM)
 	// accounts to database accounts is enabled, and otherwise false. IAM database
 	// authentication can be enabled for the following database engines
-	//
-	// * For MySQL
+	// - For MySQL
 	// 5.6, minor version 5.6.34 or higher
-	//
-	// * For MySQL 5.7, minor version 5.7.16 or
+	// - For MySQL 5.7, minor version 5.7.16 or
 	// higher
-	//
-	// * Aurora 5.6 or higher. To enable IAM database authentication for
-	// Aurora, see DBCluster Type.
+	// - Aurora 5.6 or higher. To enable IAM database authentication for Aurora,
+	// see DBCluster Type.
 	IAMDatabaseAuthenticationEnabled bool
 
 	// Provides the date and time the DB instance was created.
@@ -1567,10 +1509,8 @@ type DBInstance struct {
 	NcharCharacterSetName *string
 
 	// The network type of the DB instance. Valid values:
-	//
-	// * IPV4
-	//
-	// * DUAL
+	// - IPV4
+	// - DUAL
 	//
 	// The network
 	// type is determined by the DBSubnetGroup specified for the DB instance. A
@@ -1601,24 +1541,17 @@ type DBInstance struct {
 
 	// The number of days to retain Performance Insights data. The default is 7 days.
 	// The following values are valid:
-	//
-	// * 7
-	//
-	// * month * 31, where month is a number of
+	// - 7
+	// - month * 31, where month is a number of
 	// months from 1-23
-	//
-	// * 731
+	// - 731
 	//
 	// For example, the following values are valid:
-	//
-	// * 93 (3
+	// - 93 (3
 	// months * 31)
-	//
-	// * 341 (11 months * 31)
-	//
-	// * 589 (19 months * 31)
-	//
-	// * 731
+	// - 341 (11 months * 31)
+	// - 589 (19 months * 31)
+	// - 731
 	PerformanceInsightsRetentionPeriod *int32
 
 	// Specifies the daily time range during which automated backups are created if
@@ -1801,14 +1734,11 @@ type DBInstanceAutomatedBackup struct {
 	RestoreWindow *RestoreWindow
 
 	// Provides a list of status information for an automated backup:
-	//
-	// * active -
+	// - active -
 	// automated backups for current instances
-	//
-	// * retained - automated backups for
+	// - retained - automated backups for
 	// deleted instances
-	//
-	// * creating - automated backups that are waiting for the first
+	// - creating - automated backups that are waiting for the first
 	// automated snapshot to be available.
 	Status *string
 
@@ -1859,17 +1789,14 @@ type DBInstanceRole struct {
 
 	// Describes the state of association between the IAM role and the DB instance. The
 	// Status property returns one of the following values:
-	//
-	// * ACTIVE - the IAM role
-	// ARN is associated with the DB instance and can be used to access other Amazon
-	// Web Services services on your behalf.
-	//
-	// * PENDING - the IAM role ARN is being
+	// - ACTIVE - the IAM role ARN
+	// is associated with the DB instance and can be used to access other Amazon Web
+	// Services services on your behalf.
+	// - PENDING - the IAM role ARN is being
 	// associated with the DB instance.
-	//
-	// * INVALID - the IAM role ARN is associated
-	// with the DB instance, but the DB instance is unable to assume the IAM role in
-	// order to access other Amazon Web Services services on your behalf.
+	// - INVALID - the IAM role ARN is associated with
+	// the DB instance, but the DB instance is unable to assume the IAM role in order
+	// to access other Amazon Web Services services on your behalf.
 	Status *string
 
 	noSmithyDocumentSerde
@@ -1919,20 +1846,14 @@ type DBParameterGroup struct {
 
 // The status of the DB parameter group. This data type is used as a response
 // element in the following actions:
-//
-// * CreateDBInstance
-//
-// *
+// - CreateDBInstance
+// -
 // CreateDBInstanceReadReplica
-//
-// * DeleteDBInstance
-//
-// * ModifyDBInstance
-//
-// *
+// - DeleteDBInstance
+// - ModifyDBInstance
+// -
 // RebootDBInstance
-//
-// * RestoreDBInstanceFromDBSnapshot
+// - RestoreDBInstanceFromDBSnapshot
 type DBParameterGroupStatus struct {
 
 	// The name of the DB parameter group.
@@ -2178,15 +2099,11 @@ type DBSecurityGroup struct {
 }
 
 // This data type is used as a response element in the following actions:
-//
-// *
+// -
 // ModifyDBInstance
-//
-// * RebootDBInstance
-//
-// * RestoreDBInstanceFromDBSnapshot
-//
-// *
+// - RebootDBInstance
+// - RestoreDBInstanceFromDBSnapshot
+// -
 // RestoreDBInstanceToPointInTime
 type DBSecurityGroupMembership struct {
 
@@ -2389,10 +2306,8 @@ type DBSubnetGroup struct {
 	Subnets []Subnet
 
 	// The network type of the DB subnet group. Valid values:
-	//
-	// * IPV4
-	//
-	// * DUAL
+	// - IPV4
+	// - DUAL
 	//
 	// A
 	// DBSubnetGroup can support only the IPv4 protocol or the IPv4 and the IPv6
@@ -2456,13 +2371,10 @@ type DoubleRange struct {
 }
 
 // This data type is used as a response element in the following actions:
-//
-// *
+// -
 // AuthorizeDBSecurityGroupIngress
-//
-// * DescribeDBSecurityGroups
-//
-// *
+// - DescribeDBSecurityGroups
+// -
 // RevokeDBSecurityGroupIngress
 type EC2SecurityGroup struct {
 
@@ -2486,12 +2398,9 @@ type EC2SecurityGroup struct {
 // This data type represents the information you need to connect to an Amazon RDS
 // DB instance. This data type is used as a response element in the following
 // actions:
-//
-// * CreateDBInstance
-//
-// * DescribeDBInstances
-//
-// * DeleteDBInstance
+// - CreateDBInstance
+// - DescribeDBInstances
+// - DeleteDBInstance
 //
 // For the
 // data structure that represents Amazon Aurora DB cluster endpoints, see
@@ -2618,19 +2527,15 @@ type ExportTask struct {
 
 	// The data exported from the snapshot or cluster. Valid values are the
 	// following:
-	//
-	// * database - Export all the data from a specified database.
-	//
-	// *
+	// - database - Export all the data from a specified database.
+	// -
 	// database.table table-name - Export a table of the snapshot or cluster. This
 	// format is valid only for RDS for MySQL, RDS for MariaDB, and Aurora MySQL.
-	//
-	// *
+	// -
 	// database.schema schema-name - Export a database schema of the snapshot or
 	// cluster. This format is valid only for RDS for PostgreSQL and Aurora
 	// PostgreSQL.
-	//
-	// * database.schema.table table-name - Export a table of the database
+	// - database.schema.table table-name - Export a table of the database
 	// schema. This format is valid only for RDS for PostgreSQL and Aurora PostgreSQL.
 	ExportOnly []string
 
@@ -2671,19 +2576,12 @@ type ExportTask struct {
 
 	// The progress status of the export task. The status can be one of the
 	// following:
-	//
-	// * CANCELED
-	//
-	// * CANCELING
-	//
-	// * COMPLETE
-	//
-	// * FAILED
-	//
-	// * IN_PROGRESS
-	//
-	// *
-	// STARTING
+	// - CANCELED
+	// - CANCELING
+	// - COMPLETE
+	// - FAILED
+	// - IN_PROGRESS
+	// - STARTING
 	Status *string
 
 	// The time that the snapshot or cluster export task ended.
@@ -2712,18 +2610,15 @@ type FailoverState struct {
 
 	// The current status of the Aurora global database (GlobalCluster). Possible
 	// values are as follows:
-	//
-	// * pending  A request to fail over the Aurora global
+	// - pending  A request to fail over the Aurora global
 	// database (GlobalCluster) has been received by the service. The GlobalCluster's
 	// primary DB cluster and the specified secondary DB cluster are being verified
 	// before the failover process can start.
-	//
-	// * failing-over  This status covers the
+	// - failing-over  This status covers the
 	// range of Aurora internal operations that take place during the failover process,
 	// such as demoting the primary Aurora DB cluster, promoting the secondary Aurora
 	// DB, and synchronizing replicas.
-	//
-	// * cancelling  The request to fail over the
+	// - cancelling  The request to fail over the
 	// Aurora global database (GlobalCluster) was cancelled and the primary Aurora DB
 	// cluster and the selected secondary Aurora DB cluster are returning to their
 	// previous states.
@@ -2741,18 +2636,13 @@ type FailoverState struct {
 // resources by specific criteria, such as IDs. The filters supported by a describe
 // operation are documented with the describe operation. Currently, wildcards are
 // not supported in filters. The following actions can be filtered:
-//
-// *
+// -
 // DescribeDBClusterBacktracks
-//
-// * DescribeDBClusterEndpoints
-//
-// *
-// DescribeDBClusters
-//
-// * DescribeDBInstances
-//
-// * DescribePendingMaintenanceActions
+// - DescribeDBClusterEndpoints
+// - DescribeDBClusters
+// -
+// DescribeDBInstances
+// - DescribePendingMaintenanceActions
 type Filter struct {
 
 	// The name of the filter. Filter names are case-sensitive.
@@ -2868,23 +2758,19 @@ type MasterUserSecret struct {
 	SecretArn *string
 
 	// The status of the secret. The possible status values include the following:
-	//
-	// *
+	// -
 	// creating - The secret is being created.
-	//
-	// * active - The secret is available for
+	// - active - The secret is available for
 	// normal use and rotation.
-	//
-	// * rotating - The secret is being rotated.
-	//
-	// * impaired
-	// - The secret can be used to access database credentials, but it can't be
-	// rotated. A secret might have this status if, for example, permissions are
-	// changed so that RDS can no longer access either the secret or the KMS key for
-	// the secret. When a secret has this status, you can correct the condition that
-	// caused the status. Alternatively, modify the DB instance to turn off automatic
-	// management of database credentials, and then modify the DB instance again to
-	// turn on automatic management of database credentials.
+	// - rotating - The secret is being rotated.
+	// - impaired -
+	// The secret can be used to access database credentials, but it can't be rotated.
+	// A secret might have this status if, for example, permissions are changed so that
+	// RDS can no longer access either the secret or the KMS key for the secret. When a
+	// secret has this status, you can correct the condition that caused the status.
+	// Alternatively, modify the DB instance to turn off automatic management of
+	// database credentials, and then modify the DB instance again to turn on automatic
+	// management of database credentials.
 	SecretStatus *string
 
 	noSmithyDocumentSerde
@@ -3493,47 +3379,35 @@ type PendingModifiedValues struct {
 // number of threads per core, use the threadsPerCore feature name for the Name
 // parameter. You can set the processor features of the DB instance class for a DB
 // instance when you call one of the following actions:
-//
-// * CreateDBInstance
-//
-// *
+// - CreateDBInstance
+// -
 // ModifyDBInstance
+// - RestoreDBInstanceFromDBSnapshot
+// - RestoreDBInstanceFromS3
+// -
+// RestoreDBInstanceToPointInTime
 //
-// * RestoreDBInstanceFromDBSnapshot
+// You can view the valid processor values for a
+// particular instance class by calling the DescribeOrderableDBInstanceOptions
+// action and specifying the instance class for the DBInstanceClass parameter. In
+// addition, you can use the following actions for DB instance class processor
+// information:
+// - DescribeDBInstances
+// - DescribeDBSnapshots
+// -
+// DescribeValidDBInstanceModifications
 //
-// *
-// RestoreDBInstanceFromS3
+// If you call DescribeDBInstances,
+// ProcessorFeature returns non-null values only if the following conditions are
+// met:
+// - You are accessing an Oracle DB instance.
+// - Your Oracle DB instance class
+// supports configuring the number of CPU cores and threads per core.
+// - The current
+// number CPU cores and threads is set to a non-default value.
 //
-// * RestoreDBInstanceToPointInTime
-//
-// You can view the
-// valid processor values for a particular instance class by calling the
-// DescribeOrderableDBInstanceOptions action and specifying the instance class for
-// the DBInstanceClass parameter. In addition, you can use the following actions
-// for DB instance class processor information:
-//
-// * DescribeDBInstances
-//
-// *
-// DescribeDBSnapshots
-//
-// * DescribeValidDBInstanceModifications
-//
-// If you call
-// DescribeDBInstances, ProcessorFeature returns non-null values only if the
-// following conditions are met:
-//
-// * You are accessing an Oracle DB instance.
-//
-// *
-// Your Oracle DB instance class supports configuring the number of CPU cores and
-// threads per core.
-//
-// * The current number CPU cores and threads is set to a
-// non-default value.
-//
-// For more information, see Configuring the Processor of the
-// DB Instance Class
+// For more
+// information, see Configuring the Processor of the DB Instance Class
 // (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html#USER_ConfigureProcessor)
 // in the Amazon RDS User Guide.
 type ProcessorFeature struct {
@@ -3881,20 +3755,15 @@ type SwitchoverDetail struct {
 	SourceMember *string
 
 	// The switchover status of a resource in a blue/green deployment. Values:
-	//
-	// *
+	// -
 	// preparing-for-switchover - The resource is being prepared to switch over.
-	//
-	// *
+	// -
 	// ready-for-switchover - The resource is ready to switch over.
-	//
-	// *
+	// -
 	// switchover-in-progress - The resource is being switched over.
-	//
-	// *
+	// -
 	// switchover-completed - The resource has been switched over.
-	//
-	// * switchover-failed
+	// - switchover-failed
 	// - The resource attempted to switch over but failed.
 	Status *string
 

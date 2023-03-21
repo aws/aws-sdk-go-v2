@@ -14,23 +14,15 @@ import (
 // (ARN) for an Identity and Access Management assume role. You specify the name,
 // URI, and ARN for each action point defined in the extension. You can specify the
 // following actions for an extension:
-//
-// *
-// PRE_CREATE_HOSTED_CONFIGURATION_VERSION
-//
-// * PRE_START_DEPLOYMENT
-//
-// *
-// ON_DEPLOYMENT_START
-//
-// * ON_DEPLOYMENT_STEP
-//
-// * ON_DEPLOYMENT_BAKING
-//
-// *
-// ON_DEPLOYMENT_COMPLETE
-//
-// * ON_DEPLOYMENT_ROLLED_BACK
+// - PRE_CREATE_HOSTED_CONFIGURATION_VERSION
+// -
+// PRE_START_DEPLOYMENT
+// - ON_DEPLOYMENT_START
+// - ON_DEPLOYMENT_STEP
+// -
+// ON_DEPLOYMENT_BAKING
+// - ON_DEPLOYMENT_COMPLETE
+// - ON_DEPLOYMENT_ROLLED_BACK
 type Action struct {
 
 	// Information about the action.

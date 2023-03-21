@@ -18,16 +18,12 @@ import (
 // artifacts as part of the model. You can also use the artifacts with Amazon Web
 // Services IoT Greengrass. In that case, deploy them as an ML resource. In the
 // request body, you provide the following:
-//
-// * A name for the compilation job
-//
-// *
+// - A name for the compilation job
+// -
 // Information about the input model artifacts
-//
-// * The output location for the
+// - The output location for the
 // compiled model and the device (target) that the model runs on
-//
-// * The Amazon
+// - The Amazon
 // Resource Name (ARN) of the IAM role that Amazon SageMaker assumes to perform the
 // model compilation job.
 //
@@ -69,21 +65,17 @@ type CreateCompilationJobInput struct {
 	// The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker to
 	// perform tasks on your behalf. During model compilation, Amazon SageMaker needs
 	// your permission to:
+	// - Read input data from an S3 bucket
+	// - Write model artifacts
+	// to an S3 bucket
+	// - Write logs to Amazon CloudWatch Logs
+	// - Publish metrics to
+	// Amazon CloudWatch
 	//
-	// * Read input data from an S3 bucket
-	//
-	// * Write model
-	// artifacts to an S3 bucket
-	//
-	// * Write logs to Amazon CloudWatch Logs
-	//
-	// * Publish
-	// metrics to Amazon CloudWatch
-	//
-	// You grant permissions for all of these tasks to an
-	// IAM role. To pass this role to Amazon SageMaker, the caller of this API must
-	// have the iam:PassRole permission. For more information, see Amazon SageMaker
-	// Roles. (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html)
+	// You grant permissions for all of these tasks to an IAM role.
+	// To pass this role to Amazon SageMaker, the caller of this API must have the
+	// iam:PassRole permission. For more information, see Amazon SageMaker Roles.
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html)
 	//
 	// This member is required.
 	RoleArn *string
@@ -125,8 +117,7 @@ type CreateCompilationJobOutput struct {
 
 	// If the action is successful, the service sends back an HTTP 200 response. Amazon
 	// SageMaker returns the following data in JSON format:
-	//
-	// * CompilationJobArn: The
+	// - CompilationJobArn: The
 	// Amazon Resource Name (ARN) of the compiled job.
 	//
 	// This member is required.

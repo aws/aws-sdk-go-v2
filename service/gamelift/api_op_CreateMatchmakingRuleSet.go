@@ -21,15 +21,12 @@ import (
 // ValidateMatchmakingRuleSet
 // (https://docs.aws.amazon.com/gamelift/latest/apireference/API_ValidateMatchmakingRuleSet.html)
 // before creating a new rule set. Learn more
-//
-// * Build a rule set
+// - Build a rule set
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-rulesets.html)
-//
-// *
+// -
 // Design a matchmaker
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-configuration.html)
-//
-// *
+// -
 // Matchmaking with FlexMatch
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-intro.html)
 func (c *Client) CreateMatchmakingRuleSet(ctx context.Context, params *CreateMatchmakingRuleSetInput, optFns ...func(*Options)) (*CreateMatchmakingRuleSetOutput, error) {

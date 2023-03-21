@@ -61,14 +61,10 @@ type CreateBotLocaleInput struct {
 	// three alternative intents with the following confidence scores: IntentA (0.70),
 	// IntentB (0.60), IntentC (0.50). The response from the RecognizeText operation
 	// would be:
-	//
-	// * AMAZON.FallbackIntent
-	//
-	// * IntentA
-	//
-	// * IntentB
-	//
-	// * IntentC
+	// - AMAZON.FallbackIntent
+	// - IntentA
+	// - IntentB
+	// - IntentC
 	//
 	// This member is required.
 	NluIntentConfidenceThreshold *float64

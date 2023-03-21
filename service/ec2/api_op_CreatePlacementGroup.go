@@ -52,11 +52,9 @@ type CreatePlacementGroupInput struct {
 	PartitionCount *int32
 
 	// Determines how placement groups spread instances.
-	//
-	// * Host – You can use host
-	// only with Outpost placement groups.
-	//
-	// * Rack – No usage restrictions.
+	// - Host – You can use host only
+	// with Outpost placement groups.
+	// - Rack – No usage restrictions.
 	SpreadLevel types.SpreadLevel
 
 	// The placement strategy.

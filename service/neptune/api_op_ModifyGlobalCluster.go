@@ -59,14 +59,11 @@ type ModifyGlobalClusterInput struct {
 
 	// A new cluster identifier to assign to the global database. This value is stored
 	// as a lowercase string. Constraints:
-	//
-	// * Must contain from 1 to 63 letters,
+	// - Must contain from 1 to 63 letters,
 	// numbers, or hyphens.
-	//
-	// * The first character must be a letter.
-	//
-	// * Can't end with
-	// a hyphen or contain two consecutive hyphens
+	// - The first character must be a letter.
+	// - Can't end with a
+	// hyphen or contain two consecutive hyphens
 	//
 	// Example: my-cluster2
 	NewGlobalClusterIdentifier *string

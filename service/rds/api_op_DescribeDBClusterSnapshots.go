@@ -46,35 +46,28 @@ type DescribeDBClusterSnapshotsInput struct {
 	// The ID of the DB cluster to retrieve the list of DB cluster snapshots for. This
 	// parameter can't be used in conjunction with the DBClusterSnapshotIdentifier
 	// parameter. This parameter isn't case-sensitive. Constraints:
-	//
-	// * If supplied,
-	// must match the identifier of an existing DBCluster.
+	// - If supplied, must
+	// match the identifier of an existing DBCluster.
 	DBClusterIdentifier *string
 
 	// A specific DB cluster snapshot identifier to describe. This parameter can't be
 	// used in conjunction with the DBClusterIdentifier parameter. This value is stored
 	// as a lowercase string. Constraints:
-	//
-	// * If supplied, must match the identifier of
+	// - If supplied, must match the identifier of
 	// an existing DBClusterSnapshot.
-	//
-	// * If this identifier is for an automated
+	// - If this identifier is for an automated
 	// snapshot, the SnapshotType parameter must also be specified.
 	DBClusterSnapshotIdentifier *string
 
 	// A filter that specifies one or more DB cluster snapshots to describe. Supported
 	// filters:
-	//
-	// * db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon
+	// - db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon
 	// Resource Names (ARNs).
-	//
-	// * db-cluster-snapshot-id - Accepts DB cluster snapshot
+	// - db-cluster-snapshot-id - Accepts DB cluster snapshot
 	// identifiers.
-	//
-	// * snapshot-type - Accepts types of DB cluster snapshots.
-	//
-	// * engine
-	// - Accepts names of database engines.
+	// - snapshot-type - Accepts types of DB cluster snapshots.
+	// - engine -
+	// Accepts names of database engines.
 	Filters []types.Filter
 
 	// A value that indicates whether to include manual DB cluster snapshots that are
@@ -105,22 +98,18 @@ type DescribeDBClusterSnapshotsInput struct {
 
 	// The type of DB cluster snapshots to be returned. You can specify one of the
 	// following values:
-	//
-	// * automated - Return all DB cluster snapshots that have been
+	// - automated - Return all DB cluster snapshots that have been
 	// automatically taken by Amazon RDS for my Amazon Web Services account.
-	//
-	// * manual
-	// - Return all DB cluster snapshots that have been taken by my Amazon Web Services
+	// - manual -
+	// Return all DB cluster snapshots that have been taken by my Amazon Web Services
 	// account.
+	// - shared - Return all manual DB cluster snapshots that have been shared
+	// to my Amazon Web Services account.
+	// - public - Return all DB cluster snapshots
+	// that have been marked as public.
 	//
-	// * shared - Return all manual DB cluster snapshots that have been
-	// shared to my Amazon Web Services account.
-	//
-	// * public - Return all DB cluster
-	// snapshots that have been marked as public.
-	//
-	// If you don't specify a SnapshotType
-	// value, then both automated and manual DB cluster snapshots are returned. You can
+	// If you don't specify a SnapshotType value,
+	// then both automated and manual DB cluster snapshots are returned. You can
 	// include shared DB cluster snapshots with these results by enabling the
 	// IncludeShared parameter. You can include public DB cluster snapshots with these
 	// results by enabling the IncludePublic parameter. The IncludeShared and

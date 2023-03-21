@@ -17,13 +17,10 @@ import (
 // to enforce document access control in the search results. Amazon Kendra searches
 // your index for text content and question and answer (FAQ) content. By default
 // the response contains three types of results.
-//
-// * Relevant passages
-//
-// * Matching
+// - Relevant passages
+// - Matching
 // FAQs
-//
-// * Relevant documents
+// - Relevant documents
 //
 // You can specify that the query return only one type
 // of result using the QueryResultTypeFilter parameter. Each query returns the 100

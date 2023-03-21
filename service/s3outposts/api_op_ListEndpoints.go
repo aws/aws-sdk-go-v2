@@ -14,11 +14,9 @@ import (
 
 // Lists endpoints associated with the specified Outpost. Related actions
 // include:
-//
-// * CreateEndpoint
+// - CreateEndpoint
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_CreateEndpoint.html)
-//
-// *
+// -
 // DeleteEndpoint
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_DeleteEndpoint.html)
 func (c *Client) ListEndpoints(ctx context.Context, params *ListEndpointsInput, optFns ...func(*Options)) (*ListEndpointsOutput, error) {

@@ -30,28 +30,21 @@ func (c *Client) AddSourceIdentifierToSubscription(ctx context.Context, params *
 type AddSourceIdentifierToSubscriptionInput struct {
 
 	// The identifier of the event source to be added. Constraints:
-	//
-	// * If the source
+	// - If the source
 	// type is a DB instance, a DBInstanceIdentifier value must be supplied.
-	//
-	// * If the
+	// - If the
 	// source type is a DB cluster, a DBClusterIdentifier value must be supplied.
-	//
-	// * If
+	// - If
 	// the source type is a DB parameter group, a DBParameterGroupName value must be
 	// supplied.
-	//
-	// * If the source type is a DB security group, a DBSecurityGroupName
+	// - If the source type is a DB security group, a DBSecurityGroupName
 	// value must be supplied.
-	//
-	// * If the source type is a DB snapshot, a
+	// - If the source type is a DB snapshot, a
 	// DBSnapshotIdentifier value must be supplied.
-	//
-	// * If the source type is a DB
+	// - If the source type is a DB
 	// cluster snapshot, a DBClusterSnapshotIdentifier value must be supplied.
-	//
-	// * If
-	// the source type is an RDS Proxy, a DBProxyName value must be supplied.
+	// - If the
+	// source type is an RDS Proxy, a DBProxyName value must be supplied.
 	//
 	// This member is required.
 	SourceIdentifier *string

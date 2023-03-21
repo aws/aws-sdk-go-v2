@@ -47,18 +47,14 @@ type CreateKeySigningKeyInput struct {
 	// configure the customer managed customer managed key as follows: Status Enabled
 	// Key spec ECC_NIST_P256 Key usage Sign and verify Key policy The key policy must
 	// give permission for the following actions:
-	//
-	// * DescribeKey
-	//
-	// * GetPublicKey
-	//
-	// *
+	// - DescribeKey
+	// - GetPublicKey
+	// -
 	// Sign
 	//
 	// The key policy must also include the Amazon Route 53 service in the
 	// principal for your account. Specify the following:
-	//
-	// * "Service":
+	// - "Service":
 	// "dnssec-route53.amazonaws.com"
 	//
 	// For more information about working with a

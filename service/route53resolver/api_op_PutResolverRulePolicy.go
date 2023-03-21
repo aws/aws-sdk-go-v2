@@ -40,18 +40,13 @@ type PutResolverRulePolicyInput struct {
 	// want to share with another Amazon Web Services account and the operations that
 	// you want the account to be able to perform. You can specify the following
 	// operations in the Action section of the statement:
-	//
-	// *
+	// -
 	// route53resolver:GetResolverRule
-	//
-	// * route53resolver:AssociateResolverRule
-	//
-	// *
+	// - route53resolver:AssociateResolverRule
+	// -
 	// route53resolver:DisassociateResolverRule
-	//
-	// * route53resolver:ListResolverRules
-	//
-	// *
+	// - route53resolver:ListResolverRules
+	// -
 	// route53resolver:ListResolverRuleAssociations
 	//
 	// In the Resource section of the

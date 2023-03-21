@@ -726,8 +726,7 @@ type InputTransformer struct {
 	// values of the keys from InputPathsMap to customize the data sent to the target.
 	// Enclose each InputPathsMaps value in brackets: <value> If InputTemplate is a
 	// JSON object (surrounded by curly braces), the following restrictions apply:
-	//
-	// *
+	// -
 	// The placeholder cannot be used as an object key.
 	//
 	// The following example shows

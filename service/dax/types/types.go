@@ -23,8 +23,7 @@ type Cluster struct {
 	ClusterDiscoveryEndpoint *Endpoint
 
 	// The type of encryption supported by the cluster's endpoint. Values are:
-	//
-	// * NONE
+	// - NONE
 	// for no encryption TLS for Transport Layer Security
 	ClusterEndpointEncryptionType ClusterEndpointEncryptionType
 
@@ -272,17 +271,13 @@ type SecurityGroupMembership struct {
 type SSEDescription struct {
 
 	// The current state of server-side encryption:
-	//
-	// * ENABLING - Server-side
-	// encryption is being enabled.
-	//
-	// * ENABLED - Server-side encryption is enabled.
-	//
-	// *
-	// DISABLING - Server-side encryption is being disabled.
-	//
-	// * DISABLED - Server-side
-	// encryption is disabled.
+	// - ENABLING - Server-side encryption
+	// is being enabled.
+	// - ENABLED - Server-side encryption is enabled.
+	// - DISABLING -
+	// Server-side encryption is being disabled.
+	// - DISABLED - Server-side encryption is
+	// disabled.
 	Status SSEStatus
 
 	noSmithyDocumentSerde
@@ -314,10 +309,8 @@ type Subnet struct {
 }
 
 // Represents the output of one of the following actions:
-//
-// * CreateSubnetGroup
-//
-// *
+// - CreateSubnetGroup
+// -
 // ModifySubnetGroup
 type SubnetGroup struct {
 

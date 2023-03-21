@@ -13,8 +13,7 @@ import (
 
 // Returns information about a specified resource group. Minimum permissions To run
 // this command, you must have the following permissions:
-//
-// *
+// -
 // resource-groups:GetGroup
 func (c *Client) GetGroup(ctx context.Context, params *GetGroupInput, optFns ...func(*Options)) (*GetGroupOutput, error) {
 	if params == nil {

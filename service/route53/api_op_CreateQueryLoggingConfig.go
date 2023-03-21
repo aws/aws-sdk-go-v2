@@ -16,59 +16,49 @@ import (
 // CloudWatch Logs log group. DNS query logs contain information about the queries
 // that Route 53 receives for a specified public hosted zone, such as the
 // following:
+// - Route 53 edge location that responded to the DNS query
+// - Domain or
+// subdomain that was requested
+// - DNS record type, such as A or AAAA
+// - DNS response
+// code, such as NoError or ServFail
 //
-// * Route 53 edge location that responded to the DNS query
-//
-// * Domain
-// or subdomain that was requested
-//
-// * DNS record type, such as A or AAAA
-//
-// * DNS
-// response code, such as NoError or ServFail
-//
-// Log Group and Resource Policy Before
-// you create a query logging configuration, perform the following operations. If
-// you create a query logging configuration using the Route 53 console, Route 53
+// Log Group and Resource Policy Before you
+// create a query logging configuration, perform the following operations. If you
+// create a query logging configuration using the Route 53 console, Route 53
 // performs these operations automatically.
-//
-// * Create a CloudWatch Logs log group,
+// - Create a CloudWatch Logs log group,
 // and make note of the ARN, which you specify when you create a query logging
 // configuration. Note the following:
-//
-// * You must create the log group in the
+// - You must create the log group in the
 // us-east-1 region.
-//
-// * You must use the same Amazon Web Services account to create
+// - You must use the same Amazon Web Services account to create
 // the log group and the hosted zone that you want to configure query logging
 // for.
+// - When you create log groups for query logging, we recommend that you use a
+// consistent prefix, for example: /aws/route53/hosted zone name  In the next step,
+// you'll create a resource policy, which controls access to one or more log groups
+// and the associated Amazon Web Services resources, such as Route 53 hosted zones.
+// There's a limit on the number of resource policies that you can create, so we
+// recommend that you use a consistent prefix so you can use the same resource
+// policy for all the log groups that you create for query logging.
 //
-// * When you create log groups for query logging, we recommend that you use
-// a consistent prefix, for example: /aws/route53/hosted zone name  In the next
-// step, you'll create a resource policy, which controls access to one or more log
-// groups and the associated Amazon Web Services resources, such as Route 53 hosted
-// zones. There's a limit on the number of resource policies that you can create,
-// so we recommend that you use a consistent prefix so you can use the same
-// resource policy for all the log groups that you create for query logging.
-//
-// *
-// Create a CloudWatch Logs resource policy, and give it the permissions that Route
-// 53 needs to create log streams and to send query logs to log streams. For the
-// value of Resource, specify the ARN for the log group that you created in the
-// previous step. To use the same resource policy for all the CloudWatch Logs log
-// groups that you created for query logging configurations, replace the hosted
-// zone name with *, for example:
+// - Create a
+// CloudWatch Logs resource policy, and give it the permissions that Route 53 needs
+// to create log streams and to send query logs to log streams. For the value of
+// Resource, specify the ARN for the log group that you created in the previous
+// step. To use the same resource policy for all the CloudWatch Logs log groups
+// that you created for query logging configurations, replace the hosted zone name
+// with *, for example:
 // arn:aws:logs:us-east-1:123412341234:log-group:/aws/route53/* To avoid the
 // confused deputy problem, a security issue where an entity without a permission
 // for an action can coerce a more-privileged entity to perform it, you can
 // optionally limit the permissions that a service has to a resource in a
 // resource-based policy by supplying the following values:
-//
-// * For aws:SourceArn,
+// - For aws:SourceArn,
 // supply the hosted zone ARN used in creating the query logging configuration. For
 // example, aws:SourceArn: arn:aws:route53:::hostedzone/hosted zone ID.
-//
-// * For
+// - For
 // aws:SourceAccount, supply the account ID for the account that creates the query
 // logging configuration. For example, aws:SourceAccount:111111111111.
 //
@@ -82,17 +72,15 @@ import (
 // Log Streams and Edge Locations When Route
 // 53 finishes creating the configuration for DNS query logging, it does the
 // following:
-//
-// * Creates a log stream for an edge location the first time that the
+// - Creates a log stream for an edge location the first time that the
 // edge location responds to DNS queries for the specified hosted zone. That log
 // stream is used to log all queries that Route 53 responds to for that edge
 // location.
+// - Begins to send query logs to the applicable log stream.
 //
-// * Begins to send query logs to the applicable log stream.
-//
-// The name
-// of each log stream is in the following format:  hosted zone ID/edge location
-// code  The edge location code is a three-letter code and an arbitrarily assigned
+// The name of
+// each log stream is in the following format:  hosted zone ID/edge location code
+// The edge location code is a three-letter code and an arbitrarily assigned
 // number, for example, DFW3. The three-letter code typically corresponds with the
 // International Air Transport Association airport code for an airport near the
 // edge location. (These abbreviations might change in the future.) For a list of

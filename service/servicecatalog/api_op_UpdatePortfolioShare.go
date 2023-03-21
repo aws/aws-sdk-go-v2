@@ -54,12 +54,9 @@ type UpdatePortfolioShareInput struct {
 	PortfolioId *string
 
 	// The language code.
-	//
-	// * en - English (default)
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	// - en - English (default)
+	// - jp - Japanese
+	// - zh - Chinese
 	AcceptLanguage *string
 
 	// The Amazon Web Services account Id of the recipient account. This field is

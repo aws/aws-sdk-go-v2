@@ -60,17 +60,12 @@ type UpdateResponsePlanInput struct {
 
 	// Defines the impact to the customers. Providing an impact overwrites the impact
 	// provided by a response plan. Possible impacts:
-	//
-	// * 5 - Severe impact
-	//
-	// * 4 - High
+	// - 5 - Severe impact
+	// - 4 - High
 	// impact
-	//
-	// * 3 - Medium impact
-	//
-	// * 2 - Low impact
-	//
-	// * 1 - No impact
+	// - 3 - Medium impact
+	// - 2 - Low impact
+	// - 1 - No impact
 	IncidentTemplateImpact *int32
 
 	// The Amazon SNS targets that are notified when updates are made to an incident.

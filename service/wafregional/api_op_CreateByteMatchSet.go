@@ -23,18 +23,14 @@ import (
 // ByteMatchSet that matches any requests with User-Agent headers that contain the
 // string BadBot. You can then configure AWS WAF to reject those requests. To
 // create and configure a ByteMatchSet, perform the following steps:
-//
-// * Use
+// - Use
 // GetChangeToken to get the change token that you provide in the ChangeToken
 // parameter of a CreateByteMatchSet request.
-//
-// * Submit a CreateByteMatchSet
+// - Submit a CreateByteMatchSet
 // request.
-//
-// * Use GetChangeToken to get the change token that you provide in the
+// - Use GetChangeToken to get the change token that you provide in the
 // ChangeToken parameter of an UpdateByteMatchSet request.
-//
-// * Submit an
+// - Submit an
 // UpdateByteMatchSet request to specify the part of the request that you want AWS
 // WAF to inspect (for example, the header or the URI) and the value that you want
 // AWS WAF to watch for.

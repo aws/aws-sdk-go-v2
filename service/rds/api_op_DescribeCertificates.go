@@ -40,8 +40,7 @@ type DescribeCertificatesInput struct {
 	// The user-supplied certificate identifier. If this parameter is specified,
 	// information for only the identified certificate is returned. This parameter
 	// isn't case-sensitive. Constraints:
-	//
-	// * Must match an existing
+	// - Must match an existing
 	// CertificateIdentifier.
 	CertificateIdentifier *string
 

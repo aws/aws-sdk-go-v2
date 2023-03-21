@@ -153,13 +153,10 @@ type DirectoryConnectSettings struct {
 
 	// The user name of an account in your self-managed directory that is used to
 	// connect to the directory. This account must have the following permissions:
-	//
-	// *
+	// -
 	// Read users and groups
-	//
-	// * Create computer objects
-	//
-	// * Join computers to the domain
+	// - Create computer objects
+	// - Join computers to the domain
 	//
 	// This member is required.
 	CustomerUserName *string

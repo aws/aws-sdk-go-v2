@@ -254,28 +254,21 @@ type SqlParameter struct {
 
 	// A hint that specifies the correct object type for data type mapping. Possible
 	// values are as follows:
-	//
-	// * DATE - The corresponding String parameter value is
-	// sent as an object of DATE type to the database. The accepted format is
-	// YYYY-MM-DD.
-	//
-	// * DECIMAL - The corresponding String parameter value is sent as an
-	// object of DECIMAL type to the database.
-	//
-	// * JSON - The corresponding String
-	// parameter value is sent as an object of JSON type to the database.
-	//
-	// * TIME - The
-	// corresponding String parameter value is sent as an object of TIME type to the
-	// database. The accepted format is HH:MM:SS[.FFF].
-	//
-	// * TIMESTAMP - The
-	// corresponding String parameter value is sent as an object of TIMESTAMP type to
-	// the database. The accepted format is YYYY-MM-DD HH:MM:SS[.FFF].
-	//
-	// * UUID - The
-	// corresponding String parameter value is sent as an object of UUID type to the
-	// database.
+	// - DATE - The corresponding String parameter value is sent
+	// as an object of DATE type to the database. The accepted format is YYYY-MM-DD.
+	// -
+	// DECIMAL - The corresponding String parameter value is sent as an object of
+	// DECIMAL type to the database.
+	// - JSON - The corresponding String parameter value
+	// is sent as an object of JSON type to the database.
+	// - TIME - The corresponding
+	// String parameter value is sent as an object of TIME type to the database. The
+	// accepted format is HH:MM:SS[.FFF].
+	// - TIMESTAMP - The corresponding String
+	// parameter value is sent as an object of TIMESTAMP type to the database. The
+	// accepted format is YYYY-MM-DD HH:MM:SS[.FFF].
+	// - UUID - The corresponding String
+	// parameter value is sent as an object of UUID type to the database.
 	TypeHint TypeHint
 
 	// The value of the parameter.

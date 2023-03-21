@@ -41,14 +41,11 @@ type PutKeywordInput struct {
 	Keyword *string
 
 	// The message associated with the keyword.
-	//
-	// * AUTOMATIC_RESPONSE: A message is
-	// sent to the recipient.
-	//
-	// * OPT_OUT: Keeps the recipient from receiving future
+	// - AUTOMATIC_RESPONSE: A message is sent
+	// to the recipient.
+	// - OPT_OUT: Keeps the recipient from receiving future
 	// messages.
-	//
-	// * OPT_IN: The recipient wants to receive future messages.
+	// - OPT_IN: The recipient wants to receive future messages.
 	//
 	// This member is required.
 	KeywordMessage *string

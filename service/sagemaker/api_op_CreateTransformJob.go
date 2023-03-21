@@ -16,26 +16,21 @@ import (
 // To perform batch transformations, you create a transform job and use the data
 // that you have readily available. In the request body, you provide the
 // following:
-//
-// * TransformJobName - Identifies the transform job. The name must be
-// unique within an Amazon Web Services Region in an Amazon Web Services
-// account.
-//
-// * ModelName - Identifies the model to use. ModelName must be the name
-// of an existing Amazon SageMaker model in the same Amazon Web Services Region and
+// - TransformJobName - Identifies the transform job. The name must be
+// unique within an Amazon Web Services Region in an Amazon Web Services account.
+// -
+// ModelName - Identifies the model to use. ModelName must be the name of an
+// existing Amazon SageMaker model in the same Amazon Web Services Region and
 // Amazon Web Services account. For information on creating a model, see
 // CreateModel
 // (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateModel.html).
-//
-// *
+// -
 // TransformInput - Describes the dataset to be transformed and the Amazon S3
 // location where it is stored.
-//
-// * TransformOutput - Identifies the Amazon S3
+// - TransformOutput - Identifies the Amazon S3
 // location where you want Amazon SageMaker to save the results from the transform
 // job.
-//
-// * TransformResources - Identifies the ML compute instances for the
+// - TransformResources - Identifies the ML compute instances for the
 // transform job.
 //
 // For more information about how batch transformation works, see
@@ -116,13 +111,10 @@ type CreateTransformJobInput struct {
 
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:
-	//
-	// * CreateProcessingJob
-	//
-	// *
+	// - CreateProcessingJob
+	// -
 	// CreateTrainingJob
-	//
-	// * CreateTransformJob
+	// - CreateTransformJob
 	ExperimentConfig *types.ExperimentConfig
 
 	// The maximum number of parallel requests that can be sent to each instance in a

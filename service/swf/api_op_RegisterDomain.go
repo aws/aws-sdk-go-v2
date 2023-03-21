@@ -13,15 +13,12 @@ import (
 
 // Registers a new domain. Access Control You can use IAM policies to control this
 // action's access to Amazon SWF resources as follows:
-//
-// * You cannot use an IAM
+// - You cannot use an IAM
 // policy to control domain access for this action. The name of the domain being
 // registered is available as the resource of this action.
-//
-// * Use an Action element
+// - Use an Action element
 // to allow or deny permission to call this action.
-//
-// * You cannot use an IAM policy
+// - You cannot use an IAM policy
 // to constrain this action's parameters.
 //
 // If the caller doesn't have sufficient

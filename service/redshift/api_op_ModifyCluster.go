@@ -76,13 +76,10 @@ type ModifyClusterInput struct {
 	// is asynchronously applied as soon as possible. Security groups currently
 	// associated with the cluster, and not in the list of groups to apply, will be
 	// revoked from the cluster. Constraints:
-	//
-	// * Must be 1 to 255 alphanumeric
+	// - Must be 1 to 255 alphanumeric
 	// characters or hyphens
-	//
-	// * First character must be a letter
-	//
-	// * Cannot end with a
+	// - First character must be a letter
+	// - Cannot end with a
 	// hyphen or contain two consecutive hyphens
 	ClusterSecurityGroups []string
 
@@ -160,36 +157,26 @@ type ModifyClusterInput struct {
 	// the password, so this operation provides a way to regain access to the admin
 	// user for a cluster if the password is lost. Default: Uses existing setting.
 	// Constraints:
-	//
-	// * Must be between 8 and 64 characters in length.
-	//
-	// * Must contain
-	// at least one uppercase letter.
-	//
-	// * Must contain at least one lowercase letter.
-	//
-	// *
-	// Must contain one number.
-	//
-	// * Can be any printable ASCII character (ASCII code
-	// 33-126) except ' (single quote), " (double quote), \, /, or @.
+	// - Must be between 8 and 64 characters in length.
+	// - Must contain at
+	// least one uppercase letter.
+	// - Must contain at least one lowercase letter.
+	// - Must
+	// contain one number.
+	// - Can be any printable ASCII character (ASCII code 33-126)
+	// except ' (single quote), " (double quote), \, /, or @.
 	MasterUserPassword *string
 
 	// The new identifier for the cluster. Constraints:
-	//
-	// * Must contain from 1 to 63
+	// - Must contain from 1 to 63
 	// alphanumeric characters or hyphens.
-	//
-	// * Alphabetic characters must be
-	// lowercase.
-	//
-	// * First character must be a letter.
-	//
-	// * Cannot end with a hyphen or
-	// contain two consecutive hyphens.
-	//
-	// * Must be unique for all clusters within an
-	// Amazon Web Services account.
+	// - Alphabetic characters must be lowercase.
+	// -
+	// First character must be a letter.
+	// - Cannot end with a hyphen or contain two
+	// consecutive hyphens.
+	// - Must be unique for all clusters within an Amazon Web
+	// Services account.
 	//
 	// Example: examplecluster
 	NewClusterIdentifier *string

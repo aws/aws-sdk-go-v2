@@ -30,15 +30,12 @@ import (
 // lifecycle configuration is specified as XML consisting of one or more rules. An
 // Amazon S3 Lifecycle configuration can have up to 1,000 rules. This limit is not
 // adjustable. Each rule consists of the following:
-//
-// * Filter identifying a subset
+// - Filter identifying a subset
 // of objects to which the rule applies. The filter can be based on a key name
 // prefix, object tags, or a combination of both.
-//
-// * Status whether the rule is in
+// - Status whether the rule is in
 // effect.
-//
-// * One or more lifecycle transition and expiration actions that you want
+// - One or more lifecycle transition and expiration actions that you want
 // Amazon S3 to perform on the objects identified by the filter. If the state of
 // your bucket is versioning-enabled or versioning-suspended, you can have many
 // versions of the same object (one current version and zero or more noncurrent
@@ -60,28 +57,22 @@ import (
 // other permissions. If you want to block users or accounts from removing or
 // deleting objects from your bucket, you must deny them permissions for the
 // following actions:
-//
-// * s3:DeleteObject
-//
-// * s3:DeleteObjectVersion
-//
-// *
+// - s3:DeleteObject
+// - s3:DeleteObjectVersion
+// -
 // s3:PutLifecycleConfiguration
 //
 // For more information about permissions, see
 // Managing Access Permissions to Your Amazon S3 Resources
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
 // The following are related to PutBucketLifecycleConfiguration:
-//
-// * Examples of
+// - Examples of
 // Lifecycle Configuration
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/lifecycle-configuration-examples.html)
-//
-// *
+// -
 // GetBucketLifecycleConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycleConfiguration.html)
-//
-// *
+// -
 // DeleteBucketLifecycle
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketLifecycle.html)
 func (c *Client) PutBucketLifecycleConfiguration(ctx context.Context, params *PutBucketLifecycleConfigurationInput, optFns ...func(*Options)) (*PutBucketLifecycleConfigurationOutput, error) {

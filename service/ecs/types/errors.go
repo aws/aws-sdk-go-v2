@@ -554,13 +554,10 @@ func (e *ServiceNotFoundException) ErrorFault() smithy.ErrorFault { return smith
 
 // The execute command cannot run. This error can be caused by any of the following
 // configuration issues:
-//
-// * Incorrect IAM permissions
-//
-// * The SSM agent is not
+// - Incorrect IAM permissions
+// - The SSM agent is not
 // installed or is not running
-//
-// * There is an interface Amazon VPC endpoint for
+// - There is an interface Amazon VPC endpoint for
 // Amazon ECS, but there is not one for for Systems Manager Session Manager
 //
 // For

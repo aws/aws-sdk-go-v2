@@ -40,14 +40,11 @@ type PutRecordInput struct {
 
 	// List of FeatureValues to be inserted. This will be a full over-write. If you
 	// only want to update few of the feature values, do the following:
-	//
-	// * Use
-	// GetRecord to retrieve the latest record.
-	//
-	// * Update the record returned from
-	// GetRecord.
-	//
-	// * Use PutRecord to update feature values.
+	// - Use GetRecord
+	// to retrieve the latest record.
+	// - Update the record returned from GetRecord.
+	// -
+	// Use PutRecord to update feature values.
 	//
 	// This member is required.
 	Record []types.FeatureValue

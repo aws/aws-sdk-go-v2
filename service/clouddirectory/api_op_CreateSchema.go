@@ -12,15 +12,12 @@ import (
 
 // Creates a new schema in a development state. A schema can exist in three
 // phases:
-//
-// * Development: This is a mutable phase of the schema. All new schemas
+// - Development: This is a mutable phase of the schema. All new schemas
 // are in the development phase. Once the schema is finalized, it can be
 // published.
-//
-// * Published: Published schemas are immutable and have a version
+// - Published: Published schemas are immutable and have a version
 // associated with them.
-//
-// * Applied: Applied schemas are mutable in a way that
+// - Applied: Applied schemas are mutable in a way that
 // allows you to add new schema facets. You can also add new, nonrequired
 // attributes to existing schema facets. You can apply only published schemas to
 // directories.

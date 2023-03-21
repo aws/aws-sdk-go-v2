@@ -56,21 +56,18 @@ type DescribeStackDriftDetectionStatusInput struct {
 type DescribeStackDriftDetectionStatusOutput struct {
 
 	// The status of the stack drift detection operation.
-	//
-	// * DETECTION_COMPLETE: The
+	// - DETECTION_COMPLETE: The
 	// stack drift detection operation has successfully completed for all resources in
 	// the stack that support drift detection. (Resources that don't currently support
 	// stack detection remain unchecked.) If you specified logical resource IDs for
 	// CloudFormation to use as a filter for the stack drift detection operation, only
 	// the resources with those logical IDs are checked for drift.
-	//
-	// * DETECTION_FAILED:
+	// - DETECTION_FAILED:
 	// The stack drift detection operation has failed for at least one resource in the
 	// stack. Results will be available for resources on which CloudFormation
 	// successfully completed drift detection.
-	//
-	// * DETECTION_IN_PROGRESS: The stack
-	// drift detection operation is currently in progress.
+	// - DETECTION_IN_PROGRESS: The stack drift
+	// detection operation is currently in progress.
 	//
 	// This member is required.
 	DetectionStatus types.StackDriftDetectionStatus
@@ -103,18 +100,14 @@ type DescribeStackDriftDetectionStatusOutput struct {
 
 	// Status of the stack's actual configuration compared to its expected
 	// configuration.
-	//
-	// * DRIFTED: The stack differs from its expected template
+	// - DRIFTED: The stack differs from its expected template
 	// configuration. A stack is considered to have drifted if one or more of its
 	// resources have drifted.
-	//
-	// * NOT_CHECKED: CloudFormation hasn't checked if the
+	// - NOT_CHECKED: CloudFormation hasn't checked if the
 	// stack differs from its expected template configuration.
-	//
-	// * IN_SYNC: The stack's
+	// - IN_SYNC: The stack's
 	// actual configuration matches its expected template configuration.
-	//
-	// * UNKNOWN:
+	// - UNKNOWN:
 	// This value is reserved for future use.
 	StackDriftStatus types.StackDriftStatus
 

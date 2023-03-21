@@ -18,12 +18,10 @@ import (
 // (https://docs.aws.amazon.com/personalize/latest/dg/export-data.html) in the
 // Amazon Personalize developer guide. Status A dataset export job can be in one of
 // the following states:
+// - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
+// FAILED
 //
-// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or-
-// CREATE FAILED
-//
-// To get the status of the export job, call
-// DescribeDatasetExportJob
+// To get the status of the export job, call DescribeDatasetExportJob
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetExportJob.html),
 // and specify the Amazon Resource Name (ARN) of the dataset export job. The
 // dataset export is complete when the status shows as ACTIVE. If the status shows

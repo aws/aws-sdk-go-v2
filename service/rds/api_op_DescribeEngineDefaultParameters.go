@@ -32,113 +32,64 @@ func (c *Client) DescribeEngineDefaultParameters(ctx context.Context, params *De
 type DescribeEngineDefaultParametersInput struct {
 
 	// The name of the DB parameter group family. Valid Values:
-	//
-	// * aurora5.6
-	//
-	// *
+	// - aurora5.6
+	// -
 	// aurora-mysql5.7
-	//
-	// * aurora-mysql8.0
-	//
-	// * aurora-postgresql10
-	//
-	// *
-	// aurora-postgresql11
-	//
-	// * aurora-postgresql12
-	//
-	// * aurora-postgresql13
-	//
-	// *
-	// aurora-postgresql14
-	//
-	// * custom-oracle-ee-19
-	//
-	// * mariadb10.2
-	//
-	// * mariadb10.3
-	//
-	// *
-	// mariadb10.4
-	//
-	// * mariadb10.5
-	//
-	// * mariadb10.6
-	//
-	// * mysql5.7
-	//
-	// * mysql8.0
-	//
-	// *
-	// oracle-ee-19
-	//
-	// * oracle-ee-cdb-19
-	//
-	// * oracle-ee-cdb-21
-	//
-	// * oracle-se2-19
-	//
-	// *
-	// oracle-se2-cdb-19
-	//
-	// * oracle-se2-cdb-21
-	//
-	// * postgres10
-	//
-	// * postgres11
-	//
-	// *
-	// postgres12
-	//
-	// * postgres13
-	//
-	// * postgres14
-	//
-	// * sqlserver-ee-11.0
-	//
-	// *
-	// sqlserver-ee-12.0
-	//
-	// * sqlserver-ee-13.0
-	//
-	// * sqlserver-ee-14.0
-	//
-	// *
+	// - aurora-mysql8.0
+	// - aurora-postgresql10
+	// - aurora-postgresql11
+	// -
+	// aurora-postgresql12
+	// - aurora-postgresql13
+	// - aurora-postgresql14
+	// -
+	// custom-oracle-ee-19
+	// - mariadb10.2
+	// - mariadb10.3
+	// - mariadb10.4
+	// - mariadb10.5
+	// -
+	// mariadb10.6
+	// - mysql5.7
+	// - mysql8.0
+	// - oracle-ee-19
+	// - oracle-ee-cdb-19
+	// -
+	// oracle-ee-cdb-21
+	// - oracle-se2-19
+	// - oracle-se2-cdb-19
+	// - oracle-se2-cdb-21
+	// -
+	// postgres10
+	// - postgres11
+	// - postgres12
+	// - postgres13
+	// - postgres14
+	// -
+	// sqlserver-ee-11.0
+	// - sqlserver-ee-12.0
+	// - sqlserver-ee-13.0
+	// - sqlserver-ee-14.0
+	// -
 	// sqlserver-ee-15.0
-	//
-	// * sqlserver-ex-11.0
-	//
-	// * sqlserver-ex-12.0
-	//
-	// *
-	// sqlserver-ex-13.0
-	//
-	// * sqlserver-ex-14.0
-	//
-	// * sqlserver-ex-15.0
-	//
-	// *
-	// sqlserver-se-11.0
-	//
-	// * sqlserver-se-12.0
-	//
-	// * sqlserver-se-13.0
-	//
-	// *
-	// sqlserver-se-14.0
-	//
-	// * sqlserver-se-15.0
-	//
-	// * sqlserver-web-11.0
-	//
-	// *
+	// - sqlserver-ex-11.0
+	// - sqlserver-ex-12.0
+	// - sqlserver-ex-13.0
+	// -
+	// sqlserver-ex-14.0
+	// - sqlserver-ex-15.0
+	// - sqlserver-se-11.0
+	// - sqlserver-se-12.0
+	// -
+	// sqlserver-se-13.0
+	// - sqlserver-se-14.0
+	// - sqlserver-se-15.0
+	// - sqlserver-web-11.0
+	// -
 	// sqlserver-web-12.0
-	//
-	// * sqlserver-web-13.0
-	//
-	// * sqlserver-web-14.0
-	//
-	// *
+	// - sqlserver-web-13.0
+	// - sqlserver-web-14.0
+	// -
 	// sqlserver-web-15.0
 	//
 	// This member is required.

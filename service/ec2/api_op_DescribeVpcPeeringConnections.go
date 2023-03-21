@@ -43,48 +43,35 @@ type DescribeVpcPeeringConnectionsInput struct {
 	DryRun *bool
 
 	// One or more filters.
-	//
-	// * accepter-vpc-info.cidr-block - The IPv4 CIDR block of
-	// the accepter VPC.
-	//
-	// * accepter-vpc-info.owner-id - The ID of the Amazon Web
-	// Services account that owns the accepter VPC.
-	//
-	// * accepter-vpc-info.vpc-id - The
-	// ID of the accepter VPC.
-	//
-	// * expiration-time - The expiration date and time for
-	// the VPC peering connection.
-	//
-	// * requester-vpc-info.cidr-block - The IPv4 CIDR
-	// block of the requester's VPC.
-	//
-	// * requester-vpc-info.owner-id - The ID of the
-	// Amazon Web Services account that owns the requester VPC.
-	//
-	// *
-	// requester-vpc-info.vpc-id - The ID of the requester VPC.
-	//
-	// * status-code - The
-	// status of the VPC peering connection (pending-acceptance | failed | expired |
-	// provisioning | active | deleting | deleted | rejected).
-	//
-	// * status-message - A
-	// message that provides more information about the status of the VPC peering
-	// connection, if applicable.
-	//
-	// * tag: - The key/value combination of a tag assigned
-	// to the resource. Use the tag key in the filter name and the tag value as the
-	// filter value. For example, to find all resources that have a tag with the key
-	// Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for
-	// the filter value.
-	//
-	// * tag-key - The key of a tag assigned to the resource. Use
-	// this filter to find all resources assigned a tag with a specific key, regardless
-	// of the tag value.
-	//
-	// * vpc-peering-connection-id - The ID of the VPC peering
-	// connection.
+	// - accepter-vpc-info.cidr-block - The IPv4 CIDR block of the
+	// accepter VPC.
+	// - accepter-vpc-info.owner-id - The ID of the Amazon Web Services
+	// account that owns the accepter VPC.
+	// - accepter-vpc-info.vpc-id - The ID of the
+	// accepter VPC.
+	// - expiration-time - The expiration date and time for the VPC
+	// peering connection.
+	// - requester-vpc-info.cidr-block - The IPv4 CIDR block of the
+	// requester's VPC.
+	// - requester-vpc-info.owner-id - The ID of the Amazon Web
+	// Services account that owns the requester VPC.
+	// - requester-vpc-info.vpc-id - The
+	// ID of the requester VPC.
+	// - status-code - The status of the VPC peering
+	// connection (pending-acceptance | failed | expired | provisioning | active |
+	// deleting | deleted | rejected).
+	// - status-message - A message that provides more
+	// information about the status of the VPC peering connection, if applicable.
+	// -
+	// tag: - The key/value combination of a tag assigned to the resource. Use the tag
+	// key in the filter name and the tag value as the filter value. For example, to
+	// find all resources that have a tag with the key Owner and the value TeamA,
+	// specify tag:Owner for the filter name and TeamA for the filter value.
+	// - tag-key
+	// - The key of a tag assigned to the resource. Use this filter to find all
+	// resources assigned a tag with a specific key, regardless of the tag value.
+	// -
+	// vpc-peering-connection-id - The ID of the VPC peering connection.
 	Filters []types.Filter
 
 	// The maximum number of items to return for this request. To get the next page of

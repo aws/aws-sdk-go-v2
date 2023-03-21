@@ -32,16 +32,13 @@ import (
 // Storage Class Analysis
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/analytics-storage-class.html).
 // The following operations are related to ListBucketAnalyticsConfigurations:
-//
-// *
+// -
 // GetBucketAnalyticsConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketAnalyticsConfiguration.html)
-//
-// *
+// -
 // DeleteBucketAnalyticsConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketAnalyticsConfiguration.html)
-//
-// *
+// -
 // PutBucketAnalyticsConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketAnalyticsConfiguration.html)
 func (c *Client) ListBucketAnalyticsConfigurations(ctx context.Context, params *ListBucketAnalyticsConfigurationsInput, optFns ...func(*Options)) (*ListBucketAnalyticsConfigurationsOutput, error) {

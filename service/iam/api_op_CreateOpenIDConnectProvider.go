@@ -24,17 +24,13 @@ import (
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html)
 // in the IAM User Guide. When you create the IAM OIDC provider, you specify the
 // following:
-//
-// * The URL of the OIDC identity provider (IdP) to trust
-//
-// * A list of
+// - The URL of the OIDC identity provider (IdP) to trust
+// - A list of
 // client IDs (also known as audiences) that identify the application or
 // applications allowed to authenticate using the OIDC provider
-//
-// * A list of tags
+// - A list of tags
 // that are attached to the specified IAM OIDC provider
-//
-// * A list of thumbprints of
+// - A list of thumbprints of
 // one or more server certificates that the IdP uses
 //
 // You get all of this

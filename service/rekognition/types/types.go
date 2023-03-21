@@ -776,18 +776,15 @@ type Face struct {
 // StartFaceDetection. The following Amazon Rekognition Video operations return
 // only the default attributes. The corresponding Start operations don't have a
 // FaceAttributes input parameter:
+// - GetCelebrityRecognition
+// - GetPersonTracking
+// -
+// GetFaceSearch
 //
-// * GetCelebrityRecognition
-//
-// *
-// GetPersonTracking
-//
-// * GetFaceSearch
-//
-// The Amazon Rekognition Image DetectFaces and
-// IndexFaces operations can return all facial attributes. To specify which
-// attributes to return, use the Attributes input parameter for DetectFaces. For
-// IndexFaces, use the DetectAttributes input parameter.
+// The Amazon Rekognition Image DetectFaces and IndexFaces
+// operations can return all facial attributes. To specify which attributes to
+// return, use the Attributes input parameter for DetectFaces. For IndexFaces, use
+// the DetectAttributes input parameter.
 type FaceDetail struct {
 
 	// The estimated age range, in years, for the face. Low represents the lowest
@@ -2159,24 +2156,18 @@ type UnindexedFace struct {
 	FaceDetail *FaceDetail
 
 	// An array of reasons that specify why a face wasn't indexed.
-	//
-	// * EXTREME_POSE -
-	// The face is at a pose that can't be detected. For example, the head is turned
-	// too far away from the camera.
-	//
-	// * EXCEEDS_MAX_FACES - The number of faces
-	// detected is already higher than that specified by the MaxFaces input parameter
-	// for IndexFaces.
-	//
-	// * LOW_BRIGHTNESS - The image is too dark.
-	//
-	// * LOW_SHARPNESS -
-	// The image is too blurry.
-	//
-	// * LOW_CONFIDENCE - The face was detected with a low
+	// - EXTREME_POSE - The
+	// face is at a pose that can't be detected. For example, the head is turned too
+	// far away from the camera.
+	// - EXCEEDS_MAX_FACES - The number of faces detected is
+	// already higher than that specified by the MaxFaces input parameter for
+	// IndexFaces.
+	// - LOW_BRIGHTNESS - The image is too dark.
+	// - LOW_SHARPNESS - The
+	// image is too blurry.
+	// - LOW_CONFIDENCE - The face was detected with a low
 	// confidence.
-	//
-	// * SMALL_BOUNDING_BOX - The bounding box around the face is too
+	// - SMALL_BOUNDING_BOX - The bounding box around the face is too
 	// small.
 	Reasons []Reason
 

@@ -52,15 +52,11 @@ type ListModelPackagesInput struct {
 
 	// A filter that returns only the model packages of the specified type. This can be
 	// one of the following values.
-	//
-	// * UNVERSIONED - List only unversioined models.
-	// This is the default value if no ModelPackageType is specified.
-	//
-	// * VERSIONED -
-	// List only versioned models.
-	//
-	// * BOTH - List both versioned and unversioned
-	// models.
+	// - UNVERSIONED - List only unversioined models. This
+	// is the default value if no ModelPackageType is specified.
+	// - VERSIONED - List
+	// only versioned models.
+	// - BOTH - List both versioned and unversioned models.
 	ModelPackageType types.ModelPackageType
 
 	// A string in the model package name. This filter returns only model packages

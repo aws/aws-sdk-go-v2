@@ -43,20 +43,14 @@ type Build struct {
 	BuildNumber *int64
 
 	// The current status of the build. Valid values include:
-	//
-	// * FAILED: The build
+	// - FAILED: The build
 	// failed.
-	//
-	// * FAULT: The build faulted.
-	//
-	// * IN_PROGRESS: The build is still in
+	// - FAULT: The build faulted.
+	// - IN_PROGRESS: The build is still in
 	// progress.
-	//
-	// * STOPPED: The build stopped.
-	//
-	// * SUCCEEDED: The build succeeded.
-	//
-	// *
+	// - STOPPED: The build stopped.
+	// - SUCCEEDED: The build succeeded.
+	// -
 	// TIMED_OUT: The build timed out.
 	BuildStatus StatusType
 
@@ -100,15 +94,12 @@ type Build struct {
 	Id *string
 
 	// The entity that started the build. Valid values include:
-	//
-	// * If CodePipeline
+	// - If CodePipeline
 	// started the build, the pipeline's name (for example,
 	// codepipeline/my-demo-pipeline).
-	//
-	// * If an IAM user started the build, the user's
+	// - If an IAM user started the build, the user's
 	// name (for example, MyUserName).
-	//
-	// * If the Jenkins plugin for CodeBuild started
+	// - If the Jenkins plugin for CodeBuild started
 	// the build, the string CodeBuild-Jenkins-Plugin.
 	Initiator *string
 
@@ -132,15 +123,11 @@ type Build struct {
 	ReportArns []string
 
 	// An identifier for the version of this build's source code.
-	//
-	// * For CodeCommit,
+	// - For CodeCommit,
 	// GitHub, GitHub Enterprise, and BitBucket, the commit ID.
-	//
-	// * For CodePipeline,
-	// the source revision provided by CodePipeline.
-	//
-	// * For Amazon S3, this does not
-	// apply.
+	// - For CodePipeline, the
+	// source revision provided by CodePipeline.
+	// - For Amazon S3, this does not apply.
 	ResolvedSourceVersion *string
 
 	// An array of ProjectArtifacts objects.
@@ -148,23 +135,19 @@ type Build struct {
 
 	// An array of ProjectSourceVersion objects. Each ProjectSourceVersion must be one
 	// of:
-	//
-	// * For CodeCommit: the commit ID, branch, or Git tag to use.
-	//
-	// * For GitHub:
+	// - For CodeCommit: the commit ID, branch, or Git tag to use.
+	// - For GitHub:
 	// the commit ID, pull request ID, branch name, or tag name that corresponds to the
 	// version of the source code you want to build. If a pull request ID is specified,
 	// it must use the format pr/pull-request-ID (for example, pr/25). If a branch name
 	// is specified, the branch's HEAD commit ID is used. If not specified, the default
 	// branch's HEAD commit ID is used.
-	//
-	// * For Bitbucket: the commit ID, branch name,
-	// or tag name that corresponds to the version of the source code you want to
-	// build. If a branch name is specified, the branch's HEAD commit ID is used. If
-	// not specified, the default branch's HEAD commit ID is used.
-	//
-	// * For Amazon S3:
-	// the version ID of the object that represents the build input ZIP file to use.
+	// - For Bitbucket: the commit ID, branch name, or
+	// tag name that corresponds to the version of the source code you want to build.
+	// If a branch name is specified, the branch's HEAD commit ID is used. If not
+	// specified, the default branch's HEAD commit ID is used.
+	// - For Amazon S3: the
+	// version ID of the object that represents the build input ZIP file to use.
 	SecondarySourceVersions []ProjectSourceVersion
 
 	// An array of ProjectSource objects.
@@ -217,12 +200,10 @@ type BuildArtifacts struct {
 	// the objects. The uploading account retains ownership of the objects. FULL The
 	// bucket owner has full access to the objects. Object ownership is determined by
 	// the following criteria:
-	//
-	// * If the bucket is configured with the Bucket owner
+	// - If the bucket is configured with the Bucket owner
 	// preferred setting, the bucket owner owns the objects. The uploading account will
 	// have object access as specified by the bucket's policy.
-	//
-	// * Otherwise, the
+	// - Otherwise, the
 	// uploading account retains ownership of the objects.
 	//
 	// For more information about
@@ -323,15 +304,12 @@ type BuildBatch struct {
 	Id *string
 
 	// The entity that started the batch build. Valid values include:
-	//
-	// * If
-	// CodePipeline started the build, the pipeline's name (for example,
+	// - If CodePipeline
+	// started the build, the pipeline's name (for example,
 	// codepipeline/my-demo-pipeline).
-	//
-	// * If an IAM user started the build, the user's
+	// - If an IAM user started the build, the user's
 	// name.
-	//
-	// * If the Jenkins plugin for CodeBuild started the build, the string
+	// - If the Jenkins plugin for CodeBuild started the build, the string
 	// CodeBuild-Jenkins-Plugin.
 	Initiator *string
 
@@ -350,14 +328,11 @@ type BuildBatch struct {
 	QueuedTimeoutInMinutes *int32
 
 	// The identifier of the resolved version of this batch build's source code.
-	//
-	// * For
+	// - For
 	// CodeCommit, GitHub, GitHub Enterprise, and BitBucket, the commit ID.
-	//
-	// * For
+	// - For
 	// CodePipeline, the source revision provided by CodePipeline.
-	//
-	// * For Amazon S3,
+	// - For Amazon S3,
 	// this does not apply.
 	ResolvedSourceVersion *string
 
@@ -367,23 +342,19 @@ type BuildBatch struct {
 
 	// An array of ProjectSourceVersion objects. Each ProjectSourceVersion must be one
 	// of:
-	//
-	// * For CodeCommit: the commit ID, branch, or Git tag to use.
-	//
-	// * For GitHub:
+	// - For CodeCommit: the commit ID, branch, or Git tag to use.
+	// - For GitHub:
 	// the commit ID, pull request ID, branch name, or tag name that corresponds to the
 	// version of the source code you want to build. If a pull request ID is specified,
 	// it must use the format pr/pull-request-ID (for example, pr/25). If a branch name
 	// is specified, the branch's HEAD commit ID is used. If not specified, the default
 	// branch's HEAD commit ID is used.
-	//
-	// * For Bitbucket: the commit ID, branch name,
-	// or tag name that corresponds to the version of the source code you want to
-	// build. If a branch name is specified, the branch's HEAD commit ID is used. If
-	// not specified, the default branch's HEAD commit ID is used.
-	//
-	// * For Amazon S3:
-	// the version ID of the object that represents the build input ZIP file to use.
+	// - For Bitbucket: the commit ID, branch name, or
+	// tag name that corresponds to the version of the source code you want to build.
+	// If a branch name is specified, the branch's HEAD commit ID is used. If not
+	// specified, the default branch's HEAD commit ID is used.
+	// - For Amazon S3: the
+	// version ID of the object that represents the build input ZIP file to use.
 	SecondarySourceVersions []ProjectSourceVersion
 
 	// An array of ProjectSource objects that define the sources for the batch build.
@@ -588,10 +559,8 @@ type CloudWatchLogsConfig struct {
 
 	// The current status of the logs in CloudWatch Logs for a build project. Valid
 	// values are:
-	//
-	// * ENABLED: CloudWatch Logs are enabled for this build project.
-	//
-	// *
+	// - ENABLED: CloudWatch Logs are enabled for this build project.
+	// -
 	// DISABLED: CloudWatch Logs are not enabled for this build project.
 	//
 	// This member is required.
@@ -753,17 +722,14 @@ type EnvironmentVariable struct {
 	Value *string
 
 	// The type of environment variable. Valid values include:
-	//
-	// * PARAMETER_STORE: An
+	// - PARAMETER_STORE: An
 	// environment variable stored in Systems Manager Parameter Store. To learn how to
 	// specify a parameter store environment variable, see env/parameter-store
 	// (https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec.env.parameter-store)
 	// in the CodeBuild User Guide.
-	//
-	// * PLAINTEXT: An environment variable in plain text
+	// - PLAINTEXT: An environment variable in plain text
 	// format. This is the default value.
-	//
-	// * SECRETS_MANAGER: An environment variable
+	// - SECRETS_MANAGER: An environment variable
 	// stored in Secrets Manager. To learn how to specify a secrets manager environment
 	// variable, see env/secrets-manager
 	// (https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec.env.secrets-manager)
@@ -976,24 +942,20 @@ type Project struct {
 
 	// A version of the build input to be built for this project. If not specified, the
 	// latest version is used. If specified, it must be one of:
-	//
-	// * For CodeCommit: the
+	// - For CodeCommit: the
 	// commit ID, branch, or Git tag to use.
-	//
-	// * For GitHub: the commit ID, pull request
+	// - For GitHub: the commit ID, pull request
 	// ID, branch name, or tag name that corresponds to the version of the source code
 	// you want to build. If a pull request ID is specified, it must use the format
 	// pr/pull-request-ID (for example pr/25). If a branch name is specified, the
 	// branch's HEAD commit ID is used. If not specified, the default branch's HEAD
 	// commit ID is used.
-	//
-	// * For Bitbucket: the commit ID, branch name, or tag name
-	// that corresponds to the version of the source code you want to build. If a
-	// branch name is specified, the branch's HEAD commit ID is used. If not specified,
-	// the default branch's HEAD commit ID is used.
-	//
-	// * For Amazon S3: the version ID of
-	// the object that represents the build input ZIP file to use.
+	// - For Bitbucket: the commit ID, branch name, or tag name that
+	// corresponds to the version of the source code you want to build. If a branch
+	// name is specified, the branch's HEAD commit ID is used. If not specified, the
+	// default branch's HEAD commit ID is used.
+	// - For Amazon S3: the version ID of the
+	// object that represents the build input ZIP file to use.
 	//
 	// If sourceVersion is
 	// specified at the build level, then that version takes precedence over this
@@ -1027,15 +989,12 @@ type Project struct {
 type ProjectArtifacts struct {
 
 	// The type of build output artifact. Valid values include:
-	//
-	// * CODEPIPELINE: The
+	// - CODEPIPELINE: The
 	// build project has build output generated through CodePipeline. The CODEPIPELINE
 	// type is not supported for secondaryArtifacts.
-	//
-	// * NO_ARTIFACTS: The build project
+	// - NO_ARTIFACTS: The build project
 	// does not produce any build output.
-	//
-	// * S3: The build project stores build output
+	// - S3: The build project stores build output
 	// in Amazon S3.
 	//
 	// This member is required.
@@ -1055,12 +1014,10 @@ type ProjectArtifacts struct {
 	// the objects. The uploading account retains ownership of the objects. FULL The
 	// bucket owner has full access to the objects. Object ownership is determined by
 	// the following criteria:
-	//
-	// * If the bucket is configured with the Bucket owner
+	// - If the bucket is configured with the Bucket owner
 	// preferred setting, the bucket owner owns the objects. The uploading account will
 	// have object access as specified by the bucket's policy.
-	//
-	// * Otherwise, the
+	// - Otherwise, the
 	// uploading account retains ownership of the objects.
 	//
 	// For more information about
@@ -1076,70 +1033,56 @@ type ProjectArtifacts struct {
 	EncryptionDisabled *bool
 
 	// Information about the build output artifact location:
-	//
-	// * If type is set to
+	// - If type is set to
 	// CODEPIPELINE, CodePipeline ignores this value if specified. This is because
 	// CodePipeline manages its build output locations instead of CodeBuild.
-	//
-	// * If type
+	// - If type
 	// is set to NO_ARTIFACTS, this value is ignored if specified, because no build
 	// output is produced.
-	//
-	// * If type is set to S3, this is the name of the output
+	// - If type is set to S3, this is the name of the output
 	// bucket.
 	Location *string
 
 	// Along with path and namespaceType, the pattern that CodeBuild uses to name and
 	// store the output artifact:
-	//
-	// * If type is set to CODEPIPELINE, CodePipeline
+	// - If type is set to CODEPIPELINE, CodePipeline
 	// ignores this value if specified. This is because CodePipeline manages its build
 	// output names instead of CodeBuild.
-	//
-	// * If type is set to NO_ARTIFACTS, this value
+	// - If type is set to NO_ARTIFACTS, this value
 	// is ignored if specified, because no build output is produced.
-	//
-	// * If type is set
+	// - If type is set
 	// to S3, this is the name of the output artifact object. If you set the name to be
 	// a forward slash ("/"), the artifact is stored in the root of the output
 	// bucket.
 	//
 	// For example:
-	//
-	// * If path is set to MyArtifacts, namespaceType is set to
+	// - If path is set to MyArtifacts, namespaceType is set to
 	// BUILD_ID, and name is set to MyArtifact.zip, then the output artifact is stored
 	// in MyArtifacts//MyArtifact.zip.
-	//
-	// * If path is empty, namespaceType is set to
+	// - If path is empty, namespaceType is set to
 	// NONE, and name is set to "/", the output artifact is stored in the root of the
 	// output bucket.
-	//
-	// * If path is set to MyArtifacts, namespaceType is set to
+	// - If path is set to MyArtifacts, namespaceType is set to
 	// BUILD_ID, and name is set to "/", the output artifact is stored in MyArtifacts/.
 	Name *string
 
 	// Along with path and name, the pattern that CodeBuild uses to determine the name
 	// and location to store the output artifact:
-	//
-	// * If type is set to CODEPIPELINE,
+	// - If type is set to CODEPIPELINE,
 	// CodePipeline ignores this value if specified. This is because CodePipeline
 	// manages its build output names instead of CodeBuild.
-	//
-	// * If type is set to
+	// - If type is set to
 	// NO_ARTIFACTS, this value is ignored if specified, because no build output is
 	// produced.
+	// - If type is set to S3, valid values include:
+	// - BUILD_ID: Include the
+	// build ID in the location of the build output artifact.
+	// - NONE: Do not include
+	// the build ID. This is the default if namespaceType is not specified.
 	//
-	// * If type is set to S3, valid values include:
-	//
-	// * BUILD_ID: Include
-	// the build ID in the location of the build output artifact.
-	//
-	// * NONE: Do not
-	// include the build ID. This is the default if namespaceType is not
-	// specified.
-	//
-	// For example, if path is set to MyArtifacts, namespaceType is set to
-	// BUILD_ID, and name is set to MyArtifact.zip, the output artifact is stored in
+	// For
+	// example, if path is set to MyArtifacts, namespaceType is set to BUILD_ID, and
+	// name is set to MyArtifact.zip, the output artifact is stored in
 	// MyArtifacts//MyArtifact.zip.
 	NamespaceType ArtifactNamespace
 
@@ -1150,36 +1093,28 @@ type ProjectArtifacts struct {
 	OverrideArtifactName *bool
 
 	// The type of build output artifact to create:
-	//
-	// * If type is set to CODEPIPELINE,
+	// - If type is set to CODEPIPELINE,
 	// CodePipeline ignores this value if specified. This is because CodePipeline
 	// manages its build output artifacts instead of CodeBuild.
-	//
-	// * If type is set to
+	// - If type is set to
 	// NO_ARTIFACTS, this value is ignored if specified, because no build output is
 	// produced.
-	//
-	// * If type is set to S3, valid values include:
-	//
-	// * NONE: CodeBuild
+	// - If type is set to S3, valid values include:
+	// - NONE: CodeBuild
 	// creates in the output bucket a folder that contains the build output. This is
 	// the default if packaging is not specified.
-	//
-	// * ZIP: CodeBuild creates in the
+	// - ZIP: CodeBuild creates in the
 	// output bucket a ZIP file that contains the build output.
 	Packaging ArtifactPackaging
 
 	// Along with namespaceType and name, the pattern that CodeBuild uses to name and
 	// store the output artifact:
-	//
-	// * If type is set to CODEPIPELINE, CodePipeline
+	// - If type is set to CODEPIPELINE, CodePipeline
 	// ignores this value if specified. This is because CodePipeline manages its build
 	// output names instead of CodeBuild.
-	//
-	// * If type is set to NO_ARTIFACTS, this value
+	// - If type is set to NO_ARTIFACTS, this value
 	// is ignored if specified, because no build output is produced.
-	//
-	// * If type is set
+	// - If type is set
 	// to S3, this is the path to the output artifact. If path is not specified, path
 	// is not used.
 	//
@@ -1238,25 +1173,20 @@ type ProjectBuildBatchConfig struct {
 type ProjectCache struct {
 
 	// The type of cache used by the build project. Valid values include:
-	//
-	// * NO_CACHE:
+	// - NO_CACHE:
 	// The build project does not use any cache.
-	//
-	// * S3: The build project reads and
+	// - S3: The build project reads and
 	// writes from and to S3.
-	//
-	// * LOCAL: The build project stores a cache locally on a
+	// - LOCAL: The build project stores a cache locally on a
 	// build host that is only available to that build host.
 	//
 	// This member is required.
 	Type CacheType
 
 	// Information about the cache location:
-	//
-	// * NO_CACHE or LOCAL: This value is
+	// - NO_CACHE or LOCAL: This value is
 	// ignored.
-	//
-	// * S3: This is the S3 bucket name/prefix.
+	// - S3: This is the S3 bucket name/prefix.
 	Location *string
 
 	// An array of strings that specify the local cache modes. You can use one or more
@@ -1270,31 +1200,25 @@ type ProjectCache struct {
 	// Caches existing Docker layers. This mode is a good choice for projects that
 	// build or pull large Docker images. It can prevent the performance issues caused
 	// by pulling large Docker images down from the network.
-	//
-	// * You can use a Docker
+	// - You can use a Docker
 	// layer cache in the Linux environment only.
-	//
-	// * The privileged flag must be set so
+	// - The privileged flag must be set so
 	// that your project has the required Docker permissions.
+	// - You should consider the
+	// security implications before you use a Docker layer cache.
 	//
-	// * You should consider
-	// the security implications before you use a Docker layer
-	// cache.
-	//
-	// LOCAL_CUSTOM_CACHE Caches directories you specify in the buildspec file.
-	// This mode is a good choice if your build scenario is not suited to one of the
-	// other three local cache modes. If you use a custom cache:
-	//
-	// * Only directories
-	// can be specified for caching. You cannot specify individual files.
-	//
-	// * Symlinks
-	// are used to reference cached directories.
-	//
-	// * Cached directories are linked to
-	// your build before it downloads its project sources. Cached items are overridden
-	// if a source item has the same name. Directories are specified using cache paths
-	// in the buildspec file.
+	// LOCAL_CUSTOM_CACHE
+	// Caches directories you specify in the buildspec file. This mode is a good choice
+	// if your build scenario is not suited to one of the other three local cache
+	// modes. If you use a custom cache:
+	// - Only directories can be specified for
+	// caching. You cannot specify individual files.
+	// - Symlinks are used to reference
+	// cached directories.
+	// - Cached directories are linked to your build before it
+	// downloads its project sources. Cached items are overridden if a source item has
+	// the same name. Directories are specified using cache paths in the buildspec
+	// file.
 	Modes []CacheMode
 
 	noSmithyDocumentSerde
@@ -1305,35 +1229,28 @@ type ProjectEnvironment struct {
 
 	// Information about the compute resources the build project uses. Available values
 	// include:
+	// - BUILD_GENERAL1_SMALL: Use up to 3 GB memory and 2 vCPUs for builds.
+	// -
+	// BUILD_GENERAL1_MEDIUM: Use up to 7 GB memory and 4 vCPUs for builds.
+	// -
+	// BUILD_GENERAL1_LARGE: Use up to 16 GB memory and 8 vCPUs for builds, depending
+	// on your environment type.
+	// - BUILD_GENERAL1_2XLARGE: Use up to 145 GB memory, 72
+	// vCPUs, and 824 GB of SSD storage for builds. This compute type supports Docker
+	// images up to 100 GB uncompressed.
 	//
-	// * BUILD_GENERAL1_SMALL: Use up to 3 GB memory and 2 vCPUs for
+	// If you use BUILD_GENERAL1_LARGE:
+	// - For
+	// environment type LINUX_CONTAINER, you can use up to 15 GB memory and 8 vCPUs for
 	// builds.
+	// - For environment type LINUX_GPU_CONTAINER, you can use up to 255 GB
+	// memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.
+	// - For environment
+	// type ARM_CONTAINER, you can use up to 16 GB memory and 8 vCPUs on ARM-based
+	// processors for builds.
 	//
-	// * BUILD_GENERAL1_MEDIUM: Use up to 7 GB memory and 4 vCPUs for
-	// builds.
-	//
-	// * BUILD_GENERAL1_LARGE: Use up to 16 GB memory and 8 vCPUs for builds,
-	// depending on your environment type.
-	//
-	// * BUILD_GENERAL1_2XLARGE: Use up to 145 GB
-	// memory, 72 vCPUs, and 824 GB of SSD storage for builds. This compute type
-	// supports Docker images up to 100 GB uncompressed.
-	//
-	// If you use
-	// BUILD_GENERAL1_LARGE:
-	//
-	// * For environment type LINUX_CONTAINER, you can use up to
-	// 15 GB memory and 8 vCPUs for builds.
-	//
-	// * For environment type
-	// LINUX_GPU_CONTAINER, you can use up to 255 GB memory, 32 vCPUs, and 4 NVIDIA
-	// Tesla V100 GPUs for builds.
-	//
-	// * For environment type ARM_CONTAINER, you can use
-	// up to 16 GB memory and 8 vCPUs on ARM-based processors for builds.
-	//
-	// For more
-	// information, see Build Environment Compute Types
+	// For more information, see Build Environment Compute
+	// Types
 	// (https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html)
 	// in the CodeBuild User Guide.
 	//
@@ -1342,12 +1259,10 @@ type ProjectEnvironment struct {
 
 	// The image tag or image digest that identifies the Docker image to use for this
 	// build project. Use the following formats:
-	//
-	// * For an image tag: /:. For example,
+	// - For an image tag: /:. For example,
 	// in the Docker repository that CodeBuild uses to manage its Docker images, this
 	// would be aws/codebuild/standard:4.0.
-	//
-	// * For an image digest: /@. For example, to
+	// - For an image digest: /@. For example, to
 	// specify an image with the digest
 	// "sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf," use
 	// /@sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf.
@@ -1361,26 +1276,23 @@ type ProjectEnvironment struct {
 	Image *string
 
 	// The type of build environment to use for related builds.
-	//
-	// * The environment type
+	// - The environment type
 	// ARM_CONTAINER is available only in regions US East (N. Virginia), US East
 	// (Ohio), US West (Oregon), EU (Ireland), Asia Pacific (Mumbai), Asia Pacific
 	// (Tokyo), Asia Pacific (Sydney), and EU (Frankfurt).
-	//
-	// * The environment type
+	// - The environment type
 	// LINUX_CONTAINER with compute type build.general1.2xlarge is available only in
 	// regions US East (N. Virginia), US East (Ohio), US West (Oregon), Canada
 	// (Central), EU (Ireland), EU (London), EU (Frankfurt), Asia Pacific (Tokyo), Asia
 	// Pacific (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney), China
 	// (Beijing), and China (Ningxia).
-	//
-	// * The environment type LINUX_GPU_CONTAINER is
+	// - The environment type LINUX_GPU_CONTAINER is
 	// available only in regions US East (N. Virginia), US East (Ohio), US West
 	// (Oregon), Canada (Central), EU (Ireland), EU (London), EU (Frankfurt), Asia
 	// Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore), Asia Pacific
 	// (Sydney) , China (Beijing), and China (Ningxia).
 	//
-	// * The environment types
+	// - The environment types
 	// WINDOWS_CONTAINER and WINDOWS_SERVER_2019_CONTAINER are available only in
 	// regions US East (N. Virginia), US East (Ohio), US West (Oregon), and EU
 	// (Ireland).
@@ -1405,17 +1317,15 @@ type ProjectEnvironment struct {
 
 	// The type of credentials CodeBuild uses to pull images in your build. There are
 	// two valid values:
+	// - CODEBUILD specifies that CodeBuild uses its own credentials.
+	// This requires that you modify your ECR repository policy to trust CodeBuild
+	// service principal.
+	// - SERVICE_ROLE specifies that CodeBuild uses your build
+	// project's service role.
 	//
-	// * CODEBUILD specifies that CodeBuild uses its own
-	// credentials. This requires that you modify your ECR repository policy to trust
-	// CodeBuild service principal.
-	//
-	// * SERVICE_ROLE specifies that CodeBuild uses your
-	// build project's service role.
-	//
-	// When you use a cross-account or private registry
-	// image, you must use SERVICE_ROLE credentials. When you use an CodeBuild curated
-	// image, you must use CODEBUILD credentials.
+	// When you use a cross-account or private registry image,
+	// you must use SERVICE_ROLE credentials. When you use an CodeBuild curated image,
+	// you must use CODEBUILD credentials.
 	ImagePullCredentialsType ImagePullCredentialsType
 
 	// Enables running the Docker daemon inside a Docker container. Set to true only if
@@ -1485,26 +1395,19 @@ type ProjectSource struct {
 
 	// The type of repository that contains the source code to be built. Valid values
 	// include:
-	//
-	// * BITBUCKET: The source code is in a Bitbucket repository.
-	//
-	// *
+	// - BITBUCKET: The source code is in a Bitbucket repository.
+	// -
 	// CODECOMMIT: The source code is in an CodeCommit repository.
-	//
-	// * CODEPIPELINE: The
+	// - CODEPIPELINE: The
 	// source code settings are specified in the source action of a pipeline in
 	// CodePipeline.
-	//
-	// * GITHUB: The source code is in a GitHub or GitHub Enterprise
+	// - GITHUB: The source code is in a GitHub or GitHub Enterprise
 	// Cloud repository.
-	//
-	// * GITHUB_ENTERPRISE: The source code is in a GitHub
-	// Enterprise Server repository.
-	//
-	// * NO_SOURCE: The project does not have input
-	// source code.
-	//
-	// * S3: The source code is in an Amazon S3 bucket.
+	// - GITHUB_ENTERPRISE: The source code is in a GitHub Enterprise
+	// Server repository.
+	// - NO_SOURCE: The project does not have input source code.
+	// -
+	// S3: The source code is in an Amazon S3 bucket.
 	//
 	// This member is required.
 	Type SourceType
@@ -1544,48 +1447,42 @@ type ProjectSource struct {
 
 	// Information about the location of the source code to be built. Valid values
 	// include:
-	//
-	// * For source code settings that are specified in the source action of
-	// a pipeline in CodePipeline, location should not be specified. If it is
-	// specified, CodePipeline ignores it. This is because CodePipeline uses the
-	// settings in a pipeline's source action instead of this value.
-	//
-	// * For source code
-	// in an CodeCommit repository, the HTTPS clone URL to the repository that contains
-	// the source code and the buildspec file (for example,
+	// - For source code settings that are specified in the source action of a
+	// pipeline in CodePipeline, location should not be specified. If it is specified,
+	// CodePipeline ignores it. This is because CodePipeline uses the settings in a
+	// pipeline's source action instead of this value.
+	// - For source code in an
+	// CodeCommit repository, the HTTPS clone URL to the repository that contains the
+	// source code and the buildspec file (for example,
 	// https://git-codecommit..amazonaws.com/v1/repos/).
+	// - For source code in an Amazon
+	// S3 input bucket, one of the following.
+	// - The path to the ZIP file that contains
+	// the source code (for example, //.zip).
+	// - The path to the folder that contains
+	// the source code (for example, ///).
 	//
-	// * For source code in an
-	// Amazon S3 input bucket, one of the following.
-	//
-	// * The path to the ZIP file that
-	// contains the source code (for example, //.zip).
-	//
-	// * The path to the folder that
-	// contains the source code (for example, ///).
-	//
-	// * For source code in a GitHub
+	// - For source code in a GitHub repository,
+	// the HTTPS clone URL to the repository that contains the source and the buildspec
+	// file. You must connect your Amazon Web Services account to your GitHub account.
+	// Use the CodeBuild console to start creating a build project. When you use the
+	// console to connect (or reconnect) with GitHub, on the GitHub Authorize
+	// application page, for Organization access, choose Request access next to each
+	// repository you want to allow CodeBuild to have access to, and then choose
+	// Authorize application. (After you have connected to your GitHub account, you do
+	// not need to finish creating the build project. You can leave the CodeBuild
+	// console.) To instruct CodeBuild to use this connection, in the source object,
+	// set the auth object's type value to OAUTH.
+	// - For source code in a Bitbucket
 	// repository, the HTTPS clone URL to the repository that contains the source and
 	// the buildspec file. You must connect your Amazon Web Services account to your
-	// GitHub account. Use the CodeBuild console to start creating a build project.
-	// When you use the console to connect (or reconnect) with GitHub, on the GitHub
-	// Authorize application page, for Organization access, choose Request access next
-	// to each repository you want to allow CodeBuild to have access to, and then
-	// choose Authorize application. (After you have connected to your GitHub account,
-	// you do not need to finish creating the build project. You can leave the
-	// CodeBuild console.) To instruct CodeBuild to use this connection, in the source
-	// object, set the auth object's type value to OAUTH.
-	//
-	// * For source code in a
-	// Bitbucket repository, the HTTPS clone URL to the repository that contains the
-	// source and the buildspec file. You must connect your Amazon Web Services account
-	// to your Bitbucket account. Use the CodeBuild console to start creating a build
-	// project. When you use the console to connect (or reconnect) with Bitbucket, on
-	// the Bitbucket Confirm access to your account page, choose Grant access. (After
-	// you have connected to your Bitbucket account, you do not need to finish creating
-	// the build project. You can leave the CodeBuild console.) To instruct CodeBuild
-	// to use this connection, in the source object, set the auth object's type value
-	// to OAUTH.
+	// Bitbucket account. Use the CodeBuild console to start creating a build project.
+	// When you use the console to connect (or reconnect) with Bitbucket, on the
+	// Bitbucket Confirm access to your account page, choose Grant access. (After you
+	// have connected to your Bitbucket account, you do not need to finish creating the
+	// build project. You can leave the CodeBuild console.) To instruct CodeBuild to
+	// use this connection, in the source object, set the auth object's type value to
+	// OAUTH.
 	//
 	// If you specify CODEPIPELINE for the Type property, don't specify this
 	// property. For all of the other types, you must specify Location.
@@ -1625,23 +1522,19 @@ type ProjectSourceVersion struct {
 
 	// The source version for the corresponding source identifier. If specified, must
 	// be one of:
-	//
-	// * For CodeCommit: the commit ID, branch, or Git tag to use.
-	//
-	// * For
+	// - For CodeCommit: the commit ID, branch, or Git tag to use.
+	// - For
 	// GitHub: the commit ID, pull request ID, branch name, or tag name that
 	// corresponds to the version of the source code you want to build. If a pull
 	// request ID is specified, it must use the format pr/pull-request-ID (for example,
 	// pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If
 	// not specified, the default branch's HEAD commit ID is used.
-	//
-	// * For Bitbucket:
-	// the commit ID, branch name, or tag name that corresponds to the version of the
+	// - For Bitbucket: the
+	// commit ID, branch name, or tag name that corresponds to the version of the
 	// source code you want to build. If a branch name is specified, the branch's HEAD
 	// commit ID is used. If not specified, the default branch's HEAD commit ID is
 	// used.
-	//
-	// * For Amazon S3: the version ID of the object that represents the build
+	// - For Amazon S3: the version ID of the object that represents the build
 	// input ZIP file to use.
 	//
 	// For more information, see Source Version Sample with
@@ -1657,10 +1550,8 @@ type ProjectSourceVersion struct {
 
 // Information about credentials that provide access to a private Docker registry.
 // When this is set:
-//
-// * imagePullCredentialsType must be set to SERVICE_ROLE.
-//
-// *
+// - imagePullCredentialsType must be set to SERVICE_ROLE.
+// -
 // images cannot be curated or an Amazon ECR image.
 //
 // For more information, see
@@ -1737,11 +1628,9 @@ type Report struct {
 type ReportExportConfig struct {
 
 	// The export configuration type. Valid values are:
-	//
-	// * S3: The report results are
+	// - S3: The report results are
 	// exported to an S3 bucket.
-	//
-	// * NO_EXPORT: The report results are not exported.
+	// - NO_EXPORT: The report results are not exported.
 	ExportConfigType ReportExportConfigType
 
 	// A S3ReportExportConfig object that contains information about the S3 bucket
@@ -1849,11 +1738,9 @@ type ResolvedArtifact struct {
 type S3LogsConfig struct {
 
 	// The current status of the S3 build logs. Valid values are:
-	//
-	// * ENABLED: S3 build
+	// - ENABLED: S3 build
 	// logs are enabled for this build project.
-	//
-	// * DISABLED: S3 build logs are not
+	// - DISABLED: S3 build logs are not
 	// enabled for this build project.
 	//
 	// This member is required.
@@ -1870,12 +1757,10 @@ type S3LogsConfig struct {
 	// the objects. The uploading account retains ownership of the objects. FULL The
 	// bucket owner has full access to the objects. Object ownership is determined by
 	// the following criteria:
-	//
-	// * If the bucket is configured with the Bucket owner
+	// - If the bucket is configured with the Bucket owner
 	// preferred setting, the bucket owner owns the objects. The uploading account will
 	// have object access as specified by the bucket's policy.
-	//
-	// * Otherwise, the
+	// - Otherwise, the
 	// uploading account retains ownership of the objects.
 	//
 	// For more information about
@@ -1915,12 +1800,10 @@ type S3ReportExportConfig struct {
 	EncryptionKey *string
 
 	// The type of build output artifact to create. Valid values include:
-	//
-	// * NONE:
+	// - NONE:
 	// CodeBuild creates the raw data in the output bucket. This is the default if
 	// packaging is not specified.
-	//
-	// * ZIP: CodeBuild creates a ZIP file with the raw
+	// - ZIP: CodeBuild creates a ZIP file with the raw
 	// data in the output bucket.
 	Packaging ReportPackagingType
 
@@ -2025,16 +1908,11 @@ type TestCaseFilter struct {
 
 	// The status used to filter test cases. A TestCaseFilter can have one status.
 	// Valid values are:
-	//
-	// * SUCCEEDED
-	//
-	// * FAILED
-	//
-	// * ERROR
-	//
-	// * SKIPPED
-	//
-	// * UNKNOWN
+	// - SUCCEEDED
+	// - FAILED
+	// - ERROR
+	// - SKIPPED
+	// - UNKNOWN
 	Status *string
 
 	noSmithyDocumentSerde

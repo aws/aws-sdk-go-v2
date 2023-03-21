@@ -14,10 +14,8 @@ import (
 // Starts the replication task assessment for unsupported data types in the source
 // database. You can only use this operation for a task if the following conditions
 // are true:
-//
-// * The task must be in the stopped state.
-//
-// * The task must have
+// - The task must be in the stopped state.
+// - The task must have
 // successful connections to the source and target.
 //
 // If either of these conditions

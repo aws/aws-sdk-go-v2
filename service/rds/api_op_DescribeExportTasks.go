@@ -38,31 +38,21 @@ type DescribeExportTasksInput struct {
 	// are specified as name-value pairs that define what to include in the output.
 	// Filter names and values are case-sensitive. Supported filters include the
 	// following:
-	//
-	// * export-task-identifier - An identifier for the snapshot or cluster
+	// - export-task-identifier - An identifier for the snapshot or cluster
 	// export task.
-	//
-	// * s3-bucket - The Amazon S3 bucket the data is exported to.
-	//
-	// *
+	// - s3-bucket - The Amazon S3 bucket the data is exported to.
+	// -
 	// source-arn - The Amazon Resource Name (ARN) of the snapshot or cluster exported
 	// to Amazon S3.
-	//
-	// * status - The status of the export task. Must be lowercase.
-	// Valid statuses are the following:
-	//
-	// * canceled
-	//
-	// * canceling
-	//
-	// * complete
-	//
-	// *
-	// failed
-	//
-	// * in_progress
-	//
-	// * starting
+	// - status - The status of the export task. Must be lowercase. Valid
+	// statuses are the following:
+	// - canceled
+	// - canceling
+	// - complete
+	// - failed
+	// -
+	// in_progress
+	// - starting
 	Filters []types.Filter
 
 	// An optional pagination token provided by a previous DescribeExportTasks request.

@@ -41,19 +41,16 @@ type DescribeDBInstancesInput struct {
 	// The user-provided instance identifier. If this parameter is specified,
 	// information from only the specific instance is returned. This parameter isn't
 	// case sensitive. Constraints:
-	//
-	// * If provided, must match the identifier of an
+	// - If provided, must match the identifier of an
 	// existing DBInstance.
 	DBInstanceIdentifier *string
 
 	// A filter that specifies one or more instances to describe. Supported filters:
-	//
-	// *
+	// -
 	// db-cluster-id - Accepts cluster identifiers and cluster Amazon Resource Names
 	// (ARNs). The results list includes only the information about the instances that
 	// are associated with the clusters that are identified by these ARNs.
-	//
-	// *
+	// -
 	// db-instance-id - Accepts instance identifiers and instance ARNs. The results
 	// list includes only the information about the instances that are identified by
 	// these ARNs.

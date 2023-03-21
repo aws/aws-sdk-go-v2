@@ -40,10 +40,8 @@ type EnableKeyInput struct {
 
 	// Identifies the KMS key to enable. Specify the key ID or key ARN of the KMS key.
 	// For example:
-	//
-	// * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// * Key ARN:
+	// - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	// - Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// To

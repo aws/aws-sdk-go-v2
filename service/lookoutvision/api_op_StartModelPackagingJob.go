@@ -21,23 +21,16 @@ import (
 // version with the AWS IoT Greengrass CreateDeployment
 // (https://docs.aws.amazon.com/greengrass/v2/APIReference/API_CreateDeployment.html)
 // API. This operation requires the following permissions:
-//
-// *
+// -
 // lookoutvision:StartModelPackagingJob
-//
-// * s3:PutObject
-//
-// * s3:GetBucketLocation
-//
-// *
+// - s3:PutObject
+// - s3:GetBucketLocation
+// -
 // kms:GenerateDataKey
-//
-// * greengrass:CreateComponentVersion
-//
-// *
+// - greengrass:CreateComponentVersion
+// -
 // greengrass:DescribeComponent
-//
-// * (Optional) greengrass:TagResource. Only required
+// - (Optional) greengrass:TagResource. Only required
 // if you want to tag the component.
 //
 // For more information, see Using your Amazon

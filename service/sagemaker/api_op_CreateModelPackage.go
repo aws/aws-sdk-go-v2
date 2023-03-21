@@ -21,12 +21,10 @@ import (
 // To create a model from an algorithm resource that you created or subscribed to
 // in Amazon Web Services Marketplace, provide a value for
 // SourceAlgorithmSpecification. There are two types of model packages:
-//
-// *
-// Versioned - a model that is part of a model group in the model registry.
-//
-// *
-// Unversioned - a model package that is not part of a model group.
+// - Versioned
+// - a model that is part of a model group in the model registry.
+// - Unversioned - a
+// model package that is not part of a model group.
 func (c *Client) CreateModelPackage(ctx context.Context, params *CreateModelPackageInput, optFns ...func(*Options)) (*CreateModelPackageOutput, error) {
 	if params == nil {
 		params = &CreateModelPackageInput{}
@@ -75,15 +73,12 @@ type CreateModelPackageInput struct {
 
 	// Specifies details about inference jobs that can be run with models based on this
 	// model package, including the following:
-	//
-	// * The Amazon ECR paths of containers
+	// - The Amazon ECR paths of containers
 	// that contain the inference code and model artifacts.
-	//
-	// * The instance types that
+	// - The instance types that
 	// the model package supports for transform jobs and real-time endpoints used for
 	// inference.
-	//
-	// * The input and output content formats that the model package
+	// - The input and output content formats that the model package
 	// supports for inference.
 	InferenceSpecification *types.InferenceSpecification
 

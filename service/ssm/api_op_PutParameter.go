@@ -34,25 +34,19 @@ type PutParameterInput struct {
 	// and name. For parameters in a hierarchy, you must include a leading forward
 	// slash character (/) when you create or reference a parameter. For example:
 	// /Dev/DBServer/MySQL/db-string13 Naming Constraints:
-	//
-	// * Parameter names are case
+	// - Parameter names are case
 	// sensitive.
-	//
-	// * A parameter name must be unique within an Amazon Web Services
+	// - A parameter name must be unique within an Amazon Web Services
 	// Region
-	//
-	// * A parameter name can't be prefixed with "aws" or "ssm"
+	// - A parameter name can't be prefixed with "aws" or "ssm"
 	// (case-insensitive).
-	//
-	// * Parameter names can include only the following symbols
-	// and letters: a-zA-Z0-9_.- In addition, the slash character ( / ) is used to
+	// - Parameter names can include only the following symbols and
+	// letters: a-zA-Z0-9_.- In addition, the slash character ( / ) is used to
 	// delineate hierarchies in parameter names. For example:
 	// /Dev/Production/East/Project-ABC/MyParameter
-	//
-	// * A parameter name can't include
+	// - A parameter name can't include
 	// spaces.
-	//
-	// * Parameter hierarchies are limited to a maximum depth of fifteen
+	// - Parameter hierarchies are limited to a maximum depth of fifteen
 	// levels.
 	//
 	// For additional information about valid values for parameter names, see
@@ -84,12 +78,9 @@ type PutParameterInput struct {
 	// The data type for a String parameter. Supported data types include plain text
 	// and Amazon Machine Image (AMI) IDs. The following data type values are
 	// supported.
-	//
-	// * text
-	//
-	// * aws:ec2:image
-	//
-	// * aws:ssm:integration
+	// - text
+	// - aws:ec2:image
+	// - aws:ssm:integration
 	//
 	// When you create a
 	// String parameter and specify aws:ec2:image, Amazon Web Services Systems Manager
@@ -121,9 +112,8 @@ type PutParameterInput struct {
 	// SecureString data type. If you don't specify a key ID, the system uses the
 	// default key associated with your Amazon Web Services account which is not as
 	// secure as using a custom key.
-	//
-	// * To use a custom KMS key, choose the
-	// SecureString data type with the Key ID parameter.
+	// - To use a custom KMS key, choose the SecureString
+	// data type with the Key ID parameter.
 	KeyId *string
 
 	// Overwrite an existing parameter. The default value is false.
@@ -154,12 +144,9 @@ type PutParameterInput struct {
 	// of resource to which it applies, the environment, or the type of configuration
 	// data referenced by the parameter. In this case, you could specify the following
 	// key-value pairs:
-	//
-	// * Key=Resource,Value=S3bucket
-	//
-	// * Key=OS,Value=Windows
-	//
-	// *
+	// - Key=Resource,Value=S3bucket
+	// - Key=OS,Value=Windows
+	// -
 	// Key=ParameterType,Value=LicenseKey
 	//
 	// To add tags to an existing Systems Manager
@@ -192,12 +179,10 @@ type PutParameterInput struct {
 	// the current Parameter Store default tier configuration. The default tier when
 	// you begin using Parameter Store is the standard-parameter tier. If you use the
 	// advanced-parameter tier, you can specify one of the following as the default:
-	//
-	// *
+	// -
 	// Advanced: With this option, Parameter Store evaluates all requests as advanced
 	// parameters.
-	//
-	// * Intelligent-Tiering: With this option, Parameter Store evaluates
+	// - Intelligent-Tiering: With this option, Parameter Store evaluates
 	// each request to determine if the parameter is standard or advanced. If the
 	// request doesn't include any options that require an advanced parameter, the
 	// parameter is created in the standard-parameter tier. If one or more options
@@ -208,18 +193,15 @@ type PutParameterInput struct {
 	//
 	// Options that require an advanced parameter
 	// include the following:
+	// - The content size of the parameter is more than 4 KB.
+	// -
+	// The parameter uses a parameter policy.
+	// - More than 10,000 parameters already
+	// exist in your Amazon Web Services account in the current Amazon Web Services
+	// Region.
 	//
-	// * The content size of the parameter is more than 4
-	// KB.
-	//
-	// * The parameter uses a parameter policy.
-	//
-	// * More than 10,000 parameters
-	// already exist in your Amazon Web Services account in the current Amazon Web
-	// Services Region.
-	//
-	// For more information about configuring the default tier
-	// option, see Specifying a default parameter tier
+	// For more information about configuring the default tier option, see
+	// Specifying a default parameter tier
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-default-tier.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	Tier types.ParameterTier

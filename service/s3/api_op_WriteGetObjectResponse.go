@@ -253,38 +253,24 @@ type WriteGetObjectResponseInput struct {
 
 	// The integer status code for an HTTP response of a corresponding GetObject
 	// request. Status Codes
-	//
-	// * 200 - OK
-	//
-	// * 206 - Partial Content
-	//
-	// * 304 - Not
-	// Modified
-	//
-	// * 400 - Bad Request
-	//
-	// * 401 - Unauthorized
-	//
-	// * 403 - Forbidden
-	//
-	// * 404 -
-	// Not Found
-	//
-	// * 405 - Method Not Allowed
-	//
-	// * 409 - Conflict
-	//
-	// * 411 - Length
-	// Required
-	//
-	// * 412 - Precondition Failed
-	//
-	// * 416 - Range Not Satisfiable
-	//
-	// * 500 -
-	// Internal Server Error
-	//
-	// * 503 - Service Unavailable
+	// - 200 - OK
+	// - 206 - Partial Content
+	// - 304 - Not Modified
+	// -
+	// 400 - Bad Request
+	// - 401 - Unauthorized
+	// - 403 - Forbidden
+	// - 404 - Not Found
+	// - 405
+	// - Method Not Allowed
+	// - 409 - Conflict
+	// - 411 - Length Required
+	// - 412 -
+	// Precondition Failed
+	// - 416 - Range Not Satisfiable
+	// - 500 - Internal Server
+	// Error
+	// - 503 - Service Unavailable
 	StatusCode int32
 
 	// Provides storage class information of the object. Amazon S3 returns this header

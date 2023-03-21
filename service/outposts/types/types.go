@@ -120,15 +120,12 @@ type ComputeAttributes struct {
 	HostId *string
 
 	// The state.
-	//
-	// * ACTIVE - The asset is available and can provide capacity for new
+	// - ACTIVE - The asset is available and can provide capacity for new
 	// compute resources.
-	//
-	// * ISOLATED - The asset is undergoing maintenance and can't
+	// - ISOLATED - The asset is undergoing maintenance and can't
 	// provide capacity for new compute resources. Existing compute resources on the
 	// asset are not affected.
-	//
-	// * RETIRING - The underlying hardware for the asset is
+	// - RETIRING - The underlying hardware for the asset is
 	// degraded. Capacity for new compute resources is reduced. Amazon Web Services
 	// sends notifications for resources that must be stopped before the asset can be
 	// replaced.
@@ -267,23 +264,17 @@ type Order struct {
 	PaymentTerm PaymentTerm
 
 	// The status of the order.
-	//
-	// * PREPARING - Order is received and being prepared.
-	//
-	// *
+	// - PREPARING - Order is received and being prepared.
+	// -
 	// IN_PROGRESS - Order is either being built, shipped, or installed. To get more
 	// details, see the line item status.
+	// - COMPLETED - Order is complete.
+	// - CANCELLED
+	// - Order is cancelled.
+	// - ERROR - Customer should contact support.
 	//
-	// * COMPLETED - Order is complete.
-	//
-	// *
-	// CANCELLED - Order is cancelled.
-	//
-	// * ERROR - Customer should contact support.
-	//
-	// The
-	// following status are deprecated: RECEIVED, PENDING, PROCESSING, INSTALLING, and
-	// FULFILLED.
+	// The following
+	// status are deprecated: RECEIVED, PENDING, PROCESSING, INSTALLING, and FULFILLED.
 	Status OrderStatus
 
 	noSmithyDocumentSerde
@@ -311,19 +302,14 @@ type OrderSummary struct {
 	OutpostId *string
 
 	// The status of the order.
-	//
-	// * PREPARING - Order is received and is being
+	// - PREPARING - Order is received and is being
 	// prepared.
-	//
-	// * IN_PROGRESS - Order is either being built, shipped, or installed.
+	// - IN_PROGRESS - Order is either being built, shipped, or installed.
 	// For more information, see the LineItem status.
-	//
-	// * COMPLETED - Order is
+	// - COMPLETED - Order is
 	// complete.
-	//
-	// * CANCELLED - Order is cancelled.
-	//
-	// * ERROR - Customer should contact
+	// - CANCELLED - Order is cancelled.
+	// - ERROR - Customer should contact
 	// support.
 	//
 	// The following statuses are deprecated: RECEIVED, PENDING, PROCESSING,

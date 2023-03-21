@@ -53,126 +53,91 @@ type DescribeImagesInput struct {
 	// Scopes the images by users with explicit launch permissions. Specify an Amazon
 	// Web Services account ID, self (the sender of the request), or all (public
 	// AMIs).
-	//
-	// * If you specify an Amazon Web Services account ID that is not your own,
+	// - If you specify an Amazon Web Services account ID that is not your own,
 	// only AMIs shared with that specific Amazon Web Services account ID are returned.
 	// However, AMIs that are shared with the account’s organization or organizational
 	// unit (OU) are not returned.
-	//
-	// * If you specify self or your own Amazon Web
+	// - If you specify self or your own Amazon Web
 	// Services account ID, AMIs shared with your account are returned. In addition,
 	// AMIs that are shared with the organization or OU of which you are member are
 	// also returned.
-	//
-	// * If you specify all, all public AMIs are returned.
+	// - If you specify all, all public AMIs are returned.
 	ExecutableUsers []string
 
 	// The filters.
-	//
-	// * architecture - The image architecture (i386 | x86_64 |
-	// arm64).
-	//
-	// * block-device-mapping.delete-on-termination - A Boolean value that
-	// indicates whether the Amazon EBS volume is deleted on instance termination.
-	//
-	// *
+	// - architecture - The image architecture (i386 | x86_64 | arm64).
+	// -
+	// block-device-mapping.delete-on-termination - A Boolean value that indicates
+	// whether the Amazon EBS volume is deleted on instance termination.
+	// -
 	// block-device-mapping.device-name - The device name specified in the block device
 	// mapping (for example, /dev/sdh or xvdh).
-	//
-	// * block-device-mapping.snapshot-id -
+	// - block-device-mapping.snapshot-id -
 	// The ID of the snapshot used for the Amazon EBS volume.
-	//
-	// *
+	// -
 	// block-device-mapping.volume-size - The volume size of the Amazon EBS volume, in
 	// GiB.
-	//
-	// * block-device-mapping.volume-type - The volume type of the Amazon EBS
+	// - block-device-mapping.volume-type - The volume type of the Amazon EBS
 	// volume (io1 | io2 | gp2 | gp3 | sc1 | st1 | standard).
-	//
-	// *
+	// -
 	// block-device-mapping.encrypted - A Boolean that indicates whether the Amazon EBS
 	// volume is encrypted.
-	//
-	// * creation-date - The time when the image was created, in
+	// - creation-date - The time when the image was created, in
 	// the ISO 8601 format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), for
 	// example, 2021-09-29T11:04:43.305Z. You can use a wildcard (*), for example,
 	// 2021-09-29T*, which matches an entire day.
-	//
-	// * description - The description of
+	// - description - The description of
 	// the image (provided during image creation).
-	//
-	// * ena-support - A Boolean that
+	// - ena-support - A Boolean that
 	// indicates whether enhanced networking with ENA is enabled.
-	//
-	// * hypervisor - The
+	// - hypervisor - The
 	// hypervisor type (ovm | xen).
-	//
-	// * image-id - The ID of the image.
-	//
-	// * image-type -
+	// - image-id - The ID of the image.
+	// - image-type -
 	// The image type (machine | kernel | ramdisk).
-	//
-	// * is-public - A Boolean that
+	// - is-public - A Boolean that
 	// indicates whether the image is public.
-	//
-	// * kernel-id - The kernel ID.
-	//
-	// *
+	// - kernel-id - The kernel ID.
+	// -
 	// manifest-location - The location of the image manifest.
-	//
-	// * name - The name of
-	// the AMI (provided during image creation).
-	//
-	// * owner-alias - The owner alias
-	// (amazon | aws-marketplace). The valid aliases are defined in an
-	// Amazon-maintained list. This is not the Amazon Web Services account alias that
-	// can be set using the IAM console. We recommend that you use the Owner request
-	// parameter instead of this filter.
-	//
-	// * owner-id - The Amazon Web Services account
-	// ID of the owner. We recommend that you use the Owner request parameter instead
-	// of this filter.
-	//
-	// * platform - The platform. The only supported value is
-	// windows.
-	//
-	// * product-code - The product code.
-	//
-	// * product-code.type - The type of
-	// the product code (marketplace).
-	//
-	// * ramdisk-id - The RAM disk ID.
-	//
-	// *
-	// root-device-name - The device name of the root device volume (for example,
-	// /dev/sda1).
-	//
-	// * root-device-type - The type of the root device volume (ebs |
-	// instance-store).
-	//
-	// * state - The state of the image (available | pending |
-	// failed).
-	//
-	// * state-reason-code - The reason code for the state change.
-	//
-	// *
-	// state-reason-message - The message for the state change.
-	//
-	// * sriov-net-support -
-	// A value of simple indicates that enhanced networking with the Intel 82599 VF
-	// interface is enabled.
-	//
-	// * tag: - The key/value combination of a tag assigned to
-	// the resource. Use the tag key in the filter name and the tag value as the filter
-	// value. For example, to find all resources that have a tag with the key Owner and
-	// the value TeamA, specify tag:Owner for the filter name and TeamA for the filter
-	// value.
-	//
-	// * tag-key - The key of a tag assigned to the resource. Use this filter
-	// to find all resources assigned a tag with a specific key, regardless of the tag
-	// value.
-	//
-	// * virtualization-type - The virtualization type (paravirtual | hvm).
+	// - name - The name of the
+	// AMI (provided during image creation).
+	// - owner-alias - The owner alias (amazon |
+	// aws-marketplace). The valid aliases are defined in an Amazon-maintained list.
+	// This is not the Amazon Web Services account alias that can be set using the IAM
+	// console. We recommend that you use the Owner request parameter instead of this
+	// filter.
+	// - owner-id - The Amazon Web Services account ID of the owner. We
+	// recommend that you use the Owner request parameter instead of this filter.
+	// -
+	// platform - The platform. The only supported value is windows.
+	// - product-code -
+	// The product code.
+	// - product-code.type - The type of the product code
+	// (marketplace).
+	// - ramdisk-id - The RAM disk ID.
+	// - root-device-name - The device
+	// name of the root device volume (for example, /dev/sda1).
+	// - root-device-type -
+	// The type of the root device volume (ebs | instance-store).
+	// - state - The state
+	// of the image (available | pending | failed).
+	// - state-reason-code - The reason
+	// code for the state change.
+	// - state-reason-message - The message for the state
+	// change.
+	// - sriov-net-support - A value of simple indicates that enhanced
+	// networking with the Intel 82599 VF interface is enabled.
+	// - tag: - The key/value
+	// combination of a tag assigned to the resource. Use the tag key in the filter
+	// name and the tag value as the filter value. For example, to find all resources
+	// that have a tag with the key Owner and the value TeamA, specify tag:Owner for
+	// the filter name and TeamA for the filter value.
+	// - tag-key - The key of a tag
+	// assigned to the resource. Use this filter to find all resources assigned a tag
+	// with a specific key, regardless of the tag value.
+	// - virtualization-type - The
+	// virtualization type (paravirtual | hvm).
 	Filters []types.Filter
 
 	// The image IDs. Default: Describes all images available to you.

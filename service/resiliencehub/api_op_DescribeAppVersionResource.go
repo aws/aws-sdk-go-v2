@@ -13,13 +13,10 @@ import (
 
 // Describes a resource of the AWS Resilience Hub application. This API accepts
 // only one of the following parameters to descibe the resource:
-//
-// * resourceName
-//
-// *
+// - resourceName
+// -
 // logicalResourceId
-//
-// * physicalResourceId (Along with physicalResourceId, you can
+// - physicalResourceId (Along with physicalResourceId, you can
 // also provide awsAccountId, and awsRegion)
 func (c *Client) DescribeAppVersionResource(ctx context.Context, params *DescribeAppVersionResourceInput, optFns ...func(*Options)) (*DescribeAppVersionResourceOutput, error) {
 	if params == nil {

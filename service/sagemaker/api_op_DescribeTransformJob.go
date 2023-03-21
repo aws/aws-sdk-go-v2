@@ -112,13 +112,10 @@ type DescribeTransformJobOutput struct {
 
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:
-	//
-	// * CreateProcessingJob
-	//
-	// *
+	// - CreateProcessingJob
+	// -
 	// CreateTrainingJob
-	//
-	// * CreateTransformJob
+	// - CreateTransformJob
 	ExperimentConfig *types.ExperimentConfig
 
 	// If the transform job failed, FailureReason describes why it failed. A transform

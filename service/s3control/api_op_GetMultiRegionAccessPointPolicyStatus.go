@@ -22,11 +22,9 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html)
 // in the Amazon S3 User Guide. The following actions are related to
 // GetMultiRegionAccessPointPolicyStatus:
-//
-// * GetMultiRegionAccessPointPolicy
+// - GetMultiRegionAccessPointPolicy
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicy.html)
-//
-// *
+// -
 // PutMultiRegionAccessPointPolicy
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutMultiRegionAccessPointPolicy.html)
 func (c *Client) GetMultiRegionAccessPointPolicyStatus(ctx context.Context, params *GetMultiRegionAccessPointPolicyStatusInput, optFns ...func(*Options)) (*GetMultiRegionAccessPointPolicyStatusOutput, error) {

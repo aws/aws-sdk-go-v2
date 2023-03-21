@@ -116,13 +116,11 @@ type EntityFilter struct {
 
 // Summary information about an Health event. Health events can be public or
 // account-specific:
-//
-// * Public events might be service events that are not specific
+// - Public events might be service events that are not specific
 // to an Amazon Web Services account. For example, if there is an issue with an
 // Amazon Web Services Region, Health provides information about the event, even if
 // you don't use services or resources in that Region.
-//
-// * Account-specific events
+// - Account-specific events
 // are specific to either your Amazon Web Services account or an account in your
 // organization. For example, if there's an issue with Amazon Elastic Compute Cloud
 // in a Region that you use, Health provides information about the event and the
@@ -148,18 +146,15 @@ type Event struct {
 
 	// This parameter specifies if the Health event is a public Amazon Web Services
 	// service event or an account-specific event.
-	//
-	// * If the eventScopeCode value is
+	// - If the eventScopeCode value is
 	// PUBLIC, then the affectedAccounts value is always empty.
-	//
-	// * If the
-	// eventScopeCode value is ACCOUNT_SPECIFIC, then the affectedAccounts value lists
-	// the affected Amazon Web Services accounts in your organization. For example, if
-	// an event affects a service such as Amazon Elastic Compute Cloud and you have
-	// Amazon Web Services accounts that use that service, those account IDs appear in
-	// the response.
-	//
-	// * If the eventScopeCode value is NONE, then the eventArn that you
+	// - If the eventScopeCode
+	// value is ACCOUNT_SPECIFIC, then the affectedAccounts value lists the affected
+	// Amazon Web Services accounts in your organization. For example, if an event
+	// affects a service such as Amazon Elastic Compute Cloud and you have Amazon Web
+	// Services accounts that use that service, those account IDs appear in the
+	// response.
+	// - If the eventScopeCode value is NONE, then the eventArn that you
 	// specified in the request is invalid or doesn't exist.
 	EventScopeCode EventScopeCode
 
@@ -432,18 +427,15 @@ type OrganizationEvent struct {
 
 	// This parameter specifies if the Health event is a public Amazon Web Services
 	// service event or an account-specific event.
-	//
-	// * If the eventScopeCode value is
+	// - If the eventScopeCode value is
 	// PUBLIC, then the affectedAccounts value is always empty.
-	//
-	// * If the
-	// eventScopeCode value is ACCOUNT_SPECIFIC, then the affectedAccounts value lists
-	// the affected Amazon Web Services accounts in your organization. For example, if
-	// an event affects a service such as Amazon Elastic Compute Cloud and you have
-	// Amazon Web Services accounts that use that service, those account IDs appear in
-	// the response.
-	//
-	// * If the eventScopeCode value is NONE, then the eventArn that you
+	// - If the eventScopeCode
+	// value is ACCOUNT_SPECIFIC, then the affectedAccounts value lists the affected
+	// Amazon Web Services accounts in your organization. For example, if an event
+	// affects a service such as Amazon Elastic Compute Cloud and you have Amazon Web
+	// Services accounts that use that service, those account IDs appear in the
+	// response.
+	// - If the eventScopeCode value is NONE, then the eventArn that you
 	// specified in the request is invalid or doesn't exist.
 	EventScopeCode EventScopeCode
 
@@ -492,13 +484,11 @@ type OrganizationEventDetails struct {
 
 	// Summary information about an Health event. Health events can be public or
 	// account-specific:
-	//
-	// * Public events might be service events that are not specific
+	// - Public events might be service events that are not specific
 	// to an Amazon Web Services account. For example, if there is an issue with an
 	// Amazon Web Services Region, Health provides information about the event, even if
 	// you don't use services or resources in that Region.
-	//
-	// * Account-specific events
+	// - Account-specific events
 	// are specific to either your Amazon Web Services account or an account in your
 	// organization. For example, if there's an issue with Amazon Elastic Compute Cloud
 	// in a Region that you use, Health provides information about the event and the
@@ -535,17 +525,14 @@ type OrganizationEventDetailsErrorItem struct {
 	// A message that describes the error. If you call the
 	// DescribeEventDetailsForOrganization operation and receive one of the following
 	// errors, follow the recommendations in the message:
-	//
-	// * We couldn't find a public
+	// - We couldn't find a public
 	// event that matches your request. To find an event that is account specific, you
 	// must enter an Amazon Web Services account ID in the request.
-	//
-	// * We couldn't find
+	// - We couldn't find
 	// an account specific event for the specified Amazon Web Services account. To find
 	// an event that is public, you must enter a null value for the Amazon Web Services
 	// account ID in the request.
-	//
-	// * Your Amazon Web Services account doesn't include
+	// - Your Amazon Web Services account doesn't include
 	// the Amazon Web Services Support plan required to use the Health API. You must
 	// have either a Business, Enterprise On-Ramp, or Enterprise Support plan.
 	ErrorMessage *string

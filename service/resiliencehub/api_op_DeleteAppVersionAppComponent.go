@@ -13,13 +13,11 @@ import (
 )
 
 // Deletes an Application Component from the AWS Resilience Hub application.
-//
-// *
-// This API updates the AWS Resilience Hub application draft version. To use this
+// - This
+// API updates the AWS Resilience Hub application draft version. To use this
 // Application Component for running assessments, you must publish the AWS
 // Resilience Hub application using the PublishAppVersion API.
-//
-// * You will not be
+// - You will not be
 // able to delete an Application Component if it has resources associated with it.
 func (c *Client) DeleteAppVersionAppComponent(ctx context.Context, params *DeleteAppVersionAppComponentInput, optFns ...func(*Options)) (*DeleteAppVersionAppComponentOutput, error) {
 	if params == nil {

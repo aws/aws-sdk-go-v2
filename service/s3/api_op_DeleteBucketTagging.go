@@ -15,11 +15,9 @@ import (
 // permission to perform the s3:PutBucketTagging action. By default, the bucket
 // owner has this permission and can grant this permission to others. The following
 // operations are related to DeleteBucketTagging:
-//
-// * GetBucketTagging
+// - GetBucketTagging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketTagging.html)
-//
-// *
+// -
 // PutBucketTagging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketTagging.html)
 func (c *Client) DeleteBucketTagging(ctx context.Context, params *DeleteBucketTaggingInput, optFns ...func(*Options)) (*DeleteBucketTaggingOutput, error) {

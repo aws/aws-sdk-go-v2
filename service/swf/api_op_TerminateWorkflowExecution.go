@@ -23,14 +23,11 @@ import (
 // gracefully close while TerminateWorkflowExecution doesn't. Access Control You
 // can use IAM policies to control this action's access to Amazon SWF resources as
 // follows:
-//
-// * Use a Resource element with the domain name to limit the action to
+// - Use a Resource element with the domain name to limit the action to
 // only specified domains.
-//
-// * Use an Action element to allow or deny permission to
+// - Use an Action element to allow or deny permission to
 // call this action.
-//
-// * You cannot use an IAM policy to constrain this action's
+// - You cannot use an IAM policy to constrain this action's
 // parameters.
 //
 // If the caller doesn't have sufficient permissions to invoke the
@@ -71,16 +68,13 @@ type TerminateWorkflowExecutionInput struct {
 	// workflow execution being terminated. This policy overrides the child policy
 	// specified for the workflow execution at registration time or when starting the
 	// execution. The supported child policies are:
-	//
-	// * TERMINATE – The child executions
+	// - TERMINATE – The child executions
 	// are terminated.
-	//
-	// * REQUEST_CANCEL – A request to cancel is attempted for each
+	// - REQUEST_CANCEL – A request to cancel is attempted for each
 	// child execution by recording a WorkflowExecutionCancelRequested event in its
 	// history. It is up to the decider to take appropriate actions when it receives an
 	// execution history with this event.
-	//
-	// * ABANDON – No action is taken. The child
+	// - ABANDON – No action is taken. The child
 	// executions continue to run.
 	//
 	// A child policy for this workflow execution must be

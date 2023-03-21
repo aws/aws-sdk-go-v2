@@ -21,11 +21,9 @@ import (
 // AssociateInstanceEventWindow API. Event windows are applicable only for
 // scheduled events that stop, reboot, or terminate instances. Event windows are
 // not applicable for:
-//
-// * Expedited scheduled events and network maintenance
+// - Expedited scheduled events and network maintenance
 // events.
-//
-// * Unscheduled maintenance such as AutoRecovery and unplanned
+// - Unscheduled maintenance such as AutoRecovery and unplanned
 // reboots.
 //
 // For more information, see Define event windows for scheduled events
@@ -50,28 +48,22 @@ type CreateInstanceEventWindowInput struct {
 
 	// The cron expression for the event window, for example, * 0-4,20-23 * * 1,5. If
 	// you specify a cron expression, you can't specify a time range. Constraints:
-	//
-	// *
+	// -
 	// Only hour and day of the week values are supported.
-	//
-	// * For day of the week
+	// - For day of the week
 	// values, you can specify either integers 0 through 6, or alternative single
 	// values SUN through SAT.
+	// - The minute, month, and year must be specified by *.
+	// -
+	// The hour value must be one or a multiple range, for example, 0-4 or 0-4,20-23.
+	// -
+	// Each hour range must be >= 2 hours, for example, 0-2 or 20-23.
+	// - The event
+	// window must be >= 4 hours. The combined total time ranges in the event window
+	// must be >= 4 hours.
 	//
-	// * The minute, month, and year must be specified by
-	// *.
-	//
-	// * The hour value must be one or a multiple range, for example, 0-4 or
-	// 0-4,20-23.
-	//
-	// * Each hour range must be >= 2 hours, for example, 0-2 or 20-23.
-	//
-	// *
-	// The event window must be >= 4 hours. The combined total time ranges in the event
-	// window must be >= 4 hours.
-	//
-	// For more information about cron expressions, see
-	// cron (https://en.wikipedia.org/wiki/Cron) on the Wikipedia website.
+	// For more information about cron expressions, see cron
+	// (https://en.wikipedia.org/wiki/Cron) on the Wikipedia website.
 	CronExpression *string
 
 	// Checks whether you have the required permissions for the action, without

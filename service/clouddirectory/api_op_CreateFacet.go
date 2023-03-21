@@ -51,18 +51,17 @@ type CreateFacetInput struct {
 
 	// Specifies whether a given object created from this facet is of type node, leaf
 	// node, policy or index.
+	// - Node: Can have multiple children but one parent.
 	//
-	// * Node: Can have multiple children but one parent.
-	//
-	// *
+	// -
 	// Leaf node: Cannot have children but can have multiple parents.
 	//
-	// * Policy: Allows
+	// - Policy: Allows
 	// you to store a policy document and policy type. For more information, see
 	// Policies
 	// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies).
 	//
-	// *
+	// -
 	// Index: Can be created with the Index API.
 	ObjectType types.ObjectType
 

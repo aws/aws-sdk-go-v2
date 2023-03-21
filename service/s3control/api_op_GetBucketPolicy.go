@@ -41,15 +41,12 @@ import (
 // access point ARN, see the Examples
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html#API_control_GetBucketPolicy_Examples)
 // section. The following actions are related to GetBucketPolicy:
-//
-// * GetObject
+// - GetObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
-//
-// *
+// -
 // PutBucketPolicy
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html)
-//
-// *
+// -
 // DeleteBucketPolicy
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html)
 func (c *Client) GetBucketPolicy(ctx context.Context, params *GetBucketPolicyInput, optFns ...func(*Options)) (*GetBucketPolicyOutput, error) {

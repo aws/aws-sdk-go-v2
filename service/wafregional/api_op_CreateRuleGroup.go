@@ -20,18 +20,15 @@ import (
 // global use. Creates a RuleGroup. A rule group is a collection of predefined
 // rules that you add to a web ACL. You use UpdateRuleGroup to add rules to the
 // rule group. Rule groups are subject to the following limits:
+// - Three rule groups
+// per account. You can request an increase to this limit by contacting customer
+// support.
+// - One rule group per web ACL.
+// - Ten rules per rule group.
 //
-// * Three rule
-// groups per account. You can request an increase to this limit by contacting
-// customer support.
-//
-// * One rule group per web ACL.
-//
-// * Ten rules per rule
-// group.
-//
-// For more information about how to use the AWS WAF API to allow or block
-// HTTP requests, see the AWS WAF Developer Guide
+// For more
+// information about how to use the AWS WAF API to allow or block HTTP requests,
+// see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/).
 func (c *Client) CreateRuleGroup(ctx context.Context, params *CreateRuleGroupInput, optFns ...func(*Options)) (*CreateRuleGroupOutput, error) {
 	if params == nil {

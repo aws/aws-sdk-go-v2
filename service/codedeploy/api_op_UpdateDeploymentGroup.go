@@ -50,11 +50,9 @@ type UpdateDeploymentGroupInput struct {
 
 	// The replacement list of Auto Scaling groups to be included in the deployment
 	// group, if you want to change them.
-	//
-	// * To keep the Auto Scaling groups, enter
+	// - To keep the Auto Scaling groups, enter
 	// their names or do not specify this parameter.
-	//
-	// * To remove Auto Scaling groups,
+	// - To remove Auto Scaling groups,
 	// specify a non-null empty list of Auto Scaling group names to detach all
 	// CodeDeploy-managed Auto Scaling lifecycle hooks. For examples, see Amazon EC2
 	// instances in an Amazon EC2 Auto Scaling group fail to launch and receive the

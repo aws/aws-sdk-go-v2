@@ -17,17 +17,12 @@ import (
 // will delete a stack if it doesn't contain a last known stable state. A last
 // known stable state includes any status in a *_COMPLETE. This includes the
 // following stack statuses.
-//
-// * CREATE_COMPLETE
-//
-// * UPDATE_COMPLETE
-//
-// *
+// - CREATE_COMPLETE
+// - UPDATE_COMPLETE
+// -
 // UPDATE_ROLLBACK_COMPLETE
-//
-// * IMPORT_COMPLETE
-//
-// * IMPORT_ROLLBACK_COMPLETE
+// - IMPORT_COMPLETE
+// - IMPORT_ROLLBACK_COMPLETE
 func (c *Client) RollbackStack(ctx context.Context, params *RollbackStackInput, optFns ...func(*Options)) (*RollbackStackOutput, error) {
 	if params == nil {
 		params = &RollbackStackInput{}

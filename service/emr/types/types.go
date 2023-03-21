@@ -1067,29 +1067,22 @@ type InstanceFleetStateChangeReason struct {
 type InstanceFleetStatus struct {
 
 	// A code representing the instance fleet status.
-	//
-	// * PROVISIONING—The instance
-	// fleet is provisioning EC2 resources and is not yet ready to run jobs.
-	//
-	// *
+	// - PROVISIONING—The instance fleet
+	// is provisioning EC2 resources and is not yet ready to run jobs.
+	// -
 	// BOOTSTRAPPING—EC2 instances and other resources have been provisioned and the
 	// bootstrap actions specified for the instances are underway.
-	//
-	// * RUNNING—EC2
+	// - RUNNING—EC2
 	// instances and other resources are running. They are either executing jobs or
 	// waiting to execute jobs.
-	//
-	// * RESIZING—A resize operation is underway. EC2
+	// - RESIZING—A resize operation is underway. EC2
 	// instances are either being added or removed.
-	//
-	// * SUSPENDED—A resize operation
+	// - SUSPENDED—A resize operation
 	// could not complete. Existing EC2 instances are running, but instances can't be
 	// added or removed.
-	//
-	// * TERMINATING—The instance fleet is terminating EC2
+	// - TERMINATING—The instance fleet is terminating EC2
 	// instances.
-	//
-	// * TERMINATED—The instance fleet is no longer active, and all EC2
+	// - TERMINATED—The instance fleet is no longer active, and all EC2
 	// instances have been terminated.
 	State InstanceFleetState
 
@@ -1923,37 +1916,27 @@ type NotebookExecution struct {
 	StartTime *time.Time
 
 	// The status of the notebook execution.
-	//
-	// * START_PENDING indicates that the
-	// cluster has received the execution request but execution has not begun.
-	//
-	// *
-	// STARTING indicates that the execution is starting on the cluster.
-	//
-	// * RUNNING
-	// indicates that the execution is being processed by the cluster.
-	//
-	// * FINISHING
-	// indicates that execution processing is in the final stages.
-	//
-	// * FINISHED
-	// indicates that the execution has completed without error.
-	//
-	// * FAILING indicates
-	// that the execution is failing and will not finish successfully.
-	//
-	// * FAILED
-	// indicates that the execution failed.
-	//
-	// * STOP_PENDING indicates that the cluster
-	// has received a StopNotebookExecution request and the stop is pending.
-	//
-	// *
-	// STOPPING indicates that the cluster is in the process of stopping the execution
-	// as a result of a StopNotebookExecution request.
-	//
-	// * STOPPED indicates that the
-	// execution stopped because of a StopNotebookExecution request.
+	// - START_PENDING indicates that the cluster
+	// has received the execution request but execution has not begun.
+	// - STARTING
+	// indicates that the execution is starting on the cluster.
+	// - RUNNING indicates
+	// that the execution is being processed by the cluster.
+	// - FINISHING indicates that
+	// execution processing is in the final stages.
+	// - FINISHED indicates that the
+	// execution has completed without error.
+	// - FAILING indicates that the execution is
+	// failing and will not finish successfully.
+	// - FAILED indicates that the execution
+	// failed.
+	// - STOP_PENDING indicates that the cluster has received a
+	// StopNotebookExecution request and the stop is pending.
+	// - STOPPING indicates that
+	// the cluster is in the process of stopping the execution as a result of a
+	// StopNotebookExecution request.
+	// - STOPPED indicates that the execution stopped
+	// because of a StopNotebookExecution request.
 	Status NotebookExecutionStatus
 
 	// A list of tags associated with a notebook execution. Tags are user-defined
@@ -1984,37 +1967,27 @@ type NotebookExecutionSummary struct {
 	StartTime *time.Time
 
 	// The status of the notebook execution.
-	//
-	// * START_PENDING indicates that the
-	// cluster has received the execution request but execution has not begun.
-	//
-	// *
-	// STARTING indicates that the execution is starting on the cluster.
-	//
-	// * RUNNING
-	// indicates that the execution is being processed by the cluster.
-	//
-	// * FINISHING
-	// indicates that execution processing is in the final stages.
-	//
-	// * FINISHED
-	// indicates that the execution has completed without error.
-	//
-	// * FAILING indicates
-	// that the execution is failing and will not finish successfully.
-	//
-	// * FAILED
-	// indicates that the execution failed.
-	//
-	// * STOP_PENDING indicates that the cluster
-	// has received a StopNotebookExecution request and the stop is pending.
-	//
-	// *
-	// STOPPING indicates that the cluster is in the process of stopping the execution
-	// as a result of a StopNotebookExecution request.
-	//
-	// * STOPPED indicates that the
-	// execution stopped because of a StopNotebookExecution request.
+	// - START_PENDING indicates that the cluster
+	// has received the execution request but execution has not begun.
+	// - STARTING
+	// indicates that the execution is starting on the cluster.
+	// - RUNNING indicates
+	// that the execution is being processed by the cluster.
+	// - FINISHING indicates that
+	// execution processing is in the final stages.
+	// - FINISHED indicates that the
+	// execution has completed without error.
+	// - FAILING indicates that the execution is
+	// failing and will not finish successfully.
+	// - FAILED indicates that the execution
+	// failed.
+	// - STOP_PENDING indicates that the cluster has received a
+	// StopNotebookExecution request and the stop is pending.
+	// - STOPPING indicates that
+	// the cluster is in the process of stopping the execution as a result of a
+	// StopNotebookExecution request.
+	// - STOPPED indicates that the execution stopped
+	// because of a StopNotebookExecution request.
 	Status NotebookExecutionStatus
 
 	noSmithyDocumentSerde
@@ -2026,13 +1999,11 @@ type OnDemandCapacityReservationOptions struct {
 
 	// Indicates the instance's Capacity Reservation preferences. Possible preferences
 	// include:
-	//
-	// * open - The instance can run in any open Capacity Reservation that
-	// has matching attributes (instance type, platform, Availability Zone).
-	//
-	// * none -
-	// The instance avoids running in a Capacity Reservation even if one is available.
-	// The instance runs as an On-Demand Instance.
+	// - open - The instance can run in any open Capacity Reservation that has
+	// matching attributes (instance type, platform, Availability Zone).
+	// - none - The
+	// instance avoids running in a Capacity Reservation even if one is available. The
+	// instance runs as an On-Demand Instance.
 	CapacityReservationPreference OnDemandCapacityReservationPreference
 
 	// The ARN of the Capacity Reservation resource group in which to run the instance.
@@ -2526,17 +2497,13 @@ type StepConfig struct {
 	Name *string
 
 	// The action to take when the step fails. Use one of the following values:
-	//
-	// *
+	// -
 	// TERMINATE_CLUSTER - Shuts down the cluster.
-	//
-	// * CANCEL_AND_WAIT - Cancels any
+	// - CANCEL_AND_WAIT - Cancels any
 	// pending steps and returns the cluster to the WAITING state.
-	//
-	// * CONTINUE -
+	// - CONTINUE -
 	// Continues to the next step in the queue.
-	//
-	// * TERMINATE_JOB_FLOW - Shuts down the
+	// - TERMINATE_JOB_FLOW - Shuts down the
 	// cluster. TERMINATE_JOB_FLOW is provided for backward compatibility. We recommend
 	// using TERMINATE_CLUSTER instead.
 	//

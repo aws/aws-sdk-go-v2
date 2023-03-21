@@ -12,22 +12,18 @@ import (
 )
 
 // This action is available if all of the following are true:
-//
-// * You're authorized
+// - You're authorized
 // to create accounts in the Amazon Web Services GovCloud (US) Region. For more
 // information on the Amazon Web Services GovCloud (US) Region, see the  Amazon Web
 // Services GovCloud User Guide.
 // (https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/welcome.html)
-//
-// * You
+// - You
 // already have an account in the Amazon Web Services GovCloud (US) Region that is
 // paired with a management account of an organization in the commercial Region.
-//
-// *
+// -
 // You call this action from the management account of your organization in the
 // commercial Region.
-//
-// * You have the organizations:CreateGovCloudAccount
+// - You have the organizations:CreateGovCloudAccount
 // permission.
 //
 // Organizations automatically creates the required service-linked
@@ -37,12 +33,10 @@ import (
 // in the Organizations User Guide. Amazon Web Services automatically enables
 // CloudTrail for Amazon Web Services GovCloud (US) accounts, but you should also
 // do the following:
-//
-// * Verify that CloudTrail is enabled to store logs.
-//
-// * Create
-// an Amazon S3 bucket for CloudTrail log storage. For more information, see
-// Verifying CloudTrail Is Enabled
+// - Verify that CloudTrail is enabled to store logs.
+// - Create an
+// Amazon S3 bucket for CloudTrail log storage. For more information, see Verifying
+// CloudTrail Is Enabled
 // (https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/verifying-cloudtrail.html)
 // in the Amazon Web Services GovCloud User Guide.
 //
@@ -66,12 +60,10 @@ import (
 // in progress. You might need to wait a few minutes before you can successfully
 // access the account. To check the status of the request, do one of the
 // following:
-//
-// * Use the OperationId response element from this operation to
-// provide as a parameter to the DescribeCreateAccountStatus operation.
-//
-// * Check
-// the CloudTrail log for the CreateAccountResult event. For information on using
+// - Use the OperationId response element from this operation to provide
+// as a parameter to the DescribeCreateAccountStatus operation.
+// - Check the
+// CloudTrail log for the CreateAccountResult event. For information on using
 // CloudTrail with Organizations, see Monitoring the Activity in Your Organization
 // (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_monitoring.html)
 // in the Organizations User Guide.
@@ -96,28 +88,24 @@ import (
 // Organization
 // (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html)
 // in the Organizations User Guide.
-//
-// * When you create an account in an
-// organization using the Organizations console, API, or CLI commands, the
-// information required for the account to operate as a standalone account is not
-// automatically collected. This includes a payment method and signing the end user
-// license agreement (EULA). If you must remove an account from your organization
-// later, you can do so only after you provide the missing information. Follow the
-// steps at  To leave an organization as a member account
+// - When you create an account in an organization
+// using the Organizations console, API, or CLI commands, the information required
+// for the account to operate as a standalone account is not automatically
+// collected. This includes a payment method and signing the end user license
+// agreement (EULA). If you must remove an account from your organization later,
+// you can do so only after you provide the missing information. Follow the steps
+// at  To leave an organization as a member account
 // (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info)
 // in the Organizations User Guide.
-//
-// * If you get an exception that indicates that
+// - If you get an exception that indicates that
 // you exceeded your account limits for the organization, contact Amazon Web
 // Services Support (https://console.aws.amazon.com/support/home#/).
-//
-// * If you get
+// - If you get
 // an exception that indicates that the operation failed because your organization
 // is still initializing, wait one hour and then try again. If the error persists,
 // contact Amazon Web Services Support
 // (https://console.aws.amazon.com/support/home#/).
-//
-// * Using CreateGovCloudAccount
+// - Using CreateGovCloudAccount
 // to create multiple temporary accounts isn't recommended. You can only close an
 // account from the Amazon Web Services Billing and Cost Management console, and
 // you must be signed in as the root user. For information on the requirements and
@@ -161,30 +149,22 @@ type CreateGovCloudAccountInput struct {
 	// the commercial Region. This email address must not already be associated with
 	// another Amazon Web Services account. You must use a valid email address to
 	// complete account creation. The rules for a valid email address:
-	//
-	// * The address
+	// - The address
 	// must be a minimum of 6 and a maximum of 64 characters long.
-	//
-	// * All characters
+	// - All characters
 	// must be 7-bit ASCII characters.
-	//
-	// * There must be one and only one @ symbol,
-	// which separates the local name from the domain name.
-	//
-	// * The local name can't
-	// contain any of the following characters: whitespace, " ' ( ) < > [ ] : ; , \ | %
-	// &
-	//
-	// * The local name can't begin with a dot (.)
-	//
-	// * The domain name can consist of
-	// only the characters [a-z],[A-Z],[0-9], hyphen (-), or dot (.)
-	//
-	// * The domain name
-	// can't begin or end with a hyphen (-) or dot (.)
-	//
-	// * The domain name must contain
-	// at least one dot
+	// - There must be one and only one @ symbol, which
+	// separates the local name from the domain name.
+	// - The local name can't contain
+	// any of the following characters: whitespace, " ' ( ) < > [ ] : ; , \ | % &
+	// - The
+	// local name can't begin with a dot (.)
+	// - The domain name can consist of only the
+	// characters [a-z],[A-Z],[0-9], hyphen (-), or dot (.)
+	// - The domain name can't
+	// begin or end with a hyphen (-) or dot (.)
+	// - The domain name must contain at
+	// least one dot
 	//
 	// You can't access the root user of the account or remove an
 	// account that was created with an invalid email address. Like all request

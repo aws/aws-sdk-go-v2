@@ -401,12 +401,10 @@ type BackupSelection struct {
 	// using tags. For example, "StringEquals": { "ConditionKey":
 	// "aws:ResourceTag/CreatedByCryo", "ConditionValue": "true" },. Condition
 	// operators are case sensitive. Conditions differs from ListOfTags as follows:
-	//
-	// *
+	// -
 	// When you specify more than one condition, you only assign the resources that
 	// match ALL conditions (using AND logic).
-	//
-	// * Conditions supports StringEquals,
+	// - Conditions supports StringEquals,
 	// StringLike, StringNotEquals, and StringNotLike. ListOfTags only supports
 	// StringEquals.
 	Conditions *Conditions
@@ -415,12 +413,10 @@ type BackupSelection struct {
 	// using tags. For example, "StringEquals": { "ConditionKey":
 	// "aws:ResourceTag/CreatedByCryo", "ConditionValue": "true" },. Condition
 	// operators are case sensitive. ListOfTags differs from Conditions as follows:
-	//
-	// *
+	// -
 	// When you specify more than one condition, you assign all resources that match AT
 	// LEAST ONE condition (using OR logic).
-	//
-	// * ListOfTags only supports StringEquals.
+	// - ListOfTags only supports StringEquals.
 	// Conditions supports StringEquals, StringLike, StringNotEquals, and
 	// StringNotLike.
 	ListOfTags []Condition

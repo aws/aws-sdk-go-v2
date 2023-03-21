@@ -105,21 +105,16 @@ type GetBatchPredictionOutput struct {
 	StartedAt *time.Time
 
 	// The status of the BatchPrediction, which can be one of the following values:
-	//
-	// *
+	// -
 	// PENDING - Amazon Machine Learning (Amazon ML) submitted a request to generate
 	// batch predictions.
-	//
-	// * INPROGRESS - The batch predictions are in progress.
-	//
-	// *
+	// - INPROGRESS - The batch predictions are in progress.
+	// -
 	// FAILED - The request to perform a batch prediction did not run to completion. It
 	// is not usable.
-	//
-	// * COMPLETED - The batch prediction process completed
+	// - COMPLETED - The batch prediction process completed
 	// successfully.
-	//
-	// * DELETED - The BatchPrediction is marked as deleted. It is not
+	// - DELETED - The BatchPrediction is marked as deleted. It is not
 	// usable.
 	Status types.EntityStatus
 

@@ -110,16 +110,13 @@ type RequestCertificateInput struct {
 	// maximum length of a SAN DNS name is 253 octets. The name is made up of multiple
 	// labels separated by periods. No label can be longer than 63 octets. Consider the
 	// following examples:
-	//
-	// * (63 octets).(63 octets).(63 octets).(61 octets) is legal
+	// - (63 octets).(63 octets).(63 octets).(61 octets) is legal
 	// because the total length is 253 octets (63+1+63+1+63+1+61) and no label exceeds
 	// 63 octets.
-	//
-	// * (64 octets).(63 octets).(63 octets).(61 octets) is not legal
+	// - (64 octets).(63 octets).(63 octets).(61 octets) is not legal
 	// because the total length exceeds 253 octets (64+1+63+1+63+1+61) and the first
 	// label exceeds 63 octets.
-	//
-	// * (63 octets).(63 octets).(63 octets).(62 octets) is
+	// - (63 octets).(63 octets).(63 octets).(62 octets) is
 	// not legal because the total length of the DNS name (63+1+63+1+63+1+62) exceeds
 	// 253 octets.
 	SubjectAlternativeNames []string

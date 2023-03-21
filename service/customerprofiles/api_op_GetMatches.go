@@ -28,27 +28,19 @@ import (
 // API to return and review the results. Or, if you have configured ExportingConfig
 // in the MatchingRequest, you can download the results from S3. Amazon Connect
 // uses the following profile attributes to identify matches:
-//
-// * PhoneNumber
-//
-// *
+// - PhoneNumber
+// -
 // HomePhoneNumber
-//
-// * BusinessPhoneNumber
-//
-// * MobilePhoneNumber
-//
-// * EmailAddress
-//
-// *
+// - BusinessPhoneNumber
+// - MobilePhoneNumber
+// - EmailAddress
+// -
 // PersonalEmailAddress
+// - BusinessEmailAddress
+// - FullName
 //
-// * BusinessEmailAddress
-//
-// * FullName
-//
-// For example, two or
-// more profiles—with spelling mistakes such as John Doe and Jhn Doe, or different
+// For example, two or more
+// profiles—with spelling mistakes such as John Doe and Jhn Doe, or different
 // casing email addresses such as JOHN_DOE@ANYCOMPANY.COM and
 // johndoe@anycompany.com, or different phone number formats such as 555-010-0000
 // and +1-555-010-0000—can be detected as belonging to the same customer John Doe

@@ -65,15 +65,13 @@ type CreateEndpointInput struct {
 
 	// The settings in JSON format for the DMS transfer type of source endpoint.
 	// Possible settings include the following:
-	//
-	// * ServiceAccessRoleArn - The Amazon
+	// - ServiceAccessRoleArn - The Amazon
 	// Resource Name (ARN) used by the service access IAM role. The role must allow the
 	// iam:PassRole action.
+	// - BucketName - The name of the S3 bucket to use.
 	//
-	// * BucketName - The name of the S3 bucket to
-	// use.
-	//
-	// Shorthand syntax for these settings is as follows:
+	// Shorthand
+	// syntax for these settings is as follows:
 	// ServiceAccessRoleArn=string,BucketName=string JSON syntax for these settings is
 	// as follows: { "ServiceAccessRoleArn": "string", "BucketName": "string", }
 	DmsTransferSettings *types.DmsTransferSettings

@@ -335,49 +335,30 @@ type DatetimeOptions struct {
 type EntityDetectorConfiguration struct {
 
 	// Entity types to detect. Can be any of the following:
-	//
-	// * USA_SSN
-	//
-	// * EMAIL
-	//
-	// *
+	// - USA_SSN
+	// - EMAIL
+	// -
 	// USA_ITIN
-	//
-	// * USA_PASSPORT_NUMBER
-	//
-	// * PHONE_NUMBER
-	//
-	// * USA_DRIVING_LICENSE
-	//
-	// *
+	// - USA_PASSPORT_NUMBER
+	// - PHONE_NUMBER
+	// - USA_DRIVING_LICENSE
+	// -
 	// BANK_ACCOUNT
-	//
-	// * CREDIT_CARD
-	//
-	// * IP_ADDRESS
-	//
-	// * MAC_ADDRESS
-	//
-	// * USA_DEA_NUMBER
-	//
-	// *
+	// - CREDIT_CARD
+	// - IP_ADDRESS
+	// - MAC_ADDRESS
+	// - USA_DEA_NUMBER
+	// -
 	// USA_HCPCS_CODE
-	//
-	// * USA_NATIONAL_PROVIDER_IDENTIFIER
-	//
-	// * USA_NATIONAL_DRUG_CODE
-	//
-	// *
+	// - USA_NATIONAL_PROVIDER_IDENTIFIER
+	// - USA_NATIONAL_DRUG_CODE
+	// -
 	// USA_HEALTH_INSURANCE_CLAIM_NUMBER
-	//
-	// * USA_MEDICARE_BENEFICIARY_IDENTIFIER
-	//
-	// *
+	// - USA_MEDICARE_BENEFICIARY_IDENTIFIER
+	// -
 	// USA_CPT_CODE
-	//
-	// * PERSON_NAME
-	//
-	// * DATE
+	// - PERSON_NAME
+	// - DATE
 	//
 	// The Entity type group USA_ALL is also
 	// supported, and includes all of the above entity types except PERSON_NAME and
@@ -526,11 +507,9 @@ type Job struct {
 	EncryptionKeyArn *string
 
 	// The encryption mode for the job, which can be one of the following:
-	//
-	// * SSE-KMS -
+	// - SSE-KMS -
 	// Server-side encryption with keys managed by KMS.
-	//
-	// * SSE-S3 - Server-side
+	// - SSE-S3 - Server-side
 	// encryption with keys managed by Amazon S3.
 	EncryptionMode EncryptionMode
 
@@ -578,12 +557,10 @@ type Job struct {
 	Timeout int32
 
 	// The job type of the job, which must be one of the following:
-	//
-	// * PROFILE - A job
+	// - PROFILE - A job
 	// to analyze a dataset, to determine its size, data types, data distribution, and
 	// more.
-	//
-	// * RECIPE - A job to apply one or more transformations to a dataset.
+	// - RECIPE - A job to apply one or more transformations to a dataset.
 	Type JobType
 
 	// List of validation configurations that are applied to the profile job.
@@ -666,12 +643,10 @@ type JobSample struct {
 
 	// A value that determines whether the profile job is run on the entire dataset or
 	// a specified number of rows. This value must be one of the following:
-	//
-	// *
+	// -
 	// FULL_DATASET - The profile job is run on the entire dataset.
-	//
-	// * CUSTOM_ROWS -
-	// The profile job is run on the number of rows specified in the Size parameter.
+	// - CUSTOM_ROWS - The
+	// profile job is run on the number of rows specified in the Size parameter.
 	Mode SampleMode
 
 	// The Size parameter is only required when the mode is CUSTOM_ROWS. The profile
@@ -882,17 +857,14 @@ type Recipe struct {
 	PublishedDate *time.Time
 
 	// The identifier for the version for the recipe. Must be one of the following:
-	//
-	// *
+	// -
 	// Numeric version (X.Y) - X and Y stand for major and minor version numbers. The
 	// maximum length of each is 6 digits, and neither can be negative values. Both X
 	// and Y are required, and "0.0" isn't a valid version.
-	//
-	// * LATEST_WORKING - the
-	// most recent valid version being developed in a DataBrew project.
-	//
-	// *
-	// LATEST_PUBLISHED - the most recent published version.
+	// - LATEST_WORKING - the most
+	// recent valid version being developed in a DataBrew project.
+	// - LATEST_PUBLISHED -
+	// the most recent published version.
 	RecipeVersion *string
 
 	// The Amazon Resource Name (ARN) for the recipe.

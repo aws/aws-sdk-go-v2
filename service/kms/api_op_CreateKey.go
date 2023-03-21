@@ -145,13 +145,10 @@ import (
 // a user to create KMS keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/iam-policies.html#iam-policy-example-create-key)
 // in the Key Management Service Developer Guide. Related operations:
-//
-// *
+// -
 // DescribeKey
-//
-// * ListKeys
-//
-// * ScheduleKeyDeletion
+// - ListKeys
+// - ScheduleKeyDeletion
 func (c *Client) CreateKey(ctx context.Context, params *CreateKeyInput, optFns ...func(*Options)) (*CreateKeyOutput, error) {
 	if params == nil {
 		params = &CreateKeyInput{}
@@ -230,50 +227,36 @@ type CreateKeyInput struct {
 	// encryption KMS keys to protect your data. These services do not support
 	// asymmetric KMS keys or HMAC KMS keys. KMS supports the following key specs for
 	// KMS keys:
+	// - Symmetric encryption key (default)
+	// - SYMMETRIC_DEFAULT
 	//
-	// * Symmetric encryption key (default)
+	// - HMAC keys
+	// (symmetric)
+	// - HMAC_224
+	// - HMAC_256
+	// - HMAC_384
+	// - HMAC_512
 	//
-	// * SYMMETRIC_DEFAULT
-	//
-	// * HMAC
-	// keys (symmetric)
-	//
-	// * HMAC_224
-	//
-	// * HMAC_256
-	//
-	// * HMAC_384
-	//
-	// * HMAC_512
-	//
-	// * Asymmetric
-	// RSA key pairs
-	//
-	// * RSA_2048
-	//
-	// * RSA_3072
-	//
-	// * RSA_4096
-	//
-	// * Asymmetric NIST-recommended
-	// elliptic curve key pairs
-	//
-	// * ECC_NIST_P256 (secp256r1)
-	//
-	// * ECC_NIST_P384
-	// (secp384r1)
-	//
-	// * ECC_NIST_P521 (secp521r1)
-	//
-	// * Other asymmetric elliptic curve key
+	// - Asymmetric RSA key
 	// pairs
+	// - RSA_2048
+	// - RSA_3072
+	// - RSA_4096
 	//
-	// * ECC_SECG_P256K1 (secp256k1), commonly used for cryptocurrencies.
+	// - Asymmetric NIST-recommended elliptic
+	// curve key pairs
+	// - ECC_NIST_P256 (secp256r1)
+	// - ECC_NIST_P384 (secp384r1)
+	// -
+	// ECC_NIST_P521 (secp521r1)
 	//
-	// * SM2
-	// key pairs (China Regions only)
+	// - Other asymmetric elliptic curve key pairs
+	// -
+	// ECC_SECG_P256K1 (secp256k1), commonly used for cryptocurrencies.
 	//
-	// * SM2
+	// - SM2 key
+	// pairs (China Regions only)
+	// - SM2
 	KeySpec types.KeySpec
 
 	// Determines the cryptographic operations
@@ -282,20 +265,15 @@ type CreateKeyInput struct {
 	// parameter is optional when you are creating a symmetric encryption KMS key;
 	// otherwise, it is required. You can't change the KeyUsage value after the KMS key
 	// is created. Select only one valid value.
-	//
-	// * For symmetric encryption KMS keys,
+	// - For symmetric encryption KMS keys,
 	// omit the parameter or specify ENCRYPT_DECRYPT.
-	//
-	// * For HMAC KMS keys (symmetric),
+	// - For HMAC KMS keys (symmetric),
 	// specify GENERATE_VERIFY_MAC.
-	//
-	// * For asymmetric KMS keys with RSA key material,
+	// - For asymmetric KMS keys with RSA key material,
 	// specify ENCRYPT_DECRYPT or SIGN_VERIFY.
-	//
-	// * For asymmetric KMS keys with ECC key
+	// - For asymmetric KMS keys with ECC key
 	// material, specify SIGN_VERIFY.
-	//
-	// * For asymmetric KMS keys with SM2 key material
+	// - For asymmetric KMS keys with SM2 key material
 	// (China Regions only), specify ENCRYPT_DECRYPT or SIGN_VERIFY.
 	KeyUsage types.KeyUsageType
 
@@ -341,18 +319,16 @@ type CreateKeyInput struct {
 
 	// The key policy to attach to the KMS key. If you provide a key policy, it must
 	// meet the following criteria:
-	//
-	// * The key policy must allow the calling principal
+	// - The key policy must allow the calling principal
 	// to make a subsequent PutKeyPolicy request on the KMS key. This reduces the risk
 	// that the KMS key becomes unmanageable. For more information, see Default key
 	// policy
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-default.html#prevent-unmanageable-key)
 	// in the Key Management Service Developer Guide. (To omit this condition, set
 	// BypassPolicyLockoutSafetyCheck to true.)
-	//
-	// * Each statement in the key policy
-	// must contain one or more principals. The principals in the key policy must exist
-	// and be visible to KMS. When you create a new Amazon Web Services principal, you
+	// - Each statement in the key policy must
+	// contain one or more principals. The principals in the key policy must exist and
+	// be visible to KMS. When you create a new Amazon Web Services principal, you
 	// might need to enforce a delay before including the new principal in a key policy
 	// because the new principal might not be immediately visible to KMS. For more
 	// information, see Changes that I make are not always immediately visible

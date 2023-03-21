@@ -13,11 +13,9 @@ import (
 
 // Tests a registered extension to make sure it meets all necessary requirements
 // for being published in the CloudFormation registry.
-//
-// * For resource types, this
+// - For resource types, this
 // includes passing all contracts tests defined for the type.
-//
-// * For modules, this
+// - For modules, this
 // includes determining if the module's model meets all necessary
 // requirements.
 //
@@ -63,10 +61,8 @@ type TestTypeInput struct {
 	// the extension has been assigned a test type status of PASSED or FAILED. The user
 	// calling TestType must be able to access items in the specified S3 bucket.
 	// Specifically, the user needs the following permissions:
-	//
-	// * GetObject
-	//
-	// *
+	// - GetObject
+	// -
 	// PutObject
 	//
 	// For more information, see Actions, Resources, and Condition Keys for

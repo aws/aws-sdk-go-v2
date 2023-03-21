@@ -1099,20 +1099,15 @@ func (e *InstanceNotRegisteredException) ErrorCode() string {
 func (e *InstanceNotRegisteredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The format of the alarm configuration is invalid. Possible causes include:
-//
-// *
-// The alarm list is null.
-//
-// * The alarm object is null.
-//
-// * The alarm name is empty
-// or null or exceeds the limit of 255 characters.
-//
-// * Two alarms with the same name
+// - The
+// alarm list is null.
+// - The alarm object is null.
+// - The alarm name is empty or
+// null or exceeds the limit of 255 characters.
+// - Two alarms with the same name
 // have been specified.
-//
-// * The alarm configuration is enabled, but the alarm list
-// is empty.
+// - The alarm configuration is enabled, but the alarm list is
+// empty.
 type InvalidAlarmConfigException struct {
 	Message *string
 
@@ -2442,17 +2437,13 @@ func (e *InvalidTargetGroupPairException) ErrorCode() string {
 func (e *InvalidTargetGroupPairException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The target instance configuration is invalid. Possible causes include:
-//
-// *
+// -
 // Configuration data for target instances was entered for an in-place
 // deployment.
-//
-// * The limit of 10 tags for a tag type was exceeded.
-//
-// * The combined
+// - The limit of 10 tags for a tag type was exceeded.
+// - The combined
 // length of the tag names exceeded the limit.
-//
-// * A specified tag is not currently
+// - A specified tag is not currently
 // applied to any instances.
 type InvalidTargetInstancesException struct {
 	Message *string

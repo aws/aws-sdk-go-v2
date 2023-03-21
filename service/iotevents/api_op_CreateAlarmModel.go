@@ -103,20 +103,16 @@ type CreateAlarmModelOutput struct {
 	LastUpdateTime *time.Time
 
 	// The status of the alarm model. The status can be one of the following values:
-	//
-	// *
+	// -
 	// ACTIVE - The alarm model is active and it's ready to evaluate data.
-	//
-	// *
-	// ACTIVATING - AWS IoT Events is activating your alarm model. Activating an alarm
-	// model can take up to a few minutes.
-	//
-	// * INACTIVE - The alarm model is inactive,
-	// so it isn't ready to evaluate data. Check your alarm model information and
-	// update the alarm model.
-	//
-	// * FAILED - You couldn't create or update the alarm
-	// model. Check your alarm model information and try again.
+	// - ACTIVATING
+	// - AWS IoT Events is activating your alarm model. Activating an alarm model can
+	// take up to a few minutes.
+	// - INACTIVE - The alarm model is inactive, so it isn't
+	// ready to evaluate data. Check your alarm model information and update the alarm
+	// model.
+	// - FAILED - You couldn't create or update the alarm model. Check your
+	// alarm model information and try again.
 	Status types.AlarmModelVersionStatus
 
 	// Metadata pertaining to the operation's result.

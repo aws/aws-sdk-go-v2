@@ -17,11 +17,9 @@ import (
 // settings that can control how capacity scaling. For fleets with remote
 // locations, this operation retrieves data for the fleet's home Region only. This
 // operation can be used in the following ways:
-//
-// * To get capacity data for one or
+// - To get capacity data for one or
 // more specific fleets, provide a list of fleet IDs or fleet ARNs.
-//
-// * To get
+// - To get
 // capacity data for all fleets, do not provide a fleet identifier.
 //
 // When

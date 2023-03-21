@@ -28,15 +28,12 @@ import (
 // do not match, returns an error. Additionally, you can calculate the MD5 while
 // putting an object to Amazon S3 and compare the returned ETag to the calculated
 // MD5 value.
-//
-// * To successfully complete the PutObject request, you must have the
+// - To successfully complete the PutObject request, you must have the
 // s3:PutObject in your IAM permissions.
-//
-// * To successfully change the objects acl
+// - To successfully change the objects acl
 // of your PutObject request, you must have the s3:PutObjectAcl in your IAM
 // permissions.
-//
-// * The Content-MD5 header is required for any request to upload an
+// - The Content-MD5 header is required for any request to upload an
 // object with a retention period configured using Amazon S3 Object Lock. For more
 // information about Amazon S3 Object Lock, see Amazon S3 Object Lock Overview
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock-overview.html) in
@@ -92,11 +89,9 @@ import (
 // GetBucketVersioning
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketVersioning.html).
 // Related Resources
-//
-// * CopyObject
+// - CopyObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html)
-//
-// *
+// -
 // DeleteObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html)
 func (c *Client) PutObject(ctx context.Context, params *PutObjectInput, optFns ...func(*Options)) (*PutObjectOutput, error) {

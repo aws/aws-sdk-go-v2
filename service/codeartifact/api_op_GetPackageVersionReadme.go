@@ -65,13 +65,10 @@ type GetPackageVersionReadmeInput struct {
 	// The namespace of the package version with the requested readme file. The package
 	// version component that specifies its namespace depends on its type. For
 	// example:
-	//
-	// * The namespace of a Maven package version is its groupId.
-	//
-	// * The
+	// - The namespace of a Maven package version is its groupId.
+	// - The
 	// namespace of an npm package version is its scope.
-	//
-	// * Python and NuGet package
+	// - Python and NuGet package
 	// versions do not contain a corresponding component, package versions of those
 	// formats do not have a namespace.
 	Namespace *string
@@ -87,13 +84,10 @@ type GetPackageVersionReadmeOutput struct {
 	// The namespace of the package version with the requested readme file. The package
 	// version component that specifies its namespace depends on its type. For
 	// example:
-	//
-	// * The namespace of a Maven package version is its groupId.
-	//
-	// * The
+	// - The namespace of a Maven package version is its groupId.
+	// - The
 	// namespace of an npm package version is its scope.
-	//
-	// * Python and NuGet package
+	// - Python and NuGet package
 	// versions do not contain a corresponding component, package versions of those
 	// formats do not have a namespace.
 	Namespace *string

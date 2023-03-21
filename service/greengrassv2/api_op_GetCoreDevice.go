@@ -19,21 +19,16 @@ import (
 // device might not reflect its current status. The status timestamp indicates when
 // the device status was last updated. Core devices send status updates at the
 // following times:
-//
-// * When the IoT Greengrass Core software starts
-//
-// * When the
-// core device receives a deployment from the Amazon Web Services Cloud
-//
-// * When the
+// - When the IoT Greengrass Core software starts
+// - When the core
+// device receives a deployment from the Amazon Web Services Cloud
+// - When the
 // status of any component on the core device becomes BROKEN
-//
-// * At a regular
+// - At a regular
 // interval that you can configure
 // (https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html#greengrass-nucleus-component-configuration-fss),
 // which defaults to 24 hours
-//
-// * For IoT Greengrass Core v2.7.0, the core device
+// - For IoT Greengrass Core v2.7.0, the core device
 // sends status updates upon local deployment and cloud deployment
 func (c *Client) GetCoreDevice(ctx context.Context, params *GetCoreDeviceInput, optFns ...func(*Options)) (*GetCoreDeviceOutput, error) {
 	if params == nil {
@@ -84,12 +79,10 @@ type GetCoreDeviceOutput struct {
 	Platform *string
 
 	// The status of the core device. The core device status can be:
-	//
-	// * HEALTHY – The
+	// - HEALTHY – The
 	// IoT Greengrass Core software and all components run on the core device without
 	// issue.
-	//
-	// * UNHEALTHY – The IoT Greengrass Core software or a component is in a
+	// - UNHEALTHY – The IoT Greengrass Core software or a component is in a
 	// failed state on the core device.
 	Status types.CoreDeviceStatus
 

@@ -16,8 +16,7 @@ import (
 // Objects (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html). This
 // action is not supported by Amazon S3 on Outposts. The following action is
 // related to GetObjectRetention:
-//
-// * GetObjectAttributes
+// - GetObjectAttributes
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAttributes.html)
 func (c *Client) GetObjectRetention(ctx context.Context, params *GetObjectRetentionInput, optFns ...func(*Options)) (*GetObjectRetentionOutput, error) {
 	if params == nil {

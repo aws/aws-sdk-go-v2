@@ -36,11 +36,8 @@ import (
 // Required permissions: kms:GetParametersForImport
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (key policy) Related operations:
-//
-// * ImportKeyMaterial
-//
-// *
-// DeleteImportedKeyMaterial
+// - ImportKeyMaterial
+// - DeleteImportedKeyMaterial
 func (c *Client) GetParametersForImport(ctx context.Context, params *GetParametersForImportInput, optFns ...func(*Options)) (*GetParametersForImportOutput, error) {
 	if params == nil {
 		params = &GetParametersForImportInput{}
@@ -61,11 +58,9 @@ type GetParametersForImportInput struct {
 	// The identifier of the symmetric encryption KMS key into which you will import
 	// key material. The Origin of the KMS key must be EXTERNAL. Specify the key ID or
 	// key ARN of the KMS key. For example:
-	//
-	// * Key ID:
+	// - Key ID:
 	// 1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// * Key ARN:
+	// - Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// To

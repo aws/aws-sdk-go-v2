@@ -34,15 +34,12 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketVersioning.html#API_control_GetBucketVersioning_Examples)
 // section. The following operations are related to GetBucketVersioning for S3 on
 // Outposts.
-//
-// * PutBucketVersioning
+// - PutBucketVersioning
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketVersioning.html)
-//
-// *
+// -
 // PutBucketLifecycleConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html)
-//
-// *
+// -
 // GetBucketLifecycleConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html)
 func (c *Client) GetBucketVersioning(ctx context.Context, params *GetBucketVersioningInput, optFns ...func(*Options)) (*GetBucketVersioningOutput, error) {

@@ -602,16 +602,13 @@ type AttachmentsSource struct {
 
 	// The value of a key-value pair that identifies the location of an attachment to a
 	// document. The format for Value depends on the type of key you specify.
-	//
-	// * For
-	// the key SourceUrl, the value is an S3 bucket location. For example: "Values": [
+	// - For the
+	// key SourceUrl, the value is an S3 bucket location. For example: "Values": [
 	// "s3://doc-example-bucket/my-folder" ]
-	//
-	// * For the key S3FileUrl, the value is a
+	// - For the key S3FileUrl, the value is a
 	// file in an S3 bucket. For example: "Values": [
 	// "s3://doc-example-bucket/my-folder/my-file.py" ]
-	//
-	// * For the key
+	// - For the key
 	// AttachmentReference, the value is constructed from the name of another SSM
 	// document in your account, a version number of that document, and a file attached
 	// to that document version that you want to reuse. For example: "Values": [
@@ -1034,41 +1031,31 @@ type Command struct {
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html)
 	// in the Amazon Web Services Systems Manager User Guide. StatusDetails can be one
 	// of the following values:
-	//
-	// * Pending: The command hasn't been sent to any managed
+	// - Pending: The command hasn't been sent to any managed
 	// nodes.
-	//
-	// * In Progress: The command has been sent to at least one managed node
-	// but hasn't reached a final state on all managed nodes.
-	//
-	// * Success: The command
+	// - In Progress: The command has been sent to at least one managed node but
+	// hasn't reached a final state on all managed nodes.
+	// - Success: The command
 	// successfully ran on all invocations. This is a terminal state.
-	//
-	// * Delivery Timed
+	// - Delivery Timed
 	// Out: The value of MaxErrors or more command invocations shows a status of
 	// Delivery Timed Out. This is a terminal state.
-	//
-	// * Execution Timed Out: The value
+	// - Execution Timed Out: The value
 	// of MaxErrors or more command invocations shows a status of Execution Timed Out.
 	// This is a terminal state.
-	//
-	// * Failed: The value of MaxErrors or more command
+	// - Failed: The value of MaxErrors or more command
 	// invocations shows a status of Failed. This is a terminal state.
-	//
-	// * Incomplete:
+	// - Incomplete:
 	// The command was attempted on all managed nodes and one or more invocations
 	// doesn't have a value of Success but not enough invocations failed for the status
 	// to be Failed. This is a terminal state.
-	//
-	// * Cancelled: The command was terminated
+	// - Cancelled: The command was terminated
 	// before it was completed. This is a terminal state.
-	//
-	// * Rate Exceeded: The number
+	// - Rate Exceeded: The number
 	// of managed nodes targeted by the command exceeded the account limit for pending
 	// invocations. The system has canceled the command before running it on any
 	// managed node. This is a terminal state.
-	//
-	// * Delayed: The system attempted to send
+	// - Delayed: The system attempted to send
 	// the command to the managed node but wasn't successful. The system retries again.
 	StatusDetails *string
 
@@ -1100,94 +1087,62 @@ type CommandFilter struct {
 	Key CommandFilterKey
 
 	// The filter value. Valid values for each filter key are as follows:
-	//
-	// *
+	// -
 	// InvokedAfter: Specify a timestamp to limit your results. For example, specify
 	// 2021-07-07T00:00:00Z to see a list of command executions occurring July 7, 2021,
 	// and later.
-	//
-	// * InvokedBefore: Specify a timestamp to limit your results. For
+	// - InvokedBefore: Specify a timestamp to limit your results. For
 	// example, specify 2021-07-07T00:00:00Z to see a list of command executions from
 	// before July 7, 2021.
-	//
-	// * Status: Specify a valid command status to see a list of
+	// - Status: Specify a valid command status to see a list of
 	// all command executions with that status. The status choices depend on the API
 	// you call. The status values you can specify for ListCommands are:
-	//
-	// * Pending
-	//
-	// *
+	// - Pending
+	// -
 	// InProgress
-	//
-	// * Success
-	//
-	// * Cancelled
-	//
-	// * Failed
-	//
-	// * TimedOut (this includes both
+	// - Success
+	// - Cancelled
+	// - Failed
+	// - TimedOut (this includes both
 	// Delivery and Execution time outs)
-	//
-	// * AccessDenied
-	//
-	// * DeliveryTimedOut
-	//
-	// *
+	// - AccessDenied
+	// - DeliveryTimedOut
+	// -
 	// ExecutionTimedOut
-	//
-	// * Incomplete
-	//
-	// * NoInstancesInTag
-	//
-	// * LimitExceeded
+	// - Incomplete
+	// - NoInstancesInTag
+	// - LimitExceeded
 	//
 	// The status
 	// values you can specify for ListCommandInvocations are:
+	// - Pending
+	// - InProgress
+	// -
+	// Delayed
+	// - Success
+	// - Cancelled
+	// - Failed
+	// - TimedOut (this includes both Delivery
+	// and Execution time outs)
+	// - AccessDenied
+	// - DeliveryTimedOut
+	// - ExecutionTimedOut
+	// -
+	// Undeliverable
+	// - InvalidPlatform
+	// - Terminated
 	//
-	// * Pending
-	//
-	// *
-	// InProgress
-	//
-	// * Delayed
-	//
-	// * Success
-	//
-	// * Cancelled
-	//
-	// * Failed
-	//
-	// * TimedOut (this
-	// includes both Delivery and Execution time outs)
-	//
-	// * AccessDenied
-	//
-	// *
-	// DeliveryTimedOut
-	//
-	// * ExecutionTimedOut
-	//
-	// * Undeliverable
-	//
-	// * InvalidPlatform
-	//
-	// *
-	// Terminated
-	//
-	// * DocumentName: Specify name of the Amazon Web Services Systems
-	// Manager document (SSM document) for which you want to see command execution
-	// results. For example, specify AWS-RunPatchBaseline to see command executions
-	// that used this SSM document to perform security patching operations on managed
-	// nodes.
-	//
-	// * ExecutionStage: Specify one of the following values (ListCommands
-	// operations only):
-	//
-	// * Executing: Returns a list of command executions that are
-	// currently still running.
-	//
-	// * Complete: Returns a list of command executions that
-	// have already completed.
+	// - DocumentName: Specify name of
+	// the Amazon Web Services Systems Manager document (SSM document) for which you
+	// want to see command execution results. For example, specify AWS-RunPatchBaseline
+	// to see command executions that used this SSM document to perform security
+	// patching operations on managed nodes.
+	// - ExecutionStage: Specify one of the
+	// following values (ListCommands operations only):
+	// - Executing: Returns a list of
+	// command executions that are currently still running.
+	// - Complete: Returns a list
+	// of command executions that have already completed.
 	//
 	// This member is required.
 	Value *string
@@ -1265,48 +1220,38 @@ type CommandInvocation struct {
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html)
 	// in the Amazon Web Services Systems Manager User Guide. StatusDetails can be one
 	// of the following values:
-	//
-	// * Pending: The command hasn't been sent to the managed
+	// - Pending: The command hasn't been sent to the managed
 	// node.
-	//
-	// * In Progress: The command has been sent to the managed node but hasn't
+	// - In Progress: The command has been sent to the managed node but hasn't
 	// reached a terminal state.
-	//
-	// * Success: The execution of the command or plugin was
+	// - Success: The execution of the command or plugin was
 	// successfully completed. This is a terminal state.
-	//
-	// * Delivery Timed Out: The
+	// - Delivery Timed Out: The
 	// command wasn't delivered to the managed node before the delivery timeout
 	// expired. Delivery timeouts don't count against the parent command's MaxErrors
 	// limit, but they do contribute to whether the parent command status is Success or
 	// Incomplete. This is a terminal state.
-	//
-	// * Execution Timed Out: Command execution
+	// - Execution Timed Out: Command execution
 	// started on the managed node, but the execution wasn't complete before the
 	// execution timeout expired. Execution timeouts count against the MaxErrors limit
 	// of the parent command. This is a terminal state.
-	//
-	// * Failed: The command wasn't
+	// - Failed: The command wasn't
 	// successful on the managed node. For a plugin, this indicates that the result
 	// code wasn't zero. For a command invocation, this indicates that the result code
 	// for one or more plugins wasn't zero. Invocation failures count against the
 	// MaxErrors limit of the parent command. This is a terminal state.
-	//
-	// * Cancelled:
+	// - Cancelled:
 	// The command was terminated before it was completed. This is a terminal state.
-	//
-	// *
+	// -
 	// Undeliverable: The command can't be delivered to the managed node. The managed
 	// node might not exist or might not be responding. Undeliverable invocations don't
 	// count against the parent command's MaxErrors limit and don't contribute to
 	// whether the parent command status is Success or Incomplete. This is a terminal
 	// state.
-	//
-	// * Terminated: The parent command exceeded its MaxErrors limit and
+	// - Terminated: The parent command exceeded its MaxErrors limit and
 	// subsequent command invocations were canceled by the system. This is a terminal
 	// state.
-	//
-	// * Delayed: The system attempted to send the command to the managed node
+	// - Delayed: The system attempted to send the command to the managed node
 	// but wasn't successful. The system retries again.
 	StatusDetails *string
 
@@ -1379,44 +1324,35 @@ type CommandPlugin struct {
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html)
 	// in the Amazon Web Services Systems Manager User Guide. StatusDetails can be one
 	// of the following values:
-	//
-	// * Pending: The command hasn't been sent to the managed
+	// - Pending: The command hasn't been sent to the managed
 	// node.
-	//
-	// * In Progress: The command has been sent to the managed node but hasn't
+	// - In Progress: The command has been sent to the managed node but hasn't
 	// reached a terminal state.
-	//
-	// * Success: The execution of the command or plugin was
+	// - Success: The execution of the command or plugin was
 	// successfully completed. This is a terminal state.
-	//
-	// * Delivery Timed Out: The
+	// - Delivery Timed Out: The
 	// command wasn't delivered to the managed node before the delivery timeout
 	// expired. Delivery timeouts don't count against the parent command's MaxErrors
 	// limit, but they do contribute to whether the parent command status is Success or
 	// Incomplete. This is a terminal state.
-	//
-	// * Execution Timed Out: Command execution
+	// - Execution Timed Out: Command execution
 	// started on the managed node, but the execution wasn't complete before the
 	// execution timeout expired. Execution timeouts count against the MaxErrors limit
 	// of the parent command. This is a terminal state.
-	//
-	// * Failed: The command wasn't
+	// - Failed: The command wasn't
 	// successful on the managed node. For a plugin, this indicates that the result
 	// code wasn't zero. For a command invocation, this indicates that the result code
 	// for one or more plugins wasn't zero. Invocation failures count against the
 	// MaxErrors limit of the parent command. This is a terminal state.
-	//
-	// * Cancelled:
+	// - Cancelled:
 	// The command was terminated before it was completed. This is a terminal state.
-	//
-	// *
+	// -
 	// Undeliverable: The command can't be delivered to the managed node. The managed
 	// node might not exist, or it might not be responding. Undeliverable invocations
 	// don't count against the parent command's MaxErrors limit, and they don't
 	// contribute to whether the parent command status is Success or Incomplete. This
 	// is a terminal state.
-	//
-	// * Terminated: The parent command exceeded its MaxErrors
+	// - Terminated: The parent command exceeded its MaxErrors
 	// limit and subsequent command invocations were canceled by the system. This is a
 	// terminal state.
 	StatusDetails *string
@@ -1900,44 +1836,29 @@ type DocumentIdentifier struct {
 // You can also use Amazon Web Services-provided keys, some of which have specific
 // allowed values. These keys and their associated values are as follows:
 // DocumentType
-//
-// * ApplicationConfiguration
-//
-// * ApplicationConfigurationSchema
-//
-// *
+// - ApplicationConfiguration
+// - ApplicationConfigurationSchema
+// -
 // Automation
+// - ChangeCalendar
+// - Command
+// - Package
+// - Policy
+// - Session
 //
-// * ChangeCalendar
-//
-// * Command
-//
-// * Package
-//
-// * Policy
-//
-// * Session
-//
-// Owner
-// Note that only one Owner can be specified in a request. For example:
+// Owner Note
+// that only one Owner can be specified in a request. For example:
 // Key=Owner,Values=Self.
-//
-// * Amazon
-//
-// * Private
-//
-// * Public
-//
-// * Self
-//
-// *
+// - Amazon
+// - Private
+// - Public
+// - Self
+// -
 // ThirdParty
 //
-// # PlatformTypes
-//
-// * Linux
-//
-// * Windows
+// PlatformTypes
+// - Linux
+// - Windows
 //
 // Name is another Amazon Web
 // Services-provided key. If you use Name as a key, you can use a name prefix to
@@ -2419,24 +2340,18 @@ type InstanceInformationStringFilter struct {
 	// ActivationIds | AgentVersion | AssociationStatus | IamRole | InstanceIds |
 	// PingStatus | PlatformTypes | ResourceType | SourceIds | SourceTypes | "tag-key"
 	// | "tag:{keyname}
-	//
-	// * Valid values for the AssociationStatus filter key: Success |
+	// - Valid values for the AssociationStatus filter key: Success |
 	// Pending | Failed
-	//
-	// * Valid values for the PingStatus filter key: Online |
+	// - Valid values for the PingStatus filter key: Online |
 	// ConnectionLost | Inactive (deprecated)
-	//
-	// * Valid values for the PlatformType
+	// - Valid values for the PlatformType
 	// filter key: Windows | Linux | MacOS
-	//
-	// * Valid values for the ResourceType filter
+	// - Valid values for the ResourceType filter
 	// key: EC2Instance | ManagedInstance
-	//
-	// * Valid values for the SourceType filter
-	// key: AWS::EC2::Instance | AWS::SSM::ManagedInstance | AWS::IoT::Thing
-	//
-	// * Valid
-	// tag examples: Key=tag-key,Values=Purpose | Key=tag:Purpose,Values=Test.
+	// - Valid values for the SourceType filter key:
+	// AWS::EC2::Instance | AWS::SSM::ManagedInstance | AWS::IoT::Thing
+	// - Valid tag
+	// examples: Key=tag-key,Values=Purpose | Key=tag:Purpose,Values=Test.
 	//
 	// This member is required.
 	Key *string
@@ -2467,11 +2382,9 @@ type InstancePatchState struct {
 	InstanceId *string
 
 	// The type of patching operation that was performed: or
-	//
-	// * SCAN assesses the patch
+	// - SCAN assesses the patch
 	// compliance state.
-	//
-	// * INSTALL installs missing patches.
+	// - INSTALL installs missing patches.
 	//
 	// This member is required.
 	Operation PatchOperationType
@@ -2557,15 +2470,13 @@ type InstancePatchState struct {
 	// Indicates the reboot option specified in the patch baseline. Reboot options
 	// apply to Install operations only. Reboots aren't attempted for Patch Manager
 	// Scan operations.
-	//
-	// * RebootIfNeeded: Patch Manager tries to reboot the managed
+	// - RebootIfNeeded: Patch Manager tries to reboot the managed
 	// node if it installed any patches, or if any patches are detected with a status
 	// of InstalledPendingReboot.
-	//
-	// * NoReboot: Patch Manager attempts to install
-	// missing packages without trying to reboot the system. Patches installed with
-	// this option are assigned a status of InstalledPendingReboot. These patches might
-	// not be in effect until a reboot is performed.
+	// - NoReboot: Patch Manager attempts to install missing
+	// packages without trying to reboot the system. Patches installed with this option
+	// are assigned a status of InstalledPendingReboot. These patches might not be in
+	// effect until a reboot is performed.
 	RebootOption RebootOption
 
 	// The number of patches per node that are specified as Security in a patch
@@ -2590,35 +2501,24 @@ type InstancePatchState struct {
 // the information returned by the API. Example: To filter for all managed nodes in
 // a patch group having more than three patches with a FailedCount status, use the
 // following for the filter:
-//
-// * Value for Key: FailedCount
-//
-// * Value for Type:
+// - Value for Key: FailedCount
+// - Value for Type:
 // GreaterThan
-//
-// * Value for Values: 3
+// - Value for Values: 3
 type InstancePatchStateFilter struct {
 
 	// The key for the filter. Supported values include the following:
-	//
-	// *
+	// -
 	// InstalledCount
-	//
-	// * InstalledOtherCount
-	//
-	// * InstalledPendingRebootCount
-	//
-	// *
+	// - InstalledOtherCount
+	// - InstalledPendingRebootCount
+	// -
 	// InstalledRejectedCount
-	//
-	// * MissingCount
-	//
-	// * FailedCount
-	//
-	// *
+	// - MissingCount
+	// - FailedCount
+	// -
 	// UnreportedNotApplicableCount
-	//
-	// * NotApplicableCount
+	// - NotApplicableCount
 	//
 	// This member is required.
 	Key *string
@@ -3049,21 +2949,15 @@ type MaintenanceWindowExecutionTaskInvocationIdentity struct {
 // Filter used in the request. Supported filter keys depend on the API operation
 // that includes the filter. API operations that use MaintenanceWindowFilter>
 // include the following:
-//
-// * DescribeMaintenanceWindowExecutions
-//
-// *
+// - DescribeMaintenanceWindowExecutions
+// -
 // DescribeMaintenanceWindowExecutionTaskInvocations
-//
-// *
+// -
 // DescribeMaintenanceWindowExecutionTasks
-//
-// * DescribeMaintenanceWindows
-//
-// *
+// - DescribeMaintenanceWindows
+// -
 // DescribeMaintenanceWindowTargets
-//
-// * DescribeMaintenanceWindowTasks
+// - DescribeMaintenanceWindowTasks
 type MaintenanceWindowFilter struct {
 
 	// The name of the filter.
@@ -3439,11 +3333,9 @@ type NotificationConfig struct {
 	NotificationEvents []NotificationEvent
 
 	// The type of notification.
-	//
-	// * Command: Receive notification when the status of a
+	// - Command: Receive notification when the status of a
 	// command changes.
-	//
-	// * Invocation: For commands sent to multiple managed nodes,
+	// - Invocation: For commands sent to multiple managed nodes,
 	// receive notification on a per-node basis when the status of a command changes.
 	NotificationType NotificationType
 
@@ -3594,18 +3486,15 @@ type OpsItem struct {
 	// The ID of the OpsItem.
 	OpsItemId *string
 
-	// The type of OpsItem. Systems Manager supports the following types of
-	// OpsItems:
-	//
-	// * /aws/issue This type of OpsItem is used for default OpsItems
-	// created by OpsCenter.
-	//
-	// * /aws/changerequest This type of OpsItem is used by
-	// Change Manager for reviewing and approving or rejecting change requests.
-	//
-	// *
-	// /aws/insights This type of OpsItem is used by OpsCenter for aggregating and
-	// reporting on duplicate OpsItems.
+	// The type of OpsItem. Systems Manager supports the following types of OpsItems:
+	// -
+	// /aws/issue This type of OpsItem is used for default OpsItems created by
+	// OpsCenter.
+	// - /aws/changerequest This type of OpsItem is used by Change Manager
+	// for reviewing and approving or rejecting change requests.
+	// - /aws/insights This
+	// type of OpsItem is used by OpsCenter for aggregating and reporting on duplicate
+	// OpsItems.
 	OpsItemType *string
 
 	// The time specified in a change request for a runbook workflow to end. Currently
@@ -3840,18 +3729,15 @@ type OpsItemSummary struct {
 	// The ID of the OpsItem.
 	OpsItemId *string
 
-	// The type of OpsItem. Systems Manager supports the following types of
-	// OpsItems:
-	//
-	// * /aws/issue This type of OpsItem is used for default OpsItems
-	// created by OpsCenter.
-	//
-	// * /aws/changerequest This type of OpsItem is used by
-	// Change Manager for reviewing and approving or rejecting change requests.
-	//
-	// *
-	// /aws/insights This type of OpsItem is used by OpsCenter for aggregating and
-	// reporting on duplicate OpsItems.
+	// The type of OpsItem. Systems Manager supports the following types of OpsItems:
+	// -
+	// /aws/issue This type of OpsItem is used for default OpsItems created by
+	// OpsCenter.
+	// - /aws/changerequest This type of OpsItem is used by Change Manager
+	// for reviewing and approving or rejecting change requests.
+	// - /aws/insights This
+	// type of OpsItem is used by OpsCenter for aggregating and reporting on duplicate
+	// OpsItems.
 	OpsItemType *string
 
 	// The time specified in a change request for a runbook workflow to end. Currently
@@ -4364,15 +4250,11 @@ type PatchGroupPatchBaselineMapping struct {
 // Defines a filter used in Patch Manager APIs. Supported filter keys depend on the
 // API operation that includes the filter. Patch Manager API operations that use
 // PatchOrchestratorFilter include the following:
-//
-// * DescribeAvailablePatches
-//
-// *
+// - DescribeAvailablePatches
+// -
 // DescribeInstancePatches
-//
-// * DescribePatchBaselines
-//
-// * DescribePatchGroups
+// - DescribePatchBaselines
+// - DescribePatchGroups
 type PatchOrchestratorFilter struct {
 
 	// The key for the filter.
@@ -4918,14 +4800,11 @@ type ServiceSetting struct {
 
 	// The status of the service setting. The value can be Default, Customized or
 	// PendingUpdate.
-	//
-	// * Default: The current setting uses a default value provisioned
+	// - Default: The current setting uses a default value provisioned
 	// by the Amazon Web Services service team.
-	//
-	// * Customized: The current setting use
-	// a custom value specified by the customer.
-	//
-	// * PendingUpdate: The current setting
+	// - Customized: The current setting use a
+	// custom value specified by the customer.
+	// - PendingUpdate: The current setting
 	// uses a default or custom value, but a setting change request is pending
 	// approval.
 	Status *string
@@ -4982,40 +4861,29 @@ type SessionFilter struct {
 	Key SessionFilterKey
 
 	// The filter value. Valid values for each filter key are as follows:
-	//
-	// *
+	// -
 	// InvokedAfter: Specify a timestamp to limit your results. For example, specify
 	// 2018-08-29T00:00:00Z to see sessions that started August 29, 2018, and later.
-	//
-	// *
+	// -
 	// InvokedBefore: Specify a timestamp to limit your results. For example, specify
 	// 2018-08-29T00:00:00Z to see sessions that started before August 29, 2018.
-	//
-	// *
+	// -
 	// Target: Specify a managed node to which session connections have been made.
-	//
-	// *
+	// -
 	// Owner: Specify an Amazon Web Services user to see a list of sessions started by
 	// that user.
-	//
-	// * Status: Specify a valid session status to see a list of all
+	// - Status: Specify a valid session status to see a list of all
 	// sessions with that status. Status values you can specify include:
+	// - Connected
+	// -
+	// Connecting
+	// - Disconnected
+	// - Terminated
+	// - Terminating
+	// - Failed
 	//
-	// *
-	// Connected
-	//
-	// * Connecting
-	//
-	// * Disconnected
-	//
-	// * Terminated
-	//
-	// * Terminating
-	//
-	// *
-	// Failed
-	//
-	// * SessionId: Specify a session ID to return details about the session.
+	// - SessionId:
+	// Specify a session ID to return details about the session.
 	//
 	// This member is required.
 	Value *string
@@ -5203,56 +5071,42 @@ type Tag struct {
 // (https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html)
 // in the Amazon Web Services Systems Manager User Guide. Supported formats include
 // the following.
-//
-// * Key=InstanceIds,Values=,,
-//
-// * Key=tag:,Values=,
-//
-// *
+// - Key=InstanceIds,Values=,,
+// - Key=tag:,Values=,
+// -
 // Key=tag-key,Values=,
-//
-// * Run Command and Maintenance window targets only:
+// - Run Command and Maintenance window targets only:
 // Key=resource-groups:Name,Values=
-//
-// * Maintenance window targets only:
+// - Maintenance window targets only:
 // Key=resource-groups:ResourceTypeFilters,Values=,
-//
-// * Automation targets only:
+// - Automation targets only:
 // Key=ResourceGroup;Values=
 //
 // For example:
-//
-// *
+// -
 // Key=InstanceIds,Values=i-02573cafcfEXAMPLE,i-0471e04240EXAMPLE,i-07782c72faEXAMPLE
-//
-// *
+// -
 // Key=tag:CostCenter,Values=CostCenter1,CostCenter2,CostCenter3
-//
-// *
+// -
 // Key=tag-key,Values=Name,Instance-Type,CostCenter
-//
-// * Run Command and Maintenance
+// - Run Command and Maintenance
 // window targets only: Key=resource-groups:Name,Values=ProductionResourceGroup
 // This example demonstrates how to target all resources in the resource group
 // ProductionResourceGroup in your maintenance window.
-//
-// * Maintenance window
-// targets only:
+// - Maintenance window targets
+// only:
 // Key=resource-groups:ResourceTypeFilters,Values=AWS::EC2::INSTANCE,AWS::EC2::VPC
 // This example demonstrates how to target only Amazon Elastic Compute Cloud
 // (Amazon EC2) instances and VPCs in your maintenance window.
+// - Automation targets
+// only: Key=ResourceGroup,Values=MyResourceGroup
+// - State Manager association
+// targets only: Key=InstanceIds,Values=* This example demonstrates how to target
+// all managed instances in the Amazon Web Services Region where the association
+// was created.
 //
-// * Automation
-// targets only: Key=ResourceGroup,Values=MyResourceGroup
-//
-// * State Manager
-// association targets only: Key=InstanceIds,Values=* This example demonstrates how
-// to target all managed instances in the Amazon Web Services Region where the
-// association was created.
-//
-// For more information about how to send commands that
-// target managed nodes using Key,Value parameters, see Targeting multiple
-// instances
+// For more information about how to send commands that target
+// managed nodes using Key,Value parameters, see Targeting multiple instances
 // (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting)
 // in the Amazon Web Services Systems Manager User Guide.
 type Target struct {

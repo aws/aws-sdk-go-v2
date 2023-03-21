@@ -39,8 +39,7 @@ type DescribeGlobalClustersInput struct {
 	// The user-supplied DB cluster identifier. If this parameter is specified,
 	// information from only the specific DB cluster is returned. This parameter isn't
 	// case-sensitive. Constraints:
-	//
-	// * If supplied, must match an existing
+	// - If supplied, must match an existing
 	// DBClusterIdentifier.
 	GlobalClusterIdentifier *string
 

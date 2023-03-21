@@ -21,15 +21,12 @@ import (
 // ByteMatchSet objects. If you just want to remove a rule from a WebACL, use
 // UpdateWebACL. To permanently delete a RateBasedRule from AWS WAF, perform the
 // following steps:
-//
-// * Update the RateBasedRule to remove predicates, if any. For
+// - Update the RateBasedRule to remove predicates, if any. For
 // more information, see UpdateRateBasedRule.
-//
-// * Use GetChangeToken to get the
+// - Use GetChangeToken to get the
 // change token that you provide in the ChangeToken parameter of a
 // DeleteRateBasedRule request.
-//
-// * Submit a DeleteRateBasedRule request.
+// - Submit a DeleteRateBasedRule request.
 func (c *Client) DeleteRateBasedRule(ctx context.Context, params *DeleteRateBasedRuleInput, optFns ...func(*Options)) (*DeleteRateBasedRuleOutput, error) {
 	if params == nil {
 		params = &DeleteRateBasedRuleInput{}

@@ -68,15 +68,12 @@ type BotChannelAssociation struct {
 	Name *string
 
 	// The status of the bot channel.
-	//
-	// * CREATED - The channel has been created and is
+	// - CREATED - The channel has been created and is
 	// ready for use.
-	//
-	// * IN_PROGRESS - Channel creation is in progress.
-	//
-	// * FAILED -
-	// There was an error creating the channel. For information about the reason for
-	// the failure, see the failureReason field.
+	// - IN_PROGRESS - Channel creation is in progress.
+	// - FAILED - There
+	// was an error creating the channel. For information about the reason for the
+	// failure, see the failureReason field.
 	Status ChannelStatus
 
 	// Specifies the type of association by indicating the type of channel being
@@ -207,12 +204,9 @@ type ConversationLogsResponse struct {
 // value the slot type can take. For example, a pizza ordering bot could have a
 // slot type that specifies the type of crust that the pizza should have. The slot
 // type could include the values
-//
-// * thick
-//
-// * thin
-//
-// * stuffed
+// - thick
+// - thin
+// - stuffed
 type EnumerationValue struct {
 
 	// The value of the slot type.
@@ -253,13 +247,11 @@ type FollowUpPrompt struct {
 // presentation. If you need to update the logic, you only update the Lambda
 // function; you don't need to upgrade your client application. Consider the
 // following examples:
-//
-// * In a pizza ordering application, after the user provides
+// - In a pizza ordering application, after the user provides
 // all of the information for placing an order, you use a Lambda function to place
 // an order with a pizzeria.
-//
-// * In a gaming application, when a user says "pick up
-// a rock," this information must go back to the client application so that it can
+// - In a gaming application, when a user says "pick up a
+// rock," this information must go back to the client application so that it can
 // perform the operation and update the graphics. In this case, you want Amazon Lex
 // to return the intent data to the client.
 type FulfillmentActivity struct {
@@ -448,11 +440,9 @@ type MigrationAlert struct {
 	ReferenceURLs []string
 
 	// The type of alert. There are two kinds of alerts:
-	//
-	// * ERROR - There was an issue
+	// - ERROR - There was an issue
 	// with the migration that can't be resolved. The migration stops.
-	//
-	// * WARN - There
+	// - WARN - There
 	// was an issue with the migration that requires manual changes to the new Amazon
 	// Lex V2 bot. The migration continues.
 	Type MigrationAlertType
@@ -623,15 +613,12 @@ type Slot struct {
 type SlotDefaultValue struct {
 
 	// The default value for the slot. You can specify one of the following:
-	//
-	// *
+	// -
 	// #context-name.slot-name - The slot value "slot-name" in the context
 	// "context-name."
-	//
-	// * {attribute} - The slot value of the session attribute
+	// - {attribute} - The slot value of the session attribute
 	// "attribute."
-	//
-	// * 'value' - The discrete value "value."
+	// - 'value' - The discrete value "value."
 	//
 	// This member is required.
 	DefaultValue *string
@@ -693,21 +680,16 @@ type SlotTypeRegexConfiguration struct {
 	// A regular expression used to validate the value of a slot. Use a standard
 	// regular expression. Amazon Lex supports the following characters in the regular
 	// expression:
-	//
-	// * A-Z, a-z
-	//
-	// * 0-9
-	//
-	// * Unicode characters ("\ u")
+	// - A-Z, a-z
+	// - 0-9
+	// - Unicode characters ("\ u")
 	//
 	// Represent Unicode
 	// characters with four digits, for example "\u0041" or "\u005A". The following
 	// regular expression operators are not supported:
-	//
-	// * Infinite repeaters: *, +, or
+	// - Infinite repeaters: *, +, or
 	// {x,} with no upper bound.
-	//
-	// * Wild card (.)
+	// - Wild card (.)
 	//
 	// This member is required.
 	Pattern *string

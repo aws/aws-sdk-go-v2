@@ -34,23 +34,16 @@ func (c *Client) ActivateGateway(ctx context.Context, params *ActivateGatewayInp
 }
 
 // A JSON object containing one or more of the following fields:
-//
-// *
+// -
 // ActivateGatewayInput$ActivationKey
-//
-// * ActivateGatewayInput$GatewayName
-//
-// *
+// - ActivateGatewayInput$GatewayName
+// -
 // ActivateGatewayInput$GatewayRegion
-//
-// * ActivateGatewayInput$GatewayTimezone
-//
-// *
+// - ActivateGatewayInput$GatewayTimezone
+// -
 // ActivateGatewayInput$GatewayType
-//
-// * ActivateGatewayInput$MediumChangerType
-//
-// *
+// - ActivateGatewayInput$MediumChangerType
+// -
 // ActivateGatewayInput$TapeDriveType
 type ActivateGatewayInput struct {
 

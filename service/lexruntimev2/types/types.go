@@ -137,33 +137,23 @@ type ConfigurationEvent struct {
 
 	// The message that Amazon Lex V2 returns in the response can be either text or
 	// speech based on the responseContentType value.
-	//
-	// * If the value is
+	// - If the value is
 	// text/plain;charset=utf-8, Amazon Lex V2 returns text in the response.
-	//
-	// * If the
+	// - If the
 	// value begins with audio/, Amazon Lex V2 returns speech in the response. Amazon
 	// Lex V2 uses Amazon Polly to generate the speech using the configuration that you
 	// specified in the requestContentType parameter. For example, if you specify
 	// audio/mpeg as the value, Amazon Lex V2 returns speech in the MPEG format.
-	//
-	// * If
+	// - If
 	// the value is audio/pcm, the speech returned is audio/pcm in 16-bit,
 	// little-endian format.
-	//
-	// * The following are the accepted values:
-	//
-	// * audio/mpeg
-	//
-	// *
+	// - The following are the accepted values:
+	// - audio/mpeg
+	// -
 	// audio/ogg
-	//
-	// * audio/pcm
-	//
-	// * audio/* (defaults to mpeg)
-	//
-	// * text/plain;
-	// charset=utf-8
+	// - audio/pcm
+	// - audio/* (defaults to mpeg)
+	// - text/plain; charset=utf-8
 	//
 	// This member is required.
 	ResponseContentType *string
@@ -207,21 +197,16 @@ type DialogAction struct {
 
 	// The next action that the bot should take in its interaction with the user. The
 	// possible values are:
-	//
-	// * Close - Indicates that there will not be a response from
+	// - Close - Indicates that there will not be a response from
 	// the user. For example, the statement "Your order has been placed" does not
 	// require a response.
-	//
-	// * ConfirmIntent - The next action is asking the user if the
+	// - ConfirmIntent - The next action is asking the user if the
 	// intent is complete and ready to be fulfilled. This is a yes/no question such as
 	// "Place the order?"
-	//
-	// * Delegate - The next action is determined by Amazon Lex
+	// - Delegate - The next action is determined by Amazon Lex
 	// V2.
-	//
-	// * ElicitIntent - The next action is to elicit an intent from the user.
-	//
-	// *
+	// - ElicitIntent - The next action is to elicit an intent from the user.
+	// -
 	// ElicitSlot - The next action is to elicit a slot value from the user.
 	//
 	// This member is required.
@@ -230,10 +215,8 @@ type DialogAction struct {
 	// Configures the slot to use spell-by-letter or spell-by-word style. When you use
 	// a style on a slot, users can spell out their input to make it clear to your
 	// bot.
-	//
-	// * Spell by letter - "b" "o" "b"
-	//
-	// * Spell by word - "b as in boy" "o as in
+	// - Spell by letter - "b" "o" "b"
+	// - Spell by word - "b as in boy" "o as in
 	// oscar" "b as in boy"
 	//
 	// For more information, see  Using spelling to enter slot
@@ -684,13 +667,10 @@ func (*StartConversationRequestEventStreamMemberDisconnectionEvent) isStartConve
 // DTMF information sent to Amazon Lex V2 by your application. Amazon Lex V2
 // accumulates the DMTF information from when the user sends the first character
 // and ends
-//
-// * when there's a pause longer that the value configured for the end
+// - when there's a pause longer that the value configured for the end
 // timeout.
-//
-// * when there's a digit that is the configured end character.
-//
-// * when
+// - when there's a digit that is the configured end character.
+// - when
 // Amazon Lex V2 accumulates characters equal to the maximum DTMF character
 // configuration.
 type StartConversationRequestEventStreamMemberDTMFInputEvent struct {

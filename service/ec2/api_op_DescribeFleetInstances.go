@@ -44,8 +44,7 @@ type DescribeFleetInstancesInput struct {
 	DryRun *bool
 
 	// The filters.
-	//
-	// * instance-type - The instance type.
+	// - instance-type - The instance type.
 	Filters []types.Filter
 
 	// The maximum number of items to return for this request. To get the next page of

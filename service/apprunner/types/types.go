@@ -135,16 +135,13 @@ type CertificateValidationRecord struct {
 // service from a source code repository.
 type CodeConfiguration struct {
 
-	// The source of the App Runner configuration. Values are interpreted as
-	// follows:
-	//
-	// * REPOSITORY – App Runner reads configuration values from the
-	// apprunner.yaml file in the source code repository and ignores
-	// CodeConfigurationValues.
-	//
-	// * API – App Runner uses configuration values provided
-	// in CodeConfigurationValues and ignores the apprunner.yaml file in the source
-	// code repository.
+	// The source of the App Runner configuration. Values are interpreted as follows:
+	// -
+	// REPOSITORY – App Runner reads configuration values from the apprunner.yaml file
+	// in the source code repository and ignores CodeConfigurationValues.
+	// - API – App
+	// Runner uses configuration values provided in CodeConfigurationValues and ignores
+	// the apprunner.yaml file in the source code repository.
 	//
 	// This member is required.
 	ConfigurationSource ConfigurationSource
@@ -180,13 +177,11 @@ type CodeConfigurationValues struct {
 	// either the full Amazon Resource Name (ARN) of the Secrets Manager secret or the
 	// full ARN of the parameter in the Amazon Web Services Systems Manager Parameter
 	// Store.
-	//
-	// * If the Amazon Web Services Systems Manager Parameter Store parameter
+	// - If the Amazon Web Services Systems Manager Parameter Store parameter
 	// exists in the same Amazon Web Services Region as the service that you're
 	// launching, you can use either the full ARN or name of the secret. If the
 	// parameter exists in a different Region, then the full ARN must be specified.
-	//
-	// *
+	// -
 	// Currently, cross account referencing of Amazon Web Services Systems Manager
 	// Parameter Store parameter is not supported.
 	RuntimeEnvironmentSecrets map[string]string
@@ -363,13 +358,11 @@ type ImageConfiguration struct {
 	// either the full Amazon Resource Name (ARN) of the Secrets Manager secret or the
 	// full ARN of the parameter in the Amazon Web Services Systems Manager Parameter
 	// Store.
-	//
-	// * If the Amazon Web Services Systems Manager Parameter Store parameter
+	// - If the Amazon Web Services Systems Manager Parameter Store parameter
 	// exists in the same Amazon Web Services Region as the service that you're
 	// launching, you can use either the full ARN or name of the secret. If the
 	// parameter exists in a different Region, then the full ARN must be specified.
-	//
-	// *
+	// -
 	// Currently, cross account referencing of Amazon Web Services Systems Manager
 	// Parameter Store parameter is not supported.
 	RuntimeEnvironmentSecrets map[string]string
@@ -645,14 +638,12 @@ type Service struct {
 
 	// The current state of the App Runner service. These particular values mean the
 	// following.
-	//
-	// * CREATE_FAILED – The service failed to create. To troubleshoot this
+	// - CREATE_FAILED – The service failed to create. To troubleshoot this
 	// failure, read the failure events and logs, change any parameters that need to be
 	// fixed, and retry the call to create the service. The failed service isn't
 	// usable, and still counts towards your service quota. When you're done analyzing
 	// the failure, delete the service.
-	//
-	// * DELETE_FAILED – The service failed to delete
+	// - DELETE_FAILED – The service failed to delete
 	// and can't be successfully recovered. Retry the service deletion call to ensure
 	// that all related resources are removed.
 	//
@@ -745,14 +736,12 @@ type ServiceSummary struct {
 
 	// The current state of the App Runner service. These particular values mean the
 	// following.
-	//
-	// * CREATE_FAILED – The service failed to create. Read the failure
+	// - CREATE_FAILED – The service failed to create. Read the failure
 	// events and logs, change any parameters that need to be fixed, and retry the call
 	// to create the service. The failed service isn't usable, and still counts towards
 	// your service quota. When you're done analyzing the failure, delete the
 	// service.
-	//
-	// * DELETE_FAILED – The service failed to delete and can't be
+	// - DELETE_FAILED – The service failed to delete and can't be
 	// successfully recovered. Retry the service deletion call to ensure that all
 	// related resources are removed.
 	Status ServiceStatus
@@ -906,18 +895,14 @@ type VpcIngressConnection struct {
 
 	// The time when the VPC Ingress Connection was created. It's in the Unix time
 	// stamp format.
-	//
-	// * Type: Timestamp
-	//
-	// * Required: Yes
+	// - Type: Timestamp
+	// - Required: Yes
 	CreatedAt *time.Time
 
 	// The time when the App Runner service was deleted. It's in the Unix time stamp
 	// format.
-	//
-	// * Type: Timestamp
-	//
-	// * Required: No
+	// - Type: Timestamp
+	// - Required: No
 	DeletedAt *time.Time
 
 	// The domain name associated with the VPC Ingress Connection resource.

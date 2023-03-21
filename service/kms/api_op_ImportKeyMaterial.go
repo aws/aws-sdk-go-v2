@@ -27,34 +27,30 @@ import (
 // Use the public key to encrypt the key material. Then, submit the import token
 // from the same GetParametersForImport response. When calling this operation, you
 // must specify the following values:
-//
-// * The key ID or key ARN of a KMS key with no
+// - The key ID or key ARN of a KMS key with no
 // key material. Its Origin must be EXTERNAL. To create a KMS key with no key
 // material, call CreateKey and set the value of its Origin parameter to EXTERNAL.
 // To get the Origin of a KMS key, call DescribeKey.)
-//
-// * The encrypted key
-// material. To get the public key to encrypt the key material, call
+// - The encrypted key material.
+// To get the public key to encrypt the key material, call
 // GetParametersForImport.
+// - The import token that GetParametersForImport returned.
+// You must use a public key and token from the same GetParametersForImport
+// response.
+// - Whether the key material expires (ExpirationModel) and, if so, when
+// (ValidTo). If you set an expiration date, on the specified date, KMS deletes the
+// key material from the KMS key, making the KMS key unusable. To use the KMS key
+// in cryptographic operations again, you must reimport the same key material. The
+// only way to change the expiration model or expiration date is by reimporting the
+// same key material and specifying a new expiration date.
 //
-// * The import token that GetParametersForImport
-// returned. You must use a public key and token from the same
-// GetParametersForImport response.
-//
-// * Whether the key material expires
-// (ExpirationModel) and, if so, when (ValidTo). If you set an expiration date, on
-// the specified date, KMS deletes the key material from the KMS key, making the
-// KMS key unusable. To use the KMS key in cryptographic operations again, you must
-// reimport the same key material. The only way to change the expiration model or
-// expiration date is by reimporting the same key material and specifying a new
-// expiration date.
-//
-// When this operation is successful, the key state of the KMS
-// key changes from PendingImport to Enabled, and you can use the KMS key. If this
-// operation fails, use the exception to help determine the problem. If the error
-// is related to the key material, the import token, or wrapping key, use
-// GetParametersForImport to get a new public key and import token for the KMS key
-// and repeat the import procedure. For help, see How To Import Key Material
+// When this operation is
+// successful, the key state of the KMS key changes from PendingImport to Enabled,
+// and you can use the KMS key. If this operation fails, use the exception to help
+// determine the problem. If the error is related to the key material, the import
+// token, or wrapping key, use GetParametersForImport to get a new public key and
+// import token for the KMS key and repeat the import procedure. For help, see How
+// To Import Key Material
 // (https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html#importing-keys-overview)
 // in the Key Management Service Developer Guide. The KMS key that you use for this
 // operation must be in a compatible key state. For details, see Key states of KMS
@@ -64,10 +60,8 @@ import (
 // Required permissions: kms:ImportKeyMaterial
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (key policy) Related operations:
-//
-// * DeleteImportedKeyMaterial
-//
-// *
+// - DeleteImportedKeyMaterial
+// -
 // GetParametersForImport
 func (c *Client) ImportKeyMaterial(ctx context.Context, params *ImportKeyMaterialInput, optFns ...func(*Options)) (*ImportKeyMaterialOutput, error) {
 	if params == nil {
@@ -107,10 +101,8 @@ type ImportKeyMaterialInput struct {
 	// KMS key, a KMS key in a custom key store, or on a KMS key in a different Amazon
 	// Web Services account Specify the key ID or key ARN of the KMS key. For
 	// example:
-	//
-	// * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// * Key ARN:
+	// - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	// - Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// To

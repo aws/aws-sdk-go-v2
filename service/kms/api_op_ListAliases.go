@@ -32,13 +32,10 @@ import (
 // (IAM policy) For details, see Controlling access to aliases
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-alias.html#alias-access)
 // in the Key Management Service Developer Guide. Related operations:
-//
-// *
+// -
 // CreateAlias
-//
-// * DeleteAlias
-//
-// * UpdateAlias
+// - DeleteAlias
+// - UpdateAlias
 func (c *Client) ListAliases(ctx context.Context, params *ListAliasesInput, optFns ...func(*Options)) (*ListAliasesOutput, error) {
 	if params == nil {
 		params = &ListAliasesInput{}
@@ -60,11 +57,9 @@ type ListAliasesInput struct {
 	// key in your Amazon Web Services account. This parameter is optional. If you omit
 	// it, ListAliases returns all aliases in the account and Region. Specify the key
 	// ID or key ARN of the KMS key. For example:
-	//
-	// * Key ID:
+	// - Key ID:
 	// 1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// * Key ARN:
+	// - Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// To

@@ -284,11 +284,9 @@ type EcsContainerOverride struct {
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/taskdef-envfiles.html)
 // in the Amazon Elastic Container Service Developer Guide. This parameter is only
 // supported for tasks hosted on Fargate using the following platform versions:
-//
-// *
+// -
 // Linux platform version 1.4.0 or later.
-//
-// * Windows platform version 1.0.0 or
+// - Windows platform version 1.0.0 or
 // later.
 type EcsEnvironmentFile struct {
 
@@ -400,10 +398,8 @@ type EcsTaskOverride struct {
 	// The ephemeral storage setting override for the task. This parameter is only
 	// supported for tasks hosted on Fargate that use the following platform
 	// versions:
-	//
-	// * Linux platform version 1.4.0 or later.
-	//
-	// * Windows platform version
+	// - Linux platform version 1.4.0 or later.
+	// - Windows platform version
 	// 1.0.0 or later.
 	EphemeralStorage *EcsEphemeralStorage
 
@@ -1045,17 +1041,14 @@ type PipeTargetKinesisStreamParameters struct {
 type PipeTargetLambdaFunctionParameters struct {
 
 	// Choose from the following options.
-	//
-	// * RequestResponse (default) - Invoke the
+	// - RequestResponse (default) - Invoke the
 	// function synchronously. Keep the connection open until the function returns a
 	// response or times out. The API response includes the function response and
 	// additional data.
-	//
-	// * Event - Invoke the function asynchronously. Send events that
+	// - Event - Invoke the function asynchronously. Send events that
 	// fail multiple times to the function's dead-letter queue (if it's configured).
 	// The API response only includes a status code.
-	//
-	// * DryRun - Validate parameter
+	// - DryRun - Validate parameter
 	// values and verify that the user or role has permission to invoke the function.
 	InvocationType PipeTargetInvocationType
 

@@ -66,20 +66,17 @@ type PutAlarmInput struct {
 	EvaluationPeriods *int32
 
 	// The name of the metric to associate with the alarm. You can configure up to two
-	// alarms per metric. The following metrics are available for each resource
-	// type:
-	//
-	// * Instances: BurstCapacityPercentage, BurstCapacityTime, CPUUtilization,
+	// alarms per metric. The following metrics are available for each resource type:
+	// -
+	// Instances: BurstCapacityPercentage, BurstCapacityTime, CPUUtilization,
 	// NetworkIn, NetworkOut, StatusCheckFailed, StatusCheckFailed_Instance, and
 	// StatusCheckFailed_System.
-	//
-	// * Load balancers: ClientTLSNegotiationErrorCount,
+	// - Load balancers: ClientTLSNegotiationErrorCount,
 	// HealthyHostCount, UnhealthyHostCount, HTTPCode_LB_4XX_Count,
 	// HTTPCode_LB_5XX_Count, HTTPCode_Instance_2XX_Count, HTTPCode_Instance_3XX_Count,
 	// HTTPCode_Instance_4XX_Count, HTTPCode_Instance_5XX_Count, InstanceResponseTime,
 	// RejectedConnectionCount, and RequestCount.
-	//
-	// * Relational databases:
+	// - Relational databases:
 	// CPUUtilization, DatabaseConnections, DiskQueueDepth, FreeStorageSpace,
 	// NetworkReceiveThroughput, and NetworkTransmitThroughput.
 	//
@@ -123,26 +120,21 @@ type PutAlarmInput struct {
 
 	// The alarm states that trigger a notification. An alarm has the following
 	// possible states:
-	//
-	// * ALARM - The metric is outside of the defined threshold.
-	//
-	// *
+	// - ALARM - The metric is outside of the defined threshold.
+	// -
 	// INSUFFICIENT_DATA - The alarm has just started, the metric is not available, or
 	// not enough data is available for the metric to determine the alarm state.
-	//
-	// * OK
-	// - The metric is within the defined threshold.
+	// - OK -
+	// The metric is within the defined threshold.
 	//
 	// When you specify a notification
 	// trigger, the ALARM state must be specified. The INSUFFICIENT_DATA and OK states
 	// can be specified in addition to the ALARM state.
-	//
-	// * If you specify OK as an
-	// alarm trigger, a notification is sent when the alarm switches from an ALARM or
+	// - If you specify OK as an alarm
+	// trigger, a notification is sent when the alarm switches from an ALARM or
 	// INSUFFICIENT_DATA alarm state to an OK state. This can be thought of as an all
 	// clear alarm notification.
-	//
-	// * If you specify INSUFFICIENT_DATA as the alarm
+	// - If you specify INSUFFICIENT_DATA as the alarm
 	// trigger, a notification is sent when the alarm switches from an OK or ALARM
 	// alarm state to an INSUFFICIENT_DATA state.
 	//
@@ -152,19 +144,15 @@ type PutAlarmInput struct {
 
 	// Sets how this alarm will handle missing data points. An alarm can treat missing
 	// data in the following ways:
-	//
-	// * breaching - Assume the missing data is not within
+	// - breaching - Assume the missing data is not within
 	// the threshold. Missing data counts towards the number of times the metric is not
 	// within the threshold.
-	//
-	// * notBreaching - Assume the missing data is within the
+	// - notBreaching - Assume the missing data is within the
 	// threshold. Missing data does not count towards the number of times the metric is
 	// not within the threshold.
-	//
-	// * ignore - Ignore the missing data. Maintains the
+	// - ignore - Ignore the missing data. Maintains the
 	// current alarm state.
-	//
-	// * missing - Missing data is treated as missing.
+	// - missing - Missing data is treated as missing.
 	//
 	// If
 	// treatMissingData is not specified, the default behavior of missing is used.

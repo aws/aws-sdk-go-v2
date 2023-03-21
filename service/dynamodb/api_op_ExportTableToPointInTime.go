@@ -73,11 +73,9 @@ type ExportTableToPointInTimeInput struct {
 
 	// Type of encryption used on the bucket where export data will be stored. Valid
 	// values for S3SseAlgorithm are:
-	//
-	// * AES256 - server-side encryption with Amazon S3
+	// - AES256 - server-side encryption with Amazon S3
 	// managed keys
-	//
-	// * KMS - server-side encryption with KMS managed keys
+	// - KMS - server-side encryption with KMS managed keys
 	S3SseAlgorithm types.S3SseAlgorithm
 
 	// The ID of the KMS managed key used to encrypt the S3 bucket where export data

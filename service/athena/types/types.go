@@ -260,35 +260,29 @@ type DataCatalog struct {
 
 	// Specifies the Lambda function or functions to use for the data catalog. This is
 	// a mapping whose values depend on the catalog type.
-	//
-	// * For the HIVE data catalog
+	// - For the HIVE data catalog
 	// type, use the following syntax. The metadata-function parameter is required. The
 	// sdk-version parameter is optional and defaults to the currently supported
 	// version. metadata-function=lambda_arn, sdk-version=version_number
-	//
-	// * For the
+	// - For the
 	// LAMBDA data catalog type, use one of the following sets of required parameters,
 	// but not both.
-	//
-	// * If you have one Lambda function that processes metadata and
+	// - If you have one Lambda function that processes metadata and
 	// another for reading the actual data, use the following syntax. Both parameters
 	// are required. metadata-function=lambda_arn, record-function=lambda_arn
-	//
-	// * If you
+	// - If you
 	// have a composite Lambda function that processes both metadata and data, use the
 	// following syntax to specify your Lambda function. function=lambda_arn
 	//
-	// * The
+	// - The
 	// GLUE type takes a catalog ID parameter and is required. The  catalog_id  is the
 	// account ID of the Amazon Web Services account to which the Glue catalog belongs.
 	// catalog-id=catalog_id
-	//
-	// * The GLUE data catalog type also applies to the default
+	// - The GLUE data catalog type also applies to the default
 	// AwsDataCatalog that already exists in your account, of which you can have only
 	// one and cannot modify.
-	//
-	// * Queries that specify a Glue Data Catalog other than
-	// the default AwsDataCatalog must be run on Athena engine version 2.
+	// - Queries that specify a Glue Data Catalog other than the
+	// default AwsDataCatalog must be run on Athena engine version 2.
 	Parameters map[string]string
 
 	noSmithyDocumentSerde
@@ -1155,15 +1149,12 @@ type UnprocessedPreparedStatementName struct {
 
 	// The error message containing the reason why the prepared statement could not be
 	// returned. The following error messages are possible:
-	//
-	// * INVALID_INPUT - The name
+	// - INVALID_INPUT - The name
 	// of the prepared statement that was provided is not valid (for example, the name
 	// is too long).
-	//
-	// * STATEMENT_NOT_FOUND - A prepared statement with the name
+	// - STATEMENT_NOT_FOUND - A prepared statement with the name
 	// provided could not be found.
-	//
-	// * UNAUTHORIZED - The requester does not have
+	// - UNAUTHORIZED - The requester does not have
 	// permission to access the workgroup that contains the prepared statement.
 	ErrorMessage *string
 

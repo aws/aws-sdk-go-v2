@@ -40,10 +40,8 @@ type ListNetworkResourcesInput struct {
 	NetworkArn *string
 
 	// The filters.
-	//
-	// * ORDER - The Amazon Resource Name (ARN) of the order.
-	//
-	// * STATUS -
+	// - ORDER - The Amazon Resource Name (ARN) of the order.
+	// - STATUS -
 	// The status (AVAILABLE | DELETED | DELETING | PENDING | PENDING_RETURN |
 	// PROVISIONING | SHIPPED).
 	//

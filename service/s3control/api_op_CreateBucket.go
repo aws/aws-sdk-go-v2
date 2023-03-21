@@ -24,10 +24,8 @@ import (
 // information on bucket naming restrictions, see Working with Amazon S3 Buckets
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/BucketRestrictions.html#bucketnamingrules).
 // S3 on Outposts buckets support:
-//
-// * Tags
-//
-// * LifecycleConfigurations for deleting
+// - Tags
+// - LifecycleConfigurations for deleting
 // expired objects
 //
 // For a complete list of restrictions and Amazon S3 feature
@@ -40,23 +38,17 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html#API_control_CreateBucket_Examples)
 // section. The following actions are related to CreateBucket for Amazon S3 on
 // Outposts:
-//
-// * PutObject
+// - PutObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
-//
-// *
-// GetBucket
+// - GetBucket
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucket.html)
-//
-// *
+// -
 // DeleteBucket
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucket.html)
-//
-// *
+// -
 // CreateAccessPoint
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html)
-//
-// *
+// -
 // PutAccessPointPolicy
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicy.html)
 func (c *Client) CreateBucket(ctx context.Context, params *CreateBucketInput, optFns ...func(*Options)) (*CreateBucketOutput, error) {

@@ -16,19 +16,15 @@
 // and reliable storage volumes that can be attached to any running
 // instance and used like a hard drive. To learn more, see the following
 // resources:
-//
-// * Amazon EC2: Amazon EC2 product page (http://aws.amazon.com/ec2),
+// - Amazon EC2: Amazon EC2 product page (http://aws.amazon.com/ec2),
 // Amazon EC2 documentation (https://docs.aws.amazon.com/ec2/index.html)
-//
-// * Amazon
+// - Amazon
 // EBS: Amazon EBS product page (http://aws.amazon.com/ebs), Amazon EBS
 // documentation (https://docs.aws.amazon.com/ebs/index.html)
-//
-// * Amazon VPC: Amazon
+// - Amazon VPC: Amazon
 // VPC product page (http://aws.amazon.com/vpc), Amazon VPC documentation
 // (https://docs.aws.amazon.com/vpc/index.html)
-//
-// * VPN: VPN product page
+// - VPN: VPN product page
 // (http://aws.amazon.com/vpn), VPN documentation
 // (https://docs.aws.amazon.com/vpn/index.html)
 package ec2

@@ -30,15 +30,12 @@ import (
 // x-amz-outpost-id derived by using the access point ARN, see the Examples
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucket.html#API_control_DeleteBucket_Examples)
 // section. Related Resources
-//
-// * CreateBucket
+// - CreateBucket
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html)
-//
-// *
+// -
 // GetBucket
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucket.html)
-//
-// *
+// -
 // DeleteObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html)
 func (c *Client) DeleteBucket(ctx context.Context, params *DeleteBucketInput, optFns ...func(*Options)) (*DeleteBucketOutput, error) {

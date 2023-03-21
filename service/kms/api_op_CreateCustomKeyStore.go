@@ -37,16 +37,14 @@ import (
 // (https://docs.aws.amazon.com/kms/latest/developerguide/create-xks-keystore.html#xks-requirements)
 // in the Key Management Service Developer Guide. To create a custom key store, use
 // the following parameters.
-//
-// * To create an CloudHSM key store, specify the
+// - To create an CloudHSM key store, specify the
 // CustomKeyStoreName, CloudHsmClusterId, KeyStorePassword, and
 // TrustAnchorCertificate. The CustomKeyStoreType parameter is optional for
 // CloudHSM key stores. If you include it, set it to the default value,
 // AWS_CLOUDHSM. For help with failures, see Troubleshooting an CloudHSM key store
 // (https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html) in the
 // Key Management Service Developer Guide.
-//
-// * To create an external key store,
+// - To create an external key store,
 // specify the CustomKeyStoreName and a CustomKeyStoreType of EXTERNAL_KEY_STORE.
 // Also, specify values for XksProxyConnectivity, XksProxyAuthenticationCredential,
 // XksProxyUriEndpoint, and XksProxyUriPath. If your XksProxyConnectivity value is
@@ -76,17 +74,12 @@ import (
 // account. Required permissions: kms:CreateCustomKeyStore
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (IAM policy). Related operations:
-//
-// * ConnectCustomKeyStore
-//
-// *
+// - ConnectCustomKeyStore
+// -
 // DeleteCustomKeyStore
-//
-// * DescribeCustomKeyStores
-//
-// * DisconnectCustomKeyStore
-//
-// *
+// - DescribeCustomKeyStores
+// - DisconnectCustomKeyStore
+// -
 // UpdateCustomKeyStore
 func (c *Client) CreateCustomKeyStore(ctx context.Context, params *CreateCustomKeyStoreInput, optFns ...func(*Options)) (*CreateCustomKeyStoreOutput, error) {
 	if params == nil {
@@ -193,17 +186,14 @@ type CreateCustomKeyStoreInput struct {
 	// must begin with https://. The remainder can contain upper and lower case letters
 	// (A-Z and a-z), numbers (0-9), dots (.), and hyphens (-). Additional slashes (/
 	// and \) are not permitted. Uniqueness requirements:
-	//
-	// * The combined
+	// - The combined
 	// XksProxyUriEndpoint and XksProxyUriPath values must be unique in the Amazon Web
 	// Services account and Region.
-	//
-	// * An external key store with PUBLIC_ENDPOINT
+	// - An external key store with PUBLIC_ENDPOINT
 	// connectivity cannot use the same XksProxyUriEndpoint value as an external key
 	// store with VPC_ENDPOINT_SERVICE connectivity in the same Amazon Web Services
 	// Region.
-	//
-	// * Each external key store with VPC_ENDPOINT_SERVICE connectivity must
+	// - Each external key store with VPC_ENDPOINT_SERVICE connectivity must
 	// have its own private DNS name. The XksProxyUriEndpoint value for external key
 	// stores with VPC_ENDPOINT_SERVICE connectivity (private DNS name) must be unique
 	// in the Amazon Web Services account and Region.
@@ -216,8 +206,7 @@ type CreateCustomKeyStoreInput struct {
 	// where v1 represents the version of the KMS external key store proxy API. This
 	// path can include an optional prefix between the required elements such as
 	// /prefix/kms/xks/v1. Uniqueness requirements:
-	//
-	// * The combined XksProxyUriEndpoint
+	// - The combined XksProxyUriEndpoint
 	// and XksProxyUriPath values must be unique in the Amazon Web Services account and
 	// Region.
 	XksProxyUriPath *string
@@ -229,8 +218,7 @@ type CreateCustomKeyStoreInput struct {
 	// endpoint service must fulfill all requirements
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/create-xks-keystore.html#xks-requirements)
 	// for use with an external key store. Uniqueness requirements:
-	//
-	// * External key
+	// - External key
 	// stores with VPC_ENDPOINT_SERVICE connectivity can share an Amazon VPC, but each
 	// external key store must have its own VPC endpoint service and private DNS name.
 	XksProxyVpcEndpointServiceName *string

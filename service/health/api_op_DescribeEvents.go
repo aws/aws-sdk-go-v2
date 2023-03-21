@@ -21,8 +21,7 @@ import (
 // (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntities.html)
 // operations. If no filter criteria are specified, all events are returned.
 // Results are sorted by lastModifiedTime, starting with the most recent event.
-//
-// *
+// -
 // When you call the DescribeEvents operation and specify an entity for the
 // entityValues parameter, Health might return public events that aren't specific
 // to that resource. For example, if you call DescribeEvents and specify an ID for
@@ -31,8 +30,7 @@ import (
 // specific to a service, use the services parameter in the filter object. For more
 // information, see Event
 // (https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html).
-//
-// * This
+// - This
 // API operation uses pagination. Specify the nextToken parameter in the next
 // request to return more results.
 func (c *Client) DescribeEvents(ctx context.Context, params *DescribeEventsInput, optFns ...func(*Options)) (*DescribeEventsOutput, error) {

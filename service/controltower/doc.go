@@ -5,19 +5,17 @@
 //
 // These interfaces allow you to apply the AWS library of pre-defined controls to
 // your organizational units, programmatically. In this context, controls are the
-// same as AWS Control Tower guardrails. To call these APIs, you'll need to
-// know:
+// same as AWS Control Tower guardrails. To call these APIs, you'll need to know:
+// -
+// the ControlARN for the control--that is, the guardrail--you are targeting,
+// - and
+// the ARN associated with the target organizational unit (OU).
 //
-// * the ControlARN for the control--that is, the guardrail--you are
-// targeting,
-//
-// * and the ARN associated with the target organizational unit
-// (OU).
-//
-// To get the ControlARN for your AWS Control Tower guardrail: The
-// ControlARN contains the control name which is specified in each guardrail. For a
-// list of control names for Strongly recommended and Elective guardrails, see
-// Resource identifiers for APIs and guardrails
+// To get the
+// ControlARN for your AWS Control Tower guardrail: The ControlARN contains the
+// control name which is specified in each guardrail. For a list of control names
+// for Strongly recommended and Elective guardrails, see Resource identifiers for
+// APIs and guardrails
 // (https://docs.aws.amazon.com/controltower/latest/userguide/control-identifiers.html.html)
 // in the Automating tasks section
 // (https://docs.aws.amazon.com/controltower/latest/userguide/automating-tasks.html)
@@ -30,19 +28,15 @@
 // ARN format:
 // arn:${Partition}:organizations::${MasterAccountId}:ou/o-${OrganizationId}/ou-${OrganizationalUnitId}
 // Details and examples
-//
-// * List of resource identifiers for APIs and guardrails
+// - List of resource identifiers for APIs and guardrails
 // (https://docs.aws.amazon.com/controltower/latest/userguide/control-identifiers.html)
-//
-// *
+// -
 // Guardrail API examples (CLI)
 // (https://docs.aws.amazon.com/controltower/latest/userguide/guardrail-api-examples-short.html)
-//
-// *
+// -
 // Enable controls with AWS CloudFormation
 // (https://docs.aws.amazon.com/controltower/latest/userguide/enable-controls.html)
-//
-// *
+// -
 // Creating AWS Control Tower resources with AWS CloudFormation
 // (https://docs.aws.amazon.com/controltower/latest/userguide/creating-resources-with-cloudformation.html)
 //

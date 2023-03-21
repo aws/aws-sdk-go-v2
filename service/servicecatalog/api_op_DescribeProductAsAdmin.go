@@ -31,12 +31,9 @@ func (c *Client) DescribeProductAsAdmin(ctx context.Context, params *DescribePro
 type DescribeProductAsAdminInput struct {
 
 	// The language code.
-	//
-	// * en - English (default)
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	// - en - English (default)
+	// - jp - Japanese
+	// - zh - Chinese
 	AcceptLanguage *string
 
 	// The product identifier.

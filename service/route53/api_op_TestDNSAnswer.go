@@ -63,11 +63,9 @@ type TestDNSAnswerInput struct {
 	// 192.0.2.0/24. The default value is 24 bits for IPv4 addresses and 64 bits for
 	// IPv6 addresses. The range of valid values depends on whether edns0clientsubnetip
 	// is an IPv4 or an IPv6 address:
-	//
-	// * IPv4: Specify a value between 0 and 32
-	//
-	// *
-	// IPv6: Specify a value between 0 and 128
+	// - IPv4: Specify a value between 0 and 32
+	// - IPv6:
+	// Specify a value between 0 and 128
 	EDNS0ClientSubnetMask *string
 
 	// If you want to simulate a request from a specific DNS resolver, specify the IP

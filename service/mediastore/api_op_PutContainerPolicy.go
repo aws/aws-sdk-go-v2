@@ -39,10 +39,8 @@ type PutContainerPolicyInput struct {
 	ContainerName *string
 
 	// The contents of the policy, which includes the following:
-	//
-	// * One Version tag
-	//
-	// *
+	// - One Version tag
+	// -
 	// One Statement tag that contains the standard tags for the policy.
 	//
 	// This member is required.

@@ -96,11 +96,9 @@ type MemberDetail struct {
 	// For member accounts with a status of ACCEPTED_BUT_DISABLED, the reason that the
 	// member account is not enabled. The reason can have one of the following
 	// values:
-	//
-	// * VOLUME_TOO_HIGH - Indicates that adding the member account would
-	// cause the data volume for the behavior graph to be too high.
-	//
-	// * VOLUME_UNKNOWN -
+	// - VOLUME_TOO_HIGH - Indicates that adding the member account would cause
+	// the data volume for the behavior graph to be too high.
+	// - VOLUME_UNKNOWN -
 	// Indicates that Detective is unable to verify the data volume for the member
 	// account. This is usually because the member account is not enrolled in Amazon
 	// GuardDuty.
@@ -149,11 +147,9 @@ type MemberDetail struct {
 
 	// The current membership status of the member account. The status can have one of
 	// the following values:
-	//
-	// * INVITED - For invited accounts only. Indicates that the
+	// - INVITED - For invited accounts only. Indicates that the
 	// member was sent an invitation but has not yet responded.
-	//
-	// *
+	// -
 	// VERIFICATION_IN_PROGRESS - For invited accounts only, indicates that Detective
 	// is verifying that the account identifier and email address provided for the
 	// member account match. If they do match, then Detective sends the invitation. If
@@ -161,18 +157,15 @@ type MemberDetail struct {
 	// added to the behavior graph. For organization accounts in the organization
 	// behavior graph, indicates that Detective is verifying that the account belongs
 	// to the organization.
-	//
-	// * VERIFICATION_FAILED - For invited accounts only.
+	// - VERIFICATION_FAILED - For invited accounts only.
 	// Indicates that the account and email address provided for the member account do
 	// not match, and Detective did not send an invitation to the account.
-	//
-	// * ENABLED -
+	// - ENABLED -
 	// Indicates that the member account currently contributes data to the behavior
 	// graph. For invited accounts, the member account accepted the invitation. For
 	// organization accounts in the organization behavior graph, the Detective
 	// administrator account enabled the organization account as a member account.
-	//
-	// *
+	// -
 	// ACCEPTED_BUT_DISABLED - The account accepted the invitation, or was enabled by
 	// the Detective administrator account, but is prevented from contributing data to
 	// the behavior graph. DisabledReason provides the reason why the member account is

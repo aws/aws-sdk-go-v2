@@ -43,15 +43,12 @@ type TestAlarmInput struct {
 
 	// The alarm state to test. An alarm has the following possible states that can be
 	// tested:
-	//
-	// * ALARM - The metric is outside of the defined threshold.
-	//
-	// *
+	// - ALARM - The metric is outside of the defined threshold.
+	// -
 	// INSUFFICIENT_DATA - The alarm has just started, the metric is not available, or
 	// not enough data is available for the metric to determine the alarm state.
-	//
-	// * OK
-	// - The metric is within the defined threshold.
+	// - OK -
+	// The metric is within the defined threshold.
 	//
 	// This member is required.
 	State types.AlarmState

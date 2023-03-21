@@ -70,8 +70,7 @@ type PutSessionInput struct {
 
 	// The message that Amazon Lex V2 returns in the response can be either text or
 	// speech depending on the value of this parameter.
-	//
-	// * If the value is text/plain;
+	// - If the value is text/plain;
 	// charset=utf-8, Amazon Lex V2 returns text in the response.
 	ResponseContentType *string
 

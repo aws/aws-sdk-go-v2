@@ -38,11 +38,9 @@ type ListOnPremisesInstancesInput struct {
 	NextToken *string
 
 	// The registration status of the on-premises instances:
-	//
-	// * Deregistered: Include
+	// - Deregistered: Include
 	// deregistered on-premises instances in the resulting list.
-	//
-	// * Registered: Include
+	// - Registered: Include
 	// registered on-premises instances in the resulting list.
 	RegistrationStatus types.RegistrationStatus
 

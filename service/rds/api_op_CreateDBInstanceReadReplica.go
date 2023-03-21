@@ -50,38 +50,30 @@ type CreateDBInstanceReadReplicaInput struct {
 
 	// The identifier of the DB instance that will act as the source for the read
 	// replica. Each DB instance can have up to five read replicas. Constraints:
-	//
-	// *
-	// Must be the identifier of an existing MySQL, MariaDB, Oracle, PostgreSQL, or SQL
+	// - Must
+	// be the identifier of an existing MySQL, MariaDB, Oracle, PostgreSQL, or SQL
 	// Server DB instance.
-	//
-	// * Can specify a DB instance that is a MySQL read replica
+	// - Can specify a DB instance that is a MySQL read replica
 	// only if the source is running MySQL 5.6 or later.
-	//
-	// * For the limitations of
+	// - For the limitations of
 	// Oracle read replicas, see Read Replica Limitations with Oracle
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html)
 	// in the Amazon RDS User Guide.
-	//
-	// * For the limitations of SQL Server read
-	// replicas, see Read Replica Limitations with Microsoft SQL Server
+	// - For the limitations of SQL Server read replicas,
+	// see Read Replica Limitations with Microsoft SQL Server
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/SQLServer.ReadReplicas.Limitations.html)
 	// in the Amazon RDS User Guide.
-	//
-	// * Can specify a PostgreSQL DB instance only if
-	// the source is running PostgreSQL 9.3.5 or later (9.4.7 and higher for
-	// cross-Region replication).
-	//
-	// * The specified DB instance must have automatic
-	// backups enabled, that is, its backup retention period must be greater than 0.
-	//
-	// *
-	// If the source DB instance is in the same Amazon Web Services Region as the read
-	// replica, specify a valid DB instance identifier.
-	//
-	// * If the source DB instance is
-	// in a different Amazon Web Services Region from the read replica, specify a valid
-	// DB instance ARN. For more information, see Constructing an ARN for Amazon RDS
+	// - Can specify a PostgreSQL DB instance only if the
+	// source is running PostgreSQL 9.3.5 or later (9.4.7 and higher for cross-Region
+	// replication).
+	// - The specified DB instance must have automatic backups enabled,
+	// that is, its backup retention period must be greater than 0.
+	// - If the source DB
+	// instance is in the same Amazon Web Services Region as the read replica, specify
+	// a valid DB instance identifier.
+	// - If the source DB instance is in a different
+	// Amazon Web Services Region from the read replica, specify a valid DB instance
+	// ARN. For more information, see Constructing an ARN for Amazon RDS
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing)
 	// in the Amazon RDS User Guide. This doesn't apply to SQL Server or RDS Custom,
 	// which don't support cross-Region replicas.
@@ -112,14 +104,11 @@ type CreateDBInstanceReadReplicaInput struct {
 	// The instance profile associated with the underlying Amazon EC2 instance of an
 	// RDS Custom DB instance. The instance profile must meet the following
 	// requirements:
-	//
-	// * The profile must exist in your account.
-	//
-	// * The profile must
-	// have an IAM role that Amazon EC2 has permissions to assume.
-	//
-	// * The instance
-	// profile name and the associated IAM role name must start with the prefix
+	// - The profile must exist in your account.
+	// - The profile must have
+	// an IAM role that Amazon EC2 has permissions to assume.
+	// - The instance profile
+	// name and the associated IAM role name must start with the prefix
 	// AWSRDSCustom.
 	//
 	// For the list of permissions required for the IAM role, see
@@ -141,40 +130,30 @@ type CreateDBInstanceReadReplicaInput struct {
 	// DBParameterGroup of source DB instance for a same Region read replica, or the
 	// default DBParameterGroup for the specified DB engine for a cross-Region read
 	// replica. Specifying a parameter group for this operation is only supported for
-	// MySQL and Oracle DB instances. It isn't supported for RDS Custom.
-	// Constraints:
-	//
-	// * Must be 1 to 255 letters, numbers, or hyphens.
-	//
-	// * First
-	// character must be a letter
-	//
-	// * Can't end with a hyphen or contain two consecutive
-	// hyphens
+	// MySQL and Oracle DB instances. It isn't supported for RDS Custom. Constraints:
+	// -
+	// Must be 1 to 255 letters, numbers, or hyphens.
+	// - First character must be a
+	// letter
+	// - Can't end with a hyphen or contain two consecutive hyphens
 	DBParameterGroupName *string
 
 	// Specifies a DB subnet group for the DB instance. The new DB instance is created
 	// in the VPC associated with the DB subnet group. If no DB subnet group is
 	// specified, then the new DB instance isn't created in a VPC. Constraints:
-	//
-	// * Can
+	// - Can
 	// only be specified if the source DB instance identifier specifies a DB instance
 	// in another Amazon Web Services Region.
-	//
-	// * If supplied, must match the name of an
+	// - If supplied, must match the name of an
 	// existing DBSubnetGroup.
-	//
-	// * The specified DB subnet group must be in the same
+	// - The specified DB subnet group must be in the same
 	// Amazon Web Services Region in which the operation is running.
-	//
-	// * All read
+	// - All read
 	// replicas in one Amazon Web Services Region that are created from the same source
 	// DB instance must either:>
-	//
-	// * Specify DB subnet groups from the same VPC. All
+	// - Specify DB subnet groups from the same VPC. All
 	// these read replicas are created in the same VPC.
-	//
-	// * Not specify a DB subnet
+	// - Not specify a DB subnet
 	// group. All these read replicas are created outside of any VPC.
 	//
 	// Example:
@@ -288,10 +267,8 @@ type CreateDBInstanceReadReplicaInput struct {
 	MultiAZ *bool
 
 	// The network type of the DB instance. Valid values:
-	//
-	// * IPV4
-	//
-	// * DUAL
+	// - IPV4
+	// - DUAL
 	//
 	// The network
 	// type is determined by the DBSubnetGroup specified for read replica. A
@@ -318,28 +295,21 @@ type CreateDBInstanceReadReplicaInput struct {
 
 	// The number of days to retain Performance Insights data. The default is 7 days.
 	// The following values are valid:
-	//
-	// * 7
-	//
-	// * month * 31, where month is a number of
+	// - 7
+	// - month * 31, where month is a number of
 	// months from 1-23
-	//
-	// * 731
+	// - 731
 	//
 	// For example, the following values are valid:
-	//
-	// * 93 (3
+	// - 93 (3
 	// months * 31)
+	// - 341 (11 months * 31)
+	// - 589 (19 months * 31)
+	// - 731
 	//
-	// * 341 (11 months * 31)
-	//
-	// * 589 (19 months * 31)
-	//
-	// * 731
-	//
-	// If you
-	// specify a retention period such as 94, which isn't a valid value, RDS issues an
-	// error. This setting doesn't apply to RDS Custom.
+	// If you specify
+	// a retention period such as 94, which isn't a valid value, RDS issues an error.
+	// This setting doesn't apply to RDS Custom.
 	PerformanceInsightsRetentionPeriod *int32
 
 	// The port number that the DB instance uses for connections. Default: Inherits
@@ -360,26 +330,23 @@ type CreateDBInstanceReadReplicaInput struct {
 	// operation that can run in the source Amazon Web Services Region that contains
 	// the encrypted source DB instance. The presigned URL request must contain the
 	// following parameter values:
-	//
-	// * DestinationRegion - The Amazon Web Services
-	// Region that the encrypted read replica is created in. This Amazon Web Services
-	// Region is the same one where the CreateDBInstanceReadReplica operation is called
-	// that contains this presigned URL. For example, if you create an encrypted DB
-	// instance in the us-west-1 Amazon Web Services Region, from a source DB instance
-	// in the us-east-2 Amazon Web Services Region, then you call the
+	// - DestinationRegion - The Amazon Web Services Region
+	// that the encrypted read replica is created in. This Amazon Web Services Region
+	// is the same one where the CreateDBInstanceReadReplica operation is called that
+	// contains this presigned URL. For example, if you create an encrypted DB instance
+	// in the us-west-1 Amazon Web Services Region, from a source DB instance in the
+	// us-east-2 Amazon Web Services Region, then you call the
 	// CreateDBInstanceReadReplica operation in the us-east-1 Amazon Web Services
 	// Region and provide a presigned URL that contains a call to the
 	// CreateDBInstanceReadReplica operation in the us-west-2 Amazon Web Services
 	// Region. For this example, the DestinationRegion in the presigned URL must be set
 	// to the us-east-1 Amazon Web Services Region.
-	//
-	// * KmsKeyId - The KMS key
-	// identifier for the key to use to encrypt the read replica in the destination
-	// Amazon Web Services Region. This is the same identifier for both the
+	// - KmsKeyId - The KMS key identifier
+	// for the key to use to encrypt the read replica in the destination Amazon Web
+	// Services Region. This is the same identifier for both the
 	// CreateDBInstanceReadReplica operation that is called in the destination Amazon
 	// Web Services Region, and the operation contained in the presigned URL.
-	//
-	// *
+	// -
 	// SourceDBInstanceIdentifier - The DB instance identifier for the encrypted DB
 	// instance to be replicated. This identifier must be in the Amazon Resource Name
 	// (ARN) format for the source Amazon Web Services Region. For example, if you are

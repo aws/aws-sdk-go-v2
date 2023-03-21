@@ -250,15 +250,11 @@ type DBCluster struct {
 // This data type represents the information you need to connect to an Amazon
 // Neptune DB cluster. This data type is used as a response element in the
 // following actions:
-//
-// * CreateDBClusterEndpoint
-//
-// * DescribeDBClusterEndpoints
-//
-// *
+// - CreateDBClusterEndpoint
+// - DescribeDBClusterEndpoints
+// -
 // ModifyDBClusterEndpoint
-//
-// * DeleteDBClusterEndpoint
+// - DeleteDBClusterEndpoint
 //
 // For the data structure that
 // represents Amazon Neptune DB instance endpoints, see Endpoint.
@@ -375,15 +371,12 @@ type DBClusterRole struct {
 
 	// Describes the state of association between the IAM role and the DB cluster. The
 	// Status property returns one of the following values:
-	//
-	// * ACTIVE - the IAM role
-	// ARN is associated with the DB cluster and can be used to access other Amazon
+	// - ACTIVE - the IAM role ARN
+	// is associated with the DB cluster and can be used to access other Amazon
 	// services on your behalf.
-	//
-	// * PENDING - the IAM role ARN is being associated with
+	// - PENDING - the IAM role ARN is being associated with
 	// the DB cluster.
-	//
-	// * INVALID - the IAM role ARN is associated with the DB cluster,
+	// - INVALID - the IAM role ARN is associated with the DB cluster,
 	// but the DB cluster is unable to assume the IAM role in order to access other
 	// Amazon services on your behalf.
 	Status *string
@@ -804,15 +797,11 @@ type DBParameterGroup struct {
 
 // The status of the DB parameter group. This data type is used as a response
 // element in the following actions:
-//
-// * CreateDBInstance
-//
-// * DeleteDBInstance
-//
-// *
+// - CreateDBInstance
+// - DeleteDBInstance
+// -
 // ModifyDBInstance
-//
-// * RebootDBInstance
+// - RebootDBInstance
 type DBParameterGroupStatus struct {
 
 	// The name of the DP parameter group.

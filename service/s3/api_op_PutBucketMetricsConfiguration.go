@@ -28,29 +28,23 @@ import (
 // Metrics with Amazon CloudWatch
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html).
 // The following operations are related to PutBucketMetricsConfiguration:
-//
-// *
+// -
 // DeleteBucketMetricsConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetricsConfiguration.html)
-//
-// *
+// -
 // GetBucketMetricsConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetricsConfiguration.html)
-//
-// *
+// -
 // ListBucketMetricsConfigurations
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketMetricsConfigurations.html)
 //
 // GetBucketLifecycle
 // has the following special error:
-//
-// * Error code: TooManyConfigurations
-//
-// *
+// - Error code: TooManyConfigurations
+// -
 // Description: You are attempting to create a new configuration but have already
 // reached the 1,000-configuration limit.
-//
-// * HTTP Status Code: HTTP 400 Bad Request
+// - HTTP Status Code: HTTP 400 Bad Request
 func (c *Client) PutBucketMetricsConfiguration(ctx context.Context, params *PutBucketMetricsConfigurationInput, optFns ...func(*Options)) (*PutBucketMetricsConfigurationOutput, error) {
 	if params == nil {
 		params = &PutBucketMetricsConfigurationInput{}

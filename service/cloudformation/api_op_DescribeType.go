@@ -93,12 +93,10 @@ type DescribeTypeOutput struct {
 	DefaultVersionId *string
 
 	// The deprecation status of the extension version. Valid values include:
-	//
-	// * LIVE:
+	// - LIVE:
 	// The extension is activated or registered and can be used in CloudFormation
 	// operations, dependent on its provisioning behavior and visibility scope.
-	//
-	// *
+	// -
 	// DEPRECATED: The extension has been deactivated or deregistered and can no longer
 	// be used in CloudFormation operations.
 	//
@@ -136,13 +134,11 @@ type DescribeTypeOutput struct {
 	IsDefaultVersion *bool
 
 	// When the specified extension version was registered. This applies only to:
-	//
-	// *
+	// -
 	// Private extensions you have registered in your account. For more information,
 	// see RegisterType
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html).
-	//
-	// *
+	// -
 	// Public extensions you have activated in your account with auto-update specified.
 	// For more information, see ActivateType
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html).
@@ -178,23 +174,17 @@ type DescribeTypeOutput struct {
 	// CloudFormation determines the provisioning type during registration, based on
 	// the types of handlers in the schema handler package submitted. Valid values
 	// include:
-	//
-	// * FULLY_MUTABLE: The resource type includes an update handler to
+	// - FULLY_MUTABLE: The resource type includes an update handler to
 	// process updates to the type during stack update operations.
-	//
-	// * IMMUTABLE: The
+	// - IMMUTABLE: The
 	// resource type doesn't include an update handler, so the type can't be updated
 	// and must instead be replaced during stack update operations.
-	//
-	// *
+	// -
 	// NON_PROVISIONABLE: The resource type doesn't include all the following handlers,
 	// and therefore can't actually be provisioned.
-	//
-	// * create
-	//
-	// * read
-	//
-	// * delete
+	// - create
+	// - read
+	// - delete
 	ProvisioningType types.ProvisioningType
 
 	// The version number of a public third-party extension. This applies only if you
@@ -239,22 +229,18 @@ type DescribeTypeOutput struct {
 	// VersionId. This applies only to registered private extension versions.
 	// CloudFormation doesn't return this information for public extensions, whether
 	// they are activated in your account.
-	//
-	// * PASSED: The extension has passed all its
+	// - PASSED: The extension has passed all its
 	// contract tests. An extension must have a test status of PASSED before it can be
 	// published. For more information, see Publishing extensions to make them
 	// available for public use
 	// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-publish.html)
 	// in the CloudFormation Command Line Interface User Guide.
-	//
-	// * FAILED: The
-	// extension has failed one or more contract tests.
-	//
-	// * IN_PROGRESS: Contract tests
-	// are currently being performed on the extension.
-	//
-	// * NOT_TESTED: Contract tests
-	// haven't been performed on the extension.
+	// - FAILED: The extension
+	// has failed one or more contract tests.
+	// - IN_PROGRESS: Contract tests are
+	// currently being performed on the extension.
+	// - NOT_TESTED: Contract tests haven't
+	// been performed on the extension.
 	TypeTestsStatus types.TypeTestsStatus
 
 	// The description of the test status. To return the extension test status of a
@@ -265,12 +251,10 @@ type DescribeTypeOutput struct {
 
 	// The scope at which the extension is visible and usable in CloudFormation
 	// operations. Valid values include:
-	//
-	// * PRIVATE: The extension is only visible and
+	// - PRIVATE: The extension is only visible and
 	// usable within the account in which it is registered. CloudFormation marks any
 	// extensions you register as PRIVATE.
-	//
-	// * PUBLIC: The extension is publicly visible
+	// - PUBLIC: The extension is publicly visible
 	// and usable within any Amazon Web Services account.
 	Visibility types.Visibility
 

@@ -20,15 +20,12 @@ import (
 // it's still used in any WebACL objects or if it still includes any rules. If you
 // just want to remove a RuleGroup from a WebACL, use UpdateWebACL. To permanently
 // delete a RuleGroup from AWS WAF, perform the following steps:
-//
-// * Update the
+// - Update the
 // RuleGroup to remove rules, if any. For more information, see UpdateRuleGroup.
-//
-// *
+// -
 // Use GetChangeToken to get the change token that you provide in the ChangeToken
 // parameter of a DeleteRuleGroup request.
-//
-// * Submit a DeleteRuleGroup request.
+// - Submit a DeleteRuleGroup request.
 func (c *Client) DeleteRuleGroup(ctx context.Context, params *DeleteRuleGroupInput, optFns ...func(*Options)) (*DeleteRuleGroupOutput, error) {
 	if params == nil {
 		params = &DeleteRuleGroupInput{}

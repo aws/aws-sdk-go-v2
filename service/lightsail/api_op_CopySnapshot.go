@@ -51,44 +51,37 @@ type CopySnapshotInput struct {
 	// The date of the source automatic snapshot to copy. Use the get auto snapshots
 	// operation to identify the dates of the available automatic snapshots.
 	// Constraints:
-	//
-	// * Must be specified in YYYY-MM-DD format.
-	//
-	// * This parameter cannot
+	// - Must be specified in YYYY-MM-DD format.
+	// - This parameter cannot
 	// be defined together with the use latest restorable auto snapshot parameter. The
 	// restore date and use latest restorable auto snapshot parameters are mutually
 	// exclusive.
-	//
-	// * Define this parameter only when copying an automatic snapshot as a
+	// - Define this parameter only when copying an automatic snapshot as a
 	// manual snapshot. For more information, see the Amazon Lightsail Developer Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-keeping-automatic-snapshots).
 	RestoreDate *string
 
 	// The name of the source instance or disk from which the source automatic snapshot
 	// was created. Constraint:
-	//
-	// * Define this parameter only when copying an automatic
+	// - Define this parameter only when copying an automatic
 	// snapshot as a manual snapshot. For more information, see the Amazon Lightsail
 	// Developer Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-keeping-automatic-snapshots).
 	SourceResourceName *string
 
 	// The name of the source manual snapshot to copy. Constraint:
-	//
-	// * Define this
+	// - Define this
 	// parameter only when copying a manual snapshot as another manual snapshot.
 	SourceSnapshotName *string
 
 	// A Boolean value to indicate whether to use the latest available automatic
 	// snapshot of the specified source instance or disk. Constraints:
-	//
-	// * This
-	// parameter cannot be defined together with the restore date parameter. The use
-	// latest restorable auto snapshot and restore date parameters are mutually
-	// exclusive.
-	//
-	// * Define this parameter only when copying an automatic snapshot as a
-	// manual snapshot. For more information, see the Amazon Lightsail Developer Guide
+	// - This parameter
+	// cannot be defined together with the restore date parameter. The use latest
+	// restorable auto snapshot and restore date parameters are mutually exclusive.
+	// -
+	// Define this parameter only when copying an automatic snapshot as a manual
+	// snapshot. For more information, see the Amazon Lightsail Developer Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-keeping-automatic-snapshots).
 	UseLatestRestorableAutoSnapshot *bool
 

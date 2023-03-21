@@ -12,22 +12,18 @@
 // service endpoints, see the Amazon IVS Chat information on the Amazon IVS page
 // (https://docs.aws.amazon.com/general/latest/gr/ivs.html) in the AWS General
 // Reference. Notes on terminology:
-//
-// * You create service applications using the
+// - You create service applications using the
 // Amazon IVS Chat API. We refer to these as applications.
-//
-// * You create front-end
+// - You create front-end
 // client applications (browser and Android/iOS apps) using the Amazon IVS Chat
 // Messaging API. We refer to these as clients.
 //
 // Resources The following resources
 // are part of Amazon IVS Chat:
-//
-// * LoggingConfiguration — A configuration that
+// - LoggingConfiguration — A configuration that
 // allows customers to store and record sent messages in a chat room. See the
 // Logging Configuration endpoints for more information.
-//
-// * Room — The central
+// - Room — The central
 // Amazon IVS Chat resource through which clients connect to and exchange chat
 // messages. See the Room endpoints for more information.
 //
@@ -49,11 +45,9 @@
 // applications (service applications and clients) must be authenticated and
 // authorized to access Amazon IVS Chat resources. Note the differences between
 // these concepts:
-//
-// * Authentication is about verifying identity. Requests to the
+// - Authentication is about verifying identity. Requests to the
 // Amazon IVS Chat API must be signed to verify your identity.
-//
-// * Authorization is
+// - Authorization is
 // about granting permissions. Your IAM roles need to have permissions for Amazon
 // IVS Chat API requests.
 //
@@ -69,13 +63,11 @@
 // permission to perform the requested action. For example, DeleteMessage requests
 // must be made using an IAM role that has the ivschat:DeleteMessage permission.
 // For more information:
-//
-// * Authentication and generating signatures — See
+// - Authentication and generating signatures — See
 // Authenticating Requests (Amazon Web Services Signature Version 4)
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html)
 // in the Amazon Web Services General Reference.
-//
-// * Managing Amazon IVS permissions
+// - Managing Amazon IVS permissions
 // — See Identity and Access Management
 // (https://docs.aws.amazon.com/ivs/latest/userguide/security-iam.html) on the
 // Security page of the Amazon IVS User Guide.
@@ -86,78 +78,61 @@
 // For more information, see Amazon Resource Names
 // (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 // the AWS General Reference. Messaging Endpoints
-//
-// * DeleteMessage — Sends an event
+// - DeleteMessage — Sends an event
 // to a specific room which directs clients to delete a specific message; that is,
 // unrender it from view and delete it from the client’s chat history. This event’s
 // EventName is aws:DELETE_MESSAGE. This replicates the  DeleteMessage
 // (https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/actions-deletemessage-publish.html)
 // WebSocket operation in the Amazon IVS Chat Messaging API.
-//
-// * DisconnectUser —
+// - DisconnectUser —
 // Disconnects all connections using a specified user ID from a room. This
 // replicates the  DisconnectUser
 // (https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/actions-disconnectuser-publish.html)
 // WebSocket operation in the Amazon IVS Chat Messaging API.
-//
-// * SendEvent — Sends
-// an event to a room. Use this within your application’s business logic to send
+// - SendEvent — Sends an
+// event to a room. Use this within your application’s business logic to send
 // events to clients of a room; e.g., to notify clients to change the way the chat
 // UI is rendered.
 //
-// # Chat Token Endpoint
-//
-// * CreateChatToken — Creates an encrypted
+// Chat Token Endpoint
+// - CreateChatToken — Creates an encrypted
 // token that is used by a chat participant to establish an individual WebSocket
 // chat connection to a room. When the token is used to connect to chat, the
 // connection is valid for the session duration specified in the request. The token
 // becomes invalid at the token-expiration timestamp included in the
 // response.
 //
-// # Room Endpoints
-//
-// * CreateRoom — Creates a room that allows clients to
+// Room Endpoints
+// - CreateRoom — Creates a room that allows clients to
 // connect and pass messages.
+// - DeleteRoom — Deletes the specified room.
+// - GetRoom
+// — Gets the specified room.
+// - ListRooms — Gets summary information about all your
+// rooms in the AWS region where the API request is processed.
+// - UpdateRoom —
+// Updates a room’s configuration.
 //
-// * DeleteRoom — Deletes the specified room.
-//
-// *
-// GetRoom — Gets the specified room.
-//
-// * ListRooms — Gets summary information about
-// all your rooms in the AWS region where the API request is processed.
-//
-// *
-// UpdateRoom — Updates a room’s configuration.
-//
-// # Logging Configuration Endpoints
-//
-// *
+// Logging Configuration Endpoints
+// -
 // CreateLoggingConfiguration — Creates a logging configuration that allows clients
 // to store and record sent messages.
-//
-// * DeleteLoggingConfiguration — Deletes the
+// - DeleteLoggingConfiguration — Deletes the
 // specified logging configuration.
-//
-// * GetLoggingConfiguration — Gets the specified
+// - GetLoggingConfiguration — Gets the specified
 // logging configuration.
-//
-// * ListLoggingConfigurations — Gets summary information
+// - ListLoggingConfigurations — Gets summary information
 // about all your logging configurations in the AWS region where the API request is
 // processed.
-//
-// * UpdateLoggingConfiguration — Updates a specified logging
+// - UpdateLoggingConfiguration — Updates a specified logging
 // configuration.
 //
-// # Tags Endpoints
-//
-// * ListTagsForResource — Gets information about
+// Tags Endpoints
+// - ListTagsForResource — Gets information about
 // AWS tags for the specified ARN.
-//
-// * TagResource — Adds or updates tags for the
-// AWS resource with the specified ARN.
-//
-// * UntagResource — Removes tags from the
+// - TagResource — Adds or updates tags for the AWS
+// resource with the specified ARN.
+// - UntagResource — Removes tags from the
 // resource with the specified ARN.
 //
 // All the above are HTTP operations. There is a

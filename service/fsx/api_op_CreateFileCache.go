@@ -20,11 +20,9 @@ import (
 // the parameters don't match, this call returns IncompatibleParameterError. If a
 // file cache with the specified client request token doesn't exist,
 // CreateFileCache does the following:
-//
-// * Creates a new, empty Amazon File Cache
+// - Creates a new, empty Amazon File Cache
 // resourcewith an assigned ID, and an initial lifecycle state of CREATING.
-//
-// *
+// -
 // Returns the description of the cache in JSON format.
 //
 // The CreateFileCache call
@@ -91,12 +89,10 @@ type CreateFileCacheInput struct {
 	// S3 data repository or a Network File System (NFS) data repository that supports
 	// the NFSv3 protocol. The DRA configurations must meet the following
 	// requirements:
-	//
-	// * All configurations on the list must be of the same data
+	// - All configurations on the list must be of the same data
 	// repository type, either all S3 or all NFS. A cache can't link to different data
 	// repository types at the same time.
-	//
-	// * An NFS DRA must link to an NFS file system
+	// - An NFS DRA must link to an NFS file system
 	// that supports the NFSv3 protocol.
 	//
 	// DRA automatic import and automatic export is

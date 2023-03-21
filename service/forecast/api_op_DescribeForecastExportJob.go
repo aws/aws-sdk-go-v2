@@ -16,14 +16,10 @@ import (
 // operation. In addition to listing the properties provided by the user in the
 // CreateForecastExportJob request, this operation lists the following
 // properties:
-//
-// * CreationTime
-//
-// * LastModificationTime
-//
-// * Status
-//
-// * Message - If an
+// - CreationTime
+// - LastModificationTime
+// - Status
+// - Message - If an
 // error occurred, information about the error.
 func (c *Client) DescribeForecastExportJob(ctx context.Context, params *DescribeForecastExportJobInput, optFns ...func(*Options)) (*DescribeForecastExportJobOutput, error) {
 	if params == nil {
@@ -73,35 +69,25 @@ type DescribeForecastExportJobOutput struct {
 
 	// The last time the resource was modified. The timestamp depends on the status of
 	// the job:
-	//
-	// * CREATE_PENDING - The CreationTime.
-	//
-	// * CREATE_IN_PROGRESS - The
-	// current timestamp.
-	//
-	// * CREATE_STOPPING - The current timestamp.
-	//
-	// * CREATE_STOPPED
-	// - When the job stopped.
-	//
-	// * ACTIVE or CREATE_FAILED - When the job finished or
-	// failed.
+	// - CREATE_PENDING - The CreationTime.
+	// - CREATE_IN_PROGRESS - The current
+	// timestamp.
+	// - CREATE_STOPPING - The current timestamp.
+	// - CREATE_STOPPED - When
+	// the job stopped.
+	// - ACTIVE or CREATE_FAILED - When the job finished or failed.
 	LastModificationTime *time.Time
 
 	// If an error occurred, an informational message about the error.
 	Message *string
 
 	// The status of the forecast export job. States include:
-	//
-	// * ACTIVE
-	//
-	// *
+	// - ACTIVE
+	// -
 	// CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED
-	//
-	// * CREATE_STOPPING,
+	// - CREATE_STOPPING,
 	// CREATE_STOPPED
-	//
-	// * DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
+	// - DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
 	//
 	// The Status
 	// of the forecast export job must be ACTIVE before you can access the forecast in

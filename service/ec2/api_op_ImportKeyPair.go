@@ -62,12 +62,11 @@ type ImportKeyPairInput struct {
 
 type ImportKeyPairOutput struct {
 
-	// * For RSA key pairs, the key fingerprint is the MD5 public key fingerprint as
+	// - For RSA key pairs, the key fingerprint is the MD5 public key fingerprint as
 	// specified in section 4 of RFC 4716.
-	//
-	// * For ED25519 key pairs, the key
-	// fingerprint is the base64-encoded SHA-256 digest, which is the default for
-	// OpenSSH, starting with OpenSSH 6.8 (http://www.openssh.com/txt/release-6.8).
+	// - For ED25519 key pairs, the key fingerprint
+	// is the base64-encoded SHA-256 digest, which is the default for OpenSSH, starting
+	// with OpenSSH 6.8 (http://www.openssh.com/txt/release-6.8).
 	KeyFingerprint *string
 
 	// The key pair name that you provided.

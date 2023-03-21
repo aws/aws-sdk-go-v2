@@ -15,13 +15,11 @@ import (
 // regardless of which Amazon Web Services account or Amazon Web Services service
 // owns the hosted zones. The HostedZoneOwner structure in the response contains
 // one of the following values:
-//
-// * An OwningAccount element, which contains the
+// - An OwningAccount element, which contains the
 // account number of either the current Amazon Web Services account or another
 // Amazon Web Services account. Some services, such as Cloud Map, create hosted
 // zones using the current account.
-//
-// * An OwningService element, which identifies
+// - An OwningService element, which identifies
 // the Amazon Web Services service that created and owns the hosted zone. For
 // example, if a hosted zone was created by Amazon Elastic File System (Amazon
 // EFS), the value of Owner is efs.amazonaws.com.
@@ -31,13 +29,10 @@ import (
 // where the hosted zones were created. A partition is a group of Amazon Web
 // Services Regions. Each Amazon Web Services account is scoped to one partition.
 // The following are the supported partitions:
-//
-// * aws - Amazon Web Services
+// - aws - Amazon Web Services
 // Regions
-//
-// * aws-cn - China Regions
-//
-// * aws-us-gov - Amazon Web Services GovCloud
+// - aws-cn - China Regions
+// - aws-us-gov - Amazon Web Services GovCloud
 // (US) Region
 //
 // For more information, see Access Management

@@ -30,10 +30,8 @@ import (
 // claimed by another request. The claim time period is a fixed value and is not
 // configurable. If you try to claim a specific game server, this request will fail
 // in the following cases:
-//
-// * If the game server utilization status is UTILIZED.
-//
-// *
+// - If the game server utilization status is UTILIZED.
+// -
 // If the game server claim status is CLAIMED.
 //
 // When claiming a specific game

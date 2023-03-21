@@ -53,19 +53,15 @@ type PredictInput struct {
 type PredictOutput struct {
 
 	// The output from a Predict operation:
-	//
-	// * Details - Contains the following
+	// - Details - Contains the following
 	// attributes: DetailsAttributes.PREDICTIVE_MODEL_TYPE - REGRESSION | BINARY |
 	// MULTICLASSDetailsAttributes.ALGORITHM - SGD
-	//
-	// * PredictedLabel - Present for
+	// - PredictedLabel - Present for
 	// either a BINARY or MULTICLASSMLModel request.
-	//
-	// * PredictedScores - Contains the
+	// - PredictedScores - Contains the
 	// raw classification score corresponding to each label.
-	//
-	// * PredictedValue -
-	// Present for a REGRESSIONMLModel request.
+	// - PredictedValue - Present
+	// for a REGRESSIONMLModel request.
 	Prediction *types.Prediction
 
 	// Metadata pertaining to the operation's result.

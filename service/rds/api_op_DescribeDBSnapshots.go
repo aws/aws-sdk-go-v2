@@ -39,18 +39,15 @@ type DescribeDBSnapshotsInput struct {
 
 	// The ID of the DB instance to retrieve the list of DB snapshots for. This
 	// parameter isn't case-sensitive. Constraints:
-	//
-	// * If supplied, must match the
+	// - If supplied, must match the
 	// identifier of an existing DBInstance.
 	DBInstanceIdentifier *string
 
 	// A specific DB snapshot identifier to describe. This value is stored as a
 	// lowercase string. Constraints:
-	//
-	// * If supplied, must match the identifier of an
+	// - If supplied, must match the identifier of an
 	// existing DBSnapshot.
-	//
-	// * If this identifier is for an automated snapshot, the
+	// - If this identifier is for an automated snapshot, the
 	// SnapshotType parameter must also be specified.
 	DBSnapshotIdentifier *string
 
@@ -59,19 +56,14 @@ type DescribeDBSnapshotsInput struct {
 
 	// A filter that specifies one or more DB snapshots to describe. Supported
 	// filters:
-	//
-	// * db-instance-id - Accepts DB instance identifiers and DB instance
+	// - db-instance-id - Accepts DB instance identifiers and DB instance
 	// Amazon Resource Names (ARNs).
-	//
-	// * db-snapshot-id - Accepts DB snapshot
+	// - db-snapshot-id - Accepts DB snapshot
 	// identifiers.
-	//
-	// * dbi-resource-id - Accepts identifiers of source DB instances.
-	//
-	// *
+	// - dbi-resource-id - Accepts identifiers of source DB instances.
+	// -
 	// snapshot-type - Accepts types of DB snapshots.
-	//
-	// * engine - Accepts names of
+	// - engine - Accepts names of
 	// database engines.
 	Filters []types.Filter
 
@@ -103,20 +95,15 @@ type DescribeDBSnapshotsInput struct {
 
 	// The type of snapshots to be returned. You can specify one of the following
 	// values:
-	//
-	// * automated - Return all DB snapshots that have been automatically
-	// taken by Amazon RDS for my Amazon Web Services account.
-	//
-	// * manual - Return all
-	// DB snapshots that have been taken by my Amazon Web Services account.
-	//
-	// * shared -
+	// - automated - Return all DB snapshots that have been automatically taken
+	// by Amazon RDS for my Amazon Web Services account.
+	// - manual - Return all DB
+	// snapshots that have been taken by my Amazon Web Services account.
+	// - shared -
 	// Return all manual DB snapshots that have been shared to my Amazon Web Services
 	// account.
-	//
-	// * public - Return all DB snapshots that have been marked as public.
-	//
-	// *
+	// - public - Return all DB snapshots that have been marked as public.
+	// -
 	// awsbackup - Return the DB snapshots managed by the Amazon Web Services Backup
 	// service. For information about Amazon Web Services Backup, see the  Amazon Web
 	// Services Backup Developer Guide.

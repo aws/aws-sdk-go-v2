@@ -37,22 +37,17 @@ type ListTimelineEventsInput struct {
 
 	// Filters the timeline events based on the provided conditional values. You can
 	// filter timeline events using the following keys:
-	//
-	// * eventTime
-	//
-	// * eventType
+	// - eventTime
+	// - eventType
 	//
 	// Note
 	// the following when deciding how to use Filters:
-	//
-	// * If you don't specify a
-	// Filter, the response includes all timeline events.
-	//
-	// * If you specify more than
-	// one filter in a single request, the response returns timeline events that match
-	// all filters.
-	//
-	// * If you specify a filter with more than one value, the response
+	// - If you don't specify a Filter,
+	// the response includes all timeline events.
+	// - If you specify more than one filter
+	// in a single request, the response returns timeline events that match all
+	// filters.
+	// - If you specify a filter with more than one value, the response
 	// returns timeline events that match any of the values provided.
 	Filters []types.Filter
 

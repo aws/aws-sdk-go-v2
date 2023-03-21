@@ -14,10 +14,8 @@ import (
 
 // Retrieves a paginated list of asset summaries. You can use this operation to do
 // the following:
-//
-// * List assets based on a specific asset model.
-//
-// * List top-level
+// - List assets based on a specific asset model.
+// - List top-level
 // assets.
 //
 // You can't use this operation to list all assets. To retrieve summaries
@@ -48,11 +46,9 @@ type ListAssetsInput struct {
 
 	// The filter for the requested list of assets. Choose one of the following
 	// options:
-	//
-	// * ALL – The list includes all assets for a given asset model ID. The
+	// - ALL – The list includes all assets for a given asset model ID. The
 	// assetModelId parameter is required if you filter by ALL.
-	//
-	// * TOP_LEVEL – The list
+	// - TOP_LEVEL – The list
 	// includes only top-level assets in the asset hierarchy tree.
 	//
 	// Default: ALL

@@ -37,15 +37,12 @@ type DescribeTransitGatewayConnectPeersInput struct {
 	DryRun *bool
 
 	// One or more filters. The possible values are:
-	//
-	// * state - The state of the
-	// Connect peer (pending | available | deleting | deleted).
-	//
-	// *
-	// transit-gateway-attachment-id - The ID of the attachment.
-	//
-	// *
-	// transit-gateway-connect-peer-id - The ID of the Connect peer.
+	// - state - The state of the Connect
+	// peer (pending | available | deleting | deleted).
+	// - transit-gateway-attachment-id
+	// - The ID of the attachment.
+	// - transit-gateway-connect-peer-id - The ID of the
+	// Connect peer.
 	Filters []types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the

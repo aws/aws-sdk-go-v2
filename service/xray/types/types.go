@@ -334,12 +334,10 @@ type Group struct {
 	GroupName *string
 
 	// The structure containing configurations related to insights.
-	//
-	// * The
+	// - The
 	// InsightsEnabled boolean can be set to true to enable insights for the group or
 	// false to disable insights for the group.
-	//
-	// * The NotificationsEnabled boolean can
+	// - The NotificationsEnabled boolean can
 	// be set to true to enable insights notifications through Amazon EventBridge for
 	// the group.
 	InsightsConfiguration *InsightsConfiguration
@@ -360,12 +358,10 @@ type GroupSummary struct {
 	GroupName *string
 
 	// The structure containing configurations related to insights.
-	//
-	// * The
+	// - The
 	// InsightsEnabled boolean can be set to true to enable insights for the group or
 	// false to disable insights for the group.
-	//
-	// * The NotificationsEnabled boolean can
+	// - The NotificationsEnabled boolean can
 	// be set to true to enable insights notifications. Notifications can only be
 	// enabled on a group with InsightsEnabled set to true.
 	InsightsConfiguration *InsightsConfiguration
@@ -507,23 +503,19 @@ type InsightImpactGraphService struct {
 	ReferenceId *int32
 
 	// Identifier for the service. Unique within the service map.
-	//
-	// * Amazon Web
-	// Services Resource - The type of an Amazon Web Services resource. For example,
+	// - Amazon Web Services
+	// Resource - The type of an Amazon Web Services resource. For example,
 	// AWS::EC2::Instance for an application running on Amazon EC2 or
 	// AWS::DynamoDB::Table for an Amazon DynamoDB table that the application used.
-	//
-	// *
+	// -
 	// Amazon Web Services Service - The type of an Amazon Web Services service. For
 	// example, AWS::DynamoDB for downstream calls to Amazon DynamoDB that didn't
 	// target a specific table.
-	//
-	// * Amazon Web Services Service - The type of an Amazon
+	// - Amazon Web Services Service - The type of an Amazon
 	// Web Services service. For example, AWS::DynamoDB for downstream calls to Amazon
 	// DynamoDB that didn't target a specific table.
-	//
-	// * remote - A downstream service
-	// of indeterminate type.
+	// - remote - A downstream service of
+	// indeterminate type.
 	Type *string
 
 	noSmithyDocumentSerde
@@ -1003,20 +995,16 @@ type Service struct {
 	SummaryStatistics *ServiceStatistics
 
 	// The type of service.
-	//
-	// * Amazon Web Services Resource - The type of an Amazon Web
+	// - Amazon Web Services Resource - The type of an Amazon Web
 	// Services resource. For example, AWS::EC2::Instance for an application running on
 	// Amazon EC2 or AWS::DynamoDB::Table for an Amazon DynamoDB table that the
 	// application used.
-	//
-	// * Amazon Web Services Service - The type of an Amazon Web
+	// - Amazon Web Services Service - The type of an Amazon Web
 	// Services service. For example, AWS::DynamoDB for downstream calls to Amazon
 	// DynamoDB that didn't target a specific table.
-	//
-	// * client - Represents the clients
+	// - client - Represents the clients
 	// that sent requests to a root service.
-	//
-	// * remote - A downstream service of
+	// - remote - A downstream service of
 	// indeterminate type.
 	Type *string
 
@@ -1066,14 +1054,11 @@ type ServiceStatistics struct {
 // Tagging Amazon Web Services resources
 // (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
 // Web Services General Reference. The following restrictions apply to tags:
-//
-// *
+// -
 // Maximum number of user-applied tags per resource: 50
-//
-// * Tag keys and values are
+// - Tag keys and values are
 // case sensitive.
-//
-// * Don't use aws: as a prefix for keys; it's reserved for Amazon
+// - Don't use aws: as a prefix for keys; it's reserved for Amazon
 // Web Services use. You cannot edit or delete system tags.
 type Tag struct {
 

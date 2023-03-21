@@ -73,13 +73,11 @@ type UpdatePatchBaselineInput struct {
 
 	// The action for Patch Manager to take on patches included in the RejectedPackages
 	// list.
-	//
-	// * ALLOW_AS_DEPENDENCY : A package in the Rejected patches list is
+	// - ALLOW_AS_DEPENDENCY : A package in the Rejected patches list is
 	// installed only if it is a dependency of another package. It is considered
 	// compliant with the patch baseline, and its status is reported as InstalledOther.
 	// This is the default action if no option is specified.
-	//
-	// * BLOCK : Packages in the
+	// - BLOCK : Packages in the
 	// RejectedPatches list, and packages that include them as dependencies, aren't
 	// installed under any circumstances. If a package was installed before it was
 	// added to the Rejected patches list, it is considered non-compliant with the

@@ -46,16 +46,12 @@ import (
 // additional application software or utilities that you install on the compute
 // resources. There are two ways to use a new AMI for your Batch jobs. The original
 // method is to complete these steps:
-//
-// * Create a new compute environment with the
+// - Create a new compute environment with the
 // new AMI.
-//
-// * Add the compute environment to an existing job queue.
-//
-// * Remove the
+// - Add the compute environment to an existing job queue.
+// - Remove the
 // earlier compute environment from your job queue.
-//
-// * Delete the earlier compute
+// - Delete the earlier compute
 // environment.
 //
 // In April 2022, Batch added enhanced support for updating compute
@@ -63,18 +59,14 @@ import (
 // (https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html).
 // To use the enhanced updating of compute environments to update AMIs, follow
 // these rules:
-//
-// * Either don't set the service role (serviceRole) parameter or set
+// - Either don't set the service role (serviceRole) parameter or set
 // it to the AWSBatchServiceRole service-linked role.
-//
-// * Set the allocation
-// strategy (allocationStrategy) parameter to BEST_FIT_PROGRESSIVE or
+// - Set the allocation strategy
+// (allocationStrategy) parameter to BEST_FIT_PROGRESSIVE or
 // SPOT_CAPACITY_OPTIMIZED.
-//
-// * Set the update to latest image version
+// - Set the update to latest image version
 // (updateToLatestImageVersion) parameter to true.
-//
-// * Don't specify an AMI ID in
+// - Don't specify an AMI ID in
 // imageId, imageIdOverride (in ec2Configuration
 // (https://docs.aws.amazon.com/batch/latest/APIReference/API_Ec2Configuration.html)),
 // or in the launch template (launchTemplate). In that case, Batch selects the

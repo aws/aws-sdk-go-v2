@@ -44,12 +44,10 @@ import (
 // user credentials have a maximum duration of 3,600 seconds (1 hour). Permissions
 // You can use the temporary credentials created by GetFederationToken in any
 // Amazon Web Services service with the following exceptions:
-//
-// * You cannot call
-// any IAM operations using the CLI or the Amazon Web Services API. This limitation
+// - You cannot call any
+// IAM operations using the CLI or the Amazon Web Services API. This limitation
 // does not apply to console sessions.
-//
-// * You cannot call any STS operations except
+// - You cannot call any STS operations except
 // GetCallerIdentity.
 //
 // You can use temporary credentials for single sign-on (SSO)

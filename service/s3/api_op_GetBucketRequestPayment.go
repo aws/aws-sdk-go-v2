@@ -17,8 +17,7 @@ import (
 // Pays Buckets
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html). The
 // following operations are related to GetBucketRequestPayment:
-//
-// * ListObjects
+// - ListObjects
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjects.html)
 func (c *Client) GetBucketRequestPayment(ctx context.Context, params *GetBucketRequestPaymentInput, optFns ...func(*Options)) (*GetBucketRequestPaymentOutput, error) {
 	if params == nil {

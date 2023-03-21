@@ -50,11 +50,9 @@ type UpdateZonalShiftInput struct {
 	// before it expires, for example, if you're ready to restore traffic to the
 	// Availability Zone. To set a length of time for a zonal shift to be active,
 	// specify a whole number, and then one of the following, with no space:
-	//
-	// * A
+	// - A
 	// lowercase letter m: To specify that the value is in minutes.
-	//
-	// * A lowercase
+	// - A lowercase
 	// letter h: To specify that the value is in hours.
 	//
 	// For example: 20h means the
@@ -109,13 +107,10 @@ type UpdateZonalShiftOutput struct {
 
 	// A status for a zonal shift. The Status for a zonal shift can have one of the
 	// following values:
-	//
-	// * ACTIVE: The zonal shift is started and active.
-	//
-	// * EXPIRED:
+	// - ACTIVE: The zonal shift is started and active.
+	// - EXPIRED:
 	// The zonal shift has expired (the expiry time was exceeded).
-	//
-	// * CANCELED: The
+	// - CANCELED: The
 	// zonal shift was canceled.
 	//
 	// This member is required.

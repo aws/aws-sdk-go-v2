@@ -53,17 +53,13 @@ type AccessPointDescription struct {
 type BackupPolicy struct {
 
 	// Describes the status of the file system's backup policy.
-	//
-	// * ENABLED - EFS is
+	// - ENABLED - EFS is
 	// automatically backing up the file system.
-	//
-	// * ENABLING - EFS is turning on
+	// - ENABLING - EFS is turning on
 	// automatic backups for the file system.
-	//
-	// * DISABLED - Automatic back ups are
+	// - DISABLED - Automatic back ups are
 	// turned off for the file system.
-	//
-	// * DISABLING - EFS is turning off automatic
+	// - DISABLING - EFS is turning off automatic
 	// backups for the file system.
 	//
 	// This member is required.
@@ -148,19 +144,15 @@ type DestinationToCreate struct {
 	// the destination file system. If you do not specify a KMS key, Amazon EFS uses
 	// your default KMS key for Amazon EFS, /aws/elasticfilesystem. This ID can be in
 	// one of the following formats:
-	//
-	// * Key ID - The unique identifier of the key, for
+	// - Key ID - The unique identifier of the key, for
 	// example 1234abcd-12ab-34cd-56ef-1234567890ab.
-	//
-	// * ARN - The Amazon Resource Name
+	// - ARN - The Amazon Resource Name
 	// (ARN) for the key, for example
 	// arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab.
-	//
-	// *
+	// -
 	// Key alias - A previously created display name for a key, for example
 	// alias/projectKey1.
-	//
-	// * Key alias ARN - The ARN for a key alias, for example
+	// - Key alias ARN - The ARN for a key alias, for example
 	// arn:aws:kms:us-west-2:444455556666:alias/projectKey1.
 	KmsKeyId *string
 

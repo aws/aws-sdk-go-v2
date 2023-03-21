@@ -13,23 +13,20 @@ import (
 )
 
 // Retrieves information about a fleet's instances, including instance IDs,
-// connection data, and status. This operation can be used in the following
-// ways:
+// connection data, and status. This operation can be used in the following ways:
+// -
+// To get information on all instances that are deployed to a fleet's home Region,
+// provide the fleet ID.
+// - To get information on all instances that are deployed to
+// a fleet's remote location, provide the fleet ID and location name.
+// - To get
+// information on a specific instance in a fleet, provide the fleet ID and instance
+// ID.
 //
-// * To get information on all instances that are deployed to a fleet's home
-// Region, provide the fleet ID.
-//
-// * To get information on all instances that are
-// deployed to a fleet's remote location, provide the fleet ID and location
-// name.
-//
-// * To get information on a specific instance in a fleet, provide the fleet
-// ID and instance ID.
-//
-// Use the pagination parameters to retrieve results as a set
-// of sequential pages. If successful, an Instance object is returned for each
-// requested instance. Instances are not returned in any particular order. Learn
-// more Remotely Access Fleet Instances
+// Use the pagination parameters to retrieve results as a set of sequential
+// pages. If successful, an Instance object is returned for each requested
+// instance. Instances are not returned in any particular order. Learn more
+// Remotely Access Fleet Instances
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-remote-access.html)Debug
 // Fleet Issues
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html)

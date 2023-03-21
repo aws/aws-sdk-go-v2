@@ -35,62 +35,45 @@ type AttachmentDetails struct {
 // A JSON-formatted object that contains the metadata for a support case. It is
 // contained in the response from a DescribeCases request. CaseDetails contains the
 // following fields:
-//
-// * caseId - The support case ID requested or returned in the
+// - caseId - The support case ID requested or returned in the
 // call. The case ID is an alphanumeric string formatted as shown in this example:
 // case-12345678910-2013-c4c1d2bf33c5cf47.
+// - categoryCode - The category of problem
+// for the support case. Corresponds to the CategoryCode values returned by a call
+// to DescribeServices.
+// - displayId - The identifier for the case on pages in the
+// Amazon Web Services Support Center.
+// - language - The language in which Amazon
+// Web Services Support handles the case. Amazon Web Services Support currently
+// supports English ("en") and Japanese ("ja"). You must specify the ISO 639-1 code
+// for the language parameter if you want support in that language.
+// - nextToken - A
+// resumption point for pagination.
+// - recentCommunications - One or more
+// Communication objects. Fields of these objects are attachments, body, caseId,
+// submittedBy, and timeCreated.
+// - serviceCode - The identifier for the Amazon Web
+// Services service that corresponds to the service code defined in the call to
+// DescribeServices.
+// - severityCode - The severity code assigned to the case.
+// Contains one of the values returned by the call to DescribeSeverityLevels. The
+// possible values are: low, normal, high, urgent, and critical.
+// - status - The
+// status of the case in the Amazon Web Services Support Center. Valid values:
+// -
+// opened
+// - pending-customer-action
+// - reopened
+// - resolved
+// - unassigned
+// -
+// work-in-progress
 //
-// * categoryCode - The category of
-// problem for the support case. Corresponds to the CategoryCode values returned by
-// a call to DescribeServices.
-//
-// * displayId - The identifier for the case on pages
-// in the Amazon Web Services Support Center.
-//
-// * language - The language in which
-// Amazon Web Services Support handles the case. Amazon Web Services Support
-// currently supports English ("en") and Japanese ("ja"). You must specify the ISO
-// 639-1 code for the language parameter if you want support in that language.
-//
-// *
-// nextToken - A resumption point for pagination.
-//
-// * recentCommunications - One or
-// more Communication objects. Fields of these objects are attachments, body,
-// caseId, submittedBy, and timeCreated.
-//
-// * serviceCode - The identifier for the
-// Amazon Web Services service that corresponds to the service code defined in the
-// call to DescribeServices.
-//
-// * severityCode - The severity code assigned to the
-// case. Contains one of the values returned by the call to DescribeSeverityLevels.
-// The possible values are: low, normal, high, urgent, and critical.
-//
-// * status -
-// The status of the case in the Amazon Web Services Support Center. Valid
-// values:
-//
-// * opened
-//
-// * pending-customer-action
-//
-// * reopened
-//
-// * resolved
-//
-// *
-// unassigned
-//
-// * work-in-progress
-//
-// * subject - The subject line of the case.
-//
-// *
-// submittedBy - The email address of the account that submitted the case.
-//
-// *
-// timeCreated - The time the case was created, in ISO-8601 format.
+// - subject - The subject line of the case.
+// - submittedBy - The
+// email address of the account that submitted the case.
+// - timeCreated - The time
+// the case was created, in ISO-8601 format.
 type CaseDetails struct {
 
 	// The support case ID requested or returned in the call. The case ID is an
@@ -127,19 +110,13 @@ type CaseDetails struct {
 	SeverityCode *string
 
 	// The status of the case. Valid values:
-	//
-	// * opened
-	//
-	// * pending-customer-action
-	//
-	// *
+	// - opened
+	// - pending-customer-action
+	// -
 	// reopened
-	//
-	// * resolved
-	//
-	// * unassigned
-	//
-	// * work-in-progress
+	// - resolved
+	// - unassigned
+	// - work-in-progress
 	Status *string
 
 	// The subject line for the case in the Amazon Web Services Support Center.
@@ -245,18 +222,13 @@ type SeverityLevel struct {
 	// Amazon Web Services Support Center. For example, the API uses the code low, but
 	// the name appears as General guidance in Support Center. The following are the
 	// API code names and how they appear in the console:
-	//
-	// * low - General guidance
-	//
-	// *
+	// - low - General guidance
+	// -
 	// normal - System impaired
-	//
-	// * high - Production system impaired
-	//
-	// * urgent -
+	// - high - Production system impaired
+	// - urgent -
 	// Production system down
-	//
-	// * critical - Business-critical system down
+	// - critical - Business-critical system down
 	//
 	// For more
 	// information, see Choosing a severity
@@ -330,20 +302,15 @@ type TrustedAdvisorCheckRefreshStatus struct {
 
 	// The status of the Trusted Advisor check for which a refresh has been
 	// requested:
-	//
-	// * none - The check is not refreshed or the non-success status
-	// exceeds the timeout
-	//
-	// * enqueued - The check refresh requests has entered the
-	// refresh queue
-	//
-	// * processing - The check refresh request is picked up by the rule
+	// - none - The check is not refreshed or the non-success status exceeds
+	// the timeout
+	// - enqueued - The check refresh requests has entered the refresh
+	// queue
+	// - processing - The check refresh request is picked up by the rule
 	// processing engine
-	//
-	// * success - The check is successfully refreshed
-	//
-	// * abandoned
-	// - The check refresh has failed
+	// - success - The check is successfully refreshed
+	// - abandoned -
+	// The check refresh has failed
 	//
 	// This member is required.
 	Status *string

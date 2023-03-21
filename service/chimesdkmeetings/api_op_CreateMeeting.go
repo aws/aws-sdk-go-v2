@@ -75,8 +75,7 @@ type CreateMeetingInput struct {
 	PrimaryMeetingId *string
 
 	// Applies one or more tags to an Amazon Chime SDK meeting. Note the following:
-	//
-	// *
+	// -
 	// Not all resources have tags. For a list of services with resources that support
 	// tagging using this operation, see Services that support the Resource Groups
 	// Tagging API
@@ -84,16 +83,13 @@ type CreateMeetingInput struct {
 	// If the resource doesn't yet support this operation, the resource's service might
 	// support tagging using its own API operations. For more information, refer to the
 	// documentation for that service.
-	//
-	// * Each resource can have up to 50 tags. For
+	// - Each resource can have up to 50 tags. For
 	// other limits, see Tag Naming and Usage Conventions
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html#tag-conventions)
 	// in the AWS General Reference.
-	//
-	// * You can only tag resources that are located in
+	// - You can only tag resources that are located in
 	// the specified AWS Region for the AWS account.
-	//
-	// * To add tags to a resource, you
+	// - To add tags to a resource, you
 	// need the necessary permissions for the service that the resource belongs to as
 	// well as permissions for adding tags. For more information, see the documentation
 	// for each service.

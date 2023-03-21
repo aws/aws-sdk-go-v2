@@ -51,19 +51,16 @@ type UpdateDashboardInput struct {
 	Name *string
 
 	// Options for publishing the dashboard when you create it:
-	//
-	// * AvailabilityStatus
+	// - AvailabilityStatus
 	// for AdHocFilteringOption - This status can be either ENABLED or DISABLED. When
 	// this is set to DISABLED, Amazon QuickSight disables the left filter pane on the
 	// published dashboard, which can be used for ad hoc (one-time) filtering. This
 	// option is ENABLED by default.
-	//
-	// * AvailabilityStatus for ExportToCSVOption - This
+	// - AvailabilityStatus for ExportToCSVOption - This
 	// status can be either ENABLED or DISABLED. The visual option to export data to
 	// .CSV format isn't enabled when this is set to DISABLED. This option is ENABLED
 	// by default.
-	//
-	// * VisibilityState for SheetControlsOption - This visibility state
+	// - VisibilityState for SheetControlsOption - This visibility state
 	// can be either COLLAPSED or EXPANDED. This option is COLLAPSED by default.
 	DashboardPublishOptions *types.DashboardPublishOptions
 

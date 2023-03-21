@@ -20,20 +20,16 @@ import (
 // you're programmatically managing your external knowledge base, and you want to
 // add or remove one of the fields that is being ingested from Salesforce. Do the
 // following:
-//
-// * Call DeleteKnowledgeBase
+// - Call DeleteKnowledgeBase
 // (https://docs.aws.amazon.com/wisdom/latest/APIReference/API_DeleteKnowledgeBase.html).
-//
-// *
+// -
 // Call DeleteDataIntegration
 // (https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_DeleteDataIntegration.html).
-//
-// *
+// -
 // Call CreateDataIntegration
 // (https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html)
 // to recreate the DataIntegration or a create different one.
-//
-// * Call
+// - Call
 // CreateKnowledgeBase.
 func (c *Client) CreateKnowledgeBase(ctx context.Context, params *CreateKnowledgeBaseInput, optFns ...func(*Options)) (*CreateKnowledgeBaseOutput, error) {
 	if params == nil {

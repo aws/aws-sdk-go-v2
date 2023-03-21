@@ -52,11 +52,9 @@ type RegisterUserInput struct {
 
 	// Amazon QuickSight supports several ways of managing the identity of users. This
 	// parameter accepts two values:
-	//
-	// * IAM: A user whose identity maps to an existing
+	// - IAM: A user whose identity maps to an existing
 	// IAM user or role.
-	//
-	// * QUICKSIGHT: A user whose identity is owned and managed
+	// - QUICKSIGHT: A user whose identity is owned and managed
 	// internally by Amazon QuickSight.
 	//
 	// This member is required.
@@ -69,19 +67,14 @@ type RegisterUserInput struct {
 
 	// The Amazon QuickSight role for the user. The user role can be one of the
 	// following:
-	//
-	// * READER: A user who has read-only access to dashboards.
-	//
-	// * AUTHOR:
-	// A user who can create data sources, datasets, analyses, and dashboards.
-	//
-	// *
-	// ADMIN: A user who is an author, who can also manage Amazon QuickSight
-	// settings.
-	//
-	// * RESTRICTED_READER: This role isn't currently available for use.
-	//
-	// *
+	// - READER: A user who has read-only access to dashboards.
+	// - AUTHOR: A
+	// user who can create data sources, datasets, analyses, and dashboards.
+	// - ADMIN: A
+	// user who is an author, who can also manage Amazon QuickSight settings.
+	// -
+	// RESTRICTED_READER: This role isn't currently available for use.
+	// -
 	// RESTRICTED_AUTHOR: This role isn't currently available for use.
 	//
 	// This member is required.
@@ -96,16 +89,12 @@ type RegisterUserInput struct {
 	// (Enterprise edition only) The name of the custom permissions profile that you
 	// want to assign to this user. Customized permissions allows you to control a
 	// user's access by restricting access the following operations:
-	//
-	// * Create and
+	// - Create and
 	// update data sources
-	//
-	// * Create and update datasets
-	//
-	// * Create and update email
+	// - Create and update datasets
+	// - Create and update email
 	// reports
-	//
-	// * Subscribe to email reports
+	// - Subscribe to email reports
 	//
 	// To add custom permissions to an existing
 	// user, use UpdateUser
@@ -125,13 +114,11 @@ type RegisterUserInput struct {
 	// user federate into Amazon QuickSight with an associated Identity and Access
 	// Management(IAM) role. The type of supported external login provider can be one
 	// of the following.
-	//
-	// * COGNITO: Amazon Cognito. The provider URL is
+	// - COGNITO: Amazon Cognito. The provider URL is
 	// cognito-identity.amazonaws.com. When choosing the COGNITO provider type, don’t
 	// use the "CustomFederationProviderUrl" parameter which is only needed when the
 	// external provider is custom.
-	//
-	// * CUSTOM_OIDC: Custom OpenID Connect (OIDC)
+	// - CUSTOM_OIDC: Custom OpenID Connect (OIDC)
 	// provider. When choosing CUSTOM_OIDC type, use the CustomFederationProviderUrl
 	// parameter to provide the custom OIDC provider URL.
 	ExternalLoginFederationProviderType *string

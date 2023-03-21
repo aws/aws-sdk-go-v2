@@ -24,11 +24,9 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html) in the Amazon
 // S3 User Guide. The following operations are related to
 // DeleteBucketReplication:
-//
-// * PutBucketReplication
+// - PutBucketReplication
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketReplication.html)
-//
-// *
+// -
 // GetBucketReplication
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketReplication.html)
 func (c *Client) DeleteBucketReplication(ctx context.Context, params *DeleteBucketReplicationInput, optFns ...func(*Options)) (*DeleteBucketReplicationOutput, error) {

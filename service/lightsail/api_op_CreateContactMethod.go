@@ -49,21 +49,15 @@ type CreateContactMethodInput struct {
 
 	// The protocol of the contact method, such as Email or SMS (text messaging). The
 	// SMS protocol is supported only in the following Amazon Web Services Regions.
-	//
-	// *
+	// -
 	// US East (N. Virginia) (us-east-1)
-	//
-	// * US West (Oregon) (us-west-2)
-	//
-	// * Europe
+	// - US West (Oregon) (us-west-2)
+	// - Europe
 	// (Ireland) (eu-west-1)
-	//
-	// * Asia Pacific (Tokyo) (ap-northeast-1)
-	//
-	// * Asia Pacific
+	// - Asia Pacific (Tokyo) (ap-northeast-1)
+	// - Asia Pacific
 	// (Singapore) (ap-southeast-1)
-	//
-	// * Asia Pacific (Sydney) (ap-southeast-2)
+	// - Asia Pacific (Sydney) (ap-southeast-2)
 	//
 	// For a
 	// list of countries/regions where SMS text messages can be sent, and the latest

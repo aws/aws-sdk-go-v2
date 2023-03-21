@@ -60,24 +60,20 @@ type CreateLicenseConfigurationInput struct {
 	// License rules. The syntax is #name=value (for example,
 	// #allowedTenancy=EC2-DedicatedHost). The available rules vary by dimension, as
 	// follows.
-	//
-	// * Cores dimension: allowedTenancy | licenseAffinityToHost |
+	// - Cores dimension: allowedTenancy | licenseAffinityToHost |
 	// maximumCores | minimumCores
+	// - Instances dimension: allowedTenancy | maximumCores
+	// | minimumCores | maximumSockets | minimumSockets | maximumVcpus | minimumVcpus
+	// -
+	// Sockets dimension: allowedTenancy | licenseAffinityToHost | maximumSockets |
+	// minimumSockets
+	// - vCPUs dimension: allowedTenancy | honorVcpuOptimization |
+	// maximumVcpus | minimumVcpus
 	//
-	// * Instances dimension: allowedTenancy |
-	// maximumCores | minimumCores | maximumSockets | minimumSockets | maximumVcpus |
-	// minimumVcpus
-	//
-	// * Sockets dimension: allowedTenancy | licenseAffinityToHost |
-	// maximumSockets | minimumSockets
-	//
-	// * vCPUs dimension: allowedTenancy |
-	// honorVcpuOptimization | maximumVcpus | minimumVcpus
-	//
-	// The unit for
-	// licenseAffinityToHost is days and the range is 1 to 180. The possible values for
-	// allowedTenancy are EC2-Default, EC2-DedicatedHost, and EC2-DedicatedInstance.
-	// The possible values for honorVcpuOptimization are True and False.
+	// The unit for licenseAffinityToHost is days and the
+	// range is 1 to 180. The possible values for allowedTenancy are EC2-Default,
+	// EC2-DedicatedHost, and EC2-DedicatedInstance. The possible values for
+	// honorVcpuOptimization are True and False.
 	LicenseRules []string
 
 	// Product information.

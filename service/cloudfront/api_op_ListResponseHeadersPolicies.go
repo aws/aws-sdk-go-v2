@@ -48,11 +48,9 @@ type ListResponseHeadersPoliciesInput struct {
 
 	// A filter to get only the specified kind of response headers policies. Valid
 	// values are:
-	//
-	// * managed – Gets only the managed policies created by Amazon Web
+	// - managed – Gets only the managed policies created by Amazon Web
 	// Services.
-	//
-	// * custom – Gets only the custom policies created in your Amazon Web
+	// - custom – Gets only the custom policies created in your Amazon Web
 	// Services account.
 	Type types.ResponseHeadersPolicyType
 

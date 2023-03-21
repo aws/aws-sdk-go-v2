@@ -43,10 +43,8 @@ type DescribeVpcEndpointServicePermissionsInput struct {
 	DryRun *bool
 
 	// The filters.
-	//
-	// * principal - The ARN of the principal.
-	//
-	// * principal-type - The
+	// - principal - The ARN of the principal.
+	// - principal-type - The
 	// principal type (All | Service | OrganizationUnit | Account | User | Role).
 	Filters []types.Filter
 

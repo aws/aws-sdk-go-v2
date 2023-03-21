@@ -21,17 +21,13 @@ import (
 // only insert REGULAR rules into a rule group. You can have a maximum of ten rules
 // per rule group. To create and configure a RuleGroup, perform the following
 // steps:
-//
-// * Create and update the Rules that you want to include in the RuleGroup.
+// - Create and update the Rules that you want to include in the RuleGroup.
 // See CreateRule.
-//
-// * Use GetChangeToken to get the change token that you provide
-// in the ChangeToken parameter of an UpdateRuleGroup request.
-//
-// * Submit an
+// - Use GetChangeToken to get the change token that you provide in
+// the ChangeToken parameter of an UpdateRuleGroup request.
+// - Submit an
 // UpdateRuleGroup request to add Rules to the RuleGroup.
-//
-// * Create and update a
+// - Create and update a
 // WebACL that contains the RuleGroup. See CreateWebACL.
 //
 // If you want to replace

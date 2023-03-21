@@ -25,14 +25,11 @@ import (
 // the NextToken parameter set to the value of the last NextToken value until a
 // response has no NextToken value. When using this operation, keep the following
 // in mind:
-//
-// * The operation might return fewer than the MaxResults value of backup
+// - The operation might return fewer than the MaxResults value of backup
 // descriptions while still including a NextToken value.
-//
-// * The order of the
-// backups returned in the response of one DescribeBackups call and the order of
-// the backups returned across the responses of a multi-call iteration is
-// unspecified.
+// - The order of the backups
+// returned in the response of one DescribeBackups call and the order of the
+// backups returned across the responses of a multi-call iteration is unspecified.
 func (c *Client) DescribeBackups(ctx context.Context, params *DescribeBackupsInput, optFns ...func(*Options)) (*DescribeBackupsOutput, error) {
 	if params == nil {
 		params = &DescribeBackupsInput{}

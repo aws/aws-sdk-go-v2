@@ -42,27 +42,22 @@ type UpdateLoadBalancerAttributeInput struct {
 	// The value that you want to specify for the attribute name. The following values
 	// are supported depending on what you specify for the attributeName request
 	// parameter:
-	//
-	// * If you specify HealthCheckPath for the attributeName request
+	// - If you specify HealthCheckPath for the attributeName request
 	// parameter, then the attributeValue request parameter must be the path to ping on
 	// the target (for example, /weather/us/wa/seattle).
-	//
-	// * If you specify
+	// - If you specify
 	// SessionStickinessEnabled for the attributeName request parameter, then the
 	// attributeValue request parameter must be true to activate session stickiness or
 	// false to deactivate session stickiness.
-	//
-	// * If you specify
+	// - If you specify
 	// SessionStickiness_LB_CookieDurationSeconds for the attributeName request
 	// parameter, then the attributeValue request parameter must be an interger that
 	// represents the cookie duration in seconds.
-	//
-	// * If you specify
+	// - If you specify
 	// HttpsRedirectionEnabled for the attributeName request parameter, then the
 	// attributeValue request parameter must be true to activate HTTP to HTTPS
 	// redirection or false to deactivate HTTP to HTTPS redirection.
-	//
-	// * If you specify
+	// - If you specify
 	// TlsPolicyName for the attributeName request parameter, then the attributeValue
 	// request parameter must be the name of the TLS policy. Use the
 	// GetLoadBalancerTlsPolicies

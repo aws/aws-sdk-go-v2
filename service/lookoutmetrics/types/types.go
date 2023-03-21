@@ -909,15 +909,12 @@ type SNSConfiguration struct {
 	SnsTopicArn *string
 
 	// The format of the SNS topic.
-	//
-	// * JSON – Send JSON alerts with an anomaly ID and a
+	// - JSON – Send JSON alerts with an anomaly ID and a
 	// link to the anomaly detail page. This is the default.
-	//
-	// * LONG_TEXT – Send
+	// - LONG_TEXT – Send
 	// human-readable alerts with information about the impacted timeseries and a link
 	// to the anomaly detail page. We recommend this for email.
-	//
-	// * SHORT_TEXT – Send
+	// - SHORT_TEXT – Send
 	// human-readable alerts with a link to the anomaly detail page. We recommend this
 	// for SMS.
 	SnsFormat SnsFormat

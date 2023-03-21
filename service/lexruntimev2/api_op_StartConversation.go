@@ -24,17 +24,14 @@ import (
 // post-fulfillment response is specified, the messages are returned as follows.
 // For more information, see PostFulfillmentStatusSpecification
 // (https://docs.aws.amazon.com/lexv2/latest/dg/API_PostFulfillmentStatusSpecification.html).
-//
-// *
+// -
 // Success message - Returned if the Lambda function completes successfully and the
 // intent state is fulfilled or ready fulfillment if the message is present.
-//
-// *
+// -
 // Failed message - The failed message is returned if the Lambda function throws an
 // exception or if the Lambda function returns a failed intent state without a
 // message.
-//
-// * Timeout message - If you don't configure a timeout message and a
+// - Timeout message - If you don't configure a timeout message and a
 // timeout, and the Lambda function doesn't return within 30 seconds, the timeout
 // message is returned. If you configure a timeout, the timeout message is returned
 // when the period times out.
@@ -47,16 +44,13 @@ import (
 // runs with a 30 second timeout. For more information, see Update message
 // (https://docs.aws.amazon.com/lexv2/latest/dg/streaming-progress.html#progress-update.html)
 // The StartConversation operation is supported only in the following SDKs:
-//
-// * AWS
+// - AWS
 // SDK for C++
 // (https://docs.aws.amazon.com/goto/SdkForCpp/runtime.lex.v2-2020-08-07/StartConversation)
-//
-// *
+// -
 // AWS SDK for Java V2
 // (https://docs.aws.amazon.com/goto/SdkForJavaV2/runtime.lex.v2-2020-08-07/StartConversation)
-//
-// *
+// -
 // AWS SDK for Ruby V3
 // (https://docs.aws.amazon.com/goto/SdkForRubyV3/runtime.lex.v2-2020-08-07/StartConversation)
 func (c *Client) StartConversation(ctx context.Context, params *StartConversationInput, optFns ...func(*Options)) (*StartConversationOutput, error) {

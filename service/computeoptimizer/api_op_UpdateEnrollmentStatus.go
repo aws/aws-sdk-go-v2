@@ -42,15 +42,13 @@ type UpdateEnrollmentStatusInput struct {
 
 	// The new enrollment status of the account. The following status options are
 	// available:
-	//
-	// * Active - Opts in your account to the Compute Optimizer service.
+	// - Active - Opts in your account to the Compute Optimizer service.
 	// Compute Optimizer begins analyzing the configuration and utilization metrics of
 	// your Amazon Web Services resources after you opt in. For more information, see
 	// Metrics analyzed by Compute Optimizer
 	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html) in the
 	// Compute Optimizer User Guide.
-	//
-	// * Inactive - Opts out your account from the
+	// - Inactive - Opts out your account from the
 	// Compute Optimizer service. Your account's recommendations and related metrics
 	// data will be deleted from Compute Optimizer after you opt out.
 	//

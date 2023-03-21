@@ -28,12 +28,10 @@ type BranchDiffSourceCodeType struct {
 
 // Code artifacts are source code artifacts and build artifacts used in a
 // repository analysis or a pull request review.
-//
-// * Source code artifacts are
-// source code files in a Git repository that are compressed into a .zip file.
-//
-// *
-// Build artifacts are .jar or .class files that are compressed in a .zip file.
+// - Source code artifacts are source
+// code files in a Git repository that are compressed into a .zip file.
+// - Build
+// artifacts are .jar or .class files that are compressed in a .zip file.
 type CodeArtifacts struct {
 
 	// The S3 object key for a source code .zip file. This is required for all code
@@ -127,16 +125,12 @@ type CodeReview struct {
 	SourceCodeType *SourceCodeType
 
 	// The valid code review states are:
-	//
-	// * Completed: The code review is complete.
-	//
-	// *
+	// - Completed: The code review is complete.
+	// -
 	// Pending: The code review started and has not completed or failed.
-	//
-	// * Failed: The
+	// - Failed: The
 	// code review failed.
-	//
-	// * Deleting: The code review is being deleted.
+	// - Deleting: The code review is being deleted.
 	State JobState
 
 	// The reason for the state of the code review.
@@ -189,16 +183,12 @@ type CodeReviewSummary struct {
 	SourceCodeType *SourceCodeType
 
 	// The state of the code review. The valid code review states are:
-	//
-	// * Completed:
-	// The code review is complete.
-	//
-	// * Pending: The code review started and has not
+	// - Completed: The
+	// code review is complete.
+	// - Pending: The code review started and has not
 	// completed or failed.
-	//
-	// * Failed: The code review failed.
-	//
-	// * Deleting: The code
+	// - Failed: The code review failed.
+	// - Deleting: The code
 	// review is being deleted.
 	State JobState
 
@@ -209,12 +199,10 @@ type CodeReviewSummary struct {
 }
 
 // The type of a code review. There are two code review types:
-//
-// * PullRequest - A
+// - PullRequest - A
 // code review that is automatically triggered by a pull request on an associated
 // repository.
-//
-// * RepositoryAnalysis - A code review that analyzes all code under a
+// - RepositoryAnalysis - A code review that analyzes all code under a
 // specified branch in an associated repository. The associated repository is
 // specified using its ARN in CreateCodeReview
 // (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview).
@@ -271,12 +259,10 @@ type EventInfo struct {
 }
 
 // An object that contains:
-//
-// * The encryption option for a repository association.
+// - The encryption option for a repository association.
 // It is either owned by Amazon Web Services Key Management Service (KMS)
 // (AWS_OWNED_CMK) or customer managed (CUSTOMER_MANAGED_CMK).
-//
-// * The ID of the
+// - The ID of the
 // Amazon Web Services KMS key that is associated with a repository association.
 type KMSKeyDetails struct {
 
@@ -503,12 +489,10 @@ type RepositoryAssociation struct {
 	CreatedTimeStamp *time.Time
 
 	// A KMSKeyDetails object that contains:
-	//
-	// * The encryption option for this
+	// - The encryption option for this
 	// repository association. It is either owned by Amazon Web Services Key Management
 	// Service (KMS) (AWS_OWNED_CMK) or customer managed (CUSTOMER_MANAGED_CMK).
-	//
-	// * The
+	// - The
 	// ID of the Amazon Web Services KMS key that is associated with this repository
 	// association.
 	KMSKeyDetails *KMSKeyDetails
@@ -537,29 +521,23 @@ type RepositoryAssociation struct {
 
 	// The state of the repository association. The valid repository association states
 	// are:
-	//
-	// * Associated: The repository association is complete.
-	//
-	// * Associating:
+	// - Associated: The repository association is complete.
+	// - Associating:
 	// CodeGuru Reviewer is:
-	//
-	// * Setting up pull request notifications. This is required
+	// - Setting up pull request notifications. This is required
 	// for pull requests to trigger a CodeGuru Reviewer review. If your repository
 	// ProviderType is GitHub, GitHub Enterprise Server, or Bitbucket, CodeGuru
 	// Reviewer creates webhooks in your repository to trigger CodeGuru Reviewer
 	// reviews. If you delete these webhooks, reviews of code in your repository cannot
 	// be triggered.
-	//
-	// * Setting up source code access. This is required for CodeGuru
+	// - Setting up source code access. This is required for CodeGuru
 	// Reviewer to securely clone code in your repository.
 	//
-	// * Failed: The repository
+	// - Failed: The repository
 	// failed to associate or disassociate.
-	//
-	// * Disassociating: CodeGuru Reviewer is
+	// - Disassociating: CodeGuru Reviewer is
 	// removing the repository's pull request notifications and source code access.
-	//
-	// *
+	// -
 	// Disassociated: CodeGuru Reviewer successfully disassociated the repository. You
 	// can create a new association with this repository if you want to review source
 	// code in it later. You can control access to code reviews created in anassociated
@@ -617,29 +595,23 @@ type RepositoryAssociationSummary struct {
 
 	// The state of the repository association. The valid repository association states
 	// are:
-	//
-	// * Associated: The repository association is complete.
-	//
-	// * Associating:
+	// - Associated: The repository association is complete.
+	// - Associating:
 	// CodeGuru Reviewer is:
-	//
-	// * Setting up pull request notifications. This is required
+	// - Setting up pull request notifications. This is required
 	// for pull requests to trigger a CodeGuru Reviewer review. If your repository
 	// ProviderType is GitHub, GitHub Enterprise Server, or Bitbucket, CodeGuru
 	// Reviewer creates webhooks in your repository to trigger CodeGuru Reviewer
 	// reviews. If you delete these webhooks, reviews of code in your repository cannot
 	// be triggered.
-	//
-	// * Setting up source code access. This is required for CodeGuru
+	// - Setting up source code access. This is required for CodeGuru
 	// Reviewer to securely clone code in your repository.
 	//
-	// * Failed: The repository
+	// - Failed: The repository
 	// failed to associate or disassociate.
-	//
-	// * Disassociating: CodeGuru Reviewer is
+	// - Disassociating: CodeGuru Reviewer is
 	// removing the repository's pull request notifications and source code access.
-	//
-	// *
+	// -
 	// Disassociated: CodeGuru Reviewer successfully disassociated the repository. You
 	// can create a new association with this repository if you want to review source
 	// code in it later. You can control access to code reviews created in anassociated

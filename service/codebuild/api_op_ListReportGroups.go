@@ -45,14 +45,11 @@ type ListReportGroupsInput struct {
 	NextToken *string
 
 	// The criterion to be used to list build report groups. Valid values include:
-	//
-	// *
+	// -
 	// CREATED_TIME: List based on when each report group was created.
-	//
-	// *
+	// -
 	// LAST_MODIFIED_TIME: List based on when each report group was last changed.
-	//
-	// *
+	// -
 	// NAME: List based on each report group's name.
 	SortBy types.ReportGroupSortByType
 

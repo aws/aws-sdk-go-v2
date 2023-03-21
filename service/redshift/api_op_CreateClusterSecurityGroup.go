@@ -35,17 +35,13 @@ type CreateClusterSecurityGroupInput struct {
 
 	// The name for the security group. Amazon Redshift stores the value as a lowercase
 	// string. Constraints:
-	//
-	// * Must contain no more than 255 alphanumeric characters or
+	// - Must contain no more than 255 alphanumeric characters or
 	// hyphens.
+	// - Must not be "Default".
+	// - Must be unique for all security groups that
+	// are created by your Amazon Web Services account.
 	//
-	// * Must not be "Default".
-	//
-	// * Must be unique for all security groups
-	// that are created by your Amazon Web Services account.
-	//
-	// Example:
-	// examplesecuritygroup
+	// Example: examplesecuritygroup
 	//
 	// This member is required.
 	ClusterSecurityGroupName *string

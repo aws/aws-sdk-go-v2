@@ -21,12 +21,10 @@ import (
 // categories returned by the DescribeServices operation. Always use the service
 // codes and categories that the DescribeServices operation returns, so that you
 // have the most recent set of service and category codes.
-//
-// * You must have a
+// - You must have a
 // Business, Enterprise On-Ramp, or Enterprise Support plan to use the Amazon Web
 // Services Support API.
-//
-// * If you call the Amazon Web Services Support API from an
+// - If you call the Amazon Web Services Support API from an
 // account that doesn't have a Business, Enterprise On-Ramp, or Enterprise Support
 // plan, the SubscriptionRequiredException error message appears. For information
 // about changing your support plan, see Amazon Web Services Support

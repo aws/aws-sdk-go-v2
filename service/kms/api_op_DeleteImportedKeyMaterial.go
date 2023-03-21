@@ -26,10 +26,8 @@ import (
 // Required permissions: kms:DeleteImportedKeyMaterial
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (key policy) Related operations:
-//
-// * GetParametersForImport
-//
-// * ImportKeyMaterial
+// - GetParametersForImport
+// - ImportKeyMaterial
 func (c *Client) DeleteImportedKeyMaterial(ctx context.Context, params *DeleteImportedKeyMaterialInput, optFns ...func(*Options)) (*DeleteImportedKeyMaterialOutput, error) {
 	if params == nil {
 		params = &DeleteImportedKeyMaterialInput{}
@@ -50,10 +48,8 @@ type DeleteImportedKeyMaterialInput struct {
 	// Identifies the KMS key from which you are deleting imported key material. The
 	// Origin of the KMS key must be EXTERNAL. Specify the key ID or key ARN of the KMS
 	// key. For example:
-	//
-	// * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// * Key ARN:
+	// - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	// - Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// To

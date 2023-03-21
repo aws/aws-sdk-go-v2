@@ -40,58 +40,45 @@ type Block struct {
 
 	// The type of text item that's recognized. In operations for text detection, the
 	// following types are returned:
-	//
-	// * PAGE - Contains a list of the LINE Block
-	// objects that are detected on a document page.
-	//
-	// * WORD - A word detected on a
-	// document page. A word is one or more ISO basic Latin script characters that
-	// aren't separated by spaces.
-	//
-	// * LINE - A string of tab-delimited, contiguous
-	// words that are detected on a document page.
-	//
-	// In text analysis operations, the
-	// following types are returned:
-	//
-	// * PAGE - Contains a list of child Block objects
+	// - PAGE - Contains a list of the LINE Block objects
 	// that are detected on a document page.
+	// - WORD - A word detected on a document
+	// page. A word is one or more ISO basic Latin script characters that aren't
+	// separated by spaces.
+	// - LINE - A string of tab-delimited, contiguous words that
+	// are detected on a document page.
 	//
-	// * KEY_VALUE_SET - Stores the KEY and
-	// VALUE Block objects for linked text that's detected on a document page. Use the
-	// EntityType field to determine if a KEY_VALUE_SET object is a KEY Block object or
-	// a VALUE Block object.
-	//
-	// * WORD - A word that's detected on a document page. A
-	// word is one or more ISO basic Latin script characters that aren't separated by
-	// spaces.
-	//
-	// * LINE - A string of tab-delimited, contiguous words that are detected
-	// on a document page.
-	//
-	// * TABLE - A table that's detected on a document page. A
-	// table is grid-based information with two or more rows or columns, with a cell
-	// span of one row and one column each.
-	//
-	// * CELL - A cell within a detected table.
-	// The cell is the parent of the block that contains the text in the cell.
-	//
-	// *
-	// SELECTION_ELEMENT - A selection element such as an option button (radio button)
-	// or a check box that's detected on a document page. Use the value of
-	// SelectionStatus to determine the status of the selection element.
-	//
-	// * SIGNATURE -
-	// The location and confidene score of a signature detected on a document page. Can
-	// be returned as part of a Key-Value pair or a detected cell.
-	//
-	// * QUERY - A
-	// question asked during the call of AnalyzeDocument. Contains an alias and an ID
-	// that attaches it to its answer.
-	//
-	// * QUERY_RESULT - A response to a question asked
-	// during the call of analyze document. Comes with an alias and ID for ease of
-	// locating in a response. Also contains location and confidence score.
+	// In text analysis operations, the following
+	// types are returned:
+	// - PAGE - Contains a list of child Block objects that are
+	// detected on a document page.
+	// - KEY_VALUE_SET - Stores the KEY and VALUE Block
+	// objects for linked text that's detected on a document page. Use the EntityType
+	// field to determine if a KEY_VALUE_SET object is a KEY Block object or a VALUE
+	// Block object.
+	// - WORD - A word that's detected on a document page. A word is one
+	// or more ISO basic Latin script characters that aren't separated by spaces.
+	// -
+	// LINE - A string of tab-delimited, contiguous words that are detected on a
+	// document page.
+	// - TABLE - A table that's detected on a document page. A table is
+	// grid-based information with two or more rows or columns, with a cell span of one
+	// row and one column each.
+	// - CELL - A cell within a detected table. The cell is
+	// the parent of the block that contains the text in the cell.
+	// - SELECTION_ELEMENT
+	// - A selection element such as an option button (radio button) or a check box
+	// that's detected on a document page. Use the value of SelectionStatus to
+	// determine the status of the selection element.
+	// - SIGNATURE - The location and
+	// confidene score of a signature detected on a document page. Can be returned as
+	// part of a Key-Value pair or a detected cell.
+	// - QUERY - A question asked during
+	// the call of AnalyzeDocument. Contains an alias and an ID that attaches it to its
+	// answer.
+	// - QUERY_RESULT - A response to a question asked during the call of
+	// analyze document. Comes with an alias and ID for ease of locating in a response.
+	// Also contains location and confidence score.
 	BlockType BlockType
 
 	// The column in which a table cell appears. The first column position is 1.
@@ -108,11 +95,9 @@ type Block struct {
 	Confidence *float32
 
 	// The type of entity. The following can be returned:
-	//
-	// * KEY - An identifier for a
+	// - KEY - An identifier for a
 	// field on the document.
-	//
-	// * VALUE - The field text.
+	// - VALUE - The field text.
 	//
 	// EntityTypes isn't returned by
 	// DetectDocumentText and GetDocumentTextDetection.
@@ -145,10 +130,8 @@ type Block struct {
 	// Relationship objects in the list for relationships that don't exist, such as
 	// when the current block has no child blocks. The list size can be the
 	// following:
-	//
-	// * 0 - The block has no child blocks.
-	//
-	// * 1 - The block has child
+	// - 0 - The block has no child blocks.
+	// - 1 - The block has child
 	// blocks.
 	Relationships []Relationship
 
@@ -287,31 +270,19 @@ type DocumentMetadata struct {
 type ExpenseCurrency struct {
 
 	// Currency code for detected currency. the current supported codes are:
-	//
-	// * USD
-	//
-	// *
+	// - USD
+	// -
 	// EUR
-	//
-	// * GBP
-	//
-	// * CAD
-	//
-	// * INR
-	//
-	// * JPY
-	//
-	// * CHF
-	//
-	// * AUD
-	//
-	// * CNY
-	//
-	// * BZR
-	//
-	// * SEK
-	//
-	// * HKD
+	// - GBP
+	// - CAD
+	// - INR
+	// - JPY
+	// - CHF
+	// - AUD
+	// - CNY
+	// - BZR
+	// - SEK
+	// - HKD
 	Code *string
 
 	// Percentage confideence in the detected currency.
@@ -766,22 +737,17 @@ type Query struct {
 
 	// Pages is a parameter that the user inputs to specify which pages to apply a
 	// query to. The following is a list of rules for using this parameter.
-	//
-	// * If a
-	// page is not specified, it is set to ["1"] by default.
-	//
-	// * The following
-	// characters are allowed in the parameter's string: 0 1 2 3 4 5 6 7 8 9 - *. No
-	// whitespace is allowed.
-	//
-	// * When using * to indicate all pages, it must be the
-	// only element in the list.
-	//
-	// * You can use page intervals, such as [“1-3”, “1-1”,
-	// “4-*”]. Where * indicates last page of document.
-	//
-	// * Specified pages must be
-	// greater than 0 and less than or equal to the number of pages in the document.
+	// - If a page
+	// is not specified, it is set to ["1"] by default.
+	// - The following characters are
+	// allowed in the parameter's string: 0 1 2 3 4 5 6 7 8 9 - *. No whitespace is
+	// allowed.
+	// - When using * to indicate all pages, it must be the only element in
+	// the list.
+	// - You can use page intervals, such as [“1-3”, “1-1”, “4-*”]. Where *
+	// indicates last page of document.
+	// - Specified pages must be greater than 0 and
+	// less than or equal to the number of pages in the document.
 	Pages []string
 
 	noSmithyDocumentSerde

@@ -56,17 +56,13 @@ type DescribeStackResourceDriftsInput struct {
 
 	// The resource drift status values to use as filters for the resource drift
 	// results returned.
-	//
-	// * DELETED: The resource differs from its expected template
+	// - DELETED: The resource differs from its expected template
 	// configuration in that the resource has been deleted.
-	//
-	// * MODIFIED: One or more
+	// - MODIFIED: One or more
 	// resource properties differ from their expected template values.
-	//
-	// * IN_SYNC: The
+	// - IN_SYNC: The
 	// resource's actual configuration matches its expected template configuration.
-	//
-	// *
+	// -
 	// NOT_CHECKED: CloudFormation doesn't currently return this value.
 	StackResourceDriftStatusFilters []types.StackResourceDriftStatus
 

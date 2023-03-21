@@ -14,25 +14,20 @@ import (
 // Deletes the specified WebACL. You can only use this if ManagedByFirewallManager
 // is false in the specified WebACL. Before deleting any web ACL, first
 // disassociate it from all resources.
-//
-// * To retrieve a list of the resources that
+// - To retrieve a list of the resources that
 // are associated with a web ACL, use the following calls:
-//
-// * For regional
+// - For regional
 // resources, call ListResourcesForWebACL.
-//
-// * For Amazon CloudFront distributions,
+// - For Amazon CloudFront distributions,
 // use the CloudFront call ListDistributionsByWebACLId. For information, see
 // ListDistributionsByWebACLId
 // (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributionsByWebACLId.html).
 //
-// *
+// -
 // To disassociate a resource from a web ACL, use the following calls:
-//
-// * For
+// - For
 // regional resources, call DisassociateWebACL.
-//
-// * For Amazon CloudFront
+// - For Amazon CloudFront
 // distributions, provide an empty web ACL ID in the CloudFront call
 // UpdateDistribution. For information, see UpdateDistribution
 // (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html).
@@ -81,11 +76,9 @@ type DeleteWebACLInput struct {
 	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
 	// user pool, or an App Runner service. To work with CloudFront, you must also
 	// specify the Region US East (N. Virginia) as follows:
-	//
-	// * CLI - Specify the Region
+	// - CLI - Specify the Region
 	// when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.
-	//
-	// * API
+	// - API
 	// and SDKs - For all calls, use the Region endpoint us-east-1.
 	//
 	// This member is required.

@@ -81,31 +81,23 @@ type CreateEventSubscriptionInput struct {
 	// not specified, then all sources are included in the response. An identifier must
 	// begin with a letter and must contain only ASCII letters, digits, and hyphens. It
 	// can't end with a hyphen or contain two consecutive hyphens. Constraints:
-	//
-	// * If
+	// - If
 	// SourceIds are supplied, SourceType must also be provided.
-	//
-	// * If the source type
+	// - If the source type
 	// is a DB instance, a DBInstanceIdentifier value must be supplied.
-	//
-	// * If the
-	// source type is a DB cluster, a DBClusterIdentifier value must be supplied.
-	//
-	// * If
-	// the source type is a DB parameter group, a DBParameterGroupName value must be
+	// - If the source
+	// type is a DB cluster, a DBClusterIdentifier value must be supplied.
+	// - If the
+	// source type is a DB parameter group, a DBParameterGroupName value must be
 	// supplied.
-	//
-	// * If the source type is a DB security group, a DBSecurityGroupName
+	// - If the source type is a DB security group, a DBSecurityGroupName
 	// value must be supplied.
-	//
-	// * If the source type is a DB snapshot, a
+	// - If the source type is a DB snapshot, a
 	// DBSnapshotIdentifier value must be supplied.
-	//
-	// * If the source type is a DB
+	// - If the source type is a DB
 	// cluster snapshot, a DBClusterSnapshotIdentifier value must be supplied.
-	//
-	// * If
-	// the source type is an RDS Proxy, a DBProxyName value must be supplied.
+	// - If the
+	// source type is an RDS Proxy, a DBProxyName value must be supplied.
 	SourceIds []string
 
 	// The type of source that is generating the events. For example, if you want to be

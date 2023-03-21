@@ -22,22 +22,18 @@ import (
 // for, such as B[a@]dB[o0]t. You can then configure AWS WAF to reject those
 // requests. To create and configure a RegexPatternSet, perform the following
 // steps:
-//
-// * Use GetChangeToken to get the change token that you provide in the
+// - Use GetChangeToken to get the change token that you provide in the
 // ChangeToken parameter of a CreateRegexPatternSet request.
-//
-// * Submit a
+// - Submit a
 // CreateRegexPatternSet request.
+// - Use GetChangeToken to get the change token that
+// you provide in the ChangeToken parameter of an UpdateRegexPatternSet request.
+// -
+// Submit an UpdateRegexPatternSet request to specify the string that you want AWS
+// WAF to watch for.
 //
-// * Use GetChangeToken to get the change token
-// that you provide in the ChangeToken parameter of an UpdateRegexPatternSet
-// request.
-//
-// * Submit an UpdateRegexPatternSet request to specify the string that
-// you want AWS WAF to watch for.
-//
-// For more information about how to use the AWS
-// WAF API to allow or block HTTP requests, see the AWS WAF Developer Guide
+// For more information about how to use the AWS WAF API to
+// allow or block HTTP requests, see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/).
 func (c *Client) CreateRegexPatternSet(ctx context.Context, params *CreateRegexPatternSetInput, optFns ...func(*Options)) (*CreateRegexPatternSetOutput, error) {
 	if params == nil {

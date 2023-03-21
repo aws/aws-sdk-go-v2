@@ -64,15 +64,12 @@ type RespondToAuthChallengeInput struct {
 	// ChallengeName, for example: SECRET_HASH (if app client is configured with client
 	// secret) applies to all of the inputs that follow (including
 	// SOFTWARE_TOKEN_MFA).
-	//
-	// * SMS_MFA: SMS_MFA_CODE, USERNAME.
-	//
-	// * PASSWORD_VERIFIER:
+	// - SMS_MFA: SMS_MFA_CODE, USERNAME.
+	// - PASSWORD_VERIFIER:
 	// PASSWORD_CLAIM_SIGNATURE, PASSWORD_CLAIM_SECRET_BLOCK, TIMESTAMP, USERNAME.
 	// PASSWORD_VERIFIER requires DEVICE_KEY when you sign in with a remembered
 	// device.
-	//
-	// * NEW_PASSWORD_REQUIRED: NEW_PASSWORD, USERNAME, SECRET_HASH (if app
+	// - NEW_PASSWORD_REQUIRED: NEW_PASSWORD, USERNAME, SECRET_HASH (if app
 	// client is configured with client secret). To set any required attributes that
 	// Amazon Cognito returned as requiredAttributes in the InitiateAuth response, add
 	// a userAttributes.attributename  parameter. This parameter can also set values
@@ -82,19 +79,15 @@ type RespondToAuthChallengeInput struct {
 	// that Amazon Cognito returned in the requiredAttributes parameter, then use the
 	// UpdateUserAttributes API operation to modify the value of any additional
 	// attributes.
-	//
-	// * SOFTWARE_TOKEN_MFA: USERNAME and SOFTWARE_TOKEN_MFA_CODE are
+	// - SOFTWARE_TOKEN_MFA: USERNAME and SOFTWARE_TOKEN_MFA_CODE are
 	// required attributes.
-	//
-	// * DEVICE_SRP_AUTH requires USERNAME, DEVICE_KEY, SRP_A
-	// (and SECRET_HASH).
-	//
-	// * DEVICE_PASSWORD_VERIFIER requires everything that
+	// - DEVICE_SRP_AUTH requires USERNAME, DEVICE_KEY, SRP_A (and
+	// SECRET_HASH).
+	// - DEVICE_PASSWORD_VERIFIER requires everything that
 	// PASSWORD_VERIFIER requires, plus DEVICE_KEY.
-	//
-	// * MFA_SETUP requires USERNAME,
-	// plus you must use the session value returned by VerifySoftwareToken in the
-	// Session parameter.
+	// - MFA_SETUP requires USERNAME, plus
+	// you must use the session value returned by VerifySoftwareToken in the Session
+	// parameter.
 	ChallengeResponses map[string]string
 
 	// A map of custom key-value pairs that you can provide as input for any custom
@@ -112,16 +105,13 @@ type RespondToAuthChallengeInput struct {
 	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
 	// in the Amazon Cognito Developer Guide. When you use the ClientMetadata
 	// parameter, remember that Amazon Cognito won't do the following:
-	//
-	// * Store the
+	// - Store the
 	// ClientMetadata value. This data is available only to Lambda triggers that are
 	// assigned to a user pool to support custom workflows. If your user pool
 	// configuration doesn't include triggers, the ClientMetadata parameter serves no
 	// purpose.
-	//
-	// * Validate the ClientMetadata value.
-	//
-	// * Encrypt the ClientMetadata
+	// - Validate the ClientMetadata value.
+	// - Encrypt the ClientMetadata
 	// value. Don't use Amazon Cognito to provide sensitive information.
 	ClientMetadata map[string]string
 

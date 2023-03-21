@@ -52,16 +52,11 @@ type GetMetricDataV2Input struct {
 
 	// The filters to apply to returned metrics. You can filter on the following
 	// resources:
-	//
-	// * Queues
-	//
-	// * Routing profiles
-	//
-	// * Agents
-	//
-	// * Channels
-	//
-	// * User hierarchy
+	// - Queues
+	// - Routing profiles
+	// - Agents
+	// - Channels
+	// - User hierarchy
 	// groups
 	//
 	// At least one filter must be passed from queues, routing profiles,
@@ -69,18 +64,16 @@ type GetMetricDataV2Input struct {
 	// historical metrics report
 	// (https://docs.aws.amazon.com/connect/latest/adminguide/create-historical-metrics-report.html)
 	// in the Amazon Connect Administrator's Guide. Note the following limits:
-	//
-	// *
-	// Filter keys: A maximum of 5 filter keys are supported in a single request. Valid
-	// filter keys: QUEUE | ROUTING_PROFILE | AGENT | CHANNEL |
-	// AGENT_HIERARCHY_LEVEL_ONE | AGENT_HIERARCHY_LEVEL_TWO |
-	// AGENT_HIERARCHY_LEVEL_THREE | AGENT_HIERARCHY_LEVEL_FOUR |
-	// AGENT_HIERARCHY_LEVEL_FIVE
-	//
-	// * Filter values: A maximum of 100 filter values are
-	// supported in a single request. For example, a GetMetricDataV2 request can filter
-	// by 50 queues, 35 agents, and 15 routing profiles for a total of 100 filter
-	// values. VOICE, CHAT, and TASK are valid filterValue for the CHANNEL filter key.
+	// - Filter
+	// keys: A maximum of 5 filter keys are supported in a single request. Valid filter
+	// keys: QUEUE | ROUTING_PROFILE | AGENT | CHANNEL | AGENT_HIERARCHY_LEVEL_ONE |
+	// AGENT_HIERARCHY_LEVEL_TWO | AGENT_HIERARCHY_LEVEL_THREE |
+	// AGENT_HIERARCHY_LEVEL_FOUR | AGENT_HIERARCHY_LEVEL_FIVE
+	// - Filter values: A
+	// maximum of 100 filter values are supported in a single request. For example, a
+	// GetMetricDataV2 request can filter by 50 queues, 35 agents, and 15 routing
+	// profiles for a total of 100 filter values. VOICE, CHAT, and TASK are valid
+	// filterValue for the CHANNEL filter key.
 	//
 	// This member is required.
 	Filters []types.FilterV2

@@ -24,17 +24,13 @@ import (
 // block the requests, you can create an IPSet that contains those IP addresses and
 // then configure AWS WAF to block the requests. To create and configure an IPSet,
 // perform the following steps:
-//
-// * Use GetChangeToken to get the change token that
+// - Use GetChangeToken to get the change token that
 // you provide in the ChangeToken parameter of a CreateIPSet request.
-//
-// * Submit a
+// - Submit a
 // CreateIPSet request.
-//
-// * Use GetChangeToken to get the change token that you
+// - Use GetChangeToken to get the change token that you
 // provide in the ChangeToken parameter of an UpdateIPSet request.
-//
-// * Submit an
+// - Submit an
 // UpdateIPSet request to specify the IP addresses that you want AWS WAF to watch
 // for.
 //

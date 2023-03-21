@@ -15,15 +15,11 @@ import (
 // Returns a list of ARNs of the resources that are members of a specified resource
 // group. Minimum permissions To run this command, you must have the following
 // permissions:
-//
-// * resource-groups:ListGroupResources
-//
-// *
+// - resource-groups:ListGroupResources
+// -
 // cloudformation:DescribeStacks
-//
-// * cloudformation:ListStackResources
-//
-// *
+// - cloudformation:ListStackResources
+// -
 // tag:GetResources
 func (c *Client) ListGroupResources(ctx context.Context, params *ListGroupResourcesInput, optFns ...func(*Options)) (*ListGroupResourcesOutput, error) {
 	if params == nil {
@@ -45,8 +41,7 @@ type ListGroupResourcesInput struct {
 	// Filters, formatted as ResourceFilter objects, that you want to apply to a
 	// ListGroupResources operation. Filters the results to include only those of the
 	// specified resource types.
-	//
-	// * resource-type - Filter resources by their type.
+	// - resource-type - Filter resources by their type.
 	// Specify up to five resource types in the format AWS::ServiceCode::ResourceType.
 	// For example, AWS::EC2::Instance, or AWS::S3::Bucket.
 	//

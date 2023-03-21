@@ -11,21 +11,17 @@ import (
 )
 
 // Assign a registered instance to a layer.
+// - You can assign registered on-premises
+// instances to any layer type.
+// - You can assign registered Amazon EC2 instances
+// only to custom layers.
+// - You cannot use this action with instances that were
+// created with AWS OpsWorks Stacks.
 //
-// * You can assign registered
-// on-premises instances to any layer type.
-//
-// * You can assign registered Amazon EC2
-// instances only to custom layers.
-//
-// * You cannot use this action with instances
-// that were created with AWS OpsWorks Stacks.
-//
-// Required Permissions: To use this
-// action, an AWS Identity and Access Management (IAM) user must have a Manage
-// permissions level for the stack or an attached policy that explicitly grants
-// permissions. For more information on user permissions, see Managing User
-// Permissions
+// Required Permissions: To use this action, an
+// AWS Identity and Access Management (IAM) user must have a Manage permissions
+// level for the stack or an attached policy that explicitly grants permissions.
+// For more information on user permissions, see Managing User Permissions
 // (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 func (c *Client) AssignInstance(ctx context.Context, params *AssignInstanceInput, optFns ...func(*Options)) (*AssignInstanceOutput, error) {
 	if params == nil {

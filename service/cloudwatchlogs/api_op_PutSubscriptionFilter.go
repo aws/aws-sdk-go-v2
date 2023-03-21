@@ -18,26 +18,21 @@ import (
 // and have them delivered to a specific destination. When log events are sent to
 // the receiving service, they are Base64 encoded and compressed with the GZIP
 // format. The following destinations are supported for subscription filters:
-//
-// * An
+// - An
 // Amazon Kinesis data stream belonging to the same account as the subscription
 // filter, for same-account delivery.
-//
-// * A logical destination that belongs to a
+// - A logical destination that belongs to a
 // different account, for cross-account delivery.
+// - An Amazon Kinesis Data Firehose
+// delivery stream that belongs to the same account as the subscription filter, for
+// same-account delivery.
+// - An Lambda function that belongs to the same account as
+// the subscription filter, for same-account delivery.
 //
-// * An Amazon Kinesis Data
-// Firehose delivery stream that belongs to the same account as the subscription
-// filter, for same-account delivery.
-//
-// * An Lambda function that belongs to the
-// same account as the subscription filter, for same-account delivery.
-//
-// Each log
-// group can have up to two subscription filters associated with it. If you are
-// updating an existing filter, you must specify the correct name in filterName. To
-// perform a PutSubscriptionFilter operation, you must also have the iam:PassRole
-// permission.
+// Each log group can have up
+// to two subscription filters associated with it. If you are updating an existing
+// filter, you must specify the correct name in filterName. To perform a
+// PutSubscriptionFilter operation, you must also have the iam:PassRole permission.
 func (c *Client) PutSubscriptionFilter(ctx context.Context, params *PutSubscriptionFilterInput, optFns ...func(*Options)) (*PutSubscriptionFilterOutput, error) {
 	if params == nil {
 		params = &PutSubscriptionFilterInput{}
@@ -57,24 +52,20 @@ type PutSubscriptionFilterInput struct {
 
 	// The ARN of the destination to deliver matching log events to. Currently, the
 	// supported destinations are:
-	//
-	// * An Amazon Kinesis stream belonging to the same
+	// - An Amazon Kinesis stream belonging to the same
 	// account as the subscription filter, for same-account delivery.
-	//
-	// * A logical
+	// - A logical
 	// destination (specified using an ARN) belonging to a different account, for
 	// cross-account delivery. If you're setting up a cross-account subscription, the
 	// destination must have an IAM policy associated with it. The IAM policy must
 	// allow the sender to send logs to the destination. For more information, see
 	// PutDestinationPolicy
 	// (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDestinationPolicy.html).
-	//
-	// *
+	// -
 	// A Kinesis Data Firehose delivery stream belonging to the same account as the
 	// subscription filter, for same-account delivery.
-	//
-	// * A Lambda function belonging
-	// to the same account as the subscription filter, for same-account delivery.
+	// - A Lambda function belonging to
+	// the same account as the subscription filter, for same-account delivery.
 	//
 	// This member is required.
 	DestinationArn *string

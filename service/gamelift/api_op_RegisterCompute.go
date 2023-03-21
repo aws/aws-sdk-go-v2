@@ -15,12 +15,10 @@ import (
 // register a compute to your fleet, you can monitor and manage your compute using
 // GameLift. The operation returns the compute resource containing SDK endpoint you
 // can use to connect your game server to GameLift. Learn more
-//
-// * Create an
-// Anywhere fleet
+// - Create an Anywhere
+// fleet
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-anywhere.html)
-//
-// *
+// -
 // Test your integration
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/integration-testing.html)
 func (c *Client) RegisterCompute(ctx context.Context, params *RegisterComputeInput, optFns ...func(*Options)) (*RegisterComputeOutput, error) {

@@ -30,25 +30,22 @@ import (
 // so that updating your group does not compromise the performance or availability
 // of your application. Note the following about changing DesiredCapacity, MaxSize,
 // or MinSize:
+// - If a scale-in activity occurs as a result of a new DesiredCapacity
+// value that is lower than the current size of the group, the Auto Scaling group
+// uses its termination policy to determine which instances to terminate.
+// - If you
+// specify a new value for MinSize without specifying a value for DesiredCapacity,
+// and the new MinSize is larger than the current size of the group, this sets the
+// group's DesiredCapacity to the new MinSize value.
+// - If you specify a new value
+// for MaxSize without specifying a value for DesiredCapacity, and the new MaxSize
+// is smaller than the current size of the group, this sets the group's
+// DesiredCapacity to the new MaxSize value.
 //
-// * If a scale-in activity occurs as a result of a new
-// DesiredCapacity value that is lower than the current size of the group, the Auto
-// Scaling group uses its termination policy to determine which instances to
-// terminate.
-//
-// * If you specify a new value for MinSize without specifying a value
-// for DesiredCapacity, and the new MinSize is larger than the current size of the
-// group, this sets the group's DesiredCapacity to the new MinSize value.
-//
-// * If you
-// specify a new value for MaxSize without specifying a value for DesiredCapacity,
-// and the new MaxSize is smaller than the current size of the group, this sets the
-// group's DesiredCapacity to the new MaxSize value.
-//
-// To see which properties have
-// been set, call the DescribeAutoScalingGroups API. To view the scaling policies
-// for an Auto Scaling group, call the DescribePolicies API. If the group has
-// scaling policies, you can update them by calling the PutScalingPolicy API.
+// To see which properties have been
+// set, call the DescribeAutoScalingGroups API. To view the scaling policies for an
+// Auto Scaling group, call the DescribePolicies API. If the group has scaling
+// policies, you can update them by calling the PutScalingPolicy API.
 func (c *Client) UpdateAutoScalingGroup(ctx context.Context, params *UpdateAutoScalingGroupInput, optFns ...func(*Options)) (*UpdateAutoScalingGroupOutput, error) {
 	if params == nil {
 		params = &UpdateAutoScalingGroupInput{}

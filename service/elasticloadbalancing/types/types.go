@@ -34,8 +34,7 @@ type AccessLog struct {
 type AdditionalAttribute struct {
 
 	// The name of the attribute. The following attribute is supported.
-	//
-	// *
+	// -
 	// elb.http.desyncmitigationmode - Determines how the load balancer handles
 	// requests that might pose a security risk to your application. The possible
 	// values are monitor, defensive, and strictest. The default is defensive.
@@ -170,38 +169,26 @@ type InstanceState struct {
 
 	// A description of the instance state. This string can contain one or more of the
 	// following messages.
-	//
-	// * N/A
-	//
-	// * A transient error occurred. Please try again
+	// - N/A
+	// - A transient error occurred. Please try again
 	// later.
-	//
-	// * Instance has failed at least the UnhealthyThreshold number of health
+	// - Instance has failed at least the UnhealthyThreshold number of health
 	// checks consecutively.
-	//
-	// * Instance has not passed the configured HealthyThreshold
+	// - Instance has not passed the configured HealthyThreshold
 	// number of health checks consecutively.
-	//
-	// * Instance registration is still in
+	// - Instance registration is still in
 	// progress.
-	//
-	// * Instance is in the EC2 Availability Zone for which LoadBalancer is
+	// - Instance is in the EC2 Availability Zone for which LoadBalancer is
 	// not configured to route traffic to.
-	//
-	// * Instance is not currently registered with
+	// - Instance is not currently registered with
 	// the LoadBalancer.
-	//
-	// * Instance deregistration currently in progress.
-	//
-	// * Disable
+	// - Instance deregistration currently in progress.
+	// - Disable
 	// Availability Zone is currently in progress.
-	//
-	// * Instance is in pending state.
-	//
-	// *
+	// - Instance is in pending state.
+	// -
 	// Instance is in stopped state.
-	//
-	// * Instance is in terminated state.
+	// - Instance is in terminated state.
 	Description *string
 
 	// The ID of the instance.
@@ -241,13 +228,10 @@ type Limit struct {
 	Max *string
 
 	// The name of the limit. The possible values are:
-	//
-	// * classic-listeners
-	//
-	// *
+	// - classic-listeners
+	// -
 	// classic-load-balancers
-	//
-	// * classic-registered-instances
+	// - classic-registered-instances
 	Name *string
 
 	noSmithyDocumentSerde
@@ -458,17 +442,13 @@ type PolicyAttributeTypeDescription struct {
 	AttributeType *string
 
 	// The cardinality of the attribute. Valid values:
-	//
-	// * ONE(1) : Single value
+	// - ONE(1) : Single value
 	// required
-	//
-	// * ZERO_OR_ONE(0..1) : Up to one value is allowed
-	//
-	// * ZERO_OR_MORE(0..*)
-	// : Optional. Multiple values are allowed
-	//
-	// * ONE_OR_MORE(1..*0) : Required.
-	// Multiple values are allowed
+	// - ZERO_OR_ONE(0..1) : Up to one value is allowed
+	// - ZERO_OR_MORE(0..*) :
+	// Optional. Multiple values are allowed
+	// - ONE_OR_MORE(1..*0) : Required. Multiple
+	// values are allowed
 	Cardinality *string
 
 	// The default value of the attribute, if applicable.

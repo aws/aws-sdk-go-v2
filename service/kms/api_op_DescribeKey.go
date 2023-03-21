@@ -27,21 +27,17 @@ import (
 // cluster ID. For KMS keys in external key stores, it includes the custom key
 // store ID and the ID of the external key. DescribeKey does not return the
 // following information:
-//
-// * Aliases associated with the KMS key. To get this
+// - Aliases associated with the KMS key. To get this
 // information, use ListAliases.
-//
-// * Whether automatic key rotation is enabled on
-// the KMS key. To get this information, use GetKeyRotationStatus. Also, some key
+// - Whether automatic key rotation is enabled on the
+// KMS key. To get this information, use GetKeyRotationStatus. Also, some key
 // states prevent a KMS key from being automatically rotated. For details, see How
 // Automatic Key Rotation Works
 // (https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html#rotate-keys-how-it-works)
 // in the Key Management Service Developer Guide.
-//
-// * Tags on the KMS key. To get
+// - Tags on the KMS key. To get
 // this information, use ListResourceTags.
-//
-// * Key policies and grants on the KMS
+// - Key policies and grants on the KMS
 // key. To get this information, use GetKeyPolicy and ListGrants.
 //
 // In general,
@@ -55,21 +51,14 @@ import (
 // Required permissions: kms:DescribeKey
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (key policy) Related operations:
-//
-// * GetKeyPolicy
-//
-// * GetKeyRotationStatus
-//
-// *
+// - GetKeyPolicy
+// - GetKeyRotationStatus
+// -
 // ListAliases
-//
-// * ListGrants
-//
-// * ListKeys
-//
-// * ListResourceTags
-//
-// * ListRetirableGrants
+// - ListGrants
+// - ListKeys
+// - ListResourceTags
+// - ListRetirableGrants
 func (c *Client) DescribeKey(ctx context.Context, params *DescribeKeyInput, optFns ...func(*Options)) (*DescribeKeyOutput, error) {
 	if params == nil {
 		params = &DescribeKeyInput{}
@@ -95,17 +84,13 @@ type DescribeKeyInput struct {
 	// ID, key ARN, alias name, or alias ARN. When using an alias name, prefix it with
 	// "alias/". To specify a KMS key in a different Amazon Web Services account, you
 	// must use the key ARN or alias ARN. For example:
-	//
-	// * Key ID:
+	// - Key ID:
 	// 1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// * Key ARN:
+	// - Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// *
+	// -
 	// Alias name: alias/ExampleAlias
-	//
-	// * Alias ARN:
+	// - Alias ARN:
 	// arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
 	//
 	// To get the key ID and key

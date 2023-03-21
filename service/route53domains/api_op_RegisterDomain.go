@@ -16,30 +16,25 @@ import (
 // Gandi (for all other domains). For some top-level domains (TLDs), this operation
 // requires extra parameters. When you register a domain, Amazon Route 53 does the
 // following:
-//
-// * Creates a Route 53 hosted zone that has the same name as the
+// - Creates a Route 53 hosted zone that has the same name as the
 // domain. Route 53 assigns four name servers to your hosted zone and automatically
 // updates your domain registration with the names of these name servers.
-//
-// *
-// Enables auto renew, so your domain registration will renew automatically each
-// year. We'll notify you in advance of the renewal date so you can choose whether
-// to renew the registration.
-//
-// * Optionally enables privacy protection, so WHOIS
+// - Enables
+// auto renew, so your domain registration will renew automatically each year.
+// We'll notify you in advance of the renewal date so you can choose whether to
+// renew the registration.
+// - Optionally enables privacy protection, so WHOIS
 // queries return contact information either for Amazon Registrar (for .com, .net,
 // and .org domains) or for our registrar associate, Gandi (for all other TLDs). If
 // you don't enable privacy protection, WHOIS queries return the information that
 // you entered for the administrative, registrant, and technical contacts. You must
 // specify the same privacy setting for the administrative, registrant, and
 // technical contacts.
-//
-// * If registration is successful, returns an operation ID
+// - If registration is successful, returns an operation ID
 // that you can use to track the progress and completion of the action. If the
 // request is not completed successfully, the domain registrant is notified by
 // email.
-//
-// * Charges your Amazon Web Services account an amount based on the
+// - Charges your Amazon Web Services account an amount based on the
 // top-level domain. For more information, see Amazon Route 53 Pricing
 // (http://aws.amazon.com/route53/pricing/).
 func (c *Client) RegisterDomain(ctx context.Context, params *RegisterDomainInput, optFns ...func(*Options)) (*RegisterDomainOutput, error) {
@@ -73,16 +68,12 @@ type RegisterDomainInput struct {
 	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
 	// in the Amazon Route 53 Developer Guide. The domain name can contain only the
 	// following characters:
-	//
-	// * Letters a through z. Domain names are not case
+	// - Letters a through z. Domain names are not case
 	// sensitive.
-	//
-	// * Numbers 0 through 9.
-	//
-	// * Hyphen (-). You can't specify a hyphen at
+	// - Numbers 0 through 9.
+	// - Hyphen (-). You can't specify a hyphen at
 	// the beginning or end of a label.
-	//
-	// * Period (.) to separate the labels in the
+	// - Period (.) to separate the labels in the
 	// name, such as the . in example.com.
 	//
 	// Internationalized domain names are not

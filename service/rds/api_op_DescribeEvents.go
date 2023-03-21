@@ -69,34 +69,25 @@ type DescribeEventsInput struct {
 
 	// The identifier of the event source for which events are returned. If not
 	// specified, then all sources are included in the response. Constraints:
-	//
-	// * If
+	// - If
 	// SourceIdentifier is supplied, SourceType must also be provided.
-	//
-	// * If the source
+	// - If the source
 	// type is a DB instance, a DBInstanceIdentifier value must be supplied.
-	//
-	// * If the
+	// - If the
 	// source type is a DB cluster, a DBClusterIdentifier value must be supplied.
-	//
-	// * If
+	// - If
 	// the source type is a DB parameter group, a DBParameterGroupName value must be
 	// supplied.
-	//
-	// * If the source type is a DB security group, a DBSecurityGroupName
+	// - If the source type is a DB security group, a DBSecurityGroupName
 	// value must be supplied.
-	//
-	// * If the source type is a DB snapshot, a
+	// - If the source type is a DB snapshot, a
 	// DBSnapshotIdentifier value must be supplied.
-	//
-	// * If the source type is a DB
+	// - If the source type is a DB
 	// cluster snapshot, a DBClusterSnapshotIdentifier value must be supplied.
-	//
-	// * If
-	// the source type is an RDS Proxy, a DBProxyName value must be supplied.
-	//
-	// * Can't
-	// end with a hyphen or contain two consecutive hyphens.
+	// - If the
+	// source type is an RDS Proxy, a DBProxyName value must be supplied.
+	// - Can't end
+	// with a hyphen or contain two consecutive hyphens.
 	SourceIdentifier *string
 
 	// The event source to retrieve events for. If no value is specified, all events

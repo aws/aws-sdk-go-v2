@@ -20,15 +20,13 @@ import (
 // Regardless of supplied parameters, only job flows created within the last two
 // months are returned. If no parameters are supplied, then job flows matching
 // either of the following criteria are returned:
+// - Job flows created and completed
+// in the last two weeks
+// - Job flows created within the last two months that are in
+// one of the following states: RUNNING, WAITING, SHUTTING_DOWN, STARTING
 //
-// * Job flows created and
-// completed in the last two weeks
-//
-// * Job flows created within the last two months
-// that are in one of the following states: RUNNING, WAITING, SHUTTING_DOWN,
-// STARTING
-//
-// Amazon EMR can return a maximum of 512 job flow descriptions.
+// Amazon
+// EMR can return a maximum of 512 job flow descriptions.
 //
 // Deprecated: This operation has been deprecated.
 func (c *Client) DescribeJobFlows(ctx context.Context, params *DescribeJobFlowsInput, optFns ...func(*Options)) (*DescribeJobFlowsOutput, error) {

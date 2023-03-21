@@ -43,22 +43,15 @@ type GetGeoLocationInput struct {
 
 	// For geolocation resource record sets, a two-letter abbreviation that identifies
 	// a continent. Amazon Route 53 supports the following continent codes:
-	//
-	// * AF:
+	// - AF:
 	// Africa
-	//
-	// * AN: Antarctica
-	//
-	// * AS: Asia
-	//
-	// * EU: Europe
-	//
-	// * OC: Oceania
-	//
-	// * NA: North
+	// - AN: Antarctica
+	// - AS: Asia
+	// - EU: Europe
+	// - OC: Oceania
+	// - NA: North
 	// America
-	//
-	// * SA: South America
+	// - SA: South America
 	ContinentCode *string
 
 	// Amazon Route 53 uses the two-letter country codes that are specified in ISO

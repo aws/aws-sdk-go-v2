@@ -33,14 +33,11 @@ func (c *Client) CreateTracker(ctx context.Context, params *CreateTrackerInput, 
 type CreateTrackerInput struct {
 
 	// The name for the tracker resource. Requirements:
-	//
-	// * Contain only alphanumeric
+	// - Contain only alphanumeric
 	// characters (A-Z, a-z, 0-9) , hyphens (-), periods (.), and underscores (_).
-	//
-	// *
+	// -
 	// Must be a unique tracker resource name.
-	//
-	// * No spaces allowed. For example,
+	// - No spaces allowed. For example,
 	// ExampleTracker.
 	//
 	// This member is required.
@@ -55,31 +52,28 @@ type CreateTrackerInput struct {
 	KmsKeyId *string
 
 	// Specifies the position filtering for the tracker resource. Valid values:
-	//
-	// *
+	// -
 	// TimeBased - Location updates are evaluated against linked geofence collections,
 	// but not every location update is stored. If your update frequency is more often
 	// than 30 seconds, only one update per 30 seconds is stored for each unique device
 	// ID.
+	// - DistanceBased - If the device has moved less than 30 m (98.4 ft), location
+	// updates are ignored. Location updates within this area are neither evaluated
+	// against linked geofence collections, nor stored. This helps control costs by
+	// reducing the number of geofence evaluations and historical device positions to
+	// paginate through. Distance-based filtering can also reduce the effects of GPS
+	// noise when displaying device trajectories on a map.
+	// - AccuracyBased - If the
+	// device has moved less than the measured accuracy, location updates are ignored.
+	// For example, if two consecutive updates from a device have a horizontal accuracy
+	// of 5 m and 10 m, the second update is ignored if the device has moved less than
+	// 15 m. Ignored location updates are neither evaluated against linked geofence
+	// collections, nor stored. This can reduce the effects of GPS noise when
+	// displaying device trajectories on a map, and can help control your costs by
+	// reducing the number of geofence evaluations.
 	//
-	// * DistanceBased - If the device has moved less than 30 m (98.4 ft),
-	// location updates are ignored. Location updates within this area are neither
-	// evaluated against linked geofence collections, nor stored. This helps control
-	// costs by reducing the number of geofence evaluations and historical device
-	// positions to paginate through. Distance-based filtering can also reduce the
-	// effects of GPS noise when displaying device trajectories on a map.
-	//
-	// *
-	// AccuracyBased - If the device has moved less than the measured accuracy,
-	// location updates are ignored. For example, if two consecutive updates from a
-	// device have a horizontal accuracy of 5 m and 10 m, the second update is ignored
-	// if the device has moved less than 15 m. Ignored location updates are neither
-	// evaluated against linked geofence collections, nor stored. This can reduce the
-	// effects of GPS noise when displaying device trajectories on a map, and can help
-	// control your costs by reducing the number of geofence evaluations.
-	//
-	// This field
-	// is optional. If not specified, the default value is TimeBased.
+	// This field is optional. If not
+	// specified, the default value is TimeBased.
 	PositionFiltering types.PositionFiltering
 
 	// No longer used. If included, the only allowed value is RequestBasedUsage.
@@ -96,22 +90,16 @@ type CreateTrackerInput struct {
 	// Applies one or more tags to the tracker resource. A tag is a key-value pair
 	// helps manage, identify, search, and filter your resources by labelling them.
 	// Format: "key" : "value" Restrictions:
-	//
-	// * Maximum 50 tags per resource
-	//
-	// * Each
+	// - Maximum 50 tags per resource
+	// - Each
 	// resource tag must be unique with a maximum of one value.
-	//
-	// * Maximum key length:
+	// - Maximum key length:
 	// 128 Unicode characters in UTF-8
-	//
-	// * Maximum value length: 256 Unicode characters
+	// - Maximum value length: 256 Unicode characters
 	// in UTF-8
-	//
-	// * Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
+	// - Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
 	// characters: + - = . _ : / @.
-	//
-	// * Cannot use "aws:" as a prefix for a key.
+	// - Cannot use "aws:" as a prefix for a key.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -128,8 +116,7 @@ type CreateTrackerOutput struct {
 
 	// The Amazon Resource Name (ARN) for the tracker resource. Used when you need to
 	// specify a resource across all Amazon Web Services.
-	//
-	// * Format example:
+	// - Format example:
 	// arn:aws:geo:region:account-id:tracker/ExampleTracker
 	//
 	// This member is required.

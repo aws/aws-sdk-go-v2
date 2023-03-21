@@ -21,23 +21,18 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops.html) in the
 // Amazon S3 User Guide. This action creates a S3 Batch Operations job. Related
 // actions include:
-//
-// * DescribeJob
+// - DescribeJob
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html)
-//
-// *
+// -
 // ListJobs
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListJobs.html)
-//
-// *
+// -
 // UpdateJobPriority
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobPriority.html)
-//
-// *
+// -
 // UpdateJobStatus
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html)
-//
-// *
+// -
 // JobOperation
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_JobOperation.html)
 func (c *Client) CreateJob(ctx context.Context, params *CreateJobInput, optFns ...func(*Options)) (*CreateJobOutput, error) {

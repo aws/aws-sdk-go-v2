@@ -42,30 +42,25 @@ import (
 // be in a compatible key state. For details, see Key states of KMS keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
 // Key Management Service Developer Guide.
+// - Disabled: The key rotation status does
+// not change when you disable a KMS key. However, while the KMS key is disabled,
+// KMS does not rotate the key material. When you re-enable the KMS key, rotation
+// resumes. If the key material in the re-enabled KMS key hasn't been rotated in
+// one year, KMS rotates it immediately, and every year thereafter. If it's been
+// less than a year since the key material in the re-enabled KMS key was rotated,
+// the KMS key resumes its prior rotation schedule.
+// - Pending deletion: While a KMS
+// key is pending deletion, its key rotation status is false and KMS does not
+// rotate the key material. If you cancel the deletion, the original key rotation
+// status returns to true.
 //
-// * Disabled: The key rotation status
-// does not change when you disable a KMS key. However, while the KMS key is
-// disabled, KMS does not rotate the key material. When you re-enable the KMS key,
-// rotation resumes. If the key material in the re-enabled KMS key hasn't been
-// rotated in one year, KMS rotates it immediately, and every year thereafter. If
-// it's been less than a year since the key material in the re-enabled KMS key was
-// rotated, the KMS key resumes its prior rotation schedule.
-//
-// * Pending deletion:
-// While a KMS key is pending deletion, its key rotation status is false and KMS
-// does not rotate the key material. If you cancel the deletion, the original key
-// rotation status returns to true.
-//
-// Cross-account use: Yes. To perform this
-// operation on a KMS key in a different Amazon Web Services account, specify the
-// key ARN in the value of the KeyId parameter. Required permissions:
-// kms:GetKeyRotationStatus
+// Cross-account use: Yes. To perform this operation on a
+// KMS key in a different Amazon Web Services account, specify the key ARN in the
+// value of the KeyId parameter. Required permissions: kms:GetKeyRotationStatus
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (key policy) Related operations:
-//
-// * DisableKeyRotation
-//
-// * EnableKeyRotation
+// - DisableKeyRotation
+// - EnableKeyRotation
 func (c *Client) GetKeyRotationStatus(ctx context.Context, params *GetKeyRotationStatusInput, optFns ...func(*Options)) (*GetKeyRotationStatusOutput, error) {
 	if params == nil {
 		params = &GetKeyRotationStatusInput{}
@@ -86,11 +81,9 @@ type GetKeyRotationStatusInput struct {
 	// Gets the rotation status for the specified KMS key. Specify the key ID or key
 	// ARN of the KMS key. To specify a KMS key in a different Amazon Web Services
 	// account, you must use the key ARN. For example:
-	//
-	// * Key ID:
+	// - Key ID:
 	// 1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// * Key ARN:
+	// - Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// To

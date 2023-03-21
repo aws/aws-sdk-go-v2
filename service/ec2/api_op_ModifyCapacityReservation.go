@@ -64,12 +64,10 @@ type ModifyCapacityReservationInput struct {
 
 	// Indicates the way in which the Capacity Reservation ends. A Capacity Reservation
 	// can have one of the following end types:
-	//
-	// * unlimited - The Capacity Reservation
+	// - unlimited - The Capacity Reservation
 	// remains active until you explicitly cancel it. Do not provide an EndDate value
 	// if EndDateType is unlimited.
-	//
-	// * limited - The Capacity Reservation expires
+	// - limited - The Capacity Reservation expires
 	// automatically at a specified date and time. You must provide an EndDate value if
 	// EndDateType is limited.
 	EndDateType types.EndDateType

@@ -16,12 +16,10 @@ import (
 // (https://docs.aws.amazon.com/proton/latest/userguide/ag-templates.html) in the
 // Proton User Guide. You can create an environment template in one of the two
 // following ways:
-//
-// * Register and publish a standard environment template that
+// - Register and publish a standard environment template that
 // instructs Proton to deploy and manage environment infrastructure.
-//
-// * Register
-// and publish a customer managed environment template that connects Proton to your
+// - Register and
+// publish a customer managed environment template that connects Proton to your
 // existing provisioned infrastructure that you manage. Proton doesn't manage your
 // existing provisioned infrastructure. To create an environment template for
 // customer provisioned and managed infrastructure, include the provisioning

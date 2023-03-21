@@ -32,19 +32,15 @@ func (c *Client) GetMapSprites(ctx context.Context, params *GetMapSpritesInput, 
 type GetMapSpritesInput struct {
 
 	// The name of the sprite ﬁle. Use the following ﬁle names for the sprite sheet:
-	//
-	// *
+	// -
 	// sprites.png
-	//
-	// * sprites@2x.png for high pixel density displays
+	// - sprites@2x.png for high pixel density displays
 	//
 	// For the JSON
 	// document containing image offsets. Use the following ﬁle names:
-	//
-	// *
-	// sprites.json
-	//
-	// * sprites@2x.json for high pixel density displays
+	// - sprites.json
+	// -
+	// sprites@2x.json for high pixel density displays
 	//
 	// This member is required.
 	FileName *string

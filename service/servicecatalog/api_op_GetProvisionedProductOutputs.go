@@ -33,12 +33,9 @@ func (c *Client) GetProvisionedProductOutputs(ctx context.Context, params *GetPr
 type GetProvisionedProductOutputsInput struct {
 
 	// The language code.
-	//
-	// * en - English (default)
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	// - en - English (default)
+	// - jp - Japanese
+	// - zh - Chinese
 	AcceptLanguage *string
 
 	// The list of keys that the API should return with their values. If none are

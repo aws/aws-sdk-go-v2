@@ -66,61 +66,49 @@ type CreateChangeSetInput struct {
 
 	// In some cases, you must explicitly acknowledge that your stack template contains
 	// certain capabilities in order for CloudFormation to create the stack.
-	//
-	// *
+	// -
 	// CAPABILITY_IAM and CAPABILITY_NAMED_IAM Some stack templates might include
 	// resources that can affect permissions in your Amazon Web Services account; for
 	// example, by creating new Identity and Access Management (IAM) users. For those
 	// stacks, you must explicitly acknowledge this by specifying one of these
 	// capabilities. The following IAM resources require you to specify either the
 	// CAPABILITY_IAM or CAPABILITY_NAMED_IAM capability.
-	//
-	// * If you have IAM resources,
+	// - If you have IAM resources,
 	// you can specify either capability.
-	//
-	// * If you have IAM resources with custom
+	// - If you have IAM resources with custom
 	// names, you must specify CAPABILITY_NAMED_IAM.
-	//
-	// * If you don't specify either of
+	// - If you don't specify either of
 	// these capabilities, CloudFormation returns an InsufficientCapabilities
 	// error.
 	//
 	// If your stack template contains these resources, we suggest that you
 	// review all permissions associated with them and edit their permissions if
 	// necessary.
-	//
-	// * AWS::IAM::AccessKey
+	// - AWS::IAM::AccessKey
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html)
-	//
-	// *
+	// -
 	// AWS::IAM::Group
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html)
-	//
-	// *
+	// -
 	// AWS::IAM::InstanceProfile
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html)
-	//
-	// *
+	// -
 	// AWS::IAM::Policy
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html)
-	//
-	// *
+	// -
 	// AWS::IAM::Role
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html)
-	//
-	// *
+	// -
 	// AWS::IAM::User
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html)
-	//
-	// *
+	// -
 	// AWS::IAM::UserToGroupAddition
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html)
 	//
 	// For
 	// more information, see Acknowledging IAM resources in CloudFormation templates
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities).
-	//
-	// *
+	// -
 	// CAPABILITY_AUTO_EXPAND Some template contain macros. Macros perform custom
 	// processing on templates; this can include simple actions like find-and-replace
 	// operations, all the way to extensive transformations of entire templates.

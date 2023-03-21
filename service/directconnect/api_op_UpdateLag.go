@@ -13,17 +13,13 @@ import (
 
 // Updates the attributes of the specified link aggregation group (LAG). You can
 // update the following LAG attributes:
-//
-// * The name of the LAG.
-//
-// * The value for
-// the minimum number of connections that must be operational for the LAG itself to
-// be operational.
-//
-// * The LAG's MACsec encryption mode. Amazon Web Services assigns
+// - The name of the LAG.
+// - The value for the
+// minimum number of connections that must be operational for the LAG itself to be
+// operational.
+// - The LAG's MACsec encryption mode. Amazon Web Services assigns
 // this value to each connection which is part of the LAG.
-//
-// * The tags
+// - The tags
 //
 // If you
 // adjust the threshold value for the minimum number of operational connections,
@@ -108,25 +104,18 @@ type UpdateLagOutput struct {
 	LagName *string
 
 	// The state of the LAG. The following are the possible values:
-	//
-	// * requested: The
+	// - requested: The
 	// initial state of a LAG. The LAG stays in the requested state until the Letter of
 	// Authorization (LOA) is available.
-	//
-	// * pending: The LAG has been approved and is
+	// - pending: The LAG has been approved and is
 	// being initialized.
-	//
-	// * available: The network link is established and the LAG is
+	// - available: The network link is established and the LAG is
 	// ready for use.
-	//
-	// * down: The network link is down.
-	//
-	// * deleting: The LAG is being
+	// - down: The network link is down.
+	// - deleting: The LAG is being
 	// deleted.
-	//
-	// * deleted: The LAG is deleted.
-	//
-	// * unknown: The state of the LAG is not
+	// - deleted: The LAG is deleted.
+	// - unknown: The state of the LAG is not
 	// available.
 	LagState types.LagState
 

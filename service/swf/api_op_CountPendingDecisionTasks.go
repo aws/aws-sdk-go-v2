@@ -16,14 +16,11 @@ import (
 // specify a task list that no decision task was ever scheduled in then 0 is
 // returned. Access Control You can use IAM policies to control this action's
 // access to Amazon SWF resources as follows:
-//
-// * Use a Resource element with the
+// - Use a Resource element with the
 // domain name to limit the action to only specified domains.
-//
-// * Use an Action
+// - Use an Action
 // element to allow or deny permission to call this action.
-//
-// * Constrain the
+// - Constrain the
 // taskList.name parameter by using a Condition element with the swf:taskList.name
 // key to allow the action to access only certain task lists.
 //

@@ -49,11 +49,9 @@ type UpdateBucketInput struct {
 
 	// Specifies whether to enable or suspend versioning of objects in the bucket. The
 	// following options can be specified:
-	//
-	// * Enabled - Enables versioning of objects
-	// in the specified bucket.
-	//
-	// * Suspended - Suspends versioning of objects in the
+	// - Enabled - Enables versioning of objects in
+	// the specified bucket.
+	// - Suspended - Suspends versioning of objects in the
 	// specified bucket. Existing object versions are retained.
 	Versioning *string
 

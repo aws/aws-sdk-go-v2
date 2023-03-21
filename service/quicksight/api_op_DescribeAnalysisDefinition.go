@@ -68,22 +68,15 @@ type DescribeAnalysisDefinitionOutput struct {
 	RequestId *string
 
 	// Status associated with the analysis.
-	//
-	// * CREATION_IN_PROGRESS
-	//
-	// *
+	// - CREATION_IN_PROGRESS
+	// -
 	// CREATION_SUCCESSFUL
-	//
-	// * CREATION_FAILED
-	//
-	// * UPDATE_IN_PROGRESS
-	//
-	// *
-	// UPDATE_SUCCESSFUL
-	//
-	// * UPDATE_FAILED
-	//
-	// * DELETED
+	// - CREATION_FAILED
+	// - UPDATE_IN_PROGRESS
+	// - UPDATE_SUCCESSFUL
+	// -
+	// UPDATE_FAILED
+	// - DELETED
 	ResourceStatus types.ResourceStatus
 
 	// The HTTP status of the request.

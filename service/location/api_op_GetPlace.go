@@ -15,14 +15,11 @@ import (
 // Finds a place by its unique ID. A PlaceId is returned by other search
 // operations. A PlaceId is valid only if all of the following are the same in the
 // original search request and the call to GetPlace.
-//
-// * Customer Amazon Web
-// Services account
-//
-// * Amazon Web Services Region
-//
-// * Data provider specified in the
-// place index resource
+// - Customer Amazon Web Services
+// account
+// - Amazon Web Services Region
+// - Data provider specified in the place
+// index resource
 func (c *Client) GetPlace(ctx context.Context, params *GetPlaceInput, optFns ...func(*Options)) (*GetPlaceOutput, error) {
 	if params == nil {
 		params = &GetPlaceInput{}

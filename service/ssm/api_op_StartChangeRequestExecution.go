@@ -89,10 +89,8 @@ type StartChangeRequestExecutionInput struct {
 	// might want to tag a change request to identify an environment or target Amazon
 	// Web Services Region. In this case, you could specify the following key-value
 	// pairs:
-	//
-	// * Key=Environment,Value=Production
-	//
-	// * Key=Region,Value=us-east-2
+	// - Key=Environment,Value=Production
+	// - Key=Region,Value=us-east-2
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

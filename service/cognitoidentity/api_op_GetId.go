@@ -40,21 +40,15 @@ type GetIdInput struct {
 
 	// A set of optional name-value pairs that map provider names to provider tokens.
 	// The available provider names for Logins are as follows:
-	//
-	// * Facebook:
+	// - Facebook:
 	// graph.facebook.com
-	//
-	// * Amazon Cognito user pool: cognito-idp..amazonaws.com/, for
+	// - Amazon Cognito user pool: cognito-idp..amazonaws.com/, for
 	// example, cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789.
-	//
-	// * Google:
+	// - Google:
 	// accounts.google.com
-	//
-	// * Amazon: www.amazon.com
-	//
-	// * Twitter: api.twitter.com
-	//
-	// *
+	// - Amazon: www.amazon.com
+	// - Twitter: api.twitter.com
+	// -
 	// Digits: www.digits.com
 	Logins map[string]string
 

@@ -73,18 +73,14 @@ type DisposePackageVersionsInput struct {
 
 	// The namespace of the package versions to be disposed. The package version
 	// component that specifies its namespace depends on its type. For example:
-	//
-	// * The
+	// - The
 	// namespace of a Maven package version is its groupId.
-	//
-	// * The namespace of an npm
+	// - The namespace of an npm
 	// package version is its scope.
-	//
-	// * Python and NuGet package versions do not
-	// contain a corresponding component, package versions of those formats do not have
-	// a namespace.
-	//
-	// * The namespace of a generic package is it’s namespace.
+	// - Python and NuGet package versions do not contain
+	// a corresponding component, package versions of those formats do not have a
+	// namespace.
+	// - The namespace of a generic package is it’s namespace.
 	Namespace *string
 
 	// The revisions of the package versions you want to dispose.
@@ -97,20 +93,14 @@ type DisposePackageVersionsOutput struct {
 
 	// A PackageVersionError object that contains a map of errors codes for the
 	// disposed package versions that failed. The possible error codes are:
-	//
-	// *
+	// -
 	// ALREADY_EXISTS
-	//
-	// * MISMATCHED_REVISION
-	//
-	// * MISMATCHED_STATUS
-	//
-	// * NOT_ALLOWED
-	//
-	// *
+	// - MISMATCHED_REVISION
+	// - MISMATCHED_STATUS
+	// - NOT_ALLOWED
+	// -
 	// NOT_FOUND
-	//
-	// * SKIPPED
+	// - SKIPPED
 	FailedVersions map[string]types.PackageVersionError
 
 	// A list of the package versions that were successfully disposed.

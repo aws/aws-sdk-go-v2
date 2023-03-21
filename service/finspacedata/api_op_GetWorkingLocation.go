@@ -31,13 +31,11 @@ func (c *Client) GetWorkingLocation(ctx context.Context, params *GetWorkingLocat
 type GetWorkingLocationInput struct {
 
 	// Specify the type of the working location.
-	//
-	// * SAGEMAKER – Use the Amazon S3
+	// - SAGEMAKER – Use the Amazon S3
 	// location as a temporary location to store data content when working with
 	// FinSpace Notebooks that run on SageMaker studio.
-	//
-	// * INGESTION – Use the Amazon
-	// S3 location as a staging location to copy your data content and then use the
+	// - INGESTION – Use the Amazon S3
+	// location as a staging location to copy your data content and then use the
 	// location with the Changeset creation operation.
 	LocationType types.LocationType
 

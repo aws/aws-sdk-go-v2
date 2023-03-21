@@ -33,86 +33,53 @@ type CreateImageBuilderInput struct {
 
 	// The instance type to use when launching the image builder. The following
 	// instance types are available:
-	//
-	// * stream.standard.small
-	//
-	// *
-	// stream.standard.medium
-	//
-	// * stream.standard.large
-	//
-	// * stream.compute.large
-	//
-	// *
-	// stream.compute.xlarge
-	//
-	// * stream.compute.2xlarge
-	//
-	// * stream.compute.4xlarge
-	//
-	// *
-	// stream.compute.8xlarge
-	//
-	// * stream.memory.large
-	//
-	// * stream.memory.xlarge
-	//
-	// *
-	// stream.memory.2xlarge
-	//
-	// * stream.memory.4xlarge
-	//
-	// * stream.memory.8xlarge
-	//
-	// *
-	// stream.memory.z1d.large
-	//
-	// * stream.memory.z1d.xlarge
-	//
-	// *
-	// stream.memory.z1d.2xlarge
-	//
-	// * stream.memory.z1d.3xlarge
-	//
-	// *
-	// stream.memory.z1d.6xlarge
-	//
-	// * stream.memory.z1d.12xlarge
-	//
-	// *
-	// stream.graphics-design.large
-	//
-	// * stream.graphics-design.xlarge
-	//
-	// *
-	// stream.graphics-design.2xlarge
-	//
-	// * stream.graphics-design.4xlarge
-	//
-	// *
-	// stream.graphics-desktop.2xlarge
-	//
-	// * stream.graphics.g4dn.xlarge
-	//
-	// *
-	// stream.graphics.g4dn.2xlarge
-	//
-	// * stream.graphics.g4dn.4xlarge
-	//
-	// *
-	// stream.graphics.g4dn.8xlarge
-	//
-	// * stream.graphics.g4dn.12xlarge
-	//
-	// *
-	// stream.graphics.g4dn.16xlarge
-	//
-	// * stream.graphics-pro.4xlarge
-	//
-	// *
-	// stream.graphics-pro.8xlarge
-	//
-	// * stream.graphics-pro.16xlarge
+	// - stream.standard.small
+	// - stream.standard.medium
+	// -
+	// stream.standard.large
+	// - stream.compute.large
+	// - stream.compute.xlarge
+	// -
+	// stream.compute.2xlarge
+	// - stream.compute.4xlarge
+	// - stream.compute.8xlarge
+	// -
+	// stream.memory.large
+	// - stream.memory.xlarge
+	// - stream.memory.2xlarge
+	// -
+	// stream.memory.4xlarge
+	// - stream.memory.8xlarge
+	// - stream.memory.z1d.large
+	// -
+	// stream.memory.z1d.xlarge
+	// - stream.memory.z1d.2xlarge
+	// -
+	// stream.memory.z1d.3xlarge
+	// - stream.memory.z1d.6xlarge
+	// -
+	// stream.memory.z1d.12xlarge
+	// - stream.graphics-design.large
+	// -
+	// stream.graphics-design.xlarge
+	// - stream.graphics-design.2xlarge
+	// -
+	// stream.graphics-design.4xlarge
+	// - stream.graphics-desktop.2xlarge
+	// -
+	// stream.graphics.g4dn.xlarge
+	// - stream.graphics.g4dn.2xlarge
+	// -
+	// stream.graphics.g4dn.4xlarge
+	// - stream.graphics.g4dn.8xlarge
+	// -
+	// stream.graphics.g4dn.12xlarge
+	// - stream.graphics.g4dn.16xlarge
+	// -
+	// stream.graphics-pro.4xlarge
+	// - stream.graphics-pro.8xlarge
+	// -
+	// stream.graphics-pro.16xlarge
 	//
 	// This member is required.
 	InstanceType *string

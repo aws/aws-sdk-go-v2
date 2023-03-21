@@ -54,13 +54,10 @@ type ModifyUsageLimitOutput struct {
 
 	// The action that Amazon Redshift takes when the limit is reached. Possible values
 	// are:
-	//
-	// * log - To log an event in a system table. The default is log.
-	//
-	// *
+	// - log - To log an event in a system table. The default is log.
+	// -
 	// emit-metric - To emit CloudWatch metrics.
-	//
-	// * disable - To disable the feature
+	// - disable - To disable the feature
 	// until the next usage period begins.
 	BreachAction types.UsageLimitBreachAction
 

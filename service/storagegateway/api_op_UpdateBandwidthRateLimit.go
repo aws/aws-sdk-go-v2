@@ -36,11 +36,9 @@ func (c *Client) UpdateBandwidthRateLimit(ctx context.Context, params *UpdateBan
 }
 
 // A JSON object containing one or more of the following fields:
-//
-// *
+// -
 // UpdateBandwidthRateLimitInput$AverageDownloadRateLimitInBitsPerSec
-//
-// *
+// -
 // UpdateBandwidthRateLimitInput$AverageUploadRateLimitInBitsPerSec
 type UpdateBandwidthRateLimitInput struct {
 

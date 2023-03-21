@@ -70,17 +70,13 @@ type VerifyInput struct {
 	// key, use its key ID, key ARN, alias name, or alias ARN. When using an alias
 	// name, prefix it with "alias/". To specify a KMS key in a different Amazon Web
 	// Services account, you must use the key ARN or alias ARN. For example:
-	//
-	// * Key ID:
+	// - Key ID:
 	// 1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// * Key ARN:
+	// - Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// *
+	// -
 	// Alias name: alias/ExampleAlias
-	//
-	// * Alias ARN:
+	// - Alias ARN:
 	// arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
 	//
 	// To get the key ID and key
@@ -133,17 +129,13 @@ type VerifyInput struct {
 	// However, if the signed message is hashed once while signing, but twice while
 	// verifying, verification fails, even when the message hasn't changed. The hashing
 	// algorithm in that Verify uses is based on the SigningAlgorithm value.
-	//
-	// * Signing
+	// - Signing
 	// algorithms that end in SHA_256 use the SHA_256 hashing algorithm.
-	//
-	// * Signing
+	// - Signing
 	// algorithms that end in SHA_384 use the SHA_384 hashing algorithm.
-	//
-	// * Signing
+	// - Signing
 	// algorithms that end in SHA_512 use the SHA_512 hashing algorithm.
-	//
-	// * SM2DSA uses
+	// - SM2DSA uses
 	// the SM3 hashing algorithm. For details, see Offline verification with SM2 key
 	// pairs
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/asymmetric-key-specs.html#key-spec-sm-offline-verification).

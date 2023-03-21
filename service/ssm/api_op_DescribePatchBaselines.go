@@ -32,13 +32,10 @@ type DescribePatchBaselinesInput struct {
 
 	// Each element in the array is a structure containing a key-value pair. Supported
 	// keys for DescribePatchBaselines include the following:
-	//
-	// * NAME_PREFIX Sample
+	// - NAME_PREFIX Sample
 	// values: AWS- | My-
-	//
-	// * OWNER Sample values: AWS | Self
-	//
-	// * OPERATING_SYSTEM Sample
+	// - OWNER Sample values: AWS | Self
+	// - OPERATING_SYSTEM Sample
 	// values: AMAZON_LINUX | SUSE | WINDOWS
 	Filters []types.PatchOrchestratorFilter
 

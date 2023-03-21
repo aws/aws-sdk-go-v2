@@ -19,20 +19,16 @@ import (
 // and Managing Access Permissions to Your Amazon S3 Resources
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
 // The following operations are related to DeletePublicAccessBlock:
-//
-// * Using Amazon
+// - Using Amazon
 // S3 Block Public Access
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html)
-//
-// *
+// -
 // GetPublicAccessBlock
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetPublicAccessBlock.html)
-//
-// *
+// -
 // PutPublicAccessBlock
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutPublicAccessBlock.html)
-//
-// *
+// -
 // GetBucketPolicyStatus
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketPolicyStatus.html)
 func (c *Client) DeletePublicAccessBlock(ctx context.Context, params *DeletePublicAccessBlockInput, optFns ...func(*Options)) (*DeletePublicAccessBlockOutput, error) {

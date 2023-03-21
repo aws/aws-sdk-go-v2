@@ -85,11 +85,9 @@ type AlfrescoConfiguration struct {
 	// The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the
 	// key-value pairs required to connect to your Alfresco data source. The secret
 	// must contain a JSON structure with the following keys:
-	//
-	// * username—The user name
+	// - username—The user name
 	// of the Alfresco account.
-	//
-	// * password—The password of the Alfresco account.
+	// - password—The password of the Alfresco account.
 	//
 	// This member is required.
 	SecretArn *string
@@ -322,25 +320,20 @@ type BoxConfiguration struct {
 	// The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the
 	// key-value pairs required to connect to your Box platform. The secret must
 	// contain a JSON structure with the following keys:
-	//
-	// * clientID—The identifier of
+	// - clientID—The identifier of
 	// the client OAuth 2.0 authentication application created in Box.
+	// - clientSecret—A
+	// set of characters known only to the OAuth 2.0 authentication application created
+	// in Box.
+	// - publicKeyId—The identifier of the public key contained within an
+	// identity certificate.
+	// - privateKey—A set of characters that make up an
+	// encryption key.
+	// - passphrase—A set of characters that act like a password.
 	//
-	// *
-	// clientSecret—A set of characters known only to the OAuth 2.0 authentication
-	// application created in Box.
-	//
-	// * publicKeyId—The identifier of the public key
-	// contained within an identity certificate.
-	//
-	// * privateKey—A set of characters that
-	// make up an encryption key.
-	//
-	// * passphrase—A set of characters that act like a
-	// password.
-	//
-	// You create an application in Box to generate the keys or credentials
-	// required for the secret. For more information, see Using a Box data source
+	// You
+	// create an application in Box to generate the keys or credentials required for
+	// the secret. For more information, see Using a Box data source
 	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-box.html).
 	//
 	// This member is required.
@@ -1343,24 +1336,18 @@ type DocumentInfo struct {
 
 	// Attributes that identify a specific version of a document to check. The only
 	// valid attributes are:
+	// - version
+	// - datasourceId
+	// - jobExecutionId
 	//
-	// * version
-	//
-	// * datasourceId
-	//
-	// * jobExecutionId
-	//
-	// The
-	// attributes follow these rules:
-	//
-	// * dataSourceId and jobExecutionId must be used
-	// together.
-	//
-	// * version is ignored if dataSourceId and jobExecutionId are not
-	// provided.
-	//
-	// * If dataSourceId and jobExecutionId are provided, but version is
-	// not, the version defaults to "0".
+	// The attributes
+	// follow these rules:
+	// - dataSourceId and jobExecutionId must be used together.
+	// -
+	// version is ignored if dataSourceId and jobExecutionId are not provided.
+	// - If
+	// dataSourceId and jobExecutionId are provided, but version is not, the version
+	// defaults to "0".
 	Attributes []DocumentAttribute
 
 	noSmithyDocumentSerde
@@ -1720,13 +1707,11 @@ type FsxConfiguration struct {
 	// key-value pairs required to connect to your Amazon FSx file system. Windows is
 	// currently the only supported type. The secret must contain a JSON structure with
 	// the following keys:
-	//
-	// * username—The Active Directory user name, along with the
+	// - username—The Active Directory user name, along with the
 	// Domain Name System (DNS) domain name. For example, user@corp.example.com. The
 	// Active Directory user account must have read and mounting access to the Amazon
 	// FSx file system for Windows.
-	//
-	// * password—The password of the Active Directory
+	// - password—The password of the Active Directory
 	// user account with read and mounting access to the Amazon FSx Windows file
 	// system.
 	SecretArn *string
@@ -1740,10 +1725,9 @@ type GitHubConfiguration struct {
 	// The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the
 	// key-value pairs required to connect to your GitHub. The secret must contain a
 	// JSON structure with the following keys:
-	//
-	// * personalToken—The access token
-	// created in GitHub. For more information on creating a token in GitHub, see Using
-	// a GitHub data source
+	// - personalToken—The access token created
+	// in GitHub. For more information on creating a token in GitHub, see Using a
+	// GitHub data source
 	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-github.html).
 	//
 	// This member is required.
@@ -2199,12 +2183,10 @@ type JiraConfiguration struct {
 	// The Amazon Resource Name (ARN) of a secret in Secrets Manager contains the
 	// key-value pairs required to connect to your Jira data source. The secret must
 	// contain a JSON structure with the following keys:
-	//
-	// * jiraId—The Jira user name
-	// or email.
-	//
-	// * jiraCredentials—The Jira API token. For more information, see Using
-	// a Jira data source
+	// - jiraId—The Jira user name or
+	// email.
+	// - jiraCredentials—The Jira API token. For more information, see Using a
+	// Jira data source
 	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-jira.html).
 	//
 	// This member is required.
@@ -2645,8 +2627,7 @@ type QuipConfiguration struct {
 	// The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the
 	// key-value pairs that are required to connect to your Quip. The secret must
 	// contain a JSON structure with the following keys:
-	//
-	// * accessToken—The token
+	// - accessToken—The token
 	// created in Quip. For more information, see Using a Quip data source
 	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-slack.html).
 	//
@@ -2800,15 +2781,12 @@ type S3DataSourceConfiguration struct {
 	// pattern, the document is not indexed. Some examples
 	// (https://docs.aws.amazon.com/cli/latest/reference/s3/#use-of-exclude-and-include-filters)
 	// are:
-	//
-	// * *.png , *.jpg will exclude all PNG and JPEG image files in a directory
+	// - *.png , *.jpg will exclude all PNG and JPEG image files in a directory
 	// (files with the extensions .png and .jpg).
-	//
-	// * *internal* will exclude all files
+	// - *internal* will exclude all files
 	// in a directory that contain 'internal' in the file name, such as 'internal',
 	// 'internal_only', 'company_internal'.
-	//
-	// * **/*internal* will exclude all
+	// - **/*internal* will exclude all
 	// internal-related files in a directory and its subdirectories.
 	ExclusionPatterns []string
 
@@ -2817,15 +2795,12 @@ type S3DataSourceConfiguration struct {
 	// not indexed. Some examples
 	// (https://docs.aws.amazon.com/cli/latest/reference/s3/#use-of-exclude-and-include-filters)
 	// are:
-	//
-	// * *.txt will include all text files in a directory (files with the
+	// - *.txt will include all text files in a directory (files with the
 	// extension .txt).
-	//
-	// * **/*.txt will include all text files in a directory and its
+	// - **/*.txt will include all text files in a directory and its
 	// subdirectories.
-	//
-	// * *tax* will include all files in a directory that contain
-	// 'tax' in the file name, such as 'tax', 'taxes', 'income_tax'.
+	// - *tax* will include all files in a directory that contain 'tax'
+	// in the file name, such as 'tax', 'taxes', 'income_tax'.
 	InclusionPatterns []string
 
 	// A list of S3 prefixes for the documents that should be included in the index.
@@ -2902,24 +2877,18 @@ type SalesforceConfiguration struct {
 	// The Amazon Resource Name (ARN) of an Secrets Managersecret that contains the
 	// key/value pairs required to connect to your Salesforce instance. The secret must
 	// contain a JSON structure with the following keys:
-	//
-	// * authenticationUrl - The
+	// - authenticationUrl - The
 	// OAUTH endpoint that Amazon Kendra connects to get an OAUTH token.
-	//
-	// * consumerKey
+	// - consumerKey
 	// - The application public key generated when you created your Salesforce
 	// application.
-	//
-	// * consumerSecret - The application private key generated when you
+	// - consumerSecret - The application private key generated when you
 	// created your Salesforce application.
-	//
-	// * password - The password associated with
+	// - password - The password associated with
 	// the user logging in to the Salesforce instance.
-	//
-	// * securityToken - The token
+	// - securityToken - The token
 	// associated with the user account logging in to the Salesforce instance.
-	//
-	// *
+	// -
 	// username - The user name of the user logging in to the Salesforce instance.
 	//
 	// This member is required.
@@ -3133,16 +3102,13 @@ type SeedUrlConfiguration struct {
 	SeedUrls []string
 
 	// You can choose one of the following modes:
-	//
-	// * HOST_ONLY – crawl only the website
+	// - HOST_ONLY – crawl only the website
 	// host names. For example, if the seed URL is "abc.example.com", then only URLs
 	// with host name "abc.example.com" are crawled.
-	//
-	// * SUBDOMAINS – crawl the website
+	// - SUBDOMAINS – crawl the website
 	// host names with subdomains. For example, if the seed URL is "abc.example.com",
 	// then "a.abc.example.com" and "b.abc.example.com" are also crawled.
-	//
-	// * EVERYTHING
+	// - EVERYTHING
 	// – crawl the website host names with subdomains and other domains that the
 	// webpages link to.
 	//
@@ -3428,8 +3394,7 @@ type SlackConfiguration struct {
 	// The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the
 	// key-value pairs required to connect to your Slack workspace team. The secret
 	// must contain a JSON structure with the following keys:
-	//
-	// * slackToken—The user or
+	// - slackToken—The user or
 	// bot token created in Slack. For more information on creating a token in Slack,
 	// see Authentication for a Slack data source
 	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-slack.html#slack-authentication).
@@ -3520,34 +3485,24 @@ type SlackConfiguration struct {
 // query. You can specify a single attribute for sorting. The attribute must have
 // the Sortable flag set to true, otherwise Amazon Kendra returns an exception. You
 // can sort attributes of the following types.
-//
-// * Date value
-//
-// * Long value
-//
-// *
-// String value
+// - Date value
+// - Long value
+// - String
+// value
 //
 // You can't sort attributes of the following type.
-//
-// * String list
-// value
+// - String list value
 type SortingConfiguration struct {
 
 	// The name of the document attribute used to sort the response. You can use any
 	// field that has the Sortable flag set to true. You can also sort by any of the
 	// following built-in attributes:
-	//
-	// * _category
-	//
-	// * _created_at
-	//
-	// *
-	// _last_updated_at
-	//
-	// * _version
-	//
-	// * _view_count
+	// - _category
+	// - _created_at
+	// - _last_updated_at
+	// -
+	// _version
+	// - _view_count
 	//
 	// This member is required.
 	DocumentAttributeKey *string
@@ -3847,10 +3802,8 @@ type Urls struct {
 // are these documents relevant to all users. Only specific users or groups of
 // teams given access to top-secret documents should see these documents in their
 // search results. You provide one of the following:
-//
-// * User token
-//
-// * User ID, the
+// - User token
+// - User ID, the
 // groups the user belongs to, and any data sources the groups can access.
 //
 // If you

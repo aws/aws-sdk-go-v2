@@ -40,8 +40,7 @@ type DescribeMovingAddressesInput struct {
 	DryRun *bool
 
 	// One or more filters.
-	//
-	// * moving-status - The status of the Elastic IP address
+	// - moving-status - The status of the Elastic IP address
 	// (MovingToVpc | RestoringToClassic).
 	Filters []types.Filter
 

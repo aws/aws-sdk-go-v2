@@ -14,16 +14,11 @@ import (
 
 // Lists the following prices for either all the TLDs supported by Route 53, or the
 // specified TLD:
-//
-// * Registration
-//
-// * Transfer
-//
-// * Owner change
-//
-// * Domain renewal
-//
-// *
+// - Registration
+// - Transfer
+// - Owner change
+// - Domain renewal
+// -
 // Domain restoration
 func (c *Client) ListPrices(ctx context.Context, params *ListPricesInput, optFns ...func(*Options)) (*ListPricesOutput, error) {
 	if params == nil {

@@ -13,11 +13,9 @@ import (
 // The ApproveAssignment operation approves the results of a completed assignment.
 // Approving an assignment initiates two payments from the Requester's Amazon.com
 // account
-//
-// * The Worker who submitted the results is paid the reward specified in
+// - The Worker who submitted the results is paid the reward specified in
 // the HIT.
-//
-// * Amazon Mechanical Turk fees are debited.
+// - Amazon Mechanical Turk fees are debited.
 //
 // If the Requester's account
 // does not have adequate funds for these payments, the call to ApproveAssignment

@@ -59,14 +59,11 @@ type UpdateAddonInput struct {
 	// How to resolve field value conflicts for an Amazon EKS add-on if you've changed
 	// a value from the Amazon EKS default value. Conflicts are handled based on the
 	// option you choose:
-	//
-	// * None – Amazon EKS doesn't change the value. The update
+	// - None – Amazon EKS doesn't change the value. The update
 	// might fail.
-	//
-	// * Overwrite – Amazon EKS overwrites the changed value back to the
+	// - Overwrite – Amazon EKS overwrites the changed value back to the
 	// Amazon EKS default value.
-	//
-	// * Preserve – Amazon EKS preserves the value. If you
+	// - Preserve – Amazon EKS preserves the value. If you
 	// choose this option, we recommend that you test any field and value changes on a
 	// non-production cluster before updating the add-on on your production cluster.
 	ResolveConflicts types.ResolveConflicts

@@ -39,11 +39,9 @@ func (c *Client) DescribeHostReservationOfferings(ctx context.Context, params *D
 type DescribeHostReservationOfferingsInput struct {
 
 	// The filters.
-	//
-	// * instance-family - The instance family of the offering (for
+	// - instance-family - The instance family of the offering (for
 	// example, m4).
-	//
-	// * payment-option - The payment option (NoUpfront | PartialUpfront
+	// - payment-option - The payment option (NoUpfront | PartialUpfront
 	// | AllUpfront).
 	Filter []types.Filter
 

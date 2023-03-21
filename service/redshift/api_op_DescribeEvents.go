@@ -63,35 +63,26 @@ type DescribeEventsInput struct {
 	// parameter is not specified, then all sources are included in the response.
 	// Constraints: If SourceIdentifier is supplied, SourceType must also be
 	// provided.
-	//
-	// * Specify a cluster identifier when SourceType is cluster.
-	//
-	// * Specify
-	// a cluster security group name when SourceType is cluster-security-group.
-	//
-	// *
-	// Specify a cluster parameter group name when SourceType is
-	// cluster-parameter-group.
-	//
-	// * Specify a cluster snapshot identifier when
-	// SourceType is cluster-snapshot.
+	// - Specify a cluster identifier when SourceType is cluster.
+	// - Specify a
+	// cluster security group name when SourceType is cluster-security-group.
+	// - Specify
+	// a cluster parameter group name when SourceType is cluster-parameter-group.
+	// -
+	// Specify a cluster snapshot identifier when SourceType is cluster-snapshot.
 	SourceIdentifier *string
 
 	// The event source to retrieve events for. If no value is specified, all events
 	// are returned. Constraints: If SourceType is supplied, SourceIdentifier must also
 	// be provided.
-	//
-	// * Specify cluster when SourceIdentifier is a cluster
-	// identifier.
-	//
-	// * Specify cluster-security-group when SourceIdentifier is a cluster
-	// security group name.
-	//
-	// * Specify cluster-parameter-group when SourceIdentifier is
-	// a cluster parameter group name.
-	//
-	// * Specify cluster-snapshot when
-	// SourceIdentifier is a cluster snapshot identifier.
+	// - Specify cluster when SourceIdentifier is a cluster identifier.
+	// -
+	// Specify cluster-security-group when SourceIdentifier is a cluster security group
+	// name.
+	// - Specify cluster-parameter-group when SourceIdentifier is a cluster
+	// parameter group name.
+	// - Specify cluster-snapshot when SourceIdentifier is a
+	// cluster snapshot identifier.
 	SourceType types.SourceType
 
 	// The beginning of the time interval to retrieve events for, specified in ISO 8601

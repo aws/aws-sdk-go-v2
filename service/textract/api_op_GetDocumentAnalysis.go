@@ -22,27 +22,22 @@ import (
 // identifier (JobId) from the initial call to StartDocumentAnalysis.
 // GetDocumentAnalysis returns an array of Block objects. The following types of
 // information are returned:
-//
-// * Form data (key-value pairs). The related
-// information is returned in two Block objects, each of type KEY_VALUE_SET: a KEY
-// Block object and a VALUE Block object. For example, Name: Ana Silva Carolina
-// contains a key and value. Name: is the key. Ana Silva Carolina is the value.
-//
-// *
-// Table and table cell data. A TABLE Block object contains information about a
-// detected table. A CELL Block object is returned for each cell in a table.
-//
-// *
-// Lines and words of text. A LINE Block object contains one or more WORD Block
-// objects. All lines and words that are detected in the document are returned
-// (including text that doesn't have a relationship with the value of the
+// - Form data (key-value pairs). The related information
+// is returned in two Block objects, each of type KEY_VALUE_SET: a KEY Block object
+// and a VALUE Block object. For example, Name: Ana Silva Carolina contains a key
+// and value. Name: is the key. Ana Silva Carolina is the value.
+// - Table and table
+// cell data. A TABLE Block object contains information about a detected table. A
+// CELL Block object is returned for each cell in a table.
+// - Lines and words of
+// text. A LINE Block object contains one or more WORD Block objects. All lines and
+// words that are detected in the document are returned (including text that
+// doesn't have a relationship with the value of the
 // StartDocumentAnalysisFeatureTypes input parameter).
-//
-// * Query. A QUERY Block
+// - Query. A QUERY Block
 // object contains the query text, alias and link to the associated Query results
 // block object.
-//
-// * Query Results. A QUERY_RESULT Block object contains the answer
+// - Query Results. A QUERY_RESULT Block object contains the answer
 // to the query and an ID that connects it to the query asked. This Block also
 // contains a confidence score.
 //

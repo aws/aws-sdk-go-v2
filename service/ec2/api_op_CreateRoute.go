@@ -16,10 +16,8 @@ import (
 // use the route with the most specific match. For example, traffic is destined for
 // the IPv4 address 192.0.2.3, and the route table includes the following two IPv4
 // routes:
-//
-// * 192.0.2.0/24 (goes to some target A)
-//
-// * 192.0.2.0/28 (goes to some
+// - 192.0.2.0/24 (goes to some target A)
+// - 192.0.2.0/28 (goes to some
 // target B)
 //
 // Both routes apply to the traffic destined for 192.0.2.3. However, the

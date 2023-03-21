@@ -45,9 +45,8 @@ type FailoverGlobalClusterInput struct {
 	// over. The identifier is the unique key assigned by the user when the Aurora
 	// global database was created. In other words, it's the name of the Aurora global
 	// database that you want to fail over. Constraints:
-	//
-	// * Must match the identifier
-	// of an existing GlobalCluster (Aurora global database).
+	// - Must match the identifier of
+	// an existing GlobalCluster (Aurora global database).
 	//
 	// This member is required.
 	GlobalClusterIdentifier *string

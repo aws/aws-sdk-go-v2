@@ -52,23 +52,18 @@ type DescribeSpotPriceHistoryInput struct {
 	EndTime *time.Time
 
 	// One or more filters.
-	//
-	// * availability-zone - The Availability Zone for which
+	// - availability-zone - The Availability Zone for which
 	// prices should be returned.
-	//
-	// * instance-type - The type of instance (for example,
+	// - instance-type - The type of instance (for example,
 	// m3.medium).
-	//
-	// * product-description - The product description for the Spot price
+	// - product-description - The product description for the Spot price
 	// (Linux/UNIX | Red Hat Enterprise Linux | SUSE Linux | Windows | Linux/UNIX
 	// (Amazon VPC) | Red Hat Enterprise Linux (Amazon VPC) | SUSE Linux (Amazon VPC) |
 	// Windows (Amazon VPC)).
-	//
-	// * spot-price - The Spot price. The value must match
+	// - spot-price - The Spot price. The value must match
 	// exactly (or use wildcards; greater than or less than comparison is not
 	// supported).
-	//
-	// * timestamp - The time stamp of the Spot price history, in UTC
+	// - timestamp - The time stamp of the Spot price history, in UTC
 	// format (for example, YYYY-MM-DDTHH:MM:SSZ). You can use wildcards (* and ?).
 	// Greater than or less than comparison is not supported.
 	Filters []types.Filter

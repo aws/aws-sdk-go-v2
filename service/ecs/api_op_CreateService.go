@@ -25,8 +25,7 @@ import (
 // state. Tasks for services that use a load balancer are considered healthy if
 // they're in the RUNNING state and are reported as healthy by the load balancer.
 // There are two service scheduler strategies available:
-//
-// * REPLICA - The replica
+// - REPLICA - The replica
 // scheduling strategy places and maintains your desired number of tasks across
 // your cluster. By default, the service scheduler spreads tasks across
 // Availability Zones. You can use task placement strategies and constraints to
@@ -34,8 +33,7 @@ import (
 // concepts
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html)
 // in the Amazon Elastic Container Service Developer Guide.
-//
-// * DAEMON - The daemon
+// - DAEMON - The daemon
 // scheduling strategy deploys exactly one task on each active container instance
 // that meets all of the task placement constraints that you specify in your
 // cluster. The service scheduler also evaluates the task placement constraints for
@@ -291,15 +289,13 @@ type CreateServiceInput struct {
 	// Services
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html).
 	// There are two service scheduler strategies available:
-	//
-	// * REPLICA-The replica
+	// - REPLICA-The replica
 	// scheduling strategy places and maintains the desired number of tasks across your
 	// cluster. By default, the service scheduler spreads tasks across Availability
 	// Zones. You can use task placement strategies and constraints to customize task
 	// placement decisions. This scheduler strategy is required if the service uses the
 	// CODE_DEPLOY or EXTERNAL deployment controller types.
-	//
-	// * DAEMON-The daemon
+	// - DAEMON-The daemon
 	// scheduling strategy deploys exactly one task on each active container instance
 	// that meets all of the task placement constraints that you specify in your
 	// cluster. The service scheduler also evaluates the task placement constraints for
@@ -332,31 +328,24 @@ type CreateServiceInput struct {
 	// them. Each tag consists of a key and an optional value, both of which you
 	// define. When a service is deleted, the tags are deleted as well. The following
 	// basic restrictions apply to tags:
-	//
-	// * Maximum number of tags per resource - 50
-	//
-	// *
+	// - Maximum number of tags per resource - 50
+	// -
 	// For each resource, each tag key must be unique, and each tag key can have only
 	// one value.
-	//
-	// * Maximum key length - 128 Unicode characters in UTF-8
-	//
-	// * Maximum
+	// - Maximum key length - 128 Unicode characters in UTF-8
+	// - Maximum
 	// value length - 256 Unicode characters in UTF-8
-	//
-	// * If your tagging schema is used
+	// - If your tagging schema is used
 	// across multiple services and resources, remember that other services may have
 	// restrictions on allowed characters. Generally allowed characters are: letters,
 	// numbers, and spaces representable in UTF-8, and the following characters: + - =
 	// . _ : / @.
-	//
-	// * Tag keys and values are case-sensitive.
-	//
-	// * Do not use aws:, AWS:,
-	// or any upper or lowercase combination of such as a prefix for either keys or
-	// values as it is reserved for Amazon Web Services use. You cannot edit or delete
-	// tag keys or values with this prefix. Tags with this prefix do not count against
-	// your tags per resource limit.
+	// - Tag keys and values are case-sensitive.
+	// - Do not use aws:, AWS:, or
+	// any upper or lowercase combination of such as a prefix for either keys or values
+	// as it is reserved for Amazon Web Services use. You cannot edit or delete tag
+	// keys or values with this prefix. Tags with this prefix do not count against your
+	// tags per resource limit.
 	Tags []types.Tag
 
 	// The family and revision (family:revision) or full ARN of the task definition to

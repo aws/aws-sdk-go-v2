@@ -18,14 +18,11 @@ import (
 // all the fields are updated with the values that are provided in the request. You
 // cannot update some fields independent of others. To update a continuous
 // deployment policy configuration:
-//
-// * Use GetContinuousDeploymentPolicyConfig to
+// - Use GetContinuousDeploymentPolicyConfig to
 // get the current configuration.
-//
-// * Locally modify the fields in the continuous
+// - Locally modify the fields in the continuous
 // deployment policy configuration that you want to update.
-//
-// * Use
+// - Use
 // UpdateContinuousDeploymentPolicy, providing the entire continuous deployment
 // policy configuration, including the fields that you modified and those that you
 // didn't.

@@ -52,20 +52,13 @@ type UpdateClusterInput struct {
 	// performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H
 	// Clock UTC). The minimum maintenance window is a 60 minute period. Valid values
 	// for ddd are:
-	//
-	// * sun
-	//
-	// * mon
-	//
-	// * tue
-	//
-	// * wed
-	//
-	// * thu
-	//
-	// * fri
-	//
-	// * sat
+	// - sun
+	// - mon
+	// - tue
+	// - wed
+	// - thu
+	// - fri
+	// - sat
 	//
 	// Example:
 	// sun:23:00-mon:01:30

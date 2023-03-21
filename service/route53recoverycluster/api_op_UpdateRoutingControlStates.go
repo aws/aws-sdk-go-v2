@@ -33,12 +33,10 @@ import (
 // sequence, see API examples
 // (https://docs.aws.amazon.com/r53recovery/latest/dg/service_code_examples_actions.html)
 // in the Amazon Route 53 Application Recovery Controller Developer Guide.
-//
-// *
+// -
 // Viewing and updating routing control states
 // (https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.update.html)
-//
-// *
+// -
 // Working with routing controls overall
 // (https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.html)
 func (c *Client) UpdateRoutingControlStates(ctx context.Context, params *UpdateRoutingControlStatesInput, optFns ...func(*Options)) (*UpdateRoutingControlStatesOutput, error) {

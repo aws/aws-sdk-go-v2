@@ -49,26 +49,22 @@ import (
 // service last accessed data report for entities, specify an entity path without
 // specifying the optional Organizations policy ID. The type of entity that you
 // specify determines the data returned in the report.
-//
-// * Root – When you specify
+// - Root – When you specify
 // the organizations root as the entity, the resulting report lists all of the
 // services allowed by SCPs that are attached to your root. For each service, the
 // report includes data for all accounts in your organization except the management
 // account, because the management account is not limited by SCPs.
-//
-// * OU – When you
+// - OU – When you
 // specify an organizational unit (OU) as the entity, the resulting report lists
 // all of the services allowed by SCPs that are attached to the OU and its parents.
 // For each service, the report includes data for all accounts in the OU or its
 // children. This data excludes the management account, because the management
 // account is not limited by SCPs.
-//
-// * management account – When you specify the
+// - management account – When you specify the
 // management account, the resulting report lists all Amazon Web Services services,
 // because the management account is not limited by SCPs. For each service, the
 // report includes data for only the management account.
-//
-// * Account – When you
+// - Account – When you
 // specify another account as the entity, the resulting report lists all of the
 // services allowed by SCPs that are attached to the account and its parents. For
 // each service, the report includes data for only the specified account.
@@ -77,37 +73,33 @@ import (
 // generate a service last accessed data report for policies, specify an entity
 // path and the optional Organizations policy ID. The type of entity that you
 // specify determines the data returned for each service.
-//
-// * Root – When you
-// specify the root entity and a policy ID, the resulting report lists all of the
-// services that are allowed by the specified SCP. For each service, the report
-// includes data for all accounts in your organization to which the SCP applies.
-// This data excludes the management account, because the management account is not
-// limited by SCPs. If the SCP is not attached to any entities in the organization,
-// then the report will return a list of services with no data.
-//
-// * OU – When you
-// specify an OU entity and a policy ID, the resulting report lists all of the
-// services that are allowed by the specified SCP. For each service, the report
-// includes data for all accounts in the OU or its children to which the SCP
-// applies. This means that other accounts outside the OU that are affected by the
-// SCP might not be included in the data. This data excludes the management
-// account, because the management account is not limited by SCPs. If the SCP is
-// not attached to the OU or one of its children, the report will return a list of
-// services with no data.
-//
-// * management account – When you specify the management
-// account, the resulting report lists all Amazon Web Services services, because
-// the management account is not limited by SCPs. If you specify a policy ID in the
-// CLI or API, the policy is ignored. For each service, the report includes data
-// for only the management account.
-//
-// * Account – When you specify another account
-// entity and a policy ID, the resulting report lists all of the services that are
-// allowed by the specified SCP. For each service, the report includes data for
-// only the specified account. This means that other accounts in the organization
-// that are affected by the SCP might not be included in the data. If the SCP is
-// not attached to the account, the report will return a list of services with no
+// - Root – When you specify
+// the root entity and a policy ID, the resulting report lists all of the services
+// that are allowed by the specified SCP. For each service, the report includes
+// data for all accounts in your organization to which the SCP applies. This data
+// excludes the management account, because the management account is not limited
+// by SCPs. If the SCP is not attached to any entities in the organization, then
+// the report will return a list of services with no data.
+// - OU – When you specify
+// an OU entity and a policy ID, the resulting report lists all of the services
+// that are allowed by the specified SCP. For each service, the report includes
+// data for all accounts in the OU or its children to which the SCP applies. This
+// means that other accounts outside the OU that are affected by the SCP might not
+// be included in the data. This data excludes the management account, because the
+// management account is not limited by SCPs. If the SCP is not attached to the OU
+// or one of its children, the report will return a list of services with no
+// data.
+// - management account – When you specify the management account, the
+// resulting report lists all Amazon Web Services services, because the management
+// account is not limited by SCPs. If you specify a policy ID in the CLI or API,
+// the policy is ignored. For each service, the report includes data for only the
+// management account.
+// - Account – When you specify another account entity and a
+// policy ID, the resulting report lists all of the services that are allowed by
+// the specified SCP. For each service, the report includes data for only the
+// specified account. This means that other accounts in the organization that are
+// affected by the SCP might not be included in the data. If the SCP is not
+// attached to the account, the report will return a list of services with no
 // data.
 //
 // Service last accessed data does not use other policy types when

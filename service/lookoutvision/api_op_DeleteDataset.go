@@ -14,13 +14,11 @@ import (
 // Deletes an existing Amazon Lookout for Vision dataset. If your the project has a
 // single dataset, you must create a new dataset before you can create a model. If
 // you project has a training dataset and a test dataset consider the following.
-//
-// *
+// -
 // If you delete the test dataset, your project reverts to a single dataset
 // project. If you then train the model, Amazon Lookout for Vision internally
 // splits the remaining dataset into a training and test dataset.
-//
-// * If you delete
+// - If you delete
 // the training dataset, you must create a training dataset before you can create a
 // model.
 //

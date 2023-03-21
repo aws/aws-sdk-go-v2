@@ -22,30 +22,23 @@ import (
 // file into an Amazon S3 bucket; you can then specify the S3 location of the file
 // using the Media parameter. You must include the following parameters in your
 // StartMedicalTranscriptionJob request:
-//
-// * region: The Amazon Web Services Region
+// - region: The Amazon Web Services Region
 // where you are making your request. For a list of Amazon Web Services Regions
 // supported with Amazon Transcribe, refer to Amazon Transcribe endpoints and
 // quotas (https://docs.aws.amazon.com/general/latest/gr/transcribe.html).
-//
-// *
+// -
 // MedicalTranscriptionJobName: A custom name you create for your transcription job
 // that is unique within your Amazon Web Services account.
-//
-// * Media (MediaFileUri):
+// - Media (MediaFileUri):
 // The Amazon S3 location of your media file.
-//
-// * LanguageCode: This must be
-// en-US.
-//
-// * OutputBucketName: The Amazon S3 bucket where you want your transcript
-// stored. If you want your output stored in a sub-folder of this bucket, you must
-// also include OutputKey.
-//
-// * Specialty: This must be PRIMARYCARE.
-//
-// * Type: Choose
-// whether your audio is a conversation or a dictation.
+// - LanguageCode: This must be en-US.
+// -
+// OutputBucketName: The Amazon S3 bucket where you want your transcript stored. If
+// you want your output stored in a sub-folder of this bucket, you must also
+// include OutputKey.
+// - Specialty: This must be PRIMARYCARE.
+// - Type: Choose whether
+// your audio is a conversation or a dictation.
 func (c *Client) StartMedicalTranscriptionJob(ctx context.Context, params *StartMedicalTranscriptionJobInput, optFns ...func(*Options)) (*StartMedicalTranscriptionJobOutput, error) {
 	if params == nil {
 		params = &StartMedicalTranscriptionJobInput{}
@@ -151,30 +144,24 @@ type StartMedicalTranscriptionJobInput struct {
 	// The KMS key you want to use to encrypt your medical transcription output. If
 	// using a key located in the current Amazon Web Services account, you can specify
 	// your KMS key in one of four ways:
-	//
-	// * Use the KMS key ID itself. For example,
+	// - Use the KMS key ID itself. For example,
 	// 1234abcd-12ab-34cd-56ef-1234567890ab.
-	//
-	// * Use an alias for the KMS key ID. For
+	// - Use an alias for the KMS key ID. For
 	// example, alias/ExampleAlias.
-	//
-	// * Use the Amazon Resource Name (ARN) for the KMS
+	// - Use the Amazon Resource Name (ARN) for the KMS
 	// key ID. For example,
 	// arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab.
-	//
-	// * Use
+	// - Use
 	// the ARN for the KMS key alias. For example,
 	// arn:aws:kms:region:account-ID:alias/ExampleAlias.
 	//
 	// If using a key located in a
 	// different Amazon Web Services account than the current Amazon Web Services
 	// account, you can specify your KMS key in one of two ways:
-	//
-	// * Use the ARN for the
+	// - Use the ARN for the
 	// KMS key ID. For example,
 	// arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab.
-	//
-	// * Use
+	// - Use
 	// the ARN for the KMS key alias. For example,
 	// arn:aws:kms:region:account-ID:alias/ExampleAlias.
 	//
@@ -190,23 +177,19 @@ type StartMedicalTranscriptionJobInput struct {
 	// for your transcription output is the same as the name you specified for your
 	// medical transcription job (MedicalTranscriptionJobName). Here are some examples
 	// of how you can use OutputKey:
-	//
-	// * If you specify 'DOC-EXAMPLE-BUCKET' as the
+	// - If you specify 'DOC-EXAMPLE-BUCKET' as the
 	// OutputBucketName and 'my-transcript.json' as the OutputKey, your transcription
 	// output path is s3://DOC-EXAMPLE-BUCKET/my-transcript.json.
-	//
-	// * If you specify
+	// - If you specify
 	// 'my-first-transcription' as the MedicalTranscriptionJobName,
 	// 'DOC-EXAMPLE-BUCKET' as the OutputBucketName, and 'my-transcript' as the
 	// OutputKey, your transcription output path is
 	// s3://DOC-EXAMPLE-BUCKET/my-transcript/my-first-transcription.json.
-	//
-	// * If you
+	// - If you
 	// specify 'DOC-EXAMPLE-BUCKET' as the OutputBucketName and
 	// 'test-files/my-transcript.json' as the OutputKey, your transcription output path
 	// is s3://DOC-EXAMPLE-BUCKET/test-files/my-transcript.json.
-	//
-	// * If you specify
+	// - If you specify
 	// 'my-first-transcription' as the MedicalTranscriptionJobName,
 	// 'DOC-EXAMPLE-BUCKET' as the OutputBucketName, and 'test-files/my-transcript' as
 	// the OutputKey, your transcription output path is

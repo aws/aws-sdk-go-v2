@@ -17,20 +17,15 @@ import (
 // gives you more control over contact handling and helps you adhere to the service
 // level agreement (SLA) guaranteed to your customers. Note the following
 // requirements:
-//
-// * Transfer is supported for only TASK contacts.
-//
-// * Do not use
-// both QueueId and UserId in the same call.
-//
-// * The following flow types are
-// supported: Inbound flow, Transfer to agent flow, and Transfer to queue flow.
-//
-// *
-// The TransferContact API can be called only on active contacts.
-//
-// * A contact
-// cannot be transferred more than 11 times.
+// - Transfer is supported for only TASK contacts.
+// - Do not use both
+// QueueId and UserId in the same call.
+// - The following flow types are supported:
+// Inbound flow, Transfer to agent flow, and Transfer to queue flow.
+// - The
+// TransferContact API can be called only on active contacts.
+// - A contact cannot be
+// transferred more than 11 times.
 func (c *Client) TransferContact(ctx context.Context, params *TransferContactInput, optFns ...func(*Options)) (*TransferContactOutput, error) {
 	if params == nil {
 		params = &TransferContactInput{}

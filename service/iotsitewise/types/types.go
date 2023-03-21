@@ -546,8 +546,7 @@ type AssetRelationshipSummary struct {
 
 	// The relationship type of the assets in this relationship. This value is one of
 	// the following:
-	//
-	// * HIERARCHY – The assets are related through an asset hierarchy.
+	// - HIERARCHY – The assets are related through an asset hierarchy.
 	// If you specify this relationship type, this asset relationship includes the
 	// hierarchyInfo object.
 	//
@@ -704,13 +703,11 @@ type Attribute struct {
 // with the BatchGetAssetPropertyAggregates
 // (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html)
 // API. To identify an asset property, you must specify one of the following:
-//
-// *
-// The assetId and propertyId of an asset property.
-//
-// * A propertyAlias, which is a
-// data stream alias (for example, /company/windfarm/3/turbine/7/temperature). To
-// define an asset property's alias, see UpdateAssetProperty
+// - The
+// assetId and propertyId of an asset property.
+// - A propertyAlias, which is a data
+// stream alias (for example, /company/windfarm/3/turbine/7/temperature). To define
+// an asset property's alias, see UpdateAssetProperty
 // (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html).
 type BatchGetAssetPropertyAggregatesEntry struct {
 
@@ -855,13 +852,11 @@ type BatchGetAssetPropertyAggregatesSuccessEntry struct {
 // the BatchGetAssetPropertyValue
 // (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html)
 // API. To identify an asset property, you must specify one of the following:
-//
-// *
-// The assetId and propertyId of an asset property.
-//
-// * A propertyAlias, which is a
-// data stream alias (for example, /company/windfarm/3/turbine/7/temperature). To
-// define an asset property's alias, see UpdateAssetProperty
+// - The
+// assetId and propertyId of an asset property.
+// - A propertyAlias, which is a data
+// stream alias (for example, /company/windfarm/3/turbine/7/temperature). To define
+// an asset property's alias, see UpdateAssetProperty
 // (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html).
 type BatchGetAssetPropertyValueEntry struct {
 
@@ -930,13 +925,11 @@ type BatchGetAssetPropertyValueErrorInfo struct {
 // associated with the BatchGetAssetPropertyValueHistory
 // (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html)
 // API. To identify an asset property, you must specify one of the following:
-//
-// *
-// The assetId and propertyId of an asset property.
-//
-// * A propertyAlias, which is a
-// data stream alias (for example, /company/windfarm/3/turbine/7/temperature). To
-// define an asset property's alias, see UpdateAssetProperty
+// - The
+// assetId and propertyId of an asset property.
+// - A propertyAlias, which is a data
+// stream alias (for example, /company/windfarm/3/turbine/7/temperature). To define
+// an asset property's alias, see UpdateAssetProperty
 // (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html).
 type BatchGetAssetPropertyValueHistoryEntry struct {
 
@@ -1379,14 +1372,11 @@ type GatewayCapabilitySummary struct {
 
 	// The synchronization status of the capability configuration. The sync status can
 	// be one of the following:
-	//
-	// * IN_SYNC – The gateway is running the capability
+	// - IN_SYNC – The gateway is running the capability
 	// configuration.
-	//
-	// * OUT_OF_SYNC – The gateway hasn't received the capability
+	// - OUT_OF_SYNC – The gateway hasn't received the capability
 	// configuration.
-	//
-	// * SYNC_FAILED – The gateway rejected the capability
+	// - SYNC_FAILED – The gateway rejected the capability
 	// configuration.
 	//
 	// This member is required.
@@ -1550,11 +1540,9 @@ type Identity struct {
 }
 
 // Contains an image that is one of the following:
-//
-// * An image file. Choose this
+// - An image file. Choose this
 // option to upload a new image.
-//
-// * The ID of an existing image. Choose this option
+// - The ID of an existing image. Choose this option
 // to keep an existing image.
 type Image struct {
 
@@ -1643,25 +1631,19 @@ type JobSummary struct {
 	Name *string
 
 	// The status of the bulk import job can be one of following values.
-	//
-	// * PENDING –
+	// - PENDING –
 	// IoT SiteWise is waiting for the current bulk import job to finish.
-	//
-	// * CANCELLED
-	// – The bulk import job has been canceled.
-	//
-	// * RUNNING – IoT SiteWise is processing
+	// - CANCELLED –
+	// The bulk import job has been canceled.
+	// - RUNNING – IoT SiteWise is processing
 	// your request to import your data from Amazon S3.
-	//
-	// * COMPLETED – IoT SiteWise
+	// - COMPLETED – IoT SiteWise
 	// successfully completed your request to import data from Amazon S3.
-	//
-	// * FAILED –
+	// - FAILED –
 	// IoT SiteWise couldn't process your request to import data from Amazon S3. You
 	// can use logs saved in the specified error report location in Amazon S3 to
 	// troubleshoot issues.
-	//
-	// * COMPLETED_WITH_FAILURES – IoT SiteWise completed your
+	// - COMPLETED_WITH_FAILURES – IoT SiteWise completed your
 	// request to import data from Amazon S3 with errors. You can use logs saved in the
 	// specified error report location in Amazon S3 to troubleshoot issues.
 	//
@@ -2189,44 +2171,36 @@ type TumblingWindow struct {
 
 	// The offset for the tumbling window. The offset parameter accepts the
 	// following:
-	//
-	// * The offset time. For example, if you specify 18h for offset and 1d
+	// - The offset time. For example, if you specify 18h for offset and 1d
 	// for interval, IoT SiteWise aggregates data in one of the following ways:
-	//
-	// * If
+	// - If
 	// you create the metric before or at 6 PM (UTC), you get the first aggregation
 	// result at 6 PM (UTC) on the day when you create the metric.
-	//
-	// * If you create the
+	// - If you create the
 	// metric after 6 PM (UTC), you get the first aggregation result at 6 PM (UTC) the
 	// next day.
 	//
-	// * The ISO 8601 format. For example, if you specify PT18H for offset
+	// - The ISO 8601 format. For example, if you specify PT18H for offset
 	// and 1d for interval, IoT SiteWise aggregates data in one of the following
 	// ways:
-	//
-	// * If you create the metric before or at 6 PM (UTC), you get the first
+	// - If you create the metric before or at 6 PM (UTC), you get the first
 	// aggregation result at 6 PM (UTC) on the day when you create the metric.
+	// - If you
+	// create the metric after 6 PM (UTC), you get the first aggregation result at 6 PM
+	// (UTC) the next day.
 	//
-	// * If
-	// you create the metric after 6 PM (UTC), you get the first aggregation result at
-	// 6 PM (UTC) the next day.
-	//
-	// * The 24-hour clock. For example, if you specify
-	// 00:03:00 for offset, 5m for interval, and you create the metric at 2 PM (UTC),
-	// you get the first aggregation result at 2:03 PM (UTC). You get the second
-	// aggregation result at 2:08 PM (UTC).
-	//
-	// * The offset time zone. For example, if
-	// you specify 2021-07-23T18:00-08 for offset and 1d for interval, IoT SiteWise
-	// aggregates data in one of the following ways:
-	//
-	// * If you create the metric before
-	// or at 6 PM (PST), you get the first aggregation result at 6 PM (PST) on the day
-	// when you create the metric.
-	//
-	// * If you create the metric after 6 PM (PST), you
-	// get the first aggregation result at 6 PM (PST) the next day.
+	// - The 24-hour clock. For example, if you specify 00:03:00
+	// for offset, 5m for interval, and you create the metric at 2 PM (UTC), you get
+	// the first aggregation result at 2:03 PM (UTC). You get the second aggregation
+	// result at 2:08 PM (UTC).
+	// - The offset time zone. For example, if you specify
+	// 2021-07-23T18:00-08 for offset and 1d for interval, IoT SiteWise aggregates data
+	// in one of the following ways:
+	// - If you create the metric before or at 6 PM
+	// (PST), you get the first aggregation result at 6 PM (PST) on the day when you
+	// create the metric.
+	// - If you create the metric after 6 PM (PST), you get the
+	// first aggregation result at 6 PM (PST) the next day.
 	Offset *string
 
 	noSmithyDocumentSerde

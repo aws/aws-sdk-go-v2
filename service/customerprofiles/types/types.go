@@ -226,10 +226,8 @@ type ConflictResolution struct {
 
 	// How the auto-merging process should resolve conflicts between different
 	// profiles.
-	//
-	// * RECENCY: Uses the data that was most recently updated.
-	//
-	// * SOURCE:
+	// - RECENCY: Uses the data that was most recently updated.
+	// - SOURCE:
 	// Uses the data from a specific source. For example, if a company has been aquired
 	// or two departments have merged, data from the specified source is used. If two
 	// duplicate profiles are from the same source, then RECENCY is used again.
@@ -470,31 +468,23 @@ type IdentityResolutionJob struct {
 	Message *string
 
 	// The status of the Identity Resolution Job.
-	//
-	// * PENDING: The Identity Resolution
+	// - PENDING: The Identity Resolution
 	// Job is scheduled but has not started yet. If you turn off the Identity
 	// Resolution feature in your domain, jobs in the PENDING state are deleted.
-	//
-	// *
+	// -
 	// PREPROCESSING: The Identity Resolution Job is loading your data.
-	//
-	// *
+	// -
 	// FIND_MATCHING: The Identity Resolution Job is using the machine learning model
 	// to identify profiles that belong to the same matching group.
-	//
-	// * MERGING: The
+	// - MERGING: The
 	// Identity Resolution Job is merging duplicate profiles.
-	//
-	// * COMPLETED: The
-	// Identity Resolution Job completed successfully.
-	//
-	// * PARTIAL_SUCCESS: There's a
-	// system error and not all of the data is merged. The Identity Resolution Job
-	// writes a message indicating the source of the problem.
-	//
-	// * FAILED: The Identity
-	// Resolution Job did not merge any data. It writes a message indicating the source
-	// of the problem.
+	// - COMPLETED: The Identity
+	// Resolution Job completed successfully.
+	// - PARTIAL_SUCCESS: There's a system error
+	// and not all of the data is merged. The Identity Resolution Job writes a message
+	// indicating the source of the problem.
+	// - FAILED: The Identity Resolution Job did
+	// not merge any data. It writes a message indicating the source of the problem.
 	Status IdentityResolutionJobStatus
 
 	noSmithyDocumentSerde
@@ -897,13 +887,11 @@ type Profile struct {
 	// (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html)
 	// request, the FoundByItems list should be interpreted based on the
 	// LogicalOperator used in the request:
-	//
-	// * AND - The profile included in the
+	// - AND - The profile included in the
 	// response matched all of the search keys specified in the request. The
 	// FoundByItems will include all of the key-value(s) pairs that were specified in
 	// the request (as this is a requirement of AND search logic).
-	//
-	// * OR - The profile
+	// - OR - The profile
 	// included in the response matched at least one of the search keys specified in
 	// the request. The FoundByItems will include each of the key-value(s) pairs that
 	// the profile was found by.

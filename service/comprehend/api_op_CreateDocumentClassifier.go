@@ -72,11 +72,9 @@ type CreateDocumentClassifierInput struct {
 	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
 	// encrypt trained custom models. The ModelKmsKeyId can be either of the following
 	// formats:
-	//
-	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
-	//
-	// * Amazon
-	// Resource Name (ARN) of a KMS Key:
+	// - KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// - Amazon Resource
+	// Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	ModelKmsKeyId *string
 
@@ -112,11 +110,9 @@ type CreateDocumentClassifierInput struct {
 	// encrypt data on the storage volume attached to the ML compute instance(s) that
 	// process the analysis job. The VolumeKmsKeyId can be either of the following
 	// formats:
-	//
-	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
-	//
-	// * Amazon
-	// Resource Name (ARN) of a KMS Key:
+	// - KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// - Amazon Resource
+	// Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 

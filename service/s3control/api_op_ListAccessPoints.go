@@ -28,16 +28,13 @@ import (
 // access point ARN, see the Examples
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html#API_control_GetAccessPoint_Examples)
 // section. The following actions are related to ListAccessPoints:
-//
-// *
+// -
 // CreateAccessPoint
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html)
-//
-// *
+// -
 // DeleteAccessPoint
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html)
-//
-// *
+// -
 // GetAccessPoint
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html)
 func (c *Client) ListAccessPoints(ctx context.Context, params *ListAccessPointsInput, optFns ...func(*Options)) (*ListAccessPointsOutput, error) {

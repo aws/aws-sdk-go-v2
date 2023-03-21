@@ -23,13 +23,11 @@ import (
 // tagging on data set, data source, dashboard, and template. Tagging for Amazon
 // QuickSight works in a similar way to tagging for other Amazon Web Services
 // services, except for the following:
-//
-// * You can't use tags to track costs for
+// - You can't use tags to track costs for
 // Amazon QuickSight. This isn't possible because you can't tag the resources that
 // Amazon QuickSight costs are based on, for example Amazon QuickSight storage
 // capacity (SPICE), number of users, type of users, and usage metrics.
-//
-// * Amazon
+// - Amazon
 // QuickSight doesn't currently support the tag editor for Resource Groups.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {

@@ -18,31 +18,22 @@ import (
 // BatchUpdateFindings do not affect the value of UpdatedAt for a finding.
 // Administrator and member accounts can use BatchUpdateFindings to update the
 // following finding fields and objects.
-//
-// * Confidence
-//
-// * Criticality
-//
-// * Note
-//
-// *
+// - Confidence
+// - Criticality
+// - Note
+// -
 // RelatedFindings
+// - Severity
+// - Types
+// - UserDefinedFields
+// - VerificationState
+// -
+// Workflow
 //
-// * Severity
-//
-// * Types
-//
-// * UserDefinedFields
-//
-// *
-// VerificationState
-//
-// * Workflow
-//
-// You can configure IAM policies to restrict access
-// to fields and field values. For example, you might not want member accounts to
-// be able to suppress findings or change the finding severity. See Configuring
-// access to BatchUpdateFindings
+// You can configure IAM policies to restrict access to fields and field
+// values. For example, you might not want member accounts to be able to suppress
+// findings or change the finding severity. See Configuring access to
+// BatchUpdateFindings
 // (https://docs.aws.amazon.com/securityhub/latest/userguide/finding-update-batchupdatefindings.html#batchupdatefindings-configure-access)
 // in the Security Hub User Guide.
 func (c *Client) BatchUpdateFindings(ctx context.Context, params *BatchUpdateFindingsInput, optFns ...func(*Options)) (*BatchUpdateFindingsOutput, error) {
@@ -93,17 +84,12 @@ type BatchUpdateFindingsInput struct {
 
 	// One or more finding types in the format of namespace/category/classifier that
 	// classify a finding. Valid namespace values are as follows.
-	//
-	// * Software and
+	// - Software and
 	// Configuration Checks
-	//
-	// * TTPs
-	//
-	// * Effects
-	//
-	// * Unusual Behaviors
-	//
-	// * Sensitive Data
+	// - TTPs
+	// - Effects
+	// - Unusual Behaviors
+	// - Sensitive Data
 	// Identifications
 	Types []string
 
@@ -113,16 +99,12 @@ type BatchUpdateFindingsInput struct {
 
 	// Indicates the veracity of a finding. The available values for VerificationState
 	// are as follows.
-	//
-	// * UNKNOWN – The default disposition of a security finding
-	//
-	// *
+	// - UNKNOWN – The default disposition of a security finding
+	// -
 	// TRUE_POSITIVE – The security finding is confirmed
-	//
-	// * FALSE_POSITIVE – The
+	// - FALSE_POSITIVE – The
 	// security finding was determined to be a false alarm
-	//
-	// * BENIGN_POSITIVE – A
+	// - BENIGN_POSITIVE – A
 	// special case of TRUE_POSITIVE where the finding doesn't pose any threat, is
 	// expected, or both
 	VerificationState types.VerificationState

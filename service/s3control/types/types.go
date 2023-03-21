@@ -1313,13 +1313,10 @@ type PublicAccessBlockConfiguration struct {
 	// Specifies whether Amazon S3 should block public access control lists (ACLs) for
 	// buckets in this account. Setting this element to TRUE causes the following
 	// behavior:
-	//
-	// * PutBucketAcl and PutObjectAcl calls fail if the specified ACL is
+	// - PutBucketAcl and PutObjectAcl calls fail if the specified ACL is
 	// public.
-	//
-	// * PUT Object calls fail if the request includes a public ACL.
-	//
-	// * PUT
+	// - PUT Object calls fail if the request includes a public ACL.
+	// - PUT
 	// Bucket calls fail if the request includes a public ACL.
 	//
 	// Enabling this setting
@@ -1552,12 +1549,10 @@ type ReplicationRule struct {
 // A container for specifying rule filters. The filters determine the subset of
 // objects to which the rule applies. This element is required only if you specify
 // more than one filter. For example:
-//
-// * If you specify both a Prefix and a Tag
+// - If you specify both a Prefix and a Tag
 // filter, wrap these filters in an And element.
-//
-// * If you specify a filter based
-// on multiple tags, wrap the Tag elements in an And element.
+// - If you specify a filter based on
+// multiple tags, wrap the Tag elements in an And element.
 type ReplicationRuleAndOperator struct {
 
 	// An object key name prefix that identifies the subset of objects that the rule
@@ -1578,12 +1573,10 @@ type ReplicationRuleFilter struct {
 	// A container for specifying rule filters. The filters determine the subset of
 	// objects that the rule applies to. This element is required only if you specify
 	// more than one filter. For example:
-	//
-	// * If you specify both a Prefix and a Tag
+	// - If you specify both a Prefix and a Tag
 	// filter, wrap these filters in an And element.
-	//
-	// * If you specify a filter based
-	// on multiple tags, wrap the Tag elements in an And element.
+	// - If you specify a filter based on
+	// multiple tags, wrap the Tag elements in an And element.
 	And *ReplicationRuleAndOperator
 
 	// An object key name prefix that identifies the subset of objects that the rule

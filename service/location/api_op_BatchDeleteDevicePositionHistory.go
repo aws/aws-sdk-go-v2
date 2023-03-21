@@ -31,8 +31,7 @@ func (c *Client) BatchDeleteDevicePositionHistory(ctx context.Context, params *B
 type BatchDeleteDevicePositionHistoryInput struct {
 
 	// Devices whose position history you want to delete.
-	//
-	// * For example, for two
+	// - For example, for two
 	// devices: “DeviceIds” : [DeviceId1,DeviceId2]
 	//
 	// This member is required.

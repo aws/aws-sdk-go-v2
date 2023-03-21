@@ -15,82 +15,58 @@ import (
 // are already associated with the rule. Targets are the resources that are invoked
 // when a rule is triggered. You can configure the following as targets for
 // Events:
-//
-// * API destination
+// - API destination
 // (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-api-destinations.html)
-//
-// *
+// -
 // Amazon API Gateway REST API endpoints
-//
-// * API Gateway
-//
-// * Batch job queue
-//
-// *
+// - API Gateway
+// - Batch job queue
+// -
 // CloudWatch Logs group
-//
-// * CodeBuild project
-//
-// * CodePipeline
-//
-// * Amazon EC2
+// - CodeBuild project
+// - CodePipeline
+// - Amazon EC2
 // CreateSnapshot API call
-//
-// * Amazon EC2 RebootInstances API call
-//
-// * Amazon EC2
+// - Amazon EC2 RebootInstances API call
+// - Amazon EC2
 // StopInstances API call
-//
-// * Amazon EC2 TerminateInstances API call
-//
-// * Amazon ECS
+// - Amazon EC2 TerminateInstances API call
+// - Amazon ECS
 // tasks
-//
-// * Event bus in a different Amazon Web Services account or Region. You can
+// - Event bus in a different Amazon Web Services account or Region. You can
 // use an event bus in the US East (N. Virginia) us-east-1, US West (Oregon)
 // us-west-2, or Europe (Ireland) eu-west-1 Regions as a target for a rule.
-//
-// *
+// -
 // Firehose delivery stream (Kinesis Data Firehose)
+// - Inspector assessment template
+// (Amazon Inspector)
+// - Kinesis stream (Kinesis Data Stream)
+// - Lambda function
+// -
+// Redshift clusters (Data API statement execution)
+// - Amazon SNS topic
+// - Amazon SQS
+// queues (includes FIFO queues
+// - SSM Automation
+// - SSM OpsItem
+// - SSM Run Command
+// -
+// Step Functions state machines
 //
-// * Inspector assessment
-// template (Amazon Inspector)
-//
-// * Kinesis stream (Kinesis Data Stream)
-//
-// * Lambda
-// function
-//
-// * Redshift clusters (Data API statement execution)
-//
-// * Amazon SNS
-// topic
-//
-// * Amazon SQS queues (includes FIFO queues
-//
-// * SSM Automation
-//
-// * SSM
-// OpsItem
-//
-// * SSM Run Command
-//
-// * Step Functions state machines
-//
-// Creating rules with
-// built-in targets is supported only in the Management Console. The built-in
-// targets are EC2 CreateSnapshot API call, EC2 RebootInstances API call, EC2
-// StopInstances API call, and EC2 TerminateInstances API call. For some target
-// types, PutTargets provides target-specific parameters. If the target is a
-// Kinesis data stream, you can optionally specify which shard the event goes to by
-// using the KinesisParameters argument. To invoke a command on multiple EC2
-// instances with one rule, you can use the RunCommandParameters field. To be able
-// to make API calls against the resources that you own, Amazon EventBridge needs
-// the appropriate permissions. For Lambda and Amazon SNS resources, EventBridge
-// relies on resource-based policies. For EC2 instances, Kinesis Data Streams, Step
-// Functions state machines and API Gateway REST APIs, EventBridge relies on IAM
-// roles that you specify in the RoleARN argument in PutTargets. For more
-// information, see Authentication and Access Control
+// Creating rules with built-in targets is supported
+// only in the Management Console. The built-in targets are EC2 CreateSnapshot API
+// call, EC2 RebootInstances API call, EC2 StopInstances API call, and EC2
+// TerminateInstances API call. For some target types, PutTargets provides
+// target-specific parameters. If the target is a Kinesis data stream, you can
+// optionally specify which shard the event goes to by using the KinesisParameters
+// argument. To invoke a command on multiple EC2 instances with one rule, you can
+// use the RunCommandParameters field. To be able to make API calls against the
+// resources that you own, Amazon EventBridge needs the appropriate permissions.
+// For Lambda and Amazon SNS resources, EventBridge relies on resource-based
+// policies. For EC2 instances, Kinesis Data Streams, Step Functions state machines
+// and API Gateway REST APIs, EventBridge relies on IAM roles that you specify in
+// the RoleARN argument in PutTargets. For more information, see Authentication and
+// Access Control
 // (https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html)
 // in the Amazon EventBridge User Guide. If another Amazon Web Services account is
 // in the same region and has granted you permission (using PutPermission), you can
@@ -114,22 +90,18 @@ import (
 // (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutPermission.html).
 // Input, InputPath, and InputTransformer are mutually exclusive and optional
 // parameters of a target. When a rule is triggered due to a matched event:
-//
-// * If
+// - If
 // none of the following arguments are specified for a target, then the entire
 // event is passed to the target in JSON format (unless the target is Amazon EC2
 // Run Command or Amazon ECS task, in which case nothing from the event is passed
 // to the target).
-//
-// * If Input is specified in the form of valid JSON, then the
+// - If Input is specified in the form of valid JSON, then the
 // matched event is overridden with this constant.
-//
-// * If InputPath is specified in
+// - If InputPath is specified in
 // the form of JSONPath (for example, $.detail), then only the part of the event
 // specified in the path is passed to the target (for example, only the detail part
 // of the event is passed).
-//
-// * If InputTransformer is specified, then one or more
+// - If InputTransformer is specified, then one or more
 // specified JSONPaths are extracted from the event and used as values in a
 // template that you specify as the input to the target.
 //

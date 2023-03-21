@@ -60,13 +60,11 @@ type UpdateLocationSmbInput struct {
 	// /path/to/folder. To transfer all the data in the folder that you specified,
 	// DataSync must have permissions to mount the SMB share and to access all the data
 	// in that share. To ensure this, do either of the following:
-	//
-	// * Ensure that the
+	// - Ensure that the
 	// user/password specified belongs to the user who can mount the share and who has
 	// the appropriate permissions for all of the files and directories that you want
 	// DataSync to access.
-	//
-	// * Use credentials of a member of the Backup Operators group
+	// - Use credentials of a member of the Backup Operators group
 	// to mount the share.
 	//
 	// Doing either of these options enables the agent to access

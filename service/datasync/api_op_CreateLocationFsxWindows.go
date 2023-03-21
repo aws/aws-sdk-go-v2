@@ -44,11 +44,9 @@ type CreateLocationFsxWindowsInput struct {
 	// Specifies the ARNs of the security groups that provide access to your file
 	// system's preferred subnet. If you choose a security group that doesn't allow
 	// connections from within itself, do one of the following:
-	//
-	// * Configure the
+	// - Configure the
 	// security group to allow it to communicate within itself.
-	//
-	// * Choose a different
+	// - Choose a different
 	// security group that can communicate with the mount target's security group.
 	//
 	// This member is required.

@@ -104,21 +104,17 @@ import (
 // Amazon Web Services account that represents your identity provider. You must
 // also create an IAM role that specifies this SAML provider in its trust policy.
 // For more information, see the following resources:
-//
-// * About SAML 2.0-based
+// - About SAML 2.0-based
 // Federation
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html)
 // in the IAM User Guide.
-//
-// * Creating SAML Identity Providers
+// - Creating SAML Identity Providers
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_saml.html)
 // in the IAM User Guide.
-//
-// * Configuring a Relying Party and Claims
+// - Configuring a Relying Party and Claims
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_saml_relying-party.html)
 // in the IAM User Guide.
-//
-// * Creating a Role for SAML 2.0 Federation
+// - Creating a Role for SAML 2.0 Federation
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_saml.html)
 // in the IAM User Guide.
 func (c *Client) AssumeRoleWithSAML(ctx context.Context, params *AssumeRoleWithSAMLInput, optFns ...func(*Options)) (*AssumeRoleWithSAMLOutput, error) {
@@ -251,17 +247,14 @@ type AssumeRoleWithSAMLOutput struct {
 	Issuer *string
 
 	// A hash value based on the concatenation of the following:
-	//
-	// * The Issuer response
+	// - The Issuer response
 	// value.
+	// - The Amazon Web Services account ID.
+	// - The friendly name (the last part
+	// of the ARN) of the SAML provider in IAM.
 	//
-	// * The Amazon Web Services account ID.
-	//
-	// * The friendly name (the last
-	// part of the ARN) of the SAML provider in IAM.
-	//
-	// The combination of NameQualifier
-	// and Subject can be used to uniquely identify a federated user. The following
+	// The combination of NameQualifier and
+	// Subject can be used to uniquely identify a federated user. The following
 	// pseudocode shows how the hash value is calculated: BASE64 ( SHA1 (
 	// "https://example.com/saml" + "123456789012" + "/MySAMLIdP" ) )
 	NameQualifier *string

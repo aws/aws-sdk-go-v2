@@ -101,17 +101,14 @@ type UpdateUserPoolInput struct {
 	LambdaConfig *types.LambdaConfigType
 
 	// Possible values include:
-	//
-	// * OFF - MFA tokens aren't required and can't be
+	// - OFF - MFA tokens aren't required and can't be
 	// specified during user registration.
-	//
-	// * ON - MFA tokens are required for all user
+	// - ON - MFA tokens are required for all user
 	// registrations. You can only specify ON when you're initially creating a user
 	// pool. You can use the SetUserPoolMfaConfig
 	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SetUserPoolMfaConfig.html)
 	// API operation to turn MFA "ON" for existing user pools.
-	//
-	// * OPTIONAL - Users have
+	// - OPTIONAL - Users have
 	// the option when registering to create an MFA token.
 	MfaConfiguration types.UserPoolMfaType
 

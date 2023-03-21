@@ -33,9 +33,8 @@ type DescribeFleetAdvisorSchemaObjectSummaryInput struct {
 
 	// If you specify any of the following filters, the output includes information for
 	// only those schema objects that meet the filter criteria:
-	//
-	// * schema-id – The ID
-	// of the schema, for example d4610ac5-e323-4ad9-bc50-eaf7249dfe9d.
+	// - schema-id – The ID of
+	// the schema, for example d4610ac5-e323-4ad9-bc50-eaf7249dfe9d.
 	//
 	// Example:
 	// describe-fleet-advisor-schema-object-summary --filter

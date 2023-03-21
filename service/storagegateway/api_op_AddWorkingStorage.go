@@ -34,8 +34,7 @@ func (c *Client) AddWorkingStorage(ctx context.Context, params *AddWorkingStorag
 }
 
 // A JSON object containing one or more of the following fields:
-//
-// *
+// -
 // AddWorkingStorageInput$DiskIds
 type AddWorkingStorageInput struct {
 

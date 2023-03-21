@@ -51,11 +51,9 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/outposts-replication-eventbridge.html#outposts-replication-failure-codes)
 // in the Amazon S3 User Guide. The following operations are related to
 // GetBucketReplication:
-//
-// * PutBucketReplication
+// - PutBucketReplication
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketReplication.html)
-//
-// *
+// -
 // DeleteBucketReplication
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketReplication.html)
 func (c *Client) GetBucketReplication(ctx context.Context, params *GetBucketReplicationInput, optFns ...func(*Options)) (*GetBucketReplicationOutput, error) {

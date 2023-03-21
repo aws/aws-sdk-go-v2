@@ -42,13 +42,10 @@ type GetDatabasesInput struct {
 
 	// Allows you to specify that you want to list the databases shared with your
 	// account. The allowable values are FOREIGN or ALL.
-	//
-	// * If set to FOREIGN, will
-	// list the databases shared with your account.
-	//
-	// * If set to ALL, will list the
-	// databases shared with your account, as well as the databases in yor local
-	// account.
+	// - If set to FOREIGN, will list
+	// the databases shared with your account.
+	// - If set to ALL, will list the databases
+	// shared with your account, as well as the databases in yor local account.
 	ResourceShareType types.ResourceShareType
 
 	noSmithyDocumentSerde

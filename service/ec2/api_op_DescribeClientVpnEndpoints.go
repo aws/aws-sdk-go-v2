@@ -40,12 +40,10 @@ type DescribeClientVpnEndpointsInput struct {
 	DryRun *bool
 
 	// One or more filters. Filter names and values are case-sensitive.
-	//
-	// * endpoint-id
-	// - The ID of the Client VPN endpoint.
-	//
-	// * transport-protocol - The transport
-	// protocol (tcp | udp).
+	// - endpoint-id -
+	// The ID of the Client VPN endpoint.
+	// - transport-protocol - The transport protocol
+	// (tcp | udp).
 	Filters []types.Filter
 
 	// The maximum number of results to return for the request in a single page. The

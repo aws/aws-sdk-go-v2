@@ -14,13 +14,11 @@ import (
 // key, the action removes both that key and its associated value. The operation
 // succeeds even if you attempt to remove tags from a resource that were already
 // removed. Note the following:
-//
-// * To remove tags from a resource, you need the
+// - To remove tags from a resource, you need the
 // necessary permissions for the service that the resource belongs to as well as
 // permissions for removing tags. For more information, see the documentation for
 // the service whose resource you want to untag.
-//
-// * You can only tag resources that
+// - You can only tag resources that
 // are located in the specified AWS Region for the calling AWS account.
 //
 // Minimum

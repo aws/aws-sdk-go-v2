@@ -17,19 +17,15 @@ import (
 // message for users trying to sign in. After you import client branding, the
 // default branding experience for the specified platform type is replaced with the
 // imported experience
-//
-// * You must specify at least one platform type when
-// importing client branding.
-//
-// * You can import up to 6 MB of data with each
-// request. If your request exceeds this limit, you can import client branding for
-// different platform types using separate requests.
-//
-// * In each platform type, the
+// - You must specify at least one platform type when importing
+// client branding.
+// - You can import up to 6 MB of data with each request. If your
+// request exceeds this limit, you can import client branding for different
+// platform types using separate requests.
+// - In each platform type, the
 // SupportEmail and SupportLink parameters are mutually exclusive. You can specify
 // only one parameter for each platform type, but not both.
-//
-// * Imported data can
+// - Imported data can
 // take up to a minute to appear in the WorkSpaces client.
 func (c *Client) ImportClientBranding(ctx context.Context, params *ImportClientBrandingInput, optFns ...func(*Options)) (*ImportClientBrandingOutput, error) {
 	if params == nil {

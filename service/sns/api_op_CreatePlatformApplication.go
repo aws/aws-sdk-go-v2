@@ -16,28 +16,21 @@ import (
 // PlatformCredential attributes when using the CreatePlatformApplication action.
 // PlatformPrincipal and PlatformCredential are received from the notification
 // service.
-//
-// * For ADM, PlatformPrincipal is client id and PlatformCredential is
+// - For ADM, PlatformPrincipal is client id and PlatformCredential is
 // client secret.
-//
-// * For Baidu, PlatformPrincipal is API key and PlatformCredential
+// - For Baidu, PlatformPrincipal is API key and PlatformCredential
 // is secret key.
-//
-// * For APNS and APNS_SANDBOX using certificate credentials,
+// - For APNS and APNS_SANDBOX using certificate credentials,
 // PlatformPrincipal is SSL certificate and PlatformCredential is private key.
-//
-// *
+// -
 // For APNS and APNS_SANDBOX using token credentials, PlatformPrincipal is signing
 // key ID and PlatformCredential is signing key.
-//
-// * For GCM (Firebase Cloud
+// - For GCM (Firebase Cloud
 // Messaging), there is no PlatformPrincipal and the PlatformCredential is API
 // key.
-//
-// * For MPNS, PlatformPrincipal is TLS certificate and PlatformCredential is
+// - For MPNS, PlatformPrincipal is TLS certificate and PlatformCredential is
 // private key.
-//
-// * For WNS, PlatformPrincipal is Package Security Identifier and
+// - For WNS, PlatformPrincipal is Package Security Identifier and
 // PlatformCredential is secret key.
 //
 // You can use the returned

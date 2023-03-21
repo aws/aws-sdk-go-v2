@@ -32,15 +32,11 @@ import (
 // grants
 // (https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#grant-delete)
 // in the Key Management Service Developer Guide. Related operations:
-//
-// *
+// -
 // CreateGrant
-//
-// * ListGrants
-//
-// * ListRetirableGrants
-//
-// * RevokeGrant
+// - ListGrants
+// - ListRetirableGrants
+// - RevokeGrant
 func (c *Client) RetireGrant(ctx context.Context, params *RetireGrantInput, optFns ...func(*Options)) (*RetireGrantOutput, error) {
 	if params == nil {
 		params = &RetireGrantInput{}
@@ -60,8 +56,7 @@ type RetireGrantInput struct {
 
 	// Identifies the grant to retire. To get the grant ID, use CreateGrant,
 	// ListGrants, or ListRetirableGrants.
-	//
-	// * Grant ID Example -
+	// - Grant ID Example -
 	// 0123456789012345678901234567890123456789012345678901234567890123
 	GrantId *string
 

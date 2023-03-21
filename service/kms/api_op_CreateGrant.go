@@ -24,41 +24,34 @@ import (
 // several programming languages, see Programming grants
 // (https://docs.aws.amazon.com/kms/latest/developerguide/programming-grants.html).
 // The CreateGrant operation returns a GrantToken and a GrantId.
-//
-// * When you
-// create, retire, or revoke a grant, there might be a brief delay, usually less
-// than five minutes, until the grant is available throughout KMS. This state is
-// known as eventual consistency. Once the grant has achieved eventual consistency,
-// the grantee principal can use the permissions in the grant without identifying
-// the grant. However, to use the permissions in the grant immediately, use the
+// - When you create,
+// retire, or revoke a grant, there might be a brief delay, usually less than five
+// minutes, until the grant is available throughout KMS. This state is known as
+// eventual consistency. Once the grant has achieved eventual consistency, the
+// grantee principal can use the permissions in the grant without identifying the
+// grant. However, to use the permissions in the grant immediately, use the
 // GrantToken that CreateGrant returns. For details, see Using a grant token
 // (https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token)
 // in the Key Management Service Developer Guide .
+// - The CreateGrant operation also
+// returns a GrantId. You can use the GrantId and a key identifier to identify the
+// grant in the RetireGrant and RevokeGrant operations. To find the grant ID, use
+// the ListGrants or ListRetirableGrants operations.
 //
-// * The CreateGrant operation
-// also returns a GrantId. You can use the GrantId and a key identifier to identify
-// the grant in the RetireGrant and RevokeGrant operations. To find the grant ID,
-// use the ListGrants or ListRetirableGrants operations.
-//
-// The KMS key that you use
-// for this operation must be in a compatible key state. For details, see Key
-// states of KMS keys
-// (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
-// Key Management Service Developer Guide. Cross-account use: Yes. To perform this
-// operation on a KMS key in a different Amazon Web Services account, specify the
-// key ARN in the value of the KeyId parameter. Required permissions:
+// The KMS key that you use for
+// this operation must be in a compatible key state. For details, see Key states of
+// KMS keys (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// in the Key Management Service Developer Guide. Cross-account use: Yes. To
+// perform this operation on a KMS key in a different Amazon Web Services account,
+// specify the key ARN in the value of the KeyId parameter. Required permissions:
 // kms:CreateGrant
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (key policy) Related operations:
-//
-// * ListGrants
-//
-// * ListRetirableGrants
-//
-// *
+// - ListGrants
+// - ListRetirableGrants
+// -
 // RetireGrant
-//
-// * RevokeGrant
+// - RevokeGrant
 func (c *Client) CreateGrant(ctx context.Context, params *CreateGrantInput, optFns ...func(*Options)) (*CreateGrantOutput, error) {
 	if params == nil {
 		params = &CreateGrantInput{}
@@ -91,10 +84,8 @@ type CreateGrantInput struct {
 	// use this KMS key. Specify the key ID or key ARN of the KMS key. To specify a KMS
 	// key in a different Amazon Web Services account, you must use the key ARN. For
 	// example:
-	//
-	// * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// * Key ARN:
+	// - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	// - Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// To

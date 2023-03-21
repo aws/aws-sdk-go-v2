@@ -33,8 +33,7 @@ import (
 // accounts from removing or deleting objects from your bucket, you must deny them
 // the s3:DeleteObject, s3:DeleteObjectVersion, and s3:PutLifeCycleConfiguration
 // actions. The following action is related to DeleteObject:
-//
-// * PutObject
+// - PutObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
 func (c *Client) DeleteObject(ctx context.Context, params *DeleteObjectInput, optFns ...func(*Options)) (*DeleteObjectOutput, error) {
 	if params == nil {

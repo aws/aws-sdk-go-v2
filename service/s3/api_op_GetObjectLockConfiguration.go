@@ -17,9 +17,7 @@ import (
 // in the specified bucket. For more information, see Locking Objects
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html). The
 // following action is related to GetObjectLockConfiguration:
-//
-// *
-// GetObjectAttributes
+// - GetObjectAttributes
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAttributes.html)
 func (c *Client) GetObjectLockConfiguration(ctx context.Context, params *GetObjectLockConfigurationInput, optFns ...func(*Options)) (*GetObjectLockConfigurationOutput, error) {
 	if params == nil {

@@ -28,31 +28,24 @@ import (
 // you have enough time to apply for an increase before you hit a quota. For
 // example, you could use one of the Amazon Web Services SDKs to do the
 // following:
-//
-// * Call DescribeLimits for a particular Region to obtain your current
+// - Call DescribeLimits for a particular Region to obtain your current
 // account quotas on provisioned capacity there.
-//
-// * Create a variable to hold the
+// - Create a variable to hold the
 // aggregate read capacity units provisioned for all your tables in that Region,
 // and one to hold the aggregate write capacity units. Zero them both.
-//
-// * Call
+// - Call
 // ListTables to obtain a list of all your DynamoDB tables.
-//
-// * For each table name
+// - For each table name
 // listed by ListTables, do the following:
-//
-// * Call DescribeTable with the table
+// - Call DescribeTable with the table
 // name.
-//
-// * Use the data returned by DescribeTable to add the read capacity units
+// - Use the data returned by DescribeTable to add the read capacity units
 // and write capacity units provisioned for the table itself to your variables.
-//
-// *
+// -
 // If the table has one or more global secondary indexes (GSIs), loop over these
 // GSIs and add their provisioned capacity values to your variables as well.
 //
-// *
+// -
 // Report the account quotas for that Region returned by DescribeLimits, along with
 // the total current provisioned capacity levels you have calculated.
 //

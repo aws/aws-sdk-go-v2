@@ -65,36 +65,29 @@ type GetItemInput struct {
 
 	// One or more substitution tokens for attribute names in an expression. The
 	// following are some use cases for using ExpressionAttributeNames:
-	//
-	// * To access an
+	// - To access an
 	// attribute whose name conflicts with a DynamoDB reserved word.
-	//
-	// * To create a
+	// - To create a
 	// placeholder for repeating occurrences of an attribute name in an expression.
-	//
-	// *
+	// -
 	// To prevent special characters in an attribute name from being misinterpreted in
 	// an expression.
 	//
 	// Use the # character in an expression to dereference an attribute
 	// name. For example, consider the following attribute name:
+	// - Percentile
 	//
-	// * Percentile
-	//
-	// The
-	// name of this attribute conflicts with a reserved word, so it cannot be used
-	// directly in an expression. (For the complete list of reserved words, see
-	// Reserved Words
+	// The name
+	// of this attribute conflicts with a reserved word, so it cannot be used directly
+	// in an expression. (For the complete list of reserved words, see Reserved Words
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html)
 	// in the Amazon DynamoDB Developer Guide). To work around this, you could specify
 	// the following for ExpressionAttributeNames:
-	//
-	// * {"#P":"Percentile"}
+	// - {"#P":"Percentile"}
 	//
 	// You could
 	// then use this substitution in an expression, as in this example:
-	//
-	// * #P =
+	// - #P =
 	// :val
 	//
 	// Tokens that begin with the : character are expression attribute values,
@@ -116,18 +109,15 @@ type GetItemInput struct {
 
 	// Determines the level of detail about either provisioned or on-demand throughput
 	// consumption that is returned in the response:
-	//
-	// * INDEXES - The response includes
+	// - INDEXES - The response includes
 	// the aggregate ConsumedCapacity for the operation, together with ConsumedCapacity
 	// for each table and secondary index that was accessed. Note that some operations,
 	// such as GetItem and BatchGetItem, do not access any indexes at all. In these
 	// cases, specifying INDEXES will only return ConsumedCapacity information for
 	// table(s).
-	//
-	// * TOTAL - The response includes only the aggregate ConsumedCapacity
+	// - TOTAL - The response includes only the aggregate ConsumedCapacity
 	// for the operation.
-	//
-	// * NONE - No ConsumedCapacity details are included in the
+	// - NONE - No ConsumedCapacity details are included in the
 	// response.
 	ReturnConsumedCapacity types.ReturnConsumedCapacity
 

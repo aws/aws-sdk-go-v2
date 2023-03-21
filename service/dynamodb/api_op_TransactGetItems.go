@@ -21,18 +21,14 @@ import (
 // items from tables in more than one Amazon Web Services account or Region. The
 // aggregate size of the items in the transaction cannot exceed 4 MB. DynamoDB
 // rejects the entire TransactGetItems request if any of the following is true:
-//
-// *
-// A conflicting operation is in the process of updating an item to be read.
-//
-// *
-// There is insufficient provisioned capacity for the transaction to be
-// completed.
-//
-// * There is a user error, such as an invalid data format.
-//
-// * The
-// aggregate size of the items in the transaction exceeded 4 MB.
+// - A
+// conflicting operation is in the process of updating an item to be read.
+// - There
+// is insufficient provisioned capacity for the transaction to be completed.
+// -
+// There is a user error, such as an invalid data format.
+// - The aggregate size of
+// the items in the transaction exceeded 4 MB.
 func (c *Client) TransactGetItems(ctx context.Context, params *TransactGetItemsInput, optFns ...func(*Options)) (*TransactGetItemsOutput, error) {
 	if params == nil {
 		params = &TransactGetItemsInput{}

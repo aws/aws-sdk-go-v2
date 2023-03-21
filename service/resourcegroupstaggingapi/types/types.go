@@ -29,16 +29,14 @@ type ComplianceDetails struct {
 // Services service that hosts the resource that the ARN key represents. The
 // following are common error codes that you might receive from other Amazon Web
 // Services services:
-//
-// * InternalServiceException – This can mean that the Resource
+// - InternalServiceException – This can mean that the Resource
 // Groups Tagging API didn't receive a response from another Amazon Web Services
 // service. It can also mean that the resource type in the request is not supported
 // by the Resource Groups Tagging API. In these cases, it's safe to retry the
 // request and then call GetResources
 // (https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html)
 // to verify the changes.
-//
-// * AccessDeniedException – This can mean that you need
+// - AccessDeniedException – This can mean that you need
 // permission to call the tagging operations in the Amazon Web Services service
 // that contains the resource. For example, to use the Resource Groups Tagging API
 // to tag a Amazon CloudWatch alarm resource, you need permission to call both

@@ -23,18 +23,14 @@ import (
 // countries and you want to block the requests, you can create an GeoMatchSet that
 // contains those countries and then configure AWS WAF to block the requests. To
 // create and configure a GeoMatchSet, perform the following steps:
-//
-// * Use
+// - Use
 // GetChangeToken to get the change token that you provide in the ChangeToken
 // parameter of a CreateGeoMatchSet request.
-//
-// * Submit a CreateGeoMatchSet
+// - Submit a CreateGeoMatchSet
 // request.
-//
-// * Use GetChangeToken to get the change token that you provide in the
+// - Use GetChangeToken to get the change token that you provide in the
 // ChangeToken parameter of an UpdateGeoMatchSet request.
-//
-// * Submit an
+// - Submit an
 // UpdateGeoMatchSetSet request to specify the countries that you want AWS WAF to
 // watch for.
 //

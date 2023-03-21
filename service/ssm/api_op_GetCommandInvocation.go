@@ -146,49 +146,39 @@ type GetCommandInvocationOutput struct {
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html)
 	// in the Amazon Web Services Systems Manager User Guide. StatusDetails can be one
 	// of the following values:
-	//
-	// * Pending: The command hasn't been sent to the managed
+	// - Pending: The command hasn't been sent to the managed
 	// node.
-	//
-	// * In Progress: The command has been sent to the managed node but hasn't
+	// - In Progress: The command has been sent to the managed node but hasn't
 	// reached a terminal state.
-	//
-	// * Delayed: The system attempted to send the command
-	// to the target, but the target wasn't available. The managed node might not be
+	// - Delayed: The system attempted to send the command to
+	// the target, but the target wasn't available. The managed node might not be
 	// available because of network issues, because the node was stopped, or for
 	// similar reasons. The system will try to send the command again.
-	//
-	// * Success: The
+	// - Success: The
 	// command or plugin ran successfully. This is a terminal state.
-	//
-	// * Delivery Timed
+	// - Delivery Timed
 	// Out: The command wasn't delivered to the managed node before the delivery
 	// timeout expired. Delivery timeouts don't count against the parent command's
 	// MaxErrors limit, but they do contribute to whether the parent command status is
 	// Success or Incomplete. This is a terminal state.
-	//
-	// * Execution Timed Out: The
+	// - Execution Timed Out: The
 	// command started to run on the managed node, but the execution wasn't complete
 	// before the timeout expired. Execution timeouts count against the MaxErrors limit
 	// of the parent command. This is a terminal state.
-	//
-	// * Failed: The command wasn't
+	// - Failed: The command wasn't
 	// run successfully on the managed node. For a plugin, this indicates that the
 	// result code wasn't zero. For a command invocation, this indicates that the
 	// result code for one or more plugins wasn't zero. Invocation failures count
 	// against the MaxErrors limit of the parent command. This is a terminal state.
-	//
-	// *
+	// -
 	// Cancelled: The command was terminated before it was completed. This is a
 	// terminal state.
-	//
-	// * Undeliverable: The command can't be delivered to the managed
+	// - Undeliverable: The command can't be delivered to the managed
 	// node. The node might not exist or might not be responding. Undeliverable
 	// invocations don't count against the parent command's MaxErrors limit and don't
 	// contribute to whether the parent command status is Success or Incomplete. This
 	// is a terminal state.
-	//
-	// * Terminated: The parent command exceeded its MaxErrors
+	// - Terminated: The parent command exceeded its MaxErrors
 	// limit and subsequent command invocations were canceled by the system. This is a
 	// terminal state.
 	StatusDetails *string

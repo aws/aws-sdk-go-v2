@@ -16,8 +16,7 @@ import (
 // Objects (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html). This
 // action is not supported by Amazon S3 on Outposts. The following action is
 // related to GetObjectLegalHold:
-//
-// * GetObjectAttributes
+// - GetObjectAttributes
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAttributes.html)
 func (c *Client) GetObjectLegalHold(ctx context.Context, params *GetObjectLegalHoldInput, optFns ...func(*Options)) (*GetObjectLegalHoldOutput, error) {
 	if params == nil {

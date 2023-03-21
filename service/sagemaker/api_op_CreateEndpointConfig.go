@@ -79,16 +79,12 @@ type CreateEndpointConfigInput struct {
 	// key that SageMaker uses to encrypt data on the storage volume attached to the ML
 	// compute instance that hosts the endpoint. The KmsKeyId can be any of the
 	// following formats:
-	//
-	// * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// * Key ARN:
+	// - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	// - Key ARN:
 	// arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// *
+	// -
 	// Alias name: alias/ExampleAlias
-	//
-	// * Alias name ARN:
+	// - Alias name ARN:
 	// arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias
 	//
 	// The KMS key policy must

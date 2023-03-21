@@ -197,23 +197,19 @@ type DefaultClientBrandingAttributes struct {
 	LogoUrl *string
 
 	// The support email. The company's customer support email address.
-	//
-	// * In each
+	// - In each
 	// platform type, the SupportEmail and SupportLink parameters are mutually
-	// exclusive. You can specify one parameter for each platform type, but not
-	// both.
-	//
-	// * The default email is workspaces-feedback@amazon.com.
+	// exclusive. You can specify one parameter for each platform type, but not both.
+	// -
+	// The default email is workspaces-feedback@amazon.com.
 	SupportEmail *string
 
 	// The support link. The link for the company's customer support page for their
 	// WorkSpace.
-	//
-	// * In each platform type, the SupportEmail and SupportLink parameters
+	// - In each platform type, the SupportEmail and SupportLink parameters
 	// are mutually exclusive.You can specify one parameter for each platform type, but
 	// not both.
-	//
-	// * The default support link is workspaces-feedback@amazon.com.
+	// - The default support link is workspaces-feedback@amazon.com.
 	SupportLink *string
 
 	noSmithyDocumentSerde
@@ -240,23 +236,19 @@ type DefaultImportClientBrandingAttributes struct {
 	Logo []byte
 
 	// The support email. The company's customer support email address.
-	//
-	// * In each
+	// - In each
 	// platform type, the SupportEmail and SupportLink parameters are mutually
-	// exclusive. You can specify one parameter for each platform type, but not
-	// both.
-	//
-	// * The default email is workspaces-feedback@amazon.com.
+	// exclusive. You can specify one parameter for each platform type, but not both.
+	// -
+	// The default email is workspaces-feedback@amazon.com.
 	SupportEmail *string
 
 	// The support link. The link for the company's customer support page for their
 	// WorkSpace.
-	//
-	// * In each platform type, the SupportEmail and SupportLink parameters
+	// - In each platform type, the SupportEmail and SupportLink parameters
 	// are mutually exclusive. You can specify one parameter for each platform type,
 	// but not both.
-	//
-	// * The default support link is workspaces-feedback@amazon.com.
+	// - The default support link is workspaces-feedback@amazon.com.
 	SupportLink *string
 
 	noSmithyDocumentSerde
@@ -403,23 +395,19 @@ type IosClientBrandingAttributes struct {
 	LogoUrl *string
 
 	// The support email. The company's customer support email address.
-	//
-	// * In each
+	// - In each
 	// platform type, the SupportEmail and SupportLink parameters are mutually
-	// exclusive. You can specify one parameter for each platform type, but not
-	// both.
-	//
-	// * The default email is workspaces-feedback@amazon.com.
+	// exclusive. You can specify one parameter for each platform type, but not both.
+	// -
+	// The default email is workspaces-feedback@amazon.com.
 	SupportEmail *string
 
 	// The support link. The link for the company's customer support page for their
 	// WorkSpace.
-	//
-	// * In each platform type, the SupportEmail and SupportLink parameters
+	// - In each platform type, the SupportEmail and SupportLink parameters
 	// are mutually exclusive. You can specify one parameter for each platform type,
 	// but not both.
-	//
-	// * The default support link is workspaces-feedback@amazon.com.
+	// - The default support link is workspaces-feedback@amazon.com.
 	SupportLink *string
 
 	noSmithyDocumentSerde
@@ -463,23 +451,19 @@ type IosImportClientBrandingAttributes struct {
 	Logo3x []byte
 
 	// The support email. The company's customer support email address.
-	//
-	// * In each
+	// - In each
 	// platform type, the SupportEmail and SupportLink parameters are mutually
-	// exclusive. You can specify one parameter for each platform type, but not
-	// both.
-	//
-	// * The default email is workspaces-feedback@amazon.com.
+	// exclusive. You can specify one parameter for each platform type, but not both.
+	// -
+	// The default email is workspaces-feedback@amazon.com.
 	SupportEmail *string
 
 	// The support link. The link for the company's customer support page for their
 	// WorkSpace.
-	//
-	// * In each platform type, the SupportEmail and SupportLink parameters
+	// - In each platform type, the SupportEmail and SupportLink parameters
 	// are mutually exclusive. You can specify one parameter for each platform type,
 	// but not both.
-	//
-	// * The default support link is workspaces-feedback@amazon.com.
+	// - The default support link is workspaces-feedback@amazon.com.
 	SupportLink *string
 
 	noSmithyDocumentSerde
@@ -605,16 +589,13 @@ type SamlProperties struct {
 
 	// Indicates the status of SAML 2.0 authentication. These statuses include the
 	// following.
-	//
-	// * If the setting is DISABLED, end users will be directed to login
+	// - If the setting is DISABLED, end users will be directed to login
 	// with their directory credentials.
-	//
-	// * If the setting is ENABLED, end users will
-	// be directed to login via the user access URL. Users attempting to connect to
+	// - If the setting is ENABLED, end users will be
+	// directed to login via the user access URL. Users attempting to connect to
 	// WorkSpaces from a client application that does not support SAML 2.0
 	// authentication will not be able to connect.
-	//
-	// * If the setting is
+	// - If the setting is
 	// ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK, end users will be directed to login via
 	// the user access URL on supported client applications, but will not prevent
 	// clients that do not support SAML 2.0 authentication from connecting as if SAML
@@ -928,14 +909,12 @@ type WorkspaceCreationProperties struct {
 	// "OU=value,DC=value,DC=value", where value is any string of characters, and the
 	// number of domain components (DCs) is two or more. For example,
 	// OU=WorkSpaces_machines,DC=machines,DC=example,DC=com.
-	//
-	// * To avoid errors,
-	// certain characters in the distinguished name must be escaped. For more
-	// information, see  Distinguished Names
+	// - To avoid errors, certain
+	// characters in the distinguished name must be escaped. For more information, see
+	// Distinguished Names
 	// (https://docs.microsoft.com/previous-versions/windows/desktop/ldap/distinguished-names)
 	// in the Microsoft documentation.
-	//
-	// * The API doesn't validate whether the OU
+	// - The API doesn't validate whether the OU
 	// exists.
 	DefaultOu *string
 
@@ -1096,14 +1075,11 @@ type WorkspaceProperties struct {
 
 	// The protocol. For more information, see  Protocols for Amazon WorkSpaces
 	// (https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-protocols.html).
-	//
-	// *
+	// -
 	// Only available for WorkSpaces created with PCoIP bundles.
-	//
-	// * The Protocols
+	// - The Protocols
 	// property is case sensitive. Ensure you use PCOIP or WSP.
-	//
-	// * Unavailable for
+	// - Unavailable for
 	// Windows 7 WorkSpaces and WorkSpaces using GPU-based bundles (Graphics,
 	// GraphicsPro, Graphics.g4dn, and GraphicsPro.g4dn).
 	Protocols []Protocol

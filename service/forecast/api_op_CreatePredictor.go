@@ -36,14 +36,10 @@ import (
 // forecast types. By default, these are the p10, p50, and p90 quantile losses. For
 // more information, see EvaluationResult. When AutoML is enabled, the following
 // properties are disallowed:
-//
-// * AlgorithmArn
-//
-// * HPOConfig
-//
-// * PerformHPO
-//
-// *
+// - AlgorithmArn
+// - HPOConfig
+// - PerformHPO
+// -
 // TrainingParameters
 //
 // To get a list of all of your predictors, use the
@@ -95,21 +91,15 @@ type CreatePredictorInput struct {
 
 	// The Amazon Resource Name (ARN) of the algorithm to use for model training.
 	// Required if PerformAutoML is not set to true. Supported algorithms:
-	//
-	// *
+	// -
 	// arn:aws:forecast:::algorithm/ARIMA
-	//
-	// * arn:aws:forecast:::algorithm/CNN-QR
-	//
-	// *
+	// - arn:aws:forecast:::algorithm/CNN-QR
+	// -
 	// arn:aws:forecast:::algorithm/Deep_AR_Plus
-	//
-	// * arn:aws:forecast:::algorithm/ETS
-	//
-	// *
+	// - arn:aws:forecast:::algorithm/ETS
+	// -
 	// arn:aws:forecast:::algorithm/NPTS
-	//
-	// * arn:aws:forecast:::algorithm/Prophet
+	// - arn:aws:forecast:::algorithm/Prophet
 	AlgorithmArn *string
 
 	// The LatencyOptimized AutoML override strategy is only available in private beta.
@@ -165,38 +155,29 @@ type CreatePredictorInput struct {
 	// the valid range for each tunable hyperparameter. In this case, you are required
 	// to specify an algorithm and PerformAutoML must be false. The following
 	// algorithms support HPO:
-	//
-	// * DeepAR+
-	//
-	// * CNN-QR
+	// - DeepAR+
+	// - CNN-QR
 	PerformHPO *bool
 
 	// The optional metadata that you apply to the predictor to help you categorize and
 	// organize them. Each tag consists of a key and an optional value, both of which
 	// you define. The following basic restrictions apply to tags:
-	//
-	// * Maximum number of
+	// - Maximum number of
 	// tags per resource - 50.
-	//
-	// * For each resource, each tag key must be unique, and
+	// - For each resource, each tag key must be unique, and
 	// each tag key can have only one value.
-	//
-	// * Maximum key length - 128 Unicode
+	// - Maximum key length - 128 Unicode
 	// characters in UTF-8.
-	//
-	// * Maximum value length - 256 Unicode characters in
-	// UTF-8.
-	//
-	// * If your tagging schema is used across multiple services and resources,
-	// remember that other services may have restrictions on allowed characters.
-	// Generally allowed characters are: letters, numbers, and spaces representable in
-	// UTF-8, and the following characters: + - = . _ : / @.
-	//
-	// * Tag keys and values are
-	// case sensitive.
-	//
-	// * Do not use aws:, AWS:, or any upper or lowercase combination
-	// of such as a prefix for keys as it is reserved for Amazon Web Services use. You
+	// - Maximum value length - 256 Unicode characters in UTF-8.
+	// -
+	// If your tagging schema is used across multiple services and resources, remember
+	// that other services may have restrictions on allowed characters. Generally
+	// allowed characters are: letters, numbers, and spaces representable in UTF-8, and
+	// the following characters: + - = . _ : / @.
+	// - Tag keys and values are case
+	// sensitive.
+	// - Do not use aws:, AWS:, or any upper or lowercase combination of
+	// such as a prefix for keys as it is reserved for Amazon Web Services use. You
 	// cannot edit or delete tag keys with this prefix. Values can have this prefix. If
 	// a tag value has aws as its prefix but the key does not, then Forecast considers
 	// it to be a user tag and will count against the limit of 50 tags. Tags with only

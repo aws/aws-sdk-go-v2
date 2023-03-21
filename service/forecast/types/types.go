@@ -22,17 +22,13 @@ type Action struct {
 	AttributeName *string
 
 	// The operation that is applied to the provided attribute. Operations include:
-	//
-	// *
+	// -
 	// ADD - adds Value to all rows of AttributeName.
-	//
-	// * SUBTRACT - subtracts Value
-	// from all rows of AttributeName.
-	//
-	// * MULTIPLY - multiplies all rows of
-	// AttributeName by Value.
-	//
-	// * DIVIDE - divides all rows of AttributeName by Value.
+	// - SUBTRACT - subtracts Value from
+	// all rows of AttributeName.
+	// - MULTIPLY - multiplies all rows of AttributeName by
+	// Value.
+	// - DIVIDE - divides all rows of AttributeName by Value.
 	//
 	// This member is required.
 	Operation Operation
@@ -68,154 +64,87 @@ type AdditionalDataset struct {
 	// Weather Index To enable the Weather Index, do not specify a value for
 	// Configuration. Holidays Holidays To enable Holidays, set CountryCode to one of
 	// the following two-letter country codes:
-	//
-	// * "AL" - ALBANIA
-	//
-	// * "AR" - ARGENTINA
-	//
-	// *
+	// - "AL" - ALBANIA
+	// - "AR" - ARGENTINA
+	// -
 	// "AT" - AUSTRIA
-	//
-	// * "AU" - AUSTRALIA
-	//
-	// * "BA" - BOSNIA HERZEGOVINA
-	//
-	// * "BE" -
-	// BELGIUM
-	//
-	// * "BG" - BULGARIA
-	//
-	// * "BO" - BOLIVIA
-	//
-	// * "BR" - BRAZIL
-	//
-	// * "BY" -
-	// BELARUS
-	//
-	// * "CA" - CANADA
-	//
-	// * "CL" - CHILE
-	//
-	// * "CO" - COLOMBIA
-	//
-	// * "CR" - COSTA
-	// RICA
-	//
-	// * "HR" - CROATIA
-	//
-	// * "CZ" - CZECH REPUBLIC
-	//
-	// * "DK" - DENMARK
-	//
-	// * "EC" -
-	// ECUADOR
-	//
-	// * "EE" - ESTONIA
-	//
-	// * "ET" - ETHIOPIA
-	//
-	// * "FI" - FINLAND
-	//
-	// * "FR" -
-	// FRANCE
-	//
-	// * "DE" - GERMANY
-	//
-	// * "GR" - GREECE
-	//
-	// * "HU" - HUNGARY
-	//
-	// * "IS" - ICELAND
-	//
-	// *
-	// "IN" - INDIA
-	//
-	// * "IE" - IRELAND
-	//
-	// * "IT" - ITALY
-	//
-	// * "JP" - JAPAN
-	//
-	// * "KZ" -
-	// KAZAKHSTAN
-	//
-	// * "KR" - KOREA
-	//
-	// * "LV" - LATVIA
-	//
-	// * "LI" - LIECHTENSTEIN
-	//
-	// * "LT" -
-	// LITHUANIA
-	//
-	// * "LU" - LUXEMBOURG
-	//
-	// * "MK" - MACEDONIA
-	//
-	// * "MT" - MALTA
-	//
-	// * "MX" -
-	// MEXICO
-	//
-	// * "MD" - MOLDOVA
-	//
-	// * "ME" - MONTENEGRO
-	//
-	// * "NL" - NETHERLANDS
-	//
-	// * "NZ" -
-	// NEW ZEALAND
-	//
-	// * "NI" - NICARAGUA
-	//
-	// * "NG" - NIGERIA
-	//
-	// * "NO" - NORWAY
-	//
-	// * "PA" -
-	// PANAMA
-	//
-	// * "PY" - PARAGUAY
-	//
-	// * "PE" - PERU
-	//
-	// * "PL" - POLAND
-	//
-	// * "PT" - PORTUGAL
-	//
-	// *
-	// "RO" - ROMANIA
-	//
-	// * "RU" - RUSSIA
-	//
-	// * "RS" - SERBIA
-	//
-	// * "SK" - SLOVAKIA
-	//
-	// * "SI" -
-	// SLOVENIA
-	//
-	// * "ZA" - SOUTH AFRICA
-	//
-	// * "ES" - SPAIN
-	//
-	// * "SE" - SWEDEN
-	//
-	// * "CH" -
+	// - "AU" - AUSTRALIA
+	// - "BA" - BOSNIA HERZEGOVINA
+	// - "BE" - BELGIUM
+	// -
+	// "BG" - BULGARIA
+	// - "BO" - BOLIVIA
+	// - "BR" - BRAZIL
+	// - "BY" - BELARUS
+	// - "CA" -
+	// CANADA
+	// - "CL" - CHILE
+	// - "CO" - COLOMBIA
+	// - "CR" - COSTA RICA
+	// - "HR" - CROATIA
+	// -
+	// "CZ" - CZECH REPUBLIC
+	// - "DK" - DENMARK
+	// - "EC" - ECUADOR
+	// - "EE" - ESTONIA
+	// - "ET"
+	// - ETHIOPIA
+	// - "FI" - FINLAND
+	// - "FR" - FRANCE
+	// - "DE" - GERMANY
+	// - "GR" - GREECE
+	// -
+	// "HU" - HUNGARY
+	// - "IS" - ICELAND
+	// - "IN" - INDIA
+	// - "IE" - IRELAND
+	// - "IT" - ITALY
+	// -
+	// "JP" - JAPAN
+	// - "KZ" - KAZAKHSTAN
+	// - "KR" - KOREA
+	// - "LV" - LATVIA
+	// - "LI" -
+	// LIECHTENSTEIN
+	// - "LT" - LITHUANIA
+	// - "LU" - LUXEMBOURG
+	// - "MK" - MACEDONIA
+	// - "MT" -
+	// MALTA
+	// - "MX" - MEXICO
+	// - "MD" - MOLDOVA
+	// - "ME" - MONTENEGRO
+	// - "NL" -
+	// NETHERLANDS
+	// - "NZ" - NEW ZEALAND
+	// - "NI" - NICARAGUA
+	// - "NG" - NIGERIA
+	// - "NO" -
+	// NORWAY
+	// - "PA" - PANAMA
+	// - "PY" - PARAGUAY
+	// - "PE" - PERU
+	// - "PL" - POLAND
+	// - "PT" -
+	// PORTUGAL
+	// - "RO" - ROMANIA
+	// - "RU" - RUSSIA
+	// - "RS" - SERBIA
+	// - "SK" - SLOVAKIA
+	// -
+	// "SI" - SLOVENIA
+	// - "ZA" - SOUTH AFRICA
+	// - "ES" - SPAIN
+	// - "SE" - SWEDEN
+	// - "CH" -
 	// SWITZERLAND
-	//
-	// * "UA" - UKRAINE
-	//
-	// * "AE" - UNITED ARAB EMIRATES
-	//
-	// * "US" - UNITED
+	// - "UA" - UKRAINE
+	// - "AE" - UNITED ARAB EMIRATES
+	// - "US" - UNITED
 	// STATES
-	//
-	// * "UK" - UNITED KINGDOM
-	//
-	// * "UY" - URUGUAY
-	//
-	// * "VE" - VENEZUELA
+	// - "UK" - UNITED KINGDOM
+	// - "UY" - URUGUAY
+	// - "VE" - VENEZUELA
 	Configuration map[string][]string
 
 	noSmithyDocumentSerde
@@ -247,31 +176,24 @@ type AttributeConfig struct {
 	// attributes do not accept aggregation parameters. The following list shows the
 	// parameters and their valid values for the "filling" featurization method for a
 	// Target Time Series dataset. Default values are bolded.
-	//
-	// * aggregation: sum, avg,
+	// - aggregation: sum, avg,
 	// first, min, max
+	// - frontfill: none
+	// - middlefill: zero, nan (not a number), value,
+	// median, mean, min, max
+	// - backfill: zero, nan, value, median, mean, min, max
 	//
-	// * frontfill: none
+	// The
+	// following list shows the parameters and their valid values for a Related Time
+	// Series featurization method (there are no defaults):
+	// - middlefill: zero, value,
+	// median, mean, min, max
+	// - backfill: zero, value, median, mean, min, max
+	// -
+	// futurefill: zero, value, median, mean, min, max
 	//
-	// * middlefill: zero, nan (not a number),
-	// value, median, mean, min, max
-	//
-	// * backfill: zero, nan, value, median, mean, min,
-	// max
-	//
-	// The following list shows the parameters and their valid values for a
-	// Related Time Series featurization method (there are no defaults):
-	//
-	// * middlefill:
-	// zero, value, median, mean, min, max
-	//
-	// * backfill: zero, value, median, mean, min,
-	// max
-	//
-	// * futurefill: zero, value, median, mean, min, max
-	//
-	// To set a filling method
-	// to a specific value, set the fill parameter to value and define the value in a
+	// To set a filling method to a
+	// specific value, set the fill parameter to value and define the value in a
 	// corresponding _value parameter. For example, to set backfilling to a value of 2,
 	// include the following: "backfill": "value" and "backfill_value":"2".
 	//
@@ -447,35 +369,25 @@ type DatasetImportJobSummary struct {
 
 	// The last time the resource was modified. The timestamp depends on the status of
 	// the job:
-	//
-	// * CREATE_PENDING - The CreationTime.
-	//
-	// * CREATE_IN_PROGRESS - The
-	// current timestamp.
-	//
-	// * CREATE_STOPPING - The current timestamp.
-	//
-	// * CREATE_STOPPED
-	// - When the job stopped.
-	//
-	// * ACTIVE or CREATE_FAILED - When the job finished or
-	// failed.
+	// - CREATE_PENDING - The CreationTime.
+	// - CREATE_IN_PROGRESS - The current
+	// timestamp.
+	// - CREATE_STOPPING - The current timestamp.
+	// - CREATE_STOPPED - When
+	// the job stopped.
+	// - ACTIVE or CREATE_FAILED - When the job finished or failed.
 	LastModificationTime *time.Time
 
 	// If an error occurred, an informational message about the error.
 	Message *string
 
 	// The status of the dataset import job. States include:
-	//
-	// * ACTIVE
-	//
-	// *
-	// CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED
-	//
-	// * DELETE_PENDING,
-	// DELETE_IN_PROGRESS, DELETE_FAILED
-	//
-	// * CREATE_STOPPING, CREATE_STOPPED
+	// - ACTIVE
+	// - CREATE_PENDING,
+	// CREATE_IN_PROGRESS, CREATE_FAILED
+	// - DELETE_PENDING, DELETE_IN_PROGRESS,
+	// DELETE_FAILED
+	// - CREATE_STOPPING, CREATE_STOPPED
 	Status *string
 
 	noSmithyDocumentSerde
@@ -657,19 +569,13 @@ type ExplainabilityExportSummary struct {
 
 	// The last time the resource was modified. The timestamp depends on the status of
 	// the job:
-	//
-	// * CREATE_PENDING - The CreationTime.
-	//
-	// * CREATE_IN_PROGRESS - The
-	// current timestamp.
-	//
-	// * CREATE_STOPPING - The current timestamp.
-	//
-	// * CREATE_STOPPED
-	// - When the job stopped.
-	//
-	// * ACTIVE or CREATE_FAILED - When the job finished or
-	// failed.
+	// - CREATE_PENDING - The CreationTime.
+	// - CREATE_IN_PROGRESS - The current
+	// timestamp.
+	// - CREATE_STOPPING - The current timestamp.
+	// - CREATE_STOPPED - When
+	// the job stopped.
+	// - ACTIVE or CREATE_FAILED - When the job finished or failed.
 	LastModificationTime *time.Time
 
 	// Information about any errors that may have occurred during the Explainability
@@ -677,16 +583,12 @@ type ExplainabilityExportSummary struct {
 	Message *string
 
 	// The status of the Explainability export. States include:
-	//
-	// * ACTIVE
-	//
-	// *
+	// - ACTIVE
+	// -
 	// CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED
-	//
-	// * CREATE_STOPPING,
+	// - CREATE_STOPPING,
 	// CREATE_STOPPED
-	//
-	// * DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
+	// - DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
 	Status *string
 
 	noSmithyDocumentSerde
@@ -699,15 +601,11 @@ type ExplainabilityInfo struct {
 	ExplainabilityArn *string
 
 	// The status of the Explainability. States include:
-	//
-	// * ACTIVE
-	//
-	// * CREATE_PENDING,
+	// - ACTIVE
+	// - CREATE_PENDING,
 	// CREATE_IN_PROGRESS, CREATE_FAILED
-	//
-	// * CREATE_STOPPING, CREATE_STOPPED
-	//
-	// *
+	// - CREATE_STOPPING, CREATE_STOPPED
+	// -
 	// DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
 	Status *string
 
@@ -734,19 +632,13 @@ type ExplainabilitySummary struct {
 
 	// The last time the resource was modified. The timestamp depends on the status of
 	// the job:
-	//
-	// * CREATE_PENDING - The CreationTime.
-	//
-	// * CREATE_IN_PROGRESS - The
-	// current timestamp.
-	//
-	// * CREATE_STOPPING - The current timestamp.
-	//
-	// * CREATE_STOPPED
-	// - When the job stopped.
-	//
-	// * ACTIVE or CREATE_FAILED - When the job finished or
-	// failed.
+	// - CREATE_PENDING - The CreationTime.
+	// - CREATE_IN_PROGRESS - The current
+	// timestamp.
+	// - CREATE_STOPPING - The current timestamp.
+	// - CREATE_STOPPED - When
+	// the job stopped.
+	// - ACTIVE or CREATE_FAILED - When the job finished or failed.
 	LastModificationTime *time.Time
 
 	// Information about any errors that may have occurred during the Explainability
@@ -758,15 +650,11 @@ type ExplainabilitySummary struct {
 	ResourceArn *string
 
 	// The status of the Explainability. States include:
-	//
-	// * ACTIVE
-	//
-	// * CREATE_PENDING,
+	// - ACTIVE
+	// - CREATE_PENDING,
 	// CREATE_IN_PROGRESS, CREATE_FAILED
-	//
-	// * CREATE_STOPPING, CREATE_STOPPED
-	//
-	// *
+	// - CREATE_STOPPING, CREATE_STOPPED
+	// -
 	// DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
 	Status *string
 
@@ -828,23 +716,17 @@ type FeaturizationConfig struct {
 	// That means, for example, you cannot specify a frequency of 60 minutes, because
 	// that is equivalent to 1 hour. The valid values for each frequency are the
 	// following:
-	//
-	// * Minute - 1-59
-	//
-	// * Hour - 1-23
-	//
-	// * Day - 1-6
-	//
-	// * Week - 1-4
-	//
-	// * Month -
+	// - Minute - 1-59
+	// - Hour - 1-23
+	// - Day - 1-6
+	// - Week - 1-4
+	// - Month -
 	// 1-11
+	// - Year - 1
 	//
-	// * Year - 1
-	//
-	// Thus, if you want every other week forecasts, specify "2W".
-	// Or, if you want quarterly forecasts, you specify "3M". The frequency must be
-	// greater than or equal to the TARGET_TIME_SERIES dataset frequency. When a
+	// Thus, if you want every other week forecasts, specify "2W". Or,
+	// if you want quarterly forecasts, you specify "3M". The frequency must be greater
+	// than or equal to the TARGET_TIME_SERIES dataset frequency. When a
 	// RELATED_TIME_SERIES dataset is provided, the frequency must be equal to the
 	// TARGET_TIME_SERIES dataset frequency.
 	//
@@ -891,33 +773,26 @@ type FeaturizationMethod struct {
 	// attributes do not accept aggregation parameters. The following list shows the
 	// parameters and their valid values for the "filling" featurization method for a
 	// Target Time Series dataset. Bold signifies the default value.
-	//
-	// * aggregation:
+	// - aggregation:
 	// sum, avg, first, min, max
-	//
-	// * frontfill: none
-	//
-	// * middlefill: zero, nan (not a
+	// - frontfill: none
+	// - middlefill: zero, nan (not a
 	// number), value, median, mean, min, max
-	//
-	// * backfill: zero, nan, value, median,
+	// - backfill: zero, nan, value, median,
 	// mean, min, max
 	//
 	// The following list shows the parameters and their valid values
 	// for a Related Time Series featurization method (there are no defaults):
-	//
-	// *
+	// -
 	// middlefill: zero, value, median, mean, min, max
+	// - backfill: zero, value, median,
+	// mean, min, max
+	// - futurefill: zero, value, median, mean, min, max
 	//
-	// * backfill: zero, value,
-	// median, mean, min, max
-	//
-	// * futurefill: zero, value, median, mean, min, max
-	//
-	// To
-	// set a filling method to a specific value, set the fill parameter to value and
-	// define the value in a corresponding _value parameter. For example, to set
-	// backfilling to a value of 2, include the following: "backfill": "value" and
+	// To set a
+	// filling method to a specific value, set the fill parameter to value and define
+	// the value in a corresponding _value parameter. For example, to set backfilling
+	// to a value of 2, include the following: "backfill": "value" and
 	// "backfill_value":"2".
 	FeaturizationMethodParameters map[string]string
 
@@ -970,35 +845,25 @@ type ForecastExportJobSummary struct {
 
 	// The last time the resource was modified. The timestamp depends on the status of
 	// the job:
-	//
-	// * CREATE_PENDING - The CreationTime.
-	//
-	// * CREATE_IN_PROGRESS - The
-	// current timestamp.
-	//
-	// * CREATE_STOPPING - The current timestamp.
-	//
-	// * CREATE_STOPPED
-	// - When the job stopped.
-	//
-	// * ACTIVE or CREATE_FAILED - When the job finished or
-	// failed.
+	// - CREATE_PENDING - The CreationTime.
+	// - CREATE_IN_PROGRESS - The current
+	// timestamp.
+	// - CREATE_STOPPING - The current timestamp.
+	// - CREATE_STOPPED - When
+	// the job stopped.
+	// - ACTIVE or CREATE_FAILED - When the job finished or failed.
 	LastModificationTime *time.Time
 
 	// If an error occurred, an informational message about the error.
 	Message *string
 
 	// The status of the forecast export job. States include:
-	//
-	// * ACTIVE
-	//
-	// *
+	// - ACTIVE
+	// -
 	// CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED
-	//
-	// * CREATE_STOPPING,
+	// - CREATE_STOPPING,
 	// CREATE_STOPPED
-	//
-	// * DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
+	// - DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
 	//
 	// The Status
 	// of the forecast export job must be ACTIVE before you can access the forecast in
@@ -1031,19 +896,13 @@ type ForecastSummary struct {
 
 	// The last time the resource was modified. The timestamp depends on the status of
 	// the job:
-	//
-	// * CREATE_PENDING - The CreationTime.
-	//
-	// * CREATE_IN_PROGRESS - The
-	// current timestamp.
-	//
-	// * CREATE_STOPPING - The current timestamp.
-	//
-	// * CREATE_STOPPED
-	// - When the job stopped.
-	//
-	// * ACTIVE or CREATE_FAILED - When the job finished or
-	// failed.
+	// - CREATE_PENDING - The CreationTime.
+	// - CREATE_IN_PROGRESS - The current
+	// timestamp.
+	// - CREATE_STOPPING - The current timestamp.
+	// - CREATE_STOPPED - When
+	// the job stopped.
+	// - ACTIVE or CREATE_FAILED - When the job finished or failed.
 	LastModificationTime *time.Time
 
 	// If an error occurred, an informational message about the error.
@@ -1053,15 +912,11 @@ type ForecastSummary struct {
 	PredictorArn *string
 
 	// The status of the forecast. States include:
-	//
-	// * ACTIVE
-	//
-	// * CREATE_PENDING,
+	// - ACTIVE
+	// - CREATE_PENDING,
 	// CREATE_IN_PROGRESS, CREATE_FAILED
-	//
-	// * CREATE_STOPPING, CREATE_STOPPED
-	//
-	// *
+	// - CREATE_STOPPING, CREATE_STOPPED
+	// -
 	// DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
 	//
 	// The Status of the forecast
@@ -1220,18 +1075,13 @@ type MonitorInfo struct {
 	MonitorArn *string
 
 	// The status of the monitor. States include:
-	//
-	// * ACTIVE
-	//
-	// * ACTIVE_STOPPING,
+	// - ACTIVE
+	// - ACTIVE_STOPPING,
 	// ACTIVE_STOPPED
-	//
-	// * UPDATE_IN_PROGRESS
-	//
-	// * CREATE_PENDING, CREATE_IN_PROGRESS,
+	// - UPDATE_IN_PROGRESS
+	// - CREATE_PENDING, CREATE_IN_PROGRESS,
 	// CREATE_FAILED
-	//
-	// * DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
+	// - DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
 	Status *string
 
 	noSmithyDocumentSerde
@@ -1247,15 +1097,11 @@ type MonitorSummary struct {
 
 	// The last time the monitor resource was modified. The timestamp depends on the
 	// status of the job:
-	//
-	// * CREATE_PENDING - The CreationTime.
-	//
-	// * CREATE_IN_PROGRESS -
+	// - CREATE_PENDING - The CreationTime.
+	// - CREATE_IN_PROGRESS -
 	// The current timestamp.
-	//
-	// * STOPPED - When the resource stopped.
-	//
-	// * ACTIVE or
+	// - STOPPED - When the resource stopped.
+	// - ACTIVE or
 	// CREATE_FAILED - When the monitor creation finished or failed.
 	LastModificationTime *time.Time
 
@@ -1269,18 +1115,13 @@ type MonitorSummary struct {
 	ResourceArn *string
 
 	// The status of the monitor. States include:
-	//
-	// * ACTIVE
-	//
-	// * ACTIVE_STOPPING,
+	// - ACTIVE
+	// - ACTIVE_STOPPING,
 	// ACTIVE_STOPPED
-	//
-	// * UPDATE_IN_PROGRESS
-	//
-	// * CREATE_PENDING, CREATE_IN_PROGRESS,
+	// - UPDATE_IN_PROGRESS
+	// - CREATE_PENDING, CREATE_IN_PROGRESS,
 	// CREATE_FAILED
-	//
-	// * DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
+	// - DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
 	Status *string
 
 	noSmithyDocumentSerde
@@ -1320,19 +1161,13 @@ type PredictorBacktestExportJobSummary struct {
 
 	// The last time the resource was modified. The timestamp depends on the status of
 	// the job:
-	//
-	// * CREATE_PENDING - The CreationTime.
-	//
-	// * CREATE_IN_PROGRESS - The
-	// current timestamp.
-	//
-	// * CREATE_STOPPING - The current timestamp.
-	//
-	// * CREATE_STOPPED
-	// - When the job stopped.
-	//
-	// * ACTIVE or CREATE_FAILED - When the job finished or
-	// failed.
+	// - CREATE_PENDING - The CreationTime.
+	// - CREATE_IN_PROGRESS - The current
+	// timestamp.
+	// - CREATE_STOPPING - The current timestamp.
+	// - CREATE_STOPPED - When
+	// the job stopped.
+	// - ACTIVE or CREATE_FAILED - When the job finished or failed.
 	LastModificationTime *time.Time
 
 	// Information about any errors that may have occurred during the backtest export.
@@ -1345,16 +1180,12 @@ type PredictorBacktestExportJobSummary struct {
 	PredictorBacktestExportJobName *string
 
 	// The status of the predictor backtest export job. States include:
-	//
-	// * ACTIVE
-	//
-	// *
+	// - ACTIVE
+	// -
 	// CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED
-	//
-	// * CREATE_STOPPING,
+	// - CREATE_STOPPING,
 	// CREATE_STOPPED
-	//
-	// * DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
+	// - DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
 	Status *string
 
 	noSmithyDocumentSerde
@@ -1477,19 +1308,13 @@ type PredictorSummary struct {
 
 	// The last time the resource was modified. The timestamp depends on the status of
 	// the job:
-	//
-	// * CREATE_PENDING - The CreationTime.
-	//
-	// * CREATE_IN_PROGRESS - The
-	// current timestamp.
-	//
-	// * CREATE_STOPPING - The current timestamp.
-	//
-	// * CREATE_STOPPED
-	// - When the job stopped.
-	//
-	// * ACTIVE or CREATE_FAILED - When the job finished or
-	// failed.
+	// - CREATE_PENDING - The CreationTime.
+	// - CREATE_IN_PROGRESS - The current
+	// timestamp.
+	// - CREATE_STOPPING - The current timestamp.
+	// - CREATE_STOPPED - When
+	// the job stopped.
+	// - ACTIVE or CREATE_FAILED - When the job finished or failed.
 	LastModificationTime *time.Time
 
 	// If an error occurred, an informational message about the error.
@@ -1506,16 +1331,12 @@ type PredictorSummary struct {
 	ReferencePredictorSummary *ReferencePredictorSummary
 
 	// The status of the predictor. States include:
-	//
-	// * ACTIVE
-	//
-	// * CREATE_PENDING,
+	// - ACTIVE
+	// - CREATE_PENDING,
 	// CREATE_IN_PROGRESS, CREATE_FAILED
-	//
-	// * DELETE_PENDING, DELETE_IN_PROGRESS,
+	// - DELETE_PENDING, DELETE_IN_PROGRESS,
 	// DELETE_FAILED
-	//
-	// * CREATE_STOPPING, CREATE_STOPPED
+	// - CREATE_STOPPING, CREATE_STOPPED
 	//
 	// The Status of the predictor
 	// must be ACTIVE before you can use the predictor to create a forecast.
@@ -1670,154 +1491,87 @@ type SupplementaryFeature struct {
 	// Weather Index To enable the Weather Index, set the value to "true" Holidays To
 	// enable Holidays, specify a country with one of the following two-letter country
 	// codes:
-	//
-	// * "AL" - ALBANIA
-	//
-	// * "AR" - ARGENTINA
-	//
-	// * "AT" - AUSTRIA
-	//
-	// * "AU" -
-	// AUSTRALIA
-	//
-	// * "BA" - BOSNIA HERZEGOVINA
-	//
-	// * "BE" - BELGIUM
-	//
-	// * "BG" - BULGARIA
-	//
-	// *
-	// "BO" - BOLIVIA
-	//
-	// * "BR" - BRAZIL
-	//
-	// * "BY" - BELARUS
-	//
-	// * "CA" - CANADA
-	//
-	// * "CL" -
-	// CHILE
-	//
-	// * "CO" - COLOMBIA
-	//
-	// * "CR" - COSTA RICA
-	//
-	// * "HR" - CROATIA
-	//
-	// * "CZ" - CZECH
-	// REPUBLIC
-	//
-	// * "DK" - DENMARK
-	//
-	// * "EC" - ECUADOR
-	//
-	// * "EE" - ESTONIA
-	//
-	// * "ET" -
-	// ETHIOPIA
-	//
-	// * "FI" - FINLAND
-	//
-	// * "FR" - FRANCE
-	//
-	// * "DE" - GERMANY
-	//
-	// * "GR" -
-	// GREECE
-	//
-	// * "HU" - HUNGARY
-	//
-	// * "IS" - ICELAND
-	//
-	// * "IN" - INDIA
-	//
-	// * "IE" - IRELAND
-	//
-	// *
-	// "IT" - ITALY
-	//
-	// * "JP" - JAPAN
-	//
-	// * "KZ" - KAZAKHSTAN
-	//
-	// * "KR" - KOREA
-	//
-	// * "LV" -
-	// LATVIA
-	//
-	// * "LI" - LIECHTENSTEIN
-	//
-	// * "LT" - LITHUANIA
-	//
-	// * "LU" - LUXEMBOURG
-	//
-	// * "MK"
-	// - MACEDONIA
-	//
-	// * "MT" - MALTA
-	//
-	// * "MX" - MEXICO
-	//
-	// * "MD" - MOLDOVA
-	//
-	// * "ME" -
-	// MONTENEGRO
-	//
-	// * "NL" - NETHERLANDS
-	//
-	// * "NZ" - NEW ZEALAND
-	//
-	// * "NI" - NICARAGUA
-	//
-	// *
-	// "NG" - NIGERIA
-	//
-	// * "NO" - NORWAY
-	//
-	// * "PA" - PANAMA
-	//
-	// * "PY" - PARAGUAY
-	//
-	// * "PE" -
-	// PERU
-	//
-	// * "PL" - POLAND
-	//
-	// * "PT" - PORTUGAL
-	//
-	// * "RO" - ROMANIA
-	//
-	// * "RU" - RUSSIA
-	//
-	// *
-	// "RS" - SERBIA
-	//
-	// * "SK" - SLOVAKIA
-	//
-	// * "SI" - SLOVENIA
-	//
-	// * "ZA" - SOUTH AFRICA
-	//
-	// *
-	// "ES" - SPAIN
-	//
-	// * "SE" - SWEDEN
-	//
-	// * "CH" - SWITZERLAND
-	//
-	// * "UA" - UKRAINE
-	//
-	// * "AE" -
-	// UNITED ARAB EMIRATES
-	//
-	// * "US" - UNITED STATES
-	//
-	// * "UK" - UNITED KINGDOM
-	//
-	// * "UY" -
-	// URUGUAY
-	//
-	// * "VE" - VENEZUELA
+	// - "AL" - ALBANIA
+	// - "AR" - ARGENTINA
+	// - "AT" - AUSTRIA
+	// - "AU" - AUSTRALIA
+	// -
+	// "BA" - BOSNIA HERZEGOVINA
+	// - "BE" - BELGIUM
+	// - "BG" - BULGARIA
+	// - "BO" - BOLIVIA
+	// -
+	// "BR" - BRAZIL
+	// - "BY" - BELARUS
+	// - "CA" - CANADA
+	// - "CL" - CHILE
+	// - "CO" -
+	// COLOMBIA
+	// - "CR" - COSTA RICA
+	// - "HR" - CROATIA
+	// - "CZ" - CZECH REPUBLIC
+	// - "DK" -
+	// DENMARK
+	// - "EC" - ECUADOR
+	// - "EE" - ESTONIA
+	// - "ET" - ETHIOPIA
+	// - "FI" - FINLAND
+	// -
+	// "FR" - FRANCE
+	// - "DE" - GERMANY
+	// - "GR" - GREECE
+	// - "HU" - HUNGARY
+	// - "IS" -
+	// ICELAND
+	// - "IN" - INDIA
+	// - "IE" - IRELAND
+	// - "IT" - ITALY
+	// - "JP" - JAPAN
+	// - "KZ" -
+	// KAZAKHSTAN
+	// - "KR" - KOREA
+	// - "LV" - LATVIA
+	// - "LI" - LIECHTENSTEIN
+	// - "LT" -
+	// LITHUANIA
+	// - "LU" - LUXEMBOURG
+	// - "MK" - MACEDONIA
+	// - "MT" - MALTA
+	// - "MX" -
+	// MEXICO
+	// - "MD" - MOLDOVA
+	// - "ME" - MONTENEGRO
+	// - "NL" - NETHERLANDS
+	// - "NZ" - NEW
+	// ZEALAND
+	// - "NI" - NICARAGUA
+	// - "NG" - NIGERIA
+	// - "NO" - NORWAY
+	// - "PA" - PANAMA
+	// -
+	// "PY" - PARAGUAY
+	// - "PE" - PERU
+	// - "PL" - POLAND
+	// - "PT" - PORTUGAL
+	// - "RO" -
+	// ROMANIA
+	// - "RU" - RUSSIA
+	// - "RS" - SERBIA
+	// - "SK" - SLOVAKIA
+	// - "SI" - SLOVENIA
+	// -
+	// "ZA" - SOUTH AFRICA
+	// - "ES" - SPAIN
+	// - "SE" - SWEDEN
+	// - "CH" - SWITZERLAND
+	// - "UA" -
+	// UKRAINE
+	// - "AE" - UNITED ARAB EMIRATES
+	// - "US" - UNITED STATES
+	// - "UK" - UNITED
+	// KINGDOM
+	// - "UY" - URUGUAY
+	// - "VE" - VENEZUELA
 	//
 	// This member is required.
 	Value *string
@@ -1828,29 +1582,22 @@ type SupplementaryFeature struct {
 // The optional metadata that you apply to a resource to help you categorize and
 // organize them. Each tag consists of a key and an optional value, both of which
 // you define. The following basic restrictions apply to tags:
-//
-// * Maximum number of
+// - Maximum number of
 // tags per resource - 50.
-//
-// * For each resource, each tag key must be unique, and
+// - For each resource, each tag key must be unique, and
 // each tag key can have only one value.
-//
-// * Maximum key length - 128 Unicode
+// - Maximum key length - 128 Unicode
 // characters in UTF-8.
-//
-// * Maximum value length - 256 Unicode characters in
-// UTF-8.
-//
-// * If your tagging schema is used across multiple services and resources,
-// remember that other services may have restrictions on allowed characters.
-// Generally allowed characters are: letters, numbers, and spaces representable in
-// UTF-8, and the following characters: + - = . _ : / @.
-//
-// * Tag keys and values are
-// case sensitive.
-//
-// * Do not use aws:, AWS:, or any upper or lowercase combination
-// of such as a prefix for keys as it is reserved for Amazon Web Services use. You
+// - Maximum value length - 256 Unicode characters in UTF-8.
+// -
+// If your tagging schema is used across multiple services and resources, remember
+// that other services may have restrictions on allowed characters. Generally
+// allowed characters are: letters, numbers, and spaces representable in UTF-8, and
+// the following characters: + - = . _ : / @.
+// - Tag keys and values are case
+// sensitive.
+// - Do not use aws:, AWS:, or any upper or lowercase combination of
+// such as a prefix for keys as it is reserved for Amazon Web Services use. You
 // cannot edit or delete tag keys with this prefix. Values can have this prefix. If
 // a tag value has aws as its prefix but the key does not, then Forecast considers
 // it to be a user tag and will count against the limit of 50 tags. Tags with only
@@ -1880,13 +1627,10 @@ type TestWindowSummary struct {
 	Message *string
 
 	// The status of the test. Possible status values are:
-	//
-	// * ACTIVE
-	//
-	// *
+	// - ACTIVE
+	// -
 	// CREATE_IN_PROGRESS
-	//
-	// * CREATE_FAILED
+	// - CREATE_FAILED
 	Status *string
 
 	// The time at which the test ended.
@@ -2006,12 +1750,9 @@ type TimeSeriesReplacementsDataSource struct {
 // Defines the set of time series that are used to create the forecasts in a
 // TimeSeriesIdentifiers object. The TimeSeriesIdentifiers object needs the
 // following information:
-//
-// * DataSource
-//
-// * Format
-//
-// * Schema
+// - DataSource
+// - Format
+// - Schema
 type TimeSeriesSelector struct {
 
 	// Details about the import file that contains the time series for which you want
@@ -2071,34 +1812,24 @@ type WhatIfAnalysisSummary struct {
 
 	// The last time the resource was modified. The timestamp depends on the status of
 	// the job:
-	//
-	// * CREATE_PENDING - The CreationTime.
-	//
-	// * CREATE_IN_PROGRESS - The
-	// current timestamp.
-	//
-	// * CREATE_STOPPING - The current timestamp.
-	//
-	// * CREATE_STOPPED
-	// - When the job stopped.
-	//
-	// * ACTIVE or CREATE_FAILED - When the job finished or
-	// failed.
+	// - CREATE_PENDING - The CreationTime.
+	// - CREATE_IN_PROGRESS - The current
+	// timestamp.
+	// - CREATE_STOPPING - The current timestamp.
+	// - CREATE_STOPPED - When
+	// the job stopped.
+	// - ACTIVE or CREATE_FAILED - When the job finished or failed.
 	LastModificationTime *time.Time
 
 	// If an error occurred, an informational message about the error.
 	Message *string
 
 	// The status of the what-if analysis. States include:
-	//
-	// * ACTIVE
-	//
-	// * CREATE_PENDING,
+	// - ACTIVE
+	// - CREATE_PENDING,
 	// CREATE_IN_PROGRESS, CREATE_FAILED
-	//
-	// * CREATE_STOPPING, CREATE_STOPPED
-	//
-	// *
+	// - CREATE_STOPPING, CREATE_STOPPED
+	// -
 	// DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
 	//
 	// The Status of the what-if
@@ -2129,35 +1860,25 @@ type WhatIfForecastExportSummary struct {
 
 	// The last time the resource was modified. The timestamp depends on the status of
 	// the job:
-	//
-	// * CREATE_PENDING - The CreationTime.
-	//
-	// * CREATE_IN_PROGRESS - The
-	// current timestamp.
-	//
-	// * CREATE_STOPPING - The current timestamp.
-	//
-	// * CREATE_STOPPED
-	// - When the job stopped.
-	//
-	// * ACTIVE or CREATE_FAILED - When the job finished or
-	// failed.
+	// - CREATE_PENDING - The CreationTime.
+	// - CREATE_IN_PROGRESS - The current
+	// timestamp.
+	// - CREATE_STOPPING - The current timestamp.
+	// - CREATE_STOPPED - When
+	// the job stopped.
+	// - ACTIVE or CREATE_FAILED - When the job finished or failed.
 	LastModificationTime *time.Time
 
 	// If an error occurred, an informational message about the error.
 	Message *string
 
 	// The status of the what-if forecast export. States include:
-	//
-	// * ACTIVE
-	//
-	// *
+	// - ACTIVE
+	// -
 	// CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED
-	//
-	// * CREATE_STOPPING,
+	// - CREATE_STOPPING,
 	// CREATE_STOPPED
-	//
-	// * DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
+	// - DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
 	//
 	// The Status
 	// of the what-if analysis must be ACTIVE before you can access the analysis.
@@ -2187,34 +1908,24 @@ type WhatIfForecastSummary struct {
 
 	// The last time the resource was modified. The timestamp depends on the status of
 	// the job:
-	//
-	// * CREATE_PENDING - The CreationTime.
-	//
-	// * CREATE_IN_PROGRESS - The
-	// current timestamp.
-	//
-	// * CREATE_STOPPING - The current timestamp.
-	//
-	// * CREATE_STOPPED
-	// - When the job stopped.
-	//
-	// * ACTIVE or CREATE_FAILED - When the job finished or
-	// failed.
+	// - CREATE_PENDING - The CreationTime.
+	// - CREATE_IN_PROGRESS - The current
+	// timestamp.
+	// - CREATE_STOPPING - The current timestamp.
+	// - CREATE_STOPPED - When
+	// the job stopped.
+	// - ACTIVE or CREATE_FAILED - When the job finished or failed.
 	LastModificationTime *time.Time
 
 	// If an error occurred, an informational message about the error.
 	Message *string
 
 	// The status of the what-if forecast. States include:
-	//
-	// * ACTIVE
-	//
-	// * CREATE_PENDING,
+	// - ACTIVE
+	// - CREATE_PENDING,
 	// CREATE_IN_PROGRESS, CREATE_FAILED
-	//
-	// * CREATE_STOPPING, CREATE_STOPPED
-	//
-	// *
+	// - CREATE_STOPPING, CREATE_STOPPED
+	// -
 	// DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
 	//
 	// The Status of the what-if
@@ -2241,10 +1952,8 @@ type WhatIfForecastSummary struct {
 type WindowSummary struct {
 
 	// The type of evaluation.
-	//
-	// * SUMMARY - The average metrics across all windows.
-	//
-	// *
+	// - SUMMARY - The average metrics across all windows.
+	// -
 	// COMPUTED - The metrics for the specified window.
 	EvaluationType EvaluationType
 

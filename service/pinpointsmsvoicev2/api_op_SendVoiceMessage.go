@@ -62,12 +62,10 @@ type SendVoiceMessageInput struct {
 
 	// Specifies if the MessageBody field contains text or speech synthesis markup
 	// language (SSML) (https://docs.aws.amazon.com/polly/latest/dg/what-is.html).
-	//
-	// *
+	// -
 	// TEXT: This is the default value. When used the maximum character limit is
 	// 3000.
-	//
-	// * SSML: When used the maximum character limit is 6000 including SSML
+	// - SSML: When used the maximum character limit is 6000 including SSML
 	// tagging.
 	MessageBodyTextType types.VoiceMessageBodyTextType
 

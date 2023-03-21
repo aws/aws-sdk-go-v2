@@ -34,19 +34,16 @@ type DescribeDBClusterSnapshotsInput struct {
 	// The ID of the DB cluster to retrieve the list of DB cluster snapshots for. This
 	// parameter can't be used in conjunction with the DBClusterSnapshotIdentifier
 	// parameter. This parameter is not case-sensitive. Constraints:
-	//
-	// * If supplied,
+	// - If supplied,
 	// must match the identifier of an existing DBCluster.
 	DBClusterIdentifier *string
 
 	// A specific DB cluster snapshot identifier to describe. This parameter can't be
 	// used in conjunction with the DBClusterIdentifier parameter. This value is stored
 	// as a lowercase string. Constraints:
-	//
-	// * If supplied, must match the identifier of
+	// - If supplied, must match the identifier of
 	// an existing DBClusterSnapshot.
-	//
-	// * If this identifier is for an automated
+	// - If this identifier is for an automated
 	// snapshot, the SnapshotType parameter must also be specified.
 	DBClusterSnapshotIdentifier *string
 
@@ -79,18 +76,14 @@ type DescribeDBClusterSnapshotsInput struct {
 
 	// The type of DB cluster snapshots to be returned. You can specify one of the
 	// following values:
-	//
-	// * automated - Return all DB cluster snapshots that have been
+	// - automated - Return all DB cluster snapshots that have been
 	// automatically taken by Amazon Neptune for my Amazon account.
-	//
-	// * manual - Return
+	// - manual - Return
 	// all DB cluster snapshots that have been taken by my Amazon account.
-	//
-	// * shared -
+	// - shared -
 	// Return all manual DB cluster snapshots that have been shared to my Amazon
 	// account.
-	//
-	// * public - Return all DB cluster snapshots that have been marked as
+	// - public - Return all DB cluster snapshots that have been marked as
 	// public.
 	//
 	// If you don't specify a SnapshotType value, then both automated and

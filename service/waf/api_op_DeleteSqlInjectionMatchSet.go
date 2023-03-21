@@ -21,16 +21,13 @@ import (
 // SqlInjectionMatchTuple objects. If you just want to remove a
 // SqlInjectionMatchSet from a Rule, use UpdateRule. To permanently delete a
 // SqlInjectionMatchSet from AWS WAF, perform the following steps:
-//
-// * Update the
+// - Update the
 // SqlInjectionMatchSet to remove filters, if any. For more information, see
 // UpdateSqlInjectionMatchSet.
-//
-// * Use GetChangeToken to get the change token that
+// - Use GetChangeToken to get the change token that
 // you provide in the ChangeToken parameter of a DeleteSqlInjectionMatchSet
 // request.
-//
-// * Submit a DeleteSqlInjectionMatchSet request.
+// - Submit a DeleteSqlInjectionMatchSet request.
 func (c *Client) DeleteSqlInjectionMatchSet(ctx context.Context, params *DeleteSqlInjectionMatchSetInput, optFns ...func(*Options)) (*DeleteSqlInjectionMatchSetOutput, error) {
 	if params == nil {
 		params = &DeleteSqlInjectionMatchSetInput{}

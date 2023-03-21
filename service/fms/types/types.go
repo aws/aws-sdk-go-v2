@@ -744,15 +744,11 @@ type NetworkFirewallPolicyDescription struct {
 	// The default actions to take on a packet that doesn't match any stateful rules.
 	// The stateful default action is optional, and is only valid when using the strict
 	// rule order. Valid values of the stateful default action:
-	//
-	// * aws:drop_strict
-	//
-	// *
+	// - aws:drop_strict
+	// -
 	// aws:drop_established
-	//
-	// * aws:alert_strict
-	//
-	// * aws:alert_established
+	// - aws:alert_strict
+	// - aws:alert_established
 	StatefulDefaultActions []string
 
 	// Additional options governing how Network Firewall handles stateful rules. The
@@ -927,15 +923,12 @@ type Policy struct {
 	// then Firewall Manager applies the policy to all accounts except for those
 	// specified by the ExcludeMap. You can specify account IDs, OUs, or a
 	// combination:
-	//
-	// * Specify account IDs by setting the key to ACCOUNT. For example,
+	// - Specify account IDs by setting the key to ACCOUNT. For example,
 	// the following is a valid map: {“ACCOUNT” : [“accountID1”, “accountID2”]}.
-	//
-	// *
+	// -
 	// Specify OUs by setting the key to ORG_UNIT. For example, the following is a
 	// valid map: {“ORG_UNIT” : [“ouid111”, “ouid112”]}.
-	//
-	// * Specify accounts and OUs
+	// - Specify accounts and OUs
 	// together in a single map, separated with a comma. For example, the following is
 	// a valid map: {“ACCOUNT” : [“accountID1”, “accountID2”], “ORG_UNIT” : [“ouid111”,
 	// “ouid112”]}.
@@ -951,15 +944,12 @@ type Policy struct {
 	// then Firewall Manager applies the policy to all accounts except for those
 	// specified by the ExcludeMap. You can specify account IDs, OUs, or a
 	// combination:
-	//
-	// * Specify account IDs by setting the key to ACCOUNT. For example,
+	// - Specify account IDs by setting the key to ACCOUNT. For example,
 	// the following is a valid map: {“ACCOUNT” : [“accountID1”, “accountID2”]}.
-	//
-	// *
+	// -
 	// Specify OUs by setting the key to ORG_UNIT. For example, the following is a
 	// valid map: {“ORG_UNIT” : [“ouid111”, “ouid112”]}.
-	//
-	// * Specify accounts and OUs
+	// - Specify accounts and OUs
 	// together in a single map, separated with a comma. For example, the following is
 	// a valid map: {“ACCOUNT” : [“accountID1”, “accountID2”], “ORG_UNIT” : [“ouid111”,
 	// “ouid112”]}.
@@ -1555,20 +1545,17 @@ type SecurityServicePolicyData struct {
 
 	// Details about the service that are specific to the service type, in JSON
 	// format.
-	//
-	// * Example:
+	// - Example:
 	// DNS_FIREWALL"{\"type\":\"DNS_FIREWALL\",\"preProcessRuleGroups\":[{\"ruleGroupId\":\"rslvr-frg-1\",\"priority\":10}],\"postProcessRuleGroups\":[{\"ruleGroupId\":\"rslvr-frg-2\",\"priority\":9911}]}"
 	// Valid values for preProcessRuleGroups are between 1 and 99. Valid values for
 	// postProcessRuleGroups are between 9901 and 10000.
-	//
-	// * Example: NETWORK_FIREWALL -
+	// - Example: NETWORK_FIREWALL -
 	// Centralized deployment model
 	// "{\"type\":\"NETWORK_FIREWALL\",\"awsNetworkFirewallConfig\":{\"networkFirewallStatelessRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test\",\"priority\":1}],\"networkFirewallStatelessDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessFragmentDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessCustomActions\":[{\"actionName\":\"customActionName\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"metricdimensionvalue\"}]}}}],\"networkFirewallStatefulRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test\"}],\"networkFirewallLoggingConfiguration\":{\"logDestinationConfigs\":[{\"logDestinationType\":\"S3\",\"logType\":\"ALERT\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}},{\"logDestinationType\":\"S3\",\"logType\":\"FLOW\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}}],\"overrideExistingConfig\":true}},\"firewallDeploymentModel\":{\"centralizedFirewallDeploymentModel\":{\"centralizedFirewallOrchestrationConfig\":{\"inspectionVpcIds\":[{\"resourceId\":\"vpc-1234\",\"accountId\":\"123456789011\"}],\"firewallCreationConfig\":{\"endpointLocation\":{\"availabilityZoneConfigList\":[{\"availabilityZoneId\":null,\"availabilityZoneName\":\"us-east-1a\",\"allowedIPV4CidrList\":[\"10.0.0.0/28\"]}]}},\"allowedIPV4CidrList\":[]}}}}"
 	// To use the centralized deployment model, you must set PolicyOption
 	// (https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_PolicyOption.html)
 	// to CENTRALIZED.
-	//
-	// * Example: NETWORK_FIREWALL - Distributed deployment model with
+	// - Example: NETWORK_FIREWALL - Distributed deployment model with
 	// automatic Availability Zone configuration
 	// "{\"type\":\"NETWORK_FIREWALL\",\"networkFirewallStatelessRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test\",\"priority\":1}],\"networkFirewallStatelessDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessFragmentDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessCustomActions\":[{\"actionName\":\"customActionName\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"metricdimensionvalue\"}]}}}],\"networkFirewallStatefulRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test\"}],\"networkFirewallOrchestrationConfig\":{\"singleFirewallEndpointPerVPC\":false,\"allowedIPV4CidrList\":[\"10.0.0.0/28\",\"192.168.0.0/28\"],\"routeManagementAction\":\"OFF\"},\"networkFirewallLoggingConfiguration\":{\"logDestinationConfigs\":[{\"logDestinationType\":\"S3\",\"logType\":\"ALERT\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}},{\"logDestinationType\":\"S3\",\"logType\":\"FLOW\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}}],\"overrideExistingConfig\":true}}"
 	// With automatic Availbility Zone configuration, Firewall Manager chooses which
@@ -1576,16 +1563,14 @@ type SecurityServicePolicyData struct {
 	// model, you must set PolicyOption
 	// (https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_PolicyOption.html)
 	// to NULL.
-	//
-	// * Example: NETWORK_FIREWALL - Distributed deployment model with
+	// - Example: NETWORK_FIREWALL - Distributed deployment model with
 	// automatic Availability Zone configuration and route management
 	// "{\"type\":\"NETWORK_FIREWALL\",\"networkFirewallStatelessRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test\",\"priority\":1}],\"networkFirewallStatelessDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessFragmentDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessCustomActions\":[{\"actionName\":\"customActionName\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"metricdimensionvalue\"}]}}}],\"networkFirewallStatefulRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test\"}],\"networkFirewallOrchestrationConfig\":{\"singleFirewallEndpointPerVPC\":false,\"allowedIPV4CidrList\":[\"10.0.0.0/28\",\"192.168.0.0/28\"],\"routeManagementAction\":\"MONITOR\",\"routeManagementTargetTypes\":[\"InternetGateway\"]},\"networkFirewallLoggingConfiguration\":{\"logDestinationConfigs\":[{\"logDestinationType\":\"S3\",\"logType\":\"ALERT\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}},{\"logDestinationType\":\"S3\",\"logType\":
 	// \"FLOW\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}}],\"overrideExistingConfig\":true}}"
 	// To use the distributed deployment model, you must set PolicyOption
 	// (https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_PolicyOption.html)
 	// to NULL.
-	//
-	// * Example: NETWORK_FIREWALL - Distributed deployment model with custom
+	// - Example: NETWORK_FIREWALL - Distributed deployment model with custom
 	// Availability Zone configuration
 	// "{\"type\":\"NETWORK_FIREWALL\",\"networkFirewallStatelessRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test\",\"priority\":1}],\"networkFirewallStatelessDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessFragmentDefaultActions\":[\"aws:forward_to_sfe\",\"fragmentcustomactionname\"],\"networkFirewallStatelessCustomActions\":[{\"actionName\":\"customActionName\",
 	// \"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"metricdimensionvalue\"}]}}},{\"actionName\":\"fragmentcustomactionname\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"fragmentmetricdimensionvalue\"}]}}}],\"networkFirewallStatefulRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test\"}],\"networkFirewallOrchestrationConfig\":{\"firewallCreationConfig\":{
@@ -1599,15 +1584,13 @@ type SecurityServicePolicyData struct {
 	// To use the distributed deployment model, you must set PolicyOption
 	// (https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_PolicyOption.html)
 	// to NULL.
-	//
-	// * Example: NETWORK_FIREWALL - Distributed deployment model with custom
+	// - Example: NETWORK_FIREWALL - Distributed deployment model with custom
 	// Availability Zone configuration and route management
 	// "{\"type\":\"NETWORK_FIREWALL\",\"networkFirewallStatelessRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test\",\"priority\":1}],\"networkFirewallStatelessDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessFragmentDefaultActions\":[\"aws:forward_to_sfe\",\"fragmentcustomactionname\"],\"networkFirewallStatelessCustomActions\":[{\"actionName\":\"customActionName\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"metricdimensionvalue\"}]}}},{\"actionName\":\"fragmentcustomactionname\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"fragmentmetricdimensionvalue\"}]}}}],\"networkFirewallStatefulRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test\"}],\"networkFirewallOrchestrationConfig\":{\"firewallCreationConfig\":{\"endpointLocation\":{\"availabilityZoneConfigList\":[{\"availabilityZoneName\":\"us-east-1a\",\"allowedIPV4CidrList\":[\"10.0.0.0/28\"]},{\"availabilityZoneName\":\"us-east-1b\",\"allowedIPV4CidrList\":[\"10.0.0.0/28\"]}]}},\"singleFirewallEndpointPerVPC\":false,\"allowedIPV4CidrList\":null,\"routeManagementAction\":\"MONITOR\",\"routeManagementTargetTypes\":[\"InternetGateway\"],\"routeManagementConfig\":{\"allowCrossAZTrafficIfNoEndpoint\":true}},\"networkFirewallLoggingConfiguration\":{\"logDestinationConfigs\":[{\"logDestinationType\":\"S3\",\"logType\":\"ALERT\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}},{\"logDestinationType\":\"S3\",\"logType\":\"FLOW\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}}],\"overrideExistingConfig\":boolean}}"
 	// To use the distributed deployment model, you must set PolicyOption
 	// (https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_PolicyOption.html)
 	// to NULL.
-	//
-	// * Example: THIRD_PARTY_FIREWALL"{ "type":"THIRD_PARTY_FIREWALL",
+	// - Example: THIRD_PARTY_FIREWALL"{ "type":"THIRD_PARTY_FIREWALL",
 	// "thirdPartyFirewall":"PALO_ALTO_NETWORKS_CLOUD_NGFW",
 	// "thirdPartyFirewallConfig":{ "thirdPartyFirewallPolicyList":["global-1"] },
 	// "firewallDeploymentModel":{ "distributedFirewallDeploymentModel":{
@@ -1615,13 +1598,11 @@ type SecurityServicePolicyData struct {
 	// "endpointLocation":{ "availabilityZoneConfigList":[ {
 	// "availabilityZoneName":"${AvailabilityZone}" } ] } }, "allowedIPV4CidrList":[ ]
 	// } } } }"
-	//
-	// * Example:
+	// - Example:
 	// SECURITY_GROUPS_COMMON"{\"type\":\"SECURITY_GROUPS_COMMON\",\"revertManualSecurityGroupChanges\":false,\"exclusiveResourceSecurityGroupManagement\":false,
 	// \"applyToAllEC2InstanceENIs\":false,\"securityGroups\":[{\"id\":\"
 	// sg-000e55995d61a06bd\"}]}"
-	//
-	// * Example: SECURITY_GROUPS_COMMON - Security group
+	// - Example: SECURITY_GROUPS_COMMON - Security group
 	// tag distribution
 	// ""{\"type\":\"SECURITY_GROUPS_COMMON\",\"securityGroups\":[{\"id\":\"sg-000e55995d61a06bd\"}],\"revertManualSecurityGroupChanges\":true,\"exclusiveResourceSecurityGroupManagement\":false,\"applyToAllEC2InstanceENIs\":false,\"includeSharedVPC\":false,\"enableTagDistribution\":true}""
 	// Firewall Manager automatically distributes tags from the primary group to the
@@ -1632,26 +1613,22 @@ type SecurityServicePolicyData struct {
 	// the security groups created by this policy become non-compliant. Firewall
 	// Manager won't distrubute system tags added by Amazon Web Services services into
 	// the replica security groups. System tags begin with the aws: prefix.
-	//
-	// * Example:
+	// - Example:
 	// Shared VPCs. Apply the preceding policy to resources in shared VPCs as well as
 	// to those in VPCs that the account owns
 	// "{\"type\":\"SECURITY_GROUPS_COMMON\",\"revertManualSecurityGroupChanges\":false,\"exclusiveResourceSecurityGroupManagement\":false,
 	// \"applyToAllEC2InstanceENIs\":false,\"includeSharedVPC\":true,\"securityGroups\":[{\"id\":\"
 	// sg-000e55995d61a06bd\"}]}"
-	//
-	// * Example:
+	// - Example:
 	// SECURITY_GROUPS_CONTENT_AUDIT"{\"type\":\"SECURITY_GROUPS_CONTENT_AUDIT\",\"securityGroups\":[{\"id\":\"sg-000e55995d61a06bd\"}],\"securityGroupAction\":{\"type\":\"ALLOW\"}}"
 	// The security group action for content audit can be ALLOW or DENY. For ALLOW, all
 	// in-scope security group rules must be within the allowed range of the policy's
 	// security group rules. For DENY, all in-scope security group rules must not
 	// contain a value or a range that matches a rule value or range in the policy
 	// security group.
-	//
-	// * Example:
+	// - Example:
 	// SECURITY_GROUPS_USAGE_AUDIT"{\"type\":\"SECURITY_GROUPS_USAGE_AUDIT\",\"deleteUnusedSecurityGroups\":true,\"coalesceRedundantSecurityGroups\":true}"
-	//
-	// *
+	// -
 	// Specification for SHIELD_ADVANCED for Amazon CloudFront distributions
 	// "{\"type\":\"SHIELD_ADVANCED\",\"automaticResponseConfiguration\":
 	// {\"automaticResponseStatus\":\"ENABLED|IGNORED|DISABLED\",
@@ -1665,23 +1642,20 @@ type SecurityServicePolicyData struct {
 	// for overrideCustomerWebaclClassic is false. For other resource types that you
 	// can protect with a Shield Advanced policy, this ManagedServiceData configuration
 	// is an empty string.
-	//
-	// * Example:
+	// - Example:
 	// WAFV2"{\"type\":\"WAFV2\",\"preProcessRuleGroups\":[{\"ruleGroupArn\":null,\"overrideAction\":{\"type\":\"NONE\"},\"managedRuleGroupIdentifier\":{\"version\":null,\"vendorName\":\"AWS\",\"managedRuleGroupName\":\"AWSManagedRulesAmazonIpReputationList\"},\"ruleGroupType\":\"ManagedRuleGroup\",\"excludeRules\":[{\"name\":\"NoUserAgent_HEADER\"}]}],\"postProcessRuleGroups\":[],\"defaultAction\":{\"type\":\"ALLOW\"},\"overrideCustomerWebACLAssociation\":false,\"loggingConfiguration\":{\"logDestinationConfigs\":[\"arn:aws:firehose:us-west-2:12345678912:deliverystream/aws-waf-logs-fms-admin-destination\"],\"redactedFields\":[{\"redactedFieldType\":\"SingleHeader\",\"redactedFieldValue\":\"Cookies\"},{\"redactedFieldType\":\"Method\"}]}}"
 	// In the loggingConfiguration, you can specify one logDestinationConfigs, you can
 	// optionally provide up to 20 redactedFields, and the RedactedFieldType must be
 	// one of URI, QUERY_STRING, HEADER, or METHOD.
-	//
-	// * Example: WAFV2 - Firewall
-	// Manager support for WAF managed rule group versioning
+	// - Example: WAFV2 - Firewall Manager
+	// support for WAF managed rule group versioning
 	// "{\"type\":\"WAFV2\",\"preProcessRuleGroups\":[{\"ruleGroupArn\":null,\"overrideAction\":{\"type\":\"NONE\"},\"managedRuleGroupIdentifier\":{\"versionEnabled\":true,\"version\":\"Version_2.0\",\"vendorName\":\"AWS\",\"managedRuleGroupName\":\"AWSManagedRulesCommonRuleSet\"},\"ruleGroupType\":\"ManagedRuleGroup\",\"excludeRules\":[{\"name\":\"NoUserAgent_HEADER\"}]}],\"postProcessRuleGroups\":[],\"defaultAction\":{\"type\":\"ALLOW\"},\"overrideCustomerWebACLAssociation\":false,\"loggingConfiguration\":{\"logDestinationConfigs\":[\"arn:aws:firehose:us-west-2:12345678912:deliverystream/aws-waf-logs-fms-admin-destination\"],\"redactedFields\":[{\"redactedFieldType\":\"SingleHeader\",\"redactedFieldValue\":\"Cookies\"},{\"redactedFieldType\":\"Method\"}]}}"
 	// To use a specific version of a WAF managed rule group in your Firewall Manager
 	// policy, you must set versionEnabled to true, and set version to the version
 	// you'd like to use. If you don't set versionEnabled to true, or if you omit
 	// versionEnabled, then Firewall Manager uses the default version of the WAF
 	// managed rule group.
-	//
-	// * Example: WAF Classic"{\"type\": \"WAF\", \"ruleGroups\":
+	// - Example: WAF Classic"{\"type\": \"WAF\", \"ruleGroups\":
 	// [{\"id\":\"12345678-1bcd-9012-efga-0987654321ab\", \"overrideAction\" :
 	// {\"type\": \"COUNT\"}}], \"defaultAction\": {\"type\": \"BLOCK\"}}"
 	ManagedServiceData *string

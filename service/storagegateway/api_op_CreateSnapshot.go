@@ -51,11 +51,9 @@ func (c *Client) CreateSnapshot(ctx context.Context, params *CreateSnapshotInput
 }
 
 // A JSON object containing one or more of the following fields:
-//
-// *
+// -
 // CreateSnapshotInput$SnapshotDescription
-//
-// * CreateSnapshotInput$VolumeARN
+// - CreateSnapshotInput$VolumeARN
 type CreateSnapshotInput struct {
 
 	// Textual description of the snapshot that appears in the Amazon EC2 console,

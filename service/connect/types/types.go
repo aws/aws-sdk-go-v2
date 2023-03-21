@@ -193,11 +193,9 @@ type AvailableNumberSummary struct {
 type ChatMessage struct {
 
 	// The content of the chat message.
-	//
-	// * For text/plain and text/markdown, the Length
+	// - For text/plain and text/markdown, the Length
 	// Constraints are Minimum of 1, Maximum of 1024.
-	//
-	// * For application/json, the
+	// - For application/json, the
 	// Length Constraints are Minimum of 1, Maximum of 12000.
 	//
 	// This member is required.
@@ -258,14 +256,12 @@ type ClaimedPhoneNumberSummary struct {
 	PhoneNumberId *string
 
 	// The status of the phone number.
-	//
-	// * CLAIMED means the previous ClaimedPhoneNumber
+	// - CLAIMED means the previous ClaimedPhoneNumber
 	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimedPhoneNumber.html)
 	// or UpdatePhoneNumber
 	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html)
 	// operation succeeded.
-	//
-	// * IN_PROGRESS means a ClaimedPhoneNumber
+	// - IN_PROGRESS means a ClaimedPhoneNumber
 	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimedPhoneNumber.html)
 	// or UpdatePhoneNumber
 	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html)
@@ -273,8 +269,7 @@ type ClaimedPhoneNumberSummary struct {
 	// DescribePhoneNumber
 	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html)
 	// at a later time to verify if the previous operation has completed.
-	//
-	// * FAILED
+	// - FAILED
 	// indicates that the previous ClaimedPhoneNumber
 	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimedPhoneNumber.html)
 	// or UpdatePhoneNumber
@@ -487,12 +482,10 @@ type ContactFlowSummary struct {
 
 // An object that can be used to specify Tag conditions inside the SearchFilter.
 // This accepts an OR of AND (List of List) input where:
-//
-// * Top level list
-// specifies conditions that need to be applied with OR operator
-//
-// * Inner list
-// specifies conditions that need to be applied with AND operator.
+// - Top level list specifies
+// conditions that need to be applied with OR operator
+// - Inner list specifies
+// conditions that need to be applied with AND operator.
 type ControlPlaneTagFilter struct {
 
 	// A list of conditions which would be applied together with an AND condition.
@@ -1484,20 +1477,18 @@ type PersistentChat struct {
 
 	// The contactId that is used for rehydration depends on the rehydration type.
 	// RehydrationType is required for persistent chat.
-	//
-	// * ENTIRE_PAST_SESSION:
+	// - ENTIRE_PAST_SESSION:
 	// Rehydrates a chat from the most recently terminated past chat contact of the
 	// specified past ended chat session. To use this type, provide the
 	// initialContactId of the past ended chat session in the sourceContactId field. In
 	// this type, Amazon Connect determines the most recent chat contact on the
-	// specified chat session that has ended, and uses it to start a persistent
-	// chat.
+	// specified chat session that has ended, and uses it to start a persistent chat.
+	// -
+	// FROM_SEGMENT: Rehydrates a chat from the past chat contact that is specified in
+	// the sourceContactId field.
 	//
-	// * FROM_SEGMENT: Rehydrates a chat from the past chat contact that is
-	// specified in the sourceContactId field.
-	//
-	// The actual contactId used for
-	// rehydration is provided in the response of this API.
+	// The actual contactId used for rehydration is
+	// provided in the response of this API.
 	RehydrationType RehydrationType
 
 	// The contactId from which a persistent chat session must be started.
@@ -1518,14 +1509,12 @@ type PhoneNumberQuickConnectConfig struct {
 }
 
 // The status of the phone number.
-//
-// * CLAIMED means the previous ClaimedPhoneNumber
+// - CLAIMED means the previous ClaimedPhoneNumber
 // (https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimedPhoneNumber.html)
 // or UpdatePhoneNumber
 // (https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html)
 // operation succeeded.
-//
-// * IN_PROGRESS means a ClaimedPhoneNumber
+// - IN_PROGRESS means a ClaimedPhoneNumber
 // (https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimedPhoneNumber.html)
 // or UpdatePhoneNumber
 // (https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html)
@@ -1533,8 +1522,7 @@ type PhoneNumberQuickConnectConfig struct {
 // DescribePhoneNumber
 // (https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html)
 // at a later time to verify if the previous operation has completed.
-//
-// * FAILED
+// - FAILED
 // indicates that the previous ClaimedPhoneNumber
 // (https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimedPhoneNumber.html)
 // or UpdatePhoneNumber
@@ -1725,12 +1713,10 @@ type QueueSearchFilter struct {
 
 	// An object that can be used to specify Tag conditions inside the SearchFilter.
 	// This accepts an OR of AND (List of List) input where:
-	//
-	// * Top level list
-	// specifies conditions that need to be applied with OR operator
-	//
-	// * Inner list
-	// specifies conditions that need to be applied with AND operator.
+	// - Top level list specifies
+	// conditions that need to be applied with OR operator
+	// - Inner list specifies
+	// conditions that need to be applied with AND operator.
 	TagFilter *ControlPlaneTagFilter
 
 	noSmithyDocumentSerde
@@ -2090,12 +2076,10 @@ type RoutingProfileSearchFilter struct {
 
 	// An object that can be used to specify Tag conditions inside the SearchFilter.
 	// This accepts an OR of AND (List of List) input where:
-	//
-	// * Top level list
-	// specifies conditions that need to be applied with OR operator
-	//
-	// * Inner list
-	// specifies conditions that need to be applied with AND operator.
+	// - Top level list specifies
+	// conditions that need to be applied with OR operator
+	// - Inner list specifies
+	// conditions that need to be applied with AND operator.
 	TagFilter *ControlPlaneTagFilter
 
 	noSmithyDocumentSerde
@@ -2380,12 +2364,10 @@ type SecurityProfilesSearchFilter struct {
 
 	// An object that can be used to specify Tag conditions inside the SearchFilter.
 	// This accepts an OR of AND (List of List) input where:
-	//
-	// * Top level list
-	// specifies conditions that need to be applied with OR operator
-	//
-	// * Inner list
-	// specifies conditions that need to be applied with AND operator.
+	// - Top level list specifies
+	// conditions that need to be applied with OR operator
+	// - Inner list specifies
+	// conditions that need to be applied with AND operator.
 	TagFilter *ControlPlaneTagFilter
 
 	noSmithyDocumentSerde
@@ -2661,33 +2643,27 @@ type TrafficDistributionGroup struct {
 	Name *string
 
 	// The status of the traffic distribution group.
-	//
-	// * CREATION_IN_PROGRESS means the
+	// - CREATION_IN_PROGRESS means the
 	// previous CreateTrafficDistributionGroup
 	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTrafficDistributionGroup.html)
 	// operation is still in progress and has not yet completed.
-	//
-	// * ACTIVE means the
+	// - ACTIVE means the
 	// previous CreateTrafficDistributionGroup
 	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTrafficDistributionGroup.html)
 	// operation has succeeded.
-	//
-	// * CREATION_FAILED indicates that the previous
+	// - CREATION_FAILED indicates that the previous
 	// CreateTrafficDistributionGroup
 	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTrafficDistributionGroup.html)
 	// operation has failed.
-	//
-	// * PENDING_DELETION means the previous
+	// - PENDING_DELETION means the previous
 	// DeleteTrafficDistributionGroup
 	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteTrafficDistributionGroup.html)
 	// operation is still in progress and has not yet completed.
-	//
-	// * DELETION_FAILED
+	// - DELETION_FAILED
 	// means the previous DeleteTrafficDistributionGroup
 	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteTrafficDistributionGroup.html)
 	// operation has failed.
-	//
-	// * UPDATE_IN_PROGRESS means the previous
+	// - UPDATE_IN_PROGRESS means the previous
 	// UpdateTrafficDistributionGroup
 	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdateTrafficDistributionGroup.html)
 	// operation is still in progress and has not yet completed.
@@ -2718,33 +2694,27 @@ type TrafficDistributionGroupSummary struct {
 	Name *string
 
 	// The status of the traffic distribution group.
-	//
-	// * CREATION_IN_PROGRESS means the
+	// - CREATION_IN_PROGRESS means the
 	// previous CreateTrafficDistributionGroup
 	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTrafficDistributionGroup.html)
 	// operation is still in progress and has not yet completed.
-	//
-	// * ACTIVE means the
+	// - ACTIVE means the
 	// previous CreateTrafficDistributionGroup
 	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTrafficDistributionGroup.html)
 	// operation has succeeded.
-	//
-	// * CREATION_FAILED indicates that the previous
+	// - CREATION_FAILED indicates that the previous
 	// CreateTrafficDistributionGroup
 	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateTrafficDistributionGroup.html)
 	// operation has failed.
-	//
-	// * PENDING_DELETION means the previous
+	// - PENDING_DELETION means the previous
 	// DeleteTrafficDistributionGroup
 	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteTrafficDistributionGroup.html)
 	// operation is still in progress and has not yet completed.
-	//
-	// * DELETION_FAILED
+	// - DELETION_FAILED
 	// means the previous DeleteTrafficDistributionGroup
 	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteTrafficDistributionGroup.html)
 	// operation has failed.
-	//
-	// * UPDATE_IN_PROGRESS means the previous
+	// - UPDATE_IN_PROGRESS means the previous
 	// UpdateTrafficDistributionGroup
 	// (https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdateTrafficDistributionGroup.html)
 	// operation is still in progress and has not yet completed.
@@ -3013,12 +2983,10 @@ type UserSearchFilter struct {
 
 	// An object that can be used to specify Tag conditions inside the SearchFilter.
 	// This accepts an OR of AND (List of List) input where:
-	//
-	// * Top level list
-	// specifies conditions that need to be applied with OR operator
-	//
-	// * Inner list
-	// specifies conditions that need to be applied with AND operator.
+	// - Top level list specifies
+	// conditions that need to be applied with OR operator
+	// - Inner list specifies
+	// conditions that need to be applied with AND operator.
 	TagFilter *ControlPlaneTagFilter
 
 	noSmithyDocumentSerde

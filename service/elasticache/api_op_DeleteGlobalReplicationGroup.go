@@ -12,14 +12,12 @@ import (
 )
 
 // Deleting a Global datastore is a two-step process:
-//
-// * First, you must
+// - First, you must
 // DisassociateGlobalReplicationGroup to remove the secondary clusters in the
 // Global datastore.
-//
-// * Once the Global datastore contains only the primary
-// cluster, you can use the DeleteGlobalReplicationGroup API to delete the Global
-// datastore while retainining the primary cluster using
+// - Once the Global datastore contains only the primary cluster,
+// you can use the DeleteGlobalReplicationGroup API to delete the Global datastore
+// while retainining the primary cluster using
 // RetainPrimaryReplicationGroup=true.
 //
 // Since the Global Datastore has only a
@@ -65,8 +63,7 @@ type DeleteGlobalReplicationGroupOutput struct {
 	// cluster that resides in a different Amazon region. The secondary cluster accepts
 	// only reads. The primary cluster automatically replicates updates to the
 	// secondary cluster.
-	//
-	// * The GlobalReplicationGroupIdSuffix represents the name of
+	// - The GlobalReplicationGroupIdSuffix represents the name of
 	// the Global datastore, which is what you use to associate a secondary cluster.
 	GlobalReplicationGroup *types.GlobalReplicationGroup
 

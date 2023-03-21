@@ -198,15 +198,11 @@ type Connection struct {
 	ReplicationInstanceIdentifier *string
 
 	// The connection status. This parameter can return one of the following values:
-	//
-	// *
+	// -
 	// "successful"
-	//
-	// * "testing"
-	//
-	// * "failed"
-	//
-	// * "deleting"
+	// - "testing"
+	// - "failed"
+	// - "deleting"
 	Status *string
 
 	noSmithyDocumentSerde
@@ -413,12 +409,9 @@ type ElasticsearchSettings struct {
 
 // Describes an endpoint of a database instance in response to operations such as
 // the following:
-//
-// * CreateEndpoint
-//
-// * DescribeEndpoint
-//
-// * ModifyEndpoint
+// - CreateEndpoint
+// - DescribeEndpoint
+// - ModifyEndpoint
 type Endpoint struct {
 
 	// The Amazon Resource Name (ARN) used for SSL connection to the endpoint.
@@ -722,14 +715,10 @@ type FleetAdvisorSchemaObjectResponse struct {
 
 	// The type of the schema object, as reported by the database engine. Examples
 	// include the following:
-	//
-	// * function
-	//
-	// * trigger
-	//
-	// * SYSTEM_TABLE
-	//
-	// * QUEUE
+	// - function
+	// - trigger
+	// - SYSTEM_TABLE
+	// - QUEUE
 	ObjectType *string
 
 	// The ID of a schema object in a Fleet Advisor collector inventory.
@@ -2351,13 +2340,10 @@ type ReplicationInstance struct {
 
 	// The replication instance identifier is a required parameter. This parameter is
 	// stored as a lowercase string. Constraints:
-	//
-	// * Must contain 1-63 alphanumeric
+	// - Must contain 1-63 alphanumeric
 	// characters or hyphens.
-	//
-	// * First character must be a letter.
-	//
-	// * Cannot end with a
+	// - First character must be a letter.
+	// - Cannot end with a
 	// hyphen or contain two consecutive hyphens.
 	//
 	// Example: myrepinstance
@@ -2383,36 +2369,22 @@ type ReplicationInstance struct {
 	ReplicationInstancePublicIpAddresses []string
 
 	// The status of the replication instance. The possible return values include:
-	//
-	// *
+	// -
 	// "available"
-	//
-	// * "creating"
-	//
-	// * "deleted"
-	//
-	// * "deleting"
-	//
-	// * "failed"
-	//
-	// *
-	// "modifying"
-	//
-	// * "upgrading"
-	//
-	// * "rebooting"
-	//
-	// * "resetting-master-credentials"
-	//
-	// *
-	// "storage-full"
-	//
-	// * "incompatible-credentials"
-	//
-	// * "incompatible-network"
-	//
-	// *
-	// "maintenance"
+	// - "creating"
+	// - "deleted"
+	// - "deleting"
+	// - "failed"
+	// - "modifying"
+	// -
+	// "upgrading"
+	// - "rebooting"
+	// - "resetting-master-credentials"
+	// - "storage-full"
+	// -
+	// "incompatible-credentials"
+	// - "incompatible-network"
+	// - "maintenance"
 	ReplicationInstanceStatus *string
 
 	// The subnet group for the replication instance.
@@ -2542,14 +2514,11 @@ type ReplicationTask struct {
 	ReplicationTaskCreationDate *time.Time
 
 	// The user-assigned replication task identifier or name. Constraints:
-	//
-	// * Must
+	// - Must
 	// contain 1-255 alphanumeric characters or hyphens.
-	//
-	// * First character must be a
+	// - First character must be a
 	// letter.
-	//
-	// * Cannot end with a hyphen or contain two consecutive hyphens.
+	// - Cannot end with a hyphen or contain two consecutive hyphens.
 	ReplicationTaskIdentifier *string
 
 	// The settings for the replication task.
@@ -2567,66 +2536,54 @@ type ReplicationTask struct {
 
 	// The status of the replication task. This response parameter can return one of
 	// the following values:
-	//
-	// * "moving" – The task is being moved in response to
+	// - "moving" – The task is being moved in response to
 	// running the MoveReplicationTask
 	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_MoveReplicationTask.html)
 	// operation.
-	//
-	// * "creating" – The task is being created in response to running the
+	// - "creating" – The task is being created in response to running the
 	// CreateReplicationTask
 	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateReplicationTask.html)
 	// operation.
-	//
-	// * "deleting" – The task is being deleted in response to running the
+	// - "deleting" – The task is being deleted in response to running the
 	// DeleteReplicationTask
 	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_DeleteReplicationTask.html)
 	// operation.
-	//
-	// * "failed" – The task failed to successfully complete the database
+	// - "failed" – The task failed to successfully complete the database
 	// migration in response to running the StartReplicationTask
 	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html)
 	// operation.
-	//
-	// * "failed-move" – The task failed to move in response to running the
+	// - "failed-move" – The task failed to move in response to running the
 	// MoveReplicationTask
 	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_MoveReplicationTask.html)
 	// operation.
-	//
-	// * "modifying" – The task definition is being modified in response to
+	// - "modifying" – The task definition is being modified in response to
 	// running the ModifyReplicationTask
 	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_ModifyReplicationTask.html)
 	// operation.
-	//
-	// * "ready" – The task is in a ready state where it can respond to
+	// - "ready" – The task is in a ready state where it can respond to
 	// other task operations, such as StartReplicationTask
 	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html)
 	// or DeleteReplicationTask
 	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_DeleteReplicationTask.html).
-	//
-	// *
+	// -
 	// "running" – The task is performing a database migration in response to running
 	// the StartReplicationTask
 	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html)
 	// operation.
-	//
-	// * "starting" – The task is preparing to perform a database migration
+	// - "starting" – The task is preparing to perform a database migration
 	// in response to running the StartReplicationTask
 	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html)
 	// operation.
-	//
-	// * "stopped" – The task has stopped in response to running the
+	// - "stopped" – The task has stopped in response to running the
 	// StopReplicationTask
 	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_StopReplicationTask.html)
 	// operation.
-	//
-	// * "stopping" – The task is preparing to stop in response to running
+	// - "stopping" – The task is preparing to stop in response to running
 	// the StopReplicationTask
 	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_StopReplicationTask.html)
 	// operation.
-	//
-	// * "testing" – The database migration specified for this task is
-	// being tested in response to running either the StartReplicationTaskAssessmentRun
+	// - "testing" – The database migration specified for this task is being
+	// tested in response to running either the StartReplicationTaskAssessmentRun
 	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTaskAssessmentRun.html)
 	// or the StartReplicationTaskAssessment
 	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTaskAssessment.html)
@@ -2647,44 +2604,30 @@ type ReplicationTask struct {
 
 	// The reason the replication task was stopped. This response parameter can return
 	// one of the following values:
-	//
-	// * "Stop Reason NORMAL"
-	//
-	// * "Stop Reason
+	// - "Stop Reason NORMAL"
+	// - "Stop Reason
 	// RECOVERABLE_ERROR"
-	//
-	// * "Stop Reason FATAL_ERROR"
-	//
-	// * "Stop Reason
+	// - "Stop Reason FATAL_ERROR"
+	// - "Stop Reason
 	// FULL_LOAD_ONLY_FINISHED"
-	//
-	// * "Stop Reason STOPPED_AFTER_FULL_LOAD" – Full load
+	// - "Stop Reason STOPPED_AFTER_FULL_LOAD" – Full load
 	// completed, with cached changes not applied
-	//
-	// * "Stop Reason
+	// - "Stop Reason
 	// STOPPED_AFTER_CACHED_EVENTS" – Full load completed, with cached changes
 	// applied
-	//
-	// * "Stop Reason EXPRESS_LICENSE_LIMITS_REACHED"
-	//
-	// * "Stop Reason
+	// - "Stop Reason EXPRESS_LICENSE_LIMITS_REACHED"
+	// - "Stop Reason
 	// STOPPED_AFTER_DDL_APPLY" – User-defined stop task after DDL applied
-	//
-	// * "Stop
+	// - "Stop
 	// Reason STOPPED_DUE_TO_LOW_MEMORY"
-	//
-	// * "Stop Reason STOPPED_DUE_TO_LOW_DISK"
-	//
-	// *
+	// - "Stop Reason STOPPED_DUE_TO_LOW_DISK"
+	// -
 	// "Stop Reason STOPPED_AT_SERVER_TIME" – User-defined server time for stopping
 	// task
-	//
-	// * "Stop Reason STOPPED_AT_COMMIT_TIME" – User-defined commit time for
+	// - "Stop Reason STOPPED_AT_COMMIT_TIME" – User-defined commit time for
 	// stopping task
-	//
-	// * "Stop Reason RECONFIGURATION_RESTART"
-	//
-	// * "Stop Reason
+	// - "Stop Reason RECONFIGURATION_RESTART"
+	// - "Stop Reason
 	// RECYCLE_TASK"
 	StopReason *string
 
@@ -2790,39 +2733,29 @@ type ReplicationTaskAssessmentRun struct {
 	ServiceAccessRoleArn *string
 
 	// Assessment run status. This status can have one of the following values:
-	//
-	// *
+	// -
 	// "cancelling" – The assessment run was canceled by the
 	// CancelReplicationTaskAssessmentRun operation.
-	//
-	// * "deleting" – The assessment run
+	// - "deleting" – The assessment run
 	// was deleted by the DeleteReplicationTaskAssessmentRun operation.
-	//
-	// * "failed" –
-	// At least one individual assessment completed with a failed status.
-	//
-	// *
+	// - "failed" – At
+	// least one individual assessment completed with a failed status.
+	// -
 	// "error-provisioning" – An internal error occurred while resources were
 	// provisioned (during provisioning status).
-	//
-	// * "error-executing" – An internal
+	// - "error-executing" – An internal
 	// error occurred while individual assessments ran (during running status).
-	//
-	// *
+	// -
 	// "invalid state" – The assessment run is in an unknown state.
-	//
-	// * "passed" – All
+	// - "passed" – All
 	// individual assessments have completed, and none has a failed status.
-	//
-	// *
+	// -
 	// "provisioning" – Resources required to run individual assessments are being
 	// provisioned.
-	//
-	// * "running" – Individual assessments are being run.
-	//
-	// * "starting"
-	// – The assessment run is starting, but resources are not yet being provisioned
-	// for individual assessments.
+	// - "running" – Individual assessments are being run.
+	// - "starting" –
+	// The assessment run is starting, but resources are not yet being provisioned for
+	// individual assessments.
 	Status *string
 
 	noSmithyDocumentSerde
@@ -2860,19 +2793,12 @@ type ReplicationTaskIndividualAssessment struct {
 
 	// Individual assessment status. This status can have one of the following
 	// values:
-	//
-	// * "cancelled"
-	//
-	// * "error"
-	//
-	// * "failed"
-	//
-	// * "passed"
-	//
-	// * "pending"
-	//
-	// *
-	// "running"
+	// - "cancelled"
+	// - "error"
+	// - "failed"
+	// - "passed"
+	// - "pending"
+	// - "running"
 	Status *string
 
 	noSmithyDocumentSerde
@@ -3077,11 +3003,9 @@ type S3Settings struct {
 
 	// The format of the data that you want to use for output. You can choose one of
 	// the following:
-	//
-	// * csv : This is a row-based file format with comma-separated
+	// - csv : This is a row-based file format with comma-separated
 	// values (.csv).
-	//
-	// * parquet : Apache Parquet (.parquet) is a columnar storage file
+	// - parquet : Apache Parquet (.parquet) is a columnar storage file
 	// format that features efficient compression and provides faster query response.
 	DataFormat DataFormatValue
 
@@ -3129,15 +3053,12 @@ type S3Settings struct {
 	EnableStatistics *bool
 
 	// The type of encoding you are using:
-	//
-	// * RLE_DICTIONARY uses a combination of
+	// - RLE_DICTIONARY uses a combination of
 	// bit-packing and run-length encoding to store repeated values more efficiently.
 	// This is the default.
-	//
-	// * PLAIN doesn't use encoding at all. Values are stored as
+	// - PLAIN doesn't use encoding at all. Values are stored as
 	// they are.
-	//
-	// * PLAIN_DICTIONARY builds a dictionary of the values encountered in a
+	// - PLAIN_DICTIONARY builds a dictionary of the values encountered in a
 	// given column. The dictionary is stored in a dictionary page for each column
 	// chunk.
 	EncodingType EncodingTypeValue
@@ -3150,31 +3071,20 @@ type S3Settings struct {
 	// existing value from SSE_S3 to SSE_KMS. To use SSE_S3, you need an Identity and
 	// Access Management (IAM) role with permission to allow "arn:aws:s3:::dms-*" to
 	// use the following actions:
-	//
-	// * s3:CreateBucket
-	//
-	// * s3:ListBucket
-	//
-	// *
-	// s3:DeleteBucket
-	//
-	// * s3:GetBucketLocation
-	//
-	// * s3:GetObject
-	//
-	// * s3:PutObject
-	//
-	// *
-	// s3:DeleteObject
-	//
-	// * s3:GetObjectVersion
-	//
-	// * s3:GetBucketPolicy
-	//
-	// *
-	// s3:PutBucketPolicy
-	//
-	// * s3:DeleteBucketPolicy
+	// - s3:CreateBucket
+	// - s3:ListBucket
+	// - s3:DeleteBucket
+	// -
+	// s3:GetBucketLocation
+	// - s3:GetObject
+	// - s3:PutObject
+	// - s3:DeleteObject
+	// -
+	// s3:GetObjectVersion
+	// - s3:GetBucketPolicy
+	// - s3:PutBucketPolicy
+	// -
+	// s3:DeleteBucketPolicy
 	EncryptionMode EncryptionModeValue
 
 	// To specify a bucket owner and prevent sniping, you can use the
@@ -3565,40 +3475,29 @@ type TableStatistics struct {
 
 	// The validation state of the table. This parameter can have the following
 	// values:
-	//
-	// * Not enabled – Validation isn't enabled for the table in the migration
+	// - Not enabled – Validation isn't enabled for the table in the migration
 	// task.
-	//
-	// * Pending records – Some records in the table are waiting for
+	// - Pending records – Some records in the table are waiting for
 	// validation.
-	//
-	// * Mismatched records – Some records in the table don't match
-	// between the source and target.
-	//
-	// * Suspended records – Some records in the table
-	// couldn't be validated.
-	//
-	// * No primary key –The table couldn't be validated
-	// because it has no primary key.
-	//
-	// * Table error – The table wasn't validated
-	// because it's in an error state and some data wasn't migrated.
-	//
-	// * Validated – All
-	// rows in the table are validated. If the table is updated, the status can change
-	// from Validated.
-	//
-	// * Error – The table couldn't be validated because of an
-	// unexpected error.
-	//
-	// * Pending validation – The table is waiting validation.
-	//
-	// *
-	// Preparing table – Preparing the table enabled in the migration task for
-	// validation.
-	//
-	// * Pending revalidation – All rows in the table are pending
-	// validation after the table was updated.
+	// - Mismatched records – Some records in the table don't match between
+	// the source and target.
+	// - Suspended records – Some records in the table couldn't
+	// be validated.
+	// - No primary key –The table couldn't be validated because it has
+	// no primary key.
+	// - Table error – The table wasn't validated because it's in an
+	// error state and some data wasn't migrated.
+	// - Validated – All rows in the table
+	// are validated. If the table is updated, the status can change from Validated.
+	// -
+	// Error – The table couldn't be validated because of an unexpected error.
+	// -
+	// Pending validation – The table is waiting validation.
+	// - Preparing table –
+	// Preparing the table enabled in the migration task for validation.
+	// - Pending
+	// revalidation – All rows in the table are pending validation after the table was
+	// updated.
 	ValidationState *string
 
 	// Additional details about the state of validation.
@@ -3628,13 +3527,10 @@ type TableToReload struct {
 
 // A user-defined key-value pair that describes metadata added to an DMS resource
 // and that is used by operations such as the following:
-//
-// * AddTagsToResource
-//
-// *
+// - AddTagsToResource
+// -
 // ListTagsForResource
-//
-// * RemoveTagsFromResource
+// - RemoveTagsFromResource
 type Tag struct {
 
 	// A key is the required name of the tag. The string value can be 1-128 Unicode

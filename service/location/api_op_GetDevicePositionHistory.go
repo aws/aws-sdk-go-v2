@@ -46,8 +46,7 @@ type GetDevicePositionHistoryInput struct {
 	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
 	// YYYY-MM-DDThh:mm:ss.sssZ. By default, the value will be the time that the
 	// request is made. Requirement:
-	//
-	// * The time specified for EndTimeExclusive must be
+	// - The time specified for EndTimeExclusive must be
 	// after the time for StartTimeInclusive.
 	EndTimeExclusive *time.Time
 
@@ -63,8 +62,7 @@ type GetDevicePositionHistoryInput struct {
 	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
 	// YYYY-MM-DDThh:mm:ss.sssZ. By default, the value will be 24 hours prior to the
 	// time that the request is made. Requirement:
-	//
-	// * The time specified for
+	// - The time specified for
 	// StartTimeInclusive must be before EndTimeExclusive.
 	StartTimeInclusive *time.Time
 

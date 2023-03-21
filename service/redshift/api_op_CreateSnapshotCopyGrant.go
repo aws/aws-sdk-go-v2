@@ -37,20 +37,15 @@ type CreateSnapshotCopyGrantInput struct {
 
 	// The name of the snapshot copy grant. This name must be unique in the region for
 	// the Amazon Web Services account. Constraints:
-	//
-	// * Must contain from 1 to 63
+	// - Must contain from 1 to 63
 	// alphanumeric characters or hyphens.
-	//
-	// * Alphabetic characters must be
-	// lowercase.
-	//
-	// * First character must be a letter.
-	//
-	// * Cannot end with a hyphen or
-	// contain two consecutive hyphens.
-	//
-	// * Must be unique for all clusters within an
-	// Amazon Web Services account.
+	// - Alphabetic characters must be lowercase.
+	// -
+	// First character must be a letter.
+	// - Cannot end with a hyphen or contain two
+	// consecutive hyphens.
+	// - Must be unique for all clusters within an Amazon Web
+	// Services account.
 	//
 	// This member is required.
 	SnapshotCopyGrantName *string

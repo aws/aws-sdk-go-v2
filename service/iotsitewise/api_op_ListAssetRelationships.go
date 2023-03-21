@@ -39,8 +39,7 @@ type ListAssetRelationshipsInput struct {
 
 	// The type of traversal to use to identify asset relationships. Choose the
 	// following option:
-	//
-	// * PATH_TO_ROOT – Identify the asset's parent assets up to the
+	// - PATH_TO_ROOT – Identify the asset's parent assets up to the
 	// root asset. The asset that you specify in assetId is the first result in the
 	// list of assetRelationshipSummaries, and the root asset is the last result.
 	//

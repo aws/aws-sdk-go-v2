@@ -14,11 +14,9 @@ import (
 
 // Lists all Channels created under a single Chime App as a paginated list. You can
 // specify filters to narrow results. Functionality & restrictions
-//
-// * Use privacy =
+// - Use privacy =
 // PUBLIC to retrieve all public channels in the account.
-//
-// * Only an
+// - Only an
 // AppInstanceAdmin can set privacy = PRIVATE to list the private channels in an
 // account.
 //

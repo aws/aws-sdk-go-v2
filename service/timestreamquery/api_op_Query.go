@@ -19,20 +19,16 @@ import (
 // sample
 // (https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.run-query.html)
 // for details. Your query request will fail in the following cases:
-//
-// * If you
+// - If you
 // submit a Query request with the same client token outside of the 5-minute
 // idempotency window.
-//
-// * If you submit a Query request with the same client token,
+// - If you submit a Query request with the same client token,
 // but change other parameters, within the 5-minute idempotency window.
-//
-// * If the
+// - If the
 // size of the row (including the query metadata) exceeds 1 MB, then the query will
 // fail with the following error message: Query aborted as max page response size
 // has been exceeded by the output result row
-//
-// * If the IAM principal of the query
+// - If the IAM principal of the query
 // initiator and the result reader are not the same and/or the query initiator and
 // the result reader do not have the same query string in the query requests, the
 // query will fail with an Invalid pagination token error.
@@ -64,29 +60,23 @@ type QueryInput struct {
 	// same result. In other words, making multiple identical Query requests has the
 	// same effect as making a single request. When using ClientToken in a query, note
 	// the following:
-	//
-	// * If the Query API is instantiated without a ClientToken, the
+	// - If the Query API is instantiated without a ClientToken, the
 	// Query SDK generates a ClientToken on your behalf.
-	//
-	// * If the Query invocation
-	// only contains the ClientToken but does not include a NextToken, that invocation
-	// of Query is assumed to be a new query run.
-	//
-	// * If the invocation contains
-	// NextToken, that particular invocation is assumed to be a subsequent invocation
-	// of a prior call to the Query API, and a result set is returned.
-	//
-	// * After 4
-	// hours, any request with the same ClientToken is treated as a new request.
+	// - If the Query invocation only
+	// contains the ClientToken but does not include a NextToken, that invocation of
+	// Query is assumed to be a new query run.
+	// - If the invocation contains NextToken,
+	// that particular invocation is assumed to be a subsequent invocation of a prior
+	// call to the Query API, and a result set is returned.
+	// - After 4 hours, any
+	// request with the same ClientToken is treated as a new request.
 	ClientToken *string
 
 	// The total number of rows to be returned in the Query output. The initial run of
 	// Query with a MaxRows value specified will return the result set of the query in
 	// two cases:
-	//
-	// * The size of the result is less than 1MB.
-	//
-	// * The number of rows in
+	// - The size of the result is less than 1MB.
+	// - The number of rows in
 	// the result set is less than the value of maxRows.
 	//
 	// Otherwise, the initial
@@ -104,27 +94,21 @@ type QueryInput struct {
 	// However, if the Query invocation only contains the ClientToken, that invocation
 	// of Query is assumed to be a new query run. Note the following when using
 	// NextToken in a query:
-	//
-	// * A pagination token can be used for up to five Query
+	// - A pagination token can be used for up to five Query
 	// invocations, OR for a duration of up to 1 hour – whichever comes first.
-	//
-	// * Using
+	// - Using
 	// the same NextToken will return the same set of records. To keep paginating
 	// through the result set, you must to use the most recent nextToken.
-	//
-	// * Suppose a
+	// - Suppose a
 	// Query invocation returns two NextToken values, TokenA and TokenB. If TokenB is
 	// used in a subsequent Query invocation, then TokenA is invalidated and cannot be
 	// reused.
-	//
-	// * To request a previous result set from a query after pagination has
+	// - To request a previous result set from a query after pagination has
 	// begun, you must re-invoke the Query API.
-	//
-	// * The latest NextToken should be used
+	// - The latest NextToken should be used
 	// to paginate until null is returned, at which point a new NextToken should be
 	// used.
-	//
-	// * If the IAM principal of the query initiator and the result reader are
+	// - If the IAM principal of the query initiator and the result reader are
 	// not the same and/or the query initiator and the result reader do not have the
 	// same query string in the query requests, the query will fail with an Invalid
 	// pagination token error.
@@ -293,10 +277,8 @@ type QueryPaginatorOptions struct {
 	// The total number of rows to be returned in the Query output. The initial run of
 	// Query with a MaxRows value specified will return the result set of the query in
 	// two cases:
-	//
-	// * The size of the result is less than 1MB.
-	//
-	// * The number of rows in
+	// - The size of the result is less than 1MB.
+	// - The number of rows in
 	// the result set is less than the value of maxRows.
 	//
 	// Otherwise, the initial

@@ -560,16 +560,12 @@ type GrpcRetryPolicy struct {
 	GrpcRetryEvents []GrpcRetryPolicyEvent
 
 	// Specify at least one of the following values.
-	//
-	// * server-error – HTTP status
-	// codes 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, and 511
-	//
-	// * gateway-error
-	// – HTTP status codes 502, 503, and 504
-	//
-	// * client-error – HTTP status code 409
-	//
-	// *
+	// - server-error – HTTP status codes
+	// 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, and 511
+	// - gateway-error – HTTP
+	// status codes 502, 503, and 504
+	// - client-error – HTTP status code 409
+	// -
 	// stream-error – Retry on refused stream
 	HttpRetryEvents []string
 
@@ -994,16 +990,12 @@ type HttpRetryPolicy struct {
 	PerRetryTimeout *Duration
 
 	// Specify at least one of the following values.
-	//
-	// * server-error – HTTP status
-	// codes 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, and 511
-	//
-	// * gateway-error
-	// – HTTP status codes 502, 503, and 504
-	//
-	// * client-error – HTTP status code 409
-	//
-	// *
+	// - server-error – HTTP status codes
+	// 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, and 511
+	// - gateway-error – HTTP
+	// status codes 502, 503, and 504
+	// - client-error – HTTP status code 409
+	// -
 	// stream-error – Retry on refused stream
 	HttpRetryEvents []string
 
@@ -1220,15 +1212,11 @@ type ListenerTls struct {
 	Certificate ListenerTlsCertificate
 
 	// Specify one of the following modes.
-	//
-	// * STRICT – Listener only accepts
-	// connections with TLS enabled.
-	//
-	// * PERMISSIVE – Listener accepts connections with
-	// or without TLS enabled.
-	//
-	// * DISABLED – Listener only accepts connections without
-	// TLS.
+	// - STRICT – Listener only accepts connections
+	// with TLS enabled.
+	// - PERMISSIVE – Listener accepts connections with or without
+	// TLS enabled.
+	// - DISABLED – Listener only accepts connections without TLS.
 	//
 	// This member is required.
 	Mode ListenerTlsMode
@@ -2291,15 +2279,11 @@ type VirtualGatewayListenerTls struct {
 	Certificate VirtualGatewayListenerTlsCertificate
 
 	// Specify one of the following modes.
-	//
-	// * STRICT – Listener only accepts
-	// connections with TLS enabled.
-	//
-	// * PERMISSIVE – Listener accepts connections with
-	// or without TLS enabled.
-	//
-	// * DISABLED – Listener only accepts connections without
-	// TLS.
+	// - STRICT – Listener only accepts connections
+	// with TLS enabled.
+	// - PERMISSIVE – Listener accepts connections with or without
+	// TLS enabled.
+	// - DISABLED – Listener only accepts connections without TLS.
 	//
 	// This member is required.
 	Mode VirtualGatewayListenerTlsMode

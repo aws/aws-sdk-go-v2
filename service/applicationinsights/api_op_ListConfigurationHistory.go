@@ -15,14 +15,11 @@ import (
 
 // Lists the INFO, WARN, and ERROR events for periodic configuration updates
 // performed by Application Insights. Examples of events represented are:
-//
-// * INFO:
+// - INFO:
 // creating a new alarm or updating an alarm threshold.
-//
-// * WARN: alarm not created
+// - WARN: alarm not created
 // due to insufficient data points used to predict thresholds.
-//
-// * ERROR: alarm not
+// - ERROR: alarm not
 // created due to permission errors or exceeding quotas.
 func (c *Client) ListConfigurationHistory(ctx context.Context, params *ListConfigurationHistoryInput, optFns ...func(*Options)) (*ListConfigurationHistoryOutput, error) {
 	if params == nil {

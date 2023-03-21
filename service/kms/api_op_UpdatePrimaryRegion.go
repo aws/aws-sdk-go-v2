@@ -62,20 +62,16 @@ import (
 // output. To verify that primary key is changed, use the DescribeKey operation.
 // Cross-account use: No. You cannot use this operation in a different Amazon Web
 // Services account. Required permissions:
+// - kms:UpdatePrimaryRegion on the current
+// primary key (in the primary key's Region). Include this permission primary key's
+// key policy.
+// - kms:UpdatePrimaryRegion on the current replica key (in the replica
+// key's Region). Include this permission in the replica key's key policy.
 //
-// * kms:UpdatePrimaryRegion on the
-// current primary key (in the primary key's Region). Include this permission
-// primary key's key policy.
-//
-// * kms:UpdatePrimaryRegion on the current replica key
-// (in the replica key's Region). Include this permission in the replica key's key
-// policy.
-//
-// # Related operations
-//
-// * CreateKey
-//
-// * ReplicateKey
+// Related
+// operations
+// - CreateKey
+// - ReplicateKey
 func (c *Client) UpdatePrimaryRegion(ctx context.Context, params *UpdatePrimaryRegionInput, optFns ...func(*Options)) (*UpdatePrimaryRegionOutput, error) {
 	if params == nil {
 		params = &UpdatePrimaryRegionInput{}
@@ -96,10 +92,8 @@ type UpdatePrimaryRegionInput struct {
 	// Identifies the current primary key. When the operation completes, this KMS key
 	// will be a replica key. Specify the key ID or key ARN of a multi-Region primary
 	// key. For example:
-	//
-	// * Key ID: mrk-1234abcd12ab34cd56ef1234567890ab
-	//
-	// * Key ARN:
+	// - Key ID: mrk-1234abcd12ab34cd56ef1234567890ab
+	// - Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/mrk-1234abcd12ab34cd56ef1234567890ab
 	//
 	// To

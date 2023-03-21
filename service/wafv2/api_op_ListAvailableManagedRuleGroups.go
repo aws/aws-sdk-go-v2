@@ -37,11 +37,9 @@ type ListAvailableManagedRuleGroupsInput struct {
 	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
 	// user pool, or an App Runner service. To work with CloudFront, you must also
 	// specify the Region US East (N. Virginia) as follows:
-	//
-	// * CLI - Specify the Region
+	// - CLI - Specify the Region
 	// when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.
-	//
-	// * API
+	// - API
 	// and SDKs - For all calls, use the Region endpoint us-east-1.
 	//
 	// This member is required.

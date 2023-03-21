@@ -17,22 +17,18 @@ import (
 // can set values for the includeResolvedCases and includeCommunications parameters
 // to specify how much information to return. The response returns the following in
 // JSON format:
-//
-// * One or more CaseDetails
+// - One or more CaseDetails
 // (https://docs.aws.amazon.com/awssupport/latest/APIReference/API_CaseDetails.html)
 // data types.
-//
-// * One or more nextToken values, which specify where to paginate the
+// - One or more nextToken values, which specify where to paginate the
 // returned records represented by the CaseDetails objects.
 //
 // Case data is available
 // for 12 months after creation. If a case was created more than 12 months ago, a
 // request might return an error.
-//
-// * You must have a Business, Enterprise On-Ramp,
+// - You must have a Business, Enterprise On-Ramp,
 // or Enterprise Support plan to use the Amazon Web Services Support API.
-//
-// * If you
+// - If you
 // call the Amazon Web Services Support API from an account that doesn't have a
 // Business, Enterprise On-Ramp, or Enterprise Support plan, the
 // SubscriptionRequiredException error message appears. For information about

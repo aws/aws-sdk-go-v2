@@ -14,11 +14,9 @@ import (
 
 // Retrieves a paginated list of associated assets. You can use this operation to
 // do the following:
-//
-// * List child assets associated to a parent asset by a
+// - List child assets associated to a parent asset by a
 // hierarchy that you specify.
-//
-// * List an asset's parent asset.
+// - List an asset's parent asset.
 func (c *Client) ListAssociatedAssets(ctx context.Context, params *ListAssociatedAssetsInput, optFns ...func(*Options)) (*ListAssociatedAssetsOutput, error) {
 	if params == nil {
 		params = &ListAssociatedAssetsInput{}
@@ -59,12 +57,10 @@ type ListAssociatedAssetsInput struct {
 	NextToken *string
 
 	// The direction to list associated assets. Choose one of the following options:
-	//
-	// *
+	// -
 	// CHILD – The list includes all child assets associated to the asset. The
 	// hierarchyId parameter is required if you choose CHILD.
-	//
-	// * PARENT – The list
+	// - PARENT – The list
 	// includes the asset's parent asset.
 	//
 	// Default: CHILD

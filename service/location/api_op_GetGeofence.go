@@ -65,19 +65,14 @@ type GetGeofenceOutput struct {
 
 	// Identifies the state of the geofence. A geofence will hold one of the following
 	// states:
-	//
-	// * ACTIVE — The geofence has been indexed by the system.
-	//
-	// * PENDING —
-	// The geofence is being processed by the system.
-	//
-	// * FAILED — The geofence failed
-	// to be indexed by the system.
-	//
-	// * DELETED — The geofence has been deleted from the
-	// system index.
-	//
-	// * DELETING — The geofence is being deleted from the system index.
+	// - ACTIVE — The geofence has been indexed by the system.
+	// - PENDING — The
+	// geofence is being processed by the system.
+	// - FAILED — The geofence failed to be
+	// indexed by the system.
+	// - DELETED — The geofence has been deleted from the system
+	// index.
+	// - DELETING — The geofence is being deleted from the system index.
 	//
 	// This member is required.
 	Status *string

@@ -58,14 +58,11 @@ type ModifyCacheClusterInput struct {
 	// Reserved parameter. The password used to access a password protected server.
 	// This parameter must be specified with the auth-token-update parameter. Password
 	// constraints:
-	//
-	// * Must be only printable ASCII characters
-	//
-	// * Must be at least 16
+	// - Must be only printable ASCII characters
+	// - Must be at least 16
 	// characters and no more than 128 characters in length
-	//
-	// * Cannot contain any of
-	// the following characters: '/', '"', or '@', '%'
+	// - Cannot contain any of the
+	// following characters: '/', '"', or '@', '%'
 	//
 	// For more information, see AUTH
 	// password at AUTH (http://redis.io/commands/AUTH).
@@ -73,10 +70,8 @@ type ModifyCacheClusterInput struct {
 
 	// Specifies the strategy to use to update the AUTH token. This parameter must be
 	// specified with the auth-token parameter. Possible values:
-	//
-	// * Rotate
-	//
-	// * Set
+	// - Rotate
+	// - Set
 	//
 	// For
 	// more information, see Authenticating Users with Redis AUTH
@@ -137,72 +132,55 @@ type ModifyCacheClusterInput struct {
 	// active cache nodes and the number of cache nodes pending creation (which may be
 	// zero). The number of Availability Zones supplied in this list must match the
 	// cache nodes being added in this request. Scenarios:
-	//
-	// * Scenario 1: You have 3
+	// - Scenario 1: You have 3
 	// active nodes and wish to add 2 nodes. Specify NumCacheNodes=5 (3 + 2) and
 	// optionally specify two Availability Zones for the two new nodes.
-	//
-	// * Scenario 2:
+	// - Scenario 2:
 	// You have 3 active nodes and 2 nodes pending creation (from the scenario 1 call)
 	// and want to add 1 more node. Specify NumCacheNodes=6 ((3 + 2) + 1) and
 	// optionally specify an Availability Zone for the new node.
+	// - Scenario 3: You want
+	// to cancel all pending operations. Specify NumCacheNodes=3 to cancel all pending
+	// operations.
 	//
-	// * Scenario 3: You
-	// want to cancel all pending operations. Specify NumCacheNodes=3 to cancel all
-	// pending operations.
-	//
-	// The Availability Zone placement of nodes pending creation
-	// cannot be modified. If you wish to cancel any nodes pending creation, add 0
-	// nodes by setting NumCacheNodes to the number of current nodes. If cross-az is
-	// specified, existing Memcached nodes remain in their current Availability Zone.
-	// Only newly created nodes can be located in different Availability Zones. For
-	// guidance on how to move existing Memcached nodes to different Availability
-	// Zones, see the Availability Zone Considerations section of Cache Node
-	// Considerations for Memcached
+	// The Availability Zone placement of nodes pending creation cannot be
+	// modified. If you wish to cancel any nodes pending creation, add 0 nodes by
+	// setting NumCacheNodes to the number of current nodes. If cross-az is specified,
+	// existing Memcached nodes remain in their current Availability Zone. Only newly
+	// created nodes can be located in different Availability Zones. For guidance on
+	// how to move existing Memcached nodes to different Availability Zones, see the
+	// Availability Zone Considerations section of Cache Node Considerations for
+	// Memcached
 	// (https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/CacheNodes.SupportedTypes.html).
 	// Impact of new add/remove requests upon pending requests
-	//
-	// * Scenario-1
-	//
-	// * Pending
+	// - Scenario-1
+	// - Pending
 	// Action: Delete
-	//
-	// * New Request: Delete
-	//
-	// * Result: The new delete, pending or
+	// - New Request: Delete
+	// - Result: The new delete, pending or
 	// immediate, replaces the pending delete.
 	//
-	// * Scenario-2
+	// - Scenario-2
+	// - Pending Action: Delete
+	// -
+	// New Request: Create
+	// - Result: The new create, pending or immediate, replaces the
+	// pending delete.
 	//
-	// * Pending Action:
-	// Delete
+	// - Scenario-3
+	// - Pending Action: Create
+	// - New Request: Delete
+	// -
+	// Result: The new delete, pending or immediate, replaces the pending create.
 	//
-	// * New Request: Create
-	//
-	// * Result: The new create, pending or immediate,
-	// replaces the pending delete.
-	//
-	// * Scenario-3
-	//
-	// * Pending Action: Create
-	//
-	// * New
-	// Request: Delete
-	//
-	// * Result: The new delete, pending or immediate, replaces the
-	// pending create.
-	//
-	// * Scenario-4
-	//
-	// * Pending Action: Create
-	//
-	// * New Request:
-	// Create
-	//
-	// * Result: The new create is added to the pending create. Important: If
-	// the new create request is Apply Immediately - Yes, all creates are performed
-	// immediately. If the new create request is Apply Immediately - No, all creates
-	// are pending.
+	// -
+	// Scenario-4
+	// - Pending Action: Create
+	// - New Request: Create
+	// - Result: The new
+	// create is added to the pending create. Important: If the new create request is
+	// Apply Immediately - Yes, all creates are performed immediately. If the new
+	// create request is Apply Immediately - No, all creates are pending.
 	NewAvailabilityZones []string
 
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic to which notifications
@@ -244,20 +222,13 @@ type ModifyCacheClusterInput struct {
 	// performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H
 	// Clock UTC). The minimum maintenance window is a 60 minute period. Valid values
 	// for ddd are:
-	//
-	// * sun
-	//
-	// * mon
-	//
-	// * tue
-	//
-	// * wed
-	//
-	// * thu
-	//
-	// * fri
-	//
-	// * sat
+	// - sun
+	// - mon
+	// - tue
+	// - wed
+	// - thu
+	// - fri
+	// - sat
 	//
 	// Example:
 	// sun:23:00-mon:01:30

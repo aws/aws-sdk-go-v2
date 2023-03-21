@@ -34,17 +34,13 @@ type CopyDBClusterParameterGroupInput struct {
 	// Resource Name (ARN)
 	// (https://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing).
 	// Constraints:
-	//
-	// * Must specify a valid DB cluster parameter group.
-	//
-	// * If the
-	// source DB cluster parameter group is in the same Amazon Region as the copy,
-	// specify a valid DB parameter group identifier, for example
-	// my-db-cluster-param-group, or a valid ARN.
-	//
-	// * If the source DB parameter group
-	// is in a different Amazon Region than the copy, specify a valid DB cluster
-	// parameter group ARN, for example
+	// - Must specify a valid DB cluster parameter group.
+	// - If the source
+	// DB cluster parameter group is in the same Amazon Region as the copy, specify a
+	// valid DB parameter group identifier, for example my-db-cluster-param-group, or a
+	// valid ARN.
+	// - If the source DB parameter group is in a different Amazon Region
+	// than the copy, specify a valid DB cluster parameter group ARN, for example
 	// arn:aws:rds:us-east-1:123456789012:cluster-pg:custom-cluster-group1.
 	//
 	// This member is required.
@@ -56,17 +52,13 @@ type CopyDBClusterParameterGroupInput struct {
 	TargetDBClusterParameterGroupDescription *string
 
 	// The identifier for the copied DB cluster parameter group. Constraints:
-	//
-	// * Cannot
+	// - Cannot
 	// be null, empty, or blank
-	//
-	// * Must contain from 1 to 255 letters, numbers, or
+	// - Must contain from 1 to 255 letters, numbers, or
 	// hyphens
-	//
-	// * First character must be a letter
-	//
-	// * Cannot end with a hyphen or
-	// contain two consecutive hyphens
+	// - First character must be a letter
+	// - Cannot end with a hyphen or contain
+	// two consecutive hyphens
 	//
 	// Example: my-cluster-param-group1
 	//

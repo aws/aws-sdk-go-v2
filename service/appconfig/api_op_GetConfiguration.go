@@ -12,15 +12,13 @@ import (
 
 // (Deprecated) Retrieves the latest deployed configuration. Note the following
 // important information.
-//
-// * This API action is deprecated. Calls to receive
+// - This API action is deprecated. Calls to receive
 // configuration data should use the StartConfigurationSession
 // (https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_StartConfigurationSession.html)
 // and GetLatestConfiguration
 // (https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/API_appconfigdata_GetLatestConfiguration.html)
 // APIs instead.
-//
-// * GetConfiguration is a priced call. For more information, see
+// - GetConfiguration is a priced call. For more information, see
 // Pricing (https://aws.amazon.com/systems-manager/pricing/).
 //
 // Deprecated: This API has been deprecated in favor of the GetLatestConfiguration

@@ -92,20 +92,17 @@ type CreateFleetInput struct {
 	TerminateInstancesWithExpiration *bool
 
 	// The fleet type. The default value is maintain.
-	//
-	// * maintain - The EC2 Fleet
-	// places an asynchronous request for your desired capacity, and continues to
-	// maintain your desired Spot capacity by replenishing interrupted Spot
-	// Instances.
-	//
-	// * request - The EC2 Fleet places an asynchronous one-time request
-	// for your desired capacity, but does submit Spot requests in alternative capacity
-	// pools if Spot capacity is unavailable, and does not maintain Spot capacity if
-	// Spot Instances are interrupted.
-	//
-	// * instant - The EC2 Fleet places a synchronous
-	// one-time request for your desired capacity, and returns errors for any instances
-	// that could not be launched.
+	// - maintain - The EC2 Fleet places
+	// an asynchronous request for your desired capacity, and continues to maintain
+	// your desired Spot capacity by replenishing interrupted Spot Instances.
+	// - request
+	// - The EC2 Fleet places an asynchronous one-time request for your desired
+	// capacity, but does submit Spot requests in alternative capacity pools if Spot
+	// capacity is unavailable, and does not maintain Spot capacity if Spot Instances
+	// are interrupted.
+	// - instant - The EC2 Fleet places a synchronous one-time request
+	// for your desired capacity, and returns errors for any instances that could not
+	// be launched.
 	//
 	// For more information, see EC2 Fleet request types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-request-type.html)

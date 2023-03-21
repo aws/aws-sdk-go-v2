@@ -39,10 +39,8 @@ type GetUsageForecastInput struct {
 
 	// Which metric Cost Explorer uses to create your forecast. Valid values for a
 	// GetUsageForecast call are the following:
-	//
-	// * USAGE_QUANTITY
-	//
-	// *
+	// - USAGE_QUANTITY
+	// -
 	// NORMALIZED_USAGE_AMOUNT
 	//
 	// This member is required.
@@ -60,57 +58,34 @@ type GetUsageForecastInput struct {
 
 	// The filters that you want to use to filter your forecast. The GetUsageForecast
 	// API supports filtering by the following dimensions:
-	//
-	// * AZ
-	//
-	// * INSTANCE_TYPE
-	//
-	// *
+	// - AZ
+	// - INSTANCE_TYPE
+	// -
 	// LINKED_ACCOUNT
-	//
-	// * LINKED_ACCOUNT_NAME
-	//
-	// * OPERATION
-	//
-	// * PURCHASE_TYPE
-	//
-	// * REGION
-	//
-	// *
+	// - LINKED_ACCOUNT_NAME
+	// - OPERATION
+	// - PURCHASE_TYPE
+	// - REGION
+	// -
 	// SERVICE
-	//
-	// * USAGE_TYPE
-	//
-	// * USAGE_TYPE_GROUP
-	//
-	// * RECORD_TYPE
-	//
-	// * OPERATING_SYSTEM
-	//
-	// *
+	// - USAGE_TYPE
+	// - USAGE_TYPE_GROUP
+	// - RECORD_TYPE
+	// - OPERATING_SYSTEM
+	// -
 	// TENANCY
-	//
-	// * SCOPE
-	//
-	// * PLATFORM
-	//
-	// * SUBSCRIPTION_ID
-	//
-	// * LEGAL_ENTITY_NAME
-	//
-	// *
+	// - SCOPE
+	// - PLATFORM
+	// - SUBSCRIPTION_ID
+	// - LEGAL_ENTITY_NAME
+	// -
 	// DEPLOYMENT_OPTION
-	//
-	// * DATABASE_ENGINE
-	//
-	// * INSTANCE_TYPE_FAMILY
-	//
-	// *
-	// BILLING_ENTITY
-	//
-	// * RESERVATION_ID
-	//
-	// * SAVINGS_PLAN_ARN
+	// - DATABASE_ENGINE
+	// - INSTANCE_TYPE_FAMILY
+	// - BILLING_ENTITY
+	// -
+	// RESERVATION_ID
+	// - SAVINGS_PLAN_ARN
 	Filter *types.Expression
 
 	// Amazon Web Services Cost Explorer always returns the mean forecast as a single

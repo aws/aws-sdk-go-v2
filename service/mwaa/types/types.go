@@ -124,31 +124,23 @@ type Environment struct {
 	SourceBucketArn *string
 
 	// The status of the Amazon MWAA environment. Valid values:
-	//
-	// * CREATING - Indicates
+	// - CREATING - Indicates
 	// the request to create the environment is in progress.
-	//
-	// * CREATE_FAILED -
+	// - CREATE_FAILED -
 	// Indicates the request to create the environment failed, and the environment
 	// could not be created.
-	//
-	// * AVAILABLE - Indicates the request was successful and
-	// the environment is ready to use.
-	//
-	// * UPDATING - Indicates the request to update
-	// the environment is in progress.
-	//
-	// * DELETING - Indicates the request to delete
-	// the environment is in progress.
-	//
-	// * DELETED - Indicates the request to delete the
+	// - AVAILABLE - Indicates the request was successful and the
+	// environment is ready to use.
+	// - UPDATING - Indicates the request to update the
+	// environment is in progress.
+	// - DELETING - Indicates the request to delete the
+	// environment is in progress.
+	// - DELETED - Indicates the request to delete the
 	// environment is complete, and the environment has been deleted.
-	//
-	// * UNAVAILABLE -
+	// - UNAVAILABLE -
 	// Indicates the request failed, but the environment was unable to rollback and is
 	// not in a stable state.
-	//
-	// * UPDATE_FAILED - Indicates the request to update the
+	// - UPDATE_FAILED - Indicates the request to update the
 	// environment failed, and the environment has rolled back successfully and is
 	// ready to use.
 	//

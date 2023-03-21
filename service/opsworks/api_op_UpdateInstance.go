@@ -38,21 +38,19 @@ type UpdateInstanceInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The default AWS OpsWorks Stacks agent version. You have the following
-	// options:
+	// The default AWS OpsWorks Stacks agent version. You have the following options:
+	// -
+	// INHERIT - Use the stack's default agent version setting.
+	// - version_number - Use
+	// the specified agent version. This value overrides the stack's default setting.
+	// To update the agent version, you must edit the instance configuration and
+	// specify a new version. AWS OpsWorks Stacks then automatically installs that
+	// version on the instance.
 	//
-	// * INHERIT - Use the stack's default agent version setting.
-	//
-	// *
-	// version_number - Use the specified agent version. This value overrides the
-	// stack's default setting. To update the agent version, you must edit the instance
-	// configuration and specify a new version. AWS OpsWorks Stacks then automatically
-	// installs that version on the instance.
-	//
-	// The default setting is INHERIT. To
-	// specify an agent version, you must use the complete version number, not the
-	// abbreviated number shown on the console. For a list of available agent version
-	// numbers, call DescribeAgentVersions. AgentVersion cannot be set to Chef 12.2.
+	// The default setting is INHERIT. To specify an agent
+	// version, you must use the complete version number, not the abbreviated number
+	// shown on the console. For a list of available agent version numbers, call
+	// DescribeAgentVersions. AgentVersion cannot be set to Chef 12.2.
 	AgentVersion *string
 
 	// The ID of the AMI that was used to create the instance. The value of this
@@ -100,21 +98,16 @@ type UpdateInstanceInput struct {
 
 	// The instance's operating system, which must be set to one of the following. You
 	// cannot update an instance that is using a custom AMI.
-	//
-	// * A supported Linux
+	// - A supported Linux
 	// operating system: An Amazon Linux version, such as Amazon Linux 2018.03, Amazon
 	// Linux 2017.09, Amazon Linux 2017.03, Amazon Linux 2016.09, Amazon Linux 2016.03,
 	// Amazon Linux 2015.09, or Amazon Linux 2015.03.
-	//
-	// * A supported Ubuntu operating
+	// - A supported Ubuntu operating
 	// system, such as Ubuntu 16.04 LTS, Ubuntu 14.04 LTS, or Ubuntu 12.04 LTS.
-	//
-	// *
+	// -
 	// CentOS Linux 7
-	//
-	// * Red Hat Enterprise Linux 7
-	//
-	// * A supported Windows operating
+	// - Red Hat Enterprise Linux 7
+	// - A supported Windows operating
 	// system, such as Microsoft Windows Server 2012 R2 Base, Microsoft Windows Server
 	// 2012 R2 with SQL Server Express, Microsoft Windows Server 2012 R2 with SQL
 	// Server Standard, or Microsoft Windows Server 2012 R2 with SQL Server Web.

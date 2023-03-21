@@ -19,20 +19,17 @@ import (
 // in Amazon EC2 Auto Scaling, which helps you update instances in your Auto
 // Scaling group after you make configuration changes. A rollback is not supported
 // in the following situations:
-//
-// * There is no desired configuration specified for
+// - There is no desired configuration specified for
 // the instance refresh.
-//
-// * The Auto Scaling group has a launch template that uses
+// - The Auto Scaling group has a launch template that uses
 // an Amazon Web Services Systems Manager parameter instead of an AMI ID for the
 // ImageId property.
+// - The Auto Scaling group uses the launch template's $Latest or
+// $Default version.
 //
-// * The Auto Scaling group uses the launch template's $Latest
-// or $Default version.
-//
-// When you receive a successful response from this
-// operation, Amazon EC2 Auto Scaling immediately begins replacing instances. You
-// can check the status of this operation through the DescribeInstanceRefreshes API
+// When you receive a successful response from this operation,
+// Amazon EC2 Auto Scaling immediately begins replacing instances. You can check
+// the status of this operation through the DescribeInstanceRefreshes API
 // operation.
 func (c *Client) RollbackInstanceRefresh(ctx context.Context, params *RollbackInstanceRefreshInput, optFns ...func(*Options)) (*RollbackInstanceRefreshOutput, error) {
 	if params == nil {

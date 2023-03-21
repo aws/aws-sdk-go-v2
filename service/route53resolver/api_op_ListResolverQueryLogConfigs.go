@@ -54,56 +54,40 @@ type ListResolverQueryLogConfigsInput struct {
 	// you submit a second or subsequent ListResolverQueryLogConfigs request and
 	// specify the NextToken parameter, you must use the same value for SortBy, if any,
 	// as in the previous request. Valid values include the following elements:
-	//
-	// * Arn:
+	// - Arn:
 	// The ARN of the query logging configuration
-	//
-	// * AssociationCount: The number of
+	// - AssociationCount: The number of
 	// VPCs that are associated with the specified configuration
-	//
-	// * CreationTime: The
+	// - CreationTime: The
 	// date and time that Resolver returned when the configuration was created
-	//
-	// *
+	// -
 	// CreatorRequestId: The value that was specified for CreatorRequestId when the
 	// configuration was created
-	//
-	// * DestinationArn: The location that logs are sent
-	// to
-	//
-	// * Id: The ID of the configuration
-	//
-	// * Name: The name of the configuration
-	//
-	// *
-	// OwnerId: The Amazon Web Services account number of the account that created the
+	// - DestinationArn: The location that logs are sent to
+	// -
+	// Id: The ID of the configuration
+	// - Name: The name of the configuration
+	// - OwnerId:
+	// The Amazon Web Services account number of the account that created the
 	// configuration
-	//
-	// * ShareStatus: Whether the configuration is shared with other
+	// - ShareStatus: Whether the configuration is shared with other
 	// Amazon Web Services accounts or shared with the current account by another
 	// Amazon Web Services account. Sharing is configured through Resource Access
 	// Manager (RAM).
-	//
-	// * Status: The current status of the configuration. Valid values
+	// - Status: The current status of the configuration. Valid values
 	// include the following:
-	//
-	// * CREATING: Resolver is creating the query logging
+	// - CREATING: Resolver is creating the query logging
 	// configuration.
-	//
-	// * CREATED: The query logging configuration was successfully
+	// - CREATED: The query logging configuration was successfully
 	// created. Resolver is logging queries that originate in the specified VPC.
-	//
-	// *
+	// -
 	// DELETING: Resolver is deleting this query logging configuration.
-	//
-	// * FAILED:
+	// - FAILED:
 	// Resolver either couldn't create or couldn't delete the query logging
 	// configuration. Here are two common causes:
-	//
-	// * The specified destination (for
+	// - The specified destination (for
 	// example, an Amazon S3 bucket) was deleted.
-	//
-	// * Permissions don't allow sending
+	// - Permissions don't allow sending
 	// logs to the destination.
 	SortBy *string
 

@@ -28,29 +28,22 @@ import (
 // selected timestamp, these settings are always restored based on the table's
 // settings as of the current time or when the table was deleted. You can also
 // overwrite these settings during restore:
-//
-// * Read/write capacity mode
-//
-// *
+// - Read/write capacity mode
+// -
 // Provisioned throughput capacity settings
-//
-// * Point-in-time (PITR) settings
-//
-// *
+// - Point-in-time (PITR) settings
+// -
 // Tags
 //
 // For more information, see PITR restore settings
 // (https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery_HowItWorks.html#howitworks_backup_settings)
 // in the Amazon Keyspaces Developer Guide. Note that the following settings are
 // not restored, and you must configure them manually for the new table:
-//
-// *
+// -
 // Automatic scaling policies (for tables that use provisioned capacity mode)
-//
-// *
+// -
 // Identity and Access Management (IAM) policies
-//
-// * Amazon CloudWatch metrics and
+// - Amazon CloudWatch metrics and
 // alarms
 func (c *Client) RestoreTable(ctx context.Context, params *RestoreTableInput, optFns ...func(*Options)) (*RestoreTableOutput, error) {
 	if params == nil {
@@ -91,10 +84,8 @@ type RestoreTableInput struct {
 
 	// Specifies the read/write throughput capacity mode for the target table. The
 	// options are:
-	//
-	// * throughputMode:PAY_PER_REQUEST
-	//
-	// * throughputMode:PROVISIONED -
+	// - throughputMode:PAY_PER_REQUEST
+	// - throughputMode:PROVISIONED -
 	// Provisioned capacity mode requires readCapacityUnits and writeCapacityUnits as
 	// input.
 	//
@@ -106,12 +97,10 @@ type RestoreTableInput struct {
 
 	// Specifies the encryption settings for the target table. You can choose one of
 	// the following KMS key (KMS key):
-	//
-	// * type:AWS_OWNED_KMS_KEY - This key is owned
-	// by Amazon Keyspaces.
-	//
-	// * type:CUSTOMER_MANAGED_KMS_KEY - This key is stored in
-	// your account and is created, owned, and managed by you. This option requires the
+	// - type:AWS_OWNED_KMS_KEY - This key is owned by
+	// Amazon Keyspaces.
+	// - type:CUSTOMER_MANAGED_KMS_KEY - This key is stored in your
+	// account and is created, owned, and managed by you. This option requires the
 	// kms_key_identifier of the KMS key in Amazon Resource Name (ARN) format as
 	// input.
 	//
@@ -123,10 +112,8 @@ type RestoreTableInput struct {
 
 	// Specifies the pointInTimeRecovery settings for the target table. The options
 	// are:
-	//
-	// * status=ENABLED
-	//
-	// * status=DISABLED
+	// - status=ENABLED
+	// - status=DISABLED
 	//
 	// If it's not specified, the default is
 	// status=DISABLED. For more information, see Point-in-time recovery

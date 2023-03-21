@@ -17,8 +17,7 @@ import (
 // by the member account after it's removed from the organization. This operation
 // can be called only from the organization's management account. Member accounts
 // can remove themselves with LeaveOrganization instead.
-//
-// * You can remove an
+// - You can remove an
 // account from your organization only if the account is configured with the
 // information required to operate as a standalone account. When you create an
 // account in an organization using the Organizations console, API, or CLI
@@ -33,14 +32,12 @@ import (
 // yet been provided
 // (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info)
 // in the Organizations User Guide.
-//
-// * The account that you want to leave must not
+// - The account that you want to leave must not
 // be a delegated administrator account for any Amazon Web Services service enabled
 // for your organization. If the account is a delegated administrator, you must
 // first change the delegated administrator account to another account that is
 // remaining in the organization.
-//
-// * After the account leaves the organization, all
+// - After the account leaves the organization, all
 // tags that were attached to the account object in the organization are deleted.
 // Amazon Web Services accounts outside of an organization do not support tags.
 func (c *Client) RemoveAccountFromOrganization(ctx context.Context, params *RemoveAccountFromOrganizationInput, optFns ...func(*Options)) (*RemoveAccountFromOrganizationOutput, error) {

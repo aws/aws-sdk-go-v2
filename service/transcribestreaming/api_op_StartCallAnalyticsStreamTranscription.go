@@ -20,13 +20,10 @@ import (
 // application. Use this operation for Call Analytics
 // (https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics.html)
 // transcriptions. The following parameters are required:
-//
-// * language-code
-//
-// *
+// - language-code
+// -
 // media-encoding
-//
-// * sample-rate
+// - sample-rate
 //
 // For more information on streaming with Amazon
 // Transcribe, see Transcribing streaming audio
@@ -60,13 +57,10 @@ type StartCallAnalyticsStreamTranscriptionInput struct {
 	LanguageCode types.CallAnalyticsLanguageCode
 
 	// Specify the encoding of your input audio. Supported formats are:
-	//
-	// * FLAC
-	//
-	// *
+	// - FLAC
+	// -
 	// OPUS-encoded audio in an Ogg container
-	//
-	// * PCM (only signed 16-bit little-endian
+	// - PCM (only signed 16-bit little-endian
 	// audio formats, which does not include WAV)
 	//
 	// For more information, see Media

@@ -73,19 +73,15 @@ type CopyPackageVersionsInput struct {
 
 	// The namespace of the package versions to be copied. The package version
 	// component that specifies its namespace depends on its type. For example:
-	//
-	// * The
+	// - The
 	// namespace of a Maven package version is its groupId. The namespace is required
 	// when copying Maven package versions.
-	//
-	// * The namespace of an npm package version
+	// - The namespace of an npm package version
 	// is its scope.
-	//
-	// * Python and NuGet package versions do not contain a
-	// corresponding component, package versions of those formats do not have a
-	// namespace.
-	//
-	// * The namespace of a generic package is it’s namespace.
+	// - Python and NuGet package versions do not contain a corresponding
+	// component, package versions of those formats do not have a namespace.
+	// - The
+	// namespace of a generic package is it’s namespace.
 	Namespace *string
 
 	// A list of key-value pairs. The keys are package versions and the values are
@@ -106,20 +102,14 @@ type CopyPackageVersionsOutput struct {
 
 	// A map of package versions that failed to copy and their error codes. The
 	// possible error codes are in the PackageVersionError data type. They are:
-	//
-	// *
+	// -
 	// ALREADY_EXISTS
-	//
-	// * MISMATCHED_REVISION
-	//
-	// * MISMATCHED_STATUS
-	//
-	// * NOT_ALLOWED
-	//
-	// *
+	// - MISMATCHED_REVISION
+	// - MISMATCHED_STATUS
+	// - NOT_ALLOWED
+	// -
 	// NOT_FOUND
-	//
-	// * SKIPPED
+	// - SKIPPED
 	FailedVersions map[string]types.PackageVersionError
 
 	// A list of the package versions that were successfully copied to your repository.

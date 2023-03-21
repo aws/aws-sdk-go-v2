@@ -32,72 +32,48 @@ type CreateIdentityProviderInput struct {
 
 	// The identity provider details. The following list describes the provider detail
 	// keys for each identity provider type.
-	//
-	// * For Google and Login with Amazon:
-	//
-	// *
+	// - For Google and Login with Amazon:
+	// -
 	// client_id
+	// - client_secret
+	// - authorize_scopes
 	//
-	// * client_secret
-	//
-	// * authorize_scopes
-	//
-	// * For Facebook:
-	//
-	// * client_id
-	//
-	// *
+	// - For Facebook:
+	// - client_id
+	// -
 	// client_secret
+	// - authorize_scopes
+	// - api_version
 	//
-	// * authorize_scopes
-	//
-	// * api_version
-	//
-	// * For Sign in with Apple:
-	//
-	// *
+	// - For Sign in with Apple:
+	// -
 	// client_id
+	// - team_id
+	// - key_id
+	// - private_key
+	// - authorize_scopes
 	//
-	// * team_id
-	//
-	// * key_id
-	//
-	// * private_key
-	//
-	// * authorize_scopes
-	//
-	// * For OIDC
+	// - For OIDC
 	// providers:
-	//
-	// * client_id
-	//
-	// * client_secret
-	//
-	// * attributes_request_method
-	//
-	// *
+	// - client_id
+	// - client_secret
+	// - attributes_request_method
+	// -
 	// oidc_issuer
-	//
-	// * authorize_scopes
-	//
-	// * authorize_url if not available from discovery
+	// - authorize_scopes
+	// - authorize_url if not available from discovery
 	// URL specified by oidc_issuer key
-	//
-	// * token_url if not available from discovery
+	// - token_url if not available from discovery URL
+	// specified by oidc_issuer key
+	// - attributes_url if not available from discovery
 	// URL specified by oidc_issuer key
+	// - jwks_uri if not available from discovery URL
+	// specified by oidc_issuer key
 	//
-	// * attributes_url if not available from
-	// discovery URL specified by oidc_issuer key
-	//
-	// * jwks_uri if not available from
-	// discovery URL specified by oidc_issuer key
-	//
-	// * For SAML providers:
-	//
-	// *
-	// MetadataFile OR MetadataURL
-	//
-	// * IDPSignout (boolean) optional
+	// - For SAML providers:
+	// - MetadataFile OR
+	// MetadataURL
+	// - IDPSignout (boolean) optional
 	//
 	// This member is required.
 	IdentityProviderDetails map[string]string

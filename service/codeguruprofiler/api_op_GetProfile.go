@@ -27,26 +27,21 @@ import (
 //
 // it is retained
 // by CodeGuru Profiler.
-//
-// * If the aggregation period is 5 minutes, the aggregated
+// - If the aggregation period is 5 minutes, the aggregated
 // profile is retained for 15 days.
-//
-// * If the aggregation period is 1 hour, the
+// - If the aggregation period is 1 hour, the
 // aggregated profile is retained for 60 days.
-//
-// * If the aggregation period is 1
+// - If the aggregation period is 1
 // day, the aggregated profile is retained for 3 years.
 //
 // There are two use cases
 // for calling GetProfile.
-//
-// * If you want to return an aggregated profile that
+// - If you want to return an aggregated profile that
 // already exists, use ListProfileTimes
 // (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ListProfileTimes.html)
 // to view the time ranges of existing aggregated profiles. Use them in a
 // GetProfile request to return a specific, existing aggregated profile.
-//
-// * If you
+// - If you
 // want to return an aggregated profile for a time range that doesn't align with an
 // existing aggregated profile, then CodeGuru Profiler makes a best effort to
 // combine existing aggregated profiles from the requested time range and return
@@ -81,10 +76,8 @@ type GetProfileInput struct {
 	// The format of the returned profiling data. The format maps to the Accept and
 	// Content-Type headers of the HTTP request. You can specify one of the following:
 	// or the default .
-	//
-	// * application/json — standard JSON format
-	//
-	// *
+	// - application/json — standard JSON format
+	// -
 	// application/x-amzn-ion — the Amazon Ion data format. For more information, see
 	// Amazon Ion (http://amzn.github.io/ion-docs/).
 	Accept *string

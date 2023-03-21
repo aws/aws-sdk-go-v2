@@ -52,22 +52,16 @@ type CreateStateMachineInput struct {
 	Definition *string
 
 	// The name of the state machine. A name must not contain:
+	// - white space
+	// - brackets
+	// < > { } [ ]
+	// - wildcard characters ? *
+	// - special characters " # % \ ^ | ~ ` $ & ,
+	// ; : /
+	// - control characters (U+0000-001F, U+007F-009F)
 	//
-	// * white space
-	//
-	// *
-	// brackets < > { } [ ]
-	//
-	// * wildcard characters ? *
-	//
-	// * special characters " # % \ ^
-	// | ~ ` $ & , ; : /
-	//
-	// * control characters (U+0000-001F, U+007F-009F)
-	//
-	// To enable
-	// logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and
-	// _.
+	// To enable logging with
+	// CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
 	//
 	// This member is required.
 	Name *string

@@ -43,9 +43,7 @@ type DescribeGeofenceCollectionOutput struct {
 
 	// The Amazon Resource Name (ARN) for the geofence collection resource. Used when
 	// you need to specify a resource across all Amazon Web Services.
-	//
-	// * Format
-	// example:
+	// - Format example:
 	// arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollection
 	//
 	// This member is required.

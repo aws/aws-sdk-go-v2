@@ -23,11 +23,9 @@ import (
 // API operation to add a new user with a custom permission profile attached. For
 // more information, see the following sections in the Amazon QuickSight User
 // Guide:
-//
-// * Embedding Analytics
+// - Embedding Analytics
 // (https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html)
-//
-// *
+// -
 // Customizing Access to the Amazon QuickSight Console
 // (https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html)
 func (c *Client) GetSessionEmbedUrl(ctx context.Context, params *GetSessionEmbedUrlInput, optFns ...func(*Options)) (*GetSessionEmbedUrlOutput, error) {
@@ -55,21 +53,15 @@ type GetSessionEmbedUrlInput struct {
 
 	// The URL you use to access the embedded session. The entry point URL is
 	// constrained to the following paths:
-	//
-	// * /start
-	//
-	// * /start/analyses
-	//
-	// *
+	// - /start
+	// - /start/analyses
+	// -
 	// /start/dashboards
-	//
-	// * /start/favorites
-	//
-	// * /dashboards/DashboardId  - where
+	// - /start/favorites
+	// - /dashboards/DashboardId  - where
 	// DashboardId is the actual ID key from the Amazon QuickSight console URL of the
 	// dashboard
-	//
-	// * /analyses/AnalysisId  - where AnalysisId is the actual ID key from
+	// - /analyses/AnalysisId  - where AnalysisId is the actual ID key from
 	// the Amazon QuickSight console URL of the analysis
 	EntryPoint *string
 
@@ -81,18 +73,15 @@ type GetSessionEmbedUrlInput struct {
 	// identity type. You can use this for any type of Amazon QuickSight users in your
 	// account (readers, authors, or admins). They need to be authenticated as one of
 	// the following:
-	//
-	// * Active Directory (AD) users or group members
-	//
-	// * Invited
+	// - Active Directory (AD) users or group members
+	// - Invited
 	// nonfederated users
+	// - IAM users and IAM role-based sessions authenticated through
+	// Federated Single Sign-On using SAML, OpenID Connect, or IAM federation
 	//
-	// * IAM users and IAM role-based sessions authenticated
-	// through Federated Single Sign-On using SAML, OpenID Connect, or IAM
-	// federation
-	//
-	// Omit this parameter for users in the third group, IAM users and IAM
-	// role-based sessions.
+	// Omit
+	// this parameter for users in the third group, IAM users and IAM role-based
+	// sessions.
 	UserArn *string
 
 	noSmithyDocumentSerde

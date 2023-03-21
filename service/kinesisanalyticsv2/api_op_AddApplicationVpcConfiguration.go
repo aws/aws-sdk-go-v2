@@ -14,12 +14,10 @@ import (
 // Adds a Virtual Private Cloud (VPC) configuration to the application.
 // Applications can use VPCs to store and access resources securely. Note the
 // following about VPC configurations for Kinesis Data Analytics applications:
-//
-// *
+// -
 // VPC configurations are not supported for SQL applications.
-//
-// * When a VPC is
-// added to a Kinesis Data Analytics application, the application can no longer be
+// - When a VPC is added
+// to a Kinesis Data Analytics application, the application can no longer be
 // accessed from the Internet directly. To enable Internet access to the
 // application, add an Internet gateway to your VPC.
 func (c *Client) AddApplicationVpcConfiguration(ctx context.Context, params *AddApplicationVpcConfigurationInput, optFns ...func(*Options)) (*AddApplicationVpcConfigurationOutput, error) {

@@ -75,17 +75,15 @@ type ModifyDBClusterInput struct {
 
 	// The target backtrack window, in seconds. To disable backtracking, set this value
 	// to 0. Default: 0 Constraints:
-	//
-	// * If specified, this value must be set to a
-	// number from 0 to 259,200 (72 hours).
+	// - If specified, this value must be set to a number
+	// from 0 to 259,200 (72 hours).
 	//
 	// Valid for: Aurora MySQL DB clusters only
 	BacktrackWindow *int64
 
 	// The number of days for which automated backups are retained. Specify a minimum
 	// value of 1. Default: 1 Constraints:
-	//
-	// * Must be a value from 1 to 35
+	// - Must be a value from 1 to 35
 	//
 	// Valid for:
 	// Aurora DB clusters and Multi-AZ DB clusters
@@ -129,11 +127,9 @@ type ModifyDBClusterInput struct {
 	// parameter, the DB cluster isn't rebooted automatically. Also, parameter changes
 	// are applied immediately rather than during the next maintenance window. Default:
 	// The existing name setting Constraints:
-	//
-	// * The DB parameter group must be in the
+	// - The DB parameter group must be in the
 	// same DB parameter group family as this DB cluster.
-	//
-	// * The
+	// - The
 	// DBInstanceParameterGroupName parameter is valid in combination with the
 	// AllowMajorVersionUpgrade parameter for a major version upgrade only.
 	//
@@ -242,11 +238,9 @@ type ModifyDBClusterInput struct {
 
 	// The new password for the master database user. This password can contain any
 	// printable ASCII character except "/", """, or "@". Constraints:
-	//
-	// * Must contain
+	// - Must contain
 	// from 8 to 41 characters.
-	//
-	// * Can't be specified if ManageMasterUserPassword is
+	// - Can't be specified if ManageMasterUserPassword is
 	// turned on.
 	//
 	// Valid for: Aurora DB clusters and Multi-AZ DB clusters
@@ -255,14 +249,12 @@ type ModifyDBClusterInput struct {
 	// The Amazon Web Services KMS key identifier to encrypt a secret that is
 	// automatically generated and managed in Amazon Web Services Secrets Manager. This
 	// setting is valid only if both of the following conditions are met:
-	//
-	// * The DB
+	// - The DB
 	// cluster doesn't manage the master user password in Amazon Web Services Secrets
 	// Manager. If the DB cluster already manages the master user password in Amazon
 	// Web Services Secrets Manager, you can't change the KMS key that is used to
 	// encrypt the secret.
-	//
-	// * You are turning on ManageMasterUserPassword to manage the
+	// - You are turning on ManageMasterUserPassword to manage the
 	// master user password in Amazon Web Services Secrets Manager. If you are turning
 	// on ManageMasterUserPassword and don't specify MasterUserSecretKmsKeyId, then the
 	// aws/secretsmanager KMS key is used to encrypt the secret. If the secret is in a
@@ -295,10 +287,8 @@ type ModifyDBClusterInput struct {
 	MonitoringRoleArn *string
 
 	// The network type of the DB cluster. Valid values:
-	//
-	// * IPV4
-	//
-	// * DUAL
+	// - IPV4
+	// - DUAL
 	//
 	// The network
 	// type is determined by the DBSubnetGroup specified for the DB cluster. A
@@ -310,13 +300,10 @@ type ModifyDBClusterInput struct {
 
 	// The new DB cluster identifier for the DB cluster when renaming a DB cluster.
 	// This value is stored as a lowercase string. Constraints:
-	//
-	// * Must contain from 1
+	// - Must contain from 1
 	// to 63 letters, numbers, or hyphens
-	//
-	// * The first character must be a letter
-	//
-	// *
+	// - The first character must be a letter
+	// -
 	// Can't end with a hyphen or contain two consecutive hyphens
 	//
 	// Example: my-cluster2
@@ -339,28 +326,21 @@ type ModifyDBClusterInput struct {
 
 	// The number of days to retain Performance Insights data. The default is 7 days.
 	// The following values are valid:
-	//
-	// * 7
-	//
-	// * month * 31, where month is a number of
+	// - 7
+	// - month * 31, where month is a number of
 	// months from 1-23
-	//
-	// * 731
+	// - 731
 	//
 	// For example, the following values are valid:
-	//
-	// * 93 (3
+	// - 93 (3
 	// months * 31)
+	// - 341 (11 months * 31)
+	// - 589 (19 months * 31)
+	// - 731
 	//
-	// * 341 (11 months * 31)
-	//
-	// * 589 (19 months * 31)
-	//
-	// * 731
-	//
-	// If you
-	// specify a retention period such as 94, which isn't a valid value, RDS issues an
-	// error. Valid for: Multi-AZ DB clusters only
+	// If you specify
+	// a retention period such as 94, which isn't a valid value, RDS issues an error.
+	// Valid for: Multi-AZ DB clusters only
 	PerformanceInsightsRetentionPeriod *int32
 
 	// The port number on which the DB cluster accepts connections. Constraints: Value
@@ -374,16 +354,12 @@ type ModifyDBClusterInput struct {
 	// Web Services Region. To view the time blocks available, see  Backup window
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.Backups.BackupWindow)
 	// in the Amazon Aurora User Guide. Constraints:
-	//
-	// * Must be in the format
+	// - Must be in the format
 	// hh24:mi-hh24:mi.
-	//
-	// * Must be in Universal Coordinated Time (UTC).
-	//
-	// * Must not
+	// - Must be in Universal Coordinated Time (UTC).
+	// - Must not
 	// conflict with the preferred maintenance window.
-	//
-	// * Must be at least 30
+	// - Must be at least 30
 	// minutes.
 	//
 	// Valid for: Aurora DB clusters and Multi-AZ DB clusters
@@ -411,8 +387,7 @@ type ModifyDBClusterInput struct {
 	// Secrets Manager
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-secrets-manager.html)
 	// in the Amazon Aurora User Guide. Constraints:
-	//
-	// * You must apply the change
+	// - You must apply the change
 	// immediately when rotating the master user password.
 	//
 	// Valid for: Aurora DB

@@ -15,11 +15,9 @@ import (
 // vault must be unique within a region for an AWS account. You can create up to
 // 1,000 vaults per account. If you need to create more vaults, contact Amazon S3
 // Glacier. You must use the following guidelines when naming a vault.
-//
-// * Names can
+// - Names can
 // be between 1 and 255 characters long.
-//
-// * Allowed characters are a-z, A-Z, 0-9,
+// - Allowed characters are a-z, A-Z, 0-9,
 // '_' (underscore), '-' (hyphen), and '.' (period).
 //
 // This operation is idempotent.

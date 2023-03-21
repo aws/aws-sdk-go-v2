@@ -158,54 +158,40 @@ type BulkEmailDestinationStatus struct {
 
 	// The status of a message sent using the SendBulkTemplatedEmail operation.
 	// Possible values for this parameter include:
-	//
-	// * Success: Amazon SES accepted the
+	// - Success: Amazon SES accepted the
 	// message, and will attempt to deliver it to the recipients.
-	//
-	// * MessageRejected:
+	// - MessageRejected:
 	// The message was rejected because it contained a virus.
-	//
-	// *
+	// -
 	// MailFromDomainNotVerified: The sender's email address or domain was not
 	// verified.
-	//
-	// * ConfigurationSetDoesNotExist: The configuration set you specified
+	// - ConfigurationSetDoesNotExist: The configuration set you specified
 	// does not exist.
-	//
-	// * TemplateDoesNotExist: The template you specified does not
+	// - TemplateDoesNotExist: The template you specified does not
 	// exist.
-	//
-	// * AccountSuspended: Your account has been shut down because of issues
+	// - AccountSuspended: Your account has been shut down because of issues
 	// related to your email sending practices.
-	//
-	// * AccountThrottled: The number of
+	// - AccountThrottled: The number of
 	// emails you can send has been reduced because your account has exceeded its
 	// allocated sending limit.
-	//
-	// * AccountDailyQuotaExceeded: You have reached or
+	// - AccountDailyQuotaExceeded: You have reached or
 	// exceeded the maximum number of emails you can send from your account in a
 	// 24-hour period.
-	//
-	// * InvalidSendingPoolName: The configuration set you specified
+	// - InvalidSendingPoolName: The configuration set you specified
 	// refers to an IP pool that does not exist.
-	//
-	// * AccountSendingPaused: Email sending
+	// - AccountSendingPaused: Email sending
 	// for the Amazon SES account was disabled using the UpdateAccountSendingEnabled
 	// operation.
-	//
-	// * ConfigurationSetSendingPaused: Email sending for this
-	// configuration set was disabled using the UpdateConfigurationSetSendingEnabled
-	// operation.
-	//
-	// * InvalidParameterValue: One or more of the parameters you specified
-	// when calling this operation was invalid. See the error message for additional
-	// information.
-	//
-	// * TransientFailure: Amazon SES was unable to process your request
-	// because of a temporary issue.
-	//
-	// * Failed: Amazon SES was unable to process your
-	// request. See the error message for additional information.
+	// - ConfigurationSetSendingPaused: Email sending for this configuration
+	// set was disabled using the UpdateConfigurationSetSendingEnabled operation.
+	// -
+	// InvalidParameterValue: One or more of the parameters you specified when calling
+	// this operation was invalid. See the error message for additional information.
+	// -
+	// TransientFailure: Amazon SES was unable to process your request because of a
+	// temporary issue.
+	// - Failed: Amazon SES was unable to process your request. See
+	// the error message for additional information.
 	Status BulkEmailStatus
 
 	noSmithyDocumentSerde
@@ -237,22 +223,18 @@ type CloudWatchDimensionConfiguration struct {
 	// The default value of the dimension that is published to Amazon CloudWatch if you
 	// do not provide the value of the dimension when you send an email. The default
 	// value must:
-	//
-	// * This value can only contain ASCII letters (a-z, A-Z), numbers
+	// - This value can only contain ASCII letters (a-z, A-Z), numbers
 	// (0-9), underscores (_), or dashes (-).
-	//
-	// * Contain less than 256 characters.
+	// - Contain less than 256 characters.
 	//
 	// This member is required.
 	DefaultDimensionValue *string
 
 	// The name of an Amazon CloudWatch dimension associated with an email sending
 	// metric. The name must:
-	//
-	// * This value can only contain ASCII letters (a-z, A-Z),
+	// - This value can only contain ASCII letters (a-z, A-Z),
 	// numbers (0-9), underscores (_), or dashes (-).
-	//
-	// * Contain less than 256
+	// - Contain less than 256
 	// characters.
 	//
 	// This member is required.
@@ -281,11 +263,9 @@ type ConfigurationSet struct {
 
 	// The name of the configuration set. The name must meet the following
 	// requirements:
-	//
-	// * Contain only letters (a-z, A-Z), numbers (0-9), underscores
-	// (_), or dashes (-).
-	//
-	// * Contain 64 characters or fewer.
+	// - Contain only letters (a-z, A-Z), numbers (0-9), underscores (_),
+	// or dashes (-).
+	// - Contain 64 characters or fewer.
 	//
 	// This member is required.
 	Name *string
@@ -387,11 +367,9 @@ type EventDestination struct {
 	MatchingEventTypes []EventType
 
 	// The name of the event destination. The name must:
-	//
-	// * This value can only contain
+	// - This value can only contain
 	// ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).
-	//
-	// *
+	// -
 	// Contain less than 64 characters.
 	//
 	// This member is required.
@@ -683,22 +661,18 @@ type MessageDsn struct {
 type MessageTag struct {
 
 	// The name of the tag. The name must:
-	//
-	// * This value can only contain ASCII letters
+	// - This value can only contain ASCII letters
 	// (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).
-	//
-	// * Contain less than
+	// - Contain less than
 	// 256 characters.
 	//
 	// This member is required.
 	Name *string
 
 	// The value of the tag. The value must:
-	//
-	// * This value can only contain ASCII
+	// - This value can only contain ASCII
 	// letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).
-	//
-	// * Contain
+	// - Contain
 	// less than 256 characters.
 	//
 	// This member is required.
@@ -780,14 +754,11 @@ type ReceiptFilter struct {
 	IpFilter *ReceiptIpFilter
 
 	// The name of the IP address filter. The name must:
-	//
-	// * This value can only contain
+	// - This value can only contain
 	// ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).
-	//
-	// *
-	// Start and end with a letter or number.
-	//
-	// * Contain less than 64 characters.
+	// - Start
+	// and end with a letter or number.
+	// - Contain less than 64 characters.
 	//
 	// This member is required.
 	Name *string
@@ -830,14 +801,11 @@ type ReceiptIpFilter struct {
 type ReceiptRule struct {
 
 	// The name of the receipt rule. The name must:
-	//
-	// * This value can only contain
-	// ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).
-	//
-	// *
-	// Start and end with a letter or number.
-	//
-	// * Contain less than 64 characters.
+	// - This value can only contain ASCII
+	// letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).
+	// - Start and
+	// end with a letter or number.
+	// - Contain less than 64 characters.
 	//
 	// This member is required.
 	Name *string
@@ -878,14 +846,11 @@ type ReceiptRuleSetMetadata struct {
 	CreatedTimestamp *time.Time
 
 	// The name of the receipt rule set. The name must:
-	//
-	// * This value can only contain
+	// - This value can only contain
 	// ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-).
-	//
-	// *
-	// Start and end with a letter or number.
-	//
-	// * Contain less than 64 characters.
+	// - Start
+	// and end with a letter or number.
+	// - Contain less than 64 characters.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -991,17 +956,15 @@ type S3Action struct {
 	// The customer master key that Amazon SES should use to encrypt your emails before
 	// saving them to the Amazon S3 bucket. You can use the default master key or a
 	// custom master key you created in AWS KMS as follows:
-	//
-	// * To use the default
-	// master key, provide an ARN in the form of
+	// - To use the default master
+	// key, provide an ARN in the form of
 	// arn:aws:kms:REGION:ACCOUNT-ID-WITHOUT-HYPHENS:alias/aws/ses. For example, if
 	// your AWS account ID is 123456789012 and you want to use the default master key
 	// in the US West (Oregon) region, the ARN of the default master key would be
 	// arn:aws:kms:us-west-2:123456789012:alias/aws/ses. If you use the default master
 	// key, you don't need to perform any extra steps to give Amazon SES permission to
 	// use the key.
-	//
-	// * To use a custom master key you created in AWS KMS, provide the
+	// - To use a custom master key you created in AWS KMS, provide the
 	// ARN of the master key and ensure that you add a statement to your key's policy
 	// to give Amazon SES permission to use it. For more information about giving
 	// permissions, see the Amazon SES Developer Guide

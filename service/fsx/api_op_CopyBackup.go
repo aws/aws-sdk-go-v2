@@ -75,17 +75,13 @@ type CopyBackupInput struct {
 
 	// Specifies the ID of the Key Management Service (KMS) key to use for encrypting
 	// data on Amazon FSx file systems, as follows:
-	//
-	// * Amazon FSx for Lustre
+	// - Amazon FSx for Lustre
 	// PERSISTENT_1 and PERSISTENT_2 deployment types only. SCRATCH_1 and SCRATCH_2
 	// types are encrypted using the Amazon FSx service KMS key for your account.
-	//
-	// *
+	// -
 	// Amazon FSx for NetApp ONTAP
-	//
-	// * Amazon FSx for OpenZFS
-	//
-	// * Amazon FSx for Windows
+	// - Amazon FSx for OpenZFS
+	// - Amazon FSx for Windows
 	// File Server
 	//
 	// If a KmsKeyId isn't specified, the Amazon FSx-managed KMS key for

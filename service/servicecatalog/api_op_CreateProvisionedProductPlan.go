@@ -71,12 +71,9 @@ type CreateProvisionedProductPlanInput struct {
 	ProvisioningArtifactId *string
 
 	// The language code.
-	//
-	// * en - English (default)
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	// - en - English (default)
+	// - jp - Japanese
+	// - zh - Chinese
 	AcceptLanguage *string
 
 	// Passed to CloudFormation. The SNS topic ARNs to which to publish stack-related

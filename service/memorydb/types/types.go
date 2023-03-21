@@ -683,15 +683,13 @@ type Subnet struct {
 }
 
 // Represents the output of one of the following operations:
+// - CreateSubnetGroup
+// -
+// UpdateSubnetGroup
 //
-// *
-// CreateSubnetGroup
-//
-// * UpdateSubnetGroup
-//
-// A subnet group is a collection of
-// subnets (typically private) that you can designate for your clusters running in
-// an Amazon Virtual Private Cloud (VPC) environment.
+// A subnet group is a collection of subnets (typically private)
+// that you can designate for your clusters running in an Amazon Virtual Private
+// Cloud (VPC) environment.
 type SubnetGroup struct {
 
 	// The ARN (Amazon Resource Name) of the subnet group.

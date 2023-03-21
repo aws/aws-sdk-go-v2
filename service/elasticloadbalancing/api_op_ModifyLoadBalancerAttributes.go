@@ -17,19 +17,15 @@ import (
 // the load balancer attribute ConnectionSettings by specifying an idle connection
 // timeout value for your load balancer. For more information, see the following in
 // the Classic Load Balancers Guide:
-//
-// * Cross-Zone Load Balancing
+// - Cross-Zone Load Balancing
 // (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-crosszone-lb.html)
-//
-// *
+// -
 // Connection Draining
 // (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-conn-drain.html)
-//
-// *
+// -
 // Access Logs
 // (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/access-log-collection.html)
-//
-// *
+// -
 // Idle Connection Timeout
 // (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-idle-timeout.html)
 func (c *Client) ModifyLoadBalancerAttributes(ctx context.Context, params *ModifyLoadBalancerAttributesInput, optFns ...func(*Options)) (*ModifyLoadBalancerAttributesOutput, error) {

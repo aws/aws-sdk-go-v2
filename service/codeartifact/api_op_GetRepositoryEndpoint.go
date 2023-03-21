@@ -13,14 +13,10 @@ import (
 
 // Returns the endpoint of a repository for a specific package format. A repository
 // has one endpoint for each package format:
-//
-// * maven
-//
-// * npm
-//
-// * nuget
-//
-// * pypi
+// - maven
+// - npm
+// - nuget
+// - pypi
 func (c *Client) GetRepositoryEndpoint(ctx context.Context, params *GetRepositoryEndpointInput, optFns ...func(*Options)) (*GetRepositoryEndpointOutput, error) {
 	if params == nil {
 		params = &GetRepositoryEndpointInput{}

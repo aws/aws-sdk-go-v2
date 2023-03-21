@@ -69,21 +69,16 @@ type CreateEventSubscriptionInput struct {
 	// not specified, then all sources are included in the response. An identifier must
 	// begin with a letter and must contain only ASCII letters, digits, and hyphens; it
 	// can't end with a hyphen or contain two consecutive hyphens. Constraints:
-	//
-	// * If
+	// - If
 	// SourceIds are provided, SourceType must also be provided.
-	//
-	// * If the source type
+	// - If the source type
 	// is an instance, a DBInstanceIdentifier must be provided.
-	//
-	// * If the source type
-	// is a security group, a DBSecurityGroupName must be provided.
-	//
-	// * If the source
-	// type is a parameter group, a DBParameterGroupName must be provided.
-	//
-	// * If the
-	// source type is a snapshot, a DBSnapshotIdentifier must be provided.
+	// - If the source type is
+	// a security group, a DBSecurityGroupName must be provided.
+	// - If the source type
+	// is a parameter group, a DBParameterGroupName must be provided.
+	// - If the source
+	// type is a snapshot, a DBSnapshotIdentifier must be provided.
 	SourceIds []string
 
 	// The type of source that is generating the events. For example, if you want to be

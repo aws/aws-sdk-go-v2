@@ -42,11 +42,9 @@ type DeleteRelationalDatabaseInput struct {
 	// is the default value for that parameter. Specifying this parameter and also
 	// specifying the skip final snapshot parameter to true results in an error.
 	// Constraints:
-	//
-	// * Must contain from 2 to 255 alphanumeric characters, or
-	// hyphens.
-	//
-	// * The first and last character must be a letter or number.
+	// - Must contain from 2 to 255 alphanumeric characters, or hyphens.
+	// -
+	// The first and last character must be a letter or number.
 	FinalRelationalDatabaseSnapshotName *string
 
 	// Determines whether a final database snapshot is created before your database is

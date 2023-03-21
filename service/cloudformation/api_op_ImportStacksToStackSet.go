@@ -42,10 +42,8 @@ type ImportStacksToStackSetInput struct {
 
 	// By default, SELF is specified. Use SELF for stack sets with self-managed
 	// permissions.
-	//
-	// * If you are signed in to the management account, specify SELF.
-	//
-	// *
+	// - If you are signed in to the management account, specify SELF.
+	// -
 	// For service managed stack sets, specify DELEGATED_ADMIN.
 	CallAs types.CallAs
 

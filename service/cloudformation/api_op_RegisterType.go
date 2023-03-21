@@ -14,18 +14,15 @@ import (
 // Registers an extension with the CloudFormation service. Registering an extension
 // makes it available for use in CloudFormation templates in your Amazon Web
 // Services account, and includes:
+// - Validating the extension schema.
+// - Determining
+// which handlers, if any, have been specified for the extension.
+// - Making the
+// extension available for use in your account.
 //
-// * Validating the extension schema.
-//
-// *
-// Determining which handlers, if any, have been specified for the extension.
-//
-// *
-// Making the extension available for use in your account.
-//
-// For more information
-// about how to develop extensions and ready them for registration, see Creating
-// Resource Providers
+// For more information about how to
+// develop extensions and ready them for registration, see Creating Resource
+// Providers
 // (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html)
 // in the CloudFormation CLI User Guide. You can have a maximum of 50 resource
 // extension versions registered at a time. This maximum is per account and per
@@ -72,31 +69,22 @@ type RegisterTypeInput struct {
 
 	// The name of the extension being registered. We suggest that extension names
 	// adhere to the following patterns:
-	//
-	// * For resource types,
+	// - For resource types,
 	// company_or_organization::service::type.
-	//
-	// * For modules,
+	// - For modules,
 	// company_or_organization::service::type::MODULE.
-	//
-	// * For hooks,
+	// - For hooks,
 	// MyCompany::Testing::MyTestHook.
 	//
 	// The following organization namespaces are
 	// reserved and can't be used in your extension names:
-	//
-	// * Alexa
-	//
-	// * AMZN
-	//
-	// *
-	// Amazon
-	//
-	// * AWS
-	//
-	// * Custom
-	//
-	// * Dev
+	// - Alexa
+	// - AMZN
+	// - Amazon
+	// -
+	// AWS
+	// - Custom
+	// - Dev
 	//
 	// This member is required.
 	TypeName *string

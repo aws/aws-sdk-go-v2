@@ -1028,22 +1028,18 @@ func (e *InvalidEventDataStoreStatusException) ErrorFault() smithy.ErrorFault {
 // conditions in all advanced event selectors is allowed. A trail is limited to 250
 // data resources. These data resources can be distributed across event selectors,
 // but the overall total cannot exceed 250. You can:
-//
-// * Specify a valid number of
+// - Specify a valid number of
 // event selectors (1 to 5) for a trail.
-//
-// * Specify a valid number of data
-// resources (1 to 250) for an event selector. The limit of number of resources on
-// an individual event selector is configurable up to 250. However, this upper
-// limit is allowed only if the total number of data resources does not exceed 250
-// across all event selectors for a trail.
-//
-// * Specify up to 500 values for all
-// conditions in all advanced event selectors for a trail.
-//
-// * Specify a valid value
-// for a parameter. For example, specifying the ReadWriteType parameter with a
-// value of read-only is not valid.
+// - Specify a valid number of data resources
+// (1 to 250) for an event selector. The limit of number of resources on an
+// individual event selector is configurable up to 250. However, this upper limit
+// is allowed only if the total number of data resources does not exceed 250 across
+// all event selectors for a trail.
+// - Specify up to 500 values for all conditions
+// in all advanced event selectors for a trail.
+// - Specify a valid value for a
+// parameter. For example, specifying the ReadWriteType parameter with a value of
+// read-only is not valid.
 type InvalidEventSelectorsException struct {
 	Message *string
 
@@ -1554,21 +1550,16 @@ func (e *InvalidTokenException) ErrorFault() smithy.ErrorFault { return smithy.F
 
 // This exception is thrown when the provided trail name is not valid. Trail names
 // must meet the following requirements:
-//
-// * Contain only ASCII letters (a-z, A-Z),
+// - Contain only ASCII letters (a-z, A-Z),
 // numbers (0-9), periods (.), underscores (_), or dashes (-)
-//
-// * Start with a
-// letter or number, and end with a letter or number
-//
-// * Be between 3 and 128
-// characters
-//
-// * Have no adjacent periods, underscores or dashes. Names like
-// my-_namespace and my--namespace are not valid.
-//
-// * Not be in IP address format
-// (for example, 192.168.5.4)
+// - Start with a letter
+// or number, and end with a letter or number
+// - Be between 3 and 128 characters
+// -
+// Have no adjacent periods, underscores or dashes. Names like my-_namespace and
+// my--namespace are not valid.
+// - Not be in IP address format (for example,
+// 192.168.5.4)
 type InvalidTrailNameException struct {
 	Message *string
 
@@ -2015,14 +2006,11 @@ func (e *ResourcePolicyNotFoundException) ErrorFault() smithy.ErrorFault { retur
 // This exception is thrown when the resouce-based policy has syntax errors, or
 // contains a principal that is not valid. The following are requirements for the
 // resource policy:
-//
-// * Contains only one action: cloudtrail-data:PutAuditEvents
-//
-// *
+// - Contains only one action: cloudtrail-data:PutAuditEvents
+// -
 // Contains at least one statement. The policy can have a maximum of 20
 // statements.
-//
-// * Each statement contains at least one principal. A statement can
+// - Each statement contains at least one principal. A statement can
 // have a maximum of 50 principals.
 type ResourcePolicyNotValidException struct {
 	Message *string

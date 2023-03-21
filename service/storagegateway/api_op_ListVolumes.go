@@ -38,11 +38,9 @@ func (c *Client) ListVolumes(ctx context.Context, params *ListVolumesInput, optF
 }
 
 // A JSON object that contains one or more of the following fields:
-//
-// *
+// -
 // ListVolumesInput$Limit
-//
-// * ListVolumesInput$Marker
+// - ListVolumesInput$Marker
 type ListVolumesInput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
@@ -62,10 +60,8 @@ type ListVolumesInput struct {
 }
 
 // A JSON object containing the following fields:
-//
-// * ListVolumesOutput$Marker
-//
-// *
+// - ListVolumesOutput$Marker
+// -
 // ListVolumesOutput$VolumeInfos
 type ListVolumesOutput struct {
 

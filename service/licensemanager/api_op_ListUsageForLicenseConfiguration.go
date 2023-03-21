@@ -39,15 +39,12 @@ type ListUsageForLicenseConfigurationInput struct {
 
 	// Filters to scope the results. The following filters and logical operators are
 	// supported:
-	//
-	// * resourceArn - The ARN of the license configuration resource.
+	// - resourceArn - The ARN of the license configuration resource.
 	// Logical operators are EQUALS | NOT_EQUALS.
-	//
-	// * resourceType - The resource type
+	// - resourceType - The resource type
 	// (EC2_INSTANCE | EC2_HOST | EC2_AMI | SYSTEMS_MANAGER_MANAGED_INSTANCE). Logical
 	// operators are EQUALS | NOT_EQUALS.
-	//
-	// * resourceAccount - The ID of the account
+	// - resourceAccount - The ID of the account
 	// that owns the resource. Logical operators are EQUALS | NOT_EQUALS.
 	Filters []types.Filter
 

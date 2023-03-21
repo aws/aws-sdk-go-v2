@@ -20,20 +20,16 @@ import (
 // global use. Inserts or deletes ActivatedRule objects in a WebACL. Each Rule
 // identifies web requests that you want to allow, block, or count. When you update
 // a WebACL, you specify the following values:
-//
-// * A default action for the WebACL,
+// - A default action for the WebACL,
 // either ALLOW or BLOCK. AWS WAF performs the default action if a request doesn't
 // match the criteria in any of the Rules in a WebACL.
-//
-// * The Rules that you want
-// to add or delete. If you want to replace one Rule with another, you delete the
+// - The Rules that you want to
+// add or delete. If you want to replace one Rule with another, you delete the
 // existing Rule and add the new one.
-//
-// * For each Rule, whether you want AWS WAF to
+// - For each Rule, whether you want AWS WAF to
 // allow requests, block requests, or count requests that match the conditions in
 // the Rule.
-//
-// * The order in which you want AWS WAF to evaluate the Rules in a
+// - The order in which you want AWS WAF to evaluate the Rules in a
 // WebACL. If you add more than one Rule to a WebACL, AWS WAF evaluates each
 // request against the Rules in order based on the value of Priority. (The Rule
 // that has the lowest value for Priority is evaluated first.) When a web request
@@ -43,23 +39,18 @@ import (
 //
 // To create and
 // configure a WebACL, perform the following steps:
-//
-// * Create and update the
+// - Create and update the
 // predicates that you want to include in Rules. For more information, see
 // CreateByteMatchSet, UpdateByteMatchSet, CreateIPSet, UpdateIPSet,
 // CreateSqlInjectionMatchSet, and UpdateSqlInjectionMatchSet.
-//
-// * Create and update
+// - Create and update
 // the Rules that you want to include in the WebACL. For more information, see
 // CreateRule and UpdateRule.
-//
-// * Create a WebACL. See CreateWebACL.
-//
-// * Use
+// - Create a WebACL. See CreateWebACL.
+// - Use
 // GetChangeToken to get the change token that you provide in the ChangeToken
 // parameter of an UpdateWebACL request.
-//
-// * Submit an UpdateWebACL request to
+// - Submit an UpdateWebACL request to
 // specify the Rules that you want to include in the WebACL, to specify the default
 // action, and to associate the WebACL with a CloudFront distribution. The
 // ActivatedRule can be a rule group. If you specify a rule group as your
@@ -112,17 +103,14 @@ type UpdateWebACLInput struct {
 	// An array of updates to make to the WebACL. An array of WebACLUpdate objects that
 	// you want to insert into or delete from a WebACL. For more information, see the
 	// applicable data types:
-	//
-	// * WebACLUpdate: Contains Action and ActivatedRule
-	//
-	// *
+	// - WebACLUpdate: Contains Action and ActivatedRule
+	// -
 	// ActivatedRule: Contains Action, OverrideAction, Priority, RuleId, and Type.
 	// ActivatedRule|OverrideAction applies only when updating or adding a RuleGroup to
 	// a WebACL. In this case, you do not use ActivatedRule|Action. For all other
 	// update requests, ActivatedRule|Action is used instead of
 	// ActivatedRule|OverrideAction.
-	//
-	// * WafAction: Contains Type
+	// - WafAction: Contains Type
 	Updates []types.WebACLUpdate
 
 	noSmithyDocumentSerde

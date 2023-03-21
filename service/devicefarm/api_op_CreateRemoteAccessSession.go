@@ -56,17 +56,14 @@ type CreateRemoteAccessSessionInput struct {
 	InstanceArn *string
 
 	// The interaction mode of the remote access session. Valid values are:
-	//
-	// *
+	// -
 	// INTERACTIVE: You can interact with the iOS device by viewing, touching, and
 	// rotating the screen. You cannot run XCUITest framework-based tests in this
 	// mode.
-	//
-	// * NO_VIDEO: You are connected to the device, but cannot interact with it
+	// - NO_VIDEO: You are connected to the device, but cannot interact with it
 	// or view the screen. This mode has the fastest test execution speed. You can run
 	// XCUITest framework-based tests in this mode.
-	//
-	// * VIDEO_ONLY: You can view the
+	// - VIDEO_ONLY: You can view the
 	// screen, but cannot touch or rotate it. You can run XCUITest framework-based
 	// tests and watch the screen in this mode.
 	InteractionMode types.InteractionMode

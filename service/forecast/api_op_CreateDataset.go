@@ -14,17 +14,14 @@ import (
 // Creates an Amazon Forecast dataset. The information about the dataset that you
 // provide helps Forecast understand how to consume the data for model training.
 // This includes the following:
-//
-// * DataFrequency - How frequently your historical
+// - DataFrequency - How frequently your historical
 // time-series data is collected.
-//
-// * Domain and DatasetType - Each dataset has an
+// - Domain and DatasetType - Each dataset has an
 // associated dataset domain and a type within the domain. Amazon Forecast provides
 // a list of predefined domains and types within each domain. For each unique
 // dataset domain and type within the domain, Amazon Forecast requires your data to
 // include a minimum set of predefined fields.
-//
-// * Schema - A schema specifies the
+// - Schema - A schema specifies the
 // fields in the dataset, including the field name and data type.
 //
 // After creating a
@@ -98,20 +95,14 @@ type CreateDatasetInput struct {
 	// specify a value that would overlap with the next larger frequency. That means,
 	// for example, you cannot specify a frequency of 60 minutes, because that is
 	// equivalent to 1 hour. The valid values for each frequency are the following:
-	//
-	// *
+	// -
 	// Minute - 1-59
-	//
-	// * Hour - 1-23
-	//
-	// * Day - 1-6
-	//
-	// * Week - 1-4
-	//
-	// * Month - 1-11
-	//
-	// * Year
-	// - 1
+	// - Hour - 1-23
+	// - Day - 1-6
+	// - Week - 1-4
+	// - Month - 1-11
+	// - Year -
+	// 1
 	//
 	// Thus, if you want every other week forecasts, specify "2W". Or, if you want
 	// quarterly forecasts, you specify "3M".
@@ -124,29 +115,22 @@ type CreateDatasetInput struct {
 	// The optional metadata that you apply to the dataset to help you categorize and
 	// organize them. Each tag consists of a key and an optional value, both of which
 	// you define. The following basic restrictions apply to tags:
-	//
-	// * Maximum number of
+	// - Maximum number of
 	// tags per resource - 50.
-	//
-	// * For each resource, each tag key must be unique, and
+	// - For each resource, each tag key must be unique, and
 	// each tag key can have only one value.
-	//
-	// * Maximum key length - 128 Unicode
+	// - Maximum key length - 128 Unicode
 	// characters in UTF-8.
-	//
-	// * Maximum value length - 256 Unicode characters in
-	// UTF-8.
-	//
-	// * If your tagging schema is used across multiple services and resources,
-	// remember that other services may have restrictions on allowed characters.
-	// Generally allowed characters are: letters, numbers, and spaces representable in
-	// UTF-8, and the following characters: + - = . _ : / @.
-	//
-	// * Tag keys and values are
-	// case sensitive.
-	//
-	// * Do not use aws:, AWS:, or any upper or lowercase combination
-	// of such as a prefix for keys as it is reserved for Amazon Web Services use. You
+	// - Maximum value length - 256 Unicode characters in UTF-8.
+	// -
+	// If your tagging schema is used across multiple services and resources, remember
+	// that other services may have restrictions on allowed characters. Generally
+	// allowed characters are: letters, numbers, and spaces representable in UTF-8, and
+	// the following characters: + - = . _ : / @.
+	// - Tag keys and values are case
+	// sensitive.
+	// - Do not use aws:, AWS:, or any upper or lowercase combination of
+	// such as a prefix for keys as it is reserved for Amazon Web Services use. You
 	// cannot edit or delete tag keys with this prefix. Values can have this prefix. If
 	// a tag value has aws as its prefix but the key does not, then Forecast considers
 	// it to be a user tag and will count against the limit of 50 tags. Tags with only

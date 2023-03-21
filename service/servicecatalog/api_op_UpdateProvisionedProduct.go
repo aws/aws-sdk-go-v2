@@ -40,12 +40,9 @@ type UpdateProvisionedProductInput struct {
 	UpdateToken *string
 
 	// The language code.
-	//
-	// * en - English (default)
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	// - en - English (default)
+	// - jp - Japanese
+	// - zh - Chinese
 	AcceptLanguage *string
 
 	// The path identifier. This value is optional if the product has a default path,

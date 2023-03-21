@@ -32,8 +32,7 @@ func (c *Client) ListNetworks(ctx context.Context, params *ListNetworksInput, op
 type ListNetworksInput struct {
 
 	// The filters.
-	//
-	// * STATUS - The status (AVAILABLE | CREATED | DELETED |
+	// - STATUS - The status (AVAILABLE | CREATED | DELETED |
 	// DEPROVISIONING | PROVISIONING).
 	//
 	// Filter values are case sensitive. If you

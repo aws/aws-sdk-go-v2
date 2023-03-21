@@ -47,21 +47,16 @@ type UpdateIncidentRecordInput struct {
 
 	// Defines the impact of the incident to customers and applications. Providing an
 	// impact overwrites the impact provided by the response plan. Possible impacts:
-	//
-	// *
+	// -
 	// 1 - Critical impact, full application failure that impacts many to all
 	// customers.
-	//
-	// * 2 - High impact, partial application failure with impact to many
+	// - 2 - High impact, partial application failure with impact to many
 	// customers.
-	//
-	// * 3 - Medium impact, the application is providing reduced service to
+	// - 3 - Medium impact, the application is providing reduced service to
 	// customers.
-	//
-	// * 4 - Low impact, customer aren't impacted by the problem yet.
-	//
-	// * 5
-	// - No impact, customers aren't currently impacted but urgent action is needed to
+	// - 4 - Low impact, customer aren't impacted by the problem yet.
+	// - 5 -
+	// No impact, customers aren't currently impacted but urgent action is needed to
 	// avoid impact.
 	Impact *int32
 

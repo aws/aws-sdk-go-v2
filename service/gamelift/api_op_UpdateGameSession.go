@@ -49,11 +49,9 @@ type UpdateGameSessionInput struct {
 	PlayerSessionCreationPolicy types.PlayerSessionCreationPolicy
 
 	// Game session protection policy to apply to this game session only.
-	//
-	// *
+	// -
 	// NoProtection -- The game session can be terminated during a scale-down event.
-	//
-	// *
+	// -
 	// FullProtection -- If the game session is in an ACTIVE status, it cannot be
 	// terminated during a scale-down event.
 	ProtectionPolicy types.ProtectionPolicy

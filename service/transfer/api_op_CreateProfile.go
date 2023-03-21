@@ -39,12 +39,10 @@ type CreateProfileInput struct {
 	As2Id *string
 
 	// Determines the type of profile to create:
-	//
-	// * Specify LOCAL to create a local
+	// - Specify LOCAL to create a local
 	// profile. A local profile represents the AS2-enabled Transfer Family server
 	// organization or party.
-	//
-	// * Specify PARTNER to create a partner profile. A partner
+	// - Specify PARTNER to create a partner profile. A partner
 	// profile represents a remote organization, external to Transfer Family.
 	//
 	// This member is required.

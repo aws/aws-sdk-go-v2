@@ -12,8 +12,7 @@ import (
 )
 
 // Applies one or more tags to the specified resources. Note the following:
-//
-// * Not
+// - Not
 // all resources can have tags. For a list of services with resources that support
 // tagging using this operation, see Services that support the Resource Groups
 // Tagging API
@@ -21,17 +20,14 @@ import (
 // If the resource doesn't yet support this operation, the resource's service might
 // support tagging using its own API operations. For more information, refer to the
 // documentation for that service.
-//
-// * Each resource can have up to 50 tags. For
+// - Each resource can have up to 50 tags. For
 // other limits, see Tag Naming and Usage Conventions
 // (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html#tag-conventions)
 // in the Amazon Web Services General Reference.
-//
-// * You can only tag resources that
+// - You can only tag resources that
 // are located in the specified Amazon Web Services Region for the Amazon Web
 // Services account.
-//
-// * To add tags to a resource, you need the necessary
+// - To add tags to a resource, you need the necessary
 // permissions for the service that the resource belongs to as well as permissions
 // for adding tags. For more information, see the documentation for each
 // service.
@@ -44,11 +40,8 @@ import (
 // tagging permission defined by the service that created the resource. For
 // example, to tag an Amazon EC2 instance using the TagResources operation, you
 // must have both of the following permissions:
-//
-// * tag:TagResource
-//
-// *
-// ec2:CreateTags
+// - tag:TagResource
+// - ec2:CreateTags
 func (c *Client) TagResources(ctx context.Context, params *TagResourcesInput, optFns ...func(*Options)) (*TagResourcesOutput, error) {
 	if params == nil {
 		params = &TagResourcesInput{}

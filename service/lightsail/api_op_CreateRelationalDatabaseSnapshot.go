@@ -40,11 +40,9 @@ type CreateRelationalDatabaseSnapshotInput struct {
 	RelationalDatabaseName *string
 
 	// The name for your new database snapshot. Constraints:
-	//
-	// * Must contain from 2 to
+	// - Must contain from 2 to
 	// 255 alphanumeric characters, or hyphens.
-	//
-	// * The first and last character must be
+	// - The first and last character must be
 	// a letter or number.
 	//
 	// This member is required.

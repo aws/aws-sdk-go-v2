@@ -26,13 +26,11 @@ import (
 // the NextToken parameter set to the value of the last NextToken value until a
 // response has no NextToken. When using this operation, keep the following in
 // mind:
-//
-// * The implementation might return fewer than MaxResults cache
-// descriptions while still including a NextToken value.
-//
-// * The order of caches
-// returned in the response of one DescribeFileCaches call and the order of caches
-// returned across the responses of a multicall iteration is unspecified.
+// - The implementation might return fewer than MaxResults cache descriptions
+// while still including a NextToken value.
+// - The order of caches returned in the
+// response of one DescribeFileCaches call and the order of caches returned across
+// the responses of a multicall iteration is unspecified.
 func (c *Client) DescribeFileCaches(ctx context.Context, params *DescribeFileCachesInput, optFns ...func(*Options)) (*DescribeFileCachesOutput, error) {
 	if params == nil {
 		params = &DescribeFileCachesInput{}

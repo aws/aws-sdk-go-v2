@@ -17,8 +17,7 @@ import (
 // billing and administration services. Tags are not intended to be used for
 // private or sensitive data. Minimum permissions To run this command, you must
 // have the following permissions:
-//
-// * resource-groups:Tag
+// - resource-groups:Tag
 func (c *Client) Tag(ctx context.Context, params *TagInput, optFns ...func(*Options)) (*TagOutput, error) {
 	if params == nil {
 		params = &TagInput{}

@@ -23,16 +23,13 @@ import (
 // routes are also inactive. Conversely, no route can be active without the default
 // route also being active. When you create a route, Refactor Spaces configures the
 // Amazon API Gateway to send traffic to the target service as follows:
-//
-// * If the
+// - If the
 // service has a URL endpoint, and the endpoint resolves to a private IP address,
 // Refactor Spaces routes traffic using the API Gateway VPC link.
-//
-// * If the service
+// - If the service
 // has a URL endpoint, and the endpoint resolves to a public IP address, Refactor
 // Spaces routes traffic over the public internet.
-//
-// * If the service has an Lambda
+// - If the service has an Lambda
 // function endpoint, then Refactor Spaces configures the Lambda function's
 // resource policy to allow the application's API Gateway to invoke the
 // function.

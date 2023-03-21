@@ -25,11 +25,9 @@ import (
 // If you add more than one predicate to a RateBasedRule, a request not only must
 // exceed the RateLimit, but it also must match all the conditions to be counted or
 // blocked. For example, suppose you add the following to a RateBasedRule:
-//
-// * An
+// - An
 // IPSet that matches the IP address 192.0.2.44/32
-//
-// * A ByteMatchSet that matches
+// - A ByteMatchSet that matches
 // BadBot in the User-Agent header
 //
 // Further, you specify a RateLimit of 1,000. You
@@ -43,38 +41,29 @@ import (
 // longer blocks the requests. As a second example, suppose you want to limit
 // requests to a particular page on your site. To do this, you could add the
 // following to a RateBasedRule:
-//
-// * A ByteMatchSet with FieldToMatch of URI
-//
-// * A
+// - A ByteMatchSet with FieldToMatch of URI
+// - A
 // PositionalConstraint of STARTS_WITH
-//
-// * A TargetString of login
+// - A TargetString of login
 //
 // Further, you
 // specify a RateLimit of 1,000. By adding this RateBasedRule to a WebACL, you
 // could limit requests to your login page without affecting the rest of your site.
 // To create and configure a RateBasedRule, perform the following steps:
-//
-// * Create
+// - Create
 // and update the predicates that you want to include in the rule. For more
 // information, see CreateByteMatchSet, CreateIPSet, and
 // CreateSqlInjectionMatchSet.
-//
-// * Use GetChangeToken to get the change token that
+// - Use GetChangeToken to get the change token that
 // you provide in the ChangeToken parameter of a CreateRule request.
-//
-// * Submit a
+// - Submit a
 // CreateRateBasedRule request.
-//
-// * Use GetChangeToken to get the change token that
+// - Use GetChangeToken to get the change token that
 // you provide in the ChangeToken parameter of an UpdateRule request.
-//
-// * Submit an
+// - Submit an
 // UpdateRateBasedRule request to specify the predicates that you want to include
 // in the rule.
-//
-// * Create and update a WebACL that contains the RateBasedRule. For
+// - Create and update a WebACL that contains the RateBasedRule. For
 // more information, see CreateWebACL.
 //
 // For more information about how to use the

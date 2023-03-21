@@ -35,23 +35,17 @@ type RejectPortfolioShareInput struct {
 	PortfolioId *string
 
 	// The language code.
-	//
-	// * en - English (default)
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	// - en - English (default)
+	// - jp - Japanese
+	// - zh - Chinese
 	AcceptLanguage *string
 
 	// The type of shared portfolios to reject. The default is to reject imported
 	// portfolios.
-	//
-	// * AWS_ORGANIZATIONS - Reject portfolios shared by the management
+	// - AWS_ORGANIZATIONS - Reject portfolios shared by the management
 	// account of your organization.
-	//
-	// * IMPORTED - Reject imported portfolios.
-	//
-	// *
+	// - IMPORTED - Reject imported portfolios.
+	// -
 	// AWS_SERVICECATALOG - Not supported. (Throws ResourceNotFoundException.)
 	//
 	// For

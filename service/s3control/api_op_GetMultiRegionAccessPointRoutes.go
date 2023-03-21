@@ -19,20 +19,15 @@ import (
 // which Regions are active or passive. To obtain routing control changes and
 // failover requests, use the Amazon S3 failover control infrastructure endpoints
 // in these five Amazon Web Services Regions:
-//
-// * us-east-1
-//
-// * us-west-2
-//
-// *
+// - us-east-1
+// - us-west-2
+// -
 // ap-southeast-2
+// - ap-northeast-1
+// - eu-west-1
 //
-// * ap-northeast-1
-//
-// * eu-west-1
-//
-// Your Amazon S3 bucket does not
-// need to be in these five Regions.
+// Your Amazon S3 bucket does not need
+// to be in these five Regions.
 func (c *Client) GetMultiRegionAccessPointRoutes(ctx context.Context, params *GetMultiRegionAccessPointRoutesInput, optFns ...func(*Options)) (*GetMultiRegionAccessPointRoutesOutput, error) {
 	if params == nil {
 		params = &GetMultiRegionAccessPointRoutesInput{}

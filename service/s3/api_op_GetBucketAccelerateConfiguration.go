@@ -33,8 +33,7 @@ import (
 // transfer acceleration, see Transfer Acceleration
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html) in
 // the Amazon S3 User Guide. Related Resources
-//
-// * PutBucketAccelerateConfiguration
+// - PutBucketAccelerateConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketAccelerateConfiguration.html)
 func (c *Client) GetBucketAccelerateConfiguration(ctx context.Context, params *GetBucketAccelerateConfigurationInput, optFns ...func(*Options)) (*GetBucketAccelerateConfigurationOutput, error) {
 	if params == nil {

@@ -16,16 +16,12 @@ import (
 // specified query. The query uses the same format as a resource query in a
 // CreateGroup or UpdateGroupQuery operation. Minimum permissions To run this
 // command, you must have the following permissions:
-//
-// *
+// -
 // resource-groups:SearchResources
-//
-// * cloudformation:DescribeStacks
-//
-// *
+// - cloudformation:DescribeStacks
+// -
 // cloudformation:ListStackResources
-//
-// * tag:GetResources
+// - tag:GetResources
 func (c *Client) SearchResources(ctx context.Context, params *SearchResourcesInput, optFns ...func(*Options)) (*SearchResourcesOutput, error) {
 	if params == nil {
 		params = &SearchResourcesInput{}
@@ -79,11 +75,9 @@ type SearchResourcesOutput struct {
 
 	// A list of QueryError objects. Each error is an object that contains ErrorCode
 	// and Message structures. Possible values for ErrorCode:
-	//
-	// *
+	// -
 	// CLOUDFORMATION_STACK_INACTIVE
-	//
-	// * CLOUDFORMATION_STACK_NOT_EXISTING
+	// - CLOUDFORMATION_STACK_NOT_EXISTING
 	QueryErrors []types.QueryError
 
 	// The ARNs and resource types of resources that are members of the group that you

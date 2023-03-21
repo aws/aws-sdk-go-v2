@@ -65,36 +65,26 @@ type UpdateRelationalDatabaseInput struct {
 
 	// The daily time range during which automated backups are created for your
 	// database if automated backups are enabled. Constraints:
-	//
-	// * Must be in the
+	// - Must be in the
 	// hh24:mi-hh24:mi format. Example: 16:00-16:30
-	//
-	// * Specified in Coordinated
+	// - Specified in Coordinated
 	// Universal Time (UTC).
-	//
-	// * Must not conflict with the preferred maintenance
+	// - Must not conflict with the preferred maintenance
 	// window.
-	//
-	// * Must be at least 30 minutes.
+	// - Must be at least 30 minutes.
 	PreferredBackupWindow *string
 
 	// The weekly time range during which system maintenance can occur on your
 	// database. The default is a 30-minute window selected at random from an 8-hour
 	// block of time for each Amazon Web Services Region, occurring on a random day of
 	// the week. Constraints:
-	//
-	// * Must be in the ddd:hh24:mi-ddd:hh24:mi format.
-	//
-	// *
-	// Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
-	//
-	// * Must be at least 30
-	// minutes.
-	//
-	// * Specified in Coordinated Universal Time (UTC).
-	//
-	// * Example:
-	// Tue:17:00-Tue:17:30
+	// - Must be in the ddd:hh24:mi-ddd:hh24:mi format.
+	// - Valid
+	// days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
+	// - Must be at least 30 minutes.
+	// -
+	// Specified in Coordinated Universal Time (UTC).
+	// - Example: Tue:17:00-Tue:17:30
 	PreferredMaintenanceWindow *string
 
 	// Specifies the accessibility options for your database. A value of true specifies

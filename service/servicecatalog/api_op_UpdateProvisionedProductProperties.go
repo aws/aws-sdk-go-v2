@@ -67,12 +67,9 @@ type UpdateProvisionedProductPropertiesInput struct {
 	ProvisionedProductProperties map[string]string
 
 	// The language code.
-	//
-	// * en - English (default)
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	// - en - English (default)
+	// - jp - Japanese
+	// - zh - Chinese
 	AcceptLanguage *string
 
 	noSmithyDocumentSerde

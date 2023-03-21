@@ -66,21 +66,16 @@ type BatchPrediction struct {
 
 	// The status of the BatchPrediction. This element can have one of the following
 	// values:
-	//
-	// * PENDING - Amazon Machine Learning (Amazon ML) submitted a request to
+	// - PENDING - Amazon Machine Learning (Amazon ML) submitted a request to
 	// generate predictions for a batch of observations.
-	//
-	// * INPROGRESS - The process is
+	// - INPROGRESS - The process is
 	// underway.
-	//
-	// * FAILED - The request to perform a batch prediction did not run to
+	// - FAILED - The request to perform a batch prediction did not run to
 	// completion. It is not usable.
-	//
-	// * COMPLETED - The batch prediction process
+	// - COMPLETED - The batch prediction process
 	// completed successfully.
-	//
-	// * DELETED - The BatchPrediction is marked as deleted.
-	// It is not usable.
+	// - DELETED - The BatchPrediction is marked as deleted. It
+	// is not usable.
 	Status EntityStatus
 
 	// Long integer type that is a 64-bit signed number.
@@ -156,19 +151,14 @@ type DataSource struct {
 
 	// The current status of the DataSource. This element can have one of the following
 	// values:
-	//
-	// * PENDING - Amazon Machine Learning (Amazon ML) submitted a request to
+	// - PENDING - Amazon Machine Learning (Amazon ML) submitted a request to
 	// create a DataSource.
-	//
-	// * INPROGRESS - The creation process is underway.
-	//
-	// * FAILED
-	// - The request to create a DataSource did not run to completion. It is not
+	// - INPROGRESS - The creation process is underway.
+	// - FAILED -
+	// The request to create a DataSource did not run to completion. It is not
 	// usable.
-	//
-	// * COMPLETED - The creation process completed successfully.
-	//
-	// * DELETED -
+	// - COMPLETED - The creation process completed successfully.
+	// - DELETED -
 	// The DataSource is marked as deleted. It is not usable.
 	Status EntityStatus
 
@@ -219,16 +209,13 @@ type Evaluation struct {
 	// Measurements of how well the MLModel performed, using observations referenced by
 	// the DataSource. One of the following metrics is returned, based on the type of
 	// the MLModel:
-	//
-	// * BinaryAUC: A binary MLModel uses the Area Under the Curve (AUC)
+	// - BinaryAUC: A binary MLModel uses the Area Under the Curve (AUC)
 	// technique to measure performance.
-	//
-	// * RegressionRMSE: A regression MLModel uses
+	// - RegressionRMSE: A regression MLModel uses
 	// the Root Mean Square Error (RMSE) technique to measure performance. RMSE
 	// measures the difference between predicted and actual values for a single
 	// variable.
-	//
-	// * MulticlassAvgFScore: A multiclass MLModel uses the F1 score
+	// - MulticlassAvgFScore: A multiclass MLModel uses the F1 score
 	// technique to measure performance.
 	//
 	// For more information about performance
@@ -241,19 +228,14 @@ type Evaluation struct {
 
 	// The status of the evaluation. This element can have one of the following
 	// values:
-	//
-	// * PENDING - Amazon Machine Learning (Amazon ML) submitted a request to
+	// - PENDING - Amazon Machine Learning (Amazon ML) submitted a request to
 	// evaluate an MLModel.
-	//
-	// * INPROGRESS - The evaluation is underway.
-	//
-	// * FAILED - The
+	// - INPROGRESS - The evaluation is underway.
+	// - FAILED - The
 	// request to evaluate an MLModel did not run to completion. It is not usable.
-	//
-	// *
+	// -
 	// COMPLETED - The evaluation process completed successfully.
-	//
-	// * DELETED - The
+	// - DELETED - The
 	// Evaluation is marked as deleted. It is not usable.
 	Status EntityStatus
 
@@ -264,11 +246,10 @@ type Evaluation struct {
 // detailed metadata and the current status of the MLModel.
 type MLModel struct {
 
-	// The algorithm used to train the MLModel. The following algorithm is
-	// supported:
-	//
-	// * SGD -- Stochastic gradient descent. The goal of SGD is to minimize
-	// the gradient of the loss function.
+	// The algorithm used to train the MLModel. The following algorithm is supported:
+	// -
+	// SGD -- Stochastic gradient descent. The goal of SGD is to minimize the gradient
+	// of the loss function.
 	Algorithm Algorithm
 
 	// Long integer type that is a 64-bit signed number.
@@ -300,15 +281,12 @@ type MLModel struct {
 	MLModelId *string
 
 	// Identifies the MLModel category. The following are the available types:
-	//
-	// *
+	// -
 	// REGRESSION - Produces a numeric result. For example, "What price should a house
 	// be listed at?"
-	//
-	// * BINARY - Produces one of two possible results. For example,
-	// "Is this a child-friendly web site?".
-	//
-	// * MULTICLASS - Produces one of several
+	// - BINARY - Produces one of two possible results. For example, "Is
+	// this a child-friendly web site?".
+	// - MULTICLASS - Produces one of several
 	// possible results. For example, "Is this a HIGH-, LOW-, or MEDIUM-risk trade?".
 	MLModelType MLModelType
 
@@ -332,19 +310,14 @@ type MLModel struct {
 
 	// The current status of an MLModel. This element can have one of the following
 	// values:
-	//
-	// * PENDING - Amazon Machine Learning (Amazon ML) submitted a request to
+	// - PENDING - Amazon Machine Learning (Amazon ML) submitted a request to
 	// create an MLModel.
-	//
-	// * INPROGRESS - The creation process is underway.
-	//
-	// * FAILED -
+	// - INPROGRESS - The creation process is underway.
+	// - FAILED -
 	// The request to create an MLModel didn't run to completion. The model isn't
 	// usable.
-	//
-	// * COMPLETED - The creation process completed successfully.
-	//
-	// * DELETED -
+	// - COMPLETED - The creation process completed successfully.
+	// - DELETED -
 	// The MLModel is marked as deleted. It isn't usable.
 	Status EntityStatus
 
@@ -355,22 +328,18 @@ type MLModel struct {
 	// A list of the training parameters in the MLModel. The list is implemented as a
 	// map of key-value pairs. The following is the current set of training
 	// parameters:
-	//
-	// * sgd.maxMLModelSizeInBytes - The maximum allowed size of the
-	// model. Depending on the input data, the size of the model might affect its
-	// performance. The value is an integer that ranges from 100000 to 2147483648. The
-	// default value is 33554432.
-	//
-	// * sgd.maxPasses - The number of times that the
-	// training process traverses the observations to build the MLModel. The value is
-	// an integer that ranges from 1 to 10000. The default value is 10.
-	//
-	// *
-	// sgd.shuffleType - Whether Amazon ML shuffles the training data. Shuffling the
-	// data improves a model's ability to find the optimal solution for a variety of
-	// data types. The valid values are auto and none. The default value is none.
-	//
-	// *
+	// - sgd.maxMLModelSizeInBytes - The maximum allowed size of the model.
+	// Depending on the input data, the size of the model might affect its performance.
+	// The value is an integer that ranges from 100000 to 2147483648. The default value
+	// is 33554432.
+	// - sgd.maxPasses - The number of times that the training process
+	// traverses the observations to build the MLModel. The value is an integer that
+	// ranges from 1 to 10000. The default value is 10.
+	// - sgd.shuffleType - Whether
+	// Amazon ML shuffles the training data. Shuffling the data improves a model's
+	// ability to find the optimal solution for a variety of data types. The valid
+	// values are auto and none. The default value is none.
+	// -
 	// sgd.l1RegularizationAmount - The coefficient regularization L1 norm, which
 	// controls overfitting the data by penalizing large coefficients. This parameter
 	// tends to drive coefficients to zero, resulting in sparse feature set. If you use
@@ -378,8 +347,7 @@ type MLModel struct {
 	// a double that ranges from 0 to MAX_DOUBLE. The default is to not use L1
 	// normalization. This parameter can't be used when L2 is specified. Use this
 	// parameter sparingly.
-	//
-	// * sgd.l2RegularizationAmount - The coefficient
+	// - sgd.l2RegularizationAmount - The coefficient
 	// regularization L2 norm, which controls overfitting the data by penalizing large
 	// coefficients. This tends to drive coefficients to small, nonzero values. If you
 	// use this parameter, start by specifying a small value, such as 1.0E-08. The
@@ -393,16 +361,13 @@ type MLModel struct {
 
 // Measurements of how well the MLModel performed on known observations. One of the
 // following metrics is returned, based on the type of the MLModel:
-//
-// * BinaryAUC:
+// - BinaryAUC:
 // The binary MLModel uses the Area Under the Curve (AUC) technique to measure
 // performance.
-//
-// * RegressionRMSE: The regression MLModel uses the Root Mean Square
+// - RegressionRMSE: The regression MLModel uses the Root Mean Square
 // Error (RMSE) technique to measure performance. RMSE measures the difference
 // between predicted and actual values for a single variable.
-//
-// *
+// -
 // MulticlassAvgFScore: The multiclass MLModel uses the F1 score technique to
 // measure performance.
 //
@@ -416,19 +381,15 @@ type PerformanceMetrics struct {
 }
 
 // The output from a Predict operation:
-//
-// * Details - Contains the following
+// - Details - Contains the following
 // attributes: DetailsAttributes.PREDICTIVE_MODEL_TYPE - REGRESSION | BINARY |
 // MULTICLASSDetailsAttributes.ALGORITHM - SGD
-//
-// * PredictedLabel - Present for
+// - PredictedLabel - Present for
 // either a BINARY or MULTICLASSMLModel request.
-//
-// * PredictedScores - Contains the
+// - PredictedScores - Contains the
 // raw classification score corresponding to each label.
-//
-// * PredictedValue -
-// Present for a REGRESSIONMLModel request.
+// - PredictedValue - Present
+// for a REGRESSIONMLModel request.
 type Prediction struct {
 
 	// Provides any additional details regarding the prediction.
@@ -545,18 +506,15 @@ type RDSDataSpec struct {
 	// applied to a DataSource. If the DataRearrangement parameter is not provided, all
 	// of the input data is used to create the Datasource. There are multiple
 	// parameters that control what data is used to create a datasource:
-	//
-	// *
-	// percentBegin Use percentBegin to indicate the beginning of the range of the data
-	// used to create the Datasource. If you do not include percentBegin and
-	// percentEnd, Amazon ML includes all of the data when creating the datasource.
-	//
-	// *
-	// percentEnd Use percentEnd to indicate the end of the range of the data used to
+	// - percentBegin
+	// Use percentBegin to indicate the beginning of the range of the data used to
 	// create the Datasource. If you do not include percentBegin and percentEnd, Amazon
 	// ML includes all of the data when creating the datasource.
-	//
-	// * complement The
+	// - percentEnd Use
+	// percentEnd to indicate the end of the range of the data used to create the
+	// Datasource. If you do not include percentBegin and percentEnd, Amazon ML
+	// includes all of the data when creating the datasource.
+	// - complement The
 	// complement parameter instructs Amazon ML to use the data that is not included in
 	// the range of percentBegin to percentEnd to create a datasource. The complement
 	// parameter is useful if you need to create complementary datasources for training
@@ -567,8 +525,7 @@ type RDSDataSpec struct {
 	// second one has 75 percent of the data. Datasource for evaluation:
 	// {"splitting":{"percentBegin":0, "percentEnd":25}} Datasource for training:
 	// {"splitting":{"percentBegin":0, "percentEnd":25, "complement":"true"}}
-	//
-	// *
+	// -
 	// strategy To change how Amazon ML splits the data for a datasource, use the
 	// strategy parameter. The default value for the strategy parameter is sequential,
 	// meaning that Amazon ML takes all of the data records between the percentBegin
@@ -668,14 +625,11 @@ type RealtimeEndpointInfo struct {
 
 	// The current status of the real-time endpoint for the MLModel. This element can
 	// have one of the following values:
-	//
-	// * NONE - Endpoint does not exist or was
+	// - NONE - Endpoint does not exist or was
 	// previously deleted.
-	//
-	// * READY - Endpoint is ready to be used for real-time
+	// - READY - Endpoint is ready to be used for real-time
 	// predictions.
-	//
-	// * UPDATING - Updating/creating the endpoint.
+	// - UPDATING - Updating/creating the endpoint.
 	EndpointStatus RealtimeEndpointStatus
 
 	// The URI that specifies where to send real-time prediction requests for the
@@ -763,18 +717,15 @@ type RedshiftDataSpec struct {
 	// applied to a DataSource. If the DataRearrangement parameter is not provided, all
 	// of the input data is used to create the Datasource. There are multiple
 	// parameters that control what data is used to create a datasource:
-	//
-	// *
-	// percentBegin Use percentBegin to indicate the beginning of the range of the data
-	// used to create the Datasource. If you do not include percentBegin and
-	// percentEnd, Amazon ML includes all of the data when creating the datasource.
-	//
-	// *
-	// percentEnd Use percentEnd to indicate the end of the range of the data used to
+	// - percentBegin
+	// Use percentBegin to indicate the beginning of the range of the data used to
 	// create the Datasource. If you do not include percentBegin and percentEnd, Amazon
 	// ML includes all of the data when creating the datasource.
-	//
-	// * complement The
+	// - percentEnd Use
+	// percentEnd to indicate the end of the range of the data used to create the
+	// Datasource. If you do not include percentBegin and percentEnd, Amazon ML
+	// includes all of the data when creating the datasource.
+	// - complement The
 	// complement parameter instructs Amazon ML to use the data that is not included in
 	// the range of percentBegin to percentEnd to create a datasource. The complement
 	// parameter is useful if you need to create complementary datasources for training
@@ -785,8 +736,7 @@ type RedshiftDataSpec struct {
 	// second one has 75 percent of the data. Datasource for evaluation:
 	// {"splitting":{"percentBegin":0, "percentEnd":25}} Datasource for training:
 	// {"splitting":{"percentBegin":0, "percentEnd":25, "complement":"true"}}
-	//
-	// *
+	// -
 	// strategy To change how Amazon ML splits the data for a datasource, use the
 	// strategy parameter. The default value for the strategy parameter is sequential,
 	// meaning that Amazon ML takes all of the data records between the percentBegin
@@ -875,18 +825,15 @@ type S3DataSpec struct {
 	// applied to a DataSource. If the DataRearrangement parameter is not provided, all
 	// of the input data is used to create the Datasource. There are multiple
 	// parameters that control what data is used to create a datasource:
-	//
-	// *
-	// percentBegin Use percentBegin to indicate the beginning of the range of the data
-	// used to create the Datasource. If you do not include percentBegin and
-	// percentEnd, Amazon ML includes all of the data when creating the datasource.
-	//
-	// *
-	// percentEnd Use percentEnd to indicate the end of the range of the data used to
+	// - percentBegin
+	// Use percentBegin to indicate the beginning of the range of the data used to
 	// create the Datasource. If you do not include percentBegin and percentEnd, Amazon
 	// ML includes all of the data when creating the datasource.
-	//
-	// * complement The
+	// - percentEnd Use
+	// percentEnd to indicate the end of the range of the data used to create the
+	// Datasource. If you do not include percentBegin and percentEnd, Amazon ML
+	// includes all of the data when creating the datasource.
+	// - complement The
 	// complement parameter instructs Amazon ML to use the data that is not included in
 	// the range of percentBegin to percentEnd to create a datasource. The complement
 	// parameter is useful if you need to create complementary datasources for training
@@ -897,8 +844,7 @@ type S3DataSpec struct {
 	// second one has 75 percent of the data. Datasource for evaluation:
 	// {"splitting":{"percentBegin":0, "percentEnd":25}} Datasource for training:
 	// {"splitting":{"percentBegin":0, "percentEnd":25, "complement":"true"}}
-	//
-	// *
+	// -
 	// strategy To change how Amazon ML splits the data for a datasource, use the
 	// strategy parameter. The default value for the strategy parameter is sequential,
 	// meaning that Amazon ML takes all of the data records between the percentBegin

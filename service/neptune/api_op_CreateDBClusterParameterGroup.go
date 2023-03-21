@@ -49,8 +49,7 @@ func (c *Client) CreateDBClusterParameterGroup(ctx context.Context, params *Crea
 type CreateDBClusterParameterGroupInput struct {
 
 	// The name of the DB cluster parameter group. Constraints:
-	//
-	// * Must match the name
+	// - Must match the name
 	// of an existing DBClusterParameterGroup.
 	//
 	// This value is stored as a lowercase

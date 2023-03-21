@@ -40,20 +40,15 @@ type DescribeMaintenanceStartTimeInput struct {
 }
 
 // A JSON object containing the following fields:
-//
-// *
+// -
 // DescribeMaintenanceStartTimeOutput$DayOfMonth
-//
-// *
+// -
 // DescribeMaintenanceStartTimeOutput$DayOfWeek
-//
-// *
+// -
 // DescribeMaintenanceStartTimeOutput$HourOfDay
-//
-// *
+// -
 // DescribeMaintenanceStartTimeOutput$MinuteOfHour
-//
-// *
+// -
 // DescribeMaintenanceStartTimeOutput$Timezone
 type DescribeMaintenanceStartTimeOutput struct {
 

@@ -15,12 +15,10 @@ import (
 // Retrieves information on a fleet's remote locations, including life-cycle status
 // and any suspended fleet activity. This operation can be used in the following
 // ways:
-//
-// * To get data for specific locations, provide a fleet identifier and a
+// - To get data for specific locations, provide a fleet identifier and a
 // list of locations. Location data is returned in the order that it is
 // requested.
-//
-// * To get data for all locations, provide a fleet identifier only.
+// - To get data for all locations, provide a fleet identifier only.
 // Location data is returned in no particular order.
 //
 // When requesting attributes

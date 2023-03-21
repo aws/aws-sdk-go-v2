@@ -19,28 +19,22 @@ import (
 // the latest version, AWS WAF has a single set of endpoints for regional and
 // global use. Inserts or deletes GeoMatchConstraint objects in an GeoMatchSet. For
 // each GeoMatchConstraint object, you specify the following values:
-//
-// * Whether to
+// - Whether to
 // insert or delete the object from the array. If you want to change an
 // GeoMatchConstraint object, you delete the existing object and add a new one.
-//
-// *
+// -
 // The Type. The only valid value for Type is Country.
-//
-// * The Value, which is a two
+// - The Value, which is a two
 // character code for the country to add to the GeoMatchConstraint object. Valid
 // codes are listed in GeoMatchConstraint$Value.
 //
 // To create and configure an
 // GeoMatchSet, perform the following steps:
-//
-// * Submit a CreateGeoMatchSet
+// - Submit a CreateGeoMatchSet
 // request.
-//
-// * Use GetChangeToken to get the change token that you provide in the
+// - Use GetChangeToken to get the change token that you provide in the
 // ChangeToken parameter of an UpdateGeoMatchSet request.
-//
-// * Submit an
+// - Submit an
 // UpdateGeoMatchSet request to specify the country that you want AWS WAF to watch
 // for.
 //
@@ -79,11 +73,9 @@ type UpdateGeoMatchSetInput struct {
 
 	// An array of GeoMatchSetUpdate objects that you want to insert into or delete
 	// from an GeoMatchSet. For more information, see the applicable data types:
-	//
-	// *
+	// -
 	// GeoMatchSetUpdate: Contains Action and GeoMatchConstraint
-	//
-	// * GeoMatchConstraint:
+	// - GeoMatchConstraint:
 	// Contains Type and Value You can have only one Type and Value per
 	// GeoMatchConstraint. To add multiple countries, include multiple
 	// GeoMatchSetUpdate objects in your request.

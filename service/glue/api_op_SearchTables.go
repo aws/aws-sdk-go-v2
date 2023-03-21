@@ -60,11 +60,9 @@ type SearchTablesInput struct {
 
 	// Allows you to specify that you want to search the tables shared with your
 	// account. The allowable values are FOREIGN or ALL.
-	//
-	// * If set to FOREIGN, will
+	// - If set to FOREIGN, will
 	// search the tables shared with your account.
-	//
-	// * If set to ALL, will search the
+	// - If set to ALL, will search the
 	// tables shared with your account, as well as the tables in yor local account.
 	ResourceShareType types.ResourceShareType
 

@@ -34,11 +34,9 @@ type DescribeIamInstanceProfileAssociationsInput struct {
 	AssociationIds []string
 
 	// The filters.
-	//
-	// * instance-id - The ID of the instance.
-	//
-	// * state - The state of
-	// the association (associating | associated | disassociating).
+	// - instance-id - The ID of the instance.
+	// - state - The state of the
+	// association (associating | associated | disassociating).
 	Filters []types.Filter
 
 	// The maximum number of items to return for this request. To get the next page of

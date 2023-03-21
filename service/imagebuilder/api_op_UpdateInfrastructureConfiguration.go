@@ -54,13 +54,11 @@ type UpdateInfrastructureConfigurationInput struct {
 	// The instance metadata options that you can set for the HTTP requests that
 	// pipeline builds use to launch EC2 build and test instances. For more information
 	// about instance metadata options, see one of the following links:
-	//
-	// * Configure
-	// the instance metadata options
+	// - Configure the
+	// instance metadata options
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html)
 	// in the Amazon EC2 User Guide for Linux instances.
-	//
-	// * Configure the instance
+	// - Configure the instance
 	// metadata options
 	// (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/configuring-instance-metadata-options.html)
 	// in the Amazon EC2 Windows Guide for Windows instances.

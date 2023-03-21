@@ -30,30 +30,24 @@ import (
 // recommend starting with a low minProvisionedTPS, track your usage using Amazon
 // CloudWatch metrics, and then increase the minProvisionedTPS as necessary. Status
 // A campaign can be in one of the following states:
-//
-// * CREATE PENDING > CREATE
+// - CREATE PENDING > CREATE
 // IN_PROGRESS > ACTIVE -or- CREATE FAILED
-//
-// * DELETE PENDING > DELETE
+// - DELETE PENDING > DELETE
 // IN_PROGRESS
 //
 // To get the campaign status, call DescribeCampaign
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html).
 // Wait until the status of the campaign is ACTIVE before asking the campaign for
 // recommendations. Related APIs
-//
-// * ListCampaigns
+// - ListCampaigns
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_ListCampaigns.html)
-//
-// *
+// -
 // DescribeCampaign
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html)
-//
-// *
+// -
 // UpdateCampaign
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_UpdateCampaign.html)
-//
-// *
+// -
 // DeleteCampaign
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteCampaign.html)
 func (c *Client) CreateCampaign(ctx context.Context, params *CreateCampaignInput, optFns ...func(*Options)) (*CreateCampaignOutput, error) {

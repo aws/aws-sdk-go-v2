@@ -110,10 +110,8 @@ type PutRecordsOutput struct {
 
 	// The encryption type used on the records. This parameter can be one of the
 	// following values:
-	//
-	// * NONE: Do not encrypt the records.
-	//
-	// * KMS: Use server-side
+	// - NONE: Do not encrypt the records.
+	// - KMS: Use server-side
 	// encryption on the records using a customer-managed Amazon Web Services KMS key.
 	EncryptionType types.EncryptionType
 

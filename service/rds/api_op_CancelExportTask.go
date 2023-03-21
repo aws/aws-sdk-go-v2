@@ -46,19 +46,15 @@ type CancelExportTaskOutput struct {
 
 	// The data exported from the snapshot or cluster. Valid values are the
 	// following:
-	//
-	// * database - Export all the data from a specified database.
-	//
-	// *
+	// - database - Export all the data from a specified database.
+	// -
 	// database.table table-name - Export a table of the snapshot or cluster. This
 	// format is valid only for RDS for MySQL, RDS for MariaDB, and Aurora MySQL.
-	//
-	// *
+	// -
 	// database.schema schema-name - Export a database schema of the snapshot or
 	// cluster. This format is valid only for RDS for PostgreSQL and Aurora
 	// PostgreSQL.
-	//
-	// * database.schema.table table-name - Export a table of the database
+	// - database.schema.table table-name - Export a table of the database
 	// schema. This format is valid only for RDS for PostgreSQL and Aurora PostgreSQL.
 	ExportOnly []string
 
@@ -99,19 +95,12 @@ type CancelExportTaskOutput struct {
 
 	// The progress status of the export task. The status can be one of the
 	// following:
-	//
-	// * CANCELED
-	//
-	// * CANCELING
-	//
-	// * COMPLETE
-	//
-	// * FAILED
-	//
-	// * IN_PROGRESS
-	//
-	// *
-	// STARTING
+	// - CANCELED
+	// - CANCELING
+	// - COMPLETE
+	// - FAILED
+	// - IN_PROGRESS
+	// - STARTING
 	Status *string
 
 	// The time that the snapshot or cluster export task ended.

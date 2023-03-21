@@ -60,61 +60,48 @@ type GetNetworkResourcesInput struct {
 
 	// The resource type. The following are the supported resource types for Direct
 	// Connect:
-	//
-	// * dxcon - The definition model is Connection
+	// - dxcon - The definition model is Connection
 	// (https://docs.aws.amazon.com/directconnect/latest/APIReference/API_Connection.html).
-	//
-	// *
+	// -
 	// dx-gateway - The definition model is DirectConnectGateway
 	// (https://docs.aws.amazon.com/directconnect/latest/APIReference/API_DirectConnectGateway.html).
-	//
-	// *
+	// -
 	// dx-vif - The definition model is VirtualInterface
 	// (https://docs.aws.amazon.com/directconnect/latest/APIReference/API_VirtualInterface.html).
 	//
 	// The
 	// following are the supported resource types for Network Manager:
-	//
-	// * connection -
+	// - connection -
 	// The definition model is Connection
 	// (https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_Connection.html).
-	//
-	// *
+	// -
 	// device - The definition model is Device
 	// (https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_Device.html).
-	//
-	// *
+	// -
 	// link - The definition model is Link
 	// (https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_Link.html).
-	//
-	// *
+	// -
 	// site - The definition model is Site
 	// (https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_Site.html).
 	//
 	// The
 	// following are the supported resource types for Amazon VPC:
-	//
-	// * customer-gateway -
+	// - customer-gateway -
 	// The definition model is CustomerGateway
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CustomerGateway.html).
-	//
-	// *
+	// -
 	// transit-gateway - The definition model is TransitGateway
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TransitGateway.html).
-	//
-	// *
+	// -
 	// transit-gateway-attachment - The definition model is TransitGatewayAttachment
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TransitGatewayAttachment.html).
-	//
-	// *
+	// -
 	// transit-gateway-connect-peer - The definition model is TransitGatewayConnectPeer
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TransitGatewayConnectPeer.html).
-	//
-	// *
+	// -
 	// transit-gateway-route-table - The definition model is TransitGatewayRouteTable
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TransitGatewayRouteTable.html).
-	//
-	// *
+	// -
 	// vpn-connection - The definition model is VpnConnection
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_VpnConnection.html).
 	ResourceType *string

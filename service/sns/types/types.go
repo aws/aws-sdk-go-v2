@@ -140,31 +140,25 @@ type PublishBatchRequestEntry struct {
 	// If a message with a particular MessageDeduplicationId is sent successfully,
 	// subsequent messages with the same MessageDeduplicationId are accepted
 	// successfully but aren't delivered.
-	//
-	// * Every message must have a unique
+	// - Every message must have a unique
 	// MessageDeduplicationId.
-	//
-	// * You may provide a MessageDeduplicationId
-	// explicitly.
-	//
-	// * If you aren't able to provide a MessageDeduplicationId and you
-	// enable ContentBasedDeduplication for your topic, Amazon SNS uses a SHA-256 hash
-	// to generate the MessageDeduplicationId using the body of the message (but not
-	// the attributes of the message).
-	//
-	// * If you don't provide a MessageDeduplicationId
-	// and the topic doesn't have ContentBasedDeduplication set, the action fails with
-	// an error.
-	//
-	// * If the topic has a ContentBasedDeduplication set, your
+	// - You may provide a MessageDeduplicationId explicitly.
+	// -
+	// If you aren't able to provide a MessageDeduplicationId and you enable
+	// ContentBasedDeduplication for your topic, Amazon SNS uses a SHA-256 hash to
+	// generate the MessageDeduplicationId using the body of the message (but not the
+	// attributes of the message).
+	// - If you don't provide a MessageDeduplicationId and
+	// the topic doesn't have ContentBasedDeduplication set, the action fails with an
+	// error.
+	// - If the topic has a ContentBasedDeduplication set, your
 	// MessageDeduplicationId overrides the generated one.
 	//
-	// * When
+	// - When
 	// ContentBasedDeduplication is in effect, messages with identical content sent
 	// within the deduplication interval are treated as duplicates and only one copy of
 	// the message is delivered.
-	//
-	// * If you send one message with
+	// - If you send one message with
 	// ContentBasedDeduplication enabled, and then another message with a
 	// MessageDeduplicationId that is the same as the one generated for the first
 	// MessageDeduplicationId, the two messages are treated as duplicates and only one
@@ -200,11 +194,9 @@ type PublishBatchRequestEntry struct {
 	// protocol. For example, using one publish action, you can send a short message to
 	// your SMS subscribers and a longer message to your email subscribers. If you set
 	// MessageStructure to json, the value of the Message parameter must:
-	//
-	// * be a
+	// - be a
 	// syntactically valid JSON object; and
-	//
-	// * contain at least a top-level JSON key of
+	// - contain at least a top-level JSON key of
 	// "default" with a value that is a string.
 	//
 	// You can define other top-level keys

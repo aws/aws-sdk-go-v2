@@ -32,11 +32,9 @@ func (c *Client) SetResourceAccessForBucket(ctx context.Context, params *SetReso
 type SetResourceAccessForBucketInput struct {
 
 	// The access setting. The following access settings are available:
-	//
-	// * allow -
+	// - allow -
 	// Allows access to the bucket and its objects.
-	//
-	// * deny - Denies access to the
+	// - deny - Denies access to the
 	// bucket and its objects. Use this setting to remove access for a resource
 	// previously set to allow.
 	//

@@ -31,21 +31,17 @@ import (
 // file using the Media parameter. Note that job queuing is enabled by default for
 // Call Analytics jobs. You must include the following parameters in your
 // StartCallAnalyticsJob request:
-//
-// * region: The Amazon Web Services Region where
+// - region: The Amazon Web Services Region where
 // you are making your request. For a list of Amazon Web Services Regions supported
 // with Amazon Transcribe, refer to Amazon Transcribe endpoints and quotas
 // (https://docs.aws.amazon.com/general/latest/gr/transcribe.html).
-//
-// *
+// -
 // CallAnalyticsJobName: A custom name that you create for your transcription job
 // that's unique within your Amazon Web Services account.
-//
-// * DataAccessRoleArn: The
+// - DataAccessRoleArn: The
 // Amazon Resource Name (ARN) of an IAM role that has permissions to access the
 // Amazon S3 bucket that contains your input files.
-//
-// * Media (MediaFileUri or
+// - Media (MediaFileUri or
 // RedactedMediaFileUri): The Amazon S3 location of your media file.
 //
 // With Call
@@ -103,30 +99,24 @@ type StartCallAnalyticsJobInput struct {
 	// The KMS key you want to use to encrypt your Call Analytics output. If using a
 	// key located in the current Amazon Web Services account, you can specify your KMS
 	// key in one of four ways:
-	//
-	// * Use the KMS key ID itself. For example,
+	// - Use the KMS key ID itself. For example,
 	// 1234abcd-12ab-34cd-56ef-1234567890ab.
-	//
-	// * Use an alias for the KMS key ID. For
+	// - Use an alias for the KMS key ID. For
 	// example, alias/ExampleAlias.
-	//
-	// * Use the Amazon Resource Name (ARN) for the KMS
+	// - Use the Amazon Resource Name (ARN) for the KMS
 	// key ID. For example,
 	// arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab.
-	//
-	// * Use
+	// - Use
 	// the ARN for the KMS key alias. For example,
 	// arn:aws:kms:region:account-ID:alias/ExampleAlias.
 	//
 	// If using a key located in a
 	// different Amazon Web Services account than the current Amazon Web Services
 	// account, you can specify your KMS key in one of two ways:
-	//
-	// * Use the ARN for the
+	// - Use the ARN for the
 	// KMS key ID. For example,
 	// arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab.
-	//
-	// * Use
+	// - Use
 	// the ARN for the KMS key alias. For example,
 	// arn:aws:kms:region:account-ID:alias/ExampleAlias.
 	//
@@ -140,13 +130,10 @@ type StartCallAnalyticsJobInput struct {
 	// The Amazon S3 location where you want your Call Analytics transcription output
 	// stored. You can use any of the following formats to specify the output
 	// location:
-	//
-	// * s3://DOC-EXAMPLE-BUCKET
-	//
-	// *
+	// - s3://DOC-EXAMPLE-BUCKET
+	// -
 	// s3://DOC-EXAMPLE-BUCKET/my-output-folder/
-	//
-	// *
+	// -
 	// s3://DOC-EXAMPLE-BUCKET/my-output-folder/my-call-analytics-job.json
 	//
 	// Unless you

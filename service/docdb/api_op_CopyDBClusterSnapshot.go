@@ -40,14 +40,11 @@ type CopyDBClusterSnapshotInput struct {
 
 	// The identifier of the cluster snapshot to copy. This parameter is not case
 	// sensitive. Constraints:
-	//
-	// * Must specify a valid system snapshot in the available
+	// - Must specify a valid system snapshot in the available
 	// state.
-	//
-	// * If the source snapshot is in the same Amazon Web Services Region as
-	// the copy, specify a valid snapshot identifier.
-	//
-	// * If the source snapshot is in a
+	// - If the source snapshot is in the same Amazon Web Services Region as the
+	// copy, specify a valid snapshot identifier.
+	// - If the source snapshot is in a
 	// different Amazon Web Services Region than the copy, specify a valid cluster
 	// snapshot ARN.
 	//
@@ -58,17 +55,14 @@ type CopyDBClusterSnapshotInput struct {
 
 	// The identifier of the new cluster snapshot to create from the source cluster
 	// snapshot. This parameter is not case sensitive. Constraints:
+	// - Must contain from
+	// 1 to 63 letters, numbers, or hyphens.
+	// - The first character must be a letter.
+	// -
+	// Cannot end with a hyphen or contain two consecutive hyphens.
 	//
-	// * Must contain
-	// from 1 to 63 letters, numbers, or hyphens.
-	//
-	// * The first character must be a
-	// letter.
-	//
-	// * Cannot end with a hyphen or contain two consecutive
-	// hyphens.
-	//
-	// Example: my-cluster-snapshot2
+	// Example:
+	// my-cluster-snapshot2
 	//
 	// This member is required.
 	TargetDBClusterSnapshotIdentifier *string
@@ -106,11 +100,9 @@ type CopyDBClusterSnapshotInput struct {
 	// CopyDBClusterSnapshot API action that can be executed in the source Amazon Web
 	// Services Region that contains the cluster snapshot to be copied. The presigned
 	// URL request must contain the following parameter values:
-	//
-	// * SourceRegion - The
-	// ID of the region that contains the snapshot to be copied.
-	//
-	// *
+	// - SourceRegion - The ID
+	// of the region that contains the snapshot to be copied.
+	// -
 	// SourceDBClusterSnapshotIdentifier - The identifier for the the encrypted cluster
 	// snapshot to be copied. This identifier must be in the Amazon Resource Name (ARN)
 	// format for the source Amazon Web Services Region. For example, if you are
@@ -118,8 +110,7 @@ type CopyDBClusterSnapshotInput struct {
 	// Region, then your SourceDBClusterSnapshotIdentifier looks something like the
 	// following:
 	// arn:aws:rds:us-east-1:12345678012:sample-cluster:sample-cluster-snapshot.
-	//
-	// *
+	// -
 	// TargetDBClusterSnapshotIdentifier - The identifier for the new cluster snapshot
 	// to be created. This parameter isn't case sensitive.
 	PreSignedUrl *string

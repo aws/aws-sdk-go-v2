@@ -279,15 +279,12 @@ type ComponentVersion struct {
 	// The Amazon Resource Name (ARN) of the component. Semantic versioning is included
 	// in each object's Amazon Resource Name (ARN), at the level that applies to that
 	// object as follows:
-	//
-	// * Versionless ARNs and Name ARNs do not include specific
+	// - Versionless ARNs and Name ARNs do not include specific
 	// values in any of the nodes. The nodes are either left off entirely, or they are
 	// specified as wildcards, for example: x.x.x.
-	//
-	// * Version ARNs have only the first
+	// - Version ARNs have only the first
 	// three nodes: ..
-	//
-	// * Build version ARNs have all four nodes, and point to a
+	// - Build version ARNs have all four nodes, and point to a
 	// specific build for a specific version of an object.
 	Arn *string
 
@@ -369,16 +366,13 @@ type ContainerRecipe struct {
 	// The Amazon Resource Name (ARN) of the container recipe. Semantic versioning is
 	// included in each object's Amazon Resource Name (ARN), at the level that applies
 	// to that object as follows:
-	//
-	// * Versionless ARNs and Name ARNs do not include
+	// - Versionless ARNs and Name ARNs do not include
 	// specific values in any of the nodes. The nodes are either left off entirely, or
 	// they are specified as wildcards, for example: x.x.x.
-	//
-	// * Version ARNs have only
+	// - Version ARNs have only
 	// the first three nodes: ..
-	//
-	// * Build version ARNs have all four nodes, and point
-	// to a specific build for a specific version of an object.
+	// - Build version ARNs have all four nodes, and point to
+	// a specific build for a specific version of an object.
 	Arn *string
 
 	// Build and test components that are included in the container recipe. Recipes
@@ -683,28 +677,22 @@ type Image struct {
 	// The Amazon Resource Name (ARN) of the image. Semantic versioning is included in
 	// each object's Amazon Resource Name (ARN), at the level that applies to that
 	// object as follows:
-	//
-	// * Versionless ARNs and Name ARNs do not include specific
+	// - Versionless ARNs and Name ARNs do not include specific
 	// values in any of the nodes. The nodes are either left off entirely, or they are
 	// specified as wildcards, for example: x.x.x.
-	//
-	// * Version ARNs have only the first
+	// - Version ARNs have only the first
 	// three nodes: ..
-	//
-	// * Build version ARNs have all four nodes, and point to a
+	// - Build version ARNs have all four nodes, and point to a
 	// specific build for a specific version of an object.
 	Arn *string
 
 	// Indicates the type of build that created this image. The build can be initiated
 	// in the following ways:
-	//
-	// * USER_INITIATED – A manual pipeline build request.
-	//
-	// *
+	// - USER_INITIATED – A manual pipeline build request.
+	// -
 	// SCHEDULED – A pipeline build initiated by a cron expression in the Image Builder
 	// pipeline, or from EventBridge.
-	//
-	// * IMPORT – A VM import created the image to use
+	// - IMPORT – A VM import created the image to use
 	// as the base image for the recipe.
 	BuildType BuildType
 
@@ -956,14 +944,11 @@ type ImageSummary struct {
 
 	// Indicates the type of build that created this image. The build can be initiated
 	// in the following ways:
-	//
-	// * USER_INITIATED – A manual pipeline build request.
-	//
-	// *
+	// - USER_INITIATED – A manual pipeline build request.
+	// -
 	// SCHEDULED – A pipeline build initiated by a cron expression in the Image Builder
 	// pipeline, or from EventBridge.
-	//
-	// * IMPORT – A VM import created the image to use
+	// - IMPORT – A VM import created the image to use
 	// as the base image for the recipe.
 	BuildType BuildType
 
@@ -1026,28 +1011,22 @@ type ImageVersion struct {
 	// The Amazon Resource Name (ARN) of a specific version of an Image Builder image.
 	// Semantic versioning is included in each object's Amazon Resource Name (ARN), at
 	// the level that applies to that object as follows:
-	//
-	// * Versionless ARNs and Name
+	// - Versionless ARNs and Name
 	// ARNs do not include specific values in any of the nodes. The nodes are either
 	// left off entirely, or they are specified as wildcards, for example: x.x.x.
-	//
-	// *
+	// -
 	// Version ARNs have only the first three nodes: ..
-	//
-	// * Build version ARNs have all
+	// - Build version ARNs have all
 	// four nodes, and point to a specific build for a specific version of an object.
 	Arn *string
 
 	// Indicates the type of build that created this image. The build can be initiated
 	// in the following ways:
-	//
-	// * USER_INITIATED – A manual pipeline build request.
-	//
-	// *
+	// - USER_INITIATED – A manual pipeline build request.
+	// -
 	// SCHEDULED – A pipeline build initiated by a cron expression in the Image Builder
 	// pipeline, or from EventBridge.
-	//
-	// * IMPORT – A VM import created the image to use
+	// - IMPORT – A VM import created the image to use
 	// as the base image for the recipe.
 	BuildType BuildType
 
@@ -1235,15 +1214,13 @@ type InstanceMetadataOptions struct {
 
 	// Indicates whether a signed token header is required for instance metadata
 	// retrieval requests. The values affect the response as follows:
-	//
-	// * required –
-	// When you retrieve the IAM role credentials, version 2.0 credentials are returned
-	// in all cases.
-	//
-	// * optional – You can include a signed token header in your
-	// request to retrieve instance metadata, or you can leave it out. If you include
-	// it, version 2.0 credentials are returned for the IAM role. Otherwise, version
-	// 1.0 credentials are returned.
+	// - required – When
+	// you retrieve the IAM role credentials, version 2.0 credentials are returned in
+	// all cases.
+	// - optional – You can include a signed token header in your request to
+	// retrieve instance metadata, or you can leave it out. If you include it, version
+	// 2.0 credentials are returned for the IAM role. Otherwise, version 1.0
+	// credentials are returned.
 	//
 	// The default setting is optional.
 	HttpTokens *string
@@ -1325,17 +1302,14 @@ type OutputResources struct {
 // format for your VM.
 type S3ExportConfiguration struct {
 
-	// Export the updated image to one of the following supported disk image
-	// formats:
-	//
-	// * Virtual Hard Disk (VHD) – Compatible with Citrix Xen and Microsoft
-	// Hyper-V virtualization products.
-	//
-	// * Stream-optimized ESX Virtual Machine Disk
-	// (VMDK) – Compatible with VMware ESX and VMware vSphere versions 4, 5, and 6.
-	//
-	// *
-	// Raw – Raw format.
+	// Export the updated image to one of the following supported disk image formats:
+	// -
+	// Virtual Hard Disk (VHD) – Compatible with Citrix Xen and Microsoft Hyper-V
+	// virtualization products.
+	// - Stream-optimized ESX Virtual Machine Disk (VMDK) –
+	// Compatible with VMware ESX and VMware vSphere versions 4, 5, and 6.
+	// - Raw – Raw
+	// format.
 	//
 	// This member is required.
 	DiskImageFormat DiskImageFormat

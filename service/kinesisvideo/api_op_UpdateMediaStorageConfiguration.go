@@ -13,11 +13,9 @@ import (
 
 // Associates a SignalingChannel to a stream to store the media. There are two
 // signaling modes that can specified :
-//
-// * If the StorageStatus is disabled, no
-// data will be stored, and the StreamARN parameter will not be needed.
-//
-// * If the
+// - If the StorageStatus is disabled, no data
+// will be stored, and the StreamARN parameter will not be needed.
+// - If the
 // StorageStatus is enabled, the data will be stored in the StreamARN provided.
 func (c *Client) UpdateMediaStorageConfiguration(ctx context.Context, params *UpdateMediaStorageConfigurationInput, optFns ...func(*Options)) (*UpdateMediaStorageConfigurationOutput, error) {
 	if params == nil {

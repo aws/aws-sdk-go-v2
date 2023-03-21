@@ -14,11 +14,9 @@ import (
 
 // Deletes a custom engine version. To run this command, make sure you meet the
 // following prerequisites:
-//
-// * The CEV must not be the default for RDS Custom. If
-// it is, change the default before running this command.
-//
-// * The CEV must not be
+// - The CEV must not be the default for RDS Custom. If it
+// is, change the default before running this command.
+// - The CEV must not be
 // associated with an RDS Custom DB instance, RDS Custom instance snapshot, or
 // automated backup of your RDS Custom instance.
 //

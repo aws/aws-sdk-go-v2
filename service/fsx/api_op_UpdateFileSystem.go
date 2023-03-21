@@ -14,82 +14,54 @@ import (
 
 // Use this operation to update the configuration of an existing Amazon FSx file
 // system. You can update multiple properties in a single request. For Amazon FSx
-// for Windows File Server file systems, you can update the following
-// properties:
-//
-// * AuditLogConfiguration
-//
-// * AutomaticBackupRetentionDays
-//
-// *
+// for Windows File Server file systems, you can update the following properties:
+// -
+// AuditLogConfiguration
+// - AutomaticBackupRetentionDays
+// -
 // DailyAutomaticBackupStartTime
-//
-// * SelfManagedActiveDirectoryConfiguration
-//
-// *
+// - SelfManagedActiveDirectoryConfiguration
+// -
 // StorageCapacity
-//
-// * ThroughputCapacity
-//
-// * WeeklyMaintenanceStartTime
+// - ThroughputCapacity
+// - WeeklyMaintenanceStartTime
 //
 // For Amazon
 // FSx for Lustre file systems, you can update the following properties:
-//
-// *
+// -
 // AutoImportPolicy
-//
-// * AutomaticBackupRetentionDays
-//
-// *
+// - AutomaticBackupRetentionDays
+// -
 // DailyAutomaticBackupStartTime
-//
-// * DataCompressionType
-//
-// *
+// - DataCompressionType
+// -
 // LustreRootSquashConfiguration
-//
-// * StorageCapacity
-//
-// *
+// - StorageCapacity
+// -
 // WeeklyMaintenanceStartTime
 //
 // For Amazon FSx for NetApp ONTAP file systems, you
 // can update the following properties:
-//
-// * AutomaticBackupRetentionDays
-//
-// *
+// - AutomaticBackupRetentionDays
+// -
 // DailyAutomaticBackupStartTime
-//
-// * DiskIopsConfiguration
-//
-// * FsxAdminPassword
-//
-// *
+// - DiskIopsConfiguration
+// - FsxAdminPassword
+// -
 // StorageCapacity
-//
-// * ThroughputCapacity
-//
-// * WeeklyMaintenanceStartTime
+// - ThroughputCapacity
+// - WeeklyMaintenanceStartTime
 //
 // For the
 // Amazon FSx for OpenZFS file systems, you can update the following properties:
-//
-// *
+// -
 // AutomaticBackupRetentionDays
-//
-// * CopyTagsToBackups
-//
-// * CopyTagsToVolumes
-//
-// *
+// - CopyTagsToBackups
+// - CopyTagsToVolumes
+// -
 // DailyAutomaticBackupStartTime
-//
-// * ThroughputCapacity
-//
-// *
-// WeeklyMaintenanceStartTime
+// - ThroughputCapacity
+// - WeeklyMaintenanceStartTime
 func (c *Client) UpdateFileSystem(ctx context.Context, params *UpdateFileSystemInput, optFns ...func(*Options)) (*UpdateFileSystemOutput, error) {
 	if params == nil {
 		params = &UpdateFileSystemInput{}
@@ -140,18 +112,15 @@ type UpdateFileSystemInput struct {
 	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html)
 	// in the Amazon FSx for Windows File Server User Guide. For Lustre file systems,
 	// the storage capacity target value can be the following:
-	//
-	// * For SCRATCH_2,
+	// - For SCRATCH_2,
 	// PERSISTENT_1, and PERSISTENT_2 SSD deployment types, valid values are in
 	// multiples of 2400 GiB. The value must be greater than the current storage
 	// capacity.
-	//
-	// * For PERSISTENT HDD file systems, valid values are multiples of 6000
+	// - For PERSISTENT HDD file systems, valid values are multiples of 6000
 	// GiB for 12-MBps throughput per TiB file systems and multiples of 1800 GiB for
 	// 40-MBps throughput per TiB file systems. The values must be greater than the
 	// current storage capacity.
-	//
-	// * For SCRATCH_1 file systems, you can't increase the
+	// - For SCRATCH_1 file systems, you can't increase the
 	// storage capacity.
 	//
 	// For more information, see Managing storage and throughput

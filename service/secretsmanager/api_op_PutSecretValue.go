@@ -78,16 +78,13 @@ type PutSecretValueInput struct {
 	// rotation function processing. We recommend that you generate a UUID-type
 	// (https://wikipedia.org/wiki/Universally_unique_identifier) value to ensure
 	// uniqueness within the specified secret.
-	//
-	// * If the ClientRequestToken value isn't
+	// - If the ClientRequestToken value isn't
 	// already associated with a version of the secret then a new version of the secret
 	// is created.
-	//
-	// * If a version with this value already exists and that version's
+	// - If a version with this value already exists and that version's
 	// SecretString or SecretBinary values are the same as those in the request then
 	// the request is ignored. The operation is idempotent.
-	//
-	// * If a version with this
+	// - If a version with this
 	// value already exists and the version of the SecretString and SecretBinary values
 	// are different from those in the request, then the request fails because you
 	// can't modify a secret version. You can only create new versions to store new

@@ -19,36 +19,27 @@ import (
 // the latest version, AWS WAF has a single set of endpoints for regional and
 // global use. Inserts or deletes RegexPatternString objects in a RegexPatternSet.
 // For each RegexPatternString object, you specify the following values:
-//
-// * Whether
+// - Whether
 // to insert or delete the RegexPatternString.
-//
-// * The regular expression pattern
+// - The regular expression pattern
 // that you want to insert or delete. For more information, see
 // RegexPatternSet.
 //
 // For example, you can create a RegexPatternString such as
 // B[a@]dB[o0]t. AWS WAF will match this RegexPatternString to:
+// - BadBot
+// - BadB0t
+// -
+// B@dBot
+// - B@dB0t
 //
-// * BadBot
-//
-// *
-// BadB0t
-//
-// * B@dBot
-//
-// * B@dB0t
-//
-// To create and configure a RegexPatternSet, perform
-// the following steps:
-//
-// * Create a RegexPatternSet. For more information, see
+// To create and configure a RegexPatternSet, perform the
+// following steps:
+// - Create a RegexPatternSet. For more information, see
 // CreateRegexPatternSet.
-//
-// * Use GetChangeToken to get the change token that you
+// - Use GetChangeToken to get the change token that you
 // provide in the ChangeToken parameter of an UpdateRegexPatternSet request.
-//
-// *
+// -
 // Submit an UpdateRegexPatternSet request to specify the regular expression
 // pattern that you want AWS WAF to watch for.
 //

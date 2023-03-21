@@ -39,17 +39,13 @@ type ListLinuxSubscriptionsInput struct {
 	// filter by the name of Subscription with an optional operator to see
 	// subscriptions that match, partially match, or don't match a certain
 	// subscription's name. The valid names for this filter are:
-	//
-	// * Subscription
+	// - Subscription
 	//
 	// The
 	// valid Operators for this filter are:
-	//
-	// * contains
-	//
-	// * equals
-	//
-	// * Notequal
+	// - contains
+	// - equals
+	// - Notequal
 	Filters []types.Filter
 
 	// Maximum number of results to return in a single call.

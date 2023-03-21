@@ -8,84 +8,60 @@
 // operations and data types for Amazon CodeCatalyst. You can use the Amazon
 // CodeCatalyst API to work with the following objects. Dev Environments and the
 // Amazon Web Services Toolkits, by calling the following:
-//
-// * CreateAccessToken,
+// - CreateAccessToken,
 // which creates a personal access token (PAT) for the current user.
-//
-// *
+// -
 // CreateDevEnvironment, which creates a Dev Environment, where you can quickly
 // work on the code stored in the source repositories of your project.
-//
-// *
+// -
 // CreateProject which creates a project in a specified space.
-//
-// *
+// -
 // CreateSourceRepositoryBranch, which creates a branch in a specified repository
 // where you can work on code.
-//
-// * DeleteDevEnvironment, which deletes a Dev
+// - DeleteDevEnvironment, which deletes a Dev
 // Environment.
-//
-// * GetDevEnvironment, which returns information about a Dev
+// - GetDevEnvironment, which returns information about a Dev
 // Environment.
-//
-// * GetProject, which returns information about a project.
-//
-// *
+// - GetProject, which returns information about a project.
+// -
 // GetSourceRepositoryCloneUrls, which returns information about the URLs that can
 // be used with a Git client to clone a source repository.
-//
-// * GetSubscription,
-// which returns information about the Amazon Web Services account used for billing
+// - GetSubscription, which
+// returns information about the Amazon Web Services account used for billing
 // purposes and the billing plan for the space.
-//
-// * GetUserDetails, which returns
+// - GetUserDetails, which returns
 // information about a user in Amazon CodeCatalyst.
-//
-// * ListDevEnvironments, which
+// - ListDevEnvironments, which
 // retrives a list of Dev Environments in a project.
-//
-// * ListProjects, which
+// - ListProjects, which
 // retrieves a list of projects in a space.
-//
-// * ListSourceRepositories, which
+// - ListSourceRepositories, which
 // retrieves a list of source repositories in a project.
-//
-// *
+// -
 // ListSourceRepositoryBranches, which retrieves a list of branches in a source
 // repository.
-//
-// * ListSpaces, which retrieves a list of spaces.
-//
-// *
+// - ListSpaces, which retrieves a list of spaces.
+// -
 // StartDevEnvironment, which starts a specified Dev Environment and puts it into
 // an active state.
-//
-// * StartDevEnvironmentSession, which starts a session to a
+// - StartDevEnvironmentSession, which starts a session to a
 // specified Dev Environment.
-//
-// * StopDevEnvironment, which stops a specified Dev
+// - StopDevEnvironment, which stops a specified Dev
 // Environment and puts it into an stopped state.
-//
-// * StopDevEnvironmentSession,
+// - StopDevEnvironmentSession,
 // which stops a session for a specified Dev Environment.
-//
-// * UpdateDevEnvironment,
+// - UpdateDevEnvironment,
 // which changes one or more values for a Dev Environment.
-//
-// * VerifySession, which
+// - VerifySession, which
 // verifies whether the calling user has a valid Amazon CodeCatalyst login and
 // session.
 //
 // Security, activity, and resource management in Amazon CodeCatalyst, by
 // calling the following:
-//
-// * DeleteAccessToken, which deletes a specified personal
+// - DeleteAccessToken, which deletes a specified personal
 // access token (PAT).
-//
-// * ListAccessTokens, which lists all personal access tokens
+// - ListAccessTokens, which lists all personal access tokens
 // (PATs) associated with a user.
-//
-// * ListEventLogs, which retrieves a list of
-// events that occurred during a specified time period in a space.
+// - ListEventLogs, which retrieves a list of events
+// that occurred during a specified time period in a space.
 package codecatalyst

@@ -14,8 +14,7 @@ import (
 
 // Returns a list of existing Resource Groups in your account. Minimum permissions
 // To run this command, you must have the following permissions:
-//
-// *
+// -
 // resource-groups:ListGroups
 func (c *Client) ListGroups(ctx context.Context, params *ListGroupsInput, optFns ...func(*Options)) (*ListGroupsOutput, error) {
 	if params == nil {
@@ -36,19 +35,15 @@ type ListGroupsInput struct {
 
 	// Filters, formatted as GroupFilter objects, that you want to apply to a
 	// ListGroups operation.
-	//
-	// * resource-type - Filter the results to include only
-	// those of the specified resource types. Specify up to five resource types in the
-	// format AWS::ServiceCode::ResourceType . For example, AWS::EC2::Instance, or
+	// - resource-type - Filter the results to include only those
+	// of the specified resource types. Specify up to five resource types in the format
+	// AWS::ServiceCode::ResourceType . For example, AWS::EC2::Instance, or
 	// AWS::S3::Bucket.
-	//
-	// * configuration-type - Filter the results to include only
-	// those groups that have the specified configuration types attached. The current
+	// - configuration-type - Filter the results to include only those
+	// groups that have the specified configuration types attached. The current
 	// supported values are:
-	//
-	// * AWS::EC2::CapacityReservationPool
-	//
-	// *
+	// - AWS::EC2::CapacityReservationPool
+	// -
 	// AWS::EC2::HostManagement
 	Filters []types.GroupFilter
 

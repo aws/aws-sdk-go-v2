@@ -41,10 +41,8 @@ import (
 // Required permissions: kms:DisableKeyRotation
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (key policy) Related operations:
-//
-// * EnableKeyRotation
-//
-// * GetKeyRotationStatus
+// - EnableKeyRotation
+// - GetKeyRotationStatus
 func (c *Client) DisableKeyRotation(ctx context.Context, params *DisableKeyRotationInput, optFns ...func(*Options)) (*DisableKeyRotationOutput, error) {
 	if params == nil {
 		params = &DisableKeyRotationInput{}
@@ -71,11 +69,9 @@ type DisableKeyRotationInput struct {
 	// KMS keys in a custom key store
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html).
 	// Specify the key ID or key ARN of the KMS key. For example:
-	//
-	// * Key ID:
+	// - Key ID:
 	// 1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// * Key ARN:
+	// - Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// To

@@ -13,15 +13,12 @@ import (
 
 // Creates an Application Load Balancer, Network Load Balancer, or Gateway Load
 // Balancer. For more information, see the following:
-//
-// * Application Load Balancers
+// - Application Load Balancers
 // (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html)
-//
-// *
+// -
 // Network Load Balancers
 // (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/network-load-balancers.html)
-//
-// *
+// -
 // Gateway Load Balancers
 // (https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/gateway-load-balancers.html)
 //

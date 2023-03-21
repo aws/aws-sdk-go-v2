@@ -41,11 +41,9 @@ type UpdatePipelineStatusInput struct {
 	Id *string
 
 	// The desired status of the pipeline:
-	//
-	// * Active: The pipeline is processing
-	// jobs.
-	//
-	// * Paused: The pipeline is not currently processing jobs.
+	// - Active: The pipeline is processing jobs.
+	// -
+	// Paused: The pipeline is not currently processing jobs.
 	//
 	// This member is required.
 	Status *string

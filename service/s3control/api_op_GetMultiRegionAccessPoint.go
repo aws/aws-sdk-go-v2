@@ -22,19 +22,15 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html)
 // in the Amazon S3 User Guide. The following actions are related to
 // GetMultiRegionAccessPoint:
-//
-// * CreateMultiRegionAccessPoint
+// - CreateMultiRegionAccessPoint
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html)
-//
-// *
+// -
 // DeleteMultiRegionAccessPoint
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html)
-//
-// *
+// -
 // DescribeMultiRegionAccessPointOperation
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html)
-//
-// *
+// -
 // ListMultiRegionAccessPoints
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListMultiRegionAccessPoints.html)
 func (c *Client) GetMultiRegionAccessPoint(ctx context.Context, params *GetMultiRegionAccessPointInput, optFns ...func(*Options)) (*GetMultiRegionAccessPointOutput, error) {

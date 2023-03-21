@@ -54,8 +54,7 @@ type DescribeSourceRegionsInput struct {
 
 	// The source Amazon Web Services Region name. For example, us-east-1.
 	// Constraints:
-	//
-	// * Must specify a valid Amazon Web Services Region name.
+	// - Must specify a valid Amazon Web Services Region name.
 	RegionName *string
 
 	noSmithyDocumentSerde

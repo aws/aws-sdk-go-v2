@@ -23,12 +23,10 @@ import (
 // snapshot with the SkipFinalSnapshot parameter. If the specified DB instance is
 // part of an Amazon Aurora DB cluster, you can't delete the DB instance if both of
 // the following conditions are true:
-//
-// * The DB cluster is a read replica of
-// another Amazon Aurora DB cluster.
-//
-// * The DB instance is the only instance in the
-// DB cluster.
+// - The DB cluster is a read replica of another
+// Amazon Aurora DB cluster.
+// - The DB instance is the only instance in the DB
+// cluster.
 //
 // To delete a DB instance in this case, first call the
 // PromoteReadReplicaDBCluster API action to promote the DB cluster so it's no
@@ -53,8 +51,7 @@ type DeleteDBInstanceInput struct {
 
 	// The DB instance identifier for the DB instance to be deleted. This parameter
 	// isn't case-sensitive. Constraints:
-	//
-	// * Must match the name of an existing DB
+	// - Must match the name of an existing DB
 	// instance.
 	//
 	// This member is required.
@@ -69,16 +66,12 @@ type DeleteDBInstanceInput struct {
 	// SkipFinalSnapshot parameter is disabled. If you enable this parameter and also
 	// enable SkipFinalShapshot, the command results in an error. This setting doesn't
 	// apply to RDS Custom. Constraints:
-	//
-	// * Must be 1 to 255 letters or numbers.
-	//
-	// *
-	// First character must be a letter.
-	//
-	// * Can't end with a hyphen or contain two
-	// consecutive hyphens.
-	//
-	// * Can't be specified when deleting a read replica.
+	// - Must be 1 to 255 letters or numbers.
+	// - First
+	// character must be a letter.
+	// - Can't end with a hyphen or contain two consecutive
+	// hyphens.
+	// - Can't be specified when deleting a read replica.
 	FinalDBSnapshotIdentifier *string
 
 	// A value that indicates whether to skip the creation of a final DB snapshot

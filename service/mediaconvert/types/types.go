@@ -1871,19 +1871,14 @@ type ColorCorrector struct {
 	// outcome of manually regrading from HDR to SDR. When you specify an output color
 	// space, MediaConvert uses the following color space metadata, which includes
 	// color primaries, transfer characteristics, and matrix coefficients:
-	//
-	// * HDR 10:
+	// - HDR 10:
 	// BT.2020, PQ, BT.2020 non-constant
-	//
-	// * HLG 2020: BT.2020, HLG, BT.2020
+	// - HLG 2020: BT.2020, HLG, BT.2020
 	// non-constant
-	//
-	// * P3DCI (Theater): DCIP3, SMPTE 428M, BT.709
-	//
-	// * P3D65 (SDR):
-	// Display P3, sRGB, BT.709
-	//
-	// * P3D65 (HDR): Display P3, PQ, BT.709
+	// - P3DCI (Theater): DCIP3, SMPTE 428M, BT.709
+	// - P3D65 (SDR): Display
+	// P3, sRGB, BT.709
+	// - P3D65 (HDR): Display P3, PQ, BT.709
 	ColorSpaceConversion ColorSpaceConversion
 
 	// Contrast level.
@@ -2245,7 +2240,7 @@ type Deinterlacer struct {
 	// such as a scrolling headline at the bottom of the frame.
 	Algorithm DeinterlaceAlgorithm
 
-	// * When set to NORMAL (default), the deinterlacer does not convert frames that
+	// - When set to NORMAL (default), the deinterlacer does not convert frames that
 	// are tagged in metadata as progressive. It will only convert those that are
 	// tagged as some other type. - When set to FORCE_ALL_FRAMES, the deinterlacer
 	// converts every frame to progressive - even those that are already tagged as
@@ -7963,18 +7958,13 @@ type VideoSelector struct {
 	// an input color space, MediaConvert uses the following color space metadata,
 	// which includes color primaries, transfer characteristics, and matrix
 	// coefficients:
-	//
-	// * HDR 10: BT.2020, PQ, BT.2020 non-constant
-	//
-	// * HLG 2020: BT.2020,
+	// - HDR 10: BT.2020, PQ, BT.2020 non-constant
+	// - HLG 2020: BT.2020,
 	// HLG, BT.2020 non-constant
-	//
-	// * P3DCI (Theater): DCIP3, SMPTE 428M, BT.709
-	//
-	// * P3D65
+	// - P3DCI (Theater): DCIP3, SMPTE 428M, BT.709
+	// - P3D65
 	// (SDR): Display P3, sRGB, BT.709
-	//
-	// * P3D65 (HDR): Display P3, PQ, BT.709
+	// - P3D65 (HDR): Display P3, PQ, BT.709
 	ColorSpace ColorSpace
 
 	// There are two sources for color metadata, the input file and the job input

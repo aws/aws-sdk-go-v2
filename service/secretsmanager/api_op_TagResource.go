@@ -15,24 +15,18 @@ import (
 // of the secret's metadata. They are not associated with specific versions of the
 // secret. This operation appends tags to the existing list of tags. The following
 // restrictions apply to tags:
-//
-// * Maximum number of tags per secret: 50
-//
-// * Maximum
+// - Maximum number of tags per secret: 50
+// - Maximum
 // key length: 127 Unicode characters in UTF-8
-//
-// * Maximum value length: 255 Unicode
+// - Maximum value length: 255 Unicode
 // characters in UTF-8
-//
-// * Tag keys and values are case sensitive.
-//
-// * Do not use the
+// - Tag keys and values are case sensitive.
+// - Do not use the
 // aws: prefix in your tag names or values because Amazon Web Services reserves it
 // for Amazon Web Services use. You can't edit or delete tag names or values with
 // this prefix. Tags with this prefix do not count against your tags per secret
 // limit.
-//
-// * If you use your tagging schema across multiple services and resources,
+// - If you use your tagging schema across multiple services and resources,
 // other services might have restrictions on allowed characters. Generally allowed
 // characters: letters, spaces, and numbers representable in UTF-8, plus the
 // following special characters: + - = . _ : / @.

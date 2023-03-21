@@ -79,16 +79,14 @@ type CreatePortalInput struct {
 
 	// The service to use to authenticate users to the portal. Choose from the
 	// following options:
-	//
-	// * SSO – The portal uses IAM Identity Center (successor to
+	// - SSO – The portal uses IAM Identity Center (successor to
 	// Single Sign-On) to authenticate users and manage user permissions. Before you
 	// can create a portal that uses IAM Identity Center, you must enable IAM Identity
 	// Center. For more information, see Enabling IAM Identity Center
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-get-started.html#mon-gs-sso)
 	// in the IoT SiteWise User Guide. This option is only available in Amazon Web
 	// Services Regions other than the China Regions.
-	//
-	// * IAM – The portal uses Identity
+	// - IAM – The portal uses Identity
 	// and Access Management to authenticate users and manage user permissions.
 	//
 	// You

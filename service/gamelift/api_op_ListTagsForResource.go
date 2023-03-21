@@ -15,25 +15,18 @@ import (
 // used to organize Amazon Web Services resources for a range of purposes. This
 // operation handles the permissions necessary to manage tags for the following
 // GameLift resource types:
+// - Build
+// - Script
+// - Fleet
+// - Alias
+// - GameSessionQueue
+// -
+// MatchmakingConfiguration
+// - MatchmakingRuleSet
 //
-// * Build
-//
-// * Script
-//
-// * Fleet
-//
-// * Alias
-//
-// *
-// GameSessionQueue
-//
-// * MatchmakingConfiguration
-//
-// * MatchmakingRuleSet
-//
-// To list tags
-// for a resource, specify the unique ARN value for the resource. Learn more
-// Tagging Amazon Web Services Resources
+// To list tags for a resource,
+// specify the unique ARN value for the resource. Learn more Tagging Amazon Web
+// Services Resources
 // (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
 // Web Services General Reference  Amazon Web Services Tagging Strategies
 // (http://aws.amazon.com/answers/account-management/aws-tagging-strategies/)

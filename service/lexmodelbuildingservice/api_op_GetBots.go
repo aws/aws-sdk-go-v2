@@ -13,12 +13,10 @@ import (
 )
 
 // Returns bot information as follows:
-//
-// * If you provide the nameContains field,
-// the response includes information for the $LATEST version of all bots whose name
+// - If you provide the nameContains field, the
+// response includes information for the $LATEST version of all bots whose name
 // contains the specified string.
-//
-// * If you don't specify the nameContains field,
+// - If you don't specify the nameContains field,
 // the operation returns information about the $LATEST version of all of your
 // bots.
 //

@@ -778,40 +778,27 @@ type NetworkResource struct {
 
 	// The resource type. The following are the supported resource types for Direct
 	// Connect:
+	// - dxcon
+	// - dx-gateway
+	// - dx-vif
 	//
-	// * dxcon
+	// The following are the supported resource
+	// types for Network Manager:
+	// - connection
+	// - device
+	// - link
+	// - site
 	//
-	// * dx-gateway
-	//
-	// * dx-vif
-	//
-	// The following are the supported
-	// resource types for Network Manager:
-	//
-	// * connection
-	//
-	// * device
-	//
-	// * link
-	//
-	// * site
-	//
-	// The
-	// following are the supported resource types for Amazon VPC:
-	//
-	// *
-	// customer-gateway
-	//
-	// * transit-gateway
-	//
-	// * transit-gateway-attachment
-	//
-	// *
-	// transit-gateway-connect-peer
-	//
-	// * transit-gateway-route-table
-	//
-	// * vpn-connection
+	// The following
+	// are the supported resource types for Amazon VPC:
+	// - customer-gateway
+	// -
+	// transit-gateway
+	// - transit-gateway-attachment
+	// - transit-gateway-connect-peer
+	// -
+	// transit-gateway-route-table
+	// - vpn-connection
 	ResourceType *string
 
 	// The tags.
@@ -1081,35 +1068,26 @@ type RouteAnalysis struct {
 type RouteAnalysisCompletion struct {
 
 	// The reason code. Available only if a connection is not found.
-	//
-	// *
+	// -
 	// BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND - Found a black hole route with the
 	// destination CIDR block.
-	//
-	// * CYCLIC_PATH_DETECTED - Found the same resource
+	// - CYCLIC_PATH_DETECTED - Found the same resource
 	// multiple times while traversing the path.
-	//
-	// *
-	// INACTIVE_ROUTE_FOR_DESTINATION_FOUND - Found an inactive route with the
-	// destination CIDR block.
-	//
-	// * MAX_HOPS_EXCEEDED - Analysis exceeded 64 hops without
-	// finding the destination.
-	//
-	// * ROUTE_NOT_FOUND - Cannot find a route table with the
-	// destination CIDR block.
-	//
-	// * TGW_ATTACH_ARN_NO_MATCH - Found an attachment, but
-	// not with the correct destination ARN.
-	//
-	// * TGW_ATTACH_NOT_FOUND - Cannot find an
-	// attachment.
-	//
-	// * TGW_ATTACH_NOT_IN_TGW - Found an attachment, but not to the
-	// correct transit gateway.
-	//
-	// * TGW_ATTACH_STABLE_ROUTE_TABLE_NOT_FOUND - The state
-	// of the route table association is not associated.
+	// - INACTIVE_ROUTE_FOR_DESTINATION_FOUND
+	// - Found an inactive route with the destination CIDR block.
+	// - MAX_HOPS_EXCEEDED -
+	// Analysis exceeded 64 hops without finding the destination.
+	// - ROUTE_NOT_FOUND -
+	// Cannot find a route table with the destination CIDR block.
+	// -
+	// TGW_ATTACH_ARN_NO_MATCH - Found an attachment, but not with the correct
+	// destination ARN.
+	// - TGW_ATTACH_NOT_FOUND - Cannot find an attachment.
+	// -
+	// TGW_ATTACH_NOT_IN_TGW - Found an attachment, but not to the correct transit
+	// gateway.
+	// - TGW_ATTACH_STABLE_ROUTE_TABLE_NOT_FOUND - The state of the route
+	// table association is not associated.
 	ReasonCode RouteAnalysisCompletionReasonCode
 
 	// Additional information about the path. Available only if a connection is not

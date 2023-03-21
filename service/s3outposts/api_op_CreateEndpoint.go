@@ -13,12 +13,10 @@ import (
 
 // Creates an endpoint and associates it with the specified Outpost. It can take up
 // to 5 minutes for this action to finish. Related actions include:
-//
-// *
+// -
 // DeleteEndpoint
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_DeleteEndpoint.html)
-//
-// *
+// -
 // ListEndpoints
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_ListEndpoints.html)
 func (c *Client) CreateEndpoint(ctx context.Context, params *CreateEndpointInput, optFns ...func(*Options)) (*CreateEndpointOutput, error) {

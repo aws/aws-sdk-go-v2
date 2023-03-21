@@ -55,8 +55,7 @@ type DescribeTrackerOutput struct {
 
 	// The Amazon Resource Name (ARN) for the tracker resource. Used when you need to
 	// specify a resource across all Amazon Web Services.
-	//
-	// * Format example:
+	// - Format example:
 	// arn:aws:geo:region:account-id:tracker/ExampleTracker
 	//
 	// This member is required.

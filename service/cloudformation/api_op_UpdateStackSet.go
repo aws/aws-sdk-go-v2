@@ -76,11 +76,9 @@ type UpdateStackSetInput struct {
 	// administrator in the organization's management account or as a delegated
 	// administrator in a member account. By default, SELF is specified. Use SELF for
 	// stack sets with self-managed permissions.
-	//
-	// * If you are signed in to the
+	// - If you are signed in to the
 	// management account, specify SELF.
-	//
-	// * If you are signed in to a delegated
+	// - If you are signed in to a delegated
 	// administrator account, specify DELEGATED_ADMIN. Your Amazon Web Services account
 	// must be registered as a delegated administrator in the management account. For
 	// more information, see Register a delegated administrator
@@ -91,61 +89,48 @@ type UpdateStackSetInput struct {
 	// In some cases, you must explicitly acknowledge that your stack template contains
 	// certain capabilities in order for CloudFormation to update the stack set and its
 	// associated stack instances.
+	// - CAPABILITY_IAM and CAPABILITY_NAMED_IAM Some stack
+	// templates might include resources that can affect permissions in your Amazon Web
+	// Services account; for example, by creating new Identity and Access Management
+	// (IAM) users. For those stacks sets, you must explicitly acknowledge this by
+	// specifying one of these capabilities. The following IAM resources require you to
+	// specify either the CAPABILITY_IAM or CAPABILITY_NAMED_IAM capability.
+	// - If you
+	// have IAM resources, you can specify either capability.
+	// - If you have IAM
+	// resources with custom names, you must specify CAPABILITY_NAMED_IAM.
+	// - If you
+	// don't specify either of these capabilities, CloudFormation returns an
+	// InsufficientCapabilities error.
 	//
-	// * CAPABILITY_IAM and CAPABILITY_NAMED_IAM Some
-	// stack templates might include resources that can affect permissions in your
-	// Amazon Web Services account; for example, by creating new Identity and Access
-	// Management (IAM) users. For those stacks sets, you must explicitly acknowledge
-	// this by specifying one of these capabilities. The following IAM resources
-	// require you to specify either the CAPABILITY_IAM or CAPABILITY_NAMED_IAM
-	// capability.
-	//
-	// * If you have IAM resources, you can specify either capability.
-	//
-	// *
-	// If you have IAM resources with custom names, you must specify
-	// CAPABILITY_NAMED_IAM.
-	//
-	// * If you don't specify either of these capabilities,
-	// CloudFormation returns an InsufficientCapabilities error.
-	//
-	// If your stack
-	// template contains these resources, we recommend that you review all permissions
-	// associated with them and edit their permissions if necessary.
-	//
-	// *
-	// AWS::IAM::AccessKey
+	// If your stack template contains these
+	// resources, we recommend that you review all permissions associated with them and
+	// edit their permissions if necessary.
+	// - AWS::IAM::AccessKey
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html)
-	//
-	// *
+	// -
 	// AWS::IAM::Group
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html)
-	//
-	// *
+	// -
 	// AWS::IAM::InstanceProfile
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html)
-	//
-	// *
+	// -
 	// AWS::IAM::Policy
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html)
-	//
-	// *
+	// -
 	// AWS::IAM::Role
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html)
-	//
-	// *
+	// -
 	// AWS::IAM::User
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html)
-	//
-	// *
+	// -
 	// AWS::IAM::UserToGroupAddition
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html)
 	//
 	// For
 	// more information, see Acknowledging IAM Resources in CloudFormation Templates
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities).
-	//
-	// *
+	// -
 	// CAPABILITY_AUTO_EXPAND Some templates reference macros. If your stack set
 	// template references one or more macros, you must update the stack set directly
 	// from the processed template, without first reviewing the resulting changes in a
@@ -211,13 +196,11 @@ type UpdateStackSetInput struct {
 	// Describes how the IAM roles required for stack set operations are created. You
 	// cannot modify PermissionModel if there are stack instances associated with your
 	// stack set.
-	//
-	// * With self-managed permissions, you must create the administrator
+	// - With self-managed permissions, you must create the administrator
 	// and execution roles required to deploy to target accounts. For more information,
 	// see Grant Self-Managed Stack Set Permissions
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html).
-	//
-	// *
+	// -
 	// With service-managed permissions, StackSets automatically creates the IAM roles
 	// required to deploy to accounts managed by Organizations. For more information,
 	// see Grant Service-Managed Stack Set Permissions
@@ -242,29 +225,25 @@ type UpdateStackSetInput struct {
 	// created in the stacks. You can specify a maximum number of 50 tags. If you
 	// specify tags for this parameter, those tags replace any list of tags that are
 	// currently associated with this stack set. This means:
-	//
-	// * If you don't specify
+	// - If you don't specify
 	// this parameter, CloudFormation doesn't modify the stack's tags.
+	// - If you specify
+	// any tags using this parameter, you must specify all the tags that you want
+	// associated with this stack set, even tags you've specified before (for example,
+	// when creating the stack set or during a previous update of the stack set.). Any
+	// tags that you don't include in the updated list of tags are removed from the
+	// stack set, and therefore from the stacks and resources as well.
+	// - If you specify
+	// an empty value, CloudFormation removes all currently associated tags.
 	//
-	// * If you
-	// specify any tags using this parameter, you must specify all the tags that you
-	// want associated with this stack set, even tags you've specified before (for
-	// example, when creating the stack set or during a previous update of the stack
-	// set.). Any tags that you don't include in the updated list of tags are removed
-	// from the stack set, and therefore from the stacks and resources as well.
-	//
-	// * If
-	// you specify an empty value, CloudFormation removes all currently associated
-	// tags.
-	//
-	// If you specify new tags as part of an UpdateStackSet action,
-	// CloudFormation checks to see if you have the required IAM permission to tag
-	// resources. If you omit tags that are currently associated with the stack set
-	// from the list of tags you specify, CloudFormation assumes that you want to
-	// remove those tags from the stack set, and checks to see if you have permission
-	// to untag resources. If you don't have the necessary permission(s), the entire
-	// UpdateStackSet action fails with an access denied error, and the stack set is
-	// not updated.
+	// If you
+	// specify new tags as part of an UpdateStackSet action, CloudFormation checks to
+	// see if you have the required IAM permission to tag resources. If you omit tags
+	// that are currently associated with the stack set from the list of tags you
+	// specify, CloudFormation assumes that you want to remove those tags from the
+	// stack set, and checks to see if you have permission to untag resources. If you
+	// don't have the necessary permission(s), the entire UpdateStackSet action fails
+	// with an access denied error, and the stack set is not updated.
 	Tags []types.Tag
 
 	// The structure that contains the template body, with a minimum length of 1 byte

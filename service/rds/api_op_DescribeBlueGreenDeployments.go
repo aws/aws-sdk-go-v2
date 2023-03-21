@@ -39,31 +39,26 @@ type DescribeBlueGreenDeploymentsInput struct {
 	// The blue/green deployment identifier. If this parameter is specified,
 	// information from only the specific blue/green deployment is returned. This
 	// parameter isn't case-sensitive. Constraints:
-	//
-	// * If supplied, must match an
+	// - If supplied, must match an
 	// existing blue/green deployment identifier.
 	BlueGreenDeploymentIdentifier *string
 
 	// A filter that specifies one or more blue/green deployments to describe.
 	// Supported filters:
-	//
-	// * blue-green-deployment-identifier - Accepts
-	// system-generated identifiers for blue/green deployments. The results list only
-	// includes information about the blue/green deployments with the specified
-	// identifiers.
-	//
-	// * blue-green-deployment-name - Accepts user-supplied names for
-	// blue/green deployments. The results list only includes information about the
-	// blue/green deployments with the specified names.
-	//
-	// * source - Accepts source
-	// databases for a blue/green deployment. The results list only includes
-	// information about the blue/green deployments with the specified source
+	// - blue-green-deployment-identifier - Accepts system-generated
+	// identifiers for blue/green deployments. The results list only includes
+	// information about the blue/green deployments with the specified identifiers.
+	// -
+	// blue-green-deployment-name - Accepts user-supplied names for blue/green
+	// deployments. The results list only includes information about the blue/green
+	// deployments with the specified names.
+	// - source - Accepts source databases for a
+	// blue/green deployment. The results list only includes information about the
+	// blue/green deployments with the specified source databases.
+	// - target - Accepts
+	// target databases for a blue/green deployment. The results list only includes
+	// information about the blue/green deployments with the specified target
 	// databases.
-	//
-	// * target - Accepts target databases for a blue/green deployment. The
-	// results list only includes information about the blue/green deployments with the
-	// specified target databases.
 	Filters []types.Filter
 
 	// An optional pagination token provided by a previous DescribeBlueGreenDeployments

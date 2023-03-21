@@ -32,29 +32,22 @@ import (
 // and Managing Access Permissions to Your Amazon S3 Resources
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
 // GetBucketLifecycleConfiguration has the following special error:
-//
-// * Error code:
+// - Error code:
 // NoSuchLifecycleConfiguration
+// - Description: The lifecycle configuration does not
+// exist.
+// - HTTP Status Code: 404 Not Found
+// - SOAP Fault Code Prefix: Client
 //
-// * Description: The lifecycle configuration does
-// not exist.
-//
-// * HTTP Status Code: 404 Not Found
-//
-// * SOAP Fault Code Prefix:
-// Client
-//
-// The following operations are related to
-// GetBucketLifecycleConfiguration:
-//
-// * GetBucketLifecycle
+// The
+// following operations are related to GetBucketLifecycleConfiguration:
+// -
+// GetBucketLifecycle
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycle.html)
-//
-// *
+// -
 // PutBucketLifecycle
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycle.html)
-//
-// *
+// -
 // DeleteBucketLifecycle
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketLifecycle.html)
 func (c *Client) GetBucketLifecycleConfiguration(ctx context.Context, params *GetBucketLifecycleConfigurationInput, optFns ...func(*Options)) (*GetBucketLifecycleConfigurationOutput, error) {

@@ -34,8 +34,7 @@ type CopyDBClusterParameterGroupInput struct {
 	// Amazon RDS
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing)
 	// in the Amazon Aurora User Guide. Constraints:
-	//
-	// * Must specify a valid DB cluster
+	// - Must specify a valid DB cluster
 	// parameter group.
 	//
 	// This member is required.
@@ -47,17 +46,13 @@ type CopyDBClusterParameterGroupInput struct {
 	TargetDBClusterParameterGroupDescription *string
 
 	// The identifier for the copied DB cluster parameter group. Constraints:
-	//
-	// * Can't
+	// - Can't
 	// be null, empty, or blank
-	//
-	// * Must contain from 1 to 255 letters, numbers, or
+	// - Must contain from 1 to 255 letters, numbers, or
 	// hyphens
-	//
-	// * First character must be a letter
-	//
-	// * Can't end with a hyphen or
-	// contain two consecutive hyphens
+	// - First character must be a letter
+	// - Can't end with a hyphen or contain
+	// two consecutive hyphens
 	//
 	// Example: my-cluster-param-group1
 	//

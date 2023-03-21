@@ -12,16 +12,13 @@ import (
 )
 
 // Creates a target group. For more information, see the following:
-//
-// * Target
-// groups for your Application Load Balancers
+// - Target groups
+// for your Application Load Balancers
 // (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html)
-//
-// *
+// -
 // Target groups for your Network Load Balancers
 // (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-target-groups.html)
-//
-// *
+// -
 // Target groups for your Gateway Load Balancers
 // (https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/target-groups.html)
 //
@@ -136,19 +133,15 @@ type CreateTargetGroupInput struct {
 	// The type of target that you must specify when registering targets with this
 	// target group. You can't specify targets for a target group using more than one
 	// target type.
-	//
-	// * instance - Register targets by instance ID. This is the default
+	// - instance - Register targets by instance ID. This is the default
 	// value.
-	//
-	// * ip - Register targets by IP address. You can specify IP addresses from
+	// - ip - Register targets by IP address. You can specify IP addresses from
 	// the subnets of the virtual private cloud (VPC) for the target group, the RFC
 	// 1918 range (10.0.0.0/8, 172.16.0.0/12, and 192.168.0.0/16), and the RFC 6598
 	// range (100.64.0.0/10). You can't specify publicly routable IP addresses.
-	//
-	// *
+	// -
 	// lambda - Register a single Lambda function as a target.
-	//
-	// * alb - Register a
+	// - alb - Register a
 	// single Application Load Balancer as a target.
 	TargetType types.TargetTypeEnum
 

@@ -54,15 +54,11 @@ type CreateTableInput struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html)
 	// in the Amazon DynamoDB Developer Guide. Each KeySchemaElement in the array is
 	// composed of:
-	//
-	// * AttributeName - The name of this key attribute.
-	//
-	// * KeyType - The
+	// - AttributeName - The name of this key attribute.
+	// - KeyType - The
 	// role that the key attribute will assume:
-	//
-	// * HASH - partition key
-	//
-	// * RANGE - sort
+	// - HASH - partition key
+	// - RANGE - sort
 	// key
 	//
 	// The partition key of an item is also known as its hash attribute. The term
@@ -89,13 +85,11 @@ type CreateTableInput struct {
 
 	// Controls how you are charged for read and write throughput and how you manage
 	// capacity. This setting can be changed later.
-	//
-	// * PROVISIONED - We recommend using
+	// - PROVISIONED - We recommend using
 	// PROVISIONED for predictable workloads. PROVISIONED sets the billing mode to
 	// Provisioned Mode
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual).
-	//
-	// *
+	// -
 	// PAY_PER_REQUEST - We recommend using PAY_PER_REQUEST for unpredictable
 	// workloads. PAY_PER_REQUEST sets the billing mode to On-Demand Mode
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand).
@@ -107,40 +101,33 @@ type CreateTableInput struct {
 
 	// One or more global secondary indexes (the maximum is 20) to be created on the
 	// table. Each global secondary index in the array includes the following:
-	//
-	// *
+	// -
 	// IndexName - The name of the global secondary index. Must be unique only for this
 	// table.
+	// - KeySchema - Specifies the key schema for the global secondary index.
+	// -
+	// Projection - Specifies attributes that are copied (projected) from the table
+	// into the index. These are in addition to the primary key attributes and index
+	// key attributes, which are automatically projected. Each attribute specification
+	// is composed of:
+	// - ProjectionType - One of the following:
+	// - KEYS_ONLY - Only the
+	// index and primary keys are projected into the index.
+	// - INCLUDE - Only the
+	// specified table attributes are projected into the index. The list of projected
+	// attributes is in NonKeyAttributes.
+	// - ALL - All of the table attributes are
+	// projected into the index.
 	//
-	// * KeySchema - Specifies the key schema for the global secondary
-	// index.
+	// - NonKeyAttributes - A list of one or more non-key
+	// attribute names that are projected into the secondary index. The total count of
+	// attributes provided in NonKeyAttributes, summed across all of the secondary
+	// indexes, must not exceed 100. If you project the same attribute into two
+	// different indexes, this counts as two distinct attributes when determining the
+	// total.
 	//
-	// * Projection - Specifies attributes that are copied (projected) from the
-	// table into the index. These are in addition to the primary key attributes and
-	// index key attributes, which are automatically projected. Each attribute
-	// specification is composed of:
-	//
-	// * ProjectionType - One of the following:
-	//
-	// *
-	// KEYS_ONLY - Only the index and primary keys are projected into the index.
-	//
-	// *
-	// INCLUDE - Only the specified table attributes are projected into the index. The
-	// list of projected attributes is in NonKeyAttributes.
-	//
-	// * ALL - All of the table
-	// attributes are projected into the index.
-	//
-	// * NonKeyAttributes - A list of one or
-	// more non-key attribute names that are projected into the secondary index. The
-	// total count of attributes provided in NonKeyAttributes, summed across all of the
-	// secondary indexes, must not exceed 100. If you project the same attribute into
-	// two different indexes, this counts as two distinct attributes when determining
-	// the total.
-	//
-	// * ProvisionedThroughput - The provisioned throughput settings for
-	// the global secondary index, consisting of read and write capacity units.
+	// - ProvisionedThroughput - The provisioned throughput settings for the
+	// global secondary index, consisting of read and write capacity units.
 	GlobalSecondaryIndexes []types.GlobalSecondaryIndex
 
 	// One or more local secondary indexes (the maximum is 5) to be created on the
@@ -148,32 +135,25 @@ type CreateTableInput struct {
 	// size limit per partition key value; otherwise, the size of a local secondary
 	// index is unconstrained. Each local secondary index in the array includes the
 	// following:
-	//
-	// * IndexName - The name of the local secondary index. Must be unique
+	// - IndexName - The name of the local secondary index. Must be unique
 	// only for this table.
-	//
-	// * KeySchema - Specifies the key schema for the local
+	// - KeySchema - Specifies the key schema for the local
 	// secondary index. The key schema must begin with the same partition key as the
 	// table.
-	//
-	// * Projection - Specifies attributes that are copied (projected) from the
+	// - Projection - Specifies attributes that are copied (projected) from the
 	// table into the index. These are in addition to the primary key attributes and
 	// index key attributes, which are automatically projected. Each attribute
 	// specification is composed of:
-	//
-	// * ProjectionType - One of the following:
-	//
-	// *
+	// - ProjectionType - One of the following:
+	// -
 	// KEYS_ONLY - Only the index and primary keys are projected into the index.
-	//
-	// *
+	// -
 	// INCLUDE - Only the specified table attributes are projected into the index. The
 	// list of projected attributes is in NonKeyAttributes.
-	//
-	// * ALL - All of the table
+	// - ALL - All of the table
 	// attributes are projected into the index.
 	//
-	// * NonKeyAttributes - A list of one or
+	// - NonKeyAttributes - A list of one or
 	// more non-key attribute names that are projected into the secondary index. The
 	// total count of attributes provided in NonKeyAttributes, summed across all of the
 	// secondary indexes, must not exceed 100. If you project the same attribute into
@@ -195,25 +175,19 @@ type CreateTableInput struct {
 	SSESpecification *types.SSESpecification
 
 	// The settings for DynamoDB Streams on the table. These settings consist of:
-	//
-	// *
+	// -
 	// StreamEnabled - Indicates whether DynamoDB Streams is to be enabled (true) or
 	// disabled (false).
-	//
-	// * StreamViewType - When an item in the table is modified,
+	// - StreamViewType - When an item in the table is modified,
 	// StreamViewType determines what information is written to the table's stream.
 	// Valid values for StreamViewType are:
-	//
-	// * KEYS_ONLY - Only the key attributes of
+	// - KEYS_ONLY - Only the key attributes of
 	// the modified item are written to the stream.
-	//
-	// * NEW_IMAGE - The entire item, as
+	// - NEW_IMAGE - The entire item, as
 	// it appears after it was modified, is written to the stream.
-	//
-	// * OLD_IMAGE - The
+	// - OLD_IMAGE - The
 	// entire item, as it appeared before it was modified, is written to the stream.
-	//
-	// *
+	// -
 	// NEW_AND_OLD_IMAGES - Both the new and the old item images of the item are
 	// written to the stream.
 	StreamSpecification *types.StreamSpecification

@@ -37,34 +37,26 @@ import (
 // asymmetric keys. The standard format for asymmetric key ciphertext does not
 // include configurable fields. The maximum size of the data that you can encrypt
 // varies with the type of KMS key and the encryption algorithm that you choose.
-//
-// *
+// -
 // Symmetric encryption KMS keys
+// - SYMMETRIC_DEFAULT: 4096 bytes
 //
-// * SYMMETRIC_DEFAULT: 4096 bytes
-//
-// * RSA_2048
-//
-// *
+// - RSA_2048
+// -
 // RSAES_OAEP_SHA_1: 214 bytes
+// - RSAES_OAEP_SHA_256: 190 bytes
 //
-// * RSAES_OAEP_SHA_256: 190 bytes
-//
-// * RSA_3072
-//
-// *
+// - RSA_3072
+// -
 // RSAES_OAEP_SHA_1: 342 bytes
+// - RSAES_OAEP_SHA_256: 318 bytes
 //
-// * RSAES_OAEP_SHA_256: 318 bytes
-//
-// * RSA_4096
-//
-// *
+// - RSA_4096
+// -
 // RSAES_OAEP_SHA_1: 470 bytes
+// - RSAES_OAEP_SHA_256: 446 bytes
 //
-// * RSAES_OAEP_SHA_256: 446 bytes
-//
-// * SM2PKE: 1024
+// - SM2PKE: 1024
 // bytes (China Regions only)
 //
 // The KMS key that you use for this operation must be
@@ -76,12 +68,9 @@ import (
 // kms:Encrypt
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (key policy) Related operations:
-//
-// * Decrypt
-//
-// * GenerateDataKey
-//
-// *
+// - Decrypt
+// - GenerateDataKey
+// -
 // GenerateDataKeyPair
 func (c *Client) Encrypt(ctx context.Context, params *EncryptInput, optFns ...func(*Options)) (*EncryptOutput, error) {
 	if params == nil {
@@ -106,17 +95,13 @@ type EncryptInput struct {
 	// name, or alias ARN. When using an alias name, prefix it with "alias/". To
 	// specify a KMS key in a different Amazon Web Services account, you must use the
 	// key ARN or alias ARN. For example:
-	//
-	// * Key ID:
+	// - Key ID:
 	// 1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// * Key ARN:
+	// - Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// *
+	// -
 	// Alias name: alias/ExampleAlias
-	//
-	// * Alias ARN:
+	// - Alias ARN:
 	// arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
 	//
 	// To get the key ID and key

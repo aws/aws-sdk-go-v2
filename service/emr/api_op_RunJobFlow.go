@@ -144,29 +144,21 @@ type RunJobFlowInput struct {
 	// for Hadoop" in the Amazon EMR Developer Guide
 	// (https://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf). Supported
 	// values are:
-	//
-	// * "mapr-m3" - launch the cluster using MapR M3 Edition.
-	//
-	// *
-	// "mapr-m5" - launch the cluster using MapR M5 Edition.
-	//
-	// * "mapr" with the user
-	// arguments specifying "--edition,m3" or "--edition,m5" - launch the job flow
-	// using MapR M3 or M5 Edition respectively.
-	//
-	// * "mapr-m7" - launch the cluster
-	// using MapR M7 Edition.
-	//
-	// * "hunk" - launch the cluster with the Hunk Big Data
-	// Analytics Platform.
-	//
-	// * "hue"- launch the cluster with Hue installed.
-	//
-	// * "spark"
-	// - launch the cluster with Apache Spark installed.
-	//
-	// * "ganglia" - launch the
-	// cluster with the Ganglia Monitoring System installed.
+	// - "mapr-m3" - launch the cluster using MapR M3 Edition.
+	// - "mapr-m5"
+	// - launch the cluster using MapR M5 Edition.
+	// - "mapr" with the user arguments
+	// specifying "--edition,m3" or "--edition,m5" - launch the job flow using MapR M3
+	// or M5 Edition respectively.
+	// - "mapr-m7" - launch the cluster using MapR M7
+	// Edition.
+	// - "hunk" - launch the cluster with the Hunk Big Data Analytics
+	// Platform.
+	// - "hue"- launch the cluster with Hue installed.
+	// - "spark" - launch the
+	// cluster with Apache Spark installed.
+	// - "ganglia" - launch the cluster with the
+	// Ganglia Monitoring System installed.
 	NewSupportedProducts []types.SupportedProductConfig
 
 	// Specifies a particular Amazon Linux release for all nodes in a cluster launch
@@ -229,11 +221,9 @@ type RunJobFlowInput struct {
 	// more information, see the Amazon EMR Developer Guide
 	// (https://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf). Currently
 	// supported values are:
-	//
-	// * "mapr-m3" - launch the job flow using MapR M3
-	// Edition.
-	//
-	// * "mapr-m5" - launch the job flow using MapR M5 Edition.
+	// - "mapr-m3" - launch the job flow using MapR M3 Edition.
+	// -
+	// "mapr-m5" - launch the job flow using MapR M5 Edition.
 	SupportedProducts []string
 
 	// A list of tags to associate with a cluster and propagate to Amazon EC2

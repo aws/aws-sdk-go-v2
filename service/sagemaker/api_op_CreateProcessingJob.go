@@ -59,13 +59,10 @@ type CreateProcessingJobInput struct {
 
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:
-	//
-	// * CreateProcessingJob
-	//
-	// *
+	// - CreateProcessingJob
+	// -
 	// CreateTrainingJob
-	//
-	// * CreateTransformJob
+	// - CreateTransformJob
 	ExperimentConfig *types.ExperimentConfig
 
 	// Networking options for a processing job, such as whether to allow inbound and

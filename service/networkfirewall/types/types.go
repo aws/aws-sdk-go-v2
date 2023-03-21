@@ -30,19 +30,15 @@ type Address struct {
 	// Specify an IP address or a block of IP addresses in Classless Inter-Domain
 	// Routing (CIDR) notation. Network Firewall supports all address ranges for IPv4
 	// and IPv6. Examples:
-	//
-	// * To configure Network Firewall to inspect for the IP
+	// - To configure Network Firewall to inspect for the IP
 	// address 192.0.2.44, specify 192.0.2.44/32.
-	//
-	// * To configure Network Firewall to
+	// - To configure Network Firewall to
 	// inspect for IP addresses from 192.0.2.0 to 192.0.2.255, specify 192.0.2.0/24.
-	//
-	// *
+	// -
 	// To configure Network Firewall to inspect for the IP address
 	// 1111:0000:0000:0000:0000:0000:0000:0111, specify
 	// 1111:0000:0000:0000:0000:0000:0000:0111/128.
-	//
-	// * To configure Network Firewall to
+	// - To configure Network Firewall to
 	// inspect for IP addresses from 1111:0000:0000:0000:0000:0000:0000:0000 to
 	// 1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify
 	// 1111:0000:0000:0000:0000:0000:0000:0000/64.
@@ -124,14 +120,12 @@ type CIDRSummary struct {
 // and name the custom actions that you want to be able to use, and then you
 // reference them by name in your actions settings. You can use custom actions in
 // the following places:
-//
-// * In a rule group's StatelessRulesAndCustomActions
+// - In a rule group's StatelessRulesAndCustomActions
 // specification. The custom actions are available for use by name inside the
 // StatelessRulesAndCustomActions where you define them. You can use them for your
 // stateless rule actions to specify what to do with a packet that matches the
 // rule's match attributes.
-//
-// * In a FirewallPolicy specification, in
+// - In a FirewallPolicy specification, in
 // StatelessCustomActions. The custom actions are available for use inside the
 // policy where you define them. You can use them for the policy's default
 // stateless actions settings to specify what to do with packets that don't match
@@ -320,15 +314,11 @@ type FirewallPolicy struct {
 	// The default actions to take on a packet that doesn't match any stateful rules.
 	// The stateful default action is optional, and is only valid when using the strict
 	// rule order. Valid values of the stateful default action:
-	//
-	// * aws:drop_strict
-	//
-	// *
+	// - aws:drop_strict
+	// -
 	// aws:drop_established
-	//
-	// * aws:alert_strict
-	//
-	// * aws:alert_established
+	// - aws:alert_strict
+	// - aws:alert_established
 	//
 	// For more
 	// information, see Strict evaluation order
@@ -477,19 +467,15 @@ type Header struct {
 	// match with any address, specify ANY. Specify an IP address or a block of IP
 	// addresses in Classless Inter-Domain Routing (CIDR) notation. Network Firewall
 	// supports all address ranges for IPv4 and IPv6. Examples:
-	//
-	// * To configure Network
+	// - To configure Network
 	// Firewall to inspect for the IP address 192.0.2.44, specify 192.0.2.44/32.
-	//
-	// * To
+	// - To
 	// configure Network Firewall to inspect for IP addresses from 192.0.2.0 to
 	// 192.0.2.255, specify 192.0.2.0/24.
-	//
-	// * To configure Network Firewall to inspect
+	// - To configure Network Firewall to inspect
 	// for the IP address 1111:0000:0000:0000:0000:0000:0000:0111, specify
 	// 1111:0000:0000:0000:0000:0000:0000:0111/128.
-	//
-	// * To configure Network Firewall to
+	// - To configure Network Firewall to
 	// inspect for IP addresses from 1111:0000:0000:0000:0000:0000:0000:0000 to
 	// 1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify
 	// 1111:0000:0000:0000:0000:0000:0000:0000/64.
@@ -526,19 +512,15 @@ type Header struct {
 	// match with any address, specify ANY. Specify an IP address or a block of IP
 	// addresses in Classless Inter-Domain Routing (CIDR) notation. Network Firewall
 	// supports all address ranges for IPv4 and IPv6. Examples:
-	//
-	// * To configure Network
+	// - To configure Network
 	// Firewall to inspect for the IP address 192.0.2.44, specify 192.0.2.44/32.
-	//
-	// * To
+	// - To
 	// configure Network Firewall to inspect for IP addresses from 192.0.2.0 to
 	// 192.0.2.255, specify 192.0.2.0/24.
-	//
-	// * To configure Network Firewall to inspect
+	// - To configure Network Firewall to inspect
 	// for the IP address 1111:0000:0000:0000:0000:0000:0000:0111, specify
 	// 1111:0000:0000:0000:0000:0000:0000:0111/128.
-	//
-	// * To configure Network Firewall to
+	// - To configure Network Firewall to
 	// inspect for IP addresses from 1111:0000:0000:0000:0000:0000:0000:0000 to
 	// 1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify
 	// 1111:0000:0000:0000:0000:0000:0000:0000/64.
@@ -617,22 +599,19 @@ type LogDestinationConfig struct {
 
 	// The named location for the logs, provided in a key:value mapping that is
 	// specific to the chosen destination type.
-	//
-	// * For an Amazon S3 bucket, provide the
+	// - For an Amazon S3 bucket, provide the
 	// name of the bucket, with key bucketName, and optionally provide a prefix, with
 	// key prefix. The following example specifies an Amazon S3 bucket named
 	// DOC-EXAMPLE-BUCKET and the prefix alerts: "LogDestination": { "bucketName":
 	// "DOC-EXAMPLE-BUCKET", "prefix": "alerts" }
-	//
-	// * For a CloudWatch log group,
-	// provide the name of the CloudWatch log group, with key logGroup. The following
-	// example specifies a log group named alert-log-group: "LogDestination": {
-	// "logGroup": "alert-log-group" }
-	//
-	// * For a Kinesis Data Firehose delivery stream,
-	// provide the name of the delivery stream, with key deliveryStream. The following
-	// example specifies a delivery stream named alert-delivery-stream:
-	// "LogDestination": { "deliveryStream": "alert-delivery-stream" }
+	// - For a CloudWatch log group, provide
+	// the name of the CloudWatch log group, with key logGroup. The following example
+	// specifies a log group named alert-log-group: "LogDestination": { "logGroup":
+	// "alert-log-group" }
+	// - For a Kinesis Data Firehose delivery stream, provide the
+	// name of the delivery stream, with key deliveryStream. The following example
+	// specifies a delivery stream named alert-delivery-stream: "LogDestination": {
+	// "deliveryStream": "alert-delivery-stream" }
 	//
 	// This member is required.
 	LogDestination map[string]string
@@ -785,25 +764,22 @@ type RuleDefinition struct {
 	// aws:forward_to_sfe for the StatelessDefaultActions setting for the
 	// FirewallPolicy. For every rule, you must specify exactly one of the following
 	// standard actions.
-	//
-	// * aws:pass - Discontinues all inspection of the packet and
+	// - aws:pass - Discontinues all inspection of the packet and
 	// permits it to go to its intended destination.
+	// - aws:drop - Discontinues all
+	// inspection of the packet and blocks it from going to its intended destination.
+	// -
+	// aws:forward_to_sfe - Discontinues stateless inspection of the packet and
+	// forwards it to the stateful rule engine for inspection.
 	//
-	// * aws:drop - Discontinues all
-	// inspection of the packet and blocks it from going to its intended
-	// destination.
-	//
-	// * aws:forward_to_sfe - Discontinues stateless inspection of the
-	// packet and forwards it to the stateful rule engine for
-	// inspection.
-	//
-	// Additionally, you can specify a custom action. To do this, you
-	// define a custom action by name and type, then provide the name you've assigned
-	// to the action in this Actions setting. For information about the options, see
-	// CustomAction. To provide more than one action in this setting, separate the
-	// settings with a comma. For example, if you have a custom PublishMetrics action
-	// that you've named MyMetricsAction, then you could specify the standard action
-	// aws:pass and the custom action with [“aws:pass”, “MyMetricsAction”].
+	// Additionally, you can
+	// specify a custom action. To do this, you define a custom action by name and
+	// type, then provide the name you've assigned to the action in this Actions
+	// setting. For information about the options, see CustomAction. To provide more
+	// than one action in this setting, separate the settings with a comma. For
+	// example, if you have a custom PublishMetrics action that you've named
+	// MyMetricsAction, then you could specify the standard action aws:pass and the
+	// custom action with [“aws:pass”, “MyMetricsAction”].
 	//
 	// This member is required.
 	Actions []string
@@ -1007,14 +983,12 @@ type RulesSourceList struct {
 
 	// The domains that you want to inspect for in your traffic flows. Valid domain
 	// specifications are the following:
-	//
-	// * Explicit names. For example,
-	// abc.example.com matches only the domain abc.example.com.
-	//
-	// * Names that use a
-	// domain wildcard, which you indicate with an initial '.'. For
-	// example,.example.com matches example.com and matches all subdomains of
-	// example.com, such as abc.example.com and www.example.com.
+	// - Explicit names. For example, abc.example.com
+	// matches only the domain abc.example.com.
+	// - Names that use a domain wildcard,
+	// which you indicate with an initial '.'. For example,.example.com matches
+	// example.com and matches all subdomains of example.com, such as abc.example.com
+	// and www.example.com.
 	//
 	// This member is required.
 	Targets []string
@@ -1070,12 +1044,10 @@ type StatefulEngineOptions struct {
 	// Configures how Network Firewall processes traffic when a network connection
 	// breaks midstream. Network connections can break due to disruptions in external
 	// networks or within the firewall itself.
-	//
-	// * DROP - Network Firewall fails closed
+	// - DROP - Network Firewall fails closed
 	// and drops all subsequent traffic going to the firewall. This is the default
 	// behavior.
-	//
-	// * CONTINUE - Network Firewall continues to apply rules to the
+	// - CONTINUE - Network Firewall continues to apply rules to the
 	// subsequent traffic without context from traffic before the break. This impacts
 	// the behavior of rules that depend on this context. For example, if you have a
 	// stateful rule to drop http traffic, Network Firewall won't match the traffic for
@@ -1099,22 +1071,18 @@ type StatefulRule struct {
 	// the flow matches the stateful rule criteria. For all actions, Network Firewall
 	// performs the specified action and discontinues stateful inspection of the
 	// traffic flow. The actions for a stateful rule are defined as follows:
-	//
-	// * PASS -
+	// - PASS -
 	// Permits the packets to go to the intended destination.
-	//
-	// * DROP - Blocks the
+	// - DROP - Blocks the
 	// packets from going to the intended destination and sends an alert log message,
 	// if alert logging is configured in the FirewallLoggingConfiguration.
-	//
-	// * ALERT -
+	// - ALERT -
 	// Permits the packets to go to the intended destination and sends an alert log
 	// message, if alert logging is configured in the FirewallLoggingConfiguration. You
 	// can use this action to test a rule that you intend to use to drop traffic. You
 	// can enable the rule with ALERT action, verify in the logs that the rule is
 	// filtering as you want, then change the action to DROP.
-	//
-	// * REJECT - Drops TCP
+	// - REJECT - Drops TCP
 	// traffic that matches the conditions of the stateful rule, and sends a TCP reset
 	// packet back to sender of the packet. A TCP reset packet is a packet with no
 	// payload and a RST bit contained in the TCP header flags. Also sends an alert log
@@ -1276,11 +1244,9 @@ type SubnetMapping struct {
 // The status of the firewall endpoint and firewall policy configuration for a
 // single VPC subnet. For each VPC subnet that you associate with a firewall,
 // Network Firewall does the following:
-//
-// * Instantiates a firewall endpoint in the
+// - Instantiates a firewall endpoint in the
 // subnet, ready to take traffic.
-//
-// * Configures the endpoint with the current
+// - Configures the endpoint with the current
 // firewall policy settings, to provide the filtering behavior for the
 // endpoint.
 //
@@ -1338,11 +1304,9 @@ type TCPFlagField struct {
 	// can only specify values that are also specified in the Masks setting. For the
 	// flags that are specified in the masks setting, the following must be true for
 	// the packet to match:
-	//
-	// * The ones that are set in this flags setting must be set
+	// - The ones that are set in this flags setting must be set
 	// in the packet.
-	//
-	// * The ones that are not set in this flags setting must also not
+	// - The ones that are not set in this flags setting must also not
 	// be set in the packet.
 	//
 	// This member is required.

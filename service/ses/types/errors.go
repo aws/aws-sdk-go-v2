@@ -700,11 +700,9 @@ func (e *InvalidTemplateException) ErrorFault() smithy.ErrorFault { return smith
 // Indicates that the custom domain to be used for open and click tracking
 // redirects is invalid. This error appears most often in the following
 // situations:
-//
-// * When the tracking domain you specified is not verified in Amazon
+// - When the tracking domain you specified is not verified in Amazon
 // SES.
-//
-// * When the tracking domain you specified is not a valid domain or
+// - When the tracking domain you specified is not a valid domain or
 // subdomain.
 type InvalidTrackingOptionsException struct {
 	Message *string

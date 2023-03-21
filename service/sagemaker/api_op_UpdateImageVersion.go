@@ -47,14 +47,11 @@ type UpdateImageVersionInput struct {
 	Horovod bool
 
 	// Indicates SageMaker job type compatibility.
-	//
-	// * TRAINING: The image version is
+	// - TRAINING: The image version is
 	// compatible with SageMaker training jobs.
-	//
-	// * INFERENCE: The image version is
+	// - INFERENCE: The image version is
 	// compatible with SageMaker inference jobs.
-	//
-	// * NOTEBOOK_KERNEL: The image version
+	// - NOTEBOOK_KERNEL: The image version
 	// is compatible with SageMaker notebook kernels.
 	JobType types.JobType
 
@@ -62,11 +59,9 @@ type UpdateImageVersionInput struct {
 	MLFramework *string
 
 	// Indicates CPU or GPU compatibility.
-	//
-	// * CPU: The image version is compatible with
+	// - CPU: The image version is compatible with
 	// CPU.
-	//
-	// * GPU: The image version is compatible with GPU.
+	// - GPU: The image version is compatible with GPU.
 	Processor types.Processor
 
 	// The supported programming language and its version.
@@ -76,18 +71,14 @@ type UpdateImageVersionInput struct {
 	ReleaseNotes *string
 
 	// The availability of the image version specified by the maintainer.
-	//
-	// *
+	// -
 	// NOT_PROVIDED: The maintainers did not provide a status for image version
 	// stability.
-	//
-	// * STABLE: The image version is stable.
-	//
-	// * TO_BE_ARCHIVED: The image
+	// - STABLE: The image version is stable.
+	// - TO_BE_ARCHIVED: The image
 	// version is set to be archived. Custom image versions that are set to be archived
 	// are automatically archived after three months.
-	//
-	// * ARCHIVED: The image version is
+	// - ARCHIVED: The image version is
 	// archived. Archived image versions are not searchable and are no longer actively
 	// supported.
 	VendorGuidance types.VendorGuidance

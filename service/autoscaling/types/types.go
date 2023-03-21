@@ -371,15 +371,13 @@ type CapacityForecast struct {
 // Represents a CloudWatch metric of your choosing for a target tracking scaling
 // policy to use with Amazon EC2 Auto Scaling. To create your customized metric
 // specification:
-//
-// * Add values for each required property from CloudWatch. You can
+// - Add values for each required property from CloudWatch. You can
 // use an existing metric, or a new metric that you create. To use your own metric,
 // you must first publish the metric to CloudWatch. For more information, see
 // Publish custom metrics
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html)
 // in the Amazon CloudWatch User Guide.
-//
-// * Choose a metric that changes
+// - Choose a metric that changes
 // proportionally with capacity. The value of the metric should increase or
 // decrease in inverse proportion to the number of capacity units. That is, the
 // value of the metric should decrease when capacity increases.
@@ -479,10 +477,8 @@ type Ebs struct {
 	// performance of the volume and the rate at which the volume accumulates I/O
 	// credits for bursting. The following are the supported values for each volume
 	// type:
-	//
-	// * gp3: 3,000-16,000 IOPS
-	//
-	// * io1: 100-64,000 IOPS
+	// - gp3: 3,000-16,000 IOPS
+	// - io1: 100-64,000 IOPS
 	//
 	// For io1 volumes, we
 	// guarantee 64,000 IOPS only for Instances built on the Nitro System
@@ -501,19 +497,15 @@ type Ebs struct {
 
 	// The volume size, in GiBs. The following are the supported volumes sizes for each
 	// volume type:
+	// - gp2 and gp3: 1-16,384
+	// - io1: 4-16,384
+	// - st1 and sc1: 125-16,384
+	// -
+	// standard: 1-1,024
 	//
-	// * gp2 and gp3: 1-16,384
-	//
-	// * io1: 4-16,384
-	//
-	// * st1 and sc1:
-	// 125-16,384
-	//
-	// * standard: 1-1,024
-	//
-	// You must specify either a SnapshotId or a
-	// VolumeSize. If you specify both SnapshotId and VolumeSize, the volume size must
-	// be equal or greater than the size of the snapshot.
+	// You must specify either a SnapshotId or a VolumeSize. If you
+	// specify both SnapshotId and VolumeSize, the volume size must be equal or greater
+	// than the size of the snapshot.
 	VolumeSize *int32
 
 	// The volume type. For more information, see Amazon EBS volume types
@@ -532,56 +524,36 @@ type EnabledMetric struct {
 	Granularity *string
 
 	// One of the following metrics:
-	//
-	// * GroupMinSize
-	//
-	// * GroupMaxSize
-	//
-	// *
+	// - GroupMinSize
+	// - GroupMaxSize
+	// -
 	// GroupDesiredCapacity
-	//
-	// * GroupInServiceInstances
-	//
-	// * GroupPendingInstances
-	//
-	// *
+	// - GroupInServiceInstances
+	// - GroupPendingInstances
+	// -
 	// GroupStandbyInstances
-	//
-	// * GroupTerminatingInstances
-	//
-	// * GroupTotalInstances
-	//
-	// *
+	// - GroupTerminatingInstances
+	// - GroupTotalInstances
+	// -
 	// GroupInServiceCapacity
-	//
-	// * GroupPendingCapacity
-	//
-	// * GroupStandbyCapacity
-	//
-	// *
+	// - GroupPendingCapacity
+	// - GroupStandbyCapacity
+	// -
 	// GroupTerminatingCapacity
-	//
-	// * GroupTotalCapacity
-	//
-	// * WarmPoolDesiredCapacity
-	//
-	// *
+	// - GroupTotalCapacity
+	// - WarmPoolDesiredCapacity
+	// -
 	// WarmPoolWarmedCapacity
+	// - WarmPoolPendingCapacity
+	// - WarmPoolTerminatingCapacity
+	// -
+	// WarmPoolTotalCapacity
+	// - GroupAndWarmPoolDesiredCapacity
+	// -
+	// GroupAndWarmPoolTotalCapacity
 	//
-	// * WarmPoolPendingCapacity
-	//
-	// *
-	// WarmPoolTerminatingCapacity
-	//
-	// * WarmPoolTotalCapacity
-	//
-	// *
-	// GroupAndWarmPoolDesiredCapacity
-	//
-	// * GroupAndWarmPoolTotalCapacity
-	//
-	// For more
-	// information, see Auto Scaling group metrics
+	// For more information, see Auto Scaling group
+	// metrics
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-cloudwatch-monitoring.html#as-group-metrics)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	Metric *string
@@ -618,38 +590,30 @@ type Filter struct {
 	// The name of the filter. The valid values for Name depend on which API operation
 	// you're using with the filter (DescribeAutoScalingGroups or DescribeTags).
 	// DescribeAutoScalingGroups Valid values for Name include the following:
+	// - tag-key
+	// - Accepts tag keys. The results only include information about the Auto Scaling
+	// groups associated with these tag keys.
+	// - tag-value - Accepts tag values. The
+	// results only include information about the Auto Scaling groups associated with
+	// these tag values.
+	// - tag: - Accepts the key/value combination of the tag. Use the
+	// tag key in the filter name and the tag value as the filter value. The results
+	// only include information about the Auto Scaling groups associated with the
+	// specified key/value combination.
 	//
-	// *
-	// tag-key - Accepts tag keys. The results only include information about the Auto
-	// Scaling groups associated with these tag keys.
-	//
-	// * tag-value - Accepts tag
-	// values. The results only include information about the Auto Scaling groups
-	// associated with these tag values.
-	//
-	// * tag: - Accepts the key/value combination of
-	// the tag. Use the tag key in the filter name and the tag value as the filter
-	// value. The results only include information about the Auto Scaling groups
-	// associated with the specified key/value combination.
-	//
-	// DescribeTags Valid values
-	// for Name include the following:
-	//
-	// * auto-scaling-group - Accepts the names of
-	// Auto Scaling groups. The results only include information about the tags
-	// associated with these Auto Scaling groups.
-	//
-	// * key - Accepts tag keys. The
+	// DescribeTags Valid values for Name include the
+	// following:
+	// - auto-scaling-group - Accepts the names of Auto Scaling groups. The
+	// results only include information about the tags associated with these Auto
+	// Scaling groups.
+	// - key - Accepts tag keys. The results only include information
+	// about the tags associated with these tag keys.
+	// - value - Accepts tag values. The
 	// results only include information about the tags associated with these tag
-	// keys.
-	//
-	// * value - Accepts tag values. The results only include information about
-	// the tags associated with these tag values.
-	//
-	// * propagate-at-launch - Accepts a
-	// Boolean value, which specifies whether tags propagate to instances at launch.
-	// The results only include information about the tags associated with the
-	// specified Boolean value.
+	// values.
+	// - propagate-at-launch - Accepts a Boolean value, which specifies whether
+	// tags propagate to instances at launch. The results only include information
+	// about the tags associated with the specified Boolean value.
 	Name *string
 
 	// One or more filter values. Filter values are case-sensitive. If you specify
@@ -796,33 +760,24 @@ type InstanceRefresh struct {
 	StartTime *time.Time
 
 	// The current status for the instance refresh operation:
-	//
-	// * Pending - The request
+	// - Pending - The request
 	// was created, but the instance refresh has not started.
-	//
-	// * InProgress - An
+	// - InProgress - An
 	// instance refresh is in progress.
-	//
-	// * Successful - An instance refresh completed
+	// - Successful - An instance refresh completed
 	// successfully.
-	//
-	// * Failed - An instance refresh failed to complete. You can
+	// - Failed - An instance refresh failed to complete. You can
 	// troubleshoot using the status reason and the scaling activities.
-	//
-	// * Cancelling -
+	// - Cancelling -
 	// An ongoing instance refresh is being cancelled.
-	//
-	// * Cancelled - The instance
+	// - Cancelled - The instance
 	// refresh is cancelled.
-	//
-	// * RollbackInProgress - An instance refresh is being
-	// rolled back.
-	//
-	// * RollbackFailed - The rollback failed to complete. You can
-	// troubleshoot using the status reason and the scaling activities.
-	//
-	// *
-	// RollbackSuccessful - The rollback completed successfully.
+	// - RollbackInProgress - An instance refresh is being rolled
+	// back.
+	// - RollbackFailed - The rollback failed to complete. You can troubleshoot
+	// using the status reason and the scaling activities.
+	// - RollbackSuccessful - The
+	// rollback completed successfully.
 	Status InstanceRefreshStatus
 
 	// The explanation for the specific status assigned to this operation.
@@ -886,12 +841,10 @@ type InstanceRefreshWarmPoolProgress struct {
 // specified values. To limit the list of instance types from which Amazon EC2 Auto
 // Scaling can identify matching instance types, you can use one of the following
 // parameters, but not both in the same request:
-//
-// * AllowedInstanceTypes - The
+// - AllowedInstanceTypes - The
 // instance types to include in the list. All other instance types are ignored,
 // even if they match your specified attributes.
-//
-// * ExcludedInstanceTypes - The
+// - ExcludedInstanceTypes - The
 // instance types to exclude from the list, even if they match your specified
 // attributes.
 //
@@ -924,42 +877,31 @@ type InstanceRequirements struct {
 
 	// Indicates whether instance types must have accelerators by specific
 	// manufacturers.
-	//
-	// * For instance types with NVIDIA devices, specify nvidia.
-	//
-	// * For
+	// - For instance types with NVIDIA devices, specify nvidia.
+	// - For
 	// instance types with AMD devices, specify amd.
-	//
-	// * For instance types with Amazon
+	// - For instance types with Amazon
 	// Web Services devices, specify amazon-web-services.
-	//
-	// * For instance types with
+	// - For instance types with
 	// Xilinx devices, specify xilinx.
 	//
 	// Default: Any manufacturer
 	AcceleratorManufacturers []AcceleratorManufacturer
 
 	// Lists the accelerators that must be on an instance type.
-	//
-	// * For instance types
+	// - For instance types
 	// with NVIDIA A100 GPUs, specify a100.
-	//
-	// * For instance types with NVIDIA V100
-	// GPUs, specify v100.
-	//
-	// * For instance types with NVIDIA K80 GPUs, specify k80.
-	//
-	// *
-	// For instance types with NVIDIA T4 GPUs, specify t4.
-	//
-	// * For instance types with
-	// NVIDIA M60 GPUs, specify m60.
-	//
-	// * For instance types with AMD Radeon Pro V520
-	// GPUs, specify radeon-pro-v520.
-	//
-	// * For instance types with Xilinx VU9P FPGAs,
-	// specify vu9p.
+	// - For instance types with NVIDIA V100 GPUs,
+	// specify v100.
+	// - For instance types with NVIDIA K80 GPUs, specify k80.
+	// - For
+	// instance types with NVIDIA T4 GPUs, specify t4.
+	// - For instance types with NVIDIA
+	// M60 GPUs, specify m60.
+	// - For instance types with AMD Radeon Pro V520 GPUs,
+	// specify radeon-pro-v520.
+	// - For instance types with Xilinx VU9P FPGAs, specify
+	// vu9p.
 	//
 	// Default: Any accelerator
 	AcceleratorNames []AcceleratorName
@@ -969,14 +911,11 @@ type InstanceRequirements struct {
 	AcceleratorTotalMemoryMiB *AcceleratorTotalMemoryMiBRequest
 
 	// Lists the accelerator types that must be on an instance type.
-	//
-	// * For instance
+	// - For instance
 	// types with GPU accelerators, specify gpu.
-	//
-	// * For instance types with FPGA
+	// - For instance types with FPGA
 	// accelerators, specify fpga.
-	//
-	// * For instance types with inference accelerators,
+	// - For instance types with inference accelerators,
 	// specify inference.
 	//
 	// Default: Any accelerator type
@@ -1011,13 +950,10 @@ type InstanceRequirements struct {
 	BurstablePerformance BurstablePerformance
 
 	// Lists which specific CPU manufacturers to include.
-	//
-	// * For instance types with
+	// - For instance types with
 	// Intel CPUs, specify intel.
-	//
-	// * For instance types with AMD CPUs, specify amd.
-	//
-	// *
+	// - For instance types with AMD CPUs, specify amd.
+	// -
 	// For instance types with Amazon Web Services CPUs, specify
 	// amazon-web-services.
 	//
@@ -1038,16 +974,14 @@ type InstanceRequirements struct {
 	ExcludedInstanceTypes []string
 
 	// Indicates whether current or previous generation instance types are included.
-	//
-	// *
+	// -
 	// For current generation instance types, specify current. The current generation
 	// includes EC2 instance types currently recommended for use. This typically
 	// includes the latest two to three generations in each instance family. For more
 	// information, see Instance types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the
 	// Amazon EC2 User Guide for Linux Instances.
-	//
-	// * For previous generation instance
+	// - For previous generation instance
 	// types, specify previous.
 	//
 	// Default: Any current or previous generation
@@ -1060,11 +994,9 @@ type InstanceRequirements struct {
 	LocalStorage LocalStorage
 
 	// Indicates the type of local storage that is required.
-	//
-	// * For instance types with
+	// - For instance types with
 	// hard disk drive (HDD) storage, specify hdd.
-	//
-	// * For instance types with solid
+	// - For instance types with solid
 	// state drive (SSD) storage, specify ssd.
 	//
 	// Default: Any local storage type
@@ -1354,15 +1286,13 @@ type LaunchTemplate struct {
 
 // Use this structure to let Amazon EC2 Auto Scaling do the following when the Auto
 // Scaling group has a mixed instances policy:
+// - Override the instance type that is
+// specified in the launch template.
+// - Use multiple instance types.
 //
-// * Override the instance type that
-// is specified in the launch template.
-//
-// * Use multiple instance types.
-//
-// Specify
-// the instance types that you want, or define your instance requirements instead
-// and let Amazon EC2 Auto Scaling provision the available instance types that meet
+// Specify the
+// instance types that you want, or define your instance requirements instead and
+// let Amazon EC2 Auto Scaling provision the available instance types that meet
 // your requirements. This can provide Amazon EC2 Auto Scaling with a larger
 // selection of instance types to choose from when fulfilling Spot and On-Demand
 // capacities. You can view which instance types are matched before you apply the
@@ -1526,11 +1456,9 @@ type LifecycleHookSpecification struct {
 
 	// The lifecycle transition. For Auto Scaling groups, there are two major lifecycle
 	// transitions.
-	//
-	// * To create a lifecycle hook for scale-out events, specify
+	// - To create a lifecycle hook for scale-out events, specify
 	// autoscaling:EC2_INSTANCE_LAUNCHING.
-	//
-	// * To create a lifecycle hook for scale-in
+	// - To create a lifecycle hook for scale-in
 	// events, specify autoscaling:EC2_INSTANCE_TERMINATING.
 	//
 	// This member is required.
@@ -1573,23 +1501,18 @@ type LoadBalancerState struct {
 	LoadBalancerName *string
 
 	// One of the following load balancer states:
-	//
-	// * Adding - The Auto Scaling
-	// instances are being registered with the load balancer.
-	//
-	// * Added - All Auto
-	// Scaling instances are registered with the load balancer.
-	//
-	// * InService - At least
-	// one Auto Scaling instance passed an ELB health check.
-	//
-	// * Removing - The Auto
-	// Scaling instances are being deregistered from the load balancer. If connection
-	// draining is enabled, Elastic Load Balancing waits for in-flight requests to
-	// complete before deregistering the instances.
-	//
-	// * Removed - All Auto Scaling
-	// instances are deregistered from the load balancer.
+	// - Adding - The Auto Scaling instances
+	// are being registered with the load balancer.
+	// - Added - All Auto Scaling
+	// instances are registered with the load balancer.
+	// - InService - At least one Auto
+	// Scaling instance passed an ELB health check.
+	// - Removing - The Auto Scaling
+	// instances are being deregistered from the load balancer. If connection draining
+	// is enabled, Elastic Load Balancing waits for in-flight requests to complete
+	// before deregistering the instances.
+	// - Removed - All Auto Scaling instances are
+	// deregistered from the load balancer.
 	State *string
 
 	noSmithyDocumentSerde
@@ -1602,22 +1525,17 @@ type LoadBalancerTargetGroupState struct {
 	LoadBalancerTargetGroupARN *string
 
 	// The state of the target group.
-	//
-	// * Adding - The Auto Scaling instances are being
+	// - Adding - The Auto Scaling instances are being
 	// registered with the target group.
-	//
-	// * Added - All Auto Scaling instances are
+	// - Added - All Auto Scaling instances are
 	// registered with the target group.
-	//
-	// * InService - At least one Auto Scaling
+	// - InService - At least one Auto Scaling
 	// instance passed an ELB health check.
-	//
-	// * Removing - The Auto Scaling instances
-	// are being deregistered from the target group. If connection draining is enabled,
+	// - Removing - The Auto Scaling instances are
+	// being deregistered from the target group. If connection draining is enabled,
 	// Elastic Load Balancing waits for in-flight requests to complete before
 	// deregistering the instances.
-	//
-	// * Removed - All Auto Scaling instances are
+	// - Removed - All Auto Scaling instances are
 	// deregistered from the target group.
 	State *string
 
@@ -1706,53 +1624,33 @@ type Metric struct {
 type MetricCollectionType struct {
 
 	// One of the following metrics:
-	//
-	// * GroupMinSize
-	//
-	// * GroupMaxSize
-	//
-	// *
+	// - GroupMinSize
+	// - GroupMaxSize
+	// -
 	// GroupDesiredCapacity
-	//
-	// * GroupInServiceInstances
-	//
-	// * GroupPendingInstances
-	//
-	// *
+	// - GroupInServiceInstances
+	// - GroupPendingInstances
+	// -
 	// GroupStandbyInstances
-	//
-	// * GroupTerminatingInstances
-	//
-	// * GroupTotalInstances
-	//
-	// *
+	// - GroupTerminatingInstances
+	// - GroupTotalInstances
+	// -
 	// GroupInServiceCapacity
-	//
-	// * GroupPendingCapacity
-	//
-	// * GroupStandbyCapacity
-	//
-	// *
+	// - GroupPendingCapacity
+	// - GroupStandbyCapacity
+	// -
 	// GroupTerminatingCapacity
-	//
-	// * GroupTotalCapacity
-	//
-	// * WarmPoolDesiredCapacity
-	//
-	// *
+	// - GroupTotalCapacity
+	// - WarmPoolDesiredCapacity
+	// -
 	// WarmPoolWarmedCapacity
-	//
-	// * WarmPoolPendingCapacity
-	//
-	// *
-	// WarmPoolTerminatingCapacity
-	//
-	// * WarmPoolTotalCapacity
-	//
-	// *
-	// GroupAndWarmPoolDesiredCapacity
-	//
-	// * GroupAndWarmPoolTotalCapacity
+	// - WarmPoolPendingCapacity
+	// - WarmPoolTerminatingCapacity
+	// -
+	// WarmPoolTotalCapacity
+	// - GroupAndWarmPoolDesiredCapacity
+	// -
+	// GroupAndWarmPoolTotalCapacity
 	Metric *string
 
 	noSmithyDocumentSerde
@@ -1925,19 +1823,14 @@ type NotificationConfiguration struct {
 	AutoScalingGroupName *string
 
 	// One of the following event notification types:
-	//
-	// *
+	// -
 	// autoscaling:EC2_INSTANCE_LAUNCH
-	//
-	// * autoscaling:EC2_INSTANCE_LAUNCH_ERROR
-	//
-	// *
+	// - autoscaling:EC2_INSTANCE_LAUNCH_ERROR
+	// -
 	// autoscaling:EC2_INSTANCE_TERMINATE
-	//
-	// *
-	// autoscaling:EC2_INSTANCE_TERMINATE_ERROR
-	//
-	// * autoscaling:TEST_NOTIFICATION
+	// - autoscaling:EC2_INSTANCE_TERMINATE_ERROR
+	// -
+	// autoscaling:TEST_NOTIFICATION
 	NotificationType *string
 
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic.
@@ -1951,18 +1844,14 @@ type NotificationConfiguration struct {
 type PredefinedMetricSpecification struct {
 
 	// The metric type. The following predefined metrics are available:
-	//
-	// *
+	// -
 	// ASGAverageCPUUtilization - Average CPU utilization of the Auto Scaling group.
-	//
-	// *
+	// -
 	// ASGAverageNetworkIn - Average number of bytes received on all network interfaces
 	// by the Auto Scaling group.
-	//
-	// * ASGAverageNetworkOut - Average number of bytes
-	// sent out on all network interfaces by the Auto Scaling group.
-	//
-	// *
+	// - ASGAverageNetworkOut - Average number of bytes sent
+	// out on all network interfaces by the Auto Scaling group.
+	// -
 	// ALBRequestCountPerTarget - Average Application Load Balancer request count per
 	// target for your Auto Scaling group.
 	//
@@ -1978,14 +1867,12 @@ type PredefinedMetricSpecification struct {
 	// the resource label is:
 	// app/my-alb/778d41231b141a0f/targetgroup/my-alb-target-group/943f017f100becff.
 	// Where:
+	// - app// is the final portion of the load balancer ARN
+	// - targetgroup// is
+	// the final portion of the target group ARN.
 	//
-	// * app// is the final portion of the load balancer ARN
-	//
-	// * targetgroup//
-	// is the final portion of the target group ARN.
-	//
-	// To find the ARN for an
-	// Application Load Balancer, use the DescribeLoadBalancers
+	// To find the ARN for an Application
+	// Load Balancer, use the DescribeLoadBalancers
 	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html)
 	// API operation. To find the ARN for the target group, use the
 	// DescribeTargetGroups
@@ -2011,12 +1898,10 @@ type PredictiveScalingConfiguration struct {
 	// Defines the behavior that should be applied if the forecast capacity approaches
 	// or exceeds the maximum capacity of the Auto Scaling group. Defaults to
 	// HonorMaxCapacity if not specified. The following are possible values:
-	//
-	// *
+	// -
 	// HonorMaxCapacity - Amazon EC2 Auto Scaling cannot scale out capacity higher than
 	// the maximum capacity. The maximum capacity is enforced as a hard limit.
-	//
-	// *
+	// -
 	// IncreaseMaxCapacity - Amazon EC2 Auto Scaling can scale out capacity higher than
 	// the maximum capacity when the forecast capacity is close to or exceeds the
 	// maximum capacity. The upper limit is determined by the forecasted capacity and
@@ -2096,30 +1981,25 @@ type PredictiveScalingCustomizedScalingMetric struct {
 // policy. You choose the metric pair, and the policy automatically knows the
 // correct sum and average statistics to use for the load metric and the scaling
 // metric. Example
-//
-// * You create a predictive scaling policy and specify
+// - You create a predictive scaling policy and specify
 // ALBRequestCount as the value for the metric pair and 1000.0 as the target value.
 // For this type of metric, you must provide the metric dimension for the
 // corresponding target group, so you also provide a resource label for the
 // Application Load Balancer target group that is attached to your Auto Scaling
 // group.
-//
-// * The number of requests the target group receives per minute provides
+// - The number of requests the target group receives per minute provides
 // the load metric, and the request count averaged between the members of the
 // target group provides the scaling metric. In CloudWatch, this refers to the
 // RequestCount and RequestCountPerTarget metrics, respectively.
-//
-// * For optimal use
+// - For optimal use
 // of predictive scaling, you adhere to the best practice of using a dynamic
 // scaling policy to automatically scale between the minimum capacity and maximum
 // capacity in response to real-time changes in resource utilization.
-//
-// * Amazon EC2
+// - Amazon EC2
 // Auto Scaling consumes data points for the load metric over the last 14 days and
 // creates an hourly load forecast for predictive scaling. (A minimum of 24 hours
 // of data is required.)
-//
-// * After creating the load forecast, Amazon EC2 Auto
+// - After creating the load forecast, Amazon EC2 Auto
 // Scaling determines when to reduce or increase the capacity of your Auto Scaling
 // group in each hour of the forecast period so that the average number of requests
 // received by each instance is as close to 1000 requests per minute as possible at
@@ -2181,14 +2061,12 @@ type PredictiveScalingPredefinedLoadMetric struct {
 	// resource label is:
 	// app/my-alb/778d41231b141a0f/targetgroup/my-alb-target-group/943f017f100becff.
 	// Where:
+	// - app// is the final portion of the load balancer ARN
+	// - targetgroup// is
+	// the final portion of the target group ARN.
 	//
-	// * app// is the final portion of the load balancer ARN
-	//
-	// * targetgroup//
-	// is the final portion of the target group ARN.
-	//
-	// To find the ARN for an
-	// Application Load Balancer, use the DescribeLoadBalancers
+	// To find the ARN for an Application
+	// Load Balancer, use the DescribeLoadBalancers
 	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html)
 	// API operation. To find the ARN for the target group, use the
 	// DescribeTargetGroups
@@ -2220,14 +2098,12 @@ type PredictiveScalingPredefinedMetricPair struct {
 	// format of the resource label is:
 	// app/my-alb/778d41231b141a0f/targetgroup/my-alb-target-group/943f017f100becff.
 	// Where:
+	// - app// is the final portion of the load balancer ARN
+	// - targetgroup// is
+	// the final portion of the target group ARN.
 	//
-	// * app// is the final portion of the load balancer ARN
-	//
-	// * targetgroup//
-	// is the final portion of the target group ARN.
-	//
-	// To find the ARN for an
-	// Application Load Balancer, use the DescribeLoadBalancers
+	// To find the ARN for an Application
+	// Load Balancer, use the DescribeLoadBalancers
 	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html)
 	// API operation. To find the ARN for the target group, use the
 	// DescribeTargetGroups
@@ -2257,14 +2133,12 @@ type PredictiveScalingPredefinedScalingMetric struct {
 	// the resource label is:
 	// app/my-alb/778d41231b141a0f/targetgroup/my-alb-target-group/943f017f100becff.
 	// Where:
+	// - app// is the final portion of the load balancer ARN
+	// - targetgroup// is
+	// the final portion of the target group ARN.
 	//
-	// * app// is the final portion of the load balancer ARN
-	//
-	// * targetgroup//
-	// is the final portion of the target group ARN.
-	//
-	// To find the ARN for an
-	// Application Load Balancer, use the DescribeLoadBalancers
+	// To find the ARN for an Application
+	// Load Balancer, use the DescribeLoadBalancers
 	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html)
 	// API operation. To find the ARN for the target group, use the
 	// DescribeTargetGroups
@@ -2281,26 +2155,17 @@ type PredictiveScalingPredefinedScalingMetric struct {
 type ProcessType struct {
 
 	// One of the following processes:
-	//
-	// * Launch
-	//
-	// * Terminate
-	//
-	// * AddToLoadBalancer
-	//
-	// *
+	// - Launch
+	// - Terminate
+	// - AddToLoadBalancer
+	// -
 	// AlarmNotification
-	//
-	// * AZRebalance
-	//
-	// * HealthCheck
-	//
-	// * InstanceRefresh
-	//
-	// *
+	// - AZRebalance
+	// - HealthCheck
+	// - InstanceRefresh
+	// -
 	// ReplaceUnhealthy
-	//
-	// * ScheduledActions
+	// - ScheduledActions
 	//
 	// This member is required.
 	ProcessName *string
@@ -2314,15 +2179,12 @@ type RefreshPreferences struct {
 	// (Optional) Indicates whether to roll back the Auto Scaling group to its previous
 	// configuration if the instance refresh fails. The default is false. A rollback is
 	// not supported in the following situations:
-	//
-	// * There is no desired configuration
+	// - There is no desired configuration
 	// specified for the instance refresh.
-	//
-	// * The Auto Scaling group has a launch
+	// - The Auto Scaling group has a launch
 	// template that uses an Amazon Web Services Systems Manager parameter instead of
 	// an AMI ID for the ImageId property.
-	//
-	// * The Auto Scaling group uses the launch
+	// - The Auto Scaling group uses the launch
 	// template's $Latest or $Default version.
 	AutoRollback *bool
 
@@ -2460,15 +2322,11 @@ type ScalingPolicy struct {
 	PolicyName *string
 
 	// One of the following policy types:
-	//
-	// * TargetTrackingScaling
-	//
-	// * StepScaling
-	//
-	// *
+	// - TargetTrackingScaling
+	// - StepScaling
+	// -
 	// SimpleScaling (default)
-	//
-	// * PredictiveScaling
+	// - PredictiveScaling
 	//
 	// For more information, see Target
 	// tracking scaling policies
@@ -2593,33 +2451,27 @@ type ScheduledUpdateGroupActionRequest struct {
 // Describes information used to create a step adjustment for a step scaling
 // policy. For the following examples, suppose that you have an alarm with a breach
 // threshold of 50:
-//
-// * To trigger the adjustment when the metric is greater than or
+// - To trigger the adjustment when the metric is greater than or
 // equal to 50 and less than 60, specify a lower bound of 0 and an upper bound of
 // 10.
+// - To trigger the adjustment when the metric is greater than 40 and less than
+// or equal to 50, specify a lower bound of -10 and an upper bound of 0.
 //
-// * To trigger the adjustment when the metric is greater than 40 and less
-// than or equal to 50, specify a lower bound of -10 and an upper bound of
-// 0.
+// There are
+// a few rules for the step adjustments for your step policy:
+// - The ranges of your
+// step adjustments can't overlap or have a gap.
+// - At most, one step adjustment can
+// have a null lower bound. If one step adjustment has a negative lower bound, then
+// there must be a step adjustment with a null lower bound.
+// - At most, one step
+// adjustment can have a null upper bound. If one step adjustment has a positive
+// upper bound, then there must be a step adjustment with a null upper bound.
+// - The
+// upper and lower bound can't be null in the same step adjustment.
 //
-// There are a few rules for the step adjustments for your step policy:
-//
-// * The
-// ranges of your step adjustments can't overlap or have a gap.
-//
-// * At most, one
-// step adjustment can have a null lower bound. If one step adjustment has a
-// negative lower bound, then there must be a step adjustment with a null lower
-// bound.
-//
-// * At most, one step adjustment can have a null upper bound. If one step
-// adjustment has a positive upper bound, then there must be a step adjustment with
-// a null upper bound.
-//
-// * The upper and lower bound can't be null in the same step
-// adjustment.
-//
-// For more information, see Step adjustments
+// For more
+// information, see Step adjustments
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html#as-scaling-steps)
 // in the Amazon EC2 Auto Scaling User Guide.
 type StepAdjustment struct {
@@ -2846,22 +2698,17 @@ type TrafficSourceIdentifier struct {
 type TrafficSourceState struct {
 
 	// The following are the possible states for a VPC Lattice target group:
-	//
-	// * Adding
-	// - The Auto Scaling instances are being registered with the target group.
-	//
-	// *
-	// Added - All Auto Scaling instances are registered with the target group.
-	//
-	// *
-	// InService - At least one Auto Scaling instance passed the VPC_LATTICE health
-	// check.
-	//
-	// * Removing - The Auto Scaling instances are being deregistered from the
-	// target group. If connection draining is enabled, VPC Lattice waits for in-flight
+	// - Adding -
+	// The Auto Scaling instances are being registered with the target group.
+	// - Added -
+	// All Auto Scaling instances are registered with the target group.
+	// - InService -
+	// At least one Auto Scaling instance passed the VPC_LATTICE health check.
+	// -
+	// Removing - The Auto Scaling instances are being deregistered from the target
+	// group. If connection draining is enabled, VPC Lattice waits for in-flight
 	// requests to complete before deregistering the instances.
-	//
-	// * Removed - All Auto
+	// - Removed - All Auto
 	// Scaling instances are deregistered from the target group.
 	State *string
 

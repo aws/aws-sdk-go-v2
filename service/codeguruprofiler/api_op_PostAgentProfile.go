@@ -40,10 +40,8 @@ type PostAgentProfileInput struct {
 	// The format of the submitted profiling data. The format maps to the Accept and
 	// Content-Type headers of the HTTP request. You can specify one of the following:
 	// or the default .
-	//
-	// * application/json — standard JSON format
-	//
-	// *
+	// - application/json — standard JSON format
+	// -
 	// application/x-amzn-ion — the Amazon Ion data format. For more information, see
 	// Amazon Ion (http://amzn.github.io/ion-docs/).
 	//

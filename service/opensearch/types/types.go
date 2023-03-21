@@ -30,11 +30,10 @@ type AccessPoliciesStatus struct {
 // List of limits that are specific to a given instance type.
 type AdditionalLimit struct {
 
-	// * MaximumNumberOfDataNodesSupported - This attribute only applies to master
+	// - MaximumNumberOfDataNodesSupported - This attribute only applies to master
 	// nodes and specifies the maximum number of data nodes of a given instance type a
 	// master node can support.
-	//
-	// * MaximumNumberOfDataNodesWithoutMasterNode - This
+	// - MaximumNumberOfDataNodesWithoutMasterNode - This
 	// attribute only applies to data nodes and specifies the maximum number of data
 	// nodes of a given instance type can exist without a master node governing them.
 	LimitName *string
@@ -47,24 +46,20 @@ type AdditionalLimit struct {
 
 // Status of the advanced options for the specified domain. The following options
 // are available:
-//
-// * "rest.action.multi.allow_explicit_index": "true" | "false" -
+// - "rest.action.multi.allow_explicit_index": "true" | "false" -
 // Note the use of a string rather than a boolean. Specifies whether explicit
 // references to indexes are allowed inside the body of HTTP requests. If you want
 // to configure access policies for domain sub-resources, such as specific indexes
 // and domain APIs, you must disable this property. Default is true.
-//
-// *
+// -
 // "indices.fielddata.cache.size": "80"  - Note the use of a string rather than a
 // boolean. Specifies the percentage of heap space allocated to field data. Default
 // is unbounded.
-//
-// * "indices.query.bool.max_clause_count": "1024" - Note the use of
+// - "indices.query.bool.max_clause_count": "1024" - Note the use of
 // a string rather than a boolean. Specifies the maximum number of clauses allowed
 // in a Lucene boolean query. Default is 1,024. Queries with more than the
 // permitted number of clauses result in a TooManyClauses error.
-//
-// *
+// -
 // "override_main_response_version": "true" | "false" - Note the use of a string
 // rather than a boolean. Specifies whether the domain reports its version as 7.10
 // to allow Elasticsearch OSS clients and plugins to continue working with it.
@@ -643,11 +638,9 @@ type DomainEndpointOptions struct {
 
 	// Specify the TLS security policy to apply to the HTTPS endpoint of the domain.
 	// Can be one of the following values:
-	//
-	// * Policy-Min-TLS-1-0-2019-07: TLS security
+	// - Policy-Min-TLS-1-0-2019-07: TLS security
 	// policy which supports TLS version 1.0 and higher.
-	//
-	// * Policy-Min-TLS-1-2-2019-07:
+	// - Policy-Min-TLS-1-2-2019-07:
 	// TLS security policy which supports only TLS version 1.2
 	TLSSecurityPolicy TLSSecurityPolicy
 
@@ -876,17 +869,13 @@ type DryRunResults struct {
 
 	// Specifies the way in which OpenSearch Service will apply an update. Possible
 	// values are:
-	//
-	// * Blue/Green - The update requires a blue/green deployment.
-	//
-	// *
+	// - Blue/Green - The update requires a blue/green deployment.
+	// -
 	// DynamicUpdate - No blue/green deployment required
-	//
-	// * Undetermined - The domain
-	// is in the middle of an update and can't predict the deployment type. Try again
+	// - Undetermined - The domain is
+	// in the middle of an update and can't predict the deployment type. Try again
 	// after the update is complete.
-	//
-	// * None - The request doesn't include any
+	// - None - The request doesn't include any
 	// configuration changes.
 	DeploymentType *string
 
@@ -1039,29 +1028,21 @@ type InboundConnectionStatus struct {
 	Message *string
 
 	// The status code for the connection. Can be one of the following:
-	//
-	// *
+	// -
 	// PENDING_ACCEPTANCE - Inbound connection is not yet accepted by the remote domain
 	// owner.
-	//
-	// * APPROVED: Inbound connection is pending acceptance by the remote
-	// domain owner.
-	//
-	// * PROVISIONING: Inbound connection is being provisioned.
-	//
-	// *
-	// ACTIVE: Inbound connection is active and ready to use.
-	//
-	// * REJECTING: Inbound
-	// connection rejection is in process.
-	//
-	// * REJECTED: Inbound connection is
-	// rejected.
-	//
-	// * DELETING: Inbound connection deletion is in progress.
-	//
-	// * DELETED:
-	// Inbound connection is deleted and can no longer be used.
+	// - APPROVED: Inbound connection is pending acceptance by the remote domain
+	// owner.
+	// - PROVISIONING: Inbound connection is being provisioned.
+	// - ACTIVE:
+	// Inbound connection is active and ready to use.
+	// - REJECTING: Inbound connection
+	// rejection is in process.
+	// - REJECTED: Inbound connection is rejected.
+	// - DELETING:
+	// Inbound connection deletion is in progress.
+	// - DELETED: Inbound connection is
+	// deleted and can no longer be used.
 	StatusCode InboundConnectionStatusCode
 
 	noSmithyDocumentSerde
@@ -1321,37 +1302,26 @@ type OutboundConnectionStatus struct {
 	Message *string
 
 	// The status code for the outbound connection. Can be one of the following:
-	//
-	// *
+	// -
 	// VALIDATING - The outbound connection request is being validated.
-	//
-	// *
+	// -
 	// VALIDATION_FAILED - Validation failed for the connection request.
-	//
-	// *
+	// -
 	// PENDING_ACCEPTANCE: Outbound connection request is validated and is not yet
 	// accepted by the remote domain owner.
-	//
-	// * APPROVED - Outbound connection has been
+	// - APPROVED - Outbound connection has been
 	// approved by the remote domain owner for getting provisioned.
-	//
-	// * PROVISIONING -
+	// - PROVISIONING -
 	// Outbound connection request is in process.
-	//
-	// * ACTIVE - Outbound connection is
+	// - ACTIVE - Outbound connection is
 	// active and ready to use.
-	//
-	// * REJECTING - Outbound connection rejection by remote
+	// - REJECTING - Outbound connection rejection by remote
 	// domain owner is in progress.
-	//
-	// * REJECTED - Outbound connection request is
+	// - REJECTED - Outbound connection request is
 	// rejected by remote domain owner.
-	//
-	// * DELETING - Outbound connection deletion is
-	// in progress.
-	//
-	// * DELETED - Outbound connection is deleted and can no longer be
-	// used.
+	// - DELETING - Outbound connection deletion is in
+	// progress.
+	// - DELETED - Outbound connection is deleted and can no longer be used.
 	StatusCode OutboundConnectionStatusCode
 
 	noSmithyDocumentSerde
@@ -1755,26 +1725,20 @@ type StorageTypeLimit struct {
 
 	// Name of storage limits that are applicable for the given storage type. If
 	// StorageType is ebs, the following options are available:
-	//
-	// * MinimumVolumeSize -
+	// - MinimumVolumeSize -
 	// Minimum volume size that is available for the given storage type. Can be empty
 	// if not applicable.
-	//
-	// * MaximumVolumeSize - Maximum volume size that is available
+	// - MaximumVolumeSize - Maximum volume size that is available
 	// for the given storage type. Can be empty if not applicable.
-	//
-	// * MaximumIops -
+	// - MaximumIops -
 	// Maximum amount of IOPS that is available for the given the storage type. Can be
 	// empty if not applicable.
-	//
-	// * MinimumIops - Minimum amount of IOPS that is
+	// - MinimumIops - Minimum amount of IOPS that is
 	// available for the given the storage type. Can be empty if not applicable.
-	//
-	// *
+	// -
 	// MaximumThroughput - Maximum amount of throughput that is available for the given
 	// the storage type. Can be empty if not applicable.
-	//
-	// * MinimumThroughput - Minimum
+	// - MinimumThroughput - Minimum
 	// amount of throughput that is available for the given the storage type. Can be
 	// empty if not applicable.
 	LimitName *string
@@ -1820,14 +1784,10 @@ type UpgradeHistory struct {
 
 	// The current status of the upgrade. The status can take one of the following
 	// values:
-	//
-	// * In Progress
-	//
-	// * Succeeded
-	//
-	// * Succeeded with Issues
-	//
-	// * Failed
+	// - In Progress
+	// - Succeeded
+	// - Succeeded with Issues
+	// - Failed
 	UpgradeStatus UpgradeStatus
 
 	noSmithyDocumentSerde
@@ -1845,25 +1805,18 @@ type UpgradeStepItem struct {
 	ProgressPercent *float64
 
 	// One of three steps that an upgrade or upgrade eligibility check goes through:
-	//
-	// *
+	// -
 	// PreUpgradeCheck
-	//
-	// * Snapshot
-	//
-	// * Upgrade
+	// - Snapshot
+	// - Upgrade
 	UpgradeStep UpgradeStep
 
 	// The current status of the upgrade. The status can take one of the following
 	// values:
-	//
-	// * In Progress
-	//
-	// * Succeeded
-	//
-	// * Succeeded with Issues
-	//
-	// * Failed
+	// - In Progress
+	// - Succeeded
+	// - Succeeded with Issues
+	// - Failed
 	UpgradeStepStatus UpgradeStatus
 
 	noSmithyDocumentSerde

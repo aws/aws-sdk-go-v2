@@ -26,23 +26,18 @@ import (
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html) to
 // request the DecodeAuthorizationMessage (sts:DecodeAuthorizationMessage) action.
 // The decoded message includes the following type of information:
-//
-// * Whether the
+// - Whether the
 // request was denied due to an explicit deny or due to the absence of an explicit
 // allow. For more information, see Determining Whether a Request is Allowed or
 // Denied
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html#policy-eval-denyallow)
 // in the IAM User Guide.
-//
-// * The principal who made the request.
-//
-// * The requested
+// - The principal who made the request.
+// - The requested
 // action.
-//
-// * The requested resource.
-//
-// * The values of condition keys in the
-// context of the user's request.
+// - The requested resource.
+// - The values of condition keys in the context
+// of the user's request.
 func (c *Client) DecodeAuthorizationMessage(ctx context.Context, params *DecodeAuthorizationMessageInput, optFns ...func(*Options)) (*DecodeAuthorizationMessageOutput, error) {
 	if params == nil {
 		params = &DecodeAuthorizationMessageInput{}

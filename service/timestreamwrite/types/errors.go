@@ -114,14 +114,11 @@ func (e *InvalidEndpointException) ErrorCode() string {
 func (e *InvalidEndpointException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // WriteRecords would throw this exception in the following cases:
-//
-// * Records with
+// - Records with
 // duplicate data where there are multiple records with the same dimensions,
 // timestamps, and measure names but:
-//
-// * Measure values are different
-//
-// * Version is
+// - Measure values are different
+// - Version is
 // not present in the request or the value of version in the new record is equal to
 // or lower than the existing value
 //
@@ -129,11 +126,9 @@ func (e *InvalidEndpointException) ErrorFault() smithy.ErrorFault { return smith
 // ExistingVersion field in the RejectedRecords response will indicate the current
 // record’s version. To force an update, you can resend the request with a version
 // for the record set to a value greater than the ExistingVersion.
-//
-// * Records with
+// - Records with
 // timestamps that lie outside the retention duration of the memory store.
-//
-// *
+// -
 // Records with dimensions or measures that exceed the Timestream defined
 // limits.
 //

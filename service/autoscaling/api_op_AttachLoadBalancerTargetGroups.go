@@ -12,15 +12,12 @@ import (
 
 // Attaches one or more target groups to the specified Auto Scaling group. This
 // operation is used with the following load balancer types:
-//
-// * Application Load
+// - Application Load
 // Balancer - Operates at the application layer (layer 7) and supports HTTP and
 // HTTPS.
-//
-// * Network Load Balancer - Operates at the transport layer (layer 4) and
+// - Network Load Balancer - Operates at the transport layer (layer 4) and
 // supports TCP, TLS, and UDP.
-//
-// * Gateway Load Balancer - Operates at the network
+// - Gateway Load Balancer - Operates at the network
 // layer (layer 3).
 //
 // To describe the target groups for an Auto Scaling group, call

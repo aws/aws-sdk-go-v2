@@ -51,16 +51,13 @@ type CreateResolverQueryLogConfigInput struct {
 	// The ARN of the resource that you want Resolver to send query logs. You can send
 	// query logs to an S3 bucket, a CloudWatch Logs log group, or a Kinesis Data
 	// Firehose delivery stream. Examples of valid values include the following:
-	//
-	// * S3
+	// - S3
 	// bucket: arn:aws:s3:::examplebucket You can optionally append a file prefix to
 	// the end of the ARN. arn:aws:s3:::examplebucket/development/
-	//
-	// * CloudWatch Logs
+	// - CloudWatch Logs
 	// log group:
 	// arn:aws:logs:us-west-1:123456789012:log-group:/mystack-testgroup-12ABC1AB12A1:*
-	//
-	// *
+	// -
 	// Kinesis Data Firehose delivery stream:
 	// arn:aws:kinesis:us-east-2:0123456789:stream/my_stream_name
 	//

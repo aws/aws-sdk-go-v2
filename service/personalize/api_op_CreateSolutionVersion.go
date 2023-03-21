@@ -17,47 +17,35 @@ import (
 // operation and must be in the ACTIVE state before calling CreateSolutionVersion.
 // A new version of the solution is created every time you call this operation.
 // Status A solution version can be in one of the following states:
-//
-// * CREATE
+// - CREATE
 // PENDING
-//
-// * CREATE IN_PROGRESS
-//
-// * ACTIVE
-//
-// * CREATE FAILED
-//
-// * CREATE STOPPING
-//
-// *
-// CREATE STOPPED
+// - CREATE IN_PROGRESS
+// - ACTIVE
+// - CREATE FAILED
+// - CREATE STOPPING
+// - CREATE
+// STOPPED
 //
 // To get the status of the version, call DescribeSolutionVersion
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html).
 // Wait until the status shows as ACTIVE before calling CreateCampaign. If the
 // status shows as CREATE FAILED, the response includes a failureReason key, which
 // describes why the job failed. Related APIs
-//
-// * ListSolutionVersions
+// - ListSolutionVersions
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html)
-//
-// *
+// -
 // DescribeSolutionVersion
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html)
-//
-// *
+// -
 // ListSolutions
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutions.html)
-//
-// *
+// -
 // CreateSolution
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html)
-//
-// *
+// -
 // DescribeSolution
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html)
-//
-// *
+// -
 // DeleteSolution
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteSolution.html)
 func (c *Client) CreateSolutionVersion(ctx context.Context, params *CreateSolutionVersionInput, optFns ...func(*Options)) (*CreateSolutionVersionOutput, error) {

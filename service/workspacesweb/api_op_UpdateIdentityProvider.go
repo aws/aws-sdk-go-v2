@@ -45,72 +45,48 @@ type UpdateIdentityProviderInput struct {
 
 	// The details of the identity provider. The following list describes the provider
 	// detail keys for each identity provider type.
-	//
-	// * For Google and Login with
+	// - For Google and Login with
 	// Amazon:
+	// - client_id
+	// - client_secret
+	// - authorize_scopes
 	//
-	// * client_id
-	//
-	// * client_secret
-	//
-	// * authorize_scopes
-	//
-	// * For Facebook:
-	//
-	// *
+	// - For Facebook:
+	// -
 	// client_id
+	// - client_secret
+	// - authorize_scopes
+	// - api_version
 	//
-	// * client_secret
+	// - For Sign in with
+	// Apple:
+	// - client_id
+	// - team_id
+	// - key_id
+	// - private_key
+	// - authorize_scopes
 	//
-	// * authorize_scopes
+	// - For
+	// OIDC providers:
+	// - client_id
+	// - client_secret
+	// - attributes_request_method
+	// -
+	// oidc_issuer
+	// - authorize_scopes
+	// - authorize_url if not available from discovery
+	// URL specified by oidc_issuer key
+	// - token_url if not available from discovery URL
+	// specified by oidc_issuer key
+	// - attributes_url if not available from discovery
+	// URL specified by oidc_issuer key
+	// - jwks_uri if not available from discovery URL
+	// specified by oidc_issuer key
 	//
-	// * api_version
-	//
-	// * For Sign in
-	// with Apple:
-	//
-	// * client_id
-	//
-	// * team_id
-	//
-	// * key_id
-	//
-	// * private_key
-	//
-	// *
-	// authorize_scopes
-	//
-	// * For OIDC providers:
-	//
-	// * client_id
-	//
-	// * client_secret
-	//
-	// *
-	// attributes_request_method
-	//
-	// * oidc_issuer
-	//
-	// * authorize_scopes
-	//
-	// * authorize_url if
-	// not available from discovery URL specified by oidc_issuer key
-	//
-	// * token_url if
-	// not available from discovery URL specified by oidc_issuer key
-	//
-	// * attributes_url
-	// if not available from discovery URL specified by oidc_issuer key
-	//
-	// * jwks_uri if
-	// not available from discovery URL specified by oidc_issuer key
-	//
-	// * For SAML
-	// providers:
-	//
-	// * MetadataFile OR MetadataURL
-	//
-	// * IDPSignout (boolean) optional
+	// - For SAML providers:
+	// - MetadataFile OR
+	// MetadataURL
+	// - IDPSignout (boolean) optional
 	IdentityProviderDetails map[string]string
 
 	// The name of the identity provider.

@@ -19,14 +19,11 @@ import (
 // iam:PassRole permission and either the CloudWatchFullAccess policy or the
 // cloudwatch:PutMetricStream permission. When you create or update a metric
 // stream, you choose one of the following:
-//
-// * Stream metrics from all metric
+// - Stream metrics from all metric
 // namespaces in the account.
-//
-// * Stream metrics from all metric namespaces in the
+// - Stream metrics from all metric namespaces in the
 // account, except for the namespaces that you list in ExcludeFilters.
-//
-// * Stream
+// - Stream
 // metrics from only the metric namespaces that you list in IncludeFilters.
 //
 // By
@@ -87,10 +84,8 @@ type PutMetricStreamInput struct {
 	// Data Firehose resources. This IAM role must already exist and must be in the
 	// same account as the metric stream. This IAM role must include the following
 	// permissions:
-	//
-	// * firehose:PutRecord
-	//
-	// * firehose:PutRecordBatch
+	// - firehose:PutRecord
+	// - firehose:PutRecordBatch
 	//
 	// This member is required.
 	RoleArn *string

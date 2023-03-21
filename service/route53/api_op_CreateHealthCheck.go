@@ -23,16 +23,13 @@ import (
 // a Route 53 health check. Private Hosted Zones You can associate health checks
 // with failover resource record sets in a private hosted zone. Note the
 // following:
-//
-// * Route 53 health checkers are outside the VPC. To check the health
+// - Route 53 health checkers are outside the VPC. To check the health
 // of an endpoint within a VPC by IP address, you must assign a public IP address
 // to the instance in the VPC.
-//
-// * You can configure a health checker to check the
+// - You can configure a health checker to check the
 // health of an external resource that the instance relies on, such as a database
 // server.
-//
-// * You can create a CloudWatch metric, associate an alarm with the
+// - You can create a CloudWatch metric, associate an alarm with the
 // metric, and then create a health check that is based on the state of the alarm.
 // For example, you might create a CloudWatch metric that checks the status of the
 // Amazon EC2 StatusCheckFailed metric, add an alarm to the metric, and then create
@@ -61,22 +58,18 @@ type CreateHealthCheckInput struct {
 	// A unique string that identifies the request and that allows you to retry a
 	// failed CreateHealthCheck request without the risk of creating two identical
 	// health checks:
-	//
-	// * If you send a CreateHealthCheck request with the same
+	// - If you send a CreateHealthCheck request with the same
 	// CallerReference and settings as a previous request, and if the health check
 	// doesn't exist, Amazon Route 53 creates the health check. If the health check
 	// does exist, Route 53 returns the settings for the existing health check.
-	//
-	// * If
+	// - If
 	// you send a CreateHealthCheck request with the same CallerReference as a deleted
 	// health check, regardless of the settings, Route 53 returns a
 	// HealthCheckAlreadyExists error.
-	//
-	// * If you send a CreateHealthCheck request with
+	// - If you send a CreateHealthCheck request with
 	// the same CallerReference as an existing health check but with different
 	// settings, Route 53 returns a HealthCheckAlreadyExists error.
-	//
-	// * If you send a
+	// - If you send a
 	// CreateHealthCheck request with a unique CallerReference but settings identical
 	// to an existing health check, Route 53 creates the health check.
 	//

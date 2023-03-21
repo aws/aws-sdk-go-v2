@@ -46,17 +46,13 @@ func (c *Client) DescribeReservedInstancesListings(ctx context.Context, params *
 type DescribeReservedInstancesListingsInput struct {
 
 	// One or more filters.
-	//
-	// * reserved-instances-id - The ID of the Reserved
+	// - reserved-instances-id - The ID of the Reserved
 	// Instances.
-	//
-	// * reserved-instances-listing-id - The ID of the Reserved Instances
+	// - reserved-instances-listing-id - The ID of the Reserved Instances
 	// listing.
-	//
-	// * status - The status of the Reserved Instance listing (pending |
+	// - status - The status of the Reserved Instance listing (pending |
 	// active | cancelled | closed).
-	//
-	// * status-message - The reason for the status.
+	// - status-message - The reason for the status.
 	Filters []types.Filter
 
 	// One or more Reserved Instance IDs.

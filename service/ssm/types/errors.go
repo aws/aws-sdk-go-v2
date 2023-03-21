@@ -1400,17 +1400,13 @@ func (e *InvalidFilterValue) ErrorCode() string {
 func (e *InvalidFilterValue) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The following problems can cause this exception:
-//
-// * You don't have permission to
+// - You don't have permission to
 // access the managed node.
-//
-// * Amazon Web Services Systems Manager Agent(SSM Agent)
+// - Amazon Web Services Systems Manager Agent(SSM Agent)
 // isn't running. Verify that SSM Agent is running.
-//
-// * SSM Agent isn't registered
+// - SSM Agent isn't registered
 // with the SSM endpoint. Try reinstalling SSM Agent.
-//
-// * The managed node isn't in
+// - The managed node isn't in
 // valid state. Valid states are: Running, Pending, Stopped, and Stopping. Invalid
 // states are: Shutting-down and Terminated.
 type InvalidInstanceId struct {

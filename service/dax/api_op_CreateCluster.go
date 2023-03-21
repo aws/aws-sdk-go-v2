@@ -32,13 +32,10 @@ type CreateClusterInput struct {
 
 	// The cluster identifier. This parameter is stored as a lowercase string.
 	// Constraints:
-	//
-	// * A name must contain from 1 to 20 alphanumeric characters or
+	// - A name must contain from 1 to 20 alphanumeric characters or
 	// hyphens.
-	//
-	// * The first character must be a letter.
-	//
-	// * A name cannot end with a
+	// - The first character must be a letter.
+	// - A name cannot end with a
 	// hyphen or contain two consecutive hyphens.
 	//
 	// This member is required.
@@ -74,11 +71,9 @@ type CreateClusterInput struct {
 	AvailabilityZones []string
 
 	// The type of encryption the cluster's endpoint should support. Values are:
-	//
-	// *
-	// NONE for no encryption
-	//
-	// * TLS for Transport Layer Security
+	// - NONE
+	// for no encryption
+	// - TLS for Transport Layer Security
 	ClusterEndpointEncryptionType types.ClusterEndpointEncryptionType
 
 	// A description of the cluster.
@@ -95,20 +90,13 @@ type CreateClusterInput struct {
 	// performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H
 	// Clock UTC). The minimum maintenance window is a 60 minute period. Valid values
 	// for ddd are:
-	//
-	// * sun
-	//
-	// * mon
-	//
-	// * tue
-	//
-	// * wed
-	//
-	// * thu
-	//
-	// * fri
-	//
-	// * sat
+	// - sun
+	// - mon
+	// - tue
+	// - wed
+	// - thu
+	// - fri
+	// - sat
 	//
 	// Example:
 	// sun:05:00-sun:09:00 If you don't specify a preferred maintenance window when you

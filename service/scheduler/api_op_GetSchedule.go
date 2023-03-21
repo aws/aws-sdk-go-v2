@@ -79,17 +79,14 @@ type GetScheduleOutput struct {
 
 	// The expression that defines when the schedule runs. The following formats are
 	// supported.
-	//
-	// * at expression - at(yyyy-mm-ddThh:mm:ss)
-	//
-	// * rate expression -
+	// - at expression - at(yyyy-mm-ddThh:mm:ss)
+	// - rate expression -
 	// rate(unit value)
+	// - cron expression - cron(fields)
 	//
-	// * cron expression - cron(fields)
-	//
-	// You can use at expressions
-	// to create one-time schedules that invoke a target once, at the time and in the
-	// time zone, that you specify. You can use rate and cron expressions to create
+	// You can use at expressions to
+	// create one-time schedules that invoke a target once, at the time and in the time
+	// zone, that you specify. You can use rate and cron expressions to create
 	// recurring schedules. Rate-based schedules are useful when you want to invoke a
 	// target at regular intervals, such as every 15 minutes or every five days.
 	// Cron-based schedules are useful when you want to invoke a target periodically at

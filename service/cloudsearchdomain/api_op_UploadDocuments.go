@@ -53,10 +53,8 @@ type UploadDocumentsInput struct {
 
 	// The format of the batch you are uploading. Amazon CloudSearch supports two
 	// document batch formats:
-	//
-	// * application/json
-	//
-	// * application/xml
+	// - application/json
+	// - application/xml
 	//
 	// This member is required.
 	ContentType types.ContentType

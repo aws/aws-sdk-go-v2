@@ -160,10 +160,8 @@ type KeySchemaElement struct {
 	AttributeName *string
 
 	// The role that this key attribute will assume:
-	//
-	// * HASH - partition key
-	//
-	// * RANGE -
+	// - HASH - partition key
+	// - RANGE -
 	// sort key
 	//
 	// The partition key of an item is also known as its hash attribute. The
@@ -194,15 +192,11 @@ type Record struct {
 	EventID *string
 
 	// The type of data modification that was performed on the DynamoDB table:
-	//
-	// *
-	// INSERT - a new item was added to the table.
-	//
-	// * MODIFY - one or more of an
-	// existing item's attributes were modified.
-	//
-	// * REMOVE - the item was deleted from
-	// the table
+	// - INSERT
+	// - a new item was added to the table.
+	// - MODIFY - one or more of an existing
+	// item's attributes were modified.
+	// - REMOVE - the item was deleted from the table
 	EventName OperationType
 
 	// The AWS service from which the stream record originated. For DynamoDB Streams,
@@ -218,10 +212,8 @@ type Record struct {
 
 	// Items that are deleted by the Time to Live process after expiration have the
 	// following fields:
-	//
-	// * Records[].userIdentity.type "Service"
-	//
-	// *
+	// - Records[].userIdentity.type "Service"
+	// -
 	// Records[].userIdentity.principalId "dynamodb.amazonaws.com"
 	UserIdentity *Identity
 
@@ -268,13 +260,10 @@ type Stream struct {
 	// not a unique identifier for the stream, because it is possible that a stream
 	// from another table might have the same timestamp. However, the combination of
 	// the following three elements is guaranteed to be unique:
-	//
-	// * the AWS customer
+	// - the AWS customer
 	// ID.
-	//
-	// * the table name
-	//
-	// * the StreamLabel
+	// - the table name
+	// - the StreamLabel
 	StreamLabel *string
 
 	// The DynamoDB table with which the stream is associated.
@@ -311,42 +300,31 @@ type StreamDescription struct {
 	// not a unique identifier for the stream, because it is possible that a stream
 	// from another table might have the same timestamp. However, the combination of
 	// the following three elements is guaranteed to be unique:
-	//
-	// * the AWS customer
+	// - the AWS customer
 	// ID.
-	//
-	// * the table name
-	//
-	// * the StreamLabel
+	// - the table name
+	// - the StreamLabel
 	StreamLabel *string
 
 	// Indicates the current status of the stream:
-	//
-	// * ENABLING - Streams is currently
+	// - ENABLING - Streams is currently
 	// being enabled on the DynamoDB table.
-	//
-	// * ENABLED - the stream is enabled.
-	//
-	// *
+	// - ENABLED - the stream is enabled.
+	// -
 	// DISABLING - Streams is currently being disabled on the DynamoDB table.
-	//
-	// *
+	// -
 	// DISABLED - the stream is disabled.
 	StreamStatus StreamStatus
 
 	// Indicates the format of the records within this stream:
-	//
-	// * KEYS_ONLY - only the
+	// - KEYS_ONLY - only the
 	// key attributes of items that were modified in the DynamoDB table.
-	//
-	// * NEW_IMAGE -
+	// - NEW_IMAGE -
 	// entire items from the table, as they appeared after they were modified.
-	//
-	// *
+	// -
 	// OLD_IMAGE - entire items from the table, as they appeared before they were
 	// modified.
-	//
-	// * NEW_AND_OLD_IMAGES - both the new and the old images of the items
+	// - NEW_AND_OLD_IMAGES - both the new and the old images of the items
 	// from the table.
 	StreamViewType StreamViewType
 
@@ -381,17 +359,13 @@ type StreamRecord struct {
 
 	// The type of data from the modified DynamoDB item that was captured in this
 	// stream record:
-	//
-	// * KEYS_ONLY - only the key attributes of the modified item.
-	//
-	// *
+	// - KEYS_ONLY - only the key attributes of the modified item.
+	// -
 	// NEW_IMAGE - the entire item, as it appeared after it was modified.
-	//
-	// * OLD_IMAGE
-	// - the entire item, as it appeared before it was modified.
-	//
-	// * NEW_AND_OLD_IMAGES
-	// - both the new and the old item images of the item.
+	// - OLD_IMAGE -
+	// the entire item, as it appeared before it was modified.
+	// - NEW_AND_OLD_IMAGES -
+	// both the new and the old item images of the item.
 	StreamViewType StreamViewType
 
 	noSmithyDocumentSerde

@@ -37,18 +37,14 @@ type DescribeFastLaunchImagesInput struct {
 	DryRun *bool
 
 	// Use the following filters to streamline results.
-	//
-	// * resource-type - The resource
+	// - resource-type - The resource
 	// type for pre-provisioning.
-	//
-	// * launch-template - The launch template that is
+	// - launch-template - The launch template that is
 	// associated with the pre-provisioned Windows AMI.
-	//
-	// * owner-id - The owner ID for
+	// - owner-id - The owner ID for
 	// the pre-provisioning resource.
-	//
-	// * state - The current state of fast launching
-	// for the Windows AMI.
+	// - state - The current state of fast launching for
+	// the Windows AMI.
 	Filters []types.Filter
 
 	// Details for one or more Windows AMI image IDs.

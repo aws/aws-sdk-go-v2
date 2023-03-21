@@ -76,20 +76,15 @@ type GetEmailIdentityOutput struct {
 
 	// The verification status of the identity. The status can be one of the
 	// following:
-	//
-	// * PENDING – The verification process was initiated, but Amazon SES
+	// - PENDING – The verification process was initiated, but Amazon SES
 	// hasn't yet been able to verify the identity.
-	//
-	// * SUCCESS – The verification
+	// - SUCCESS – The verification
 	// process completed successfully.
-	//
-	// * FAILED – The verification process failed.
-	//
-	// *
+	// - FAILED – The verification process failed.
+	// -
 	// TEMPORARY_FAILURE – A temporary issue is preventing Amazon SES from determining
 	// the verification status of the identity.
-	//
-	// * NOT_STARTED – The verification
+	// - NOT_STARTED – The verification
 	// process hasn't been initiated for the identity.
 	VerificationStatus types.VerificationStatus
 

@@ -20,20 +20,15 @@ import (
 // the event matches any event selector, the trail processes and logs the event. If
 // the event doesn't match any event selector, the trail doesn't log the event.
 // Example
-//
-// * You create an event selector for a trail and specify that you want
+// - You create an event selector for a trail and specify that you want
 // write-only events.
-//
-// * The EC2 GetConsoleOutput and RunInstances API operations
+// - The EC2 GetConsoleOutput and RunInstances API operations
 // occur in your account.
-//
-// * CloudTrail evaluates whether the events match your
+// - CloudTrail evaluates whether the events match your
 // event selectors.
-//
-// * The RunInstances is a write-only event and it matches your
+// - The RunInstances is a write-only event and it matches your
 // event selector. The trail logs the event.
-//
-// * The GetConsoleOutput is a read-only
+// - The GetConsoleOutput is a read-only
 // event that doesn't match your event selector. The trail doesn't log the
 // event.
 //
@@ -74,20 +69,15 @@ type PutEventSelectorsInput struct {
 
 	// Specifies the name of the trail or trail ARN. If you specify a trail name, the
 	// string must meet the following requirements:
-	//
-	// * Contain only ASCII letters (a-z,
+	// - Contain only ASCII letters (a-z,
 	// A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)
-	//
-	// * Start with a
+	// - Start with a
 	// letter or number, and end with a letter or number
-	//
-	// * Be between 3 and 128
+	// - Be between 3 and 128
 	// characters
-	//
-	// * Have no adjacent periods, underscores or dashes. Names like
+	// - Have no adjacent periods, underscores or dashes. Names like
 	// my-_namespace and my--namespace are not valid.
-	//
-	// * Not be in IP address format
+	// - Not be in IP address format
 	// (for example, 192.168.5.4)
 	//
 	// If you specify a trail ARN, it must be in the

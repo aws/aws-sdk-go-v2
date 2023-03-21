@@ -19,16 +19,14 @@ import (
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-metrics.html).
 // In addition to these default metrics, you can choose to send extended metrics or
 // custom metrics or both.
-//
-// * Extended metrics enable you to send metrics with
+// - Extended metrics enable you to send metrics with
 // additional dimensions not included in the default metrics. You can also send
 // extended metrics to Evidently as well as CloudWatch. The valid dimension names
 // for the additional dimensions for extended metrics are BrowserName, CountryCode,
 // DeviceType, FileType, OSName, and PageId. For more information, see  Extended
 // metrics that you can send to CloudWatch and CloudWatch Evidently
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-vended-metrics.html).
-//
-// *
+// -
 // Custom metrics are metrics that you define. You can send custom metrics to
 // CloudWatch or to CloudWatch Evidently or to both. With custom metrics, you can
 // use any metric name and namespace, and to derive the metrics you can use any

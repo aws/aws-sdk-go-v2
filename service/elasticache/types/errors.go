@@ -1455,11 +1455,9 @@ func (e *SnapshotAlreadyExistsFault) ErrorCode() string {
 func (e *SnapshotAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You attempted one of the following operations:
-//
-// * Creating a snapshot of a Redis
+// - Creating a snapshot of a Redis
 // cluster running on a cache.t1.micro cache node.
-//
-// * Creating a snapshot of a
+// - Creating a snapshot of a
 // cluster that is running Memcached rather than Redis.
 //
 // Neither of these are

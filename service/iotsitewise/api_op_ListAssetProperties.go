@@ -39,11 +39,9 @@ type ListAssetPropertiesInput struct {
 
 	// Filters the requested list of asset properties. You can choose one of the
 	// following options:
-	//
-	// * ALL – The list includes all asset properties for a given
+	// - ALL – The list includes all asset properties for a given
 	// asset model ID.
-	//
-	// * BASE – The list includes only base asset properties for a
+	// - BASE – The list includes only base asset properties for a
 	// given asset model ID.
 	//
 	// Default: BASE

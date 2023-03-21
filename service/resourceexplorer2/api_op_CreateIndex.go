@@ -34,8 +34,7 @@ import (
 // (https://docs.aws.amazon.com/resource-explorer/latest/userguide/security_iam_service-linked-roles.html)
 // in your Amazon Web Services account that allows Resource Explorer to enumerate
 // your resources to populate the index.
-//
-// * Action: resource-explorer-2:CreateIndex
+// - Action: resource-explorer-2:CreateIndex
 // Resource: The ARN of the index (as it will exist after the operation completes)
 // in the Amazon Web Services Region and account in which you're trying to create
 // the index. Use the wildcard character (*) at the end of the string to match the
@@ -44,8 +43,7 @@ import (
 // "Resource": "arn:aws:resource-explorer-2:us-west-2:<account-id>:index/*"
 // Alternatively, you can use "Resource": "*" to allow the role or user to create
 // an index in any Region.
-//
-// * Action: iam:CreateServiceLinkedRole Resource: No
+// - Action: iam:CreateServiceLinkedRole Resource: No
 // specific resource (*). This permission is required only the first time you
 // create an index to turn on Resource Explorer in the account. Resource Explorer
 // uses this to create the service-linked role needed to index the resources in

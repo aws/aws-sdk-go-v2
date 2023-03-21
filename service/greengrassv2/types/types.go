@@ -71,16 +71,13 @@ type CloudComponentStatus struct {
 	// The vendor guidance state for the component version. This state indicates
 	// whether the component version has any issues that you should consider before you
 	// deploy it. The vendor guidance state can be:
-	//
-	// * ACTIVE – This component version
+	// - ACTIVE – This component version
 	// is available and recommended for use.
-	//
-	// * DISCONTINUED – This component version
+	// - DISCONTINUED – This component version
 	// has been discontinued by its publisher. You can deploy this component version,
 	// but we recommend that you use a different version of this component.
-	//
-	// * DELETED
-	// – This component version has been deleted by its publisher, so you can't deploy
+	// - DELETED –
+	// This component version has been deleted by its publisher, so you can't deploy
 	// it. If you have any existing deployments that specify this component version,
 	// those deployments will fail.
 	VendorGuidance VendorGuidance
@@ -164,11 +161,9 @@ type ComponentConfigurationUpdate struct {
 type ComponentDependencyRequirement struct {
 
 	// The type of this dependency. Choose from the following options:
-	//
-	// * SOFT – The
+	// - SOFT – The
 	// component doesn't restart if the dependency changes state.
-	//
-	// * HARD – The
+	// - HARD – The
 	// component restarts if the dependency changes state.
 	//
 	// Default: HARD
@@ -346,12 +341,10 @@ type CoreDevice struct {
 	LastStatusUpdateTimestamp *time.Time
 
 	// The status of the core device. Core devices can have the following statuses:
-	//
-	// *
+	// -
 	// HEALTHY – The IoT Greengrass Core software and all components run on the core
 	// device without issue.
-	//
-	// * UNHEALTHY – The IoT Greengrass Core software or a
+	// - UNHEALTHY – The IoT Greengrass Core software or a
 	// component is in a failed state on the core device.
 	Status CoreDeviceStatus
 
@@ -404,8 +397,7 @@ type DeploymentComponentUpdatePolicy struct {
 
 	// Whether or not to notify components and wait for components to become safe to
 	// update. Choose from the following options:
-	//
-	// * NOTIFY_COMPONENTS – The deployment
+	// - NOTIFY_COMPONENTS – The deployment
 	// notifies each component before it stops and updates that component. Components
 	// can use the SubscribeToComponentUpdates
 	// (https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-subscribetocomponentupdates)
@@ -415,8 +407,7 @@ type DeploymentComponentUpdatePolicy struct {
 	// IPC operation. For more information, see Create deployments
 	// (https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html)
 	// in the IoT Greengrass V2 Developer Guide.
-	//
-	// * SKIP_NOTIFY_COMPONENTS – The
+	// - SKIP_NOTIFY_COMPONENTS – The
 	// deployment doesn't notify components or wait for them to be safe to
 	// update.
 	//
@@ -659,11 +650,9 @@ type IoTJobAbortConfig struct {
 
 // Contains criteria that define when and how to cancel a job. The deployment stops
 // if the following conditions are true:
-//
-// * The number of things that receive the
+// - The number of things that receive the
 // deployment exceeds the minNumberOfExecutedThings.
-//
-// * The percentage of failures
+// - The percentage of failures
 // with type failureType exceeds the thresholdPercentage.
 type IoTJobAbortCriteria struct {
 
@@ -813,12 +802,10 @@ type LambdaEventSource struct {
 	Topic *string
 
 	// The type of event source. Choose from the following options:
-	//
-	// * PUB_SUB –
+	// - PUB_SUB –
 	// Subscribe to local publish/subscribe messages. This event source type doesn't
 	// support MQTT wildcards (+ and #) in the event source topic.
-	//
-	// * IOT_CORE –
+	// - IOT_CORE –
 	// Subscribe to Amazon Web Services IoT Core MQTT messages. This event source type
 	// supports MQTT wildcards (+ and #) in the event source topic.
 	//
@@ -864,12 +851,10 @@ type LambdaExecutionParameters struct {
 	MaxQueueSize *int32
 
 	// Whether or not the Lambda function is pinned, or long-lived.
-	//
-	// * A pinned Lambda
+	// - A pinned Lambda
 	// function starts when IoT Greengrass starts and keeps running in its own
 	// container.
-	//
-	// * A non-pinned Lambda function starts only when it receives a work
+	// - A non-pinned Lambda function starts only when it receives a work
 	// item and exists after it idles for maxIdleTimeInSeconds. If the function has
 	// multiple work items, the IoT Greengrass Core software creates multiple instances
 	// of the function.
@@ -987,16 +972,13 @@ type ResolvedComponentVersion struct {
 	// The vendor guidance state for the component version. This state indicates
 	// whether the component version has any issues that you should consider before you
 	// deploy it. The vendor guidance state can be:
-	//
-	// * ACTIVE – This component version
+	// - ACTIVE – This component version
 	// is available and recommended for use.
-	//
-	// * DISCONTINUED – This component version
+	// - DISCONTINUED – This component version
 	// has been discontinued by its publisher. You can deploy this component version,
 	// but we recommend that you use a different version of this component.
-	//
-	// * DELETED
-	// – This component version has been deleted by its publisher, so you can't deploy
+	// - DELETED –
+	// This component version has been deleted by its publisher, so you can't deploy
 	// it. If you have any existing deployments that specify this component version,
 	// those deployments will fail.
 	VendorGuidance VendorGuidance

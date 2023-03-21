@@ -23,15 +23,12 @@ import (
 // Amazon S3 object tagging feature, see Object Tagging
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html). The
 // following actions are related to GetObjectTagging:
-//
-// * DeleteObjectTagging
+// - DeleteObjectTagging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjectTagging.html)
-//
-// *
+// -
 // GetObjectAttributes
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAttributes.html)
-//
-// *
+// -
 // PutObjectTagging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObjectTagging.html)
 func (c *Client) GetObjectTagging(ctx context.Context, params *GetObjectTaggingInput, optFns ...func(*Options)) (*GetObjectTaggingOutput, error) {

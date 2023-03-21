@@ -69,12 +69,10 @@ func (e *CloudHsmClusterInUseException) ErrorFault() smithy.ErrorFault { return 
 
 // The request was rejected because the associated CloudHSM cluster did not meet
 // the configuration requirements for an CloudHSM key store.
-//
-// * The CloudHSM
-// cluster must be configured with private subnets in at least two different
-// Availability Zones in the Region.
-//
-// * The security group for the cluster
+// - The CloudHSM cluster
+// must be configured with private subnets in at least two different Availability
+// Zones in the Region.
+// - The security group for the cluster
 // (https://docs.aws.amazon.com/cloudhsm/latest/userguide/configure-sg.html)
 // (cloudhsm-cluster--sg) must include inbound rules and outbound rules that allow
 // TCP traffic on ports 2223-2225. The Source in the inbound rules and the
@@ -84,8 +82,7 @@ func (e *CloudHsmClusterInUseException) ErrorFault() smithy.ErrorFault { return 
 // DescribeSecurityGroups
 // (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html)
 // operation.
-//
-// * The CloudHSM cluster must contain at least as many HSMs as the
+// - The CloudHSM cluster must contain at least as many HSMs as the
 // operation requires. To add HSMs, use the CloudHSM CreateHsm
 // (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_CreateHsm.html)
 // operation. For the CreateCustomKeyStore, UpdateCustomKeyStore, and CreateKey
@@ -258,30 +255,25 @@ func (e *CustomKeyStoreHasCMKsException) ErrorFault() smithy.ErrorFault { return
 // To get the ConnectionState of a custom key store, use the
 // DescribeCustomKeyStores operation. This exception is thrown under the following
 // conditions:
-//
-// * You requested the ConnectCustomKeyStore operation on a custom key
+// - You requested the ConnectCustomKeyStore operation on a custom key
 // store with a ConnectionState of DISCONNECTING or FAILED. This operation is valid
 // for all other ConnectionState values. To reconnect a custom key store in a
 // FAILED state, disconnect it (DisconnectCustomKeyStore), then connect it
 // (ConnectCustomKeyStore).
-//
-// * You requested the CreateKey operation in a custom
-// key store that is not connected. This operations is valid only when the custom
-// key store ConnectionState is CONNECTED.
-//
-// * You requested the
-// DisconnectCustomKeyStore operation on a custom key store with a ConnectionState
-// of DISCONNECTING or DISCONNECTED. This operation is valid for all other
-// ConnectionState values.
-//
-// * You requested the UpdateCustomKeyStore or
-// DeleteCustomKeyStore operation on a custom key store that is not disconnected.
-// This operation is valid only when the custom key store ConnectionState is
-// DISCONNECTED.
-//
-// * You requested the GenerateRandom operation in an CloudHSM key
-// store that is not connected. This operation is valid only when the CloudHSM key
+// - You requested the CreateKey operation in a custom key
+// store that is not connected. This operations is valid only when the custom key
 // store ConnectionState is CONNECTED.
+// - You requested the DisconnectCustomKeyStore
+// operation on a custom key store with a ConnectionState of DISCONNECTING or
+// DISCONNECTED. This operation is valid for all other ConnectionState values.
+// -
+// You requested the UpdateCustomKeyStore or DeleteCustomKeyStore operation on a
+// custom key store that is not disconnected. This operation is valid only when the
+// custom key store ConnectionState is DISCONNECTED.
+// - You requested the
+// GenerateRandom operation in an CloudHSM key store that is not connected. This
+// operation is valid only when the CloudHSM key store ConnectionState is
+// CONNECTED.
 type CustomKeyStoreInvalidStateException struct {
 	Message *string
 
@@ -694,11 +686,9 @@ func (e *InvalidImportTokenException) ErrorCode() string {
 func (e *InvalidImportTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected for one of the following reasons:
-//
-// * The KeyUsage value
+// - The KeyUsage value
 // of the KMS key is incompatible with the API operation.
-//
-// * The encryption
+// - The encryption
 // algorithm or signing algorithm specified for the operation is incompatible with
 // the type of key material in the KMS key (KeySpec).
 //
@@ -873,15 +863,13 @@ func (e *KMSInvalidSignatureException) ErrorFault() smithy.ErrorFault { return s
 
 // The request was rejected because the state of the specified resource is not
 // valid for this request. This exceptions means one of the following:
-//
-// * The key
+// - The key
 // state of the KMS key is not compatible with the operation. To find the key
 // state, use the DescribeKey operation. For more information about which key
 // states are compatible with each KMS operation, see Key states of KMS keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
 // Key Management Service Developer Guide .
-//
-// * For cryptographic operations on KMS
+// - For cryptographic operations on KMS
 // keys in custom key stores, this exception represents a general failure with many
 // possible causes. To identify the cause, see the error message that accompanies
 // the exception.

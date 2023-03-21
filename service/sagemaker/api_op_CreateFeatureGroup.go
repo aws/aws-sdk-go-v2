@@ -43,12 +43,10 @@ type CreateFeatureGroupInput struct {
 	// creation or update of a Record in a FeatureGroup. All Records in the
 	// FeatureGroup must have a corresponding EventTime. An EventTime can be a String
 	// or Fractional.
-	//
-	// * Fractional: EventTime feature values must be a Unix timestamp
+	// - Fractional: EventTime feature values must be a Unix timestamp
 	// in seconds.
-	//
-	// * String: EventTime feature values must be an ISO-8601 string in
-	// the format. The following formats are supported yyyy-MM-dd'T'HH:mm:ssZ and
+	// - String: EventTime feature values must be an ISO-8601 string in the
+	// format. The following formats are supported yyyy-MM-dd'T'HH:mm:ssZ and
 	// yyyy-MM-dd'T'HH:mm:ss.SSSZ where yyyy, MM, and dd represent the year, month, and
 	// day respectively and HH, mm, ss, and if applicable, SSS represent the hour,
 	// month, second and milliseconds respsectively. 'T' and Z are constants.
@@ -66,11 +64,9 @@ type CreateFeatureGroupInput struct {
 
 	// The name of the FeatureGroup. The name must be unique within an Amazon Web
 	// Services Region in an Amazon Web Services account. The name:
-	//
-	// * Must start and
+	// - Must start and
 	// end with an alphanumeric character.
-	//
-	// * Can only contain alphanumeric character
+	// - Can only contain alphanumeric character
 	// and hyphens. Spaces are not allowed.
 	//
 	// This member is required.
@@ -81,10 +77,8 @@ type CreateFeatureGroupInput struct {
 	// OnlineStore. RecordIdentifierFeatureName must be one of feature definitions'
 	// names. You use the RecordIdentifierFeatureName to access data in a FeatureStore.
 	// This name:
-	//
-	// * Must start and end with an alphanumeric character.
-	//
-	// * Can only
+	// - Must start and end with an alphanumeric character.
+	// - Can only
 	// contains alphanumeric characters, hyphens, underscores. Spaces are not allowed.
 	//
 	// This member is required.
@@ -95,21 +89,17 @@ type CreateFeatureGroupInput struct {
 
 	// Use this to configure an OfflineFeatureStore. This parameter allows you to
 	// specify:
-	//
-	// * The Amazon Simple Storage Service (Amazon S3) location of an
+	// - The Amazon Simple Storage Service (Amazon S3) location of an
 	// OfflineStore.
-	//
-	// * A configuration for an Amazon Web Services Glue or Amazon Web
+	// - A configuration for an Amazon Web Services Glue or Amazon Web
 	// Services Hive data catalog.
-	//
-	// * An KMS encryption key to encrypt the Amazon S3
+	// - An KMS encryption key to encrypt the Amazon S3
 	// location used for OfflineStore. If KMS encryption key is not specified, by
 	// default we encrypt all data at rest using Amazon Web Services KMS key. By
 	// defining your bucket-level key
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-key.html) for SSE,
 	// you can reduce Amazon Web Services KMS requests costs by up to 99 percent.
-	//
-	// *
+	// -
 	// Format for the offline store table. Supported formats are Glue (Default) and
 	// Apache Iceberg (https://iceberg.apache.org/).
 	//

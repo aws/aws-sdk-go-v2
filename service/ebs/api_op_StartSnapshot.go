@@ -106,10 +106,8 @@ type StartSnapshotInput struct {
 
 	// The amount of time (in minutes) after which the snapshot is automatically
 	// cancelled if:
-	//
-	// * No blocks are written to the snapshot.
-	//
-	// * The snapshot is not
+	// - No blocks are written to the snapshot.
+	// - The snapshot is not
 	// completed after writing the last block of data.
 	//
 	// If no value is specified, the

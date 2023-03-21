@@ -19,16 +19,13 @@ import (
 // audio to achieve higher speech recognition accuracy in telephone audio
 // applications. In response, Amazon Lex returns the next message to convey to the
 // user. Consider the following example messages:
-//
-// * For a user input "I would like
+// - For a user input "I would like
 // a pizza," Amazon Lex might return a response with a message eliciting slot data
 // (for example, PizzaSize): "What size pizza would you like?".
-//
-// * After the user
+// - After the user
 // provides all of the pizza order information, Amazon Lex might return a response
 // with a message to get user confirmation: "Order the pizza?".
-//
-// * After the user
+// - After the user
 // replies "Yes" to the confirmation prompt, Amazon Lex might return a conclusion
 // statement: "Thank you, your cheese pizza has been ordered.".
 //
@@ -39,27 +36,21 @@ import (
 // message in the response that you can use to enhance client behavior, such as
 // displaying the appropriate client user interface. Consider the following
 // examples:
-//
-// * If the message is to elicit slot data, Amazon Lex returns the
+// - If the message is to elicit slot data, Amazon Lex returns the
 // following context information:
-//
-// * x-amz-lex-dialog-state header set to
+// - x-amz-lex-dialog-state header set to
 // ElicitSlot
-//
-// * x-amz-lex-intent-name header set to the intent name in the current
+// - x-amz-lex-intent-name header set to the intent name in the current
 // context
-//
-// * x-amz-lex-slot-to-elicit header set to the slot name for which the
+// - x-amz-lex-slot-to-elicit header set to the slot name for which the
 // message is eliciting information
-//
-// * x-amz-lex-slots header set to a map of slots
+// - x-amz-lex-slots header set to a map of slots
 // configured for the intent with their current values
 //
-// * If the message is a
+// - If the message is a
 // confirmation prompt, the x-amz-lex-dialog-state header is set to Confirmation
 // and the x-amz-lex-slot-to-elicit header is omitted.
-//
-// * If the message is a
+// - If the message is a
 // clarification prompt configured for the intent, indicating that the user intent
 // is not understood, the x-amz-dialog-state header is set to ElicitIntent and the
 // x-amz-slot-to-elicit header is omitted.
@@ -97,28 +88,21 @@ type PostContentInput struct {
 
 	// You pass this value as the Content-Type HTTP header. Indicates the audio format
 	// or text. The header value must start with one of the following prefixes:
-	//
-	// * PCM
+	// - PCM
 	// format, audio data must be in little-endian byte order.
+	// - audio/l16; rate=16000;
+	// channels=1
+	// - audio/x-l16; sample-rate=16000; channel-count=1
+	// - audio/lpcm;
+	// sample-rate=8000; sample-size-bits=16; channel-count=1; is-big-endian=false
 	//
-	// * audio/l16;
-	// rate=16000; channels=1
+	// -
+	// Opus format
+	// - audio/x-cbr-opus-with-preamble; preamble-size=0; bit-rate=256000;
+	// frame-size-milliseconds=4
 	//
-	// * audio/x-l16; sample-rate=16000; channel-count=1
-	//
-	// *
-	// audio/lpcm; sample-rate=8000; sample-size-bits=16; channel-count=1;
-	// is-big-endian=false
-	//
-	// * Opus format
-	//
-	// * audio/x-cbr-opus-with-preamble;
-	// preamble-size=0; bit-rate=256000; frame-size-milliseconds=4
-	//
-	// * Text format
-	//
-	// *
-	// text/plain; charset=utf-8
+	// - Text format
+	// - text/plain; charset=utf-8
 	//
 	// This member is required.
 	ContentType *string
@@ -136,22 +120,18 @@ type PostContentInput struct {
 	// conversation with your bot. At runtime, each request must contain the userID
 	// field. To decide the user ID to use for your application, consider the following
 	// factors.
-	//
-	// * The userID field must not contain any personally identifiable
+	// - The userID field must not contain any personally identifiable
 	// information of the user, for example, name, personal identification numbers, or
 	// other end user personal information.
-	//
-	// * If you want a user to start a
+	// - If you want a user to start a
 	// conversation on one device and continue on another device, use a user-specific
 	// identifier.
-	//
-	// * If you want the same user to be able to have two independent
+	// - If you want the same user to be able to have two independent
 	// conversations on two different devices, choose a device-specific identifier.
-	//
-	// *
-	// A user can't have two independent conversations with two different versions of
-	// the same bot. For example, a user can't have a conversation with the PROD and
-	// BETA versions of the same bot. If you anticipate that a user will need to have
+	// - A
+	// user can't have two independent conversations with two different versions of the
+	// same bot. For example, a user can't have a conversation with the PROD and BETA
+	// versions of the same bot. If you anticipate that a user will need to have
 	// conversation with two different versions, for example, while testing, include
 	// the bot alias in the user ID to separate the two conversations.
 	//
@@ -161,32 +141,22 @@ type PostContentInput struct {
 	// You pass this value as the Accept HTTP header. The message Amazon Lex returns in
 	// the response can be either text or speech based on the Accept HTTP header value
 	// in the request.
-	//
-	// * If the value is text/plain; charset=utf-8, Amazon Lex returns
+	// - If the value is text/plain; charset=utf-8, Amazon Lex returns
 	// text in the response.
-	//
-	// * If the value begins with audio/, Amazon Lex returns
+	// - If the value begins with audio/, Amazon Lex returns
 	// speech in the response. Amazon Lex uses Amazon Polly to generate the speech
 	// (using the configuration you specified in the Accept header). For example, if
 	// you specify audio/mpeg as the value, Amazon Lex returns speech in the MPEG
 	// format.
-	//
-	// * If the value is audio/pcm, the speech returned is audio/pcm in
-	// 16-bit, little endian format.
-	//
-	// * The following are the accepted values:
-	//
-	// *
-	// audio/mpeg
-	//
-	// * audio/ogg
-	//
-	// * audio/pcm
-	//
-	// * text/plain; charset=utf-8
-	//
-	// * audio/*
-	// (defaults to mpeg)
+	// - If the value is audio/pcm, the speech returned is audio/pcm in 16-bit,
+	// little endian format.
+	// - The following are the accepted values:
+	// - audio/mpeg
+	// -
+	// audio/ogg
+	// - audio/pcm
+	// - text/plain; charset=utf-8
+	// - audio/* (defaults to mpeg)
 	Accept *string
 
 	// A list of contexts active for the request. A context can be activated when a
@@ -262,13 +232,11 @@ type PostContentOutput struct {
 	// Identifies the current state of the user interaction. Amazon Lex returns one of
 	// the following values as dialogState. The client can optionally use this
 	// information to customize the user interface.
-	//
-	// * ElicitIntent - Amazon Lex wants
+	// - ElicitIntent - Amazon Lex wants
 	// to elicit the user's intent. Consider the following examples: For example, a
 	// user might utter an intent ("I want to order a pizza"). If Amazon Lex cannot
 	// infer the user intent from this utterance, it will return this dialog state.
-	//
-	// *
+	// -
 	// ConfirmIntent - Amazon Lex is expecting a "yes" or "no" response. For example,
 	// Amazon Lex wants user confirmation before fulfilling an intent. Instead of a
 	// simple "yes" or "no" response, a user might respond with additional information.
@@ -276,21 +244,17 @@ type PostContentOutput struct {
 	// drink." Amazon Lex can process such additional information (in these examples,
 	// update the crust type slot or change the intent from OrderPizza to
 	// OrderDrink).
-	//
-	// * ElicitSlot - Amazon Lex is expecting the value of a slot for the
+	// - ElicitSlot - Amazon Lex is expecting the value of a slot for the
 	// current intent. For example, suppose that in the response Amazon Lex sends this
 	// message: "What size pizza would you like?". A user might reply with the slot
 	// value (e.g., "medium"). The user might also provide additional information in
 	// the response (e.g., "medium thick crust pizza"). Amazon Lex can process such
 	// additional information appropriately.
-	//
-	// * Fulfilled - Conveys that the Lambda
+	// - Fulfilled - Conveys that the Lambda
 	// function has successfully fulfilled the intent.
-	//
-	// * ReadyForFulfillment - Conveys
+	// - ReadyForFulfillment - Conveys
 	// that the client has to fulfill the request.
-	//
-	// * Failed - Conveys that the
+	// - Failed - Conveys that the
 	// conversation with the user failed. This can happen for various reasons,
 	// including that the user does not provide an appropriate response to prompts from
 	// the service (you can configure how many times Amazon Lex can prompt a user for
@@ -361,19 +325,15 @@ type PostContentOutput struct {
 	Message *string
 
 	// The format of the response message. One of the following values:
-	//
-	// * PlainText -
+	// - PlainText -
 	// The message contains plain UTF-8 text.
-	//
-	// * CustomPayload - The message is a
-	// custom format for the client.
-	//
-	// * SSML - The message contains text formatted for
-	// voice output.
-	//
-	// * Composite - The message contains an escaped JSON object
-	// containing one or more messages from the groups that messages were assigned to
-	// when the intent was created.
+	// - CustomPayload - The message is a custom
+	// format for the client.
+	// - SSML - The message contains text formatted for voice
+	// output.
+	// - Composite - The message contains an escaped JSON object containing one
+	// or more messages from the groups that messages were assigned to when the intent
+	// was created.
 	MessageFormat types.MessageFormatType
 
 	// Provides a score that indicates how confident Amazon Lex is that the returned

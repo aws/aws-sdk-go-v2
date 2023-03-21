@@ -30,20 +30,17 @@ import (
 // (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services_list.html).
 // on this page. If you disable access by using this command, it causes the
 // following actions to occur:
-//
-// * The service can no longer create a service-linked
+// - The service can no longer create a service-linked
 // role in the accounts in your organization. This means that the service can't
 // perform operations on your behalf on any new accounts in your organization. The
 // service can still perform operations in older accounts until the service
 // completes its clean-up from Organizations.
-//
-// * The service can no longer perform
+// - The service can no longer perform
 // tasks in the member accounts in the organization, unless those operations are
 // explicitly permitted by the IAM policies that are attached to your roles. This
 // includes any data aggregation from the member accounts to the management
 // account, or to a delegated administrator account, where relevant.
-//
-// * Some
+// - Some
 // services detect this and clean up any remaining data or resources related to the
 // integration, while other services stop accessing the organization but leave any
 // historical data and configuration in place to support a possible re-enabling of

@@ -13,20 +13,14 @@ import (
 
 // Modifies a task assigned to a maintenance window. You can't change the task
 // type, but you can change the following values:
-//
-// * TaskARN. For example, you can
+// - TaskARN. For example, you can
 // change a RUN_COMMAND task from AWS-RunPowerShellScript to AWS-RunShellScript.
-//
-// *
+// -
 // ServiceRoleArn
-//
-// * TaskInvocationParameters
-//
-// * Priority
-//
-// * MaxConcurrency
-//
-// *
+// - TaskInvocationParameters
+// - Priority
+// - MaxConcurrency
+// -
 // MaxErrors
 //
 // One or more targets must be specified for maintenance window Run
@@ -80,18 +74,14 @@ type UpdateMaintenanceWindowTaskInput struct {
 
 	// Indicates whether tasks should continue to run after the cutoff time specified
 	// in the maintenance windows is reached.
-	//
-	// * CONTINUE_TASK: When the cutoff time is
+	// - CONTINUE_TASK: When the cutoff time is
 	// reached, any tasks that are running continue. The default value.
-	//
-	// *
+	// -
 	// CANCEL_TASK:
-	//
-	// * For Automation, Lambda, Step Functions tasks: When the cutoff
+	// - For Automation, Lambda, Step Functions tasks: When the cutoff
 	// time is reached, any task invocations that are already running continue, but no
 	// new task invocations are started.
-	//
-	// * For Run Command tasks: When the cutoff time
+	// - For Run Command tasks: When the cutoff time
 	// is reached, the system sends a CancelCommand operation that attempts to cancel
 	// the command associated with the task. However, there is no guarantee that the
 	// command will be terminated and the underlying process stopped.
@@ -152,11 +142,9 @@ type UpdateMaintenanceWindowTaskInput struct {
 	// is created when you run RegisterTaskWithMaintenanceWindow. For more information,
 	// see the following topics in the in the Amazon Web Services Systems Manager User
 	// Guide:
-	//
-	// * Using service-linked roles for Systems Manager
+	// - Using service-linked roles for Systems Manager
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions)
-	//
-	// *
+	// -
 	// Should I use a service-linked role or a custom service role to run maintenance
 	// window tasks?
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role)

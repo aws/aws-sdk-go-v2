@@ -47,28 +47,23 @@ type DescribeDBClustersInput struct {
 	// The user-supplied DB cluster identifier or the Amazon Resource Name (ARN) of the
 	// DB cluster. If this parameter is specified, information from only the specific
 	// DB cluster is returned. This parameter isn't case-sensitive. Constraints:
-	//
-	// * If
+	// - If
 	// supplied, must match an existing DBClusterIdentifier.
 	DBClusterIdentifier *string
 
 	// A filter that specifies one or more DB clusters to describe. Supported
 	// filters:
-	//
-	// * clone-group-id - Accepts clone group identifiers. The results list
+	// - clone-group-id - Accepts clone group identifiers. The results list
 	// only includes information about the DB clusters associated with these clone
 	// groups.
-	//
-	// * db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon
+	// - db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon
 	// Resource Names (ARNs). The results list only includes information about the DB
 	// clusters identified by these ARNs.
-	//
-	// * domain - Accepts Active Directory
-	// directory IDs. The results list only includes information about the DB clusters
-	// associated with these domains.
-	//
-	// * engine - Accepts engine names. The results
-	// list only includes information about the DB clusters for these engines.
+	// - domain - Accepts Active Directory directory
+	// IDs. The results list only includes information about the DB clusters associated
+	// with these domains.
+	// - engine - Accepts engine names. The results list only
+	// includes information about the DB clusters for these engines.
 	Filters []types.Filter
 
 	// Optional Boolean parameter that specifies whether the output includes

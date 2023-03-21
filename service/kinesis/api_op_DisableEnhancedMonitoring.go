@@ -33,25 +33,17 @@ type DisableEnhancedMonitoringInput struct {
 
 	// List of shard-level metrics to disable. The following are the valid shard-level
 	// metrics. The value "ALL" disables every metric.
-	//
-	// * IncomingBytes
-	//
-	// *
+	// - IncomingBytes
+	// -
 	// IncomingRecords
-	//
-	// * OutgoingBytes
-	//
-	// * OutgoingRecords
-	//
-	// *
+	// - OutgoingBytes
+	// - OutgoingRecords
+	// -
 	// WriteProvisionedThroughputExceeded
-	//
-	// * ReadProvisionedThroughputExceeded
-	//
-	// *
+	// - ReadProvisionedThroughputExceeded
+	// -
 	// IteratorAgeMilliseconds
-	//
-	// * ALL
+	// - ALL
 	//
 	// For more information, see Monitoring the Amazon
 	// Kinesis Data Streams Service with Amazon CloudWatch

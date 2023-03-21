@@ -122,19 +122,15 @@ type AppInstanceUserEndpoint struct {
 
 	// A read-only field that represents the state of an AppInstanceUserEndpoint.
 	// Supported values:
-	//
-	// * ACTIVE: The AppInstanceUserEndpoint is active and able to
+	// - ACTIVE: The AppInstanceUserEndpoint is active and able to
 	// receive messages. When ACTIVE, the EndpointStatusReason remains empty.
-	//
-	// *
+	// -
 	// INACTIVE: The AppInstanceUserEndpoint is inactive and can't receive message.
 	// When INACTIVE, the corresponding reason will be conveyed through
 	// EndpointStatusReason.
-	//
-	// * INVALID_DEVICE_TOKEN indicates that an
+	// - INVALID_DEVICE_TOKEN indicates that an
 	// AppInstanceUserEndpoint is INACTIVE due to invalid device token
-	//
-	// *
+	// -
 	// INVALID_PINPOINT_ARN indicates that an AppInstanceUserEndpoint is INACTIVE due
 	// to an invalid pinpoint ARN that was input through the ResourceArn field.
 	EndpointState *EndpointState
@@ -220,19 +216,15 @@ type EndpointAttributes struct {
 
 // A read-only field that represents the state of an AppInstanceUserEndpoint.
 // Supported values:
-//
-// * ACTIVE: The AppInstanceUserEndpoint is active and able to
+// - ACTIVE: The AppInstanceUserEndpoint is active and able to
 // receive messages. When ACTIVE, the EndpointStatusReason remains empty.
-//
-// *
+// -
 // INACTIVE: The AppInstanceUserEndpoint is inactive and can't receive message.
 // When INACTIVE, the corresponding reason will be conveyed through
 // EndpointStatusReason.
-//
-// * INVALID_DEVICE_TOKEN indicates that an
+// - INVALID_DEVICE_TOKEN indicates that an
 // AppInstanceUserEndpoint is INACTIVE due to invalid device token
-//
-// *
+// -
 // INVALID_PINPOINT_ARN indicates that an AppInstanceUserEndpoint is INACTIVE due
 // to an invalid pinpoint ARN that was input through the ResourceArn field.
 type EndpointState struct {

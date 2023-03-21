@@ -32,15 +32,12 @@ type ApiAssociation struct {
 	ApiId *string
 
 	// Identifies the status of an association.
-	//
-	// * PROCESSING: The API association is
+	// - PROCESSING: The API association is
 	// being created. You cannot modify association requests during processing.
-	//
-	// *
+	// -
 	// SUCCESS: The API association was successful. You can modify associations after
 	// success.
-	//
-	// * FAILED: The API association has failed. You can modify associations
+	// - FAILED: The API association has failed. You can modify associations
 	// after failure.
 	AssociationStatus AssociationStatus
 
@@ -57,10 +54,8 @@ type ApiAssociation struct {
 type ApiCache struct {
 
 	// Caching behavior.
-	//
-	// * FULL_REQUEST_CACHING: All requests are fully cached.
-	//
-	// *
+	// - FULL_REQUEST_CACHING: All requests are fully cached.
+	// -
 	// PER_RESOLVER_CACHING: Individual resolvers that you specify are cached.
 	ApiCachingBehavior ApiCachingBehavior
 
@@ -69,19 +64,14 @@ type ApiCache struct {
 	AtRestEncryptionEnabled bool
 
 	// The cache instance status.
-	//
-	// * AVAILABLE: The instance is available for use.
-	//
-	// *
+	// - AVAILABLE: The instance is available for use.
+	// -
 	// CREATING: The instance is currently creating.
-	//
-	// * DELETING: The instance is
+	// - DELETING: The instance is
 	// currently deleting.
-	//
-	// * MODIFYING: The instance is currently modifying.
-	//
-	// *
-	// FAILED: The instance has failed creation.
+	// - MODIFYING: The instance is currently modifying.
+	// - FAILED:
+	// The instance has failed creation.
 	Status ApiCacheStatus
 
 	// Transit encryption flag when connecting to cache. You cannot update this setting
@@ -92,46 +82,31 @@ type ApiCache struct {
 	Ttl int64
 
 	// The cache instance type. Valid values are
-	//
-	// * SMALL
-	//
-	// * MEDIUM
-	//
-	// * LARGE
-	//
-	// *
-	// XLARGE
-	//
-	// * LARGE_2X
-	//
-	// * LARGE_4X
-	//
-	// * LARGE_8X (not available in all regions)
-	//
-	// *
+	// - SMALL
+	// - MEDIUM
+	// - LARGE
+	// - XLARGE
+	// -
+	// LARGE_2X
+	// - LARGE_4X
+	// - LARGE_8X (not available in all regions)
+	// -
 	// LARGE_12X
 	//
 	// Historically, instance types were identified by an EC2-style value.
 	// As of July 2020, this is deprecated, and the generic identifiers above should be
 	// used. The following legacy instance types are available, but their use is
 	// discouraged:
-	//
-	// * T2_SMALL: A t2.small instance type.
-	//
-	// * T2_MEDIUM: A t2.medium
+	// - T2_SMALL: A t2.small instance type.
+	// - T2_MEDIUM: A t2.medium
 	// instance type.
-	//
-	// * R4_LARGE: A r4.large instance type.
-	//
-	// * R4_XLARGE: A r4.xlarge
+	// - R4_LARGE: A r4.large instance type.
+	// - R4_XLARGE: A r4.xlarge
 	// instance type.
-	//
-	// * R4_2XLARGE: A r4.2xlarge instance type.
-	//
-	// * R4_4XLARGE: A
+	// - R4_2XLARGE: A r4.2xlarge instance type.
+	// - R4_4XLARGE: A
 	// r4.4xlarge instance type.
-	//
-	// * R4_8XLARGE: A r4.8xlarge instance type.
+	// - R4_8XLARGE: A r4.8xlarge instance type.
 	Type ApiCacheType
 
 	noSmithyDocumentSerde
@@ -142,48 +117,36 @@ type ApiCache struct {
 // this version at launch in November 2017. These keys always expire after 7 days.
 // Amazon DynamoDB TTL manages key expiration. These keys ceased to be valid after
 // February 21, 2018, and they should no longer be used.
-//
-// * ListApiKeys returns the
+// - ListApiKeys returns the
 // expiration time in milliseconds.
-//
-// * CreateApiKey returns the expiration time in
+// - CreateApiKey returns the expiration time in
 // milliseconds.
-//
-// * UpdateApiKey is not available for this key version.
-//
-// *
+// - UpdateApiKey is not available for this key version.
+// -
 // DeleteApiKey deletes the item from the table.
+// - Expiration is stored in DynamoDB
+// as milliseconds. This results in a bug where keys are not automatically deleted
+// because DynamoDB expects the TTL to be stored in seconds. As a one-time action,
+// we deleted these keys from the table on February 21, 2018.
 //
-// * Expiration is stored in
-// DynamoDB as milliseconds. This results in a bug where keys are not automatically
-// deleted because DynamoDB expects the TTL to be stored in seconds. As a one-time
-// action, we deleted these keys from the table on February 21, 2018.
-//
-// da2: We
-// introduced this version in February 2018 when AppSync added support to extend
-// key expiration.
-//
-// * ListApiKeys returns the expiration time and deletion time in
+// da2: We introduced
+// this version in February 2018 when AppSync added support to extend key
+// expiration.
+// - ListApiKeys returns the expiration time and deletion time in
 // seconds.
-//
-// * CreateApiKey returns the expiration time and deletion time in
-// seconds and accepts a user-provided expiration time in seconds.
-//
-// * UpdateApiKey
-// returns the expiration time and and deletion time in seconds and accepts a
-// user-provided expiration time in seconds. Expired API keys are kept for 60 days
-// after the expiration time. You can update the key expiration time as long as the
-// key isn't deleted.
-//
-// * DeleteApiKey deletes the item from the table.
-//
-// *
-// Expiration is stored in DynamoDB as seconds. After the expiration time, using
-// the key to authenticate will fail. However, you can reinstate the key before
-// deletion.
-//
-// * Deletion is stored in DynamoDB as seconds. The key is deleted after
-// deletion time.
+// - CreateApiKey returns the expiration time and deletion time in seconds
+// and accepts a user-provided expiration time in seconds.
+// - UpdateApiKey returns
+// the expiration time and and deletion time in seconds and accepts a user-provided
+// expiration time in seconds. Expired API keys are kept for 60 days after the
+// expiration time. You can update the key expiration time as long as the key isn't
+// deleted.
+// - DeleteApiKey deletes the item from the table.
+// - Expiration is stored
+// in DynamoDB as seconds. After the expiration time, using the key to authenticate
+// will fail. However, you can reinstate the key before deletion.
+// - Deletion is
+// stored in DynamoDB as seconds. The key is deleted after deletion time.
 type ApiKey struct {
 
 	// The time after which the API key is deleted. The date is represented as seconds
@@ -227,8 +190,7 @@ type AppSyncRuntime struct {
 type AuthorizationConfig struct {
 
 	// The authorization type that the HTTP endpoint requires.
-	//
-	// * AWS_IAM: The
+	// - AWS_IAM: The
 	// authorization type is Signature Version 4 (SigV4).
 	//
 	// This member is required.
@@ -370,30 +332,22 @@ type DataSource struct {
 	ServiceRoleArn *string
 
 	// The type of the data source.
-	//
-	// * AWS_LAMBDA: The data source is an Lambda
+	// - AWS_LAMBDA: The data source is an Lambda
 	// function.
-	//
-	// * AMAZON_DYNAMODB: The data source is an Amazon DynamoDB table.
-	//
-	// *
+	// - AMAZON_DYNAMODB: The data source is an Amazon DynamoDB table.
+	// -
 	// AMAZON_ELASTICSEARCH: The data source is an Amazon OpenSearch Service domain.
-	//
-	// *
+	// -
 	// AMAZON_OPENSEARCH_SERVICE: The data source is an Amazon OpenSearch Service
 	// domain.
-	//
-	// * AMAZON_EVENTBRIDGE: The data source is an Amazon EventBridge
+	// - AMAZON_EVENTBRIDGE: The data source is an Amazon EventBridge
 	// configuration.
-	//
-	// * NONE: There is no data source. Use this type when you want to
+	// - NONE: There is no data source. Use this type when you want to
 	// invoke a GraphQL operation without connecting to a data source, such as when
 	// you're performing data transformation with resolvers or invoking a subscription
 	// from a mutation.
-	//
-	// * HTTP: The data source is an HTTP endpoint.
-	//
-	// *
+	// - HTTP: The data source is an HTTP endpoint.
+	// -
 	// RELATIONAL_DATABASE: The data source is a relational database.
 	Type DataSourceType
 
@@ -691,28 +645,21 @@ type LogConfig struct {
 	CloudWatchLogsRoleArn *string
 
 	// The field logging level. Values can be NONE, ERROR, or ALL.
-	//
-	// * NONE: No
+	// - NONE: No
 	// field-level logs are captured.
-	//
-	// * ERROR: Logs the following information only for
+	// - ERROR: Logs the following information only for
 	// the fields that are in error:
-	//
-	// * The error section in the server response.
-	//
-	// *
+	// - The error section in the server response.
+	// -
 	// Field-level errors.
+	// - The generated request/response functions that got resolved
+	// for error fields.
 	//
-	// * The generated request/response functions that got
-	// resolved for error fields.
-	//
-	// * ALL: The following information is logged for all
-	// fields in the query:
-	//
-	// * Field-level tracing information.
-	//
-	// * The generated
-	// request/response functions that got resolved for each field.
+	// - ALL: The following information is logged for all fields in
+	// the query:
+	// - Field-level tracing information.
+	// - The generated request/response
+	// functions that got resolved for each field.
 	//
 	// This member is required.
 	FieldLogLevel FieldLogLevel
@@ -802,8 +749,7 @@ type RelationalDatabaseDataSourceConfig struct {
 	RdsHttpEndpointConfig *RdsHttpEndpointConfig
 
 	// Source type for the relational database.
-	//
-	// * RDS_HTTP_ENDPOINT: The relational
+	// - RDS_HTTP_ENDPOINT: The relational
 	// database source type is an Amazon Relational Database Service (Amazon RDS) HTTP
 	// endpoint.
 	RelationalDatabaseSourceType RelationalDatabaseSourceType
@@ -828,15 +774,12 @@ type Resolver struct {
 	FieldName *string
 
 	// The resolver type.
-	//
-	// * UNIT: A UNIT resolver type. A UNIT resolver is the default
+	// - UNIT: A UNIT resolver type. A UNIT resolver is the default
 	// resolver type. You can use a UNIT resolver to run a GraphQL query against a
 	// single data source.
-	//
-	// * PIPELINE: A PIPELINE resolver type. You can use a
-	// PIPELINE resolver to invoke a series of Function objects in a serial manner. You
-	// can use a pipeline resolver to run a GraphQL query against multiple data
-	// sources.
+	// - PIPELINE: A PIPELINE resolver type. You can use a PIPELINE
+	// resolver to invoke a series of Function objects in a serial manner. You can use
+	// a pipeline resolver to run a GraphQL query against multiple data sources.
 	Kind ResolverKind
 
 	// The maximum batching size for a resolver.
@@ -874,24 +817,19 @@ type Resolver struct {
 type SyncConfig struct {
 
 	// The Conflict Detection strategy to use.
-	//
-	// * VERSION: Detect conflicts based on
+	// - VERSION: Detect conflicts based on
 	// object versions for this resolver.
-	//
-	// * NONE: Do not detect conflicts when
-	// invoking this resolver.
+	// - NONE: Do not detect conflicts when invoking
+	// this resolver.
 	ConflictDetection ConflictDetectionType
 
 	// The Conflict Resolution strategy to perform in the event of a conflict.
-	//
-	// *
+	// -
 	// OPTIMISTIC_CONCURRENCY: Resolve conflicts by rejecting mutations when versions
 	// don't match the latest version at the server.
-	//
-	// * AUTOMERGE: Resolve conflicts
+	// - AUTOMERGE: Resolve conflicts
 	// with the Automerge conflict resolution strategy.
-	//
-	// * LAMBDA: Resolve conflicts
+	// - LAMBDA: Resolve conflicts
 	// with an Lambda function supplied in the LambdaConflictHandlerConfig.
 	ConflictHandler ConflictHandlerType
 

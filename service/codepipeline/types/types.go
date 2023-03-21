@@ -462,18 +462,12 @@ type ActionTypeId struct {
 	// A category defines what kind of action can be taken in the stage, and constrains
 	// the provider type for the action. Valid categories are limited to one of the
 	// following values.
-	//
-	// * Source
-	//
-	// * Build
-	//
-	// * Test
-	//
-	// * Deploy
-	//
-	// * Invoke
-	//
-	// * Approval
+	// - Source
+	// - Build
+	// - Test
+	// - Deploy
+	// - Invoke
+	// - Approval
 	//
 	// This member is required.
 	Category ActionCategory
@@ -509,19 +503,13 @@ type ActionTypeId struct {
 type ActionTypeIdentifier struct {
 
 	// Defines what kind of action can be taken in the stage, one of the following:
-	//
-	// *
+	// -
 	// Source
-	//
-	// * Build
-	//
-	// * Test
-	//
-	// * Deploy
-	//
-	// * Approval
-	//
-	// * Invoke
+	// - Build
+	// - Test
+	// - Deploy
+	// - Approval
+	// - Invoke
 	//
 	// This member is required.
 	Category ActionCategory
@@ -1190,33 +1178,26 @@ type PipelineExecution struct {
 	PipelineVersion *int32
 
 	// The status of the pipeline execution.
-	//
-	// * Cancelled: The pipeline’s definition
-	// was updated before the pipeline execution could be completed.
-	//
-	// * InProgress: The
+	// - Cancelled: The pipeline’s definition was
+	// updated before the pipeline execution could be completed.
+	// - InProgress: The
 	// pipeline execution is currently running.
-	//
-	// * Stopped: The pipeline execution was
+	// - Stopped: The pipeline execution was
 	// manually stopped. For more information, see Stopped Executions
 	// (https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped).
-	//
-	// *
+	// -
 	// Stopping: The pipeline execution received a request to be manually stopped.
 	// Depending on the selected stop mode, the execution is either completing or
 	// abandoning in-progress actions. For more information, see Stopped Executions
 	// (https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped).
-	//
-	// *
+	// -
 	// Succeeded: The pipeline execution was completed successfully.
-	//
-	// * Superseded:
+	// - Superseded:
 	// While this pipeline execution was waiting for the next stage to be completed, a
 	// newer pipeline execution advanced and continued through the pipeline instead.
 	// For more information, see Superseded Executions
 	// (https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-superseded).
-	//
-	// *
+	// -
 	// Failed: The pipeline execution was not completed successfully.
 	Status PipelineExecutionStatus
 
@@ -1243,30 +1224,24 @@ type PipelineExecutionSummary struct {
 	StartTime *time.Time
 
 	// The status of the pipeline execution.
-	//
-	// * InProgress: The pipeline execution is
+	// - InProgress: The pipeline execution is
 	// currently running.
-	//
-	// * Stopped: The pipeline execution was manually stopped. For
+	// - Stopped: The pipeline execution was manually stopped. For
 	// more information, see Stopped Executions
 	// (https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped).
-	//
-	// *
+	// -
 	// Stopping: The pipeline execution received a request to be manually stopped.
 	// Depending on the selected stop mode, the execution is either completing or
 	// abandoning in-progress actions. For more information, see Stopped Executions
 	// (https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped).
-	//
-	// *
+	// -
 	// Succeeded: The pipeline execution was completed successfully.
-	//
-	// * Superseded:
+	// - Superseded:
 	// While this pipeline execution was waiting for the next stage to be completed, a
 	// newer pipeline execution advanced and continued through the pipeline instead.
 	// For more information, see Superseded Executions
 	// (https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-superseded).
-	//
-	// *
+	// -
 	// Failed: The pipeline execution was not completed successfully.
 	Status PipelineExecutionStatus
 
@@ -1574,18 +1549,15 @@ type WebhookAuthConfiguration struct {
 type WebhookDefinition struct {
 
 	// Supported options are GITHUB_HMAC, IP, and UNAUTHENTICATED.
-	//
-	// * For information
+	// - For information
 	// about the authentication scheme implemented by GITHUB_HMAC, see Securing your
 	// webhooks (https://developer.github.com/webhooks/securing/) on the GitHub
 	// Developer website.
-	//
-	// * IP rejects webhooks trigger requests unless they originate
+	// - IP rejects webhooks trigger requests unless they originate
 	// from an IP address in the IP range whitelisted in the authentication
 	// configuration.
-	//
-	// * UNAUTHENTICATED accepts all webhook trigger requests
-	// regardless of origin.
+	// - UNAUTHENTICATED accepts all webhook trigger requests regardless
+	// of origin.
 	//
 	// This member is required.
 	Authentication WebhookAuthenticationType

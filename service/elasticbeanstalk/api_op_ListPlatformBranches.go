@@ -39,30 +39,23 @@ type ListPlatformBranchesInput struct {
 	// following list shows valid attribute values for each of the SearchFilter terms.
 	// Most operators take a single value. The in and not_in operators can take
 	// multiple values.
-	//
-	// * Attribute = BranchName:
-	//
-	// * Operator: = | != | begins_with |
+	// - Attribute = BranchName:
+	// - Operator: = | != | begins_with |
 	// ends_with | contains | in | not_in
 	//
-	// * Attribute = LifecycleState:
-	//
-	// * Operator: =
+	// - Attribute = LifecycleState:
+	// - Operator: =
 	// | != | in | not_in
+	// - Values: beta | supported | deprecated | retired
 	//
-	// * Values: beta | supported | deprecated | retired
-	//
-	// *
+	// -
 	// Attribute = PlatformName:
-	//
-	// * Operator: = | != | begins_with | ends_with |
+	// - Operator: = | != | begins_with | ends_with |
 	// contains | in | not_in
 	//
-	// * Attribute = TierType:
-	//
-	// * Operator: = | !=
-	//
-	// * Values:
+	// - Attribute = TierType:
+	// - Operator: = | !=
+	// - Values:
 	// WebServer/Standard | Worker/SQS/HTTP
 	//
 	// Array size: limited to 10 SearchFilter

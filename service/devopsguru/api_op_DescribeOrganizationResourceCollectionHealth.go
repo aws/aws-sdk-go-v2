@@ -85,12 +85,10 @@ type DescribeOrganizationResourceCollectionHealthOutput struct {
 	// see the Tagging best practices
 	// (https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html)
 	// whitepaper. Each Amazon Web Services tag has two parts.
-	//
-	// * A tag key (for
+	// - A tag key (for
 	// example, CostCenter, Environment, Project, or Secret). Tag keys are
 	// case-sensitive.
-	//
-	// * An optional field known as a tag value (for example,
+	// - An optional field known as a tag value (for example,
 	// 111122223333, Production, or a team name). Omitting the tag value is the same as
 	// using an empty string. Like tag keys, tag values are case-sensitive.
 	//

@@ -91,27 +91,21 @@ func (e *InsufficientDeliveryPolicyException) ErrorFault() smithy.ErrorFault {
 }
 
 // Indicates one of the following errors:
-//
-// * For PutConfigRule, the rule cannot be
+// - For PutConfigRule, the rule cannot be
 // created because the IAM role assigned to Config lacks permissions to perform the
 // config:Put* action.
-//
-// * For PutConfigRule, the Lambda function cannot be invoked.
+// - For PutConfigRule, the Lambda function cannot be invoked.
 // Check the function ARN, and check the function's permissions.
-//
-// * For
+// - For
 // PutOrganizationConfigRule, organization Config rule cannot be created because
 // you do not have permissions to call IAM GetRole action or create a
 // service-linked role.
-//
-// * For PutConformancePack and
+// - For PutConformancePack and
 // PutOrganizationConformancePack, a conformance pack cannot be created because you
 // do not have the following permissions:
-//
-// * You do not have permission to call IAM
+// - You do not have permission to call IAM
 // GetRole action or create a service-linked role.
-//
-// * You do not have permission to
+// - You do not have permission to
 // read Amazon S3 bucket or call SSM:GetDocument.
 type InsufficientPermissionsException struct {
 	Message *string
@@ -1228,21 +1222,17 @@ func (e *NoSuchRetentionConfigurationException) ErrorFault() smithy.ErrorFault {
 
 // For PutConfigurationAggregator API, you can see this exception for the following
 // reasons:
-//
-// * No permission to call EnableAWSServiceAccess API
-//
-// * The
-// configuration aggregator cannot be updated because your Amazon Web Services
-// Organization management account or the delegated administrator role changed.
-// Delete this aggregator and create a new one with the current Amazon Web Services
+// - No permission to call EnableAWSServiceAccess API
+// - The configuration
+// aggregator cannot be updated because your Amazon Web Services Organization
+// management account or the delegated administrator role changed. Delete this
+// aggregator and create a new one with the current Amazon Web Services
 // Organization.
-//
-// * The configuration aggregator is associated with a previous
+// - The configuration aggregator is associated with a previous
 // Amazon Web Services Organization and Config cannot aggregate data with current
 // Amazon Web Services Organization. Delete this aggregator and create a new one
 // with the current Amazon Web Services Organization.
-//
-// * You are not a registered
+// - You are not a registered
 // delegated administrator for Config with permissions to call
 // ListDelegatedAdministrators API. Ensure that the management account registers
 // delagated administrator for Config service principle name before the delegated
@@ -1419,30 +1409,23 @@ func (e *ResourceConcurrentModificationException) ErrorFault() smithy.ErrorFault
 }
 
 // You see this exception in the following cases:
-//
-// * For DeleteConfigRule, Config
-// is deleting this rule. Try your request again later.
-//
-// * For DeleteConfigRule,
-// the rule is deleting your evaluation results. Try your request again later.
-//
-// *
-// For DeleteConfigRule, a remediation action is associated with the rule and
-// Config cannot delete this rule. Delete the remediation action associated with
-// the rule before deleting the rule and try your request again later.
-//
-// * For
+// - For DeleteConfigRule, Config is
+// deleting this rule. Try your request again later.
+// - For DeleteConfigRule, the
+// rule is deleting your evaluation results. Try your request again later.
+// - For
+// DeleteConfigRule, a remediation action is associated with the rule and Config
+// cannot delete this rule. Delete the remediation action associated with the rule
+// before deleting the rule and try your request again later.
+// - For
 // PutConfigOrganizationRule, organization Config rule deletion is in progress. Try
 // your request again later.
-//
-// * For DeleteOrganizationConfigRule, organization
+// - For DeleteOrganizationConfigRule, organization
 // Config rule creation is in progress. Try your request again later.
-//
-// * For
+// - For
 // PutConformancePack and PutOrganizationConformancePack, a conformance pack
 // creation, update, and deletion is in progress. Try your request again later.
-//
-// *
+// -
 // For DeleteConformancePack, a conformance pack creation, update, and deletion is
 // in progress. Try your request again later.
 type ResourceInUseException struct {

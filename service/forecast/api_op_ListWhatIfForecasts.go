@@ -39,15 +39,12 @@ type ListWhatIfForecastsInput struct {
 	// include or exclude the what-if forecast export jobs that match the statement
 	// from the list, respectively. The match statement consists of a key and a value.
 	// Filter properties
-	//
-	// * Condition - The condition to apply. Valid values are IS and
+	// - Condition - The condition to apply. Valid values are IS and
 	// IS_NOT. To include the forecast export jobs that match the statement, specify
 	// IS. To exclude matching forecast export jobs, specify IS_NOT.
-	//
-	// * Key - The name
+	// - Key - The name
 	// of the parameter to filter on. Valid values are WhatIfForecastArn and Status.
-	//
-	// *
+	// -
 	// Value - The value to match.
 	//
 	// For example, to list all jobs that export a

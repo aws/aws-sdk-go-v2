@@ -37,13 +37,10 @@ type DescribeSecurityGroupRulesInput struct {
 	DryRun *bool
 
 	// One or more filters.
-	//
-	// * group-id - The ID of the security group.
-	//
-	// *
+	// - group-id - The ID of the security group.
+	// -
 	// security-group-rule-id - The ID of the security group rule.
-	//
-	// * tag: - The
+	// - tag: - The
 	// key/value combination of a tag assigned to the resource. Use the tag key in the
 	// filter name and the tag value as the filter value. For example, to find all
 	// resources that have a tag with the key Owner and the value TeamA, specify

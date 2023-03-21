@@ -28,31 +28,25 @@ import (
 // bucket, it evaluates the cors configuration on the bucket and uses the first
 // CORSRule rule that matches the incoming browser request to enable a cross-origin
 // request. For a rule to match, the following conditions must be met:
-//
-// * The
+// - The
 // request's Origin header must match AllowedOrigin elements.
-//
-// * The request method
+// - The request method
 // (for example, GET, PUT, HEAD, and so on) or the Access-Control-Request-Method
 // header in case of a pre-flight OPTIONS request must be one of the AllowedMethod
 // elements.
+// - Every header specified in the Access-Control-Request-Headers request
+// header of a pre-flight request must match an AllowedHeader element.
 //
-// * Every header specified in the Access-Control-Request-Headers
-// request header of a pre-flight request must match an AllowedHeader element.
-//
-// For
-// more information about CORS, go to Enabling Cross-Origin Resource Sharing
+// For more
+// information about CORS, go to Enabling Cross-Origin Resource Sharing
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html) in the Amazon S3
 // User Guide. Related Resources
-//
-// * GetBucketCors
+// - GetBucketCors
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketCors.html)
-//
-// *
+// -
 // DeleteBucketCors
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketCors.html)
-//
-// *
+// -
 // RESTOPTIONSobject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTOPTIONSobject.html)
 func (c *Client) PutBucketCors(ctx context.Context, params *PutBucketCorsInput, optFns ...func(*Options)) (*PutBucketCorsOutput, error) {

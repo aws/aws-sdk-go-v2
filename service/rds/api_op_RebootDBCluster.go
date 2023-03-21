@@ -40,8 +40,7 @@ type RebootDBClusterInput struct {
 
 	// The DB cluster identifier. This parameter is stored as a lowercase string.
 	// Constraints:
-	//
-	// * Must match the identifier of an existing DBCluster.
+	// - Must match the identifier of an existing DBCluster.
 	//
 	// This member is required.
 	DBClusterIdentifier *string

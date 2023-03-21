@@ -27,23 +27,19 @@ import (
 // unique identifier, the upload ID, that you must include in your upload part
 // request. For more information about using the UploadPartCopy operation, see the
 // following:
-//
-// * For conceptual information about multipart uploads, see Uploading
+// - For conceptual information about multipart uploads, see Uploading
 // Objects Using Multipart Upload
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/uploadobjusingmpu.html) in the
 // Amazon S3 User Guide.
-//
-// * For information about permissions required to use the
+// - For information about permissions required to use the
 // multipart upload API, see Multipart Upload and Permissions
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html) in the
 // Amazon S3 User Guide.
-//
-// * For information about copying objects using a single
+// - For information about copying objects using a single
 // atomic action vs. a multipart upload, see Operations on Objects
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectOperations.html) in the
 // Amazon S3 User Guide.
-//
-// * For information about using server-side encryption with
+// - For information about using server-side encryption with
 // customer-provided encryption keys with the UploadPartCopy operation, see
 // CopyObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html)
 // and UploadPart
@@ -54,14 +50,12 @@ import (
 // x-amz-copy-source-if-match, x-amz-copy-source-if-none-match,
 // x-amz-copy-source-if-unmodified-since, and
 // x-amz-copy-source-if-modified-since:
-//
-// * Consideration 1 - If both of the
+// - Consideration 1 - If both of the
 // x-amz-copy-source-if-match and x-amz-copy-source-if-unmodified-since headers are
 // present in the request as follows: x-amz-copy-source-if-match condition
 // evaluates to true, and; x-amz-copy-source-if-unmodified-since condition
 // evaluates to false; Amazon S3 returns 200 OK and copies the data.
-//
-// *
+// -
 // Consideration 2 - If both of the x-amz-copy-source-if-none-match and
 // x-amz-copy-source-if-modified-since headers are present in the request as
 // follows: x-amz-copy-source-if-none-match condition evaluates to false, and;
@@ -80,45 +74,34 @@ import (
 // the versionId subresource as shown in the following example: x-amz-copy-source:
 // /bucket/object?versionId=version id Special Errors
 //
-// * Code: NoSuchUpload
-//
-// *
+// - Code: NoSuchUpload
+// -
 // Cause: The specified multipart upload does not exist. The upload ID might be
 // invalid, or the multipart upload might have been aborted or completed.
-//
-// * HTTP
+// - HTTP
 // Status Code: 404 Not Found
 //
-// * Code: InvalidRequest
-//
-// * Cause: The specified copy
+// - Code: InvalidRequest
+// - Cause: The specified copy
 // source is not supported as a byte-range copy source.
+// - HTTP Status Code: 400 Bad
+// Request
 //
-// * HTTP Status Code: 400
-// Bad Request
-//
-// # Related Resources
-//
-// * CreateMultipartUpload
+// Related Resources
+// - CreateMultipartUpload
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html)
-//
-// *
+// -
 // UploadPart
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)
-//
-// *
+// -
 // CompleteMultipartUpload
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html)
-//
-// *
+// -
 // AbortMultipartUpload
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html)
-//
-// *
-// ListParts
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html)
-//
-// *
+// -
+// ListParts (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html)
+// -
 // ListMultipartUploads
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html)
 func (c *Client) UploadPartCopy(ctx context.Context, params *UploadPartCopyInput, optFns ...func(*Options)) (*UploadPartCopyOutput, error) {
@@ -162,14 +145,12 @@ type UploadPartCopyInput struct {
 	// of two formats, depending on whether you want to access the source object
 	// through an access point
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html):
-	//
-	// *
+	// -
 	// For objects not accessed through an access point, specify the name of the source
 	// bucket and key of the source object, separated by a slash (/). For example, to
 	// copy the object reports/january.pdf from the bucket awsexamplebucket, use
 	// awsexamplebucket/reports/january.pdf. The value must be URL-encoded.
-	//
-	// * For
+	// - For
 	// objects accessed through access points, specify the Amazon Resource Name (ARN)
 	// of the object as accessed through the access point, in the format
 	// arn:aws:s3:::accesspoint//object/. For example, to copy the object

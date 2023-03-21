@@ -18,13 +18,11 @@ import (
 // unshared with the account. For more information, see  Cross-Region Redirection
 // for Amazon WorkSpaces
 // (https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html).
-//
-// *
+// -
 // Before performing this operation, call  DescribeConnectionAliases
 // (https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeConnectionAliases.html)
 // to make sure that the current state of the connection alias is CREATED.
-//
-// * To
+// - To
 // delete a connection alias that has been shared, the shared account must first
 // disassociate the connection alias from any directories it has been associated
 // with. Then you must unshare the connection alias from the account it has been

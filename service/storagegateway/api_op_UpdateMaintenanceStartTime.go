@@ -28,17 +28,13 @@ func (c *Client) UpdateMaintenanceStartTime(ctx context.Context, params *UpdateM
 }
 
 // A JSON object containing the following fields:
-//
-// *
+// -
 // UpdateMaintenanceStartTimeInput$DayOfMonth
-//
-// *
+// -
 // UpdateMaintenanceStartTimeInput$DayOfWeek
-//
-// *
+// -
 // UpdateMaintenanceStartTimeInput$HourOfDay
-//
-// *
+// -
 // UpdateMaintenanceStartTimeInput$MinuteOfHour
 type UpdateMaintenanceStartTimeInput struct {
 

@@ -71,31 +71,25 @@ type SendMessageInput struct {
 	// processing
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues-exactly-once-processing.html)
 	// in the Amazon SQS Developer Guide.
-	//
-	// * Every message must have a unique
+	// - Every message must have a unique
 	// MessageDeduplicationId,
-	//
-	// * You may provide a MessageDeduplicationId
-	// explicitly.
-	//
-	// * If you aren't able to provide a MessageDeduplicationId and you
-	// enable ContentBasedDeduplication for your queue, Amazon SQS uses a SHA-256 hash
-	// to generate the MessageDeduplicationId using the body of the message (but not
-	// the attributes of the message).
-	//
-	// * If you don't provide a MessageDeduplicationId
-	// and the queue doesn't have ContentBasedDeduplication set, the action fails with
-	// an error.
-	//
-	// * If the queue has ContentBasedDeduplication set, your
+	// - You may provide a MessageDeduplicationId explicitly.
+	// -
+	// If you aren't able to provide a MessageDeduplicationId and you enable
+	// ContentBasedDeduplication for your queue, Amazon SQS uses a SHA-256 hash to
+	// generate the MessageDeduplicationId using the body of the message (but not the
+	// attributes of the message).
+	// - If you don't provide a MessageDeduplicationId and
+	// the queue doesn't have ContentBasedDeduplication set, the action fails with an
+	// error.
+	// - If the queue has ContentBasedDeduplication set, your
 	// MessageDeduplicationId overrides the generated one.
 	//
-	// * When
+	// - When
 	// ContentBasedDeduplication is in effect, messages with identical content sent
 	// within the deduplication interval are treated as duplicates and only one copy of
 	// the message is delivered.
-	//
-	// * If you send one message with
+	// - If you send one message with
 	// ContentBasedDeduplication enabled and then another message with a
 	// MessageDeduplicationId that is the same as the one generated for the first
 	// MessageDeduplicationId, the two messages are treated as duplicates and only one
@@ -123,11 +117,9 @@ type SendMessageInput struct {
 	// values (for example, session data for multiple users). In this scenario,
 	// multiple consumers can process the queue, but the session data of each user is
 	// processed in a FIFO fashion.
-	//
-	// * You must associate a non-empty MessageGroupId
+	// - You must associate a non-empty MessageGroupId
 	// with a message. If you don't provide a MessageGroupId, the action fails.
-	//
-	// *
+	// -
 	// ReceiveMessage might return messages with multiple MessageGroupId values. For
 	// each MessageGroupId, the messages are sorted by time sent. The caller can't
 	// specify a MessageGroupId.
@@ -143,12 +135,10 @@ type SendMessageInput struct {
 
 	// The message system attribute to send. Each message system attribute consists of
 	// a Name, Type, and Value.
-	//
-	// * Currently, the only supported message system
+	// - Currently, the only supported message system
 	// attribute is AWSTraceHeader. Its type must be String and its value must be a
 	// correctly formatted X-Ray trace header string.
-	//
-	// * The size of a message system
+	// - The size of a message system
 	// attribute doesn't count towards the total size of a message.
 	MessageSystemAttributes map[string]types.MessageSystemAttributeValue
 

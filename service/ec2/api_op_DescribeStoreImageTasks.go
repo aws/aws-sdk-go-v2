@@ -49,11 +49,9 @@ type DescribeStoreImageTasksInput struct {
 	DryRun *bool
 
 	// The filters.
-	//
-	// * task-state - Returns tasks in a certain state (InProgress |
+	// - task-state - Returns tasks in a certain state (InProgress |
 	// Completed | Failed)
-	//
-	// * bucket - Returns task information for tasks that targeted
+	// - bucket - Returns task information for tasks that targeted
 	// a specific bucket. For the filter value, specify the bucket name.
 	Filters []types.Filter
 

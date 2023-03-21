@@ -29,23 +29,17 @@ import (
 // your shard limit. However, if you specify a target that isn't a multiple of 25%,
 // the scaling action might take longer to complete. This operation has the
 // following default limits. By default, you cannot do the following:
-//
-// * Scale more
+// - Scale more
 // than ten times per rolling 24-hour period per stream
-//
-// * Scale up to more than
+// - Scale up to more than
 // double your current shard count for a stream
-//
-// * Scale down below half your
+// - Scale down below half your
 // current shard count for a stream
-//
-// * Scale up to more than 10000 shards in a
+// - Scale up to more than 10000 shards in a
 // stream
-//
-// * Scale a stream with more than 10000 shards down unless the result is
+// - Scale a stream with more than 10000 shards down unless the result is
 // less than 10000 shards
-//
-// * Scale up to more than the shard limit for your
+// - Scale up to more than the shard limit for your
 // account
 //
 // For the default limits for an Amazon Web Services account, see Streams
@@ -79,19 +73,15 @@ type UpdateShardCountInput struct {
 
 	// The new number of shards. This value has the following default limits. By
 	// default, you cannot do the following:
-	//
-	// * Set this value to more than double your
+	// - Set this value to more than double your
 	// current shard count for a stream.
-	//
-	// * Set this value below half your current
-	// shard count for a stream.
-	//
-	// * Set this value to more than 10000 shards in a
-	// stream (the default limit for shard count per stream is 10000 per account per
-	// region), unless you request a limit increase.
-	//
-	// * Scale a stream with more than
-	// 10000 shards down unless you set this value to less than 10000 shards.
+	// - Set this value below half your current shard
+	// count for a stream.
+	// - Set this value to more than 10000 shards in a stream (the
+	// default limit for shard count per stream is 10000 per account per region),
+	// unless you request a limit increase.
+	// - Scale a stream with more than 10000
+	// shards down unless you set this value to less than 10000 shards.
 	//
 	// This member is required.
 	TargetShardCount *int32

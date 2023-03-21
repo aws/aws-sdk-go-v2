@@ -33,29 +33,23 @@ type SetSubscriptionAttributesInput struct {
 	// A map of attributes with their corresponding values. The following lists the
 	// names, descriptions, and values of the special request parameters that this
 	// action uses:
-	//
-	// * DeliveryPolicy – The policy that defines how Amazon SNS retries
+	// - DeliveryPolicy – The policy that defines how Amazon SNS retries
 	// failed deliveries to HTTP/S endpoints.
-	//
-	// * FilterPolicy – The simple JSON object
+	// - FilterPolicy – The simple JSON object
 	// that lets your subscriber receive only a subset of messages, rather than
 	// receiving every message published to the topic.
-	//
-	// * FilterPolicyScope – This
+	// - FilterPolicyScope – This
 	// attribute lets you choose the filtering scope by using one of the following
 	// string value types:
-	//
-	// * MessageAttributes (default) – The filter is applied on
-	// the message attributes.
-	//
-	// * MessageBody – The filter is applied on the message
+	// - MessageAttributes (default) – The filter is applied on the
+	// message attributes.
+	// - MessageBody – The filter is applied on the message
 	// body.
 	//
-	// * RawMessageDelivery – When set to true, enables raw message delivery to
+	// - RawMessageDelivery – When set to true, enables raw message delivery to
 	// Amazon SQS or HTTP/S endpoints. This eliminates the need for the endpoints to
 	// process JSON formatting, which is otherwise created for Amazon SNS metadata.
-	//
-	// *
+	// -
 	// RedrivePolicy – When specified, sends undeliverable messages to the specified
 	// Amazon SQS dead-letter queue. Messages that can't be delivered due to client
 	// errors (for example, when the subscribed endpoint is unreachable) or server
@@ -65,14 +59,11 @@ type SetSubscriptionAttributesInput struct {
 	//
 	// The following attribute applies only to Amazon Kinesis Data
 	// Firehose delivery stream subscriptions:
-	//
-	// * SubscriptionRoleArn – The ARN of the
+	// - SubscriptionRoleArn – The ARN of the
 	// IAM role that has the following:
-	//
-	// * Permission to write to the Kinesis Data
+	// - Permission to write to the Kinesis Data
 	// Firehose delivery stream
-	//
-	// * Amazon SNS listed as a trusted entity
+	// - Amazon SNS listed as a trusted entity
 	//
 	// Specifying a
 	// valid ARN for this attribute is required for Kinesis Data Firehose delivery

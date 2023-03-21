@@ -711,15 +711,12 @@ type FrequencyBandwidth struct {
 
 	// Frequency bandwidth value. AWS Ground Station currently has the following
 	// bandwidth limitations:
-	//
-	// * For AntennaDownlinkDemodDecodeconfig, valid values are
+	// - For AntennaDownlinkDemodDecodeconfig, valid values are
 	// between 125 kHz to 650 MHz.
-	//
-	// * For AntennaDownlinkconfig, valid values are
+	// - For AntennaDownlinkconfig, valid values are
 	// between 10 kHz to 54 MHz.
-	//
-	// * For AntennaUplinkConfig, valid values are between
-	// 10 kHz to 54 MHz.
+	// - For AntennaUplinkConfig, valid values are between 10
+	// kHz to 54 MHz.
 	//
 	// This member is required.
 	Value *float64
@@ -976,15 +973,12 @@ type SpectrumConfig struct {
 
 	// Bandwidth of a spectral Config. AWS Ground Station currently has the following
 	// bandwidth limitations:
-	//
-	// * For AntennaDownlinkDemodDecodeconfig, valid values are
+	// - For AntennaDownlinkDemodDecodeconfig, valid values are
 	// between 125 kHz to 650 MHz.
-	//
-	// * For AntennaDownlinkconfig valid values are
-	// between 10 kHz to 54 MHz.
-	//
-	// * For AntennaUplinkConfig, valid values are between
+	// - For AntennaDownlinkconfig valid values are between
 	// 10 kHz to 54 MHz.
+	// - For AntennaUplinkConfig, valid values are between 10 kHz to
+	// 54 MHz.
 	//
 	// This member is required.
 	Bandwidth *FrequencyBandwidth

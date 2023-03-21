@@ -14,16 +14,12 @@ import (
 // Modifies the customer gateway or the target gateway of an Amazon Web Services
 // Site-to-Site VPN connection. To modify the target gateway, the following
 // migration options are available:
-//
-// * An existing virtual private gateway to a new
+// - An existing virtual private gateway to a new
 // virtual private gateway
-//
-// * An existing virtual private gateway to a transit
+// - An existing virtual private gateway to a transit
 // gateway
-//
-// * An existing transit gateway to a new transit gateway
-//
-// * An existing
+// - An existing transit gateway to a new transit gateway
+// - An existing
 // transit gateway to a virtual private gateway
 //
 // Before you perform the migration

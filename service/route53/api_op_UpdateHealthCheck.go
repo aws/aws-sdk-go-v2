@@ -53,15 +53,12 @@ type UpdateHealthCheckInput struct {
 
 	// Stops Route 53 from performing health checks. When you disable a health check,
 	// here's what happens:
-	//
-	// * Health checks that check the health of endpoints: Route
+	// - Health checks that check the health of endpoints: Route
 	// 53 stops submitting requests to your application, server, or other resource.
-	//
-	// *
+	// -
 	// Calculated health checks: Route 53 stops aggregating the status of the
 	// referenced health checks.
-	//
-	// * Health checks that monitor CloudWatch alarms: Route
+	// - Health checks that monitor CloudWatch alarms: Route
 	// 53 stops monitoring the corresponding CloudWatch metrics.
 	//
 	// After you disable a
@@ -112,37 +109,33 @@ type UpdateHealthCheckInput struct {
 	// health checks. This is typically the fully qualified DNS name of the endpoint on
 	// which you want Route 53 to perform health checks. When Route 53 checks the
 	// health of an endpoint, here is how it constructs the Host header:
-	//
-	// * If you
+	// - If you
 	// specify a value of 80 for Port and HTTP or HTTP_STR_MATCH for Type, Route 53
 	// passes the value of FullyQualifiedDomainName to the endpoint in the Host
 	// header.
-	//
-	// * If you specify a value of 443 for Port and HTTPS or HTTPS_STR_MATCH
+	// - If you specify a value of 443 for Port and HTTPS or HTTPS_STR_MATCH
 	// for Type, Route 53 passes the value of FullyQualifiedDomainName to the endpoint
 	// in the Host header.
+	// - If you specify another value for Port and any value except
+	// TCP for Type, Route 53 passes FullyQualifiedDomainName:Port to the endpoint in
+	// the Host header.
 	//
-	// * If you specify another value for Port and any value
-	// except TCP for Type, Route 53 passes FullyQualifiedDomainName:Port to the
-	// endpoint in the Host header.
-	//
-	// If you don't specify a value for
-	// FullyQualifiedDomainName, Route 53 substitutes the value of IPAddress in the
-	// Host header in each of the above cases. If you don't specify a value for
-	// IPAddress: If you don't specify a value for IPAddress, Route 53 sends a DNS
-	// request to the domain that you specify in FullyQualifiedDomainName at the
-	// interval you specify in RequestInterval. Using an IPv4 address that is returned
-	// by DNS, Route 53 then checks the health of the endpoint. If you don't specify a
-	// value for IPAddress, Route 53 uses only IPv4 to send health checks to the
-	// endpoint. If there's no resource record set with a type of A for the name that
-	// you specify for FullyQualifiedDomainName, the health check fails with a "DNS
-	// resolution failed" error. If you want to check the health of weighted, latency,
-	// or failover resource record sets and you choose to specify the endpoint only by
-	// FullyQualifiedDomainName, we recommend that you create a separate health check
-	// for each endpoint. For example, create a health check for each HTTP server that
-	// is serving content for www.example.com. For the value of
-	// FullyQualifiedDomainName, specify the domain name of the server (such as
-	// us-east-2-www.example.com), not the name of the resource record sets
+	// If you don't specify a value for FullyQualifiedDomainName,
+	// Route 53 substitutes the value of IPAddress in the Host header in each of the
+	// above cases. If you don't specify a value for IPAddress: If you don't specify a
+	// value for IPAddress, Route 53 sends a DNS request to the domain that you specify
+	// in FullyQualifiedDomainName at the interval you specify in RequestInterval.
+	// Using an IPv4 address that is returned by DNS, Route 53 then checks the health
+	// of the endpoint. If you don't specify a value for IPAddress, Route 53 uses only
+	// IPv4 to send health checks to the endpoint. If there's no resource record set
+	// with a type of A for the name that you specify for FullyQualifiedDomainName, the
+	// health check fails with a "DNS resolution failed" error. If you want to check
+	// the health of weighted, latency, or failover resource record sets and you choose
+	// to specify the endpoint only by FullyQualifiedDomainName, we recommend that you
+	// create a separate health check for each endpoint. For example, create a health
+	// check for each HTTP server that is serving content for www.example.com. For the
+	// value of FullyQualifiedDomainName, specify the domain name of the server (such
+	// as us-east-2-www.example.com), not the name of the resource record sets
 	// (www.example.com). In this configuration, if the value of
 	// FullyQualifiedDomainName matches the name of the resource record sets and you
 	// then associate the health check with those resource record sets, health check
@@ -158,12 +151,10 @@ type UpdateHealthCheckInput struct {
 	// value of HealthCheckVersion for the health check that you want to update, and
 	// that you include that value in your UpdateHealthCheck request. This prevents
 	// Route 53 from overwriting an intervening update:
-	//
-	// * If the value in the
+	// - If the value in the
 	// UpdateHealthCheck request matches the value of HealthCheckVersion in the health
 	// check, Route 53 updates the health check with the new settings.
-	//
-	// * If the value
+	// - If the value
 	// of HealthCheckVersion in the health check is greater, the health check was
 	// changed after you got the version number. Route 53 does not update the health
 	// check, and it returns a HealthCheckVersionMismatch error.
@@ -174,13 +165,11 @@ type UpdateHealthCheckInput struct {
 	// considered healthy. To specify the child health checks that you want to
 	// associate with a CALCULATED health check, use the ChildHealthChecks and
 	// ChildHealthCheck elements. Note the following:
-	//
-	// * If you specify a number
-	// greater than the number of child health checks, Route 53 always considers this
-	// health check to be unhealthy.
-	//
-	// * If you specify 0, Route 53 always considers
-	// this health check to be healthy.
+	// - If you specify a number greater
+	// than the number of child health checks, Route 53 always considers this health
+	// check to be unhealthy.
+	// - If you specify 0, Route 53 always considers this health
+	// check to be healthy.
 	HealthThreshold *int32
 
 	// The IPv4 or IPv6 IP address for the endpoint that you want Amazon Route 53 to
@@ -189,12 +178,10 @@ type UpdateHealthCheckInput struct {
 	// FullyQualifiedDomainName at the interval that you specify in RequestInterval.
 	// Using an IP address that is returned by DNS, Route 53 then checks the health of
 	// the endpoint. Use one of the following formats for the value of IPAddress:
-	//
-	// *
+	// -
 	// IPv4 address: four values between 0 and 255, separated by periods (.), for
 	// example, 192.0.2.44.
-	//
-	// * IPv6 address: eight groups of four hexadecimal values,
+	// - IPv6 address: eight groups of four hexadecimal values,
 	// separated by colons (:), for example, 2001:0db8:85a3:0000:0000:abcd:0001:2345.
 	// You can also shorten IPv6 addresses as described in RFC 5952, for example,
 	// 2001:db8:85a3::abcd:1:2345.
@@ -204,13 +191,11 @@ type UpdateHealthCheckInput struct {
 	// specify the Elastic IP address for IPAddress. This ensures that the IP address
 	// of your instance never changes. For more information, see the applicable
 	// documentation:
-	//
-	// * Linux: Elastic IP Addresses (EIP)
+	// - Linux: Elastic IP Addresses (EIP)
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)
 	// in the Amazon EC2 User Guide for Linux Instances
-	//
-	// * Windows: Elastic IP
-	// Addresses (EIP)
+	// - Windows: Elastic IP Addresses
+	// (EIP)
 	// (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-ip-addresses-eip.html)
 	// in the Amazon EC2 User Guide for Windows Instances
 	//
@@ -223,31 +208,24 @@ type UpdateHealthCheckInput struct {
 	// address is in local, private, non-routable, or multicast ranges. For more
 	// information about IP addresses for which you can't create health checks, see the
 	// following documents:
-	//
-	// * RFC 5735, Special Use IPv4 Addresses
+	// - RFC 5735, Special Use IPv4 Addresses
 	// (https://tools.ietf.org/html/rfc5735)
-	//
-	// * RFC 6598, IANA-Reserved IPv4 Prefix for
+	// - RFC 6598, IANA-Reserved IPv4 Prefix for
 	// Shared Address Space (https://tools.ietf.org/html/rfc6598)
-	//
-	// * RFC 5156,
+	// - RFC 5156,
 	// Special-Use IPv6 Addresses (https://tools.ietf.org/html/rfc5156)
 	IPAddress *string
 
 	// When CloudWatch has insufficient data about the metric to determine the alarm
-	// state, the status that you want Amazon Route 53 to assign to the health
-	// check:
-	//
-	// * Healthy: Route 53 considers the health check to be healthy.
-	//
-	// *
-	// Unhealthy: Route 53 considers the health check to be unhealthy.
-	//
-	// *
-	// LastKnownStatus: By default, Route 53 uses the status of the health check from
-	// the last time CloudWatch had sufficient data to determine the alarm state. For
-	// new health checks that have no last known status, the status for the health
-	// check is healthy.
+	// state, the status that you want Amazon Route 53 to assign to the health check:
+	// -
+	// Healthy: Route 53 considers the health check to be healthy.
+	// - Unhealthy: Route
+	// 53 considers the health check to be unhealthy.
+	// - LastKnownStatus: By default,
+	// Route 53 uses the status of the health check from the last time CloudWatch had
+	// sufficient data to determine the alarm state. For new health checks that have no
+	// last known status, the status for the health check is healthy.
 	InsufficientDataHealthStatus types.InsufficientDataHealthStatus
 
 	// Specify whether you want Amazon Route 53 to invert the status of a health check,
@@ -267,22 +245,17 @@ type UpdateHealthCheckInput struct {
 	// A complex type that contains one ResettableElementName element for each element
 	// that you want to reset to the default value. Valid values for
 	// ResettableElementName include the following:
-	//
-	// * ChildHealthChecks: Amazon Route
+	// - ChildHealthChecks: Amazon Route
 	// 53 resets ChildHealthChecks
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-ChildHealthChecks)
 	// to null.
-	//
-	// * FullyQualifiedDomainName: Route 53 resets FullyQualifiedDomainName
+	// - FullyQualifiedDomainName: Route 53 resets FullyQualifiedDomainName
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_UpdateHealthCheck.html#Route53-UpdateHealthCheck-request-FullyQualifiedDomainName).
 	// to null.
-	//
-	// * Regions: Route 53 resets the Regions
+	// - Regions: Route 53 resets the Regions
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-Regions)
 	// list to the default set of regions.
-	//
-	// * ResourcePath: Route 53 resets
-	// ResourcePath
+	// - ResourcePath: Route 53 resets ResourcePath
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-ResourcePath)
 	// to null.
 	ResetElements []types.ResettableElementName

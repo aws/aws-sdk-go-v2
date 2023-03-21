@@ -20,15 +20,12 @@ import (
 // more information, see Controlling access and labeling jobs using tags
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-managing-jobs.html#batch-ops-job-tags)
 // in the Amazon S3 User Guide. Related actions include:
-//
-// * CreateJob
+// - CreateJob
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html)
-//
-// *
+// -
 // PutJobTagging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutJobTagging.html)
-//
-// *
+// -
 // DeleteJobTagging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteJobTagging.html)
 func (c *Client) GetJobTagging(ctx context.Context, params *GetJobTaggingInput, optFns ...func(*Options)) (*GetJobTaggingOutput, error) {

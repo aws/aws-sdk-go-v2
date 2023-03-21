@@ -47,13 +47,11 @@ type StartSupportDataExportInput struct {
 	// Code, Customer Guid, Subscription Guid, Subscription Start Date, Organization,
 	// AWS Account Id, Given Name, Surname, Telephone Number, Email, Title, Country
 	// Code, ZIP Code, Operation Type, and Operation Time.
-	//
-	// *
+	// -
 	// customer_support_contacts_data Customer support contact data. The data set will
 	// contain all changes (Creates, Updates, and Deletes) to customer support contact
 	// data from the date specified in the from_date parameter.
-	//
-	// *
+	// -
 	// test_customer_support_contacts_data An example data set containing static test
 	// data in the same format as customer_support_contacts_data
 	//

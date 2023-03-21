@@ -65,30 +65,22 @@ type DescribeInferenceExperimentOutput struct {
 
 	// The status of the inference experiment. The following are the possible statuses
 	// for an inference experiment:
-	//
-	// * Creating - Amazon SageMaker is creating your
+	// - Creating - Amazon SageMaker is creating your
 	// experiment.
-	//
-	// * Created - Amazon SageMaker has finished the creation of your
+	// - Created - Amazon SageMaker has finished the creation of your
 	// experiment and will begin the experiment at the scheduled time.
-	//
-	// * Updating -
+	// - Updating -
 	// When you make changes to your experiment, your experiment shows as updating.
-	//
-	// *
+	// -
 	// Starting - Amazon SageMaker is beginning your experiment.
-	//
-	// * Running - Your
+	// - Running - Your
 	// experiment is in progress.
-	//
-	// * Stopping - Amazon SageMaker is stopping your
+	// - Stopping - Amazon SageMaker is stopping your
 	// experiment.
-	//
-	// * Completed - Your experiment has completed.
-	//
-	// * Cancelled - When
-	// you conclude your experiment early using the StopInferenceExperiment API, or if
-	// any operation fails with an unexpected error, it shows as cancelled.
+	// - Completed - Your experiment has completed.
+	// - Cancelled - When you
+	// conclude your experiment early using the StopInferenceExperiment API, or if any
+	// operation fails with an unexpected error, it shows as cancelled.
 	//
 	// This member is required.
 	Status types.InferenceExperimentStatus

@@ -53,20 +53,15 @@ type StopStreamEncryptionInput struct {
 	// Amazon Resource Name (ARN) to either an alias or a key, or an alias name
 	// prefixed by "alias/".You can also use a master key owned by Kinesis Data Streams
 	// by specifying the alias aws/kinesis.
-	//
-	// * Key ARN example:
+	// - Key ARN example:
 	// arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
-	//
-	// *
+	// -
 	// Alias ARN example: arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
-	//
-	// *
+	// -
 	// Globally unique key ID example: 12345678-1234-1234-1234-123456789012
-	//
-	// * Alias
+	// - Alias
 	// name example: alias/MyAliasName
-	//
-	// * Master key owned by Kinesis Data Streams:
+	// - Master key owned by Kinesis Data Streams:
 	// alias/aws/kinesis
 	//
 	// This member is required.

@@ -31,12 +31,9 @@ func (c *Client) SearchProducts(ctx context.Context, params *SearchProductsInput
 type SearchProductsInput struct {
 
 	// The language code.
-	//
-	// * en - English (default)
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	// - en - English (default)
+	// - jp - Japanese
+	// - zh - Chinese
 	AcceptLanguage *string
 
 	// The search filters. If no search filters are specified, the output includes all

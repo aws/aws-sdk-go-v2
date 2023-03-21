@@ -37,17 +37,13 @@ type DescribeFastSnapshotRestoresInput struct {
 	DryRun *bool
 
 	// The filters. The possible values are:
-	//
-	// * availability-zone: The Availability
-	// Zone of the snapshot.
-	//
-	// * owner-id: The ID of the Amazon Web Services account
-	// that enabled fast snapshot restore on the snapshot.
-	//
-	// * snapshot-id: The ID of
-	// the snapshot.
-	//
-	// * state: The state of fast snapshot restores for the snapshot
+	// - availability-zone: The Availability Zone
+	// of the snapshot.
+	// - owner-id: The ID of the Amazon Web Services account that
+	// enabled fast snapshot restore on the snapshot.
+	// - snapshot-id: The ID of the
+	// snapshot.
+	// - state: The state of fast snapshot restores for the snapshot
 	// (enabling | optimizing | enabled | disabling | disabled).
 	Filters []types.Filter
 

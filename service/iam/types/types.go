@@ -105,28 +105,22 @@ type AccessKeyLastUsed struct {
 	// The date and time, in ISO 8601 date-time format
 	// (http://www.iso.org/iso/iso8601), when the access key was most recently used.
 	// This field is null in the following situations:
-	//
-	// * The user does not have an
+	// - The user does not have an
 	// access key.
-	//
-	// * An access key exists but has not been used since IAM began
+	// - An access key exists but has not been used since IAM began
 	// tracking this information.
-	//
-	// * There is no sign-in data associated with the user.
+	// - There is no sign-in data associated with the user.
 	//
 	// This member is required.
 	LastUsedDate *time.Time
 
 	// The Amazon Web Services Region where this access key was most recently used. The
 	// value for this field is "N/A" in the following situations:
-	//
-	// * The user does not
+	// - The user does not
 	// have an access key.
-	//
-	// * An access key exists but has not been used since IAM
-	// began tracking this information.
-	//
-	// * There is no sign-in data associated with the
+	// - An access key exists but has not been used since IAM began
+	// tracking this information.
+	// - There is no sign-in data associated with the
 	// user.
 	//
 	// For more information about Amazon Web Services Regions, see Regions and
@@ -138,14 +132,11 @@ type AccessKeyLastUsed struct {
 
 	// The name of the Amazon Web Services service with which this access key was most
 	// recently used. The value of this field is "N/A" in the following situations:
-	//
-	// *
+	// -
 	// The user does not have an access key.
-	//
-	// * An access key exists but has not been
+	// - An access key exists but has not been
 	// used since IAM started tracking this information.
-	//
-	// * There is no sign-in data
+	// - There is no sign-in data
 	// associated with the user.
 	//
 	// This member is required.
@@ -404,12 +395,9 @@ type EvaluationResult struct {
 
 // Contains information about an IAM group entity. This data type is used as a
 // response element in the following operations:
-//
-// * CreateGroup
-//
-// * GetGroup
-//
-// *
+// - CreateGroup
+// - GetGroup
+// -
 // ListGroups
 type Group struct {
 
@@ -491,15 +479,11 @@ type GroupDetail struct {
 
 // Contains information about an instance profile. This data type is used as a
 // response element in the following operations:
-//
-// * CreateInstanceProfile
-//
-// *
+// - CreateInstanceProfile
+// -
 // GetInstanceProfile
-//
-// * ListInstanceProfiles
-//
-// * ListInstanceProfilesForRole
+// - ListInstanceProfiles
+// - ListInstanceProfilesForRole
 type InstanceProfile struct {
 
 	// The Amazon Resource Name (ARN) specifying the instance profile. For more
@@ -1666,13 +1650,9 @@ type TrackedActionLastAccessed struct {
 
 // Contains information about an IAM user entity. This data type is used as a
 // response element in the following operations:
-//
-// * CreateUser
-//
-// * GetUser
-//
-// *
-// ListUsers
+// - CreateUser
+// - GetUser
+// - ListUsers
 type User struct {
 
 	// The Amazon Resource Name (ARN) that identifies the user. For more information
@@ -1719,10 +1699,8 @@ type User struct {
 	// span, only the first use is returned in this field. If the field is null (no
 	// value), then it indicates that they never signed in with a password. This can be
 	// because:
-	//
-	// * The user never had a password.
-	//
-	// * A password exists but has not been
+	// - The user never had a password.
+	// - A password exists but has not been
 	// used since IAM started tracking this information on October 20, 2014.
 	//
 	// A null

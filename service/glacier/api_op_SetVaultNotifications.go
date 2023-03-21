@@ -21,13 +21,11 @@ import (
 // permission to the vault to be allowed to publish notifications to the topic. You
 // can configure a vault to publish a notification for the following vault
 // events:
-//
-// * ArchiveRetrievalCompleted This event occurs when a job that was
+// - ArchiveRetrievalCompleted This event occurs when a job that was
 // initiated for an archive retrieval is completed (InitiateJob). The status of the
 // completed job can be "Succeeded" or "Failed". The notification sent to the SNS
 // topic is the same output as returned from DescribeJob.
-//
-// *
+// -
 // InventoryRetrievalCompleted This event occurs when a job that was initiated for
 // an inventory retrieval is completed (InitiateJob). The status of the completed
 // job can be "Succeeded" or "Failed". The notification sent to the SNS topic is

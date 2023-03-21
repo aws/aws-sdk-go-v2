@@ -50,17 +50,12 @@ type CreateClientVpnEndpointInput struct {
 	// Information about the client connection logging options. If you enable client
 	// connection logging, data about client connections is sent to a Cloudwatch Logs
 	// log stream. The following information is logged:
-	//
-	// * Client connection
-	// requests
-	//
-	// * Client connection results (successful and unsuccessful)
-	//
-	// * Reasons
-	// for unsuccessful client connection requests
-	//
-	// * Client connection termination
-	// time
+	// - Client connection requests
+	// -
+	// Client connection results (successful and unsuccessful)
+	// - Reasons for
+	// unsuccessful client connection requests
+	// - Client connection termination time
 	//
 	// This member is required.
 	ConnectionLogOptions *types.ConnectionLogOptions

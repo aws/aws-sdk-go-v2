@@ -70,13 +70,10 @@ type ModifyReplicationTaskInput struct {
 	MigrationType types.MigrationTypeValue
 
 	// The replication task identifier. Constraints:
-	//
-	// * Must contain 1-255 alphanumeric
+	// - Must contain 1-255 alphanumeric
 	// characters or hyphens.
-	//
-	// * First character must be a letter.
-	//
-	// * Cannot end with a
+	// - First character must be a letter.
+	// - Cannot end with a
 	// hyphen or contain two consecutive hyphens.
 	ReplicationTaskIdentifier *string
 

@@ -44,54 +44,40 @@ type ListUsersInput struct {
 	// A filter string of the form "AttributeName Filter-Type "AttributeValue"".
 	// Quotation marks within the filter string must be escaped using the backslash (\)
 	// character. For example, "family_name = \"Reddy\"".
-	//
-	// * AttributeName: The name of
+	// - AttributeName: The name of
 	// the attribute to search for. You can only search for one attribute at a time.
-	//
-	// *
+	// -
 	// Filter-Type: For an exact match, use =, for example, "given_name = \"Jon\"". For
 	// a prefix ("starts with") match, use ^=, for example, "given_name ^= \"Jon\"".
-	//
-	// *
+	// -
 	// AttributeValue: The attribute value that must be matched for each user.
 	//
 	// If the
 	// filter string is empty, ListUsers returns all users in the user pool. You can
 	// only search for the following standard attributes:
+	// - username (case-sensitive)
+	// -
+	// email
+	// - phone_number
+	// - name
+	// - given_name
+	// - family_name
+	// - preferred_username
+	// -
+	// cognito:user_status (called Status in the Console) (case-insensitive)
+	// - status
+	// (called Enabled in the Console) (case-sensitive)
+	// - sub
 	//
-	// * username
-	// (case-sensitive)
-	//
-	// * email
-	//
-	// * phone_number
-	//
-	// * name
-	//
-	// * given_name
-	//
-	// *
-	// family_name
-	//
-	// * preferred_username
-	//
-	// * cognito:user_status (called Status in the
-	// Console) (case-insensitive)
-	//
-	// * status (called Enabled in the Console)
-	// (case-sensitive)
-	//
-	// * sub
-	//
-	// Custom attributes aren't searchable. You can also list
-	// users with a client-side filter. The server-side filter matches no more than one
-	// attribute. For an advanced search, use a client-side filter with the --query
-	// parameter of the list-users action in the CLI. When you use a client-side
-	// filter, ListUsers returns a paginated list of zero or more users. You can
-	// receive multiple pages in a row with zero results. Repeat the query with each
-	// pagination token that is returned until you receive a null pagination token
-	// value, and then review the combined result. For more information about
-	// server-side and client-side filtering, see FilteringCLI output
+	// Custom attributes aren't
+	// searchable. You can also list users with a client-side filter. The server-side
+	// filter matches no more than one attribute. For an advanced search, use a
+	// client-side filter with the --query parameter of the list-users action in the
+	// CLI. When you use a client-side filter, ListUsers returns a paginated list of
+	// zero or more users. You can receive multiple pages in a row with zero results.
+	// Repeat the query with each pagination token that is returned until you receive a
+	// null pagination token value, and then review the combined result. For more
+	// information about server-side and client-side filtering, see FilteringCLI output
 	// (https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html) in the
 	// Command Line Interface User Guide
 	// (https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html). For

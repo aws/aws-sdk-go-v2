@@ -23,11 +23,9 @@ import (
 // you update an existing alarm, its state is left unchanged, but the update
 // completely overwrites the previous configuration of the alarm. If you are an IAM
 // user, you must have Amazon EC2 permissions for some alarm operations:
-//
-// * The
+// - The
 // iam:CreateServiceLinkedRole for all alarms with EC2 actions
-//
-// * The
+// - The
 // iam:CreateServiceLinkedRole to create an alarm with Systems Manager OpsItem
 // actions.
 //
@@ -41,8 +39,7 @@ import (
 // Cross-account alarms You can set an alarm on metrics in the current account, or
 // in another account. To create a cross-account alarm that watches a metric in a
 // different account, you must have completed the following pre-requisites:
-//
-// * The
+// - The
 // account where the metrics are located (the sharing account) must already have a
 // sharing role named CloudWatch-CrossAccountSharingRole. If it does not already
 // have this role, you must create it using the instructions in Set up a sharing
@@ -50,8 +47,7 @@ import (
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Cross-Account-Cross-Region.html#enable-cross-account-cross-Region).
 // The policy for that role must grant access to the ID of the account where you
 // are creating the alarm.
-//
-// * The account where you are creating the alarm (the
+// - The account where you are creating the alarm (the
 // monitoring account) must already have a service-linked role named
 // AWSServiceRoleForCloudWatchCrossAccount to allow CloudWatch to assume the
 // sharing role in the sharing account. If it does not, you must create it

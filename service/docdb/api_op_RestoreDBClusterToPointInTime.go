@@ -36,21 +36,17 @@ func (c *Client) RestoreDBClusterToPointInTime(ctx context.Context, params *Rest
 type RestoreDBClusterToPointInTimeInput struct {
 
 	// The name of the new cluster to be created. Constraints:
-	//
-	// * Must contain from 1
-	// to 63 letters, numbers, or hyphens.
-	//
-	// * The first character must be a letter.
-	//
-	// *
+	// - Must contain from 1 to
+	// 63 letters, numbers, or hyphens.
+	// - The first character must be a letter.
+	// -
 	// Cannot end with a hyphen or contain two consecutive hyphens.
 	//
 	// This member is required.
 	DBClusterIdentifier *string
 
 	// The identifier of the source cluster from which to restore. Constraints:
-	//
-	// * Must
+	// - Must
 	// match the identifier of an existing DBCluster.
 	//
 	// This member is required.
@@ -79,12 +75,10 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// cluster. The new DB cluster is encrypted with the KMS key identified by the
 	// KmsKeyId parameter. If you do not specify a value for the KmsKeyId parameter,
 	// then the following occurs:
-	//
-	// * If the cluster is encrypted, then the restored
+	// - If the cluster is encrypted, then the restored
 	// cluster is encrypted using the KMS key that was used to encrypt the source
 	// cluster.
-	//
-	// * If the cluster is not encrypted, then the restored cluster is not
+	// - If the cluster is not encrypted, then the restored cluster is not
 	// encrypted.
 	//
 	// If DBClusterIdentifier refers to a cluster that is not encrypted,
@@ -97,17 +91,13 @@ type RestoreDBClusterToPointInTimeInput struct {
 
 	// The date and time to restore the cluster to. Valid values: A time in Universal
 	// Coordinated Time (UTC) format. Constraints:
-	//
-	// * Must be before the latest
+	// - Must be before the latest
 	// restorable time for the instance.
-	//
-	// * Must be specified if the
+	// - Must be specified if the
 	// UseLatestRestorableTime parameter is not provided.
-	//
-	// * Cannot be specified if the
+	// - Cannot be specified if the
 	// UseLatestRestorableTime parameter is true.
-	//
-	// * Cannot be specified if the
+	// - Cannot be specified if the
 	// RestoreType parameter is copy-on-write.
 	//
 	// Example: 2015-03-07T23:45:00Z
@@ -115,11 +105,9 @@ type RestoreDBClusterToPointInTimeInput struct {
 
 	// The type of restore to be performed. You can specify one of the following
 	// values:
-	//
-	// * full-copy - The new DB cluster is restored as a full copy of the
+	// - full-copy - The new DB cluster is restored as a full copy of the
 	// source DB cluster.
-	//
-	// * copy-on-write - The new DB cluster is restored as a clone
+	// - copy-on-write - The new DB cluster is restored as a clone
 	// of the source DB cluster.
 	//
 	// If you don't specify a RestoreType value, then the

@@ -362,28 +362,21 @@ type EncryptionConfig struct {
 type ErrorDetail struct {
 
 	// A brief description of the error.
-	//
-	// * SubnetNotFound: We couldn't find one of the
+	// - SubnetNotFound: We couldn't find one of the
 	// subnets associated with the cluster.
-	//
-	// * SecurityGroupNotFound: We couldn't find
+	// - SecurityGroupNotFound: We couldn't find
 	// one of the security groups associated with the cluster.
-	//
-	// * EniLimitReached: You
+	// - EniLimitReached: You
 	// have reached the elastic network interface limit for your account.
-	//
-	// *
+	// -
 	// IpNotAvailable: A subnet associated with the cluster doesn't have any free IP
 	// addresses.
-	//
-	// * AccessDenied: You don't have permissions to perform the specified
+	// - AccessDenied: You don't have permissions to perform the specified
 	// operation.
-	//
-	// * OperationNotPermitted: The service role associated with the
-	// cluster doesn't have the required access permissions for Amazon EKS.
-	//
-	// *
-	// VpcIdNotFound: We couldn't find the VPC associated with the cluster.
+	// - OperationNotPermitted: The service role associated with the cluster
+	// doesn't have the required access permissions for Amazon EKS.
+	// - VpcIdNotFound: We
+	// couldn't find the VPC associated with the cluster.
 	ErrorCode ErrorCode
 
 	// A more complete description of the error.
@@ -488,42 +481,33 @@ type IdentityProviderConfigResponse struct {
 type Issue struct {
 
 	// A brief description of the error.
-	//
-	// * AccessDenied: Amazon EKS or one or more of
+	// - AccessDenied: Amazon EKS or one or more of
 	// your managed nodes is failing to authenticate or authorize with your Kubernetes
 	// cluster API server.
-	//
-	// * AsgInstanceLaunchFailures: Your Auto Scaling group is
+	// - AsgInstanceLaunchFailures: Your Auto Scaling group is
 	// experiencing failures while attempting to launch instances.
-	//
-	// *
+	// -
 	// AutoScalingGroupNotFound: We couldn't find the Auto Scaling group associated
 	// with the managed node group. You may be able to recreate an Auto Scaling group
 	// with the same settings to recover.
-	//
-	// * ClusterUnreachable: Amazon EKS or one or
+	// - ClusterUnreachable: Amazon EKS or one or
 	// more of your managed nodes is unable to to communicate with your Kubernetes
 	// cluster API server. This can happen if there are network disruptions or if API
 	// servers are timing out processing requests.
-	//
-	// * Ec2LaunchTemplateNotFound: We
+	// - Ec2LaunchTemplateNotFound: We
 	// couldn't find the Amazon EC2 launch template for your managed node group. You
 	// may be able to recreate a launch template with the same settings to recover.
-	//
-	// *
+	// -
 	// Ec2LaunchTemplateVersionMismatch: The Amazon EC2 launch template version for
 	// your managed node group does not match the version that Amazon EKS created. You
 	// may be able to revert to the version that Amazon EKS created to recover.
-	//
-	// *
+	// -
 	// Ec2SecurityGroupDeletionFailure: We could not delete the remote access security
 	// group for your managed node group. Remove any dependencies from the security
 	// group.
-	//
-	// * Ec2SecurityGroupNotFound: We couldn't find the cluster security group
+	// - Ec2SecurityGroupNotFound: We couldn't find the cluster security group
 	// for the cluster. You must recreate your cluster.
-	//
-	// *
+	// -
 	// Ec2SubnetInvalidConfiguration: One or more Amazon EC2 subnets specified for a
 	// node group do not automatically assign public IP addresses to instances launched
 	// into it. If you want your instances to be assigned a public IP address, then you
@@ -531,30 +515,24 @@ type Issue struct {
 	// Modifying the public IPv4 addressing attribute for your subnet
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html#subnet-public-ip)
 	// in the Amazon VPC User Guide.
-	//
-	// * IamInstanceProfileNotFound: We couldn't find
-	// the IAM instance profile for your managed node group. You may be able to
-	// recreate an instance profile with the same settings to recover.
-	//
-	// *
-	// IamNodeRoleNotFound: We couldn't find the IAM role for your managed node group.
-	// You may be able to recreate an IAM role with the same settings to recover.
-	//
-	// *
-	// InstanceLimitExceeded: Your Amazon Web Services account is unable to launch any
-	// more instances of the specified instance type. You may be able to request an
-	// Amazon EC2 instance limit increase to recover.
-	//
-	// * InsufficientFreeAddresses: One
-	// or more of the subnets associated with your managed node group does not have
-	// enough available IP addresses for new nodes.
-	//
-	// * InternalFailure: These errors
-	// are usually caused by an Amazon EKS server-side issue.
-	//
-	// * NodeCreationFailure:
-	// Your launched instances are unable to register with your Amazon EKS cluster.
-	// Common causes of this failure are insufficient node IAM role
+	// - IamInstanceProfileNotFound: We couldn't find the
+	// IAM instance profile for your managed node group. You may be able to recreate an
+	// instance profile with the same settings to recover.
+	// - IamNodeRoleNotFound: We
+	// couldn't find the IAM role for your managed node group. You may be able to
+	// recreate an IAM role with the same settings to recover.
+	// - InstanceLimitExceeded:
+	// Your Amazon Web Services account is unable to launch any more instances of the
+	// specified instance type. You may be able to request an Amazon EC2 instance limit
+	// increase to recover.
+	// - InsufficientFreeAddresses: One or more of the subnets
+	// associated with your managed node group does not have enough available IP
+	// addresses for new nodes.
+	// - InternalFailure: These errors are usually caused by
+	// an Amazon EKS server-side issue.
+	// - NodeCreationFailure: Your launched instances
+	// are unable to register with your Amazon EKS cluster. Common causes of this
+	// failure are insufficient node IAM role
 	// (https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html)
 	// permissions or lack of outbound internet access for the nodes.
 	Code NodegroupIssueCode
@@ -593,18 +571,15 @@ type KubernetesNetworkConfigRequest struct {
 	// recommend that you specify a block that does not overlap with resources in other
 	// networks that are peered or connected to your VPC. The block must meet the
 	// following requirements:
+	// - Within one of the following private IP address blocks:
+	// 10.0.0.0/8, 172.16.0.0/12, or 192.168.0.0/16.
+	// - Doesn't overlap with any CIDR
+	// block assigned to the VPC that you selected for VPC.
+	// - Between /24 and /12.
 	//
-	// * Within one of the following private IP address
-	// blocks: 10.0.0.0/8, 172.16.0.0/12, or 192.168.0.0/16.
-	//
-	// * Doesn't overlap with
-	// any CIDR block assigned to the VPC that you selected for VPC.
-	//
-	// * Between /24 and
-	// /12.
-	//
-	// You can only specify a custom CIDR block when you create a cluster and
-	// can't change this value once the cluster is created.
+	// You
+	// can only specify a custom CIDR block when you create a cluster and can't change
+	// this value once the cluster is created.
 	ServiceIpv4Cidr *string
 
 	noSmithyDocumentSerde

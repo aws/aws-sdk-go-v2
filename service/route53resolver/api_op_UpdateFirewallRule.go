@@ -41,15 +41,12 @@ type UpdateFirewallRuleInput struct {
 
 	// The action that DNS Firewall should take on a DNS query when it matches one of
 	// the domains in the rule's domain list:
-	//
-	// * ALLOW - Permit the request to go
+	// - ALLOW - Permit the request to go
 	// through.
-	//
-	// * ALERT - Permit the request to go through but send an alert to the
+	// - ALERT - Permit the request to go through but send an alert to the
 	// logs.
-	//
-	// * BLOCK - Disallow the request. This option requires additional details
-	// in the rule's BlockResponse.
+	// - BLOCK - Disallow the request. This option requires additional details in
+	// the rule's BlockResponse.
 	Action types.Action
 
 	// The DNS record's type. This determines the format of the record value that you
@@ -68,16 +65,13 @@ type UpdateFirewallRuleInput struct {
 
 	// The way that you want DNS Firewall to block the request. Used for the rule
 	// action setting BLOCK.
-	//
-	// * NODATA - Respond indicating that the query was
+	// - NODATA - Respond indicating that the query was
 	// successful, but no response is available for it.
-	//
-	// * NXDOMAIN - Respond
-	// indicating that the domain name that's in the query doesn't exist.
-	//
-	// * OVERRIDE -
-	// Provide a custom override in the response. This option requires custom handling
-	// details in the rule's BlockOverride* settings.
+	// - NXDOMAIN - Respond indicating
+	// that the domain name that's in the query doesn't exist.
+	// - OVERRIDE - Provide a
+	// custom override in the response. This option requires custom handling details in
+	// the rule's BlockOverride* settings.
 	BlockResponse types.BlockResponse
 
 	// The name of the rule.

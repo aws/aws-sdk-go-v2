@@ -15,8 +15,7 @@ import (
 // asynchronously, and can take time to complete. You can use GetGroupConfiguration
 // to check the status of the update. Minimum permissions To run this command, you
 // must have the following permissions:
-//
-// * resource-groups:PutGroupConfiguration
+// - resource-groups:PutGroupConfiguration
 func (c *Client) PutGroupConfiguration(ctx context.Context, params *PutGroupConfigurationInput, optFns ...func(*Options)) (*PutGroupConfigurationOutput, error) {
 	if params == nil {
 		params = &PutGroupConfigurationInput{}

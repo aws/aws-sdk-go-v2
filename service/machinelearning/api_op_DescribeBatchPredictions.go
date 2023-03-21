@@ -40,27 +40,20 @@ type DescribeBatchPredictionsInput struct {
 	EQ *string
 
 	// Use one of the following variables to filter a list of BatchPrediction:
-	//
-	// *
+	// -
 	// CreatedAt - Sets the search criteria to the BatchPrediction creation date.
-	//
-	// *
+	// -
 	// Status - Sets the search criteria to the BatchPrediction status.
-	//
-	// * Name - Sets
+	// - Name - Sets
 	// the search criteria to the contents of the BatchPredictionName.
-	//
-	// * IAMUser -
-	// Sets the search criteria to the user account that invoked the BatchPrediction
+	// - IAMUser - Sets
+	// the search criteria to the user account that invoked the BatchPrediction
 	// creation.
-	//
-	// * MLModelId - Sets the search criteria to the MLModel used in the
+	// - MLModelId - Sets the search criteria to the MLModel used in the
 	// BatchPrediction.
-	//
-	// * DataSourceId - Sets the search criteria to the DataSource
+	// - DataSourceId - Sets the search criteria to the DataSource
 	// used in the BatchPrediction.
-	//
-	// * DataURI - Sets the search criteria to the data
+	// - DataURI - Sets the search criteria to the data
 	// file(s) used in the BatchPrediction. The URL can identify either a file or an
 	// Amazon Simple Storage Solution (Amazon S3) bucket or directory.
 	FilterVariable types.BatchPredictionFilterVariable
@@ -98,21 +91,16 @@ type DescribeBatchPredictionsInput struct {
 	// example, a Batch Prediction operation could have the
 	// Name2014-09-09-HolidayGiftMailer. To search for this BatchPrediction, select
 	// Name for the FilterVariable and any of the following strings for the Prefix:
-	//
-	// *
+	// -
 	// 2014-09
-	//
-	// * 2014-09-09
-	//
-	// * 2014-09-09-Holiday
+	// - 2014-09-09
+	// - 2014-09-09-Holiday
 	Prefix *string
 
 	// A two-value parameter that determines the sequence of the resulting list of
 	// MLModels.
-	//
-	// * asc - Arranges the list in ascending order (A-Z, 0-9).
-	//
-	// * dsc -
+	// - asc - Arranges the list in ascending order (A-Z, 0-9).
+	// - dsc -
 	// Arranges the list in descending order (Z-A, 9-0).
 	//
 	// Results are sorted by

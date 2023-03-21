@@ -33,17 +33,13 @@ import (
 // includes the number of entities that have attempted to access the service and
 // the date and time of the last attempt. It also returns the ARN of the following
 // entity, depending on the resource ARN that you used to generate the report:
-//
-// *
+// -
 // User – Returns the user ARN that you used to generate the report
-//
-// * Group –
+// - Group –
 // Returns the ARN of the group member (user) that last attempted to access the
 // service
-//
-// * Role – Returns the role ARN that you used to generate the report
-//
-// *
+// - Role – Returns the role ARN that you used to generate the report
+// -
 // Policy – Returns the ARN of the user or role that last used the policy to
 // attempt to access the service
 //

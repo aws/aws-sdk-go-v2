@@ -57,18 +57,14 @@ type ListExecutionsInput struct {
 type ListExecutionsOutput struct {
 
 	// Returns the details for each execution.
-	//
-	// * NextToken: returned from a call to
+	// - NextToken: returned from a call to
 	// several APIs, you can use pass it to a subsequent command to continue listing
 	// additional executions.
-	//
-	// * StartTime: timestamp indicating when the execution
+	// - StartTime: timestamp indicating when the execution
 	// began.
-	//
-	// * Executions: details of the execution, including the execution ID,
+	// - Executions: details of the execution, including the execution ID,
 	// initial file location, and Service metadata.
-	//
-	// * Status: one of the following
+	// - Status: one of the following
 	// values: IN_PROGRESS, COMPLETED, EXCEPTION, HANDLING_EXEPTION.
 	//
 	// This member is required.

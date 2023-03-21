@@ -32,12 +32,10 @@ func (c *Client) GetCostEstimate(ctx context.Context, params *GetCostEstimateInp
 type GetCostEstimateInput struct {
 
 	// The cost estimate end time. Constraints:
-	//
-	// * Specified in Coordinated Universal
+	// - Specified in Coordinated Universal
 	// Time (UTC).
-	//
-	// * Specified in the Unix time format. For example, if you wish to
-	// use an end time of October 1, 2018, at 9 PM UTC, specify 1538427600 as the end
+	// - Specified in the Unix time format. For example, if you wish to use
+	// an end time of October 1, 2018, at 9 PM UTC, specify 1538427600 as the end
 	// time.
 	//
 	// You can convert a human-friendly time to Unix time format using a
@@ -52,13 +50,11 @@ type GetCostEstimateInput struct {
 	ResourceName *string
 
 	// The cost estimate start time. Constraints:
-	//
-	// * Specified in Coordinated Universal
+	// - Specified in Coordinated Universal
 	// Time (UTC).
-	//
-	// * Specified in the Unix time format. For example, if you wish to
-	// use a start time of October 1, 2018, at 8 PM UTC, specify 1538424000 as the
-	// start time.
+	// - Specified in the Unix time format. For example, if you wish to use
+	// a start time of October 1, 2018, at 8 PM UTC, specify 1538424000 as the start
+	// time.
 	//
 	// You can convert a human-friendly time to Unix time format using a
 	// converter like Epoch converter (https://www.epochconverter.com/).

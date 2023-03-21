@@ -64,12 +64,9 @@ type AssociatePrincipalWithPortfolioInput struct {
 	PrincipalType types.PrincipalType
 
 	// The language code.
-	//
-	// * en - English (default)
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	// - en - English (default)
+	// - jp - Japanese
+	// - zh - Chinese
 	AcceptLanguage *string
 
 	noSmithyDocumentSerde

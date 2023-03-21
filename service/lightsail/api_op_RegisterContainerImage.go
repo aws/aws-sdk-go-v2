@@ -45,8 +45,7 @@ type RegisterContainerImageInput struct {
 	// registered container images. Use the GetContainerImages action to return the
 	// container images registered to a Lightsail container service. The label is the
 	// portion of the following image name example:
-	//
-	// * :container-service-1..1
+	// - :container-service-1..1
 	//
 	// If the
 	// name of your container service is mycontainerservice, and the label that you

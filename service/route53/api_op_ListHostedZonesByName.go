@@ -29,23 +29,19 @@ import (
 // response. If you have a lot of hosted zones, use the MaxItems parameter to list
 // them in groups of up to 100. The response includes values that help navigate
 // from one group of MaxItems hosted zones to the next:
-//
-// * The DNSName and
+// - The DNSName and
 // HostedZoneId elements in the response contain the values, if any, specified for
 // the dnsname and hostedzoneid parameters in the request that produced the current
 // response.
-//
-// * The MaxItems element in the response contains the value, if any,
+// - The MaxItems element in the response contains the value, if any,
 // that you specified for the maxitems parameter in the request that produced the
 // current response.
-//
-// * If the value of IsTruncated in the response is true, there
+// - If the value of IsTruncated in the response is true, there
 // are more hosted zones associated with the current Amazon Web Services account.
 // If IsTruncated is false, this response includes the last hosted zone that is
 // associated with the current account. The NextDNSName element and
 // NextHostedZoneId elements are omitted from the response.
-//
-// * The NextDNSName and
+// - The NextDNSName and
 // NextHostedZoneId elements in the response contain the domain name and the hosted
 // zone ID of the next hosted zone that is associated with the current Amazon Web
 // Services account. If you want to list more hosted zones, make another call to

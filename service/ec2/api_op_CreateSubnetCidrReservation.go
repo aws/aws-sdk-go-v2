@@ -38,15 +38,13 @@ type CreateSubnetCidrReservationInput struct {
 	Cidr *string
 
 	// The type of reservation. The following are valid values:
-	//
-	// * prefix: The Amazon
+	// - prefix: The Amazon
 	// EC2 Prefix Delegation feature assigns the IP addresses to network interfaces
 	// that are associated with an instance. For information about Prefix Delegation,
 	// see Prefix Delegation for Amazon EC2 network interfaces
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-delegation.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
-	//
-	// * explicit: You manually assign
+	// - explicit: You manually assign
 	// the IP addresses to resources that reside in your subnet.
 	//
 	// This member is required.

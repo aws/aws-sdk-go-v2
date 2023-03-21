@@ -46,8 +46,7 @@ type ModifyCurrentDBClusterCapacityInput struct {
 
 	// The DB cluster identifier for the cluster being modified. This parameter isn't
 	// case-sensitive. Constraints:
-	//
-	// * Must match the identifier of an existing DB
+	// - Must match the identifier of an existing DB
 	// cluster.
 	//
 	// This member is required.
@@ -55,11 +54,9 @@ type ModifyCurrentDBClusterCapacityInput struct {
 
 	// The DB cluster capacity. When you change the capacity of a paused Aurora
 	// Serverless v1 DB cluster, it automatically resumes. Constraints:
-	//
-	// * For Aurora
+	// - For Aurora
 	// MySQL, valid capacity values are 1, 2, 4, 8, 16, 32, 64, 128, and 256.
-	//
-	// * For
+	// - For
 	// Aurora PostgreSQL, valid capacity values are 2, 4, 8, 16, 32, 64, 192, and 384.
 	Capacity *int32
 

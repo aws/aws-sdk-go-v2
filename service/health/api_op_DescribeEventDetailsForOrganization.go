@@ -27,13 +27,11 @@ import (
 // DescribeEventDetailsForOrganization operation, specify the
 // organizationEventDetailFilters object in the request. Depending on the Health
 // event type, note the following differences:
-//
-// * To return event details for a
+// - To return event details for a
 // public event, you must specify a null value for the awsAccountId parameter. If
 // you specify an account ID for a public event, Health returns an error message
 // because public events aren't specific to an account.
-//
-// * To return event details
+// - To return event details
 // for an event that is specific to an account in your organization, you must
 // specify the awsAccountId parameter in the request. If you don't specify an
 // account ID, Health returns an error message because the event is specific to an

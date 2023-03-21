@@ -643,8 +643,7 @@ type InputTransformer struct {
 	// Enclose each InputPathsMaps value in brackets: <value> The InputTemplate must be
 	// valid JSON. If InputTemplate is a JSON object (surrounded by curly braces), the
 	// following restrictions apply:
-	//
-	// * The placeholder cannot be used as an object
+	// - The placeholder cannot be used as an object
 	// key.
 	//
 	// The following example shows the syntax for using InputPathsMap and

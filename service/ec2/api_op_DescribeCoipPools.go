@@ -38,11 +38,9 @@ type DescribeCoipPoolsInput struct {
 	DryRun *bool
 
 	// One or more filters.
-	//
-	// * coip-pool.local-gateway-route-table-id - The ID of the
+	// - coip-pool.local-gateway-route-table-id - The ID of the
 	// local gateway route table.
-	//
-	// * coip-pool.pool-id - The ID of the address pool.
+	// - coip-pool.pool-id - The ID of the address pool.
 	Filters []types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the

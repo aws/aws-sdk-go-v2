@@ -25,12 +25,10 @@ import (
 // point ARN, see the Examples
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicy.html#API_control_PutAccessPointPolicy_Examples)
 // section. The following actions are related to PutAccessPointPolicy:
-//
-// *
+// -
 // GetAccessPointPolicy
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointPolicy.html)
-//
-// *
+// -
 // DeleteAccessPointPolicy
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicy.html)
 func (c *Client) PutAccessPointPolicy(ctx context.Context, params *PutAccessPointPolicyInput, optFns ...func(*Options)) (*PutAccessPointPolicyOutput, error) {

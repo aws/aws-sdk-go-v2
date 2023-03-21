@@ -20,15 +20,12 @@ import (
 // those fleets that are deployed with a specific build or script. For fleets that
 // have multiple locations, this operation retrieves fleets based on their home
 // Region only. This operation can be used in the following ways:
-//
-// * To get a list
+// - To get a list
 // of all fleets in a Region, don't provide a build or script identifier.
-//
-// * To get
+// - To get
 // a list of all fleets where a specific custom game build is deployed, provide the
 // build ID.
-//
-// * To get a list of all Realtime Servers fleets with a specific
+// - To get a list of all Realtime Servers fleets with a specific
 // configuration script, provide the script ID.
 //
 // Use the pagination parameters to

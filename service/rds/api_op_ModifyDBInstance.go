@@ -34,8 +34,7 @@ type ModifyDBInstanceInput struct {
 
 	// The DB instance identifier. This value is stored as a lowercase string.
 	// Constraints:
-	//
-	// * Must match the identifier of an existing DBInstance.
+	// - Must match the identifier of an existing DBInstance.
 	//
 	// This member is required.
 	DBInstanceIdentifier *string
@@ -72,13 +71,10 @@ type ModifyDBInstanceInput struct {
 	// A value that indicates whether minor version upgrades are applied automatically
 	// to the DB instance during the maintenance window. An outage occurs when all the
 	// following conditions are met:
-	//
-	// * The automatic upgrade is enabled for the
+	// - The automatic upgrade is enabled for the
 	// maintenance window.
-	//
-	// * A newer minor version is available.
-	//
-	// * RDS has enabled
+	// - A newer minor version is available.
+	// - RDS has enabled
 	// automatic patching for the engine version.
 	//
 	// If any of the preceding conditions
@@ -108,15 +104,12 @@ type ModifyDBInstanceInput struct {
 	// applicable. The retention period for automated backups is managed by the DB
 	// cluster. For more information, see ModifyDBCluster. Default: Uses existing
 	// setting Constraints:
-	//
-	// * It must be a value from 0 to 35. It can't be set to 0 if
+	// - It must be a value from 0 to 35. It can't be set to 0 if
 	// the DB instance is a source to read replicas. It can't be set to 0 for an RDS
 	// Custom for Oracle DB instance.
-	//
-	// * It can be specified for a MySQL read replica
+	// - It can be specified for a MySQL read replica
 	// only if the source is running MySQL 5.6 or later.
-	//
-	// * It can be specified for a
+	// - It can be specified for a
 	// PostgreSQL read replica only if the source is running PostgreSQL 9.3.5.
 	BackupRetentionPeriod *int32
 
@@ -137,15 +130,12 @@ type ModifyDBInstanceInput struct {
 	// the DB instance. If you are using SSL/TLS to connect to the DB instance, follow
 	// the appropriate instructions for your DB engine to rotate your SSL/TLS
 	// certificate:
-	//
-	// * For more information about rotating your SSL/TLS certificate for
+	// - For more information about rotating your SSL/TLS certificate for
 	// RDS DB engines, see  Rotating Your SSL/TLS Certificate.
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL-certificate-rotation.html)
 	// in the Amazon RDS User Guide.
-	//
-	// * For more information about rotating your
-	// SSL/TLS certificate for Aurora DB engines, see  Rotating Your SSL/TLS
-	// Certificate
+	// - For more information about rotating your SSL/TLS
+	// certificate for Aurora DB engines, see  Rotating Your SSL/TLS Certificate
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL-certificate-rotation.html)
 	// in the Amazon Aurora User Guide.
 	//
@@ -210,8 +200,7 @@ type ModifyDBInstanceInput struct {
 	// A list of DB security groups to authorize on this DB instance. Changing this
 	// setting doesn't result in an outage and the change is asynchronously applied as
 	// soon as possible. This setting doesn't apply to RDS Custom. Constraints:
-	//
-	// * If
+	// - If
 	// supplied, must match existing DBSecurityGroups.
 	DBSecurityGroups []string
 
@@ -331,8 +320,7 @@ type ModifyDBInstanceInput struct {
 	// information, see Password management with Amazon Web Services Secrets Manager
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html)
 	// in the Amazon RDS User Guide. Constraints:
-	//
-	// * Can't manage the master user
+	// - Can't manage the master user
 	// password with Amazon Web Services Secrets Manager if MasterUserPassword is
 	// specified.
 	ManageMasterUserPassword *bool
@@ -358,14 +346,12 @@ type ModifyDBInstanceInput struct {
 	// The Amazon Web Services KMS key identifier to encrypt a secret that is
 	// automatically generated and managed in Amazon Web Services Secrets Manager. This
 	// setting is valid only if both of the following conditions are met:
-	//
-	// * The DB
+	// - The DB
 	// instance doesn't manage the master user password in Amazon Web Services Secrets
 	// Manager. If the DB instance already manages the master user password in Amazon
 	// Web Services Secrets Manager, you can't change the KMS key used to encrypt the
 	// secret.
-	//
-	// * You are turning on ManageMasterUserPassword to manage the master user
+	// - You are turning on ManageMasterUserPassword to manage the master user
 	// password in Amazon Web Services Secrets Manager. If you are turning on
 	// ManageMasterUserPassword and don't specify MasterUserSecretKmsKeyId, then the
 	// aws/secretsmanager KMS key is used to encrypt the secret. If the secret is in a
@@ -411,10 +397,8 @@ type ModifyDBInstanceInput struct {
 	MultiAZ *bool
 
 	// The network type of the DB instance. Valid values:
-	//
-	// * IPV4
-	//
-	// * DUAL
+	// - IPV4
+	// - DUAL
 	//
 	// The network
 	// type is determined by the DBSubnetGroup specified for the DB instance. A
@@ -429,14 +413,11 @@ type ModifyDBInstanceInput struct {
 	// immediately if you enable ApplyImmediately, or will occur during the next
 	// maintenance window if you disable Apply Immediately. This value is stored as a
 	// lowercase string. This setting doesn't apply to RDS Custom. Constraints:
-	//
-	// * Must
+	// - Must
 	// contain from 1 to 63 letters, numbers, or hyphens.
-	//
-	// * The first character must
-	// be a letter.
-	//
-	// * Can't end with a hyphen or contain two consecutive
+	// - The first character must be
+	// a letter.
+	// - Can't end with a hyphen or contain two consecutive
 	// hyphens.
 	//
 	// Example: mydbinstance
@@ -465,28 +446,21 @@ type ModifyDBInstanceInput struct {
 
 	// The number of days to retain Performance Insights data. The default is 7 days.
 	// The following values are valid:
-	//
-	// * 7
-	//
-	// * month * 31, where month is a number of
+	// - 7
+	// - month * 31, where month is a number of
 	// months from 1-23
-	//
-	// * 731
+	// - 731
 	//
 	// For example, the following values are valid:
-	//
-	// * 93 (3
+	// - 93 (3
 	// months * 31)
+	// - 341 (11 months * 31)
+	// - 589 (19 months * 31)
+	// - 731
 	//
-	// * 341 (11 months * 31)
-	//
-	// * 589 (19 months * 31)
-	//
-	// * 731
-	//
-	// If you
-	// specify a retention period such as 94, which isn't a valid value, RDS issues an
-	// error. This setting doesn't apply to RDS Custom.
+	// If you specify
+	// a retention period such as 94, which isn't a valid value, RDS issues an error.
+	// This setting doesn't apply to RDS Custom.
 	PerformanceInsightsRetentionPeriod *int32
 
 	// The daily time range during which automated backups are created if automated
@@ -499,16 +473,12 @@ type ModifyDBInstanceInput struct {
 	// in the Amazon RDS User Guide. Amazon Aurora Not applicable. The daily time range
 	// for creating automated backups is managed by the DB cluster. For more
 	// information, see ModifyDBCluster. Constraints:
-	//
-	// * Must be in the format
+	// - Must be in the format
 	// hh24:mi-hh24:mi
-	//
-	// * Must be in Universal Time Coordinated (UTC)
-	//
-	// * Must not
+	// - Must be in Universal Time Coordinated (UTC)
+	// - Must not
 	// conflict with the preferred maintenance window
-	//
-	// * Must be at least 30 minutes
+	// - Must be at least 30 minutes
 	PreferredBackupWindow *string
 
 	// The weekly time range (in UTC) during which system maintenance can occur, which
@@ -578,8 +548,7 @@ type ModifyDBInstanceInput struct {
 	// Secrets Manager
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html)
 	// in the Amazon RDS User Guide. Constraints:
-	//
-	// * You must apply the change
+	// - You must apply the change
 	// immediately when rotating the master user password.
 	RotateMasterUserPassword *bool
 
@@ -623,8 +592,7 @@ type ModifyDBInstanceInput struct {
 	// to RDS Custom. Amazon Aurora Not applicable. The associated list of EC2 VPC
 	// security groups is managed by the DB cluster. For more information, see
 	// ModifyDBCluster. Constraints:
-	//
-	// * If supplied, must match existing
+	// - If supplied, must match existing
 	// VpcSecurityGroupIds.
 	VpcSecurityGroupIds []string
 

@@ -42,20 +42,14 @@ type GetSavingsPlansUtilizationInput struct {
 
 	// Filters Savings Plans utilization coverage data for active Savings Plans
 	// dimensions. You can filter data with the following dimensions:
-	//
-	// *
+	// -
 	// LINKED_ACCOUNT
-	//
-	// * SAVINGS_PLAN_ARN
-	//
-	// * SAVINGS_PLANS_TYPE
-	//
-	// * REGION
-	//
-	// *
+	// - SAVINGS_PLAN_ARN
+	// - SAVINGS_PLANS_TYPE
+	// - REGION
+	// -
 	// PAYMENT_OPTION
-	//
-	// * INSTANCE_TYPE_FAMILY
+	// - INSTANCE_TYPE_FAMILY
 	//
 	// GetSavingsPlansUtilization uses the same
 	// Expression
@@ -70,17 +64,12 @@ type GetSavingsPlansUtilizationInput struct {
 
 	// The value that you want to sort the data by. The following values are supported
 	// for Key:
-	//
-	// * UtilizationPercentage
-	//
-	// * TotalCommitment
-	//
-	// * UsedCommitment
-	//
-	// *
+	// - UtilizationPercentage
+	// - TotalCommitment
+	// - UsedCommitment
+	// -
 	// UnusedCommitment
-	//
-	// * NetSavings
+	// - NetSavings
 	//
 	// The supported values for SortOrder are ASCENDING
 	// and DESCENDING.

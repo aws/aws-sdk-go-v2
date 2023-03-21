@@ -48,14 +48,11 @@ type UpdateUserInput struct {
 
 	// The Amazon QuickSight role of the user. The role can be one of the following
 	// default security cohorts:
-	//
-	// * READER: A user who has read-only access to
+	// - READER: A user who has read-only access to
 	// dashboards.
-	//
-	// * AUTHOR: A user who can create data sources, datasets, analyses,
+	// - AUTHOR: A user who can create data sources, datasets, analyses,
 	// and dashboards.
-	//
-	// * ADMIN: A user who is an author, who can also manage Amazon
+	// - ADMIN: A user who is an author, who can also manage Amazon
 	// QuickSight settings.
 	//
 	// The name of the Amazon QuickSight role is invisible to the
@@ -78,16 +75,12 @@ type UpdateUserInput struct {
 	// (Enterprise edition only) The name of the custom permissions profile that you
 	// want to assign to this user. Customized permissions allows you to control a
 	// user's access by restricting access the following operations:
-	//
-	// * Create and
+	// - Create and
 	// update data sources
-	//
-	// * Create and update datasets
-	//
-	// * Create and update email
+	// - Create and update datasets
+	// - Create and update email
 	// reports
-	//
-	// * Subscribe to email reports
+	// - Subscribe to email reports
 	//
 	// A set of custom permissions includes any
 	// combination of these restrictions. Currently, you need to create the profile
@@ -104,17 +97,14 @@ type UpdateUserInput struct {
 	// user federate into Amazon QuickSight with an associated Identity and Access
 	// Management(IAM) role. The type of supported external login provider can be one
 	// of the following.
-	//
-	// * COGNITO: Amazon Cognito. The provider URL is
+	// - COGNITO: Amazon Cognito. The provider URL is
 	// cognito-identity.amazonaws.com. When choosing the COGNITO provider type, don’t
 	// use the "CustomFederationProviderUrl" parameter which is only needed when the
 	// external provider is custom.
-	//
-	// * CUSTOM_OIDC: Custom OpenID Connect (OIDC)
+	// - CUSTOM_OIDC: Custom OpenID Connect (OIDC)
 	// provider. When choosing CUSTOM_OIDC type, use the CustomFederationProviderUrl
 	// parameter to provide the custom OIDC provider URL.
-	//
-	// * NONE: This clears all the
+	// - NONE: This clears all the
 	// previously saved external login information for a user. Use the DescribeUser
 	// (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DescribeUser.html)
 	// API operation to check the external login information.

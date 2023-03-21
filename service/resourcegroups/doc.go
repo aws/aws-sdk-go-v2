@@ -22,18 +22,13 @@
 // (https://docs.aws.amazon.com/ARG/latest/userguide/welcome.html). Resource Groups
 // uses a REST-compliant API that you can use to perform the following types of
 // operations.
-//
-// * Create, Read, Update, and Delete (CRUD) operations on resource
+// - Create, Read, Update, and Delete (CRUD) operations on resource
 // groups and resource query entities
-//
-// * Applying, editing, and removing tags from
+// - Applying, editing, and removing tags from
 // resource groups
-//
-// * Resolving resource group member ARNs so they can be returned
+// - Resolving resource group member ARNs so they can be returned
 // as search results
-//
-// * Getting data about resources that are members of a group
-//
-// *
+// - Getting data about resources that are members of a group
+// -
 // Searching Amazon Web Services resources based on a resource query
 package resourcegroups

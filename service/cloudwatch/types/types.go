@@ -866,16 +866,13 @@ type MetricStat struct {
 	// that includes a StorageResolution of 1 second. If the StartTime parameter
 	// specifies a time stamp that is greater than 3 hours ago, you must specify the
 	// period as follows or no data points in that time range is returned:
-	//
-	// * Start
-	// time between 3 hours and 15 days ago - Use a multiple of 60 seconds (1
-	// minute).
-	//
-	// * Start time between 15 and 63 days ago - Use a multiple of 300
-	// seconds (5 minutes).
-	//
-	// * Start time greater than 63 days ago - Use a multiple of
-	// 3600 seconds (1 hour).
+	// - Start time
+	// between 3 hours and 15 days ago - Use a multiple of 60 seconds (1 minute).
+	// -
+	// Start time between 15 and 63 days ago - Use a multiple of 300 seconds (5
+	// minutes).
+	// - Start time greater than 63 days ago - Use a multiple of 3600 seconds
+	// (1 hour).
 	//
 	// This member is required.
 	Period *int32

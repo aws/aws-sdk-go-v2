@@ -33,15 +33,12 @@ import (
 // versions.) For more information, see Lifecycle and Versioning
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html#lifecycle-and-other-bucket-config).
 // Related Resources
-//
-// * CreateBucket
+// - CreateBucket
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
-//
-// *
+// -
 // DeleteBucket
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html)
-//
-// *
+// -
 // GetBucketVersioning
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketVersioning.html)
 func (c *Client) PutBucketVersioning(ctx context.Context, params *PutBucketVersioningInput, optFns ...func(*Options)) (*PutBucketVersioningOutput, error) {

@@ -51,15 +51,11 @@ type ModifyDBClusterEndpointInput struct {
 // This data type represents the information you need to connect to an Amazon
 // Neptune DB cluster. This data type is used as a response element in the
 // following actions:
-//
-// * CreateDBClusterEndpoint
-//
-// * DescribeDBClusterEndpoints
-//
-// *
+// - CreateDBClusterEndpoint
+// - DescribeDBClusterEndpoints
+// -
 // ModifyDBClusterEndpoint
-//
-// * DeleteDBClusterEndpoint
+// - DeleteDBClusterEndpoint
 //
 // For the data structure that
 // represents Amazon RDS DB instance endpoints, see Endpoint.

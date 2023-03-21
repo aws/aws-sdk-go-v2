@@ -55,11 +55,9 @@ import (
 // the Key Management Service Developer Guide. Cross-account use: No. You cannot
 // perform this operation on a KMS key in a different Amazon Web Services account.
 // Required permissions: kms:ScheduleKeyDeletion (key policy) Related operations
-//
-// *
+// -
 // CancelKeyDeletion
-//
-// * DisableKey
+// - DisableKey
 func (c *Client) ScheduleKeyDeletion(ctx context.Context, params *ScheduleKeyDeletionInput, optFns ...func(*Options)) (*ScheduleKeyDeletionOutput, error) {
 	if params == nil {
 		params = &ScheduleKeyDeletionInput{}
@@ -79,10 +77,8 @@ type ScheduleKeyDeletionInput struct {
 
 	// The unique identifier of the KMS key to delete. Specify the key ID or key ARN of
 	// the KMS key. For example:
-	//
-	// * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// * Key
+	// - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	// - Key
 	// ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//

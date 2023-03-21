@@ -18,15 +18,12 @@ import (
 // the latest version, AWS WAF has a single set of endpoints for regional and
 // global use. Permanently deletes a WebACL. You can't delete a WebACL if it still
 // contains any Rules. To delete a WebACL, perform the following steps:
-//
-// * Update
+// - Update
 // the WebACL to remove Rules, if any. For more information, see UpdateWebACL.
-//
-// *
+// -
 // Use GetChangeToken to get the change token that you provide in the ChangeToken
 // parameter of a DeleteWebACL request.
-//
-// * Submit a DeleteWebACL request.
+// - Submit a DeleteWebACL request.
 func (c *Client) DeleteWebACL(ctx context.Context, params *DeleteWebACLInput, optFns ...func(*Options)) (*DeleteWebACLOutput, error) {
 	if params == nil {
 		params = &DeleteWebACLInput{}

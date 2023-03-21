@@ -36,8 +36,7 @@ type RebootDBInstanceInput struct {
 
 	// The DB instance identifier. This parameter is stored as a lowercase string.
 	// Constraints:
-	//
-	// * Must match the identifier of an existing DBInstance.
+	// - Must match the identifier of an existing DBInstance.
 	//
 	// This member is required.
 	DBInstanceIdentifier *string

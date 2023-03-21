@@ -16,16 +16,12 @@ import (
 // (https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetGroup.html)
 // operation. In addition to listing the parameters provided in the
 // CreateDatasetGroup request, this operation includes the following properties:
-//
-// *
+// -
 // DatasetArns - The datasets belonging to the group.
-//
-// * CreationTime
-//
-// *
+// - CreationTime
+// -
 // LastModificationTime
-//
-// * Status
+// - Status
 func (c *Client) DescribeDatasetGroup(ctx context.Context, params *DescribeDatasetGroupInput, optFns ...func(*Options)) (*DescribeDatasetGroupOutput, error) {
 	if params == nil {
 		params = &DescribeDatasetGroupInput{}
@@ -77,16 +73,12 @@ type DescribeDatasetGroupOutput struct {
 	LastModificationTime *time.Time
 
 	// The status of the dataset group. States include:
-	//
-	// * ACTIVE
-	//
-	// * CREATE_PENDING,
+	// - ACTIVE
+	// - CREATE_PENDING,
 	// CREATE_IN_PROGRESS, CREATE_FAILED
-	//
-	// * DELETE_PENDING, DELETE_IN_PROGRESS,
+	// - DELETE_PENDING, DELETE_IN_PROGRESS,
 	// DELETE_FAILED
-	//
-	// * UPDATE_PENDING, UPDATE_IN_PROGRESS, UPDATE_FAILED
+	// - UPDATE_PENDING, UPDATE_IN_PROGRESS, UPDATE_FAILED
 	//
 	// The UPDATE
 	// states apply when you call the UpdateDatasetGroup

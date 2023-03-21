@@ -11,13 +11,10 @@ import (
 )
 
 // This operation has three possible return values:
-//
-// * A successful response in the
+// - A successful response in the
 // form of GreetingWithErrorsOutput
-//
-// * An InvalidGreeting error.
-//
-// * A ComplexError
+// - An InvalidGreeting error.
+// - A ComplexError
 // error.
 //
 // Implementations must be able to successfully take a response and

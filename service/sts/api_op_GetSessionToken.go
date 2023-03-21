@@ -41,12 +41,10 @@ import (
 // (1 hour), with a default of 1 hour. Permissions The temporary security
 // credentials created by GetSessionToken can be used to make API calls to any
 // Amazon Web Services service with the following exceptions:
-//
-// * You cannot call
-// any IAM API operations unless MFA authentication information is included in the
+// - You cannot call any
+// IAM API operations unless MFA authentication information is included in the
 // request.
-//
-// * You cannot call any STS API except AssumeRole or
+// - You cannot call any STS API except AssumeRole or
 // GetCallerIdentity.
 //
 // We recommend that you do not call GetSessionToken with

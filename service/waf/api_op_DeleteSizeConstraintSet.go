@@ -21,15 +21,12 @@ import (
 // SizeConstraint objects (any filters). If you just want to remove a
 // SizeConstraintSet from a Rule, use UpdateRule. To permanently delete a
 // SizeConstraintSet, perform the following steps:
-//
-// * Update the SizeConstraintSet
+// - Update the SizeConstraintSet
 // to remove filters, if any. For more information, see UpdateSizeConstraintSet.
-//
-// *
+// -
 // Use GetChangeToken to get the change token that you provide in the ChangeToken
 // parameter of a DeleteSizeConstraintSet request.
-//
-// * Submit a
+// - Submit a
 // DeleteSizeConstraintSet request.
 func (c *Client) DeleteSizeConstraintSet(ctx context.Context, params *DeleteSizeConstraintSetInput, optFns ...func(*Options)) (*DeleteSizeConstraintSetOutput, error) {
 	if params == nil {

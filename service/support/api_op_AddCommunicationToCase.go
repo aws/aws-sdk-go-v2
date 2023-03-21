@@ -15,11 +15,9 @@ import (
 // can list a set of email addresses to copy on the communication by using the
 // ccEmailAddresses parameter. The communicationBody value contains the text of the
 // communication.
-//
-// * You must have a Business, Enterprise On-Ramp, or Enterprise
+// - You must have a Business, Enterprise On-Ramp, or Enterprise
 // Support plan to use the Amazon Web Services Support API.
-//
-// * If you call the
+// - If you call the
 // Amazon Web Services Support API from an account that doesn't have a Business,
 // Enterprise On-Ramp, or Enterprise Support plan, the
 // SubscriptionRequiredException error message appears. For information about

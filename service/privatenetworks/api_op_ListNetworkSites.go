@@ -38,8 +38,7 @@ type ListNetworkSitesInput struct {
 
 	// The filters. Add filters to your request to return a more specific list of
 	// results. Use filters to match the status of the network sites.
-	//
-	// * STATUS - The
+	// - STATUS - The
 	// status (AVAILABLE | CREATED | DELETED | DEPROVISIONING | PROVISIONING).
 	//
 	// Filter

@@ -65,8 +65,7 @@ type DescribeMapOutput struct {
 
 	// The Amazon Resource Name (ARN) for the map resource. Used to specify a resource
 	// across all Amazon Web Services.
-	//
-	// * Format example:
+	// - Format example:
 	// arn:aws:geo:region:account-id:map/ExampleMap
 	//
 	// This member is required.

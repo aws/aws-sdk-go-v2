@@ -22,8 +22,7 @@ import (
 // you imported in bulk. To add new records without replacing existing data,
 // specify INCREMENTAL for the import mode in the CreateDatasetImportJob operation.
 // Status A dataset import job can be in one of the following states:
-//
-// * CREATE
+// - CREATE
 // PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 //
 // To get the status of
@@ -34,12 +33,10 @@ import (
 // CREATE FAILED, the response includes a failureReason key, which describes why
 // the job failed. Importing takes time. You must wait until the status shows as
 // ACTIVE before training a model using the dataset. Related APIs
-//
-// *
+// -
 // ListDatasetImportJobs
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_ListDatasetImportJobs.html)
-//
-// *
+// -
 // DescribeDatasetImportJob
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetImportJob.html)
 func (c *Client) CreateDatasetImportJob(ctx context.Context, params *CreateDatasetImportJobInput, optFns ...func(*Options)) (*CreateDatasetImportJobOutput, error) {
@@ -83,11 +80,9 @@ type CreateDatasetImportJobInput struct {
 	// Specify how to add the new records to an existing dataset. The default import
 	// mode is FULL. If you haven't imported bulk records into the dataset previously,
 	// you can only specify FULL.
-	//
-	// * Specify FULL to overwrite all existing bulk data
-	// in your dataset. Data you imported individually is not replaced.
-	//
-	// * Specify
+	// - Specify FULL to overwrite all existing bulk data in
+	// your dataset. Data you imported individually is not replaced.
+	// - Specify
 	// INCREMENTAL to append the new records to the existing data in your dataset.
 	// Amazon Personalize replaces any record with the same ID with the new one.
 	ImportMode types.ImportMode

@@ -20,14 +20,12 @@ import (
 // global use. Associates a LoggingConfiguration with a specified web ACL. You can
 // access information about all traffic that AWS WAF inspects using the following
 // steps:
-//
-// * Create an Amazon Kinesis Data Firehose. Create the data firehose with
-// a PUT source and in the region that you are operating. However, if you are
+// - Create an Amazon Kinesis Data Firehose. Create the data firehose with a
+// PUT source and in the region that you are operating. However, if you are
 // capturing logs for Amazon CloudFront, always create the firehose in US East (N.
 // Virginia). Do not create the data firehose using a Kinesis stream as your
 // source.
-//
-// * Associate that firehose to your web ACL using a
+// - Associate that firehose to your web ACL using a
 // PutLoggingConfiguration request.
 //
 // When you successfully enable logging using a

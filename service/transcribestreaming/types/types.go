@@ -525,13 +525,10 @@ type PostCallAnalyticsSettings struct {
 	// The Amazon S3 location where you want your Call Analytics post-call
 	// transcription output stored. You can use any of the following formats to specify
 	// the output location:
-	//
-	// * s3://DOC-EXAMPLE-BUCKET
-	//
-	// *
+	// - s3://DOC-EXAMPLE-BUCKET
+	// -
 	// s3://DOC-EXAMPLE-BUCKET/my-output-folder/
-	//
-	// *
+	// -
 	// s3://DOC-EXAMPLE-BUCKET/my-output-folder/my-call-analytics-job.json
 	//
 	// This member is required.
@@ -547,30 +544,24 @@ type PostCallAnalyticsSettings struct {
 	// The KMS key you want to use to encrypt your Call Analytics post-call output. If
 	// using a key located in the current Amazon Web Services account, you can specify
 	// your KMS key in one of four ways:
-	//
-	// * Use the KMS key ID itself. For example,
+	// - Use the KMS key ID itself. For example,
 	// 1234abcd-12ab-34cd-56ef-1234567890ab.
-	//
-	// * Use an alias for the KMS key ID. For
+	// - Use an alias for the KMS key ID. For
 	// example, alias/ExampleAlias.
-	//
-	// * Use the Amazon Resource Name (ARN) for the KMS
+	// - Use the Amazon Resource Name (ARN) for the KMS
 	// key ID. For example,
 	// arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab.
-	//
-	// * Use
+	// - Use
 	// the ARN for the KMS key alias. For example,
 	// arn:aws:kms:region:account-ID:alias/ExampleAlias.
 	//
 	// If using a key located in a
 	// different Amazon Web Services account than the current Amazon Web Services
 	// account, you can specify your KMS key in one of two ways:
-	//
-	// * Use the ARN for the
+	// - Use the ARN for the
 	// KMS key ID. For example,
 	// arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab.
-	//
-	// * Use
+	// - Use
 	// the ARN for the KMS key alias. For example,
 	// arn:aws:kms:region:account-ID:alias/ExampleAlias.
 	//

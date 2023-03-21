@@ -18,12 +18,10 @@ import (
 // operation with same creation token has no effect). If a file system does not
 // currently exist that is owned by the caller's Amazon Web Services account with
 // the specified creation token, this operation does the following:
-//
-// * Creates a
+// - Creates a
 // new, empty file system. The file system will have an Amazon EFS assigned ID, and
 // an initial lifecycle state creating.
-//
-// * Returns with the description of the
+// - Returns with the description of the
 // created file system.
 //
 // Otherwise, this operation returns a
@@ -110,19 +108,15 @@ type CreateFileSystemInput struct {
 	// This parameter is required only if you want to use a non-default KMS key. If
 	// this parameter is not specified, the default KMS key for Amazon EFS is used. You
 	// can specify a KMS key ID using the following formats:
-	//
-	// * Key ID - A unique
+	// - Key ID - A unique
 	// identifier of the key, for example 1234abcd-12ab-34cd-56ef-1234567890ab.
-	//
-	// * ARN
-	// - An Amazon Resource Name (ARN) for the key, for example
+	// - ARN -
+	// An Amazon Resource Name (ARN) for the key, for example
 	// arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab.
-	//
-	// *
+	// -
 	// Key alias - A previously created display name for a key, for example
 	// alias/projectKey1.
-	//
-	// * Key alias ARN - An ARN for a key alias, for example
+	// - Key alias ARN - An ARN for a key alias, for example
 	// arn:aws:kms:us-west-2:444455556666:alias/projectKey1.
 	//
 	// If you use KmsKeyId, you

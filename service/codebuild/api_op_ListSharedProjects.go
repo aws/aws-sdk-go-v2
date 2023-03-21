@@ -46,20 +46,16 @@ type ListSharedProjectsInput struct {
 
 	// The criterion to be used to list build projects shared with the current Amazon
 	// Web Services account or user. Valid values include:
-	//
-	// * ARN: List based on the
+	// - ARN: List based on the
 	// ARN.
-	//
-	// * MODIFIED_TIME: List based on when information about the shared project
+	// - MODIFIED_TIME: List based on when information about the shared project
 	// was last changed.
 	SortBy types.SharedResourceSortByType
 
 	// The order in which to list shared build projects. Valid values include:
-	//
-	// *
+	// -
 	// ASCENDING: List in ascending order.
-	//
-	// * DESCENDING: List in descending order.
+	// - DESCENDING: List in descending order.
 	SortOrder types.SortOrderType
 
 	noSmithyDocumentSerde

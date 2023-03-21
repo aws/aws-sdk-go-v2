@@ -66,12 +66,9 @@ type CreateWhatIfAnalysisInput struct {
 	// TimeSeriesIdentifiers object. What-if analyses are performed only for the time
 	// series in this object. The TimeSeriesIdentifiers object needs the following
 	// information:
-	//
-	// * DataSource
-	//
-	// * Format
-	//
-	// * Schema
+	// - DataSource
+	// - Format
+	// - Schema
 	TimeSeriesSelector *types.TimeSeriesSelector
 
 	noSmithyDocumentSerde

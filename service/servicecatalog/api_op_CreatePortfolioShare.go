@@ -55,12 +55,9 @@ type CreatePortfolioShareInput struct {
 	PortfolioId *string
 
 	// The language code.
-	//
-	// * en - English (default)
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	// - en - English (default)
+	// - jp - Japanese
+	// - zh - Chinese
 	AcceptLanguage *string
 
 	// The Amazon Web Services account ID. For example, 123456789012.

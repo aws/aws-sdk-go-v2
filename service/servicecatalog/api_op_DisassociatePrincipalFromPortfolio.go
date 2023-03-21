@@ -49,12 +49,9 @@ type DisassociatePrincipalFromPortfolioInput struct {
 	PrincipalARN *string
 
 	// The language code.
-	//
-	// * en - English (default)
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	// - en - English (default)
+	// - jp - Japanese
+	// - zh - Chinese
 	AcceptLanguage *string
 
 	// The supported value is IAM if you use a fully defined ARN, or IAM_PATTERN if you

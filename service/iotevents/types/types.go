@@ -100,30 +100,26 @@ type AlarmAction struct {
 	// payload that you specify. You must use expressions for all parameters in
 	// DynamoDBAction. The expressions accept literals, operators, functions,
 	// references, and substitution templates. Examples
-	//
-	// * For literal values, the
+	// - For literal values, the
 	// expressions must contain single quotes. For example, the value for the
 	// hashKeyType parameter can be 'STRING'.
+	// - For references, you must specify either
+	// variables or input values. For example, the value for the hashKeyField parameter
+	// can be $input.GreenhouseInput.name.
+	// - For a substitution template, you must use
+	// ${}, and the template must be in single quotes. A substitution template can also
+	// contain a combination of literals, operators, functions, references, and
+	// substitution templates. In the following example, the value for the hashKeyValue
+	// parameter uses a substitution template. '${$input.GreenhouseInput.temperature *
+	// 6 / 5 + 32} in Fahrenheit'
+	// - For a string concatenation, you must use +. A
+	// string concatenation can also contain a combination of literals, operators,
+	// functions, references, and substitution templates. In the following example, the
+	// value for the tableName parameter uses a string concatenation.
+	// 'GreenhouseTemperatureTable ' + $input.GreenhouseInput.date
 	//
-	// * For references, you must specify
-	// either variables or input values. For example, the value for the hashKeyField
-	// parameter can be $input.GreenhouseInput.name.
-	//
-	// * For a substitution template,
-	// you must use ${}, and the template must be in single quotes. A substitution
-	// template can also contain a combination of literals, operators, functions,
-	// references, and substitution templates. In the following example, the value for
-	// the hashKeyValue parameter uses a substitution template.
-	// '${$input.GreenhouseInput.temperature * 6 / 5 + 32} in Fahrenheit'
-	//
-	// * For a
-	// string concatenation, you must use +. A string concatenation can also contain a
-	// combination of literals, operators, functions, references, and substitution
-	// templates. In the following example, the value for the tableName parameter uses
-	// a string concatenation. 'GreenhouseTemperatureTable ' +
-	// $input.GreenhouseInput.date
-	//
-	// For more information, see Expressions
+	// For more
+	// information, see Expressions
 	// (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html)
 	// in the AWS IoT Events Developer Guide. If the defined payload type is a string,
 	// DynamoDBAction writes non-JSON data to the DynamoDB table as binary data. The
@@ -139,24 +135,20 @@ type AlarmAction struct {
 	// payload that you specify. You must use expressions for all parameters in
 	// DynamoDBv2Action. The expressions accept literals, operators, functions,
 	// references, and substitution templates. Examples
-	//
-	// * For literal values, the
+	// - For literal values, the
 	// expressions must contain single quotes. For example, the value for the tableName
 	// parameter can be 'GreenhouseTemperatureTable'.
-	//
-	// * For references, you must
+	// - For references, you must
 	// specify either variables or input values. For example, the value for the
 	// tableName parameter can be $variable.ddbtableName.
-	//
-	// * For a substitution
+	// - For a substitution
 	// template, you must use ${}, and the template must be in single quotes. A
 	// substitution template can also contain a combination of literals, operators,
 	// functions, references, and substitution templates. In the following example, the
 	// value for the contentExpression parameter in Payload uses a substitution
 	// template. '{\"sensorID\": \"${$input.GreenhouseInput.sensor_id}\",
 	// \"temperature\": \"${$input.GreenhouseInput.temperature * 9 / 5 + 32}\"}'
-	//
-	// * For
+	// - For
 	// a string concatenation, you must use +. A string concatenation can also contain
 	// a combination of literals, operators, functions, references, and substitution
 	// templates. In the following example, the value for the tableName parameter uses
@@ -182,16 +174,13 @@ type AlarmAction struct {
 	// expressions for all parameters in IotSiteWiseAction. The expressions accept
 	// literals, operators, functions, references, and substitutions templates.
 	// Examples
-	//
-	// * For literal values, the expressions must contain single quotes. For
+	// - For literal values, the expressions must contain single quotes. For
 	// example, the value for the propertyAlias parameter can be
 	// '/company/windfarm/3/turbine/7/temperature'.
-	//
-	// * For references, you must specify
+	// - For references, you must specify
 	// either variables or input values. For example, the value for the assetId
 	// parameter can be $input.TurbineInput.assetId1.
-	//
-	// * For a substitution template,
+	// - For a substitution template,
 	// you must use ${}, and the template must be in single quotes. A substitution
 	// template can also contain a combination of literals, operators, functions,
 	// references, and substitution templates. In the following example, the value for
@@ -290,20 +279,16 @@ type AlarmModelVersionSummary struct {
 	RoleArn *string
 
 	// The status of the alarm model. The status can be one of the following values:
-	//
-	// *
+	// -
 	// ACTIVE - The alarm model is active and it's ready to evaluate data.
-	//
-	// *
-	// ACTIVATING - AWS IoT Events is activating your alarm model. Activating an alarm
-	// model can take up to a few minutes.
-	//
-	// * INACTIVE - The alarm model is inactive,
-	// so it isn't ready to evaluate data. Check your alarm model information and
-	// update the alarm model.
-	//
-	// * FAILED - You couldn't create or update the alarm
-	// model. Check your alarm model information and try again.
+	// - ACTIVATING
+	// - AWS IoT Events is activating your alarm model. Activating an alarm model can
+	// take up to a few minutes.
+	// - INACTIVE - The alarm model is inactive, so it isn't
+	// ready to evaluate data. Check your alarm model information and update the alarm
+	// model.
+	// - FAILED - You couldn't create or update the alarm model. Check your
+	// alarm model information and try again.
 	Status AlarmModelVersionStatus
 
 	// Contains information about the status of the alarm model version.
@@ -337,18 +322,15 @@ type AnalysisResult struct {
 
 	// The severity level of the analysis result. Based on the severity level, analysis
 	// results fall into three general categories:
-	//
-	// * INFO - An information result
-	// tells you about a significant field in your detector model. This type of result
+	// - INFO - An information result tells
+	// you about a significant field in your detector model. This type of result
 	// usually doesn't require immediate action.
-	//
-	// * WARNING - A warning result draws
+	// - WARNING - A warning result draws
 	// special attention to fields that might cause issues for your detector model. We
 	// recommend that you review warnings and take necessary actions before you use
 	// your detector model in production environments. Otherwise, the detector model
 	// might not work as expected.
-	//
-	// * ERROR - An error result notifies you about a
+	// - ERROR - An error result notifies you about a
 	// problem found in your detector model. You must fix all errors before you can
 	// publish your detector model.
 	Level AnalysisResultLevel
@@ -362,28 +344,21 @@ type AnalysisResult struct {
 
 	// The type of the analysis result. Analyses fall into the following types based on
 	// the validators used to generate the analysis result:
-	//
-	// * supported-actions - You
+	// - supported-actions - You
 	// must specify AWS IoT Events supported actions that work with other AWS services
 	// in a supported AWS Region.
-	//
-	// * service-limits - Resources or API operations can't
+	// - service-limits - Resources or API operations can't
 	// exceed service quotas (also known as limits). Update your detector model or
 	// request a quota increase.
-	//
-	// * structure - The detector model must follow a
+	// - structure - The detector model must follow a
 	// structure that AWS IoT Events supports.
-	//
-	// * expression-syntax - Your expression
+	// - expression-syntax - Your expression
 	// must follow the required syntax.
-	//
-	// * data-type - Data types referenced in the
+	// - data-type - Data types referenced in the
 	// detector model must be compatible.
-	//
-	// * referenced-data - You must define the data
+	// - referenced-data - You must define the data
 	// referenced in your detector model before you can use the data.
-	//
-	// *
+	// -
 	// referenced-resource - Resources that the detector model uses must be
 	// available.
 	//
@@ -412,20 +387,17 @@ type AnalysisResultLocation struct {
 // in the AWS IoT SiteWise API Reference. You must use expressions for all
 // parameters in AssetPropertyTimestamp. The expressions accept literals,
 // operators, functions, references, and substitution templates. Examples
-//
-// * For
+// - For
 // literal values, the expressions must contain single quotes. For example, the
 // value for the timeInSeconds parameter can be '1586400675'.
-//
-// * For references,
-// you must specify either variables or input values. For example, the value for
-// the offsetInNanos parameter can be $variable.time.
-//
-// * For a substitution
-// template, you must use ${}, and the template must be in single quotes. A
-// substitution template can also contain a combination of literals, operators,
-// functions, references, and substitution templates. In the following example, the
-// value for the timeInSeconds parameter uses a substitution template.
+// - For references, you
+// must specify either variables or input values. For example, the value for the
+// offsetInNanos parameter can be $variable.time.
+// - For a substitution template,
+// you must use ${}, and the template must be in single quotes. A substitution
+// template can also contain a combination of literals, operators, functions,
+// references, and substitution templates. In the following example, the value for
+// the timeInSeconds parameter uses a substitution template.
 // '${$input.TemperatureInput.sensorData.timestamp / 1000}'
 //
 // For more information,
@@ -453,12 +425,10 @@ type AssetPropertyTimestamp struct {
 // in the AWS IoT SiteWise API Reference. You must use expressions for all
 // parameters in AssetPropertyValue. The expressions accept literals, operators,
 // functions, references, and substitution templates. Examples
-//
-// * For literal
+// - For literal
 // values, the expressions must contain single quotes. For example, the value for
 // the quality parameter can be 'GOOD'.
-//
-// * For references, you must specify either
+// - For references, you must specify either
 // variables or input values. For example, the value for the quality parameter can
 // be $input.TemperatureInput.sensorData.quality.
 //
@@ -488,16 +458,13 @@ type AssetPropertyValue struct {
 // in the AWS IoT SiteWise API Reference. You must use expressions for all
 // parameters in AssetPropertyVariant. The expressions accept literals, operators,
 // functions, references, and substitution templates. Examples
-//
-// * For literal
+// - For literal
 // values, the expressions must contain single quotes. For example, the value for
 // the integerValue parameter can be '100'.
-//
-// * For references, you must specify
+// - For references, you must specify
 // either variables or parameters. For example, the value for the booleanValue
 // parameter can be $variable.offline.
-//
-// * For a substitution template, you must use
+// - For a substitution template, you must use
 // ${}, and the template must be in single quotes. A substitution template can also
 // contain a combination of literals, operators, functions, references, and
 // substitution templates. In the following example, the value for the doubleValue
@@ -707,30 +674,26 @@ type DetectorModelVersionSummary struct {
 // payload that you specify. You must use expressions for all parameters in
 // DynamoDBAction. The expressions accept literals, operators, functions,
 // references, and substitution templates. Examples
-//
-// * For literal values, the
+// - For literal values, the
 // expressions must contain single quotes. For example, the value for the
 // hashKeyType parameter can be 'STRING'.
+// - For references, you must specify either
+// variables or input values. For example, the value for the hashKeyField parameter
+// can be $input.GreenhouseInput.name.
+// - For a substitution template, you must use
+// ${}, and the template must be in single quotes. A substitution template can also
+// contain a combination of literals, operators, functions, references, and
+// substitution templates. In the following example, the value for the hashKeyValue
+// parameter uses a substitution template. '${$input.GreenhouseInput.temperature *
+// 6 / 5 + 32} in Fahrenheit'
+// - For a string concatenation, you must use +. A
+// string concatenation can also contain a combination of literals, operators,
+// functions, references, and substitution templates. In the following example, the
+// value for the tableName parameter uses a string concatenation.
+// 'GreenhouseTemperatureTable ' + $input.GreenhouseInput.date
 //
-// * For references, you must specify
-// either variables or input values. For example, the value for the hashKeyField
-// parameter can be $input.GreenhouseInput.name.
-//
-// * For a substitution template,
-// you must use ${}, and the template must be in single quotes. A substitution
-// template can also contain a combination of literals, operators, functions,
-// references, and substitution templates. In the following example, the value for
-// the hashKeyValue parameter uses a substitution template.
-// '${$input.GreenhouseInput.temperature * 6 / 5 + 32} in Fahrenheit'
-//
-// * For a
-// string concatenation, you must use +. A string concatenation can also contain a
-// combination of literals, operators, functions, references, and substitution
-// templates. In the following example, the value for the tableName parameter uses
-// a string concatenation. 'GreenhouseTemperatureTable ' +
-// $input.GreenhouseInput.date
-//
-// For more information, see Expressions
+// For more
+// information, see Expressions
 // (https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html)
 // in the AWS IoT Events Developer Guide. If the defined payload type is a string,
 // DynamoDBAction writes non-JSON data to the DynamoDB table as binary data. The
@@ -757,10 +720,8 @@ type DynamoDBAction struct {
 
 	// The data type for the hash key (also called the partition key). You can specify
 	// the following values:
-	//
-	// * 'STRING' - The hash key is a string.
-	//
-	// * 'NUMBER' - The
+	// - 'STRING' - The hash key is a string.
+	// - 'NUMBER' - The
 	// hash key is a number.
 	//
 	// If you don't specify hashKeyType, the default value is
@@ -768,18 +729,15 @@ type DynamoDBAction struct {
 	HashKeyType *string
 
 	// The type of operation to perform. You can specify the following values:
-	//
-	// *
+	// -
 	// 'INSERT' - Insert data as a new item into the DynamoDB table. This item uses the
 	// specified hash key as a partition key. If you specified a range key, the item
 	// uses the range key as a sort key.
-	//
-	// * 'UPDATE' - Update an existing item of the
+	// - 'UPDATE' - Update an existing item of the
 	// DynamoDB table with new data. This item's partition key must match the specified
 	// hash key. If you specified a range key, the range key must match the item's sort
 	// key.
-	//
-	// * 'DELETE' - Delete an existing item of the DynamoDB table. This item's
+	// - 'DELETE' - Delete an existing item of the DynamoDB table. This item's
 	// partition key must match the specified hash key. If you specified a range key,
 	// the range key must match the item's sort key.
 	//
@@ -804,11 +762,9 @@ type DynamoDBAction struct {
 
 	// The data type for the range key (also called the sort key), You can specify the
 	// following values:
-	//
-	// * 'STRING' - The range key is a string.
-	//
-	// * 'NUMBER' - The
-	// range key is number.
+	// - 'STRING' - The range key is a string.
+	// - 'NUMBER' - The range
+	// key is number.
 	//
 	// If you don't specify rangeKeyField, the default value is
 	// 'STRING'.
@@ -828,24 +784,20 @@ type DynamoDBAction struct {
 // payload that you specify. You must use expressions for all parameters in
 // DynamoDBv2Action. The expressions accept literals, operators, functions,
 // references, and substitution templates. Examples
-//
-// * For literal values, the
+// - For literal values, the
 // expressions must contain single quotes. For example, the value for the tableName
 // parameter can be 'GreenhouseTemperatureTable'.
-//
-// * For references, you must
+// - For references, you must
 // specify either variables or input values. For example, the value for the
 // tableName parameter can be $variable.ddbtableName.
-//
-// * For a substitution
+// - For a substitution
 // template, you must use ${}, and the template must be in single quotes. A
 // substitution template can also contain a combination of literals, operators,
 // functions, references, and substitution templates. In the following example, the
 // value for the contentExpression parameter in Payload uses a substitution
 // template. '{\"sensorID\": \"${$input.GreenhouseInput.sensor_id}\",
 // \"temperature\": \"${$input.GreenhouseInput.temperature * 9 / 5 + 32}\"}'
-//
-// * For
+// - For
 // a string concatenation, you must use +. A string concatenation can also contain
 // a combination of literals, operators, functions, references, and substitution
 // templates. In the following example, the value for the tableName parameter uses
@@ -1102,16 +1054,13 @@ type IotEventsInputIdentifier struct {
 // expressions for all parameters in IotSiteWiseAction. The expressions accept
 // literals, operators, functions, references, and substitutions templates.
 // Examples
-//
-// * For literal values, the expressions must contain single quotes. For
+// - For literal values, the expressions must contain single quotes. For
 // example, the value for the propertyAlias parameter can be
 // '/company/windfarm/3/turbine/7/temperature'.
-//
-// * For references, you must specify
+// - For references, you must specify
 // either variables or input values. For example, the value for the assetId
 // parameter can be $input.TurbineInput.assetId1.
-//
-// * For a substitution template,
+// - For a substitution template,
 // you must use ${}, and the template must be in single quotes. A substitution
 // template can also contain a combination of literals, operators, functions,
 // references, and substitution templates. In the following example, the value for

@@ -64,16 +64,12 @@ type CreateEventDataStoreInput struct {
 	// multi-Region keys, see Using multi-Region keys
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html)
 	// in the Key Management Service Developer Guide. Examples:
-	//
-	// * alias/MyAliasName
-	//
-	// *
+	// - alias/MyAliasName
+	// -
 	// arn:aws:kms:us-east-2:123456789012:alias/MyAliasName
-	//
-	// *
+	// -
 	// arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012
-	//
-	// *
+	// -
 	// 12345678-1234-1234-1234-123456789012
 	KmsKeyId *string
 

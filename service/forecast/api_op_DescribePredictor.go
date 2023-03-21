@@ -17,21 +17,15 @@ import (
 // predictor created using the CreatePredictor operation. In addition to listing
 // the properties provided in the CreatePredictor request, this operation lists the
 // following properties:
-//
-// * DatasetImportJobArns - The dataset import jobs used to
+// - DatasetImportJobArns - The dataset import jobs used to
 // import training data.
-//
-// * AutoMLAlgorithmArns - If AutoML is performed, the
+// - AutoMLAlgorithmArns - If AutoML is performed, the
 // algorithms that were evaluated.
-//
-// * CreationTime
-//
-// * LastModificationTime
-//
-// *
-// Status
-//
-// * Message - If an error occurred, information about the error.
+// - CreationTime
+// - LastModificationTime
+// - Status
+// -
+// Message - If an error occurred, information about the error.
 func (c *Client) DescribePredictor(ctx context.Context, params *DescribePredictorInput, optFns ...func(*Options)) (*DescribePredictorOutput, error) {
 	if params == nil {
 		params = &DescribePredictorInput{}
@@ -116,19 +110,13 @@ type DescribePredictorOutput struct {
 
 	// The last time the resource was modified. The timestamp depends on the status of
 	// the job:
-	//
-	// * CREATE_PENDING - The CreationTime.
-	//
-	// * CREATE_IN_PROGRESS - The
-	// current timestamp.
-	//
-	// * CREATE_STOPPING - The current timestamp.
-	//
-	// * CREATE_STOPPED
-	// - When the job stopped.
-	//
-	// * ACTIVE or CREATE_FAILED - When the job finished or
-	// failed.
+	// - CREATE_PENDING - The CreationTime.
+	// - CREATE_IN_PROGRESS - The current
+	// timestamp.
+	// - CREATE_STOPPING - The current timestamp.
+	// - CREATE_STOPPED - When
+	// the job stopped.
+	// - ACTIVE or CREATE_FAILED - When the job finished or failed.
 	LastModificationTime *time.Time
 
 	// If an error occurred, an informational message about the error.
@@ -155,16 +143,12 @@ type DescribePredictorOutput struct {
 	PredictorName *string
 
 	// The status of the predictor. States include:
-	//
-	// * ACTIVE
-	//
-	// * CREATE_PENDING,
+	// - ACTIVE
+	// - CREATE_PENDING,
 	// CREATE_IN_PROGRESS, CREATE_FAILED
-	//
-	// * DELETE_PENDING, DELETE_IN_PROGRESS,
+	// - DELETE_PENDING, DELETE_IN_PROGRESS,
 	// DELETE_FAILED
-	//
-	// * CREATE_STOPPING, CREATE_STOPPED
+	// - CREATE_STOPPING, CREATE_STOPPED
 	//
 	// The Status of the predictor
 	// must be ACTIVE before you can use the predictor to create a forecast.

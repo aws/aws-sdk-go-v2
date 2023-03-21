@@ -39,42 +39,32 @@ import (
 // and Managing Access Permissions to Your Amazon S3 Resources
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html)
 // in the Amazon S3 User Guide. Special Errors
+// - HTTP 400 Bad Request Error
+// - Code:
+// InvalidArgument
+// - Cause: Invalid Argument
 //
-// * HTTP 400 Bad Request Error
+// - HTTP 400 Bad Request Error
+// - Code:
+// TooManyConfigurations
+// - Cause: You are attempting to create a new configuration
+// but have already reached the 1,000-configuration limit.
 //
-// *
-// Code: InvalidArgument
-//
-// * Cause: Invalid Argument
-//
-// * HTTP 400 Bad Request
+// - HTTP 403 Forbidden
 // Error
+// - Code: AccessDenied
+// - Cause: You are not the owner of the specified
+// bucket, or you do not have the s3:PutInventoryConfiguration bucket permission to
+// set the configuration on the bucket.
 //
-// * Code: TooManyConfigurations
-//
-// * Cause: You are attempting to create a
-// new configuration but have already reached the 1,000-configuration limit.
-//
-// *
-// HTTP 403 Forbidden Error
-//
-// * Code: AccessDenied
-//
-// * Cause: You are not the owner
-// of the specified bucket, or you do not have the s3:PutInventoryConfiguration
-// bucket permission to set the configuration on the bucket.
-//
-// # Related Resources
-//
-// *
+// Related Resources
+// -
 // GetBucketInventoryConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketInventoryConfiguration.html)
-//
-// *
+// -
 // DeleteBucketInventoryConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketInventoryConfiguration.html)
-//
-// *
+// -
 // ListBucketInventoryConfigurations
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketInventoryConfigurations.html)
 func (c *Client) PutBucketInventoryConfiguration(ctx context.Context, params *PutBucketInventoryConfigurationInput, optFns ...func(*Options)) (*PutBucketInventoryConfigurationOutput, error) {

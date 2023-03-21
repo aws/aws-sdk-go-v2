@@ -17,11 +17,9 @@ import (
 // are asynchronously evaluated. The evaluation determines if the device has
 // entered or exited a geofenced area, and then publishes one of the following
 // events to Amazon EventBridge:
-//
-// * ENTER if Amazon Location determines that the
+// - ENTER if Amazon Location determines that the
 // tracked device has entered a geofenced area.
-//
-// * EXIT if Amazon Location
+// - EXIT if Amazon Location
 // determines that the tracked device has exited a geofenced area.
 //
 // The last

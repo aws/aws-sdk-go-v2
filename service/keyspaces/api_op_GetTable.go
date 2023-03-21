@@ -64,11 +64,9 @@ type GetTableOutput struct {
 	TableName *string
 
 	// The read/write throughput capacity mode for a table. The options are:
-	//
-	// *
+	// -
 	// throughputMode:PAY_PER_REQUEST
-	//
-	// * throughputMode:PROVISIONED
+	// - throughputMode:PROVISIONED
 	CapacitySpecification *types.CapacitySpecificationSummary
 
 	// The client-side timestamps setting of the table.

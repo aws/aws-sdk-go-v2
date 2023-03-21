@@ -43,14 +43,11 @@ type DescribeDetectorModelAnalysisOutput struct {
 
 	// The status of the analysis activity. The status can be one of the following
 	// values:
-	//
-	// * RUNNING - AWS IoT Events is analyzing your detector model. This
+	// - RUNNING - AWS IoT Events is analyzing your detector model. This
 	// process can take several minutes to complete.
-	//
-	// * COMPLETE - AWS IoT Events
+	// - COMPLETE - AWS IoT Events
 	// finished analyzing your detector model.
-	//
-	// * FAILED - AWS IoT Events couldn't
+	// - FAILED - AWS IoT Events couldn't
 	// analyze your detector model. Try again later.
 	Status types.AnalysisStatus
 

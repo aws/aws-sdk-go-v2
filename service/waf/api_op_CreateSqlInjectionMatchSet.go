@@ -22,23 +22,19 @@ import (
 // requests. AWS WAF searches for character sequences that are likely to be
 // malicious strings. To create and configure a SqlInjectionMatchSet, perform the
 // following steps:
-//
-// * Use GetChangeToken to get the change token that you provide
+// - Use GetChangeToken to get the change token that you provide
 // in the ChangeToken parameter of a CreateSqlInjectionMatchSet request.
+// - Submit a
+// CreateSqlInjectionMatchSet request.
+// - Use GetChangeToken to get the change token
+// that you provide in the ChangeToken parameter of an UpdateSqlInjectionMatchSet
+// request.
+// - Submit an UpdateSqlInjectionMatchSet request to specify the parts of
+// web requests in which you want to allow, block, or count malicious SQL
+// code.
 //
-// * Submit
-// a CreateSqlInjectionMatchSet request.
-//
-// * Use GetChangeToken to get the change
-// token that you provide in the ChangeToken parameter of an
-// UpdateSqlInjectionMatchSet request.
-//
-// * Submit an UpdateSqlInjectionMatchSet
-// request to specify the parts of web requests in which you want to allow, block,
-// or count malicious SQL code.
-//
-// For more information about how to use the AWS WAF
-// API to allow or block HTTP requests, see the AWS WAF Developer Guide
+// For more information about how to use the AWS WAF API to allow or block
+// HTTP requests, see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/).
 func (c *Client) CreateSqlInjectionMatchSet(ctx context.Context, params *CreateSqlInjectionMatchSetInput, optFns ...func(*Options)) (*CreateSqlInjectionMatchSetOutput, error) {
 	if params == nil {

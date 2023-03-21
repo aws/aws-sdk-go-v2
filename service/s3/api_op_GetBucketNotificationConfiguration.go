@@ -24,8 +24,7 @@ import (
 // more information about bucket policies, see Using Bucket Policies
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html). The
 // following action is related to GetBucketNotification:
-//
-// * PutBucketNotification
+// - PutBucketNotification
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketNotification.html)
 func (c *Client) GetBucketNotificationConfiguration(ctx context.Context, params *GetBucketNotificationConfigurationInput, optFns ...func(*Options)) (*GetBucketNotificationConfigurationOutput, error) {
 	if params == nil {

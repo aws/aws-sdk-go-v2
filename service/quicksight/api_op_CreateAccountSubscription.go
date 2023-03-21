@@ -78,15 +78,11 @@ type CreateAccountSubscriptionInput struct {
 	// The edition of Amazon QuickSight that you want your account to have. Currently,
 	// you can choose from ENTERPRISE or ENTERPRISE_AND_Q. If you choose
 	// ENTERPRISE_AND_Q, the following parameters are required:
-	//
-	// * FirstName
-	//
-	// *
+	// - FirstName
+	// -
 	// LastName
-	//
-	// * EmailAddress
-	//
-	// * ContactNumber
+	// - EmailAddress
+	// - ContactNumber
 	//
 	// This member is required.
 	Edition types.Edition

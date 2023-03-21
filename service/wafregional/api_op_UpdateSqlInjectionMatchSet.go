@@ -20,16 +20,13 @@ import (
 // global use. Inserts or deletes SqlInjectionMatchTuple objects (filters) in a
 // SqlInjectionMatchSet. For each SqlInjectionMatchTuple object, you specify the
 // following values:
-//
-// * Action: Whether to insert the object into or delete the
+// - Action: Whether to insert the object into or delete the
 // object from the array. To change a SqlInjectionMatchTuple, you delete the
 // existing object and add a new one.
-//
-// * FieldToMatch: The part of web requests
-// that you want AWS WAF to inspect and, if you want AWS WAF to inspect a header or
+// - FieldToMatch: The part of web requests that
+// you want AWS WAF to inspect and, if you want AWS WAF to inspect a header or
 // custom query parameter, the name of the header or parameter.
-//
-// *
+// -
 // TextTransformation: Which text transformation, if any, to perform on the web
 // request before inspecting the request for snippets of malicious SQL code. You
 // can only specify a single type of TextTransformation.
@@ -41,20 +38,17 @@ import (
 // requests, you can create a SqlInjectionMatchSet with the applicable settings,
 // and then configure AWS WAF to block the requests. To create and configure a
 // SqlInjectionMatchSet, perform the following steps:
-//
-// * Submit a
+// - Submit a
 // CreateSqlInjectionMatchSet request.
+// - Use GetChangeToken to get the change token
+// that you provide in the ChangeToken parameter of an UpdateIPSet request.
+// -
+// Submit an UpdateSqlInjectionMatchSet request to specify the parts of web
+// requests that you want AWS WAF to inspect for snippets of SQL code.
 //
-// * Use GetChangeToken to get the change
-// token that you provide in the ChangeToken parameter of an UpdateIPSet
-// request.
-//
-// * Submit an UpdateSqlInjectionMatchSet request to specify the parts of
-// web requests that you want AWS WAF to inspect for snippets of SQL code.
-//
-// For
-// more information about how to use the AWS WAF API to allow or block HTTP
-// requests, see the AWS WAF Developer Guide
+// For more
+// information about how to use the AWS WAF API to allow or block HTTP requests,
+// see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/).
 func (c *Client) UpdateSqlInjectionMatchSet(ctx context.Context, params *UpdateSqlInjectionMatchSetInput, optFns ...func(*Options)) (*UpdateSqlInjectionMatchSetOutput, error) {
 	if params == nil {
@@ -89,14 +83,11 @@ type UpdateSqlInjectionMatchSetInput struct {
 	// An array of SqlInjectionMatchSetUpdate objects that you want to insert into or
 	// delete from a SqlInjectionMatchSet. For more information, see the applicable
 	// data types:
-	//
-	// * SqlInjectionMatchSetUpdate: Contains Action and
+	// - SqlInjectionMatchSetUpdate: Contains Action and
 	// SqlInjectionMatchTuple
-	//
-	// * SqlInjectionMatchTuple: Contains FieldToMatch and
+	// - SqlInjectionMatchTuple: Contains FieldToMatch and
 	// TextTransformation
-	//
-	// * FieldToMatch: Contains Data and Type
+	// - FieldToMatch: Contains Data and Type
 	//
 	// This member is required.
 	Updates []types.SqlInjectionMatchSetUpdate

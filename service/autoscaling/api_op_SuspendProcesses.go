@@ -40,26 +40,17 @@ type SuspendProcessesInput struct {
 	AutoScalingGroupName *string
 
 	// One or more of the following processes:
-	//
-	// * Launch
-	//
-	// * Terminate
-	//
-	// *
+	// - Launch
+	// - Terminate
+	// -
 	// AddToLoadBalancer
-	//
-	// * AlarmNotification
-	//
-	// * AZRebalance
-	//
-	// * HealthCheck
-	//
-	// *
+	// - AlarmNotification
+	// - AZRebalance
+	// - HealthCheck
+	// -
 	// InstanceRefresh
-	//
-	// * ReplaceUnhealthy
-	//
-	// * ScheduledActions
+	// - ReplaceUnhealthy
+	// - ScheduledActions
 	//
 	// If you omit this
 	// property, all processes are specified.

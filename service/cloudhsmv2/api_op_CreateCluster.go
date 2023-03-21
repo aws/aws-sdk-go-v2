@@ -38,11 +38,9 @@ type CreateClusterInput struct {
 	// The identifiers (IDs) of the subnets where you are creating the cluster. You
 	// must specify at least one subnet. If you specify multiple subnets, they must
 	// meet the following criteria:
-	//
-	// * All subnets must be in the same virtual private
+	// - All subnets must be in the same virtual private
 	// cloud (VPC).
-	//
-	// * You can specify only one subnet per Availability Zone.
+	// - You can specify only one subnet per Availability Zone.
 	//
 	// This member is required.
 	SubnetIds []string

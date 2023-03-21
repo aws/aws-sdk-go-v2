@@ -130,20 +130,16 @@ type CampaignSummary struct {
 	SignalCatalogArn *string
 
 	// The state of a campaign. The status can be one of the following:
-	//
-	// * CREATING -
+	// - CREATING -
 	// Amazon Web Services IoT FleetWise is processing your request to create the
 	// campaign.
-	//
-	// * WAITING_FOR_APPROVAL - After a campaign is created, it enters the
+	// - WAITING_FOR_APPROVAL - After a campaign is created, it enters the
 	// WAITING_FOR_APPROVAL state. To allow Amazon Web Services IoT FleetWise to deploy
 	// the campaign to the target vehicle or fleet, use the API operation to approve
 	// the campaign.
-	//
-	// * RUNNING - The campaign is active.
-	//
-	// * SUSPENDED - The campaign
-	// is suspended. To resume the campaign, use the API operation.
+	// - RUNNING - The campaign is active.
+	// - SUSPENDED - The campaign is
+	// suspended. To resume the campaign, use the API operation.
 	Status CampaignStatus
 
 	// The ARN of a vehicle or fleet to which the campaign is deployed.
@@ -1040,20 +1036,15 @@ type VehicleStatus struct {
 	CampaignName *string
 
 	// The state of a vehicle, which can be one of the following:
-	//
-	// * CREATED - Amazon
+	// - CREATED - Amazon
 	// Web Services IoT FleetWise sucessfully created the vehicle.
-	//
-	// * READY - The
+	// - READY - The
 	// vehicle is ready to receive a campaign deployment.
-	//
-	// * HEALTHY - A campaign
+	// - HEALTHY - A campaign
 	// deployment was delivered to the vehicle.
-	//
-	// * SUSPENDED - A campaign associated
+	// - SUSPENDED - A campaign associated
 	// with the vehicle was suspended and data collection was paused.
-	//
-	// * DELETING -
+	// - DELETING -
 	// Amazon Web Services IoT FleetWise is removing a campaign from the vehicle.
 	Status VehicleState
 

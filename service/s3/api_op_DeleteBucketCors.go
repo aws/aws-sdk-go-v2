@@ -17,11 +17,9 @@ import (
 // others. For information about cors, see Enabling Cross-Origin Resource Sharing
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html) in the Amazon S3
 // User Guide. Related Resources:
-//
-// * PutBucketCors
+// - PutBucketCors
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketCors.html)
-//
-// *
+// -
 // RESTOPTIONSobject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTOPTIONSobject.html)
 func (c *Client) DeleteBucketCors(ctx context.Context, params *DeleteBucketCorsInput, optFns ...func(*Options)) (*DeleteBucketCorsOutput, error) {

@@ -185,17 +185,12 @@ type Budget struct {
 	// The cost filters, such as Region, Service, member account, Tag, or Cost
 	// Category, that are applied to a budget. Amazon Web Services Budgets supports the
 	// following services as a Service filter for RI budgets:
-	//
-	// * Amazon EC2
-	//
-	// * Amazon
+	// - Amazon EC2
+	// - Amazon
 	// Redshift
-	//
-	// * Amazon Relational Database Service
-	//
-	// * Amazon ElastiCache
-	//
-	// * Amazon
+	// - Amazon Relational Database Service
+	// - Amazon ElastiCache
+	// - Amazon
 	// OpenSearch Service
 	CostFilters map[string][]string
 
@@ -391,16 +386,12 @@ type HistoricalOptions struct {
 	// The number of budget periods included in the moving-average calculation that
 	// determines your auto-adjusted budget amount. The maximum value depends on the
 	// TimeUnit granularity of the budget:
-	//
-	// * For the DAILY granularity, the maximum
+	// - For the DAILY granularity, the maximum
 	// value is 60.
-	//
-	// * For the MONTHLY granularity, the maximum value is 12.
-	//
-	// * For the
+	// - For the MONTHLY granularity, the maximum value is 12.
+	// - For the
 	// QUARTERLY granularity, the maximum value is 4.
-	//
-	// * For the ANNUALLY granularity,
+	// - For the ANNUALLY granularity,
 	// the maximum value is 1.
 	//
 	// This member is required.
@@ -447,16 +438,12 @@ type IamActionDefinition struct {
 // total of 11 subscribers. For example, if you have a budget for 200 dollars and
 // you want to be notified when you go over 160 dollars, create a notification with
 // the following parameters:
-//
-// * A notificationType of ACTUAL
-//
-// * A thresholdType of
+// - A notificationType of ACTUAL
+// - A thresholdType of
 // PERCENTAGE
-//
-// * A comparisonOperator of GREATER_THAN
-//
-// * A notification threshold
-// of 80
+// - A comparisonOperator of GREATER_THAN
+// - A notification threshold of
+// 80
 type Notification struct {
 
 	// The comparison that's used for this notification.
@@ -529,11 +516,9 @@ type ScpActionDefinition struct {
 
 // The amount of cost or usage that's measured for a budget. For example, a Spend
 // for 3 GB of S3 usage has the following parameters:
-//
-// * An Amount of 3
-//
-// * A unit
-// of GB
+// - An Amount of 3
+// - A unit of
+// GB
 type Spend struct {
 
 	// The cost or usage amount that's associated with a budget forecast, actual spend,
@@ -575,11 +560,9 @@ type SsmActionDefinition struct {
 // The subscriber to a budget notification. The subscriber consists of a
 // subscription type and either an Amazon SNS topic or an email address. For
 // example, an email subscriber has the following parameters:
-//
-// * A subscriptionType
+// - A subscriptionType
 // of EMAIL
-//
-// * An address of example@example.com
+// - An address of example@example.com
 type Subscriber struct {
 
 	// The address that Amazon Web Services sends budget notifications to, either an

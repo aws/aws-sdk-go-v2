@@ -44,21 +44,18 @@ import (
 // strictly. For example, record boundaries might be such that the size is a little
 // over or under the configured buffering size. By default, no encryption is
 // performed. We strongly recommend that you enable encryption to ensure secure
-// data storage in Amazon S3. A few notes about Amazon Redshift as a
-// destination:
-//
-// * An Amazon Redshift destination requires an S3 bucket as
-// intermediate location. Kinesis Data Firehose first delivers data to Amazon S3
-// and then uses COPY syntax to load data into an Amazon Redshift table. This is
-// specified in the RedshiftDestinationConfiguration.S3Configuration parameter.
-//
-// *
-// The compression formats SNAPPY or ZIP cannot be specified in
+// data storage in Amazon S3. A few notes about Amazon Redshift as a destination:
+// -
+// An Amazon Redshift destination requires an S3 bucket as intermediate location.
+// Kinesis Data Firehose first delivers data to Amazon S3 and then uses COPY syntax
+// to load data into an Amazon Redshift table. This is specified in the
+// RedshiftDestinationConfiguration.S3Configuration parameter.
+// - The compression
+// formats SNAPPY or ZIP cannot be specified in
 // RedshiftDestinationConfiguration.S3Configuration because the Amazon Redshift
 // COPY operation that reads from the S3 bucket doesn't support these compression
 // formats.
-//
-// * We strongly recommend that you use the user name and password you
+// - We strongly recommend that you use the user name and password you
 // provide exclusively with Kinesis Data Firehose, and that the permissions for the
 // account are restricted for Amazon Redshift INSERT permissions.
 //
@@ -108,11 +105,9 @@ type CreateDeliveryStreamInput struct {
 	DeliveryStreamEncryptionConfigurationInput *types.DeliveryStreamEncryptionConfigurationInput
 
 	// The delivery stream type. This parameter can be one of the following values:
-	//
-	// *
+	// -
 	// DirectPut: Provider applications access the delivery stream directly.
-	//
-	// *
+	// -
 	// KinesisStreamAsSource: The delivery stream uses a Kinesis data stream as a
 	// source.
 	DeliveryStreamType types.DeliveryStreamType

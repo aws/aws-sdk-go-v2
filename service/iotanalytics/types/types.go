@@ -1286,14 +1286,11 @@ type S3DestinationConfiguration struct {
 	// The key of the dataset contents object in an S3 bucket. Each object has a key
 	// that is a unique identifier. Each object has exactly one key. You can create a
 	// unique key with the following options:
-	//
-	// * Use !{iotanalytics:scheduleTime} to
+	// - Use !{iotanalytics:scheduleTime} to
 	// insert the time of a scheduled SQL query run.
-	//
-	// * Use !{iotanalytics:versionId}
-	// to insert a unique hash that identifies a dataset content.
-	//
-	// * Use
+	// - Use !{iotanalytics:versionId} to
+	// insert a unique hash that identifies a dataset content.
+	// - Use
 	// !{iotanalytics:creationTime} to insert the creation time of a dataset
 	// content.
 	//

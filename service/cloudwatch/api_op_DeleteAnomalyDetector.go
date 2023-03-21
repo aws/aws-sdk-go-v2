@@ -41,16 +41,11 @@ type DeleteAnomalyDetectorInput struct {
 	// The metric math anomaly detector to be deleted. When using
 	// MetricMathAnomalyDetector, you cannot include following parameters in the same
 	// operation:
-	//
-	// * Dimensions,
-	//
-	// * MetricName
-	//
-	// * Namespace
-	//
-	// * Stat
-	//
-	// * the
+	// - Dimensions,
+	// - MetricName
+	// - Namespace
+	// - Stat
+	// - the
 	// SingleMetricAnomalyDetector parameters of DeleteAnomalyDetectorInput
 	//
 	// Instead,
@@ -71,16 +66,11 @@ type DeleteAnomalyDetectorInput struct {
 	// A single metric anomaly detector to be deleted. When using
 	// SingleMetricAnomalyDetector, you cannot include the following parameters in the
 	// same operation:
-	//
-	// * Dimensions,
-	//
-	// * MetricName
-	//
-	// * Namespace
-	//
-	// * Stat
-	//
-	// * the
+	// - Dimensions,
+	// - MetricName
+	// - Namespace
+	// - Stat
+	// - the
 	// MetricMathAnomalyDetector parameters of DeleteAnomalyDetectorInput
 	//
 	// Instead,

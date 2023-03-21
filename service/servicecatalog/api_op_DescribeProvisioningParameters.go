@@ -37,12 +37,9 @@ func (c *Client) DescribeProvisioningParameters(ctx context.Context, params *Des
 type DescribeProvisioningParametersInput struct {
 
 	// The language code.
-	//
-	// * en - English (default)
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	// - en - English (default)
+	// - jp - Japanese
+	// - zh - Chinese
 	AcceptLanguage *string
 
 	// The path identifier of the product. This value is optional if the product has a

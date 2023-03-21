@@ -41,12 +41,9 @@ import (
 // access point ARN, see the Examples
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html#API_control_PutBucketPolicy_Examples)
 // section. The following actions are related to PutBucketPolicy:
-//
-// *
-// GetBucketPolicy
+// - GetBucketPolicy
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html)
-//
-// *
+// -
 // DeleteBucketPolicy
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html)
 func (c *Client) PutBucketPolicy(ctx context.Context, params *PutBucketPolicyInput, optFns ...func(*Options)) (*PutBucketPolicyOutput, error) {

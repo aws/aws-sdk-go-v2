@@ -41,11 +41,9 @@ type CreateLocationFsxOntapInput struct {
 	// Specifies the Amazon EC2 security groups that provide access to your file
 	// system's preferred subnet. The security groups must allow outbound traffic on
 	// the following ports (depending on the protocol you use):
-	//
-	// * Network File System
+	// - Network File System
 	// (NFS): TCP ports 111, 635, and 2049
-	//
-	// * Server Message Block (SMB): TCP port
+	// - Server Message Block (SMB): TCP port
 	// 445
 	//
 	// Your file system's security groups must also allow inbound traffic on the

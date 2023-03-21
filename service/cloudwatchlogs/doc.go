@@ -9,8 +9,7 @@
 // Alternatively, you can use CloudWatch Logs commands in the Amazon Web Services
 // CLI, CloudWatch Logs API, or CloudWatch Logs SDK. You can use CloudWatch Logs
 // to:
-//
-// * Monitor logs from EC2 instances in real time: You can use CloudWatch Logs
+// - Monitor logs from EC2 instances in real time: You can use CloudWatch Logs
 // to monitor applications and systems using log data. For example, CloudWatch Logs
 // can track the number of errors that occur in your application logs. Then, it can
 // send you a notification whenever the rate of errors exceeds a threshold that you
@@ -21,15 +20,13 @@
 // "404" status codes in an Apache access log). When the term you are searching for
 // is found, CloudWatch Logs reports the data to a CloudWatch metric that you
 // specify.
-//
-// * Monitor CloudTrail logged events: You can create alarms in
-// CloudWatch and receive notifications of particular API activity as captured by
-// CloudTrail. You can use the notification to perform troubleshooting.
-//
-// * Archive
-// log data: You can use CloudWatch Logs to store your log data in highly durable
-// storage. You can change the log retention setting so that any log events earlier
-// than this setting are automatically deleted. The CloudWatch Logs agent helps to
-// quickly send both rotated and non-rotated log data off of a host and into the
-// log service. You can then access the raw log data when you need it.
+// - Monitor CloudTrail logged events: You can create alarms in CloudWatch
+// and receive notifications of particular API activity as captured by CloudTrail.
+// You can use the notification to perform troubleshooting.
+// - Archive log data: You
+// can use CloudWatch Logs to store your log data in highly durable storage. You
+// can change the log retention setting so that any log events earlier than this
+// setting are automatically deleted. The CloudWatch Logs agent helps to quickly
+// send both rotated and non-rotated log data off of a host and into the log
+// service. You can then access the raw log data when you need it.
 package cloudwatchlogs

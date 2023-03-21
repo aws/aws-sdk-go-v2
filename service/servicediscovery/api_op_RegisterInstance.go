@@ -14,38 +14,32 @@ import (
 // Creates or updates one or more records and, optionally, creates a health check
 // based on the settings in a specified service. When you submit a RegisterInstance
 // request, the following occurs:
-//
-// * For each DNS record that you define in the
+// - For each DNS record that you define in the
 // service that's specified by ServiceId, a record is created or updated in the
 // hosted zone that's associated with the corresponding namespace.
+// - If the service
+// includes HealthCheckConfig, a health check is created based on the settings in
+// the health check configuration.
+// - The health check, if any, is associated with
+// each of the new or updated records.
 //
-// * If the
-// service includes HealthCheckConfig, a health check is created based on the
-// settings in the health check configuration.
-//
-// * The health check, if any, is
-// associated with each of the new or updated records.
-//
-// One RegisterInstance
-// request must complete before you can submit another request and specify the same
-// service ID and instance ID. For more information, see CreateService
+// One RegisterInstance request must complete
+// before you can submit another request and specify the same service ID and
+// instance ID. For more information, see CreateService
 // (https://docs.aws.amazon.com/cloud-map/latest/api/API_CreateService.html). When
 // Cloud Map receives a DNS query for the specified DNS name, it returns the
 // applicable value:
+// - If the health check is healthy: returns all the records
+// - If
+// the health check is unhealthy: returns the applicable value for the last healthy
+// instance
+// - If you didn't specify a health check configuration: returns all the
+// records
 //
-// * If the health check is healthy: returns all the records
-//
-// *
-// If the health check is unhealthy: returns the applicable value for the last
-// healthy instance
-//
-// * If you didn't specify a health check configuration: returns
-// all the records
-//
-// For the current quota on the number of instances that you can
-// register using the same namespace and using the same service, see Cloud Map
-// quotas (https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html)
-// in the Cloud Map Developer Guide.
+// For the current quota on the number of instances that you can register
+// using the same namespace and using the same service, see Cloud Map quotas
+// (https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html) in the
+// Cloud Map Developer Guide.
 func (c *Client) RegisterInstance(ctx context.Context, params *RegisterInstanceInput, optFns ...func(*Options)) (*RegisterInstanceOutput, error) {
 	if params == nil {
 		params = &RegisterInstanceInput{}
@@ -65,11 +59,9 @@ type RegisterInstanceInput struct {
 
 	// A string map that contains the following information for the service that you
 	// specify in ServiceId:
-	//
-	// * The attributes that apply to the records that are
+	// - The attributes that apply to the records that are
 	// defined in the service.
-	//
-	// * For each attribute, the applicable value.
+	// - For each attribute, the applicable value.
 	//
 	// Do not
 	// include sensitive information in the attributes if the namespace is discoverable
@@ -80,24 +72,19 @@ type RegisterInstanceInput struct {
 	// to get the DNS name, see "DNSName" in the topic AliasTarget
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html)
 	// in the Route 53 API Reference. Note the following:
-	//
-	// * The configuration for the
+	// - The configuration for the
 	// service that's specified by ServiceId must include settings for an A record, an
 	// AAAA record, or both.
-	//
-	// * In the service that's specified by ServiceId, the value
+	// - In the service that's specified by ServiceId, the value
 	// of RoutingPolicy must be WEIGHTED.
-	//
-	// * If the service that's specified by
+	// - If the service that's specified by
 	// ServiceId includes HealthCheckConfig settings, Cloud Map will create the Route
 	// 53 health check, but it doesn't associate the health check with the alias
 	// record.
-	//
-	// * Auto naming currently doesn't support creating alias records that
+	// - Auto naming currently doesn't support creating alias records that
 	// route traffic to Amazon Web Services resources other than Elastic Load Balancing
 	// load balancers.
-	//
-	// * If you specify a value for AWS_ALIAS_DNS_NAME, don't specify
+	// - If you specify a value for AWS_ALIAS_DNS_NAME, don't specify
 	// values for any of the AWS_INSTANCE attributes.
 	//
 	// AWS_EC2_INSTANCE_ID HTTP
@@ -139,20 +126,16 @@ type RegisterInstanceInput struct {
 
 	// An identifier that you want to associate with the instance. Note the
 	// following:
-	//
-	// * If the service that's specified by ServiceId includes settings for
+	// - If the service that's specified by ServiceId includes settings for
 	// an SRV record, the value of InstanceId is automatically included as part of the
 	// value for the SRV record. For more information, see DnsRecord > Type
 	// (https://docs.aws.amazon.com/cloud-map/latest/api/API_DnsRecord.html#cloudmap-Type-DnsRecord-Type).
-	//
-	// *
+	// -
 	// You can use this value to update an existing instance.
-	//
-	// * To register a new
+	// - To register a new
 	// instance, you must specify a value that's unique among instances that you
 	// register by using the same service.
-	//
-	// * If you specify an existing InstanceId and
+	// - If you specify an existing InstanceId and
 	// ServiceId, Cloud Map updates the existing DNS records, if any. If there's also
 	// an existing health check, Cloud Map deletes the old health check and creates a
 	// new one. The health check isn't deleted immediately, so it will still appear for

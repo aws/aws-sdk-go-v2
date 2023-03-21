@@ -33,8 +33,7 @@ type DescribeDBLogFilesInput struct {
 
 	// The customer-assigned name of the DB instance that contains the log files you
 	// want to list. Constraints:
-	//
-	// * Must match the identifier of an existing
+	// - Must match the identifier of an existing
 	// DBInstance.
 	//
 	// This member is required.

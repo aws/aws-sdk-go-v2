@@ -13,17 +13,13 @@ import (
 
 // This operation retrieves the following attributes from the lock-policy
 // subresource set on the specified vault:
-//
-// * The vault lock policy set on the
+// - The vault lock policy set on the
 // vault.
-//
-// * The state of the vault lock, which is either InProgess or Locked.
-//
-// *
+// - The state of the vault lock, which is either InProgess or Locked.
+// -
 // When the lock ID expires. The lock ID is used to complete the vault locking
 // process.
-//
-// * When the vault lock was initiated and put into the InProgress
+// - When the vault lock was initiated and put into the InProgress
 // state.
 //
 // A vault lock is put into the InProgress state by calling

@@ -25,10 +25,8 @@ import (
 // the GetBucketTagging action. By default, the bucket owner has this permission
 // and can grant this permission to others. GetBucketTagging has the following
 // special error:
-//
-// * Error code: NoSuchTagSetError
-//
-// * Description: There is no tag
+// - Error code: NoSuchTagSetError
+// - Description: There is no tag
 // set associated with the bucket.
 //
 // All Amazon S3 on Outposts REST API requests for
@@ -39,12 +37,10 @@ import (
 // x-amz-outpost-id derived by using the access point ARN, see the Examples
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html#API_control_GetBucketTagging_Examples)
 // section. The following actions are related to GetBucketTagging:
-//
-// *
+// -
 // PutBucketTagging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html)
-//
-// *
+// -
 // DeleteBucketTagging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html)
 func (c *Client) GetBucketTagging(ctx context.Context, params *GetBucketTaggingInput, optFns ...func(*Options)) (*GetBucketTaggingOutput, error) {

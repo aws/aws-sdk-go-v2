@@ -278,15 +278,12 @@ func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.
 // When the input StreamARN or ChannelARN in CLOUD_STORAGE_MODE is already mapped
 // to a different Kinesis Video Stream resource, or if the provided input StreamARN
 // or ChannelARN is not in Active status, try one of the following :
-//
-// * The
+// - The
 // DescribeMediaStorageConfiguration API to determine what the stream given channel
 // is mapped to.
-//
-// * The DescribeMappedResourceConfiguration API to determine the
+// - The DescribeMappedResourceConfiguration API to determine the
 // channel that the given stream is mapped to.
-//
-// * The DescribeStream or
+// - The DescribeStream or
 // DescribeSignalingChannel API to determine the status of the resource.
 type ResourceInUseException struct {
 	Message *string

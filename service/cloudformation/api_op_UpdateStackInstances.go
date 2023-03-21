@@ -71,11 +71,9 @@ type UpdateStackInstancesInput struct {
 	// administrator in the organization's management account or as a delegated
 	// administrator in a member account. By default, SELF is specified. Use SELF for
 	// stack sets with self-managed permissions.
-	//
-	// * If you are signed in to the
+	// - If you are signed in to the
 	// management account, specify SELF.
-	//
-	// * If you are signed in to a delegated
+	// - If you are signed in to a delegated
 	// administrator account, specify DELEGATED_ADMIN. Your Amazon Web Services account
 	// must be registered as a delegated administrator in the management account. For
 	// more information, see Register a delegated administrator
@@ -107,20 +105,16 @@ type UpdateStackInstancesInput struct {
 	// instances in the specified accounts and Amazon Web Services Regions. When
 	// specifying parameters and their values, be aware of how CloudFormation sets
 	// parameter values during stack instance update operations:
-	//
-	// * To override the
+	// - To override the
 	// current value for a parameter, include the parameter and specify its value.
-	//
-	// *
-	// To leave an overridden parameter set to its present value, include the parameter
+	// - To
+	// leave an overridden parameter set to its present value, include the parameter
 	// and specify UsePreviousValue as true. (You can't specify both a value and set
 	// UsePreviousValue to true.)
-	//
-	// * To set an overridden parameter back to the value
+	// - To set an overridden parameter back to the value
 	// specified in the stack set, specify a parameter list but don't include the
 	// parameter in the list.
-	//
-	// * To leave all parameters set to their present values,
+	// - To leave all parameters set to their present values,
 	// don't specify this property at all.
 	//
 	// During stack set updates, any parameter

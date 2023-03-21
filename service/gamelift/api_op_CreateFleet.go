@@ -154,12 +154,10 @@ type CreateFleetInput struct {
 	// The status of termination protection for active game sessions on the fleet. By
 	// default, this property is set to NoProtection. You can also set game session
 	// protection for an individual game session by calling UpdateGameSession.
-	//
-	// *
+	// -
 	// NoProtection - Game sessions can be terminated during active gameplay as a
 	// result of a scale-down event.
-	//
-	// * FullProtection - Game sessions in ACTIVE status
+	// - FullProtection - Game sessions in ACTIVE status
 	// cannot be terminated during a scale-down event.
 	NewGameSessionProtectionPolicy types.ProtectionPolicy
 

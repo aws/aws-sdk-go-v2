@@ -46,17 +46,12 @@ import (
 // Required permissions: kms:DeleteCustomKeyStore
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (IAM policy) Related operations:
-//
-// * ConnectCustomKeyStore
-//
-// *
+// - ConnectCustomKeyStore
+// -
 // CreateCustomKeyStore
-//
-// * DescribeCustomKeyStores
-//
-// * DisconnectCustomKeyStore
-//
-// *
+// - DescribeCustomKeyStores
+// - DisconnectCustomKeyStore
+// -
 // UpdateCustomKeyStore
 func (c *Client) DeleteCustomKeyStore(ctx context.Context, params *DeleteCustomKeyStoreInput, optFns ...func(*Options)) (*DeleteCustomKeyStoreOutput, error) {
 	if params == nil {

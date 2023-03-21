@@ -22,14 +22,11 @@ import (
 // timeout to at least 70 seconds (10 seconds higher than the maximum time service
 // may hold the poll request). Access Control You can use IAM policies to control
 // this action's access to Amazon SWF resources as follows:
-//
-// * Use a Resource
+// - Use a Resource
 // element with the domain name to limit the action to only specified domains.
-//
-// *
+// -
 // Use an Action element to allow or deny permission to call this action.
-//
-// *
+// -
 // Constrain the taskList.name parameter by using a Condition element with the
 // swf:taskList.name key to allow the action to access only certain task lists.
 //

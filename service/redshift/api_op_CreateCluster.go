@@ -38,20 +38,15 @@ type CreateClusterInput struct {
 	// A unique identifier for the cluster. You use this identifier to refer to the
 	// cluster for any subsequent cluster operations such as deleting or modifying. The
 	// identifier also appears in the Amazon Redshift console. Constraints:
-	//
-	// * Must
+	// - Must
 	// contain from 1 to 63 alphanumeric characters or hyphens.
-	//
-	// * Alphabetic
-	// characters must be lowercase.
-	//
-	// * First character must be a letter.
-	//
-	// * Cannot end
-	// with a hyphen or contain two consecutive hyphens.
-	//
-	// * Must be unique for all
-	// clusters within an Amazon Web Services account.
+	// - Alphabetic characters
+	// must be lowercase.
+	// - First character must be a letter.
+	// - Cannot end with a
+	// hyphen or contain two consecutive hyphens.
+	// - Must be unique for all clusters
+	// within an Amazon Web Services account.
 	//
 	// Example: myexamplecluster
 	//
@@ -60,38 +55,28 @@ type CreateClusterInput struct {
 
 	// The password associated with the admin user for the cluster that is being
 	// created. Constraints:
-	//
-	// * Must be between 8 and 64 characters in length.
-	//
-	// * Must
+	// - Must be between 8 and 64 characters in length.
+	// - Must
 	// contain at least one uppercase letter.
-	//
-	// * Must contain at least one lowercase
+	// - Must contain at least one lowercase
 	// letter.
-	//
-	// * Must contain one number.
-	//
-	// * Can be any printable ASCII character
-	// (ASCII code 33-126) except ' (single quote), " (double quote), \, /, or @.
+	// - Must contain one number.
+	// - Can be any printable ASCII character (ASCII
+	// code 33-126) except ' (single quote), " (double quote), \, /, or @.
 	//
 	// This member is required.
 	MasterUserPassword *string
 
 	// The user name associated with the admin user for the cluster that is being
 	// created. Constraints:
-	//
-	// * Must be 1 - 128 alphanumeric characters or hyphens. The
+	// - Must be 1 - 128 alphanumeric characters or hyphens. The
 	// user name can't be PUBLIC.
-	//
-	// * Must contain only lowercase letters, numbers,
+	// - Must contain only lowercase letters, numbers,
 	// underscore, plus sign, period (dot), at symbol (@), or hyphen.
-	//
-	// * The first
+	// - The first
 	// character must be a letter.
-	//
-	// * Must not contain a colon (:) or a slash (/).
-	//
-	// *
+	// - Must not contain a colon (:) or a slash (/).
+	// -
 	// Cannot be a reserved word. A list of reserved words can be found in Reserved
 	// Words (https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html) in the
 	// Amazon Redshift Database Developer Guide.
@@ -150,13 +135,10 @@ type CreateClusterInput struct {
 	// default parameter group, go to Working with Amazon Redshift Parameter Groups
 	// (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
 	// Constraints:
-	//
-	// * Must be 1 to 255 alphanumeric characters or hyphens.
-	//
-	// * First
+	// - Must be 1 to 255 alphanumeric characters or hyphens.
+	// - First
 	// character must be a letter.
-	//
-	// * Cannot end with a hyphen or contain two
+	// - Cannot end with a hyphen or contain two
 	// consecutive hyphens.
 	ClusterParameterGroupName *string
 
@@ -170,11 +152,9 @@ type CreateClusterInput struct {
 	ClusterSubnetGroupName *string
 
 	// The type of the cluster. When cluster type is specified as
-	//
-	// * single-node, the
+	// - single-node, the
 	// NumberOfNodes parameter is not required.
-	//
-	// * multi-node, the NumberOfNodes
+	// - multi-node, the NumberOfNodes
 	// parameter is required.
 	//
 	// Valid Values: multi-node | single-node Default:
@@ -192,14 +172,11 @@ type CreateClusterInput struct {
 	// information, go to Create a Database
 	// (https://docs.aws.amazon.com/redshift/latest/dg/t_creating_database.html) in the
 	// Amazon Redshift Database Developer Guide. Default: dev Constraints:
-	//
-	// * Must
+	// - Must
 	// contain 1 to 64 alphanumeric characters.
-	//
-	// * Must contain only lowercase
+	// - Must contain only lowercase
 	// letters.
-	//
-	// * Cannot be a word that is reserved by the service. A list of reserved
+	// - Cannot be a word that is reserved by the service. A list of reserved
 	// words can be found in Reserved Words
 	// (https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html) in the
 	// Amazon Redshift Database Developer Guide.

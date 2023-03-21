@@ -24,50 +24,40 @@ import (
 // with customer-provided encryption keys (SSE-C) when you store the object in
 // Amazon S3, then when you retrieve the metadata from the object, you must use the
 // following headers:
-//
-// * x-amz-server-side-encryption-customer-algorithm
-//
-// *
+// - x-amz-server-side-encryption-customer-algorithm
+// -
 // x-amz-server-side-encryption-customer-key
-//
-// *
+// -
 // x-amz-server-side-encryption-customer-key-MD5
 //
 // For more information about SSE-C,
 // see Server-Side Encryption (Using Customer-Provided Encryption Keys)
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html)
 // in the Amazon S3 User Guide.
-//
-// * Encryption request headers, such as
+// - Encryption request headers, such as
 // x-amz-server-side-encryption, should not be sent for GET requests if your object
 // uses server-side encryption with Amazon Web Services KMS keys stored in Amazon
 // Web Services Key Management Service (SSE-KMS) or server-side encryption with
 // Amazon S3 managed encryption keys (SSE-S3). If your object does use these types
 // of keys, you'll get an HTTP 400 Bad Request error.
-//
-// * The last modified property
+// - The last modified property
 // in this case is the creation date of the object.
 //
 // Consider the following when
 // using request headers:
+// - If both of the If-Match and If-Unmodified-Since headers
+// are present in the request as follows, then Amazon S3 returns the HTTP status
+// code 200 OK and the data requested:
+// - If-Match condition evaluates to true.
+// -
+// If-Unmodified-Since condition evaluates to false.
 //
-// * If both of the If-Match and If-Unmodified-Since
-// headers are present in the request as follows, then Amazon S3 returns the HTTP
-// status code 200 OK and the data requested:
-//
-// * If-Match condition evaluates to
-// true.
-//
-// * If-Unmodified-Since condition evaluates to false.
-//
-// * If both of the
+// - If both of the
 // If-None-Match and If-Modified-Since headers are present in the request as
 // follows, then Amazon S3 returns the HTTP status code 304 Not Modified:
-//
-// *
+// -
 // If-None-Match condition evaluates to false.
-//
-// * If-Modified-Since condition
+// - If-Modified-Since condition
 // evaluates to true.
 //
 // For more information about conditional requests, see RFC
@@ -81,45 +71,35 @@ import (
 // the Amazon S3 User Guide. If the object that you request does not exist, the
 // error Amazon S3 returns depends on whether you also have the s3:ListBucket
 // permission.
-//
-// * If you have the s3:ListBucket permission on the bucket, Amazon S3
+// - If you have the s3:ListBucket permission on the bucket, Amazon S3
 // returns an HTTP status code 404 Not Found ("no such key") error.
-//
-// * If you don't
+// - If you don't
 // have the s3:ListBucket permission, Amazon S3 returns an HTTP status code 403
 // Forbidden ("access denied") error.
 //
 // The following actions are related to
 // GetObjectAttributes:
-//
-// * GetObject
+// - GetObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
-//
-// *
+// -
 // GetObjectAcl
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAcl.html)
-//
-// *
+// -
 // GetObjectLegalHold
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectLegalHold.html)
-//
-// *
+// -
 // GetObjectLockConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectLockConfiguration.html)
-//
-// *
+// -
 // GetObjectRetention
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectRetention.html)
-//
-// *
+// -
 // GetObjectTagging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectTagging.html)
-//
-// *
+// -
 // HeadObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_HeadObject.html)
-//
-// *
+// -
 // ListParts (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html)
 func (c *Client) GetObjectAttributes(ctx context.Context, params *GetObjectAttributesInput, optFns ...func(*Options)) (*GetObjectAttributesOutput, error) {
 	if params == nil {

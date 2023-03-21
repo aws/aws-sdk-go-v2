@@ -40,12 +40,9 @@ type DescribeTagsInput struct {
 	DryRun *bool
 
 	// The filters.
-	//
-	// * key - The tag key.
-	//
-	// * resource-id - The ID of the resource.
-	//
-	// *
+	// - key - The tag key.
+	// - resource-id - The ID of the resource.
+	// -
 	// resource-type - The resource type (customer-gateway | dedicated-host |
 	// dhcp-options | elastic-ip | fleet | fpga-image | host-reservation | image |
 	// instance | internet-gateway | key-pair | launch-template | natgateway |
@@ -53,12 +50,10 @@ type DescribeTagsInput struct {
 	// route-table | security-group | snapshot | spot-instances-request | subnet |
 	// volume | vpc | vpc-endpoint | vpc-endpoint-service | vpc-peering-connection |
 	// vpn-connection | vpn-gateway).
-	//
-	// * tag: - The key/value combination of the tag.
+	// - tag: - The key/value combination of the tag.
 	// For example, specify "tag:Owner" for the filter name and "TeamA" for the filter
 	// value to find resources with the tag "Owner=TeamA".
-	//
-	// * value - The tag value.
+	// - value - The tag value.
 	Filters []types.Filter
 
 	// The maximum number of items to return for this request. This value can be

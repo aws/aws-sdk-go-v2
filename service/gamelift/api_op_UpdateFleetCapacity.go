@@ -15,27 +15,23 @@ import (
 // capacity determines the number of game sessions and players that can be hosted
 // based on the fleet configuration. Use this operation to set the following fleet
 // capacity properties:
-//
-// * Minimum/maximum size: Set hard limits on fleet capacity.
+// - Minimum/maximum size: Set hard limits on fleet capacity.
 // GameLift cannot set the fleet's capacity to a value outside of this range,
 // whether the capacity is changed manually or through automatic scaling.
-//
-// *
-// Desired capacity: Manually set the number of Amazon EC2 instances to be
-// maintained in a fleet location. Before changing a fleet's desired capacity, you
-// may want to call DescribeEC2InstanceLimits
+// - Desired
+// capacity: Manually set the number of Amazon EC2 instances to be maintained in a
+// fleet location. Before changing a fleet's desired capacity, you may want to call
+// DescribeEC2InstanceLimits
 // (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeEC2InstanceLimits.html)
 // to get the maximum capacity of the fleet's Amazon EC2 instance type.
 // Alternatively, consider using automatic scaling to adjust capacity based on
 // player demand.
 //
 // This operation can be used in the following ways:
-//
-// * To update
+// - To update
 // capacity for a fleet's home Region, or if the fleet has no remote locations,
 // omit the Location parameter. The fleet must be in ACTIVE status.
-//
-// * To update
+// - To update
 // capacity for a fleet's remote location, include the Location parameter set to
 // the location to be updated. The location must be in ACTIVE status.
 //

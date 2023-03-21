@@ -40,21 +40,17 @@ func (c *Client) RestoreDBClusterToPointInTime(ctx context.Context, params *Rest
 type RestoreDBClusterToPointInTimeInput struct {
 
 	// The name of the new DB cluster to be created. Constraints:
-	//
-	// * Must contain from
-	// 1 to 63 letters, numbers, or hyphens
-	//
-	// * First character must be a letter
-	//
-	// *
-	// Cannot end with a hyphen or contain two consecutive hyphens
+	// - Must contain from 1
+	// to 63 letters, numbers, or hyphens
+	// - First character must be a letter
+	// - Cannot
+	// end with a hyphen or contain two consecutive hyphens
 	//
 	// This member is required.
 	DBClusterIdentifier *string
 
 	// The identifier of the source DB cluster from which to restore. Constraints:
-	//
-	// *
+	// -
 	// Must match the identifier of an existing DBCluster.
 	//
 	// This member is required.
@@ -62,8 +58,7 @@ type RestoreDBClusterToPointInTimeInput struct {
 
 	// The name of the DB cluster parameter group to associate with the new DB cluster.
 	// Constraints:
-	//
-	// * If supplied, must match the name of an existing
+	// - If supplied, must match the name of an existing
 	// DBClusterParameterGroup.
 	DBClusterParameterGroupName *string
 
@@ -94,16 +89,14 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// source DB cluster. The new DB cluster is encrypted with the KMS key identified
 	// by the KmsKeyId parameter. If you do not specify a value for the KmsKeyId
 	// parameter, then the following will occur:
+	// - If the DB cluster is encrypted, then
+	// the restored DB cluster is encrypted using the KMS key that was used to encrypt
+	// the source DB cluster.
+	// - If the DB cluster is not encrypted, then the restored
+	// DB cluster is not encrypted.
 	//
-	// * If the DB cluster is encrypted,
-	// then the restored DB cluster is encrypted using the KMS key that was used to
-	// encrypt the source DB cluster.
-	//
-	// * If the DB cluster is not encrypted, then the
-	// restored DB cluster is not encrypted.
-	//
-	// If DBClusterIdentifier refers to a DB
-	// cluster that is not encrypted, then the restore request is rejected.
+	// If DBClusterIdentifier refers to a DB cluster that
+	// is not encrypted, then the restore request is rejected.
 	KmsKeyId *string
 
 	// (Not supported by Neptune)
@@ -115,17 +108,13 @@ type RestoreDBClusterToPointInTimeInput struct {
 
 	// The date and time to restore the DB cluster to. Valid Values: Value must be a
 	// time in Universal Coordinated Time (UTC) format Constraints:
-	//
-	// * Must be before
+	// - Must be before
 	// the latest restorable time for the DB instance
-	//
-	// * Must be specified if
+	// - Must be specified if
 	// UseLatestRestorableTime parameter is not provided
-	//
-	// * Cannot be specified if
+	// - Cannot be specified if
 	// UseLatestRestorableTime parameter is true
-	//
-	// * Cannot be specified if RestoreType
+	// - Cannot be specified if RestoreType
 	// parameter is copy-on-write
 	//
 	// Example: 2015-03-07T23:45:00Z
@@ -133,11 +122,9 @@ type RestoreDBClusterToPointInTimeInput struct {
 
 	// The type of restore to be performed. You can specify one of the following
 	// values:
-	//
-	// * full-copy - The new DB cluster is restored as a full copy of the
+	// - full-copy - The new DB cluster is restored as a full copy of the
 	// source DB cluster.
-	//
-	// * copy-on-write - The new DB cluster is restored as a clone
+	// - copy-on-write - The new DB cluster is restored as a clone
 	// of the source DB cluster.
 	//
 	// If you don't specify a RestoreType value, then the

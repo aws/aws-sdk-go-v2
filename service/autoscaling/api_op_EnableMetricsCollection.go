@@ -47,57 +47,36 @@ type EnableMetricsCollectionInput struct {
 
 	// Identifies the metrics to enable. You can specify one or more of the following
 	// metrics:
-	//
-	// * GroupMinSize
-	//
-	// * GroupMaxSize
-	//
-	// * GroupDesiredCapacity
-	//
-	// *
+	// - GroupMinSize
+	// - GroupMaxSize
+	// - GroupDesiredCapacity
+	// -
 	// GroupInServiceInstances
-	//
-	// * GroupPendingInstances
-	//
-	// * GroupStandbyInstances
-	//
-	// *
+	// - GroupPendingInstances
+	// - GroupStandbyInstances
+	// -
 	// GroupTerminatingInstances
-	//
-	// * GroupTotalInstances
-	//
-	// * GroupInServiceCapacity
-	//
-	// *
+	// - GroupTotalInstances
+	// - GroupInServiceCapacity
+	// -
 	// GroupPendingCapacity
-	//
-	// * GroupStandbyCapacity
-	//
-	// * GroupTerminatingCapacity
-	//
-	// *
+	// - GroupStandbyCapacity
+	// - GroupTerminatingCapacity
+	// -
 	// GroupTotalCapacity
-	//
-	// * WarmPoolDesiredCapacity
-	//
-	// * WarmPoolWarmedCapacity
-	//
-	// *
+	// - WarmPoolDesiredCapacity
+	// - WarmPoolWarmedCapacity
+	// -
 	// WarmPoolPendingCapacity
+	// - WarmPoolTerminatingCapacity
+	// - WarmPoolTotalCapacity
+	// -
+	// GroupAndWarmPoolDesiredCapacity
+	// - GroupAndWarmPoolTotalCapacity
 	//
-	// * WarmPoolTerminatingCapacity
-	//
-	// *
-	// WarmPoolTotalCapacity
-	//
-	// * GroupAndWarmPoolDesiredCapacity
-	//
-	// *
-	// GroupAndWarmPoolTotalCapacity
-	//
-	// If you specify Granularity and don't specify any
-	// metrics, all metrics are enabled. For more information, see Auto Scaling group
-	// metrics
+	// If you specify
+	// Granularity and don't specify any metrics, all metrics are enabled. For more
+	// information, see Auto Scaling group metrics
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-cloudwatch-monitoring.html#as-group-metrics)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	Metrics []string

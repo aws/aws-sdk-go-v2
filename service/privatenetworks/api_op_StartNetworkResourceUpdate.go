@@ -40,12 +40,10 @@ type StartNetworkResourceUpdateInput struct {
 	NetworkResourceArn *string
 
 	// The update type.
-	//
-	// * REPLACE - Submits a request to replace a defective radio
+	// - REPLACE - Submits a request to replace a defective radio
 	// unit. We provide a shipping label that you can use for the return process and we
 	// ship a replacement radio unit to you.
-	//
-	// * RETURN - Submits a request to replace a
+	// - RETURN - Submits a request to replace a
 	// radio unit that you no longer need. We provide a shipping label that you can use
 	// for the return process.
 	//

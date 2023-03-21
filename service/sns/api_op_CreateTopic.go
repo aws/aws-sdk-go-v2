@@ -47,26 +47,20 @@ type CreateTopicInput struct {
 	// A map of attributes with their corresponding values. The following lists the
 	// names, descriptions, and values of the special request parameters that the
 	// CreateTopic action uses:
-	//
-	// * DeliveryPolicy – The policy that defines how Amazon
+	// - DeliveryPolicy – The policy that defines how Amazon
 	// SNS retries failed deliveries to HTTP/S endpoints.
-	//
-	// * DisplayName – The display
+	// - DisplayName – The display
 	// name to use for a topic with SMS subscriptions.
-	//
-	// * FifoTopic – Set to true to
+	// - FifoTopic – Set to true to
 	// create a FIFO topic.
-	//
-	// * Policy – The policy that defines who can access your
-	// topic. By default, only the topic owner can publish or subscribe to the
-	// topic.
-	//
-	// * SignatureVersion – The signature version corresponds to the hashing
-	// algorithm used while creating the signature of the notifications, subscription
+	// - Policy – The policy that defines who can access your
+	// topic. By default, only the topic owner can publish or subscribe to the topic.
+	// -
+	// SignatureVersion – The signature version corresponds to the hashing algorithm
+	// used while creating the signature of the notifications, subscription
 	// confirmations, or unsubscribe confirmation messages sent by Amazon SNS. By
 	// default, SignatureVersion is set to 1.
-	//
-	// * TracingConfig – Tracing mode of an
+	// - TracingConfig – Tracing mode of an
 	// Amazon SNS topic. By default TracingConfig is set to PassThrough, and the topic
 	// passes through the tracing header it receives from an Amazon SNS publisher to
 	// its subscriptions. If set to Active, Amazon SNS will vend X-Ray segment data to
@@ -76,8 +70,7 @@ type CreateTopicInput struct {
 	// The following attribute applies only to
 	// server-side encryption
 	// (https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html):
-	//
-	// *
+	// -
 	// KmsMasterKeyId – The ID of an Amazon Web Services managed customer master key
 	// (CMK) for Amazon SNS or a custom CMK. For more information, see Key Terms
 	// (https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms).
@@ -88,21 +81,17 @@ type CreateTopicInput struct {
 	// The following attributes apply
 	// only to FIFO topics
 	// (https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html):
-	//
-	// * FifoTopic –
+	// - FifoTopic –
 	// When this is set to true, a FIFO topic is created.
-	//
-	// * ContentBasedDeduplication
-	// – Enables content-based deduplication for FIFO topics.
-	//
-	// * By default,
+	// - ContentBasedDeduplication –
+	// Enables content-based deduplication for FIFO topics.
+	// - By default,
 	// ContentBasedDeduplication is set to false. If you create a FIFO topic and this
 	// attribute is false, you must specify a value for the MessageDeduplicationId
 	// parameter for the Publish
 	// (https://docs.aws.amazon.com/sns/latest/api/API_Publish.html) action.
-	//
-	// * When
-	// you set ContentBasedDeduplication to true, Amazon SNS uses a SHA-256 hash to
+	// - When you
+	// set ContentBasedDeduplication to true, Amazon SNS uses a SHA-256 hash to
 	// generate the MessageDeduplicationId using the body of the message (but not the
 	// attributes of the message). (Optional) To override the generated value, you can
 	// specify a value for the MessageDeduplicationId parameter for the Publish action.

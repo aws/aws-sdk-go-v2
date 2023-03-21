@@ -45,14 +45,11 @@ type DescribeClientVpnTargetNetworksInput struct {
 	DryRun *bool
 
 	// One or more filters. Filter names and values are case-sensitive.
-	//
-	// *
+	// -
 	// association-id - The ID of the association.
-	//
-	// * target-network-id - The ID of the
+	// - target-network-id - The ID of the
 	// subnet specified as the target network.
-	//
-	// * vpc-id - The ID of the VPC in which
+	// - vpc-id - The ID of the VPC in which
 	// the target network is located.
 	Filters []types.Filter
 

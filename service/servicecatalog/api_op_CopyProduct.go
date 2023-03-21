@@ -48,12 +48,9 @@ type CopyProductInput struct {
 	SourceProductArn *string
 
 	// The language code.
-	//
-	// * en - English (default)
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	// - en - English (default)
+	// - jp - Japanese
+	// - zh - Chinese
 	AcceptLanguage *string
 
 	// The copy options. If the value is CopyTags, the tags from the source product are

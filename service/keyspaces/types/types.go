@@ -9,10 +9,8 @@ import (
 
 // Amazon Keyspaces has two read/write capacity modes for processing reads and
 // writes on your tables:
-//
-// * On-demand (default)
-//
-// * Provisioned
+// - On-demand (default)
+// - Provisioned
 //
 // The read/write
 // capacity mode that you choose controls how you are charged for read and write
@@ -23,11 +21,9 @@ import (
 type CapacitySpecification struct {
 
 	// The read/write throughput capacity mode for a table. The options are:
-	//
-	// *
+	// -
 	// throughputMode:PAY_PER_REQUEST and
-	//
-	// * throughputMode:PROVISIONED - Provisioned
+	// - throughputMode:PROVISIONED - Provisioned
 	// capacity mode requires readCapacityUnits and writeCapacityUnits as input.
 	//
 	// The
@@ -51,11 +47,9 @@ type CapacitySpecification struct {
 }
 
 // The read/write throughput capacity mode for a table. The options are:
-//
-// *
+// -
 // throughputMode:PAY_PER_REQUEST and
-//
-// * throughputMode:PROVISIONED.
+// - throughputMode:PROVISIONED.
 //
 // For more
 // information, see Read/write capacity modes
@@ -64,11 +58,9 @@ type CapacitySpecification struct {
 type CapacitySpecificationSummary struct {
 
 	// The read/write throughput capacity mode for a table. The options are:
-	//
-	// *
+	// -
 	// throughputMode:PAY_PER_REQUEST and
-	//
-	// * throughputMode:PROVISIONED - Provisioned
+	// - throughputMode:PROVISIONED - Provisioned
 	// capacity mode requires readCapacityUnits and writeCapacityUnits as input.
 	//
 	// The
@@ -158,12 +150,10 @@ type Comment struct {
 // Amazon Keyspaces encrypts and decrypts the table data at rest transparently and
 // integrates with Key Management Service for storing and managing the encryption
 // key. You can choose one of the following KMS keys (KMS keys):
-//
-// * Amazon Web
+// - Amazon Web
 // Services owned key - This is the default encryption type. The key is owned by
 // Amazon Keyspaces (no additional charge).
-//
-// * Customer managed key - This key is
+// - Customer managed key - This key is
 // stored in your account and is created, owned, and managed by you. You have full
 // control over the customer managed key (KMS charges apply).
 //
@@ -178,11 +168,9 @@ type EncryptionSpecification struct {
 
 	// The encryption option specified for the table. You can choose one of the
 	// following KMS keys (KMS keys):
-	//
-	// * type:AWS_OWNED_KMS_KEY - This key is owned by
+	// - type:AWS_OWNED_KMS_KEY - This key is owned by
 	// Amazon Keyspaces.
-	//
-	// * type:CUSTOMER_MANAGED_KMS_KEY - This key is stored in your
+	// - type:CUSTOMER_MANAGED_KMS_KEY - This key is stored in your
 	// account and is created, owned, and managed by you. This option requires the
 	// kms_key_identifier of the KMS key in Amazon Resource Name (ARN) format as
 	// input.
@@ -240,10 +228,8 @@ type PartitionKey struct {
 type PointInTimeRecovery struct {
 
 	// The options are:
-	//
-	// * status=ENABLED
-	//
-	// * status=DISABLED
+	// - status=ENABLED
+	// - status=DISABLED
 	//
 	// This member is required.
 	Status PointInTimeRecoveryStatus

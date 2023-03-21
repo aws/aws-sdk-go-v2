@@ -32,14 +32,12 @@ import (
 // These libraries return a ciphertext format that is incompatible with KMS. When
 // you use the ReEncrypt operation, you need to provide information for the decrypt
 // operation and the subsequent encrypt operation.
-//
-// * If your ciphertext was
+// - If your ciphertext was
 // encrypted under an asymmetric KMS key, you must use the SourceKeyId parameter to
 // identify the KMS key that encrypted the ciphertext. You must also supply the
 // encryption algorithm that was used. This information is required to decrypt the
 // data.
-//
-// * If your ciphertext was encrypted under a symmetric encryption KMS key,
+// - If your ciphertext was encrypted under a symmetric encryption KMS key,
 // the SourceKeyId parameter is optional. KMS can get this information from
 // metadata that it adds to the symmetric ciphertext blob. This feature adds
 // durability to your implementation by ensuring that authorized users can decrypt
@@ -49,8 +47,7 @@ import (
 // only the KMS key you specify. If the ciphertext was encrypted under a different
 // KMS key, the ReEncrypt operation fails. This practice ensures that you use the
 // KMS key that you intend.
-//
-// * To reencrypt the data, you must use the
+// - To reencrypt the data, you must use the
 // DestinationKeyId parameter to specify the KMS key that re-encrypts the data
 // after it is decrypted. If the destination KMS key is an asymmetric KMS key, you
 // must also provide the encryption algorithm. The algorithm that you choose must
@@ -73,12 +70,10 @@ import (
 // Either or both KMS keys can be in a different account than the caller. To
 // specify a KMS key in a different account, you must use its key ARN or alias ARN.
 // Required permissions:
-//
-// * kms:ReEncryptFrom
+// - kms:ReEncryptFrom
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // permission on the source KMS key (key policy)
-//
-// * kms:ReEncryptTo
+// - kms:ReEncryptTo
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // permission on the destination KMS key (key policy)
 //
@@ -89,15 +84,10 @@ import (
 // to create a KMS key. But you must include it manually when you create a KMS key
 // programmatically or when you use the PutKeyPolicy operation to set a key policy.
 // Related operations:
-//
-// * Decrypt
-//
-// * Encrypt
-//
-// * GenerateDataKey
-//
-// *
-// GenerateDataKeyPair
+// - Decrypt
+// - Encrypt
+// - GenerateDataKey
+// - GenerateDataKeyPair
 func (c *Client) ReEncrypt(ctx context.Context, params *ReEncryptInput, optFns ...func(*Options)) (*ReEncryptOutput, error) {
 	if params == nil {
 		params = &ReEncryptInput{}
@@ -127,16 +117,12 @@ type ReEncryptInput struct {
 	// ARN. When using an alias name, prefix it with "alias/". To specify a KMS key in
 	// a different Amazon Web Services account, you must use the key ARN or alias ARN.
 	// For example:
-	//
-	// * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// * Key ARN:
+	// - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	// - Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// *
+	// -
 	// Alias name: alias/ExampleAlias
-	//
-	// * Alias ARN:
+	// - Alias ARN:
 	// arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
 	//
 	// To get the key ID and key
@@ -208,17 +194,13 @@ type ReEncryptInput struct {
 	// use its key ID, key ARN, alias name, or alias ARN. When using an alias name,
 	// prefix it with "alias/". To specify a KMS key in a different Amazon Web Services
 	// account, you must use the key ARN or alias ARN. For example:
-	//
-	// * Key ID:
+	// - Key ID:
 	// 1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// * Key ARN:
+	// - Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// *
+	// -
 	// Alias name: alias/ExampleAlias
-	//
-	// * Alias ARN:
+	// - Alias ARN:
 	// arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
 	//
 	// To get the key ID and key

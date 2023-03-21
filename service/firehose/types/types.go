@@ -496,11 +496,9 @@ type DeliveryStreamDescription struct {
 	DeliveryStreamStatus DeliveryStreamStatus
 
 	// The delivery stream type. This can be one of the following values:
-	//
-	// * DirectPut:
+	// - DirectPut:
 	// Provider applications access the delivery stream directly.
-	//
-	// *
+	// -
 	// KinesisStreamAsSource: The delivery stream uses a Kinesis data stream as a
 	// source.
 	//
@@ -2275,30 +2273,22 @@ type VpcConfiguration struct {
 	// Firehose delivery role or you can specify a new role. In either case, make sure
 	// that the role trusts the Kinesis Data Firehose service principal and that it
 	// grants the following permissions:
-	//
-	// * ec2:DescribeVpcs
-	//
-	// *
+	// - ec2:DescribeVpcs
+	// -
 	// ec2:DescribeVpcAttribute
-	//
-	// * ec2:DescribeSubnets
-	//
-	// * ec2:DescribeSecurityGroups
-	//
-	// *
+	// - ec2:DescribeSubnets
+	// - ec2:DescribeSecurityGroups
+	// -
 	// ec2:DescribeNetworkInterfaces
-	//
-	// * ec2:CreateNetworkInterface
-	//
-	// *
+	// - ec2:CreateNetworkInterface
+	// -
 	// ec2:CreateNetworkInterfacePermission
+	// - ec2:DeleteNetworkInterface
 	//
-	// * ec2:DeleteNetworkInterface
-	//
-	// If you
-	// revoke these permissions after you create the delivery stream, Kinesis Data
-	// Firehose can't scale out by creating more ENIs when necessary. You might
-	// therefore see a degradation in performance.
+	// If you revoke
+	// these permissions after you create the delivery stream, Kinesis Data Firehose
+	// can't scale out by creating more ENIs when necessary. You might therefore see a
+	// degradation in performance.
 	//
 	// This member is required.
 	RoleARN *string
@@ -2347,30 +2337,22 @@ type VpcConfigurationDescription struct {
 	// or you can specify a new role. In either case, make sure that the role trusts
 	// the Kinesis Data Firehose service principal and that it grants the following
 	// permissions:
-	//
-	// * ec2:DescribeVpcs
-	//
-	// * ec2:DescribeVpcAttribute
-	//
-	// *
+	// - ec2:DescribeVpcs
+	// - ec2:DescribeVpcAttribute
+	// -
 	// ec2:DescribeSubnets
-	//
-	// * ec2:DescribeSecurityGroups
-	//
-	// *
+	// - ec2:DescribeSecurityGroups
+	// -
 	// ec2:DescribeNetworkInterfaces
-	//
-	// * ec2:CreateNetworkInterface
-	//
-	// *
+	// - ec2:CreateNetworkInterface
+	// -
 	// ec2:CreateNetworkInterfacePermission
+	// - ec2:DeleteNetworkInterface
 	//
-	// * ec2:DeleteNetworkInterface
-	//
-	// If you
-	// revoke these permissions after you create the delivery stream, Kinesis Data
-	// Firehose can't scale out by creating more ENIs when necessary. You might
-	// therefore see a degradation in performance.
+	// If you revoke
+	// these permissions after you create the delivery stream, Kinesis Data Firehose
+	// can't scale out by creating more ENIs when necessary. You might therefore see a
+	// degradation in performance.
 	//
 	// This member is required.
 	RoleARN *string

@@ -48,13 +48,10 @@ type CreateReplicationInstanceInput struct {
 
 	// The replication instance identifier. This parameter is stored as a lowercase
 	// string. Constraints:
-	//
-	// * Must contain 1-63 alphanumeric characters or hyphens.
-	//
-	// *
+	// - Must contain 1-63 alphanumeric characters or hyphens.
+	// -
 	// First character must be a letter.
-	//
-	// * Can't end with a hyphen or contain two
+	// - Can't end with a hyphen or contain two
 	// consecutive hyphens.
 	//
 	// Example: myrepinstance

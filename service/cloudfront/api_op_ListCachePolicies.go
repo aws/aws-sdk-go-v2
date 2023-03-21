@@ -47,12 +47,10 @@ type ListCachePoliciesInput struct {
 
 	// A filter to return only the specified kinds of cache policies. Valid values
 	// are:
-	//
-	// * managed – Returns only the managed policies created by Amazon Web
+	// - managed – Returns only the managed policies created by Amazon Web
 	// Services.
-	//
-	// * custom – Returns only the custom policies created in your Amazon
-	// Web Services account.
+	// - custom – Returns only the custom policies created in your Amazon Web
+	// Services account.
 	Type types.CachePolicyType
 
 	noSmithyDocumentSerde

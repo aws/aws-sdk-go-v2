@@ -43,29 +43,18 @@ type GetReservationUtilizationInput struct {
 
 	// Filters utilization data by dimensions. You can filter by the following
 	// dimensions:
-	//
-	// * AZ
-	//
-	// * CACHE_ENGINE
-	//
-	// * DEPLOYMENT_OPTION
-	//
-	// * INSTANCE_TYPE
-	//
-	// *
+	// - AZ
+	// - CACHE_ENGINE
+	// - DEPLOYMENT_OPTION
+	// - INSTANCE_TYPE
+	// -
 	// LINKED_ACCOUNT
-	//
-	// * OPERATING_SYSTEM
-	//
-	// * PLATFORM
-	//
-	// * REGION
-	//
-	// * SERVICE
-	//
-	// * SCOPE
-	//
-	// *
+	// - OPERATING_SYSTEM
+	// - PLATFORM
+	// - REGION
+	// - SERVICE
+	// - SCOPE
+	// -
 	// TENANCY
 	//
 	// GetReservationUtilization uses the same Expression
@@ -98,44 +87,27 @@ type GetReservationUtilizationInput struct {
 
 	// The value that you want to sort the data by. The following values are supported
 	// for Key:
-	//
-	// * UtilizationPercentage
-	//
-	// * UtilizationPercentageInUnits
-	//
-	// *
+	// - UtilizationPercentage
+	// - UtilizationPercentageInUnits
+	// -
 	// PurchasedHours
-	//
-	// * PurchasedUnits
-	//
-	// * TotalActualHours
-	//
-	// * TotalActualUnits
-	//
-	// *
+	// - PurchasedUnits
+	// - TotalActualHours
+	// - TotalActualUnits
+	// -
 	// UnusedHours
-	//
-	// * UnusedUnits
-	//
-	// * OnDemandCostOfRIHoursUsed
-	//
-	// * NetRISavings
-	//
-	// *
+	// - UnusedUnits
+	// - OnDemandCostOfRIHoursUsed
+	// - NetRISavings
+	// -
 	// TotalPotentialRISavings
-	//
-	// * AmortizedUpfrontFee
-	//
-	// * AmortizedRecurringFee
-	//
-	// *
+	// - AmortizedUpfrontFee
+	// - AmortizedRecurringFee
+	// -
 	// TotalAmortizedFee
-	//
-	// * RICostForUnusedHours
-	//
-	// * RealizedSavings
-	//
-	// *
+	// - RICostForUnusedHours
+	// - RealizedSavings
+	// -
 	// UnrealizedSavings
 	//
 	// The supported values for SortOrder are ASCENDING and

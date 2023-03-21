@@ -29,12 +29,10 @@ import (
 // specify the AppNetworkAccessType parameter. AppNetworkAccessType corresponds to
 // the network access type that you choose when you onboard to Studio. The
 // following options are available:
-//
-// * PublicInternetOnly - Non-EFS traffic goes
+// - PublicInternetOnly - Non-EFS traffic goes
 // through a VPC managed by Amazon SageMaker, which allows internet access. This is
 // the default value.
-//
-// * VpcOnly - All Studio traffic is through the specified VPC
+// - VpcOnly - All Studio traffic is through the specified VPC
 // and subnets. Internet access is disabled by default. To allow internet access,
 // you must specify a NAT gateway. When internet access is disabled, you won't be
 // able to run a Studio notebook or to train or host models unless your VPC has an
@@ -95,12 +93,10 @@ type CreateDomainInput struct {
 
 	// Specifies the VPC used for non-EFS traffic. The default value is
 	// PublicInternetOnly.
-	//
-	// * PublicInternetOnly - Non-EFS traffic is through a VPC
+	// - PublicInternetOnly - Non-EFS traffic is through a VPC
 	// managed by Amazon SageMaker, which allows direct internet access
-	//
-	// * VpcOnly -
-	// All Studio traffic is through the specified VPC and subnets
+	// - VpcOnly - All
+	// Studio traffic is through the specified VPC and subnets
 	AppNetworkAccessType types.AppNetworkAccessType
 
 	// The entity that creates and manages the required security groups for inter-app

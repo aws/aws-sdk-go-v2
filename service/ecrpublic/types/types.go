@@ -343,14 +343,10 @@ type RepositoryCatalogDataInput struct {
 	// tag is added to your repository catalog data, it's associated with the
 	// repository and can be retrieved using the API but isn't discoverable in the
 	// Amazon ECR Public Gallery.
-	//
-	// * ARM
-	//
-	// * ARM 64
-	//
-	// * x86
-	//
-	// * x86-64
+	// - ARM
+	// - ARM 64
+	// - x86
+	// - x86-64
 	Architectures []string
 
 	// A short description of the contents of the repository. This text appears in both
@@ -368,10 +364,8 @@ type RepositoryCatalogDataInput struct {
 	// tag is added to your repository catalog data, it's associated with the
 	// repository and can be retrieved using the API but isn't discoverable in the
 	// Amazon ECR Public Gallery.
-	//
-	// * Linux
-	//
-	// * Windows
+	// - Linux
+	// - Windows
 	OperatingSystems []string
 
 	// Detailed information about how to use the contents of the repository. It's

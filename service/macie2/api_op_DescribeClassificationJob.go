@@ -74,27 +74,21 @@ type DescribeClassificationJobOutput struct {
 	JobId *string
 
 	// The current status of the job. Possible values are:
-	//
-	// * CANCELLED - You cancelled
+	// - CANCELLED - You cancelled
 	// the job or, if it's a one-time job, you paused the job and didn't resume it
 	// within 30 days.
-	//
-	// * COMPLETE - For a one-time job, Amazon Macie finished
+	// - COMPLETE - For a one-time job, Amazon Macie finished
 	// processing the data specified for the job. This value doesn't apply to recurring
 	// jobs.
-	//
-	// * IDLE - For a recurring job, the previous scheduled run is complete and
+	// - IDLE - For a recurring job, the previous scheduled run is complete and
 	// the next scheduled run is pending. This value doesn't apply to one-time jobs.
-	//
-	// *
+	// -
 	// PAUSED - Macie started running the job but additional processing would exceed
 	// the monthly sensitive data discovery quota for your account or one or more
 	// member accounts that the job analyzes data for.
-	//
-	// * RUNNING - For a one-time job,
+	// - RUNNING - For a one-time job,
 	// the job is in progress. For a recurring job, a scheduled run is in progress.
-	//
-	// *
+	// -
 	// USER_PAUSED - You paused the job. If you paused the job while it had a status of
 	// RUNNING and you don't resume it within 30 days of pausing it, the job or job run
 	// will expire and be cancelled, depending on the job's type. To check the
@@ -102,13 +96,10 @@ type DescribeClassificationJobOutput struct {
 	JobStatus types.JobStatus
 
 	// The schedule for running the job. Possible values are:
-	//
-	// * ONE_TIME - The job
-	// runs only once.
-	//
-	// * SCHEDULED - The job runs on a daily, weekly, or monthly
-	// basis. The scheduleFrequency property indicates the recurrence pattern for the
-	// job.
+	// - ONE_TIME - The job runs
+	// only once.
+	// - SCHEDULED - The job runs on a daily, weekly, or monthly basis. The
+	// scheduleFrequency property indicates the recurrence pattern for the job.
 	JobType types.JobType
 
 	// Specifies whether any account- or bucket-level access errors occurred when the
@@ -131,18 +122,14 @@ type DescribeClassificationJobOutput struct {
 
 	// The selection type that determines which managed data identifiers the job uses
 	// to analyze data. Possible values are:
-	//
-	// * ALL - Use all the managed data
+	// - ALL - Use all the managed data
 	// identifiers that Amazon Macie provides.
-	//
-	// * EXCLUDE - Use all the managed data
+	// - EXCLUDE - Use all the managed data
 	// identifiers that Macie provides except the managed data identifiers specified by
 	// the managedDataIdentifierIds property.
-	//
-	// * INCLUDE - Use only the managed data
+	// - INCLUDE - Use only the managed data
 	// identifiers specified by the managedDataIdentifierIds property.
-	//
-	// * NONE - Don't
+	// - NONE - Don't
 	// use any managed data identifiers.
 	//
 	// If this value is null, the job uses all

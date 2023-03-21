@@ -60,11 +60,9 @@ type DescribeDimensionKeysInput struct {
 
 	// The name of a Performance Insights metric to be measured. Valid values for
 	// Metric are:
-	//
-	// * db.load.avg - A scaled representation of the number of active
+	// - db.load.avg - A scaled representation of the number of active
 	// sessions for the database engine.
-	//
-	// * db.sampledload.avg - The raw number of
+	// - db.sampledload.avg - The raw number of
 	// active sessions for the database engine.
 	//
 	// If the number of active sessions is
@@ -80,10 +78,8 @@ type DescribeDimensionKeysInput struct {
 
 	// The Amazon Web Services service for which Performance Insights will return
 	// metrics. Valid values are as follows:
-	//
-	// * RDS
-	//
-	// * DOCDB
+	// - RDS
+	// - DOCDB
 	//
 	// This member is required.
 	ServiceType types.ServiceType
@@ -103,12 +99,10 @@ type DescribeDimensionKeysInput struct {
 	AdditionalMetrics []string
 
 	// One or more filters to apply in the request. Restrictions:
-	//
-	// * Any number of
+	// - Any number of
 	// filters by the same dimension, as specified in the GroupBy or Partition
 	// parameters.
-	//
-	// * A single filter for any other dimension in this dimension group.
+	// - A single filter for any other dimension in this dimension group.
 	Filter map[string]string
 
 	// The maximum number of items to return in the response. If more items exist than
@@ -128,17 +122,12 @@ type DescribeDimensionKeysInput struct {
 	// The granularity, in seconds, of the data points returned from Performance
 	// Insights. A period can be as short as one second, or as long as one day (86400
 	// seconds). Valid values are:
-	//
-	// * 1 (one second)
-	//
-	// * 60 (one minute)
-	//
-	// * 300 (five
+	// - 1 (one second)
+	// - 60 (one minute)
+	// - 300 (five
 	// minutes)
-	//
-	// * 3600 (one hour)
-	//
-	// * 86400 (twenty-four hours)
+	// - 3600 (one hour)
+	// - 86400 (twenty-four hours)
 	//
 	// If you don't specify
 	// PeriodInSeconds, then Performance Insights chooses a value for you, with a goal

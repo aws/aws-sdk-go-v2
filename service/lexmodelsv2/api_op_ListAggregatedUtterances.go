@@ -22,14 +22,11 @@ import (
 // recognized by the bot and didn't activate an intent. Utterances can be
 // aggregated for a bot alias or for a bot version, but not both at the same time.
 // Utterances statistics are not generated under the following conditions:
-//
-// * The
+// - The
 // childDirected field was set to true when the bot was created.
-//
-// * You are using
+// - You are using
 // slot obfuscation with one or more slots.
-//
-// * You opted out of participating in
+// - You opted out of participating in
 // improving Amazon Lex.
 func (c *Client) ListAggregatedUtterances(ctx context.Context, params *ListAggregatedUtterancesInput, optFns ...func(*Options)) (*ListAggregatedUtterancesOutput, error) {
 	if params == nil {
@@ -111,14 +108,11 @@ type ListAggregatedUtterancesOutput struct {
 
 	// The last date and time that the aggregated data was collected. The time period
 	// depends on the length of the aggregation window.
-	//
-	// * Hours - for 1 hour time
+	// - Hours - for 1 hour time
 	// window, every half hour; otherwise every hour.
-	//
-	// * Days - every 6 hours
-	//
-	// * Weeks
-	// - for a one week time window, every 12 hours; otherwise, every day
+	// - Days - every 6 hours
+	// - Weeks -
+	// for a one week time window, every 12 hours; otherwise, every day
 	AggregationLastRefreshedDateTime *time.Time
 
 	// The date and time that the aggregation window ends. Only data collected between

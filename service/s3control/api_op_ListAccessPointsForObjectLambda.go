@@ -20,15 +20,12 @@ import (
 // returned in one call, the response will include a continuation token that you
 // can use to list the additional access points. The following actions are related
 // to ListAccessPointsForObjectLambda:
-//
-// * CreateAccessPointForObjectLambda
+// - CreateAccessPointForObjectLambda
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPointForObjectLambda.html)
-//
-// *
+// -
 // DeleteAccessPointForObjectLambda
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointForObjectLambda.html)
-//
-// *
+// -
 // GetAccessPointForObjectLambda
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointForObjectLambda.html)
 func (c *Client) ListAccessPointsForObjectLambda(ctx context.Context, params *ListAccessPointsForObjectLambdaInput, optFns ...func(*Options)) (*ListAccessPointsForObjectLambdaOutput, error) {

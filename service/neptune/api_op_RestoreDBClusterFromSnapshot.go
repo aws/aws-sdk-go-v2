@@ -37,17 +37,13 @@ type RestoreDBClusterFromSnapshotInput struct {
 
 	// The name of the DB cluster to create from the DB snapshot or DB cluster
 	// snapshot. This parameter isn't case-sensitive. Constraints:
-	//
-	// * Must contain from
+	// - Must contain from
 	// 1 to 63 letters, numbers, or hyphens
+	// - First character must be a letter
+	// - Cannot
+	// end with a hyphen or contain two consecutive hyphens
 	//
-	// * First character must be a letter
-	//
-	// *
-	// Cannot end with a hyphen or contain two consecutive hyphens
-	//
-	// Example:
-	// my-snapshot-id
+	// Example: my-snapshot-id
 	//
 	// This member is required.
 	DBClusterIdentifier *string
@@ -62,8 +58,7 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// can use either the name or the Amazon Resource Name (ARN) to specify a DB
 	// cluster snapshot. However, you can use only the ARN to specify a DB snapshot.
 	// Constraints:
-	//
-	// * Must match the identifier of an existing Snapshot.
+	// - Must match the identifier of an existing Snapshot.
 	//
 	// This member is required.
 	SnapshotIdentifier *string
@@ -78,8 +73,7 @@ type RestoreDBClusterFromSnapshotInput struct {
 
 	// The name of the DB cluster parameter group to associate with the new DB cluster.
 	// Constraints:
-	//
-	// * If supplied, must match the name of an existing
+	// - If supplied, must match the name of an existing
 	// DBClusterParameterGroup.
 	DBClusterParameterGroupName *string
 
@@ -114,13 +108,11 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// encrypt the new DB cluster, then you can use the KMS key alias instead of the
 	// ARN for the KMS encryption key. If you do not specify a value for the KmsKeyId
 	// parameter, then the following will occur:
-	//
-	// * If the DB snapshot or DB cluster
+	// - If the DB snapshot or DB cluster
 	// snapshot in SnapshotIdentifier is encrypted, then the restored DB cluster is
 	// encrypted using the KMS key that was used to encrypt the DB snapshot or DB
 	// cluster snapshot.
-	//
-	// * If the DB snapshot or DB cluster snapshot in
+	// - If the DB snapshot or DB cluster snapshot in
 	// SnapshotIdentifier is not encrypted, then the restored DB cluster is not
 	// encrypted.
 	KmsKeyId *string

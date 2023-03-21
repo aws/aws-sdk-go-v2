@@ -40,14 +40,12 @@ type FailedResource struct {
 // A resource group that contains Amazon Web Services resources. You can assign
 // resources to the group by associating either of the following elements with the
 // group:
-//
-// * ResourceQuery - Use a resource query to specify a set of tag keys and
+// - ResourceQuery - Use a resource query to specify a set of tag keys and
 // values. All resources in the same Amazon Web Services Region and Amazon Web
 // Services account that have those keys with the same values are included in the
 // group. You can add a resource query when you create the group, or later by using
 // the PutGroupConfiguration operation.
-//
-// * GroupConfiguration - Use a service
+// - GroupConfiguration - Use a service
 // configuration to associate the group with an Amazon Web Services service. The
 // configuration specifies which resource types can be included in the group.
 type Group struct {
@@ -289,15 +287,12 @@ type ResourceQuery struct {
 
 	// The query that defines a group or a search. The contents depends on the value of
 	// the Type element.
-	//
-	// * ResourceTypeFilters – Applies to all ResourceQuery objects
+	// - ResourceTypeFilters – Applies to all ResourceQuery objects
 	// of either Type. This element contains one of the following two items:
-	//
-	// * The
+	// - The
 	// value AWS::AllSupported. This causes the ResourceQuery to match resources of any
 	// resource type that also match the query.
-	//
-	// * A list (a JSON array) of resource
+	// - A list (a JSON array) of resource
 	// type identifiers that limit the query to only resources of the specified types.
 	// For the complete list of resource types that you can use in the array value for
 	// ResourceTypeFilters, see Resources you can use with Resource Groups and Tag
@@ -308,10 +303,9 @@ type ResourceQuery struct {
 	// Example: "ResourceTypeFilters":
 	// ["AWS::AllSupported"] or "ResourceTypeFilters": ["AWS::EC2::Instance",
 	// "AWS::S3::Bucket"]
-	//
-	// * TagFilters – applicable only if Type = TAG_FILTERS_1_0.
-	// The Query contains a JSON string that represents a collection of simple tag
-	// filters. The JSON string uses a syntax similar to the GetResources
+	// - TagFilters – applicable only if Type = TAG_FILTERS_1_0. The
+	// Query contains a JSON string that represents a collection of simple tag filters.
+	// The JSON string uses a syntax similar to the GetResources
 	// (https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html)
 	// operation, but uses only the  ResourceTypeFilters
 	// (https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html#resourcegrouptagging-GetResources-request-ResourceTypeFilters)
@@ -325,30 +319,25 @@ type ResourceQuery struct {
 	// Stage and Version, with two values each:
 	// [{"Stage":["Test","Deploy"]},{"Version":["1","2"]}] The results of this resource
 	// query could include the following.
-	//
-	// * An Amazon EC2 instance that has the
+	// - An Amazon EC2 instance that has the
 	// following two tags: {"Stage":"Deploy"}, and {"Version":"2"}
-	//
-	// * An S3 bucket that
+	// - An S3 bucket that
 	// has the following two tags: {"Stage":"Test"}, and {"Version":"1"}
 	//
 	// The resource
 	// query results would not include the following items in the results, however.
-	//
-	// *
+	// -
 	// An Amazon EC2 instance that has only the following tag: {"Stage":"Deploy"}. The
 	// instance does not have all of the tag keys specified in the filter, so it is
 	// excluded from the results.
-	//
-	// * An RDS database that has the following two tags:
+	// - An RDS database that has the following two tags:
 	// {"Stage":"Archived"} and {"Version":"4"} The database has all of the tag keys,
 	// but none of those keys has an associated value that matches at least one of the
 	// specified values in the filter.
 	//
 	// Example: "TagFilters": [ { "Key": "Stage",
 	// "Values": [ "Gamma", "Beta" ] }
-	//
-	// * StackIdentifier – applicable only if Type =
+	// - StackIdentifier – applicable only if Type =
 	// CLOUDFORMATION_STACK_1_0. The value of this parameter is the Amazon Resource
 	// Name (ARN) of the CloudFormation stack whose resources you want included in the
 	// group.
@@ -357,13 +346,11 @@ type ResourceQuery struct {
 	Query *string
 
 	// The type of the query to perform. This can have one of two values:
-	//
-	// *
+	// -
 	// CLOUDFORMATION_STACK_1_0: Specifies that you want the group to contain the
 	// members of an CloudFormation stack. The Query contains a StackIdentifier element
 	// with an ARN for a CloudFormation stack.
-	//
-	// * TAG_FILTERS_1_0: Specifies that you
+	// - TAG_FILTERS_1_0: Specifies that you
 	// want the group to include resource that have tags that match the query.
 	//
 	// This member is required.

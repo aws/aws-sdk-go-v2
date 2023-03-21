@@ -23,13 +23,11 @@ import (
 // want to search and provide a search filter expression, a sort expression, or
 // both. A search request can search only one fleet, but it can search all of a
 // fleet's locations. This operation can be used in the following ways:
-//
-// * To
-// search all game sessions that are currently running on all locations in a fleet,
+// - To search
+// all game sessions that are currently running on all locations in a fleet,
 // provide a fleet or alias ID. This approach returns game sessions in the fleet's
 // home Region and all remote locations that fit the search criteria.
-//
-// * To search
+// - To search
 // all game sessions that are currently running on a specific fleet location,
 // provide a fleet or alias ID and a location name. For location, you can specify a
 // fleet's home Region or any remote location.
@@ -41,34 +39,27 @@ import (
 // sessions in other statuses, use DescribeGameSessions
 // (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeGameSessions.html)
 // . You can search or sort by the following game session attributes:
-//
-// *
+// -
 // gameSessionId -- A unique identifier for the game session. You can use either a
 // GameSessionId or GameSessionArn value.
-//
-// * gameSessionName -- Name assigned to a
+// - gameSessionName -- Name assigned to a
 // game session. Game session names do not need to be unique to a game session.
-//
-// *
+// -
 // gameSessionProperties -- Custom data defined in a game session's GameProperty
 // parameter. GameProperty values are stored as key:value pairs; the filter
 // expression must indicate the key and a string to search the data values for. For
 // example, to search for game sessions with custom data containing the key:value
 // pair "gameMode:brawl", specify the following: gameSessionProperties.gameMode =
 // "brawl". All custom data values are searched as strings.
-//
-// * maximumSessions --
+// - maximumSessions --
 // Maximum number of player sessions allowed for a game session.
-//
-// *
+// -
 // creationTimeMillis -- Value indicating when a game session was created. It is
 // expressed in Unix time as milliseconds.
-//
-// * playerSessionCount -- Number of
+// - playerSessionCount -- Number of
 // players currently connected to a game session. This value changes rapidly as
 // players join the session or drop out.
-//
-// * hasAvailablePlayerSessions -- Boolean
+// - hasAvailablePlayerSessions -- Boolean
 // value indicating whether a game session has reached its maximum number of
 // players. It is highly recommended that all search requests include this filter
 // attribute to optimize search performance and return only sessions that players
@@ -105,16 +96,13 @@ type SearchGameSessionsInput struct {
 	// expression is included, the request returns results for all game sessions in the
 	// fleet that are in ACTIVE status. A filter expression can contain one or multiple
 	// conditions. Each condition consists of the following:
-	//
-	// * Operand -- Name of a
+	// - Operand -- Name of a
 	// game session attribute. Valid values are gameSessionName, gameSessionId,
 	// gameSessionProperties, maximumSessions, creationTimeMillis, playerSessionCount,
 	// hasAvailablePlayerSessions.
-	//
-	// * Comparator -- Valid comparators are: =, <>, <, >,
+	// - Comparator -- Valid comparators are: =, <>, <, >,
 	// <=, >=.
-	//
-	// * Value -- Value to be searched for. Values may be numbers, boolean
+	// - Value -- Value to be searched for. Values may be numbers, boolean
 	// values (true/false) or strings depending on the operand. String values are case
 	// sensitive and must be enclosed in single quotes. Special characters must be
 	// escaped. Boolean and string values can only be used with the comparators = and
@@ -126,16 +114,11 @@ type SearchGameSessionsInput struct {
 	// and NOT and parentheses as needed. For example: x AND y AND NOT z, NOT (x OR y).
 	// Session search evaluates conditions from left to right using the following
 	// precedence rules:
-	//
-	// * =, <>, <, >, <=, >=
-	//
-	// * Parentheses
-	//
-	// * NOT
-	//
-	// * AND
-	//
-	// * OR
+	// - =, <>, <, >, <=, >=
+	// - Parentheses
+	// - NOT
+	// - AND
+	// - OR
 	//
 	// For
 	// example, this filter expression retrieves game sessions hosting at least ten
@@ -166,18 +149,16 @@ type SearchGameSessionsInput struct {
 	// Instructions on how to sort the search results. If no sort expression is
 	// included, the request returns results in random order. A sort expression
 	// consists of the following elements:
-	//
-	// * Operand -- Name of a game session
+	// - Operand -- Name of a game session
 	// attribute. Valid values are gameSessionName, gameSessionId,
 	// gameSessionProperties, maximumSessions, creationTimeMillis, playerSessionCount,
 	// hasAvailablePlayerSessions.
+	// - Order -- Valid sort orders are ASC (ascending) and
+	// DESC (descending).
 	//
-	// * Order -- Valid sort orders are ASC (ascending)
-	// and DESC (descending).
-	//
-	// For example, this sort expression returns the oldest
-	// active sessions first: "SortExpression": "creationTimeMillis ASC". Results with
-	// a null value for the sort operand are returned at the end of the list.
+	// For example, this sort expression returns the oldest active
+	// sessions first: "SortExpression": "creationTimeMillis ASC". Results with a null
+	// value for the sort operand are returned at the end of the list.
 	SortExpression *string
 
 	noSmithyDocumentSerde

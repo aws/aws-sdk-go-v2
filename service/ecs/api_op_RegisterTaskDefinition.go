@@ -77,30 +77,23 @@ type RegisterTaskDefinitionInput struct {
 	// field is required and you must use one of the following values, which determines
 	// your range of supported values for the memory parameter: The CPU units cannot be
 	// less than 1 vCPU when you use Windows containers on Fargate.
-	//
-	// * 256 (.25 vCPU) -
+	// - 256 (.25 vCPU) -
 	// Available memory values: 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB)
-	//
-	// * 512 (.5 vCPU)
+	// - 512 (.5 vCPU)
 	// - Available memory values: 1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB)
-	//
-	// *
+	// -
 	// 1024 (1 vCPU) - Available memory values: 2048 (2 GB), 3072 (3 GB), 4096 (4 GB),
 	// 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB)
-	//
-	// * 2048 (2 vCPU) - Available
+	// - 2048 (2 vCPU) - Available
 	// memory values: 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB)
-	//
-	// *
-	// 4096 (4 vCPU) - Available memory values: 8192 (8 GB) and 30720 (30 GB) in
-	// increments of 1024 (1 GB)
-	//
-	// * 8192 (8 vCPU) - Available memory values: 16 GB and
-	// 60 GB in 4 GB increments This option requires Linux platform 1.4.0 or later.
-	//
-	// *
-	// 16384 (16vCPU) - Available memory values: 32GB and 120 GB in 8 GB increments
-	// This option requires Linux platform 1.4.0 or later.
+	// - 4096
+	// (4 vCPU) - Available memory values: 8192 (8 GB) and 30720 (30 GB) in increments
+	// of 1024 (1 GB)
+	// - 8192 (8 vCPU) - Available memory values: 16 GB and 60 GB in 4
+	// GB increments This option requires Linux platform 1.4.0 or later.
+	// - 16384
+	// (16vCPU) - Available memory values: 32GB and 120 GB in 8 GB increments This
+	// option requires Linux platform 1.4.0 or later.
 	Cpu *string
 
 	// The amount of ephemeral storage to allocate for the task. This parameter is used
@@ -110,8 +103,7 @@ type RegisterTaskDefinitionInput struct {
 	// (https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html)
 	// in the Amazon ECS User Guide for Fargate. This parameter is only supported for
 	// tasks hosted on Fargate using the following platform versions:
-	//
-	// * Linux platform
+	// - Linux platform
 	// version 1.4.0 or later.
 	EphemeralStorage *types.EphemeralStorage
 
@@ -144,12 +136,10 @@ type RegisterTaskDefinitionInput struct {
 	// information, see System Controls
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html)
 	// in the Amazon Elastic Container Service Developer Guide.
-	//
-	// * For tasks that use
+	// - For tasks that use
 	// the host IPC mode, IPC namespace related systemControls are not supported.
-	//
-	// *
-	// For tasks that use the task IPC mode, IPC namespace related systemControls will
+	// - For
+	// tasks that use the task IPC mode, IPC namespace related systemControls will
 	// apply to all containers within a task.
 	//
 	// This parameter is not supported for
@@ -166,30 +156,23 @@ type RegisterTaskDefinitionInput struct {
 	// and you must use one of the following values. This determines your range of
 	// supported values for the cpu parameter. The CPU units cannot be less than 1 vCPU
 	// when you use Windows containers on Fargate.
-	//
-	// * 512 (0.5 GB), 1024 (1 GB), 2048
-	// (2 GB) - Available cpu values: 256 (.25 vCPU)
-	//
-	// * 1024 (1 GB), 2048 (2 GB), 3072
-	// (3 GB), 4096 (4 GB) - Available cpu values: 512 (.5 vCPU)
-	//
-	// * 2048 (2 GB), 3072
-	// (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB) -
-	// Available cpu values: 1024 (1 vCPU)
-	//
-	// * Between 4096 (4 GB) and 16384 (16 GB) in
-	// increments of 1024 (1 GB) - Available cpu values: 2048 (2 vCPU)
-	//
-	// * Between 8192
-	// (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB) - Available cpu values:
-	// 4096 (4 vCPU)
-	//
-	// * Between 16 GB and 60 GB in 4 GB increments - Available cpu
-	// values: 8192 (8 vCPU) This option requires Linux platform 1.4.0 or later.
-	//
-	// *
-	// Between 32GB and 120 GB in 8 GB increments - Available cpu values: 16384 (16
-	// vCPU) This option requires Linux platform 1.4.0 or later.
+	// - 512 (0.5 GB), 1024 (1 GB), 2048 (2
+	// GB) - Available cpu values: 256 (.25 vCPU)
+	// - 1024 (1 GB), 2048 (2 GB), 3072 (3
+	// GB), 4096 (4 GB) - Available cpu values: 512 (.5 vCPU)
+	// - 2048 (2 GB), 3072 (3
+	// GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB) - Available
+	// cpu values: 1024 (1 vCPU)
+	// - Between 4096 (4 GB) and 16384 (16 GB) in increments
+	// of 1024 (1 GB) - Available cpu values: 2048 (2 vCPU)
+	// - Between 8192 (8 GB) and
+	// 30720 (30 GB) in increments of 1024 (1 GB) - Available cpu values: 4096 (4
+	// vCPU)
+	// - Between 16 GB and 60 GB in 4 GB increments - Available cpu values: 8192
+	// (8 vCPU) This option requires Linux platform 1.4.0 or later.
+	// - Between 32GB and
+	// 120 GB in 8 GB increments - Available cpu values: 16384 (16 vCPU) This option
+	// requires Linux platform 1.4.0 or later.
 	Memory *string
 
 	// The Docker networking mode to use for the containers in the task. The valid
@@ -265,28 +248,21 @@ type RegisterTaskDefinitionInput struct {
 	// The metadata that you apply to the task definition to help you categorize and
 	// organize them. Each tag consists of a key and an optional value. You define both
 	// of them. The following basic restrictions apply to tags:
-	//
-	// * Maximum number of
+	// - Maximum number of
 	// tags per resource - 50
-	//
-	// * For each resource, each tag key must be unique, and
+	// - For each resource, each tag key must be unique, and
 	// each tag key can have only one value.
-	//
-	// * Maximum key length - 128 Unicode
+	// - Maximum key length - 128 Unicode
 	// characters in UTF-8
-	//
-	// * Maximum value length - 256 Unicode characters in UTF-8
-	//
-	// *
+	// - Maximum value length - 256 Unicode characters in UTF-8
+	// -
 	// If your tagging schema is used across multiple services and resources, remember
 	// that other services may have restrictions on allowed characters. Generally
 	// allowed characters are: letters, numbers, and spaces representable in UTF-8, and
 	// the following characters: + - = . _ : / @.
-	//
-	// * Tag keys and values are
+	// - Tag keys and values are
 	// case-sensitive.
-	//
-	// * Do not use aws:, AWS:, or any upper or lowercase combination
+	// - Do not use aws:, AWS:, or any upper or lowercase combination
 	// of such as a prefix for either keys or values as it is reserved for Amazon Web
 	// Services use. You cannot edit or delete tag keys or values with this prefix.
 	// Tags with this prefix do not count against your tags per resource limit.

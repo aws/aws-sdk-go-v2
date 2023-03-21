@@ -23,11 +23,9 @@ import (
 // more than one predicate to a Rule, a request must match all of the
 // specifications to be allowed, blocked, or counted. For example, suppose that you
 // add the following to a Rule:
-//
-// * A ByteMatchSet that matches the value BadBot in
+// - A ByteMatchSet that matches the value BadBot in
 // the User-Agent header
-//
-// * An IPSet that matches the IP address 192.0.2.44
+// - An IPSet that matches the IP address 192.0.2.44
 //
 // You
 // then add the Rule to a WebACL and specify that you want to block requests that
@@ -35,25 +33,20 @@ import (
 // request must contain the value BadBot and the request must originate from the IP
 // address 192.0.2.44. To create and configure a Rule, perform the following
 // steps:
-//
-// * Create and update the predicates that you want to include in the
+// - Create and update the predicates that you want to include in the
 // Rule.
+// - Create the Rule. See CreateRule.
+// - Use GetChangeToken to get the change
+// token that you provide in the ChangeToken parameter of an UpdateRule request.
+// -
+// Submit an UpdateRule request to add predicates to the Rule.
+// - Create and update
+// a WebACL that contains the Rule. See CreateWebACL.
 //
-// * Create the Rule. See CreateRule.
-//
-// * Use GetChangeToken to get the
-// change token that you provide in the ChangeToken parameter of an UpdateRule
-// request.
-//
-// * Submit an UpdateRule request to add predicates to the Rule.
-//
-// *
-// Create and update a WebACL that contains the Rule. See CreateWebACL.
-//
-// If you
-// want to replace one ByteMatchSet or IPSet with another, you delete the existing
-// one and add the new one. For more information about how to use the AWS WAF API
-// to allow or block HTTP requests, see the AWS WAF Developer Guide
+// If you want to replace one
+// ByteMatchSet or IPSet with another, you delete the existing one and add the new
+// one. For more information about how to use the AWS WAF API to allow or block
+// HTTP requests, see the AWS WAF Developer Guide
 // (https://docs.aws.amazon.com/waf/latest/developerguide/).
 func (c *Client) UpdateRule(ctx context.Context, params *UpdateRuleInput, optFns ...func(*Options)) (*UpdateRuleOutput, error) {
 	if params == nil {
@@ -85,14 +78,11 @@ type UpdateRuleInput struct {
 
 	// An array of RuleUpdate objects that you want to insert into or delete from a
 	// Rule. For more information, see the applicable data types:
-	//
-	// * RuleUpdate:
+	// - RuleUpdate:
 	// Contains Action and Predicate
-	//
-	// * Predicate: Contains DataId, Negated, and
-	// Type
-	//
-	// * FieldToMatch: Contains Data and Type
+	// - Predicate: Contains DataId, Negated, and Type
+	// -
+	// FieldToMatch: Contains Data and Type
 	//
 	// This member is required.
 	Updates []types.RuleUpdate

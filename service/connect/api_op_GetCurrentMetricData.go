@@ -77,12 +77,9 @@ type GetCurrentMetricDataInput struct {
 
 	// The filters to apply to returned metrics. You can filter up to the following
 	// limits:
-	//
-	// * Queues: 100
-	//
-	// * Routing profiles: 100
-	//
-	// * Channels: 3 (VOICE, CHAT, and
+	// - Queues: 100
+	// - Routing profiles: 100
+	// - Channels: 3 (VOICE, CHAT, and
 	// TASK channels are supported.)
 	//
 	// Metric data is retrieved only for the resources
@@ -104,16 +101,13 @@ type GetCurrentMetricDataInput struct {
 	// The grouping applied to the metrics returned. For example, when grouped by
 	// QUEUE, the metrics returned apply to each queue rather than aggregated for all
 	// queues.
-	//
-	// * If you group by CHANNEL, you should include a Channels filter. VOICE,
+	// - If you group by CHANNEL, you should include a Channels filter. VOICE,
 	// CHAT, and TASK channels are supported.
-	//
-	// * If you group by ROUTING_PROFILE, you
+	// - If you group by ROUTING_PROFILE, you
 	// must include either a queue or routing profile filter. In addition, a routing
 	// profile filter is required for metrics CONTACTS_SCHEDULED, CONTACTS_IN_QUEUE,
 	// and  OLDEST_CONTACT_AGE.
-	//
-	// * If no Grouping is included in the request, a summary
+	// - If no Grouping is included in the request, a summary
 	// of metrics is returned.
 	Groupings []types.Grouping
 
@@ -131,8 +125,7 @@ type GetCurrentMetricDataInput struct {
 	// criteria. By default resources are sorted based on AGENTS_ONLINE, DESCENDING.
 	// The metric collection is sorted based on the input metrics. Note the
 	// following:
-	//
-	// * Sorting on SLOTS_ACTIVE and SLOTS_AVAILABLE is not supported.
+	// - Sorting on SLOTS_ACTIVE and SLOTS_AVAILABLE is not supported.
 	SortCriteria []types.CurrentMetricSortCriteria
 
 	noSmithyDocumentSerde

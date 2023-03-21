@@ -72,8 +72,7 @@ type SearchPlaceIndexForSuggestionsInput struct {
 
 	// An optional parameter that limits the search results by returning only
 	// suggestions within the provided list of countries.
-	//
-	// * Use the ISO 3166
+	// - Use the ISO 3166
 	// (https://www.iso.org/iso-3166-country-codes.html) 3-digit country code. For
 	// example, Australia uses three upper-case characters: AUS.
 	FilterCountries []string

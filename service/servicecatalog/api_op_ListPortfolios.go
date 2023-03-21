@@ -31,12 +31,9 @@ func (c *Client) ListPortfolios(ctx context.Context, params *ListPortfoliosInput
 type ListPortfoliosInput struct {
 
 	// The language code.
-	//
-	// * en - English (default)
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	// - en - English (default)
+	// - jp - Japanese
+	// - zh - Chinese
 	AcceptLanguage *string
 
 	// The maximum number of items to return with this call.

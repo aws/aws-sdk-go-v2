@@ -81,11 +81,9 @@ type CreateScheduledQueryInput struct {
 	// words, making the same request repeatedly will produce the same result. Making
 	// multiple identical CreateScheduledQuery requests has the same effect as making a
 	// single request.
-	//
-	// * If CreateScheduledQuery is called without a ClientToken, the
+	// - If CreateScheduledQuery is called without a ClientToken, the
 	// Query SDK generates a ClientToken on your behalf.
-	//
-	// * After 8 hours, any request
+	// - After 8 hours, any request
 	// with the same ClientToken is treated as a new request.
 	ClientToken *string
 

@@ -88,11 +88,9 @@ type StartEntitiesDetectionJobInput struct {
 	// encrypt data on the storage volume attached to the ML compute instance(s) that
 	// process the analysis job. The VolumeKmsKeyId can be either of the following
 	// formats:
-	//
-	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
-	//
-	// * Amazon
-	// Resource Name (ARN) of a KMS Key:
+	// - KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// - Amazon Resource
+	// Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 
@@ -122,24 +120,17 @@ type StartEntitiesDetectionJobOutput struct {
 	JobId *string
 
 	// The status of the job.
-	//
-	// * SUBMITTED - The job has been received and is queued
-	// for processing.
-	//
-	// * IN_PROGRESS - Amazon Comprehend is processing the job.
-	//
-	// *
-	// COMPLETED - The job was successfully completed and the output is available.
-	//
-	// *
-	// FAILED - The job did not complete. To get details, use the operation.
-	//
-	// *
-	// STOP_REQUESTED - Amazon Comprehend has received a stop request for the job and
-	// is processing the request.
-	//
-	// * STOPPED - The job was successfully stopped without
-	// completing.
+	// - SUBMITTED - The job has been received and is queued for
+	// processing.
+	// - IN_PROGRESS - Amazon Comprehend is processing the job.
+	// - COMPLETED
+	// - The job was successfully completed and the output is available.
+	// - FAILED - The
+	// job did not complete. To get details, use the operation.
+	// - STOP_REQUESTED -
+	// Amazon Comprehend has received a stop request for the job and is processing the
+	// request.
+	// - STOPPED - The job was successfully stopped without completing.
 	JobStatus types.JobStatus
 
 	// Metadata pertaining to the operation's result.

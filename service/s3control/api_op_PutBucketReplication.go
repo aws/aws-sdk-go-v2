@@ -30,15 +30,12 @@ import (
 // configuration on that Outpost can be significant. Specify the replication
 // configuration in the request body. In the replication configuration, you provide
 // the following information:
-//
-// * The name of the destination bucket or buckets
-// where you want S3 on Outposts to replicate objects
-//
-// * The Identity and Access
+// - The name of the destination bucket or buckets where
+// you want S3 on Outposts to replicate objects
+// - The Identity and Access
 // Management (IAM) role that S3 on Outposts can assume to replicate objects on
 // your behalf
-//
-// * Other relevant information, such as replication rules
+// - Other relevant information, such as replication rules
 //
 // A
 // replication configuration must include at least one rule and can contain a
@@ -81,12 +78,10 @@ import (
 // derived by using the access point ARN, see the Examples
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketReplication.html#API_control_PutBucketReplication_Examples)
 // section. The following operations are related to PutBucketReplication:
-//
-// *
+// -
 // GetBucketReplication
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketReplication.html)
-//
-// *
+// -
 // DeleteBucketReplication
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketReplication.html)
 func (c *Client) PutBucketReplication(ctx context.Context, params *PutBucketReplicationInput, optFns ...func(*Options)) (*PutBucketReplicationOutput, error) {

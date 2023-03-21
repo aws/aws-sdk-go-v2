@@ -14,30 +14,23 @@ import (
 
 // Adds a user to a channel. The InvitedBy response field is derived from the
 // request header. A channel member can:
+// - List messages
+// - Send messages
+// - Receive
+// messages
+// - Edit their own messages
+// - Leave the channel
 //
-// * List messages
+// Privacy settings impact
+// this action as follows:
+// - Public Channels: You do not need to be a member to
+// list messages, but you must be a member to send messages.
+// - Private Channels:
+// You must be a member to list or send messages.
 //
-// * Send messages
-//
-// *
-// Receive messages
-//
-// * Edit their own messages
-//
-// * Leave the channel
-//
-// Privacy
-// settings impact this action as follows:
-//
-// * Public Channels: You do not need to
-// be a member to list messages, but you must be a member to send messages.
-//
-// *
-// Private Channels: You must be a member to list or send messages.
-//
-// The
-// x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of
-// the user that makes the API call as the value in the header.
+// The x-amz-chime-bearer request
+// header is mandatory. Use the AppInstanceUserArn of the user that makes the API
+// call as the value in the header.
 func (c *Client) CreateChannelMembership(ctx context.Context, params *CreateChannelMembershipInput, optFns ...func(*Options)) (*CreateChannelMembershipOutput, error) {
 	if params == nil {
 		params = &CreateChannelMembershipInput{}

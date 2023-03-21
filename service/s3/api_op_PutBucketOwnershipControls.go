@@ -20,11 +20,9 @@ import (
 // For information about Amazon S3 Object Ownership, see Using object ownership
 // (https://docs.aws.amazon.com/AmazonS3/latest/user-guide/about-object-ownership.html).
 // The following operations are related to PutBucketOwnershipControls:
-//
-// *
+// -
 // GetBucketOwnershipControls
-//
-// * DeleteBucketOwnershipControls
+// - DeleteBucketOwnershipControls
 func (c *Client) PutBucketOwnershipControls(ctx context.Context, params *PutBucketOwnershipControlsInput, optFns ...func(*Options)) (*PutBucketOwnershipControlsOutput, error) {
 	if params == nil {
 		params = &PutBucketOwnershipControlsInput{}

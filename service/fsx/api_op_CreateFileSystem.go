@@ -14,21 +14,17 @@ import (
 
 // Creates a new, empty Amazon FSx file system. You can create the following
 // supported Amazon FSx file systems using the CreateFileSystem API operation:
-//
-// *
+// -
 // Amazon FSx for Lustre
+// - Amazon FSx for NetApp ONTAP
+// - Amazon FSx for OpenZFS
+// -
+// Amazon FSx for Windows File Server
 //
-// * Amazon FSx for NetApp ONTAP
-//
-// * Amazon FSx for
-// OpenZFS
-//
-// * Amazon FSx for Windows File Server
-//
-// This operation requires a client
-// request token in the request that Amazon FSx uses to ensure idempotent creation.
-// This means that calling the operation multiple times with the same client
-// request token has no effect. By using the idempotent operation, you can retry a
+// This operation requires a client request
+// token in the request that Amazon FSx uses to ensure idempotent creation. This
+// means that calling the operation multiple times with the same client request
+// token has no effect. By using the idempotent operation, you can retry a
 // CreateFileSystem operation without the risk of creating an extra file system.
 // This approach can be useful when an initial call fails in a way that makes it
 // unclear whether a file system was created. Examples are if a transport level
@@ -40,12 +36,10 @@ import (
 // specified client request token exists and the parameters don't match, this call
 // returns IncompatibleParameterError. If a file system with the specified client
 // request token doesn't exist, CreateFileSystem does the following:
-//
-// * Creates a
+// - Creates a
 // new, empty Amazon FSx file system with an assigned ID, and an initial lifecycle
 // state of CREATING.
-//
-// * Returns the description of the file system in JSON
+// - Returns the description of the file system in JSON
 // format.
 //
 // The CreateFileSystem call returns while the file system's lifecycle
@@ -81,16 +75,13 @@ type CreateFileSystemInput struct {
 	// (GiB). FSx for Lustre file systems - The amount of storage capacity that you can
 	// configure depends on the value that you set for StorageType and the Lustre
 	// DeploymentType, as follows:
-	//
-	// * For SCRATCH_2, PERSISTENT_2 and PERSISTENT_1
+	// - For SCRATCH_2, PERSISTENT_2 and PERSISTENT_1
 	// deployment types using SSD storage type, the valid values are 1200 GiB, 2400
 	// GiB, and increments of 2400 GiB.
-	//
-	// * For PERSISTENT_1 HDD file systems, valid
+	// - For PERSISTENT_1 HDD file systems, valid
 	// values are increments of 6000 GiB for 12 MB/s/TiB file systems and increments of
 	// 1800 GiB for 40 MB/s/TiB file systems.
-	//
-	// * For SCRATCH_1 deployment type, valid
+	// - For SCRATCH_1 deployment type, valid
 	// values are 1200 GiB, 2400 GiB, and increments of 3600 GiB.
 	//
 	// FSx for ONTAP file
@@ -100,10 +91,8 @@ type CreateFileSystemInput struct {
 	// TiB). FSx for Windows File Server file systems - The amount of storage capacity
 	// that you can configure depends on the value that you set for StorageType as
 	// follows:
-	//
-	// * For SSD storage, valid values are 32 GiB-65,536 GiB (64 TiB).
-	//
-	// * For
+	// - For SSD storage, valid values are 32 GiB-65,536 GiB (64 TiB).
+	// - For
 	// HDD storage, valid values are 2000 GiB-65,536 GiB (64 TiB).
 	//
 	// This member is required.
@@ -134,13 +123,11 @@ type CreateFileSystemInput struct {
 
 	// (Optional) For FSx for Lustre file systems, sets the Lustre version for the file
 	// system that you're creating. Valid values are 2.10 and 2.12:
-	//
-	// * 2.10 is
-	// supported by the Scratch and Persistent_1 Lustre deployment types.
-	//
-	// * 2.12 is
-	// supported by all Lustre deployment types. 2.12 is required when setting FSx for
-	// Lustre DeploymentType to PERSISTENT_2.
+	// - 2.10 is supported
+	// by the Scratch and Persistent_1 Lustre deployment types.
+	// - 2.12 is supported by
+	// all Lustre deployment types. 2.12 is required when setting FSx for Lustre
+	// DeploymentType to PERSISTENT_2.
 	//
 	// Default value = 2.10, except when
 	// DeploymentType is set to PERSISTENT_2, then the default is 2.12. If you set
@@ -150,17 +137,13 @@ type CreateFileSystemInput struct {
 
 	// Specifies the ID of the Key Management Service (KMS) key to use for encrypting
 	// data on Amazon FSx file systems, as follows:
-	//
-	// * Amazon FSx for Lustre
+	// - Amazon FSx for Lustre
 	// PERSISTENT_1 and PERSISTENT_2 deployment types only. SCRATCH_1 and SCRATCH_2
 	// types are encrypted using the Amazon FSx service KMS key for your account.
-	//
-	// *
+	// -
 	// Amazon FSx for NetApp ONTAP
-	//
-	// * Amazon FSx for OpenZFS
-	//
-	// * Amazon FSx for Windows
+	// - Amazon FSx for OpenZFS
+	// - Amazon FSx for Windows
 	// File Server
 	//
 	// If a KmsKeyId isn't specified, the Amazon FSx-managed KMS key for
@@ -173,15 +156,11 @@ type CreateFileSystemInput struct {
 	// parameters are not supported for file systems with the Persistent_2 deployment
 	// type. Instead, use CreateDataRepositoryAssociation to create a data repository
 	// association to link your Lustre file system to a data repository.
-	//
-	// *
+	// -
 	// AutoImportPolicy
-	//
-	// * ExportPath
-	//
-	// * ImportedChunkSize
-	//
-	// * ImportPath
+	// - ExportPath
+	// - ImportedChunkSize
+	// - ImportPath
 	LustreConfiguration *types.CreateFileSystemLustreConfiguration
 
 	// The ONTAP configuration properties of the FSx for ONTAP file system that you are
@@ -198,11 +177,9 @@ type CreateFileSystemInput struct {
 
 	// Sets the storage type for the file system that you're creating. Valid values are
 	// SSD and HDD.
-	//
-	// * Set to SSD to use solid state drive storage. SSD is supported on
+	// - Set to SSD to use solid state drive storage. SSD is supported on
 	// all Windows, Lustre, ONTAP, and OpenZFS deployment types.
-	//
-	// * Set to HDD to use
+	// - Set to HDD to use
 	// hard disk drive storage. HDD is supported on SINGLE_AZ_2 and MULTI_AZ_1 Windows
 	// file system deployment types, and on PERSISTENT_1 Lustre file system deployment
 	// types.

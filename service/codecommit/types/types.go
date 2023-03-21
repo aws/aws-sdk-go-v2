@@ -203,16 +203,12 @@ type BlobMetadata struct {
 	BlobId *string
 
 	// The file mode permissions of the blob. File mode permission codes include:
-	//
-	// *
+	// -
 	// 100644 indicates read/write
-	//
-	// * 100755 indicates read/write/execute
-	//
-	// * 160000
+	// - 100755 indicates read/write/execute
+	// - 160000
 	// indicates a submodule
-	//
-	// * 120000 indicates a symlink
+	// - 120000 indicates a symlink
 	Mode *string
 
 	// The path to the blob and associated file name, if any.

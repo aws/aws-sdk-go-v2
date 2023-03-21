@@ -14,29 +14,24 @@ import (
 // Composes an email message and immediately queues it for sending. In order to
 // send email using the SendEmail operation, your message must meet the following
 // requirements:
-//
-// * The message must be sent from a verified email address or
+// - The message must be sent from a verified email address or
 // domain. If you attempt to send email using a non-verified address or domain, the
 // operation will result in an "Email address not verified" error.
-//
-// * If your
+// - If your
 // account is still in the Amazon SES sandbox, you may only send to verified
 // addresses or domains, or to email addresses associated with the Amazon SES
 // Mailbox Simulator. For more information, see Verifying Email Addresses and
 // Domains
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html)
 // in the Amazon SES Developer Guide.
-//
-// * The maximum message size is 10 MB.
-//
-// * The
+// - The maximum message size is 10 MB.
+// - The
 // message must include at least one recipient email address. The recipient address
 // can be a To: address, a CC: address, or a BCC: address. If a recipient email
 // address is invalid (that is, it is not in the format
 // UserName@[SubDomain.]Domain.TopLevelDomain), the entire message will be
 // rejected, even if the message contains other recipients that are valid.
-//
-// * The
+// - The
 // message may not include more than 50 recipients, across the To:, CC: and BCC:
 // fields. If you need to send an email message to a larger audience, you can
 // divide your recipient list into groups of 50 or fewer, and then call the

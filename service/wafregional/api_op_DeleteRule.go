@@ -21,15 +21,11 @@ import (
 // ByteMatchSet objects. If you just want to remove a Rule from a WebACL, use
 // UpdateWebACL. To permanently delete a Rule from AWS WAF, perform the following
 // steps:
-//
-// * Update the Rule to remove predicates, if any. For more information,
-// see UpdateRule.
-//
-// * Use GetChangeToken to get the change token that you provide
-// in the ChangeToken parameter of a DeleteRule request.
-//
-// * Submit a DeleteRule
-// request.
+// - Update the Rule to remove predicates, if any. For more information, see
+// UpdateRule.
+// - Use GetChangeToken to get the change token that you provide in the
+// ChangeToken parameter of a DeleteRule request.
+// - Submit a DeleteRule request.
 func (c *Client) DeleteRule(ctx context.Context, params *DeleteRuleInput, optFns ...func(*Options)) (*DeleteRuleOutput, error) {
 	if params == nil {
 		params = &DeleteRuleInput{}

@@ -33,8 +33,7 @@ type ModifyDBClusterInput struct {
 
 	// The DB cluster identifier for the cluster being modified. This parameter is not
 	// case-sensitive. Constraints:
-	//
-	// * Must match the identifier of an existing
+	// - Must match the identifier of an existing
 	// DBCluster.
 	//
 	// This member is required.
@@ -59,8 +58,7 @@ type ModifyDBClusterInput struct {
 
 	// The number of days for which automated backups are retained. You must specify a
 	// minimum value of 1. Default: 1 Constraints:
-	//
-	// * Must be a value from 1 to 35
+	// - Must be a value from 1 to 35
 	BackupRetentionPeriod *int32
 
 	// The configuration setting for the log types to be enabled for export to
@@ -78,12 +76,10 @@ type ModifyDBClusterInput struct {
 	// When you apply a parameter group using DBInstanceParameterGroupName, parameter
 	// changes aren't applied during the next maintenance window but instead are
 	// applied immediately. Default: The existing name setting Constraints:
-	//
-	// * The DB
+	// - The DB
 	// parameter group must be in the same DB parameter group family as the target DB
 	// cluster version.
-	//
-	// * The DBInstanceParameterGroupName parameter is only valid in
+	// - The DBInstanceParameterGroupName parameter is only valid in
 	// combination with the AllowMajorVersionUpgrade parameter.
 	DBInstanceParameterGroupName *string
 
@@ -110,13 +106,10 @@ type ModifyDBClusterInput struct {
 
 	// The new DB cluster identifier for the DB cluster when renaming a DB cluster.
 	// This value is stored as a lowercase string. Constraints:
-	//
-	// * Must contain from 1
+	// - Must contain from 1
 	// to 63 letters, numbers, or hyphens
-	//
-	// * The first character must be a letter
-	//
-	// *
+	// - The first character must be a letter
+	// -
 	// Cannot end with a hyphen or contain two consecutive hyphens
 	//
 	// Example:
@@ -134,16 +127,12 @@ type ModifyDBClusterInput struct {
 	// backups are enabled, using the BackupRetentionPeriod parameter. The default is a
 	// 30-minute window selected at random from an 8-hour block of time for each Amazon
 	// Region. Constraints:
-	//
-	// * Must be in the format hh24:mi-hh24:mi.
-	//
-	// * Must be in
+	// - Must be in the format hh24:mi-hh24:mi.
+	// - Must be in
 	// Universal Coordinated Time (UTC).
-	//
-	// * Must not conflict with the preferred
+	// - Must not conflict with the preferred
 	// maintenance window.
-	//
-	// * Must be at least 30 minutes.
+	// - Must be at least 30 minutes.
 	PreferredBackupWindow *string
 
 	// The weekly time range during which system maintenance can occur, in Universal

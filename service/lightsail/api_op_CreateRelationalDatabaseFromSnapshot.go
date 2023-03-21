@@ -38,11 +38,9 @@ func (c *Client) CreateRelationalDatabaseFromSnapshot(ctx context.Context, param
 type CreateRelationalDatabaseFromSnapshotInput struct {
 
 	// The name to use for your new Lightsail database resource. Constraints:
-	//
-	// * Must
+	// - Must
 	// contain from 2 to 255 alphanumeric characters, or hyphens.
-	//
-	// * The first and last
+	// - The first and last
 	// character must be a letter or number.
 	//
 	// This member is required.
@@ -71,19 +69,15 @@ type CreateRelationalDatabaseFromSnapshotInput struct {
 	RelationalDatabaseSnapshotName *string
 
 	// The date and time to restore your database from. Constraints:
-	//
-	// * Must be before
+	// - Must be before
 	// the latest restorable time for the database.
-	//
-	// * Cannot be specified if the use
+	// - Cannot be specified if the use
 	// latest restorable time parameter is true.
-	//
-	// * Specified in Coordinated Universal
+	// - Specified in Coordinated Universal
 	// Time (UTC).
-	//
-	// * Specified in the Unix time format. For example, if you wish to
-	// use a restore time of October 1, 2018, at 8 PM UTC, then you input 1538424000 as
-	// the restore time.
+	// - Specified in the Unix time format. For example, if you wish to use
+	// a restore time of October 1, 2018, at 8 PM UTC, then you input 1538424000 as the
+	// restore time.
 	RestoreTime *time.Time
 
 	// The name of the source database.

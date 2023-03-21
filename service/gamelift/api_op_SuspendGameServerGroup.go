@@ -15,8 +15,7 @@ import (
 // groups. Temporarily stops activity on a game server group without terminating
 // instances or the game server group. You can restart activity by calling
 // ResumeGameServerGroup. You can suspend the following activity:
-//
-// * Instance type
+// - Instance type
 // replacement - This activity evaluates the current game hosting viability of all
 // Spot instance types that are defined for the game server group. It updates the
 // Auto Scaling group to remove nonviable Spot Instance types, which have a higher

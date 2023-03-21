@@ -14,21 +14,14 @@ import (
 // organize Amazon Web Services resources for a range of purposes. This operation
 // handles the permissions necessary to manage tags for the following GameLift
 // resource types:
-//
-// * Build
-//
-// * Script
-//
-// * Fleet
-//
-// * Alias
-//
-// * GameSessionQueue
-//
-// *
+// - Build
+// - Script
+// - Fleet
+// - Alias
+// - GameSessionQueue
+// -
 // MatchmakingConfiguration
-//
-// * MatchmakingRuleSet
+// - MatchmakingRuleSet
 //
 // To remove a tag from a resource,
 // specify the unique ARN value for the resource and provide a string list

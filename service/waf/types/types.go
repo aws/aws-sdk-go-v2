@@ -38,16 +38,13 @@ type ActivatedRule struct {
 
 	// Specifies the action that CloudFront or AWS WAF takes when a web request matches
 	// the conditions in the Rule. Valid values for Action include the following:
-	//
-	// *
+	// -
 	// ALLOW: CloudFront responds with the requested object.
-	//
-	// * BLOCK: CloudFront
+	// - BLOCK: CloudFront
 	// responds with an HTTP 403 (Forbidden) status code.
-	//
-	// * COUNT: AWS WAF increments
-	// a counter of requests that match the conditions in the rule and then continues
-	// to inspect the web request based on the remaining rules in the web
+	// - COUNT: AWS WAF increments a
+	// counter of requests that match the conditions in the rule and then continues to
+	// inspect the web request based on the remaining rules in the web
 	// ACL.
 	//
 	// ActivatedRule|OverrideAction applies only when updating or adding a
@@ -68,21 +65,17 @@ type ActivatedRule struct {
 	// ExcludedRule are counted but not blocked. The RuleGroup owner will receive COUNT
 	// metrics for each ExcludedRule. If you want to exclude rules from a rule group
 	// that is already associated with a web ACL, perform the following steps:
-	//
-	// * Use
+	// - Use
 	// the AWS WAF logs to identify the IDs of the rules that you want to exclude. For
 	// more information about the logs, see Logging Web ACL Traffic Information
 	// (https://docs.aws.amazon.com/waf/latest/developerguide/logging.html).
-	//
-	// * Submit
+	// - Submit
 	// an UpdateWebACL request that has two actions:
-	//
-	// * The first action deletes the
+	// - The first action deletes the
 	// existing rule group from the web ACL. That is, in the UpdateWebACL request, the
 	// first Updates:Action should be DELETE and Updates:ActivatedRule:RuleId should be
 	// the rule group that contains the rules that you want to exclude.
-	//
-	// * The second
+	// - The second
 	// action inserts the same rule group back in, but specifying the rules to exclude.
 	// That is, the second Updates:Action should be INSERT,
 	// Updates:ActivatedRule:RuleId should be the rule group that you just removed, and
@@ -231,20 +224,16 @@ type ByteMatchTuple struct {
 	// TargetString, and TargetString must contain only alphanumeric characters or
 	// underscore (A-Z, a-z, 0-9, or _). In addition, TargetString must be a word,
 	// which means one of the following:
-	//
-	// * TargetString exactly matches the value of
+	// - TargetString exactly matches the value of
 	// the specified part of the web request, such as the value of a header.
-	//
-	// *
+	// -
 	// TargetString is at the beginning of the specified part of the web request and is
 	// followed by a character other than an alphanumeric character or underscore (_),
 	// for example, BadBot;.
-	//
-	// * TargetString is at the end of the specified part of the
+	// - TargetString is at the end of the specified part of the
 	// web request and is preceded by a character other than an alphanumeric character
 	// or underscore (_), for example, ;BadBot.
-	//
-	// * TargetString is in the middle of the
+	// - TargetString is in the middle of the
 	// specified part of the web request and is preceded and followed by characters
 	// other than alphanumeric characters or underscore (_), for example,
 	// -BadBot;.
@@ -262,36 +251,29 @@ type ByteMatchTuple struct {
 	// specified string in the part of web requests that you specified in FieldToMatch.
 	// The maximum length of the value is 50 bytes. Valid values depend on the values
 	// that you specified for FieldToMatch:
-	//
-	// * HEADER: The value that you want AWS WAF
+	// - HEADER: The value that you want AWS WAF
 	// to search for in the request header that you specified in FieldToMatch, for
 	// example, the value of the User-Agent or Referer header.
-	//
-	// * METHOD: The HTTP
+	// - METHOD: The HTTP
 	// method, which indicates the type of operation specified in the request.
 	// CloudFront supports the following methods: DELETE, GET, HEAD, OPTIONS, PATCH,
 	// POST, and PUT.
-	//
-	// * QUERY_STRING: The value that you want AWS WAF to search for in
-	// the query string, which is the part of a URL that appears after a ?
-	// character.
-	//
-	// * URI: The value that you want AWS WAF to search for in the part of
-	// a URL that identifies a resource, for example, /images/daily-ad.jpg.
-	//
-	// * BODY:
-	// The part of a request that contains any additional data that you want to send to
-	// your web server as the HTTP request body, such as data from a form. The request
-	// body immediately follows the request headers. Note that only the first 8192
-	// bytes of the request body are forwarded to AWS WAF for inspection. To allow or
-	// block requests based on the length of the body, you can create a size constraint
-	// set. For more information, see CreateSizeConstraintSet.
-	//
-	// * SINGLE_QUERY_ARG: The
+	// - QUERY_STRING: The value that you want AWS WAF to search for in
+	// the query string, which is the part of a URL that appears after a ? character.
+	// -
+	// URI: The value that you want AWS WAF to search for in the part of a URL that
+	// identifies a resource, for example, /images/daily-ad.jpg.
+	// - BODY: The part of a
+	// request that contains any additional data that you want to send to your web
+	// server as the HTTP request body, such as data from a form. The request body
+	// immediately follows the request headers. Note that only the first 8192 bytes of
+	// the request body are forwarded to AWS WAF for inspection. To allow or block
+	// requests based on the length of the body, you can create a size constraint set.
+	// For more information, see CreateSizeConstraintSet.
+	// - SINGLE_QUERY_ARG: The
 	// parameter in the query string that you will inspect, such as UserName or
 	// SalesRegion. The maximum length for SINGLE_QUERY_ARG is 30 characters.
-	//
-	// *
+	// -
 	// ALL_QUERY_ARGS: Similar to SINGLE_QUERY_ARG, but instead of inspecting a single
 	// parameter, AWS WAF inspects all parameters within the query string for the value
 	// or regex pattern that you specify in TargetString.
@@ -317,65 +299,47 @@ type ByteMatchTuple struct {
 	// you're concerned that attackers are injecting an operating system command line
 	// command and using unusual formatting to disguise some or all of the command, use
 	// this option to perform the following transformations:
-	//
-	// * Delete the following
+	// - Delete the following
 	// characters: \ " ' ^
-	//
-	// * Delete spaces before the following characters: / (
-	//
-	// *
+	// - Delete spaces before the following characters: / (
+	// -
 	// Replace the following characters with a space: , ;
-	//
-	// * Replace multiple spaces
+	// - Replace multiple spaces
 	// with one space
-	//
-	// * Convert uppercase letters (A-Z) to lowercase
+	// - Convert uppercase letters (A-Z) to lowercase
 	// (a-z)
 	//
 	// COMPRESS_WHITE_SPACE Use this option to replace the following characters
 	// with a space character (decimal 32):
-	//
-	// * \f, formfeed, decimal 12
-	//
-	// * \t, tab,
+	// - \f, formfeed, decimal 12
+	// - \t, tab,
 	// decimal 9
-	//
-	// * \n, newline, decimal 10
-	//
-	// * \r, carriage return, decimal 13
-	//
-	// * \v,
+	// - \n, newline, decimal 10
+	// - \r, carriage return, decimal 13
+	// - \v,
 	// vertical tab, decimal 11
+	// - non-breaking space, decimal 160
 	//
-	// * non-breaking space, decimal
-	// 160
-	//
-	// COMPRESS_WHITE_SPACE also replaces multiple spaces with one space.
-	// HTML_ENTITY_DECODE Use this option to replace HTML-encoded characters with
-	// unencoded characters. HTML_ENTITY_DECODE performs the following operations:
-	//
-	// *
-	// Replaces (ampersand)quot; with "
-	//
-	// * Replaces (ampersand)nbsp; with a
-	// non-breaking space, decimal 160
-	//
-	// * Replaces (ampersand)lt; with a "less than"
-	// symbol
-	//
-	// * Replaces (ampersand)gt; with >
-	//
-	// * Replaces characters that are
-	// represented in hexadecimal format, (ampersand)#xhhhh;, with the corresponding
+	// COMPRESS_WHITE_SPACE
+	// also replaces multiple spaces with one space. HTML_ENTITY_DECODE Use this option
+	// to replace HTML-encoded characters with unencoded characters. HTML_ENTITY_DECODE
+	// performs the following operations:
+	// - Replaces (ampersand)quot; with "
+	// - Replaces
+	// (ampersand)nbsp; with a non-breaking space, decimal 160
+	// - Replaces
+	// (ampersand)lt; with a "less than" symbol
+	// - Replaces (ampersand)gt; with >
+	// -
+	// Replaces characters that are represented in hexadecimal format,
+	// (ampersand)#xhhhh;, with the corresponding characters
+	// - Replaces characters that
+	// are represented in decimal format, (ampersand)#nnnn;, with the corresponding
 	// characters
 	//
-	// * Replaces characters that are represented in decimal format,
-	// (ampersand)#nnnn;, with the corresponding characters
-	//
-	// LOWERCASE Use this option
-	// to convert uppercase letters (A-Z) to lowercase (a-z). URL_DECODE Use this
-	// option to decode a URL-encoded value. NONE Specify NONE if you don't want to
-	// perform any text transformations.
+	// LOWERCASE Use this option to convert uppercase letters (A-Z) to
+	// lowercase (a-z). URL_DECODE Use this option to decode a URL-encoded value. NONE
+	// Specify NONE if you don't want to perform any text transformations.
 	//
 	// This member is required.
 	TextTransformation TextTransformation
@@ -413,36 +377,29 @@ type FieldToMatch struct {
 
 	// The part of the web request that you want AWS WAF to search for a specified
 	// string. Parts of a request that you can search include the following:
-	//
-	// * HEADER:
+	// - HEADER:
 	// A specified request header, for example, the value of the User-Agent or Referer
 	// header. If you choose HEADER for the type, specify the name of the header in
 	// Data.
-	//
-	// * METHOD: The HTTP method, which indicated the type of operation that the
+	// - METHOD: The HTTP method, which indicated the type of operation that the
 	// request is asking the origin to perform. Amazon CloudFront supports the
 	// following methods: DELETE, GET, HEAD, OPTIONS, PATCH, POST, and PUT.
-	//
-	// *
+	// -
 	// QUERY_STRING: A query string, which is the part of a URL that appears after a ?
 	// character, if any.
-	//
-	// * URI: The part of a web request that identifies a resource,
+	// - URI: The part of a web request that identifies a resource,
 	// for example, /images/daily-ad.jpg.
-	//
-	// * BODY: The part of a request that contains
+	// - BODY: The part of a request that contains
 	// any additional data that you want to send to your web server as the HTTP request
 	// body, such as data from a form. The request body immediately follows the request
 	// headers. Note that only the first 8192 bytes of the request body are forwarded
 	// to AWS WAF for inspection. To allow or block requests based on the length of the
 	// body, you can create a size constraint set. For more information, see
 	// CreateSizeConstraintSet.
-	//
-	// * SINGLE_QUERY_ARG: The parameter in the query string
+	// - SINGLE_QUERY_ARG: The parameter in the query string
 	// that you will inspect, such as UserName or SalesRegion. The maximum length for
 	// SINGLE_QUERY_ARG is 30 characters.
-	//
-	// * ALL_QUERY_ARGS: Similar to
+	// - ALL_QUERY_ARGS: Similar to
 	// SINGLE_QUERY_ARG, but rather than inspecting a single parameter, AWS WAF will
 	// inspect all parameters within the query for the value or regex pattern that you
 	// specify in TargetString.
@@ -600,11 +557,9 @@ type HTTPRequest struct {
 	// The IP address that the request originated from. If the WebACL is associated
 	// with a CloudFront distribution, this is the value of one of the following fields
 	// in CloudFront access logs:
-	//
-	// * c-ip, if the viewer did not use an HTTP proxy or a
+	// - c-ip, if the viewer did not use an HTTP proxy or a
 	// load balancer to send the request
-	//
-	// * x-forwarded-for, if the viewer did use an
+	// - x-forwarded-for, if the viewer did use an
 	// HTTP proxy or a load balancer to send the request
 	ClientIP *string
 
@@ -688,12 +643,10 @@ type IPSetDescriptor struct {
 	Type IPSetDescriptorType
 
 	// Specify an IPv4 address by using CIDR notation. For example:
-	//
-	// * To configure AWS
+	// - To configure AWS
 	// WAF to allow, block, or count requests that originated from the IP address
 	// 192.0.2.44, specify 192.0.2.44/32.
-	//
-	// * To configure AWS WAF to allow, block, or
+	// - To configure AWS WAF to allow, block, or
 	// count requests that originated from IP addresses from 192.0.2.0 to 192.0.2.255,
 	// specify 192.0.2.0/24.
 	//
@@ -701,13 +654,11 @@ type IPSetDescriptor struct {
 	// Wikipedia entry Classless Inter-Domain Routing
 	// (https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing). Specify an IPv6
 	// address by using CIDR notation. For example:
-	//
-	// * To configure AWS WAF to allow,
+	// - To configure AWS WAF to allow,
 	// block, or count requests that originated from the IP address
 	// 1111:0000:0000:0000:0000:0000:0000:0111, specify
 	// 1111:0000:0000:0000:0000:0000:0000:0111/128.
-	//
-	// * To configure AWS WAF to allow,
+	// - To configure AWS WAF to allow,
 	// block, or count requests that originated from IP addresses
 	// 1111:0000:0000:0000:0000:0000:0000:0000 to
 	// 1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify
@@ -847,10 +798,8 @@ type Predicate struct {
 // address every five minutes. For example, based on recent requests that you've
 // seen from an attacker, you might create a RateBasedRule that includes the
 // following conditions:
-//
-// * The requests come from 192.0.2.44.
-//
-// * They contain the
+// - The requests come from 192.0.2.44.
+// - They contain the
 // value BadBot in the User-Agent header.
 //
 // In the rule, you also define the rate
@@ -934,15 +883,12 @@ type RegexMatchSet struct {
 
 	// Contains an array of RegexMatchTuple objects. Each RegexMatchTuple object
 	// contains:
-	//
-	// * The part of a web request that you want AWS WAF to inspect, such as
+	// - The part of a web request that you want AWS WAF to inspect, such as
 	// a query string or the value of the User-Agent header.
-	//
-	// * The identifier of the
+	// - The identifier of the
 	// pattern (a regular expression) that you want AWS WAF to look for. For more
 	// information, see RegexPatternSet.
-	//
-	// * Whether to perform any conversions on the
+	// - Whether to perform any conversions on the
 	// request, such as converting it to lowercase, before inspecting it for the
 	// specified string.
 	RegexMatchTuples []RegexMatchTuple
@@ -1014,15 +960,12 @@ type RegexMatchSetUpdate struct {
 // global use. The regular expression pattern that you want AWS WAF to search for
 // in web requests, the location in requests that you want AWS WAF to search, and
 // other settings. Each RegexMatchTuple object contains:
-//
-// * The part of a web
+// - The part of a web
 // request that you want AWS WAF to inspect, such as a query string or the value of
 // the User-Agent header.
-//
-// * The identifier of the pattern (a regular expression)
+// - The identifier of the pattern (a regular expression)
 // that you want AWS WAF to look for. For more information, see RegexPatternSet.
-//
-// *
+// -
 // Whether to perform any conversions on the request, such as converting it to
 // lowercase, before inspecting it for the specified string.
 type RegexMatchTuple struct {
@@ -1050,65 +993,47 @@ type RegexMatchTuple struct {
 	// CMD_LINE When you're concerned that attackers are injecting an operating system
 	// commandline command and using unusual formatting to disguise some or all of the
 	// command, use this option to perform the following transformations:
-	//
-	// * Delete the
+	// - Delete the
 	// following characters: \ " ' ^
-	//
-	// * Delete spaces before the following characters:
-	// / (
-	//
-	// * Replace the following characters with a space: , ;
-	//
-	// * Replace multiple
-	// spaces with one space
-	//
-	// * Convert uppercase letters (A-Z) to lowercase
+	// - Delete spaces before the following characters: /
+	// (
+	// - Replace the following characters with a space: , ;
+	// - Replace multiple spaces
+	// with one space
+	// - Convert uppercase letters (A-Z) to lowercase
 	// (a-z)
 	//
 	// COMPRESS_WHITE_SPACE Use this option to replace the following characters
 	// with a space character (decimal 32):
-	//
-	// * \f, formfeed, decimal 12
-	//
-	// * \t, tab,
+	// - \f, formfeed, decimal 12
+	// - \t, tab,
 	// decimal 9
-	//
-	// * \n, newline, decimal 10
-	//
-	// * \r, carriage return, decimal 13
-	//
-	// * \v,
+	// - \n, newline, decimal 10
+	// - \r, carriage return, decimal 13
+	// - \v,
 	// vertical tab, decimal 11
+	// - non-breaking space, decimal 160
 	//
-	// * non-breaking space, decimal
-	// 160
-	//
-	// COMPRESS_WHITE_SPACE also replaces multiple spaces with one space.
-	// HTML_ENTITY_DECODE Use this option to replace HTML-encoded characters with
-	// unencoded characters. HTML_ENTITY_DECODE performs the following operations:
-	//
-	// *
-	// Replaces (ampersand)quot; with "
-	//
-	// * Replaces (ampersand)nbsp; with a
-	// non-breaking space, decimal 160
-	//
-	// * Replaces (ampersand)lt; with a "less than"
-	// symbol
-	//
-	// * Replaces (ampersand)gt; with >
-	//
-	// * Replaces characters that are
-	// represented in hexadecimal format, (ampersand)#xhhhh;, with the corresponding
+	// COMPRESS_WHITE_SPACE
+	// also replaces multiple spaces with one space. HTML_ENTITY_DECODE Use this option
+	// to replace HTML-encoded characters with unencoded characters. HTML_ENTITY_DECODE
+	// performs the following operations:
+	// - Replaces (ampersand)quot; with "
+	// - Replaces
+	// (ampersand)nbsp; with a non-breaking space, decimal 160
+	// - Replaces
+	// (ampersand)lt; with a "less than" symbol
+	// - Replaces (ampersand)gt; with >
+	// -
+	// Replaces characters that are represented in hexadecimal format,
+	// (ampersand)#xhhhh;, with the corresponding characters
+	// - Replaces characters that
+	// are represented in decimal format, (ampersand)#nnnn;, with the corresponding
 	// characters
 	//
-	// * Replaces characters that are represented in decimal format,
-	// (ampersand)#nnnn;, with the corresponding characters
-	//
-	// LOWERCASE Use this option
-	// to convert uppercase letters (A-Z) to lowercase (a-z). URL_DECODE Use this
-	// option to decode a URL-encoded value. NONE Specify NONE if you don't want to
-	// perform any text transformations.
+	// LOWERCASE Use this option to convert uppercase letters (A-Z) to
+	// lowercase (a-z). URL_DECODE Use this option to decode a URL-encoded value. NONE
+	// Specify NONE if you don't want to perform any text transformations.
 	//
 	// This member is required.
 	TextTransformation TextTransformation
@@ -1211,12 +1136,10 @@ type RegexPatternSetUpdate struct {
 // global use. A combination of ByteMatchSet, IPSet, and/or SqlInjectionMatchSet
 // objects that identify the web requests that you want to allow, block, or count.
 // For example, you might create a Rule that includes the following predicates:
-//
-// *
+// -
 // An IPSet that causes AWS WAF to search for web requests that originate from the
 // IP address 192.0.2.44
-//
-// * A ByteMatchSet that causes AWS WAF to search for web
+// - A ByteMatchSet that causes AWS WAF to search for web
 // requests for which the value of the User-Agent header is BadBot.
 //
 // To match the
@@ -1260,14 +1183,11 @@ type Rule struct {
 // the latest version, AWS WAF has a single set of endpoints for regional and
 // global use. A collection of predefined rules that you can add to a web ACL. Rule
 // groups are subject to the following limits:
-//
-// * Three rule groups per account.
-// You can request an increase to this limit by contacting customer support.
-//
-// * One
-// rule group per web ACL.
-//
-// * Ten rules per rule group.
+// - Three rule groups per account. You
+// can request an increase to this limit by contacting customer support.
+// - One rule
+// group per web ACL.
+// - Ten rules per rule group.
 type RuleGroup struct {
 
 	// A unique identifier for a RuleGroup. You use RuleGroupId to get more information
@@ -1492,63 +1412,46 @@ type SizeConstraint struct {
 	// operating system command line command and using unusual formatting to disguise
 	// some or all of the command, use this option to perform the following
 	// transformations:
-	//
-	// * Delete the following characters: \ " ' ^
-	//
-	// * Delete spaces
+	// - Delete the following characters: \ " ' ^
+	// - Delete spaces
 	// before the following characters: / (
-	//
-	// * Replace the following characters with a
+	// - Replace the following characters with a
 	// space: , ;
+	// - Replace multiple spaces with one space
+	// - Convert uppercase letters
+	// (A-Z) to lowercase (a-z)
 	//
-	// * Replace multiple spaces with one space
+	// COMPRESS_WHITE_SPACE Use this option to replace the
+	// following characters with a space character (decimal 32):
+	// - \f, formfeed,
+	// decimal 12
+	// - \t, tab, decimal 9
+	// - \n, newline, decimal 10
+	// - \r, carriage return,
+	// decimal 13
+	// - \v, vertical tab, decimal 11
+	// - non-breaking space, decimal
+	// 160
 	//
-	// * Convert uppercase
-	// letters (A-Z) to lowercase (a-z)
-	//
-	// COMPRESS_WHITE_SPACE Use this option to
-	// replace the following characters with a space character (decimal 32):
-	//
-	// * \f,
-	// formfeed, decimal 12
-	//
-	// * \t, tab, decimal 9
-	//
-	// * \n, newline, decimal 10
-	//
-	// * \r,
-	// carriage return, decimal 13
-	//
-	// * \v, vertical tab, decimal 11
-	//
-	// * non-breaking
+	// COMPRESS_WHITE_SPACE also replaces multiple spaces with one space.
+	// HTML_ENTITY_DECODE Use this option to replace HTML-encoded characters with
+	// unencoded characters. HTML_ENTITY_DECODE performs the following operations:
+	// -
+	// Replaces (ampersand)quot; with "
+	// - Replaces (ampersand)nbsp; with a non-breaking
 	// space, decimal 160
+	// - Replaces (ampersand)lt; with a "less than" symbol
+	// -
+	// Replaces (ampersand)gt; with >
+	// - Replaces characters that are represented in
+	// hexadecimal format, (ampersand)#xhhhh;, with the corresponding characters
+	// -
+	// Replaces characters that are represented in decimal format, (ampersand)#nnnn;,
+	// with the corresponding characters
 	//
-	// COMPRESS_WHITE_SPACE also replaces multiple spaces with one
-	// space. HTML_ENTITY_DECODE Use this option to replace HTML-encoded characters
-	// with unencoded characters. HTML_ENTITY_DECODE performs the following
-	// operations:
-	//
-	// * Replaces (ampersand)quot; with "
-	//
-	// * Replaces (ampersand)nbsp;
-	// with a non-breaking space, decimal 160
-	//
-	// * Replaces (ampersand)lt; with a "less
-	// than" symbol
-	//
-	// * Replaces (ampersand)gt; with >
-	//
-	// * Replaces characters that are
-	// represented in hexadecimal format, (ampersand)#xhhhh;, with the corresponding
-	// characters
-	//
-	// * Replaces characters that are represented in decimal format,
-	// (ampersand)#nnnn;, with the corresponding characters
-	//
-	// LOWERCASE Use this option
-	// to convert uppercase letters (A-Z) to lowercase (a-z). URL_DECODE Use this
-	// option to decode a URL-encoded value.
+	// LOWERCASE Use this option to convert
+	// uppercase letters (A-Z) to lowercase (a-z). URL_DECODE Use this option to decode
+	// a URL-encoded value.
 	//
 	// This member is required.
 	TextTransformation TextTransformation
@@ -1762,65 +1665,47 @@ type SqlInjectionMatchTuple struct {
 	// you're concerned that attackers are injecting an operating system command line
 	// command and using unusual formatting to disguise some or all of the command, use
 	// this option to perform the following transformations:
-	//
-	// * Delete the following
+	// - Delete the following
 	// characters: \ " ' ^
-	//
-	// * Delete spaces before the following characters: / (
-	//
-	// *
+	// - Delete spaces before the following characters: / (
+	// -
 	// Replace the following characters with a space: , ;
-	//
-	// * Replace multiple spaces
+	// - Replace multiple spaces
 	// with one space
-	//
-	// * Convert uppercase letters (A-Z) to lowercase
+	// - Convert uppercase letters (A-Z) to lowercase
 	// (a-z)
 	//
 	// COMPRESS_WHITE_SPACE Use this option to replace the following characters
 	// with a space character (decimal 32):
-	//
-	// * \f, formfeed, decimal 12
-	//
-	// * \t, tab,
+	// - \f, formfeed, decimal 12
+	// - \t, tab,
 	// decimal 9
-	//
-	// * \n, newline, decimal 10
-	//
-	// * \r, carriage return, decimal 13
-	//
-	// * \v,
+	// - \n, newline, decimal 10
+	// - \r, carriage return, decimal 13
+	// - \v,
 	// vertical tab, decimal 11
+	// - non-breaking space, decimal 160
 	//
-	// * non-breaking space, decimal
-	// 160
-	//
-	// COMPRESS_WHITE_SPACE also replaces multiple spaces with one space.
-	// HTML_ENTITY_DECODE Use this option to replace HTML-encoded characters with
-	// unencoded characters. HTML_ENTITY_DECODE performs the following operations:
-	//
-	// *
-	// Replaces (ampersand)quot; with "
-	//
-	// * Replaces (ampersand)nbsp; with a
-	// non-breaking space, decimal 160
-	//
-	// * Replaces (ampersand)lt; with a "less than"
-	// symbol
-	//
-	// * Replaces (ampersand)gt; with >
-	//
-	// * Replaces characters that are
-	// represented in hexadecimal format, (ampersand)#xhhhh;, with the corresponding
+	// COMPRESS_WHITE_SPACE
+	// also replaces multiple spaces with one space. HTML_ENTITY_DECODE Use this option
+	// to replace HTML-encoded characters with unencoded characters. HTML_ENTITY_DECODE
+	// performs the following operations:
+	// - Replaces (ampersand)quot; with "
+	// - Replaces
+	// (ampersand)nbsp; with a non-breaking space, decimal 160
+	// - Replaces
+	// (ampersand)lt; with a "less than" symbol
+	// - Replaces (ampersand)gt; with >
+	// -
+	// Replaces characters that are represented in hexadecimal format,
+	// (ampersand)#xhhhh;, with the corresponding characters
+	// - Replaces characters that
+	// are represented in decimal format, (ampersand)#nnnn;, with the corresponding
 	// characters
 	//
-	// * Replaces characters that are represented in decimal format,
-	// (ampersand)#nnnn;, with the corresponding characters
-	//
-	// LOWERCASE Use this option
-	// to convert uppercase letters (A-Z) to lowercase (a-z). URL_DECODE Use this
-	// option to decode a URL-encoded value. NONE Specify NONE if you don't want to
-	// perform any text transformations.
+	// LOWERCASE Use this option to convert uppercase letters (A-Z) to
+	// lowercase (a-z). URL_DECODE Use this option to decode a URL-encoded value. NONE
+	// Specify NONE if you don't want to perform any text transformations.
 	//
 	// This member is required.
 	TextTransformation TextTransformation
@@ -1969,16 +1854,13 @@ type WafAction struct {
 
 	// Specifies how you want AWS WAF to respond to requests that match the settings in
 	// a Rule. Valid settings include the following:
-	//
-	// * ALLOW: AWS WAF allows
-	// requests
-	//
-	// * BLOCK: AWS WAF blocks requests
-	//
-	// * COUNT: AWS WAF increments a
-	// counter of the requests that match all of the conditions in the rule. AWS WAF
-	// then continues to inspect the web request based on the remaining rules in the
-	// web ACL. You can't specify COUNT for the default action for a WebACL.
+	// - ALLOW: AWS WAF allows requests
+	// -
+	// BLOCK: AWS WAF blocks requests
+	// - COUNT: AWS WAF increments a counter of the
+	// requests that match all of the conditions in the rule. AWS WAF then continues to
+	// inspect the web request based on the remaining rules in the web ACL. You can't
+	// specify COUNT for the default action for a WebACL.
 	//
 	// This member is required.
 	Type WafActionType
@@ -2223,65 +2105,47 @@ type XssMatchTuple struct {
 	// you're concerned that attackers are injecting an operating system command line
 	// command and using unusual formatting to disguise some or all of the command, use
 	// this option to perform the following transformations:
-	//
-	// * Delete the following
+	// - Delete the following
 	// characters: \ " ' ^
-	//
-	// * Delete spaces before the following characters: / (
-	//
-	// *
+	// - Delete spaces before the following characters: / (
+	// -
 	// Replace the following characters with a space: , ;
-	//
-	// * Replace multiple spaces
+	// - Replace multiple spaces
 	// with one space
-	//
-	// * Convert uppercase letters (A-Z) to lowercase
+	// - Convert uppercase letters (A-Z) to lowercase
 	// (a-z)
 	//
 	// COMPRESS_WHITE_SPACE Use this option to replace the following characters
 	// with a space character (decimal 32):
-	//
-	// * \f, formfeed, decimal 12
-	//
-	// * \t, tab,
+	// - \f, formfeed, decimal 12
+	// - \t, tab,
 	// decimal 9
-	//
-	// * \n, newline, decimal 10
-	//
-	// * \r, carriage return, decimal 13
-	//
-	// * \v,
+	// - \n, newline, decimal 10
+	// - \r, carriage return, decimal 13
+	// - \v,
 	// vertical tab, decimal 11
+	// - non-breaking space, decimal 160
 	//
-	// * non-breaking space, decimal
-	// 160
-	//
-	// COMPRESS_WHITE_SPACE also replaces multiple spaces with one space.
-	// HTML_ENTITY_DECODE Use this option to replace HTML-encoded characters with
-	// unencoded characters. HTML_ENTITY_DECODE performs the following operations:
-	//
-	// *
-	// Replaces (ampersand)quot; with "
-	//
-	// * Replaces (ampersand)nbsp; with a
-	// non-breaking space, decimal 160
-	//
-	// * Replaces (ampersand)lt; with a "less than"
-	// symbol
-	//
-	// * Replaces (ampersand)gt; with >
-	//
-	// * Replaces characters that are
-	// represented in hexadecimal format, (ampersand)#xhhhh;, with the corresponding
+	// COMPRESS_WHITE_SPACE
+	// also replaces multiple spaces with one space. HTML_ENTITY_DECODE Use this option
+	// to replace HTML-encoded characters with unencoded characters. HTML_ENTITY_DECODE
+	// performs the following operations:
+	// - Replaces (ampersand)quot; with "
+	// - Replaces
+	// (ampersand)nbsp; with a non-breaking space, decimal 160
+	// - Replaces
+	// (ampersand)lt; with a "less than" symbol
+	// - Replaces (ampersand)gt; with >
+	// -
+	// Replaces characters that are represented in hexadecimal format,
+	// (ampersand)#xhhhh;, with the corresponding characters
+	// - Replaces characters that
+	// are represented in decimal format, (ampersand)#nnnn;, with the corresponding
 	// characters
 	//
-	// * Replaces characters that are represented in decimal format,
-	// (ampersand)#nnnn;, with the corresponding characters
-	//
-	// LOWERCASE Use this option
-	// to convert uppercase letters (A-Z) to lowercase (a-z). URL_DECODE Use this
-	// option to decode a URL-encoded value. NONE Specify NONE if you don't want to
-	// perform any text transformations.
+	// LOWERCASE Use this option to convert uppercase letters (A-Z) to
+	// lowercase (a-z). URL_DECODE Use this option to decode a URL-encoded value. NONE
+	// Specify NONE if you don't want to perform any text transformations.
 	//
 	// This member is required.
 	TextTransformation TextTransformation

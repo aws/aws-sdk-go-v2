@@ -46,17 +46,12 @@ import (
 // Amazon Web Services account. Required permissions: kms:DescribeCustomKeyStores
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (IAM policy) Related operations:
-//
-// * ConnectCustomKeyStore
-//
-// *
+// - ConnectCustomKeyStore
+// -
 // CreateCustomKeyStore
-//
-// * DeleteCustomKeyStore
-//
-// * DisconnectCustomKeyStore
-//
-// *
+// - DeleteCustomKeyStore
+// - DisconnectCustomKeyStore
+// -
 // UpdateCustomKeyStore
 func (c *Client) DescribeCustomKeyStores(ctx context.Context, params *DescribeCustomKeyStoresInput, optFns ...func(*Options)) (*DescribeCustomKeyStoresOutput, error) {
 	if params == nil {

@@ -10,11 +10,9 @@
 // makes periodic calls to GetLatestConfiguration to check for and retrieve the
 // latest data available. When calling StartConfigurationSession, your code sends
 // the following information:
-//
-// * Identifiers (ID or name) of an AppConfig
+// - Identifiers (ID or name) of an AppConfig
 // application, environment, and configuration profile that the session tracks.
-//
-// *
+// -
 // (Optional) The minimum amount of time the session's client must wait between
 // calls to GetLatestConfiguration.
 //
@@ -26,17 +24,14 @@
 // each subsequent call to GetLatestConfiguration. When calling
 // GetLatestConfiguration, your client code sends the most recent
 // ConfigurationToken value it has and receives in response:
-//
-// *
+// -
 // NextPollConfigurationToken: the ConfigurationToken value to use on the next call
 // to GetLatestConfiguration.
-//
-// * NextPollIntervalInSeconds: the duration the client
+// - NextPollIntervalInSeconds: the duration the client
 // should wait before making its next call to GetLatestConfiguration. This duration
 // may vary over the course of the session, so it should be used instead of the
 // value sent on the StartConfigurationSession call.
-//
-// * The configuration: the
+// - The configuration: the
 // latest data intended for the session. This may be empty if the client already
 // has the latest version of the configuration.
 //

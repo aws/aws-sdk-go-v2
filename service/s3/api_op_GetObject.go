@@ -47,14 +47,11 @@ import (
 // BadRequest error. If you encrypt an object by using server-side encryption with
 // customer-provided encryption keys (SSE-C) when you store the object in Amazon
 // S3, then when you GET the object, you must use the following headers:
-//
-// *
+// -
 // x-amz-server-side-encryption-customer-algorithm
-//
-// *
+// -
 // x-amz-server-side-encryption-customer-key
-//
-// *
+// -
 // x-amz-server-side-encryption-customer-key-MD5
 //
 // For more information about SSE-C,
@@ -70,26 +67,22 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html). If
 // the object you request does not exist, the error Amazon S3 returns depends on
 // whether you also have the s3:ListBucket permission.
-//
-// * If you have the
+// - If you have the
 // s3:ListBucket permission on the bucket, Amazon S3 will return an HTTP status
 // code 404 ("no such key") error.
-//
-// * If you don’t have the s3:ListBucket
+// - If you don’t have the s3:ListBucket
 // permission, Amazon S3 will return an HTTP status code 403 ("access denied")
 // error.
 //
 // Versioning By default, the GET action returns the current version of an
 // object. To return a different version, use the versionId subresource.
-//
-// * If you
+// - If you
 // supply a versionId, you need the s3:GetObjectVersion permission to access a
 // specific version of an object. If you request a specific version, you do not
 // need to have the s3:GetObject permission.
-//
-// * If the current version of the
-// object is a delete marker, Amazon S3 behaves as if the object was deleted and
-// includes x-amz-delete-marker: true in the response.
+// - If the current version of the object
+// is a delete marker, Amazon S3 behaves as if the object was deleted and includes
+// x-amz-delete-marker: true in the response.
 //
 // For more information about
 // versioning, see PutBucketVersioning
@@ -107,20 +100,14 @@ import (
 // the GET response, you use the following request parameters. You must sign the
 // request, either using an Authorization header or a presigned URL, when using
 // these parameters. They cannot be used with an unsigned (anonymous) request.
-//
-// *
+// -
 // response-content-type
-//
-// * response-content-language
-//
-// * response-expires
-//
-// *
+// - response-content-language
+// - response-expires
+// -
 // response-cache-control
-//
-// * response-content-disposition
-//
-// *
+// - response-content-disposition
+// -
 // response-content-encoding
 //
 // Additional Considerations about Request Headers If
@@ -133,11 +120,9 @@ import (
 // response code. For more information about conditional requests, see RFC 7232
 // (https://tools.ietf.org/html/rfc7232). The following operations are related to
 // GetObject:
-//
-// * ListBuckets
+// - ListBuckets
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBuckets.html)
-//
-// *
+// -
 // GetObjectAcl
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAcl.html)
 func (c *Client) GetObject(ctx context.Context, params *GetObjectInput, optFns ...func(*Options)) (*GetObjectOutput, error) {

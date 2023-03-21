@@ -15,19 +15,17 @@ import (
 // Retrieves core fleet-wide properties, including the computing hardware and
 // deployment configuration for all instances in the fleet. This operation can be
 // used in the following ways:
+// - To get attributes for one or more specific fleets,
+// provide a list of fleet IDs or fleet ARNs.
+// - To get attributes for all fleets,
+// do not provide a fleet identifier.
 //
-// * To get attributes for one or more specific
-// fleets, provide a list of fleet IDs or fleet ARNs.
-//
-// * To get attributes for all
-// fleets, do not provide a fleet identifier.
-//
-// When requesting attributes for
-// multiple fleets, use the pagination parameters to retrieve results as a set of
-// sequential pages. If successful, a FleetAttributes object is returned for each
-// fleet requested, unless the fleet identifier is not found. Some API operations
-// limit the number of fleet IDs that allowed in one request. If a request exceeds
-// this limit, the request fails and the error message contains the maximum allowed
+// When requesting attributes for multiple
+// fleets, use the pagination parameters to retrieve results as a set of sequential
+// pages. If successful, a FleetAttributes object is returned for each fleet
+// requested, unless the fleet identifier is not found. Some API operations limit
+// the number of fleet IDs that allowed in one request. If a request exceeds this
+// limit, the request fails and the error message contains the maximum allowed
 // number. Learn more Setting up GameLift fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 func (c *Client) DescribeFleetAttributes(ctx context.Context, params *DescribeFleetAttributesInput, optFns ...func(*Options)) (*DescribeFleetAttributesOutput, error) {

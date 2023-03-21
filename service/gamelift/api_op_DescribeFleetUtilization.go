@@ -19,16 +19,14 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetLocationUtilization.html)
 // to get utilization statistics for a fleet's remote locations. This operation can
 // be used in the following ways:
-//
-// * To get utilization data for one or more
+// - To get utilization data for one or more
 // specific fleets, provide a list of fleet IDs or fleet ARNs.
+// - To get utilization
+// data for all fleets, do not provide a fleet identifier.
 //
-// * To get
-// utilization data for all fleets, do not provide a fleet identifier.
-//
-// When
-// requesting multiple fleets, use the pagination parameters to retrieve results as
-// a set of sequential pages. If successful, a FleetUtilization
+// When requesting
+// multiple fleets, use the pagination parameters to retrieve results as a set of
+// sequential pages. If successful, a FleetUtilization
 // (https://docs.aws.amazon.com/gamelift/latest/apireference/API_FleetUtilization.html)
 // object is returned for each requested fleet ID, unless the fleet identifier is
 // not found. Each fleet utilization object includes a Location property, which is

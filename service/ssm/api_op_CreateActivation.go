@@ -80,11 +80,9 @@ type CreateActivationInput struct {
 	// example, you might want to tag an activation to identify which servers or
 	// virtual machines (VMs) in your on-premises environment you intend to activate.
 	// In this case, you could specify the following key-value pairs:
-	//
-	// *
+	// -
 	// Key=OS,Value=Windows
-	//
-	// * Key=Environment,Value=Production
+	// - Key=Environment,Value=Production
 	//
 	// When you install SSM
 	// Agent on your on-premises servers and VMs, you specify an activation ID and

@@ -41,11 +41,9 @@ type GetSchemaByDefinitionInput struct {
 
 	// This is a wrapper structure to contain schema identity fields. The structure
 	// contains:
-	//
-	// * SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema.
+	// - SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema.
 	// One of SchemaArn or SchemaName has to be provided.
-	//
-	// * SchemaId$SchemaName: The
+	// - SchemaId$SchemaName: The
 	// name of the schema. One of SchemaArn or SchemaName has to be provided.
 	//
 	// This member is required.

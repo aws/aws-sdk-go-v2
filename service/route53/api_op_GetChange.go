@@ -18,12 +18,10 @@ import (
 
 // Returns the current status of a change batch request. The status is one of the
 // following values:
-//
-// * PENDING indicates that the changes in this request have not
+// - PENDING indicates that the changes in this request have not
 // propagated to all Amazon Route 53 DNS servers. This is the initial status of all
 // change batch requests.
-//
-// * INSYNC indicates that the changes have propagated to
+// - INSYNC indicates that the changes have propagated to
 // all Route 53 DNS servers.
 func (c *Client) GetChange(ctx context.Context, params *GetChangeInput, optFns ...func(*Options)) (*GetChangeOutput, error) {
 	if params == nil {

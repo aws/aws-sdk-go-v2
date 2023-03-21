@@ -15,8 +15,7 @@ import (
 // account. Organizations sends email on your behalf to the email address that is
 // associated with the other account's owner. The invitation is implemented as a
 // Handshake whose details are in the response.
-//
-// * You can invite Amazon Web
+// - You can invite Amazon Web
 // Services accounts only from the same seller as the management account. For
 // example, if your organization's management account was created by Amazon
 // Internet Services Pvt. Ltd (AISPL), an Amazon Web Services seller in India, you
@@ -24,8 +23,7 @@ import (
 // accounts from AISPL and Amazon Web Services or from any other Amazon Web
 // Services seller. For more information, see Consolidated Billing in India
 // (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/useconsolidatedbilliing-India.html).
-//
-// *
+// -
 // If you receive an exception that indicates that you exceeded your account limits
 // for the organization or that the operation failed because your organization is
 // still initializing, wait one hour and then try again. If the error persists

@@ -79,16 +79,13 @@ type AdminCreateUserInput struct {
 	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
 	// in the Amazon Cognito Developer Guide. When you use the ClientMetadata
 	// parameter, remember that Amazon Cognito won't do the following:
-	//
-	// * Store the
+	// - Store the
 	// ClientMetadata value. This data is available only to Lambda triggers that are
 	// assigned to a user pool to support custom workflows. If your user pool
 	// configuration doesn't include triggers, the ClientMetadata parameter serves no
 	// purpose.
-	//
-	// * Validate the ClientMetadata value.
-	//
-	// * Encrypt the ClientMetadata
+	// - Validate the ClientMetadata value.
+	// - Encrypt the ClientMetadata
 	// value. Don't use Amazon Cognito to provide sensitive information.
 	ClientMetadata map[string]string
 
@@ -137,13 +134,11 @@ type AdminCreateUserInput struct {
 	// set the phone_number_verified attribute to True. You can also do this by calling
 	// AdminUpdateUserAttributes
 	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminUpdateUserAttributes.html).
-	//
-	// *
+	// -
 	// email: The email address of the user to whom the message that contains the code
 	// and username will be sent. Required if the email_verified attribute is set to
 	// True, or if "EMAIL" is specified in the DesiredDeliveryMediums parameter.
-	//
-	// *
+	// -
 	// phone_number: The phone number of the user to whom the message that contains the
 	// code and username will be sent. Required if the phone_number_verified attribute
 	// is set to True, or if "SMS" is specified in the DesiredDeliveryMediums

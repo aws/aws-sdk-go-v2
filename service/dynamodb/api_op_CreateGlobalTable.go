@@ -29,35 +29,27 @@ import (
 // (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html).
 // If you want to add a new replica table to a global table, each of the following
 // conditions must be true:
-//
-// * The table must have the same primary key as all of
+// - The table must have the same primary key as all of
 // the other replicas.
-//
-// * The table must have the same name as all of the other
+// - The table must have the same name as all of the other
 // replicas.
-//
-// * The table must have DynamoDB Streams enabled, with the stream
+// - The table must have DynamoDB Streams enabled, with the stream
 // containing both the new and the old images of the item.
-//
-// * None of the replica
+// - None of the replica
 // tables in the global table can contain any data.
 //
 // If global secondary indexes
 // are specified, then the following conditions must also be met:
-//
-// * The global
+// - The global
 // secondary indexes must have the same name.
-//
-// * The global secondary indexes must
+// - The global secondary indexes must
 // have the same hash key and sort key (if present).
 //
 // If local secondary indexes
 // are specified, then the following conditions must also be met:
-//
-// * The local
+// - The local
 // secondary indexes must have the same name.
-//
-// * The local secondary indexes must
+// - The local secondary indexes must
 // have the same hash key and sort key (if present).
 //
 // Write capacity settings

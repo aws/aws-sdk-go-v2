@@ -19,10 +19,8 @@ import (
 // Required permissions: kms:UpdateKeyDescription
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (key policy) Related operations
-//
-// * CreateKey
-//
-// * DescribeKey
+// - CreateKey
+// - DescribeKey
 func (c *Client) UpdateKeyDescription(ctx context.Context, params *UpdateKeyDescriptionInput, optFns ...func(*Options)) (*UpdateKeyDescriptionOutput, error) {
 	if params == nil {
 		params = &UpdateKeyDescriptionInput{}
@@ -47,10 +45,8 @@ type UpdateKeyDescriptionInput struct {
 
 	// Updates the description of the specified KMS key. Specify the key ID or key ARN
 	// of the KMS key. For example:
-	//
-	// * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// *
+	// - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	// -
 	// Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//

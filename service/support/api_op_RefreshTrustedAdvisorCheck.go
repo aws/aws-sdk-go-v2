@@ -16,12 +16,10 @@ import (
 // checks are refreshed automatically. If you call the RefreshTrustedAdvisorCheck
 // operation to refresh them, you might see the InvalidParameterValue error. The
 // response contains a TrustedAdvisorCheckRefreshStatus object.
-//
-// * You must have a
+// - You must have a
 // Business, Enterprise On-Ramp, or Enterprise Support plan to use the Amazon Web
 // Services Support API.
-//
-// * If you call the Amazon Web Services Support API from an
+// - If you call the Amazon Web Services Support API from an
 // account that doesn't have a Business, Enterprise On-Ramp, or Enterprise Support
 // plan, the SubscriptionRequiredException error message appears. For information
 // about changing your support plan, see Amazon Web Services Support

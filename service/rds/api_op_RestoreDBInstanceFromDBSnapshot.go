@@ -47,14 +47,11 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 
 	// Name of the DB instance to create from the DB snapshot. This parameter isn't
 	// case-sensitive. Constraints:
-	//
-	// * Must contain from 1 to 63 numbers, letters, or
+	// - Must contain from 1 to 63 numbers, letters, or
 	// hyphens
-	//
-	// * First character must be a letter
-	//
-	// * Can't end with a hyphen or
-	// contain two consecutive hyphens
+	// - First character must be a letter
+	// - Can't end with a hyphen or contain
+	// two consecutive hyphens
 	//
 	// Example: my-snapshot-id
 	//
@@ -100,14 +97,11 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// The instance profile associated with the underlying Amazon EC2 instance of an
 	// RDS Custom DB instance. The instance profile must meet the following
 	// requirements:
-	//
-	// * The profile must exist in your account.
-	//
-	// * The profile must
-	// have an IAM role that Amazon EC2 has permissions to assume.
-	//
-	// * The instance
-	// profile name and the associated IAM role name must start with the prefix
+	// - The profile must exist in your account.
+	// - The profile must have
+	// an IAM role that Amazon EC2 has permissions to assume.
+	// - The instance profile
+	// name and the associated IAM role name must start with the prefix
 	// AWSRDSCustom.
 	//
 	// For the list of permissions required for the IAM role, see
@@ -121,25 +115,18 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// deployments
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
 	// in the Amazon RDS User Guide. Constraints:
-	//
-	// * Must match the identifier of an
+	// - Must match the identifier of an
 	// existing Multi-AZ DB cluster snapshot.
-	//
-	// * Can't be specified when
+	// - Can't be specified when
 	// DBSnapshotIdentifier is specified.
-	//
-	// * Must be specified when
-	// DBSnapshotIdentifier isn't specified.
-	//
-	// * If you are restoring from a shared
-	// manual Multi-AZ DB cluster snapshot, the DBClusterSnapshotIdentifier must be the
-	// ARN of the shared snapshot.
-	//
-	// * Can't be the identifier of an Aurora DB cluster
+	// - Must be specified when DBSnapshotIdentifier
+	// isn't specified.
+	// - If you are restoring from a shared manual Multi-AZ DB cluster
+	// snapshot, the DBClusterSnapshotIdentifier must be the ARN of the shared
 	// snapshot.
-	//
-	// * Can't be the identifier of an RDS for PostgreSQL Multi-AZ DB
-	// cluster snapshot.
+	// - Can't be the identifier of an Aurora DB cluster snapshot.
+	// - Can't be
+	// the identifier of an RDS for PostgreSQL Multi-AZ DB cluster snapshot.
 	DBClusterSnapshotIdentifier *string
 
 	// The compute and memory capacity of the Amazon RDS DB instance, for example
@@ -160,31 +147,23 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// don't specify a value for DBParameterGroupName, then RDS uses the default
 	// DBParameterGroup for the specified DB engine. This setting doesn't apply to RDS
 	// Custom. Constraints:
-	//
-	// * If supplied, must match the name of an existing
+	// - If supplied, must match the name of an existing
 	// DBParameterGroup.
-	//
-	// * Must be 1 to 255 letters, numbers, or hyphens.
-	//
-	// * First
+	// - Must be 1 to 255 letters, numbers, or hyphens.
+	// - First
 	// character must be a letter.
-	//
-	// * Can't end with a hyphen or contain two
-	// consecutive hyphens.
+	// - Can't end with a hyphen or contain two consecutive
+	// hyphens.
 	DBParameterGroupName *string
 
 	// The identifier for the DB snapshot to restore from. Constraints:
-	//
-	// * Must match
+	// - Must match
 	// the identifier of an existing DBSnapshot.
-	//
-	// * Can't be specified when
+	// - Can't be specified when
 	// DBClusterSnapshotIdentifier is specified.
-	//
-	// * Must be specified when
+	// - Must be specified when
 	// DBClusterSnapshotIdentifier isn't specified.
-	//
-	// * If you are restoring from a
+	// - If you are restoring from a
 	// shared manual DB snapshot, the DBSnapshotIdentifier must be the ARN of the
 	// shared DB snapshot.
 	DBSnapshotIdentifier *string
@@ -245,30 +224,19 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// RDS Custom. Default: The same as source Constraint: Must be compatible with the
 	// engine of the source. For example, you can restore a MariaDB 10.1 DB instance
 	// from a MySQL 5.6 snapshot. Valid Values:
-	//
-	// * mariadb
-	//
-	// * mysql
-	//
-	// * oracle-ee
-	//
-	// *
+	// - mariadb
+	// - mysql
+	// - oracle-ee
+	// -
 	// oracle-ee-cdb
-	//
-	// * oracle-se2
-	//
-	// * oracle-se2-cdb
-	//
-	// * postgres
-	//
-	// * sqlserver-ee
-	//
-	// *
+	// - oracle-se2
+	// - oracle-se2-cdb
+	// - postgres
+	// - sqlserver-ee
+	// -
 	// sqlserver-se
-	//
-	// * sqlserver-ex
-	//
-	// * sqlserver-web
+	// - sqlserver-ex
+	// - sqlserver-web
 	Engine *string
 
 	// Specifies the amount of provisioned IOPS for the DB instance, expressed in I/O
@@ -293,10 +261,8 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	MultiAZ *bool
 
 	// The network type of the DB instance. Valid values:
-	//
-	// * IPV4
-	//
-	// * DUAL
+	// - IPV4
+	// - DUAL
 	//
 	// The network
 	// type is determined by the DBSubnetGroup specified for the DB instance. A

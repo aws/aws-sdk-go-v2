@@ -25,27 +25,23 @@
 // and routing controls) using the recovery cluster configuration API. For more
 // information about working with routing control in Route 53 ARC, see the
 // following:
-//
-// * Create clusters, control panels, and routing controls by using API
+// - Create clusters, control panels, and routing controls by using API
 // operations. For more information, see the Recovery Control Configuration API
 // Reference Guide for Amazon Route 53 Application Recovery Controller
 // (https://docs.aws.amazon.com/recovery-cluster/latest/api/).
-//
-// * Learn about the
+// - Learn about the
 // components in recovery control, including clusters, routing controls, and
 // control panels, and how to work with Route 53 ARC in the Amazon Web Services
 // console. For more information, see  Recovery control components
 // (https://docs.aws.amazon.com/r53recovery/latest/dg/introduction-components.html#introduction-components-routing)
 // in the Amazon Route 53 Application Recovery Controller Developer Guide.
-//
-// * Route
+// - Route
 // 53 ARC also provides readiness checks that continually audit resources to help
 // make sure that your applications are scaled and ready to handle failover
 // traffic. For more information about the related API operations, see the Recovery
 // Readiness API Reference Guide for Amazon Route 53 Application Recovery
 // Controller (https://docs.aws.amazon.com/recovery-readiness/latest/api/).
-//
-// * For
+// - For
 // more information about creating resilient applications and preparing for
 // recovery readiness with Route 53 ARC, see the Amazon Route 53 Application
 // Recovery Controller Developer Guide

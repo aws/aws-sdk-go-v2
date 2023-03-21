@@ -32,12 +32,9 @@ func (c *Client) DescribeProduct(ctx context.Context, params *DescribeProductInp
 type DescribeProductInput struct {
 
 	// The language code.
-	//
-	// * en - English (default)
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	// - en - English (default)
+	// - jp - Japanese
+	// - zh - Chinese
 	AcceptLanguage *string
 
 	// The product identifier.

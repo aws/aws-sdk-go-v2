@@ -35,11 +35,9 @@ type AugmentedManifestsListItem struct {
 
 	// The type of augmented manifest. PlainTextDocument or SemiStructuredDocument. If
 	// you don't specify, the default is PlainTextDocument.
-	//
-	// * PLAIN_TEXT_DOCUMENT A
+	// - PLAIN_TEXT_DOCUMENT A
 	// document type that represents any unicode text that is encoded in UTF-8.
-	//
-	// *
+	// -
 	// SEMI_STRUCTURED_DOCUMENT A document type with positional and structural context,
 	// like a PDF. For training with Amazon Comprehend, only PDFs are supported. For
 	// inference, Amazon Comprehend support PDFs, DOCX and TXT.
@@ -166,12 +164,10 @@ type BatchItemError struct {
 type Block struct {
 
 	// The block represents a line of text or one word of text.
-	//
-	// * WORD - A word that's
+	// - WORD - A word that's
 	// detected on a document page. A word is one or more ISO basic Latin script
 	// characters that aren't separated by spaces.
-	//
-	// * LINE - A string of tab-delimited,
+	// - LINE - A string of tab-delimited,
 	// contiguous words that are detected on a document page
 	BlockType BlockType
 
@@ -338,11 +334,9 @@ type DataSecurityConfig struct {
 	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
 	// encrypt trained custom models. The ModelKmsKeyId can be either of the following
 	// formats:
-	//
-	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
-	//
-	// * Amazon
-	// Resource Name (ARN) of a KMS Key:
+	// - KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// - Amazon Resource
+	// Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	ModelKmsKeyId *string
 
@@ -679,11 +673,9 @@ type DocumentClassificationJobProperties struct {
 	// encrypt data on the storage volume attached to the ML compute instance(s) that
 	// process the analysis job. The VolumeKmsKeyId can be either of the following
 	// formats:
-	//
-	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
-	//
-	// * Amazon
-	// Resource Name (ARN) of a KMS Key:
+	// - KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// - Amazon Resource
+	// Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 
@@ -733,13 +725,11 @@ type DocumentClassifierInputDataConfig struct {
 	AugmentedManifests []AugmentedManifestsListItem
 
 	// The format of your training data:
-	//
-	// * COMPREHEND_CSV: A two-column CSV file,
-	// where labels are provided in the first column, and documents are provided in the
+	// - COMPREHEND_CSV: A two-column CSV file, where
+	// labels are provided in the first column, and documents are provided in the
 	// second. If you use this value, you must provide the S3Uri parameter in your
 	// request.
-	//
-	// * AUGMENTED_MANIFEST: A labeled dataset that is produced by Amazon
+	// - AUGMENTED_MANIFEST: A labeled dataset that is produced by Amazon
 	// SageMaker Ground Truth. This file is in JSON lines format. Each line is a
 	// complete JSON object that contains a training document and its associated
 	// labels. If you use this value, you must provide the AugmentedManifests parameter
@@ -783,17 +773,13 @@ type DocumentClassifierOutputDataConfig struct {
 	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
 	// encrypt the output results from an analysis job. The KmsKeyId can be one of the
 	// following formats:
-	//
-	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
-	//
-	// *
-	// Amazon Resource Name (ARN) of a KMS Key:
+	// - KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// - Amazon
+	// Resource Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
-	//
-	// *
+	// -
 	// KMS Key Alias: "alias/ExampleAlias"
-	//
-	// * ARN of a KMS Key Alias:
+	// - ARN of a KMS Key Alias:
 	// "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"
 	KmsKeyId *string
 
@@ -851,11 +837,9 @@ type DocumentClassifierProperties struct {
 	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
 	// encrypt trained custom models. The ModelKmsKeyId can be either of the following
 	// formats:
-	//
-	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
-	//
-	// * Amazon
-	// Resource Name (ARN) of a KMS Key:
+	// - KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// - Amazon Resource
+	// Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	ModelKmsKeyId *string
 
@@ -892,11 +876,9 @@ type DocumentClassifierProperties struct {
 	// encrypt data on the storage volume attached to the ML compute instance(s) that
 	// process the analysis job. The VolumeKmsKeyId can be either of the following
 	// formats:
-	//
-	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
-	//
-	// * Amazon
-	// Resource Name (ARN) of a KMS Key:
+	// - KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// - Amazon Resource
+	// Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 
@@ -965,13 +947,10 @@ type DocumentMetadata struct {
 // text from PDF documents and image files. By default, Amazon Comprehend performs
 // the following actions to extract text from files, based on the input file
 // type:
-//
-// * Word files - Amazon Comprehend parser extracts the text.
-//
-// * Digital PDF
+// - Word files - Amazon Comprehend parser extracts the text.
+// - Digital PDF
 // files - Amazon Comprehend parser extracts the text.
-//
-// * Image files and scanned
+// - Image files and scanned
 // PDF files - Amazon Comprehend uses the Amazon Textract DetectDocumentText API to
 // extract the text.
 //
@@ -985,11 +964,9 @@ type DocumentReaderConfig struct {
 	// This field defines the Amazon Textract API operation that Amazon Comprehend uses
 	// to extract text from PDF files and image files. Enter one of the following
 	// values:
-	//
-	// * TEXTRACT_DETECT_DOCUMENT_TEXT - The Amazon Comprehend service uses
-	// the DetectDocumentText API operation.
-	//
-	// * TEXTRACT_ANALYZE_DOCUMENT - The Amazon
+	// - TEXTRACT_DETECT_DOCUMENT_TEXT - The Amazon Comprehend service uses the
+	// DetectDocumentText API operation.
+	// - TEXTRACT_ANALYZE_DOCUMENT - The Amazon
 	// Comprehend service uses the AnalyzeDocument API operation.
 	//
 	// This member is required.
@@ -997,22 +974,18 @@ type DocumentReaderConfig struct {
 
 	// Determines the text extraction actions for PDF files. Enter one of the following
 	// values:
-	//
-	// * SERVICE_DEFAULT - use the Amazon Comprehend service defaults for PDF
+	// - SERVICE_DEFAULT - use the Amazon Comprehend service defaults for PDF
 	// files.
-	//
-	// * FORCE_DOCUMENT_READ_ACTION - Amazon Comprehend uses the Textract API
+	// - FORCE_DOCUMENT_READ_ACTION - Amazon Comprehend uses the Textract API
 	// specified by DocumentReadAction for all PDF files, including digital PDF files.
 	DocumentReadMode DocumentReadMode
 
 	// Specifies the type of Amazon Textract features to apply. If you chose
 	// TEXTRACT_ANALYZE_DOCUMENT as the read action, you must specify one or both of
 	// the following values:
-	//
-	// * TABLES - Returns information about any tables that are
+	// - TABLES - Returns information about any tables that are
 	// detected in the input document.
-	//
-	// * FORMS - Returns information and the data from
+	// - FORMS - Returns information and the data from
 	// any forms that are detected in the input document.
 	FeatureTypes []DocumentReadFeatureTypes
 
@@ -1117,11 +1090,9 @@ type DominantLanguageDetectionJobProperties struct {
 	// encrypt data on the storage volume attached to the ML compute instance(s) that
 	// process the analysis job. The VolumeKmsKeyId can be either of the following
 	// formats:
-	//
-	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
-	//
-	// * Amazon
-	// Resource Name (ARN) of a KMS Key:
+	// - KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// - Amazon Resource
+	// Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 
@@ -1282,11 +1253,9 @@ type EntitiesDetectionJobProperties struct {
 	// encrypt data on the storage volume attached to the ML compute instance(s) that
 	// process the analysis job. The VolumeKmsKeyId can be either of the following
 	// formats:
-	//
-	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
-	//
-	// * Amazon
-	// Resource Name (ARN) of a KMS Key:
+	// - KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// - Amazon Resource
+	// Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 
@@ -1480,18 +1449,16 @@ type EntityRecognizerInputDataConfig struct {
 	AugmentedManifests []AugmentedManifestsListItem
 
 	// The format of your training data:
-	//
-	// * COMPREHEND_CSV: A CSV file that supplements
+	// - COMPREHEND_CSV: A CSV file that supplements
 	// your training documents. The CSV file contains information about the custom
 	// entities that your trained model will detect. The required format of the file
 	// depends on whether you are providing annotations or an entity list. If you use
 	// this value, you must provide your CSV file by using either the Annotations or
 	// EntityList parameters. You must provide your training documents by using the
 	// Documents parameter.
-	//
-	// * AUGMENTED_MANIFEST: A labeled dataset that is produced
-	// by Amazon SageMaker Ground Truth. This file is in JSON lines format. Each line
-	// is a complete JSON object that contains a training document and its labels. Each
+	// - AUGMENTED_MANIFEST: A labeled dataset that is produced by
+	// Amazon SageMaker Ground Truth. This file is in JSON lines format. Each line is a
+	// complete JSON object that contains a training document and its labels. Each
 	// label annotates a named entity in the training document. If you use this value,
 	// you must provide the AugmentedManifests parameter in your request.
 	//
@@ -1588,11 +1555,9 @@ type EntityRecognizerProperties struct {
 	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
 	// encrypt trained custom models. The ModelKmsKeyId can be either of the following
 	// formats:
-	//
-	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
-	//
-	// * Amazon
-	// Resource Name (ARN) of a KMS Key:
+	// - KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// - Amazon Resource
+	// Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	ModelKmsKeyId *string
 
@@ -1626,11 +1591,9 @@ type EntityRecognizerProperties struct {
 	// encrypt data on the storage volume attached to the ML compute instance(s) that
 	// process the analysis job. The VolumeKmsKeyId can be either of the following
 	// formats:
-	//
-	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
-	//
-	// * Amazon
-	// Resource Name (ARN) of a KMS Key:
+	// - KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// - Amazon Resource
+	// Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 
@@ -1705,25 +1668,20 @@ type EntityTypesListItem struct {
 
 // Text extraction encountered one or more page-level errors in the input document.
 // The ErrorCode contains one of the following values:
-//
-// * TEXTRACT_BAD_PAGE -
-// Amazon Textract cannot read the page. For more information about page limits in
-// Amazon Textract, see  Page Quotas in Amazon Textract
+// - TEXTRACT_BAD_PAGE - Amazon
+// Textract cannot read the page. For more information about page limits in Amazon
+// Textract, see  Page Quotas in Amazon Textract
 // (https://docs.aws.amazon.com/textract/latest/dg/limits-document.html).
-//
-// *
+// -
 // TEXTRACT_PROVISIONED_THROUGHPUT_EXCEEDED - The number of requests exceeded your
 // throughput limit. For more information about throughput quotas in Amazon
 // Textract, see  Default quotas in Amazon Textract
 // (https://docs.aws.amazon.com/textract/latest/dg/limits-quotas-explained.html).
-//
-// *
+// -
 // PAGE_CHARACTERS_EXCEEDED - Too many text characters on the page (10,000
 // characters maximum).
-//
-// * PAGE_SIZE_EXCEEDED - The maximum page size is 10 MB.
-//
-// *
+// - PAGE_SIZE_EXCEEDED - The maximum page size is 10 MB.
+// -
 // INTERNAL_SERVER_ERROR - The request encountered a service issue. Try the API
 // request again.
 type ErrorsListItem struct {
@@ -2021,12 +1979,10 @@ type InputDataConfig struct {
 	DocumentReaderConfig *DocumentReaderConfig
 
 	// Specifies how the text in an input file should be processed:
-	//
-	// * ONE_DOC_PER_FILE
+	// - ONE_DOC_PER_FILE
 	// - Each file is considered a separate document. Use this option when you are
 	// processing large documents, such as newspaper articles or scientific papers.
-	//
-	// *
+	// -
 	// ONE_DOC_PER_LINE - Each line in a file is considered a separate document. Use
 	// this option when you are processing many short documents, such as text messages.
 	InputFormat InputFormat
@@ -2035,18 +1991,14 @@ type InputDataConfig struct {
 }
 
 // Provides additional detail about why the request failed:
-//
-// * Document size is too
+// - Document size is too
 // large - Check the size of your file and resubmit the request.
-//
-// * Document type
-// is not supported - Check the file type and resubmit the request.
-//
-// * Too many
-// pages in the document - Check the number of pages in your file and resubmit the
+// - Document type is
+// not supported - Check the file type and resubmit the request.
+// - Too many pages
+// in the document - Check the number of pages in your file and resubmit the
 // request.
-//
-// * Access denied to Amazon Textract - Verify that your account has
+// - Access denied to Amazon Textract - Verify that your account has
 // permission to use Amazon Textract API operations and resubmit the request.
 type InvalidRequestDetail struct {
 
@@ -2150,11 +2102,9 @@ type KeyPhrasesDetectionJobProperties struct {
 	// encrypt data on the storage volume attached to the ML compute instance(s) that
 	// process the analysis job. The VolumeKmsKeyId can be either of the following
 	// formats:
-	//
-	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
-	//
-	// * Amazon
-	// Resource Name (ARN) of a KMS Key:
+	// - KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// - Amazon Resource
+	// Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 
@@ -2202,17 +2152,13 @@ type OutputDataConfig struct {
 	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
 	// encrypt the output results from an analysis job. The KmsKeyId can be one of the
 	// following formats:
-	//
-	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
-	//
-	// *
-	// Amazon Resource Name (ARN) of a KMS Key:
+	// - KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// - Amazon
+	// Resource Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
-	//
-	// *
+	// -
 	// KMS Key Alias: "alias/ExampleAlias"
-	//
-	// * ARN of a KMS Key Alias:
+	// - ARN of a KMS Key Alias:
 	// "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"
 	KmsKeyId *string
 
@@ -2471,11 +2417,9 @@ type SentimentDetectionJobProperties struct {
 	// encrypt data on the storage volume attached to the ML compute instance(s) that
 	// process the analysis job. The VolumeKmsKeyId can be either of the following
 	// formats:
-	//
-	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
-	//
-	// * Amazon
-	// Resource Name (ARN) of a KMS Key:
+	// - KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// - Amazon Resource
+	// Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 
@@ -2633,11 +2577,9 @@ type TargetedSentimentDetectionJobProperties struct {
 	// storage volume attached to the ML compute instance(s) that process the targeted
 	// sentiment detection job. The VolumeKmsKeyId can be either of the following
 	// formats:
-	//
-	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
-	//
-	// * Amazon
-	// Resource Name (ARN) of a KMS Key:
+	// - KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// - Amazon Resource
+	// Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 
@@ -2789,11 +2731,9 @@ type TopicsDetectionJobProperties struct {
 	// encrypt data on the storage volume attached to the ML compute instance(s) that
 	// process the analysis job. The VolumeKmsKeyId can be either of the following
 	// formats:
-	//
-	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
-	//
-	// * Amazon
-	// Resource Name (ARN) of a KMS Key:
+	// - KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// - Amazon Resource
+	// Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 
@@ -2812,11 +2752,9 @@ type UpdateDataSecurityConfig struct {
 	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
 	// encrypt trained custom models. The ModelKmsKeyId can be either of the following
 	// formats:
-	//
-	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
-	//
-	// * Amazon
-	// Resource Name (ARN) of a KMS Key:
+	// - KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// - Amazon Resource
+	// Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	ModelKmsKeyId *string
 

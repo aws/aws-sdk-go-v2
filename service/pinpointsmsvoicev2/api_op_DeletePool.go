@@ -73,14 +73,11 @@ type DeletePoolOutput struct {
 	SharedRoutesEnabled bool
 
 	// The current status of the pool.
-	//
-	// * CREATING: The pool is currently being created
+	// - CREATING: The pool is currently being created
 	// and isn't yet available for use.
-	//
-	// * ACTIVE: The pool is active and available for
+	// - ACTIVE: The pool is active and available for
 	// use.
-	//
-	// * DELETING: The pool is being deleted.
+	// - DELETING: The pool is being deleted.
 	Status types.PoolStatus
 
 	// The Amazon Resource Name (ARN) of the TwoWayChannel.

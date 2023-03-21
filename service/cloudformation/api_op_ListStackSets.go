@@ -14,17 +14,14 @@ import (
 
 // Returns summary information about stack sets that are associated with the
 // user.
-//
-// * [Self-managed permissions] If you set the CallAs parameter to SELF
-// while signed in to your Amazon Web Services account, ListStackSets returns all
+// - [Self-managed permissions] If you set the CallAs parameter to SELF while
+// signed in to your Amazon Web Services account, ListStackSets returns all
 // self-managed stack sets in your Amazon Web Services account.
-//
-// * [Service-managed
+// - [Service-managed
 // permissions] If you set the CallAs parameter to SELF while signed in to the
 // organization's management account, ListStackSets returns all stack sets in the
 // management account.
-//
-// * [Service-managed permissions] If you set the CallAs
+// - [Service-managed permissions] If you set the CallAs
 // parameter to DELEGATED_ADMIN while signed in to your member account,
 // ListStackSets returns all stack sets with service-managed permissions in the
 // management account.
@@ -49,11 +46,9 @@ type ListStackSetsInput struct {
 	// administrator in the management account or as a delegated administrator in a
 	// member account. By default, SELF is specified. Use SELF for stack sets with
 	// self-managed permissions.
-	//
-	// * If you are signed in to the management account,
+	// - If you are signed in to the management account,
 	// specify SELF.
-	//
-	// * If you are signed in to a delegated administrator account,
+	// - If you are signed in to a delegated administrator account,
 	// specify DELEGATED_ADMIN. Your Amazon Web Services account must be registered as
 	// a delegated administrator in the management account. For more information, see
 	// Register a delegated administrator

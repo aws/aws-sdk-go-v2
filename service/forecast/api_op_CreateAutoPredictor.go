@@ -16,28 +16,22 @@ import (
 // each time series in your datasets. You can use CreateAutoPredictor to create new
 // predictors or upgrade/retrain existing predictors. Creating new predictors The
 // following parameters are required when creating a new predictor:
+// - PredictorName
+// - A unique name for the predictor.
+// - DatasetGroupArn - The ARN of the dataset
+// group used to train the predictor.
+// - ForecastFrequency - The granularity of your
+// forecasts (hourly, daily, weekly, etc).
+// - ForecastHorizon - The number of
+// time-steps that the model predicts. The forecast horizon is also called the
+// prediction length.
 //
-// *
+// When creating a new predictor, do not specify a value for
+// ReferencePredictorArn. Upgrading and retraining predictors The following
+// parameters are required when retraining or upgrading a predictor:
+// -
 // PredictorName - A unique name for the predictor.
-//
-// * DatasetGroupArn - The ARN of
-// the dataset group used to train the predictor.
-//
-// * ForecastFrequency - The
-// granularity of your forecasts (hourly, daily, weekly, etc).
-//
-// * ForecastHorizon -
-// The number of time-steps that the model predicts. The forecast horizon is also
-// called the prediction length.
-//
-// When creating a new predictor, do not specify a
-// value for ReferencePredictorArn. Upgrading and retraining predictors The
-// following parameters are required when retraining or upgrading a predictor:
-//
-// *
-// PredictorName - A unique name for the predictor.
-//
-// * ReferencePredictorArn - The
+// - ReferencePredictorArn - The
 // ARN of the predictor to retrain or upgrade.
 //
 // When upgrading or retraining a
@@ -88,23 +82,17 @@ type CreateAutoPredictorInput struct {
 	// That means, for example, you cannot specify a frequency of 60 minutes, because
 	// that is equivalent to 1 hour. The valid values for each frequency are the
 	// following:
-	//
-	// * Minute - 1-59
-	//
-	// * Hour - 1-23
-	//
-	// * Day - 1-6
-	//
-	// * Week - 1-4
-	//
-	// * Month -
+	// - Minute - 1-59
+	// - Hour - 1-23
+	// - Day - 1-6
+	// - Week - 1-4
+	// - Month -
 	// 1-11
+	// - Year - 1
 	//
-	// * Year - 1
-	//
-	// Thus, if you want every other week forecasts, specify "2W".
-	// Or, if you want quarterly forecasts, you specify "3M". The frequency must be
-	// greater than or equal to the TARGET_TIME_SERIES dataset frequency. When a
+	// Thus, if you want every other week forecasts, specify "2W". Or,
+	// if you want quarterly forecasts, you specify "3M". The frequency must be greater
+	// than or equal to the TARGET_TIME_SERIES dataset frequency. When a
 	// RELATED_TIME_SERIES dataset is provided, the frequency must be equal to the
 	// RELATED_TIME_SERIES dataset frequency.
 	ForecastFrequency *string
@@ -144,24 +132,18 @@ type CreateAutoPredictorInput struct {
 	// Optional metadata to help you categorize and organize your predictors. Each tag
 	// consists of a key and an optional value, both of which you define. Tag keys and
 	// values are case sensitive. The following restrictions apply to tags:
-	//
-	// * For each
+	// - For each
 	// resource, each tag key must be unique and each tag key must have one value.
-	//
-	// *
+	// -
 	// Maximum number of tags per resource: 50.
-	//
-	// * Maximum key length: 128 Unicode
+	// - Maximum key length: 128 Unicode
 	// characters in UTF-8.
-	//
-	// * Maximum value length: 256 Unicode characters in
-	// UTF-8.
-	//
-	// * Accepted characters: all letters and numbers, spaces representable in
-	// UTF-8, and + - = . _ : / @. If your tagging schema is used across other services
-	// and resources, the character restrictions of those services also apply.
-	//
-	// * Key
+	// - Maximum value length: 256 Unicode characters in UTF-8.
+	// -
+	// Accepted characters: all letters and numbers, spaces representable in UTF-8, and
+	// + - = . _ : / @. If your tagging schema is used across other services and
+	// resources, the character restrictions of those services also apply.
+	// - Key
 	// prefixes cannot include any upper or lowercase combination of aws: or AWS:.
 	// Values can have this prefix. If a tag value has aws as its prefix but the key
 	// does not, Forecast considers it to be a user tag and will count against the

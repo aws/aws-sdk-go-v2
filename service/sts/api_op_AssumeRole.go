@@ -49,20 +49,18 @@ import (
 // different account must also have permissions that are delegated from the user
 // account administrator. The administrator must attach a policy that allows the
 // user to call AssumeRole for the ARN of the role in the other account. To allow a
-// user to assume a role in the same account, you can do either of the
-// following:
+// user to assume a role in the same account, you can do either of the following:
+// -
+// Attach a policy to the user that allows the user to call AssumeRole (as long as
+// the role's trust policy trusts the account).
+// - Add the user as a principal
+// directly in the role's trust policy.
 //
-// * Attach a policy to the user that allows the user to call
-// AssumeRole (as long as the role's trust policy trusts the account).
-//
-// * Add the
-// user as a principal directly in the role's trust policy.
-//
-// You can do either
-// because the role’s trust policy acts as an IAM resource-based policy. When a
-// resource-based policy grants access to a principal in the same account, no
-// additional identity-based policy is required. For more information about trust
-// policies and resource-based policies, see IAM Policies
+// You can do either because the role’s trust
+// policy acts as an IAM resource-based policy. When a resource-based policy grants
+// access to a principal in the same account, no additional identity-based policy
+// is required. For more information about trust policies and resource-based
+// policies, see IAM Policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html) in the
 // IAM User Guide. Tags (Optional) You can pass tag key-value pairs to your
 // session. These tags are called session tags. For more information about session

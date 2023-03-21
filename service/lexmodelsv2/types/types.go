@@ -445,14 +445,10 @@ type BotLocaleImportSpecification struct {
 	// three alternative intents with the following confidence scores: IntentA (0.70),
 	// IntentB (0.60), IntentC (0.50). The response from the PostText operation would
 	// be:
-	//
-	// * AMAZON.FallbackIntent
-	//
-	// * IntentA
-	//
-	// * IntentB
-	//
-	// * IntentC
+	// - AMAZON.FallbackIntent
+	// - IntentA
+	// - IntentB
+	// - IntentC
 	NluIntentConfidenceThreshold *float64
 
 	// Defines settings for using an Amazon Polly voice to communicate with a user.
@@ -2140,16 +2136,13 @@ type RecommendedIntentSummary struct {
 // 1600, the time window is set to 1 hour, and the last refresh time was 1530, only
 // utterances made between 1430 and 1530 are returned. You can choose the time
 // window that statistics should be returned for.
-//
-// * Hours - You can request
+// - Hours - You can request
 // utterance statistics for 1, 3, 6, 12, or 24 hour time windows. Statistics are
 // refreshed every half hour for 1 hour time windows, and hourly for the other time
 // windows.
-//
-// * Days - You can request utterance statistics for 3 days. Statistics
+// - Days - You can request utterance statistics for 3 days. Statistics
 // are refreshed every 6 hours.
-//
-// * Weeks - You can see statistics for one or two
+// - Weeks - You can see statistics for one or two
 // weeks. Statistics are refreshed every 12 hours for one week time windows, and
 // once per day for two week time windows.
 type RelativeAggregationDuration struct {
@@ -2161,12 +2154,9 @@ type RelativeAggregationDuration struct {
 
 	// The period of the time window to gather statistics for. The valid value depends
 	// on the setting of the timeDimension field.
-	//
-	// * Hours - 1/3/6/12/24
-	//
-	// * Days - 3
-	//
-	// *
+	// - Hours - 1/3/6/12/24
+	// - Days - 3
+	// -
 	// Weeks - 1/2
 	//
 	// This member is required.
@@ -2487,17 +2477,14 @@ type SlotTypeSummary struct {
 	ParentSlotTypeSignature *string
 
 	// Indicates the type of the slot type.
-	//
-	// * Custom - A slot type that you created
+	// - Custom - A slot type that you created
 	// using custom values. For more information, see Creating custom slot types
 	// (https://docs.aws.amazon.com/lexv2/latest/dg/custom-slot-types.html).
-	//
-	// *
-	// Extended - A slot type created by extending the AMAZON.AlphaNumeric built-in
-	// slot type. For more information, see AMAZON.AlphaNumeric
+	// - Extended
+	// - A slot type created by extending the AMAZON.AlphaNumeric built-in slot type.
+	// For more information, see AMAZON.AlphaNumeric
 	// (https://docs.aws.amazon.com/lexv2/latest/dg/built-in-slot-alphanumerice.html).
-	//
-	// *
+	// -
 	// ExternalGrammar - A slot type using a custom GRXML grammar to define values. For
 	// more information, see Using a custom grammar slot type
 	// (https://docs.aws.amazon.com/lexv2/latest/dg/building-grxml.html).
@@ -2595,21 +2582,16 @@ type SlotValueRegexFilter struct {
 	// A regular expression used to validate the value of a slot. Use a standard
 	// regular expression. Amazon Lex supports the following characters in the regular
 	// expression:
-	//
-	// * A-Z, a-z
-	//
-	// * 0-9
-	//
-	// * Unicode characters ("\ u")
+	// - A-Z, a-z
+	// - 0-9
+	// - Unicode characters ("\ u")
 	//
 	// Represent Unicode
 	// characters with four digits, for example "\u0041" or "\u005A". The following
 	// regular expression operators are not supported:
-	//
-	// * Infinite repeaters: *, +, or
+	// - Infinite repeaters: *, +, or
 	// {x,} with no upper bound.
-	//
-	// * Wild card (.)
+	// - Wild card (.)
 	//
 	// This member is required.
 	Pattern *string
@@ -2622,12 +2604,10 @@ type SlotValueSelectionSetting struct {
 
 	// Determines the slot resolution strategy that Amazon Lex uses to return slot type
 	// values. The field can be set to one of the following values:
-	//
-	// * OriginalValue -
+	// - OriginalValue -
 	// Returns the value entered by the user, if the user value is similar to the slot
 	// value.
-	//
-	// * TopResolution - If there is a resolution list for the slot, return the
+	// - TopResolution - If there is a resolution list for the slot, return the
 	// first value in the resolution list as the slot type value. If there is no
 	// resolution list, null is returned.
 	//

@@ -43,11 +43,9 @@ type DescribeStackSetOperationInput struct {
 	// administrator in the organization's management account or as a delegated
 	// administrator in a member account. By default, SELF is specified. Use SELF for
 	// stack sets with self-managed permissions.
-	//
-	// * If you are signed in to the
+	// - If you are signed in to the
 	// management account, specify SELF.
-	//
-	// * If you are signed in to a delegated
+	// - If you are signed in to a delegated
 	// administrator account, specify DELEGATED_ADMIN. Your Amazon Web Services account
 	// must be registered as a delegated administrator in the management account. For
 	// more information, see Register a delegated administrator

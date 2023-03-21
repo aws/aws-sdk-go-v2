@@ -48,11 +48,9 @@ type DeleteSchemaVersionsInput struct {
 	SchemaId *types.SchemaId
 
 	// A version range may be supplied which may be of the format:
-	//
-	// * a single version
+	// - a single version
 	// number, 5
-	//
-	// * a range, 5-8 : deletes versions 5, 6, 7, 8
+	// - a range, 5-8 : deletes versions 5, 6, 7, 8
 	//
 	// This member is required.
 	Versions *string

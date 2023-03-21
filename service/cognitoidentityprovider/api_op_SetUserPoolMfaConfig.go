@@ -55,13 +55,10 @@ type SetUserPoolMfaConfigInput struct {
 	// Multi-Factor Authentication (MFA) to a user pool
 	// (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-mfa.html).
 	// Valid values include:
-	//
-	// * OFF MFA won't be used for any users.
-	//
-	// * ON MFA is
+	// - OFF MFA won't be used for any users.
+	// - ON MFA is
 	// required for all users to sign in.
-	//
-	// * OPTIONAL MFA will be required only for
+	// - OPTIONAL MFA will be required only for
 	// individual users who have an MFA factor activated.
 	MfaConfiguration types.UserPoolMfaType
 
@@ -77,13 +74,10 @@ type SetUserPoolMfaConfigInput struct {
 type SetUserPoolMfaConfigOutput struct {
 
 	// The MFA configuration. Valid values include:
-	//
-	// * OFF MFA won't be used for any
+	// - OFF MFA won't be used for any
 	// users.
-	//
-	// * ON MFA is required for all users to sign in.
-	//
-	// * OPTIONAL MFA will be
+	// - ON MFA is required for all users to sign in.
+	// - OPTIONAL MFA will be
 	// required only for individual users who have an MFA factor enabled.
 	MfaConfiguration types.UserPoolMfaType
 

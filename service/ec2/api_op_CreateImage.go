@@ -83,11 +83,9 @@ type CreateImageInput struct {
 
 	// The tags to apply to the AMI and snapshots on creation. You can tag the AMI, the
 	// snapshots, or both.
-	//
-	// * To tag the AMI, the value for ResourceType must be
+	// - To tag the AMI, the value for ResourceType must be
 	// image.
-	//
-	// * To tag the snapshots that are created of the root volume and of other
+	// - To tag the snapshots that are created of the root volume and of other
 	// Amazon EBS volumes that are attached to the instance, the value for ResourceType
 	// must be snapshot. The same tag is applied to all of the snapshots that are
 	// created.

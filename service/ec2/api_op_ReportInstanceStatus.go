@@ -41,33 +41,24 @@ type ReportInstanceStatusInput struct {
 	Instances []string
 
 	// The reason codes that describe the health state of your instance.
-	//
-	// *
+	// -
 	// instance-stuck-in-state: My instance is stuck in a state.
-	//
-	// * unresponsive: My
+	// - unresponsive: My
 	// instance is unresponsive.
-	//
-	// * not-accepting-credentials: My instance is not
+	// - not-accepting-credentials: My instance is not
 	// accepting my credentials.
-	//
-	// * password-not-available: A password is not available
+	// - password-not-available: A password is not available
 	// for my instance.
-	//
-	// * performance-network: My instance is experiencing performance
+	// - performance-network: My instance is experiencing performance
 	// problems that I believe are network related.
-	//
-	// * performance-instance-store: My
+	// - performance-instance-store: My
 	// instance is experiencing performance problems that I believe are related to the
 	// instance stores.
-	//
-	// * performance-ebs-volume: My instance is experiencing
+	// - performance-ebs-volume: My instance is experiencing
 	// performance problems that I believe are related to an EBS volume.
-	//
-	// *
+	// -
 	// performance-other: My instance is experiencing performance problems.
-	//
-	// * other:
+	// - other:
 	// [explain using the description parameter]
 	//
 	// This member is required.

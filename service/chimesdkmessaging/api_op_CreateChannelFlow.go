@@ -16,13 +16,10 @@ import (
 // profanity. You can associate channel flows with channels, and the processors in
 // the channel flow then take action on all messages sent to that channel. This is
 // a developer API. Channel flows process the following items:
-//
-// * New and updated
+// - New and updated
 // messages
-//
-// * Persistent and non-persistent messages
-//
-// * The Standard message
+// - Persistent and non-persistent messages
+// - The Standard message
 // type
 //
 // Channel flows don't process Control or System messages. For more

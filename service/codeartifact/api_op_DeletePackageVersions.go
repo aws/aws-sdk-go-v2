@@ -70,19 +70,15 @@ type DeletePackageVersionsInput struct {
 
 	// The namespace of the package versions to be deleted. The package version
 	// component that specifies its namespace depends on its type. For example:
-	//
-	// * The
+	// - The
 	// namespace of a Maven package version is its groupId. The namespace is required
 	// when deleting Maven package versions.
-	//
-	// * The namespace of an npm package version
+	// - The namespace of an npm package version
 	// is its scope.
-	//
-	// * Python and NuGet package versions do not contain a
-	// corresponding component, package versions of those formats do not have a
-	// namespace.
-	//
-	// * The namespace of a generic package is it’s namespace.
+	// - Python and NuGet package versions do not contain a corresponding
+	// component, package versions of those formats do not have a namespace.
+	// - The
+	// namespace of a generic package is it’s namespace.
 	Namespace *string
 
 	noSmithyDocumentSerde
@@ -92,19 +88,13 @@ type DeletePackageVersionsOutput struct {
 
 	// A PackageVersionError object that contains a map of errors codes for the deleted
 	// package that failed. The possible error codes are:
-	//
-	// * ALREADY_EXISTS
-	//
-	// *
+	// - ALREADY_EXISTS
+	// -
 	// MISMATCHED_REVISION
-	//
-	// * MISMATCHED_STATUS
-	//
-	// * NOT_ALLOWED
-	//
-	// * NOT_FOUND
-	//
-	// * SKIPPED
+	// - MISMATCHED_STATUS
+	// - NOT_ALLOWED
+	// - NOT_FOUND
+	// - SKIPPED
 	FailedVersions map[string]types.PackageVersionError
 
 	// A list of the package versions that were successfully deleted. The status of

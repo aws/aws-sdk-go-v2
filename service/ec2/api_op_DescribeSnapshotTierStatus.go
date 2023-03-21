@@ -37,15 +37,12 @@ type DescribeSnapshotTierStatusInput struct {
 	DryRun *bool
 
 	// The filters.
-	//
-	// * snapshot-id - The snapshot ID.
-	//
-	// * volume-id - The ID of the
-	// volume the snapshot is for.
-	//
-	// * last-tiering-operation - The state of the last
-	// archive or restore action. (archival-in-progress | archival-completed |
-	// archival-failed | permanent-restore-in-progress | permanent-restore-completed |
+	// - snapshot-id - The snapshot ID.
+	// - volume-id - The ID of the volume
+	// the snapshot is for.
+	// - last-tiering-operation - The state of the last archive or
+	// restore action. (archival-in-progress | archival-completed | archival-failed |
+	// permanent-restore-in-progress | permanent-restore-completed |
 	// permanent-restore-failed | temporary-restore-in-progress |
 	// temporary-restore-completed | temporary-restore-failed)
 	Filters []types.Filter

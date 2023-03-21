@@ -32,13 +32,10 @@ func (c *Client) PutRuntimeManagementConfig(ctx context.Context, params *PutRunt
 type PutRuntimeManagementConfigInput struct {
 
 	// The name of the Lambda function. Name formats
-	//
-	// * Function name – my-function.
-	//
-	// *
+	// - Function name – my-function.
+	// -
 	// Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function.
-	//
-	// *
+	// -
 	// Partial ARN – 123456789012:function:my-function.
 	//
 	// The length constraint applies
@@ -49,26 +46,23 @@ type PutRuntimeManagementConfigInput struct {
 	FunctionName *string
 
 	// Specify the runtime update mode.
-	//
-	// * Auto (default) - Automatically update to the
+	// - Auto (default) - Automatically update to the
 	// most recent and secure runtime version using a Two-phase runtime version rollout
 	// (https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html#runtime-management-two-phase).
 	// This is the best choice for most customers to ensure they always benefit from
 	// runtime updates.
-	//
-	// * Function update - Lambda updates the runtime of your
-	// function to the most recent and secure runtime version when you update your
-	// function. This approach synchronizes runtime updates with function deployments,
-	// giving you control over when runtime updates are applied and allowing you to
-	// detect and mitigate rare runtime update incompatibilities early. When using this
-	// setting, you need to regularly update your functions to keep their runtime
-	// up-to-date.
-	//
-	// * Manual - You specify a runtime version in your function
-	// configuration. The function will use this runtime version indefinitely. In the
-	// rare case where a new runtime version is incompatible with an existing function,
-	// this allows you to roll back your function to an earlier runtime version. For
-	// more information, see Roll back a runtime version
+	// - Function update - Lambda updates the runtime of your function
+	// to the most recent and secure runtime version when you update your function.
+	// This approach synchronizes runtime updates with function deployments, giving you
+	// control over when runtime updates are applied and allowing you to detect and
+	// mitigate rare runtime update incompatibilities early. When using this setting,
+	// you need to regularly update your functions to keep their runtime up-to-date.
+	// -
+	// Manual - You specify a runtime version in your function configuration. The
+	// function will use this runtime version indefinitely. In the rare case where a
+	// new runtime version is incompatible with an existing function, this allows you
+	// to roll back your function to an earlier runtime version. For more information,
+	// see Roll back a runtime version
 	// (https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html#runtime-management-rollback).
 	//
 	// This member is required.

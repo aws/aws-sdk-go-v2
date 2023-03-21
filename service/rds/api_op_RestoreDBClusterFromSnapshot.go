@@ -45,17 +45,14 @@ type RestoreDBClusterFromSnapshotInput struct {
 
 	// The name of the DB cluster to create from the DB snapshot or DB cluster
 	// snapshot. This parameter isn't case-sensitive. Constraints:
-	//
-	// * Must contain from
+	// - Must contain from
 	// 1 to 63 letters, numbers, or hyphens
+	// - First character must be a letter
+	// - Can't
+	// end with a hyphen or contain two consecutive hyphens
 	//
-	// * First character must be a letter
-	//
-	// *
-	// Can't end with a hyphen or contain two consecutive hyphens
-	//
-	// Example:
-	// my-snapshot-id Valid for: Aurora DB clusters and Multi-AZ DB clusters
+	// Example: my-snapshot-id
+	// Valid for: Aurora DB clusters and Multi-AZ DB clusters
 	//
 	// This member is required.
 	DBClusterIdentifier *string
@@ -71,8 +68,7 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// can use either the name or the Amazon Resource Name (ARN) to specify a DB
 	// cluster snapshot. However, you can use only the ARN to specify a DB snapshot.
 	// Constraints:
-	//
-	// * Must match the identifier of an existing Snapshot.
+	// - Must match the identifier of an existing Snapshot.
 	//
 	// Valid for:
 	// Aurora DB clusters and Multi-AZ DB clusters
@@ -87,8 +83,7 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// The target backtrack window, in seconds. To disable backtracking, set this value
 	// to 0. Currently, Backtrack is only supported for Aurora MySQL DB clusters.
 	// Default: 0 Constraints:
-	//
-	// * If specified, this value must be set to a number from
+	// - If specified, this value must be set to a number from
 	// 0 to 259,200 (72 hours).
 	//
 	// Valid for: Aurora DB clusters only
@@ -111,16 +106,12 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// The name of the DB cluster parameter group to associate with this DB cluster. If
 	// this argument is omitted, the default DB cluster parameter group for the
 	// specified engine is used. Constraints:
-	//
-	// * If supplied, must match the name of an
+	// - If supplied, must match the name of an
 	// existing default DB cluster parameter group.
-	//
-	// * Must be 1 to 255 letters,
+	// - Must be 1 to 255 letters,
 	// numbers, or hyphens.
-	//
-	// * First character must be a letter.
-	//
-	// * Can't end with a
+	// - First character must be a letter.
+	// - Can't end with a
 	// hyphen or contain two consecutive hyphens.
 	//
 	// Valid for: Aurora DB clusters and
@@ -227,12 +218,10 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// To use a KMS key in a different Amazon Web Services account, specify the key ARN
 	// or alias ARN. When you don't specify a value for the KmsKeyId parameter, then
 	// the following occurs:
-	//
-	// * If the DB snapshot or DB cluster snapshot in
+	// - If the DB snapshot or DB cluster snapshot in
 	// SnapshotIdentifier is encrypted, then the restored DB cluster is encrypted using
 	// the KMS key that was used to encrypt the DB snapshot or DB cluster snapshot.
-	//
-	// *
+	// -
 	// If the DB snapshot or DB cluster snapshot in SnapshotIdentifier isn't encrypted,
 	// then the restored DB cluster isn't encrypted.
 	//
@@ -241,10 +230,8 @@ type RestoreDBClusterFromSnapshotInput struct {
 	KmsKeyId *string
 
 	// The network type of the DB cluster. Valid values:
-	//
-	// * IPV4
-	//
-	// * DUAL
+	// - IPV4
+	// - DUAL
 	//
 	// The network
 	// type is determined by the DBSubnetGroup specified for the DB cluster. A
@@ -274,22 +261,18 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// private IP address. Default: The default behavior varies depending on whether
 	// DBSubnetGroupName is specified. If DBSubnetGroupName isn't specified, and
 	// PubliclyAccessible isn't specified, the following applies:
-	//
-	// * If the default VPC
+	// - If the default VPC
 	// in the target Region doesn’t have an internet gateway attached to it, the DB
 	// cluster is private.
-	//
-	// * If the default VPC in the target Region has an internet
+	// - If the default VPC in the target Region has an internet
 	// gateway attached to it, the DB cluster is public.
 	//
 	// If DBSubnetGroupName is
 	// specified, and PubliclyAccessible isn't specified, the following applies:
-	//
-	// * If
+	// - If
 	// the subnets are part of a VPC that doesn’t have an internet gateway attached to
 	// it, the DB cluster is private.
-	//
-	// * If the subnets are part of a VPC that has an
+	// - If the subnets are part of a VPC that has an
 	// internet gateway attached to it, the DB cluster is public.
 	//
 	// Valid for: Aurora DB

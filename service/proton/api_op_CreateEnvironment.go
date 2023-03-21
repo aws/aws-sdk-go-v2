@@ -14,12 +14,10 @@ import (
 // Deploy a new environment. An Proton environment is created from an environment
 // template that defines infrastructure and resources that can be shared across
 // services. You can provision environments using the following methods:
-//
-// * Amazon
+// - Amazon
 // Web Services-managed provisioning: Proton makes direct calls to provision your
 // resources.
-//
-// * Self-managed provisioning: Proton makes pull requests on your
+// - Self-managed provisioning: Proton makes pull requests on your
 // repository to provide compiled infrastructure as code (IaC) files that your IaC
 // engine uses to provision resources.
 //

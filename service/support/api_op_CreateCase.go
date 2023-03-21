@@ -15,12 +15,10 @@ import (
 // Create Case (https://console.aws.amazon.com/support/home#/case/create) page. The
 // Amazon Web Services Support API doesn't support requesting service limit
 // increases. You can submit a service limit increase in the following ways:
-//
-// *
+// -
 // Submit a request from the Amazon Web Services Support Center Create Case
 // (https://console.aws.amazon.com/support/home#/case/create) page.
-//
-// * Use the
+// - Use the
 // Service Quotas RequestServiceQuotaIncrease
 // (https://docs.aws.amazon.com/servicequotas/2019-06-24/apireference/API_RequestServiceQuotaIncrease.html)
 // operation.
@@ -33,11 +31,9 @@ import (
 // that appears in the Amazon Web Services Support Center
 // (https://console.aws.amazon.com/support). Use the DescribeCases operation to get
 // the displayId.
-//
-// * You must have a Business, Enterprise On-Ramp, or Enterprise
+// - You must have a Business, Enterprise On-Ramp, or Enterprise
 // Support plan to use the Amazon Web Services Support API.
-//
-// * If you call the
+// - If you call the
 // Amazon Web Services Support API from an account that doesn't have a Business,
 // Enterprise On-Ramp, or Enterprise Support plan, the
 // SubscriptionRequiredException error message appears. For information about

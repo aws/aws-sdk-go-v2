@@ -36,16 +36,12 @@ type CheckDomainTransferabilityInput struct {
 	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
 	// in the Amazon Route 53 Developer Guide. The domain name can contain only the
 	// following characters:
-	//
-	// * Letters a through z. Domain names are not case
+	// - Letters a through z. Domain names are not case
 	// sensitive.
-	//
-	// * Numbers 0 through 9.
-	//
-	// * Hyphen (-). You can't specify a hyphen at
+	// - Numbers 0 through 9.
+	// - Hyphen (-). You can't specify a hyphen at
 	// the beginning or end of a label.
-	//
-	// * Period (.) to separate the labels in the
+	// - Period (.) to separate the labels in the
 	// name, such as the . in example.com.
 	//
 	// This member is required.

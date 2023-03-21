@@ -30,12 +30,10 @@ import (
 // the x-amz-outpost-id derived by using the access point ARN, see the Examples
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html#API_control_DeleteBucketTagging_Examples)
 // section. The following actions are related to DeleteBucketTagging:
-//
-// *
+// -
 // GetBucketTagging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html)
-//
-// *
+// -
 // PutBucketTagging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html)
 func (c *Client) DeleteBucketTagging(ctx context.Context, params *DeleteBucketTaggingInput, optFns ...func(*Options)) (*DeleteBucketTaggingOutput, error) {

@@ -49,13 +49,11 @@ type UpdateGlobalTableSettingsInput struct {
 
 	// The billing mode of the global table. If GlobalTableBillingMode is not
 	// specified, the global table defaults to PROVISIONED capacity billing mode.
-	//
-	// *
+	// -
 	// PROVISIONED - We recommend using PROVISIONED for predictable workloads.
 	// PROVISIONED sets the billing mode to Provisioned Mode
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual).
-	//
-	// *
+	// -
 	// PAY_PER_REQUEST - We recommend using PAY_PER_REQUEST for unpredictable
 	// workloads. PAY_PER_REQUEST sets the billing mode to On-Demand Mode
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand).

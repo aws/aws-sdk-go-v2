@@ -14,34 +14,25 @@ import (
 // Creates a configuration profile, which is information that enables AppConfig to
 // access the configuration source. Valid configuration sources include the
 // following:
-//
-// * Configuration data in YAML, JSON, and other formats stored in the
+// - Configuration data in YAML, JSON, and other formats stored in the
 // AppConfig hosted configuration store
-//
-// * Configuration data stored as objects in
+// - Configuration data stored as objects in
 // an Amazon Simple Storage Service (Amazon S3) bucket
-//
-// * Pipelines stored in
+// - Pipelines stored in
 // CodePipeline
-//
-// * Secrets stored in Secrets Manager
-//
-// * Standard and secure string
+// - Secrets stored in Secrets Manager
+// - Standard and secure string
 // parameters stored in Amazon Web Services Systems Manager Parameter Store
-//
-// *
+// -
 // Configuration data in SSM documents stored in the Systems Manager document
 // store
 //
 // A configuration profile includes the following information:
-//
-// * The URI
+// - The URI
 // location of the configuration data.
-//
-// * The Identity and Access Management (IAM)
+// - The Identity and Access Management (IAM)
 // role that provides access to the configuration data.
-//
-// * A validator for the
+// - A validator for the
 // configuration data. Available validators include either a JSON Schema or an
 // Amazon Web Services Lambda function.
 //
@@ -72,23 +63,18 @@ type CreateConfigurationProfileInput struct {
 	ApplicationId *string
 
 	// A URI to locate the configuration. You can specify the following:
-	//
-	// * For the
+	// - For the
 	// AppConfig hosted configuration store and for feature flags, specify hosted.
-	//
-	// *
+	// -
 	// For an Amazon Web Services Systems Manager Parameter Store parameter, specify
 	// either the parameter name in the format ssm-parameter:// or the ARN.
-	//
-	// * For an
+	// - For an
 	// Secrets Manager secret, specify the URI in the following format:
 	// secrets-manager://.
-	//
-	// * For an Amazon S3 object, specify the URI in the following
+	// - For an Amazon S3 object, specify the URI in the following
 	// format: s3:/// . Here is an example:
 	// s3://my-bucket/my-app/us-east-1/my-config.json
-	//
-	// * For an SSM document, specify
+	// - For an SSM document, specify
 	// either the document name in the format ssm-document:// or the Amazon Resource
 	// Name (ARN).
 	//

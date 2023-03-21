@@ -36,11 +36,9 @@ func (c *Client) ListGateways(ctx context.Context, params *ListGatewaysInput, op
 }
 
 // A JSON object containing zero or more of the following fields:
-//
-// *
+// -
 // ListGatewaysInput$Limit
-//
-// * ListGatewaysInput$Marker
+// - ListGatewaysInput$Marker
 type ListGatewaysInput struct {
 
 	// Specifies that the list of gateways returned be limited to the specified number

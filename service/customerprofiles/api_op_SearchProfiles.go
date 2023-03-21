@@ -67,11 +67,9 @@ type SearchProfilesInput struct {
 	// any key-value(s) pairs specified in the AdditionalSearchKeys list. This
 	// parameter influences which profiles will be returned in the response in the
 	// following manner:
-	//
-	// * AND - The response only includes profiles that match all of
+	// - AND - The response only includes profiles that match all of
 	// the search keys.
-	//
-	// * OR - The response includes profiles that match at least one
+	// - OR - The response includes profiles that match at least one
 	// of the search keys.
 	//
 	// The OR relationship is the default behavior if this

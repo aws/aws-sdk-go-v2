@@ -17,15 +17,12 @@ import (
 // best effort and may not exactly reflect recent updates and changes. Access
 // Control You can use IAM policies to control this action's access to Amazon SWF
 // resources as follows:
-//
-// * Use a Resource element with the domain name to limit
-// the action to only specified domains.
-//
-// * Use an Action element to allow or deny
+// - Use a Resource element with the domain name to limit the
+// action to only specified domains.
+// - Use an Action element to allow or deny
 // permission to call this action.
-//
-// * You cannot use an IAM policy to constrain
-// this action's parameters.
+// - You cannot use an IAM policy to constrain this
+// action's parameters.
 //
 // If the caller doesn't have sufficient permissions to
 // invoke the action, or the parameter values fall outside the specified

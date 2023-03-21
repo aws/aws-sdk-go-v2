@@ -13,27 +13,23 @@ type AppIntegrationsConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the AppIntegrations DataIntegration to use for
 	// ingesting content.
-	//
-	// * For  Salesforce
+	// - For  Salesforce
 	// (https://developer.salesforce.com/docs/atlas.en-us.knowledge_dev.meta/knowledge_dev/sforce_api_objects_knowledge__kav.htm),
 	// your AppIntegrations DataIntegration must have an ObjectConfiguration if
 	// objectFields is not provided, including at least Id, ArticleNumber,
 	// VersionNumber, Title, PublishStatus, and IsDeleted as source fields.
-	//
-	// * For
+	// - For
 	// ServiceNow
 	// (https://developer.servicenow.com/dev.do#!/reference/api/rome/rest/knowledge-management-api),
 	// your AppIntegrations DataIntegration must have an ObjectConfiguration if
 	// objectFields is not provided, including at least number, short_description,
 	// sys_mod_count, workflow_state, and active as source fields.
-	//
-	// * For  Zendesk
+	// - For  Zendesk
 	// (https://developer.zendesk.com/api-reference/help_center/help-center-api/articles/),
 	// your AppIntegrations DataIntegration must have an ObjectConfiguration if
 	// objectFields is not provided, including at least id, title, updated_at, and
 	// draft as source fields.
-	//
-	// * For  SharePoint
+	// - For  SharePoint
 	// (https://learn.microsoft.com/en-us/sharepoint/dev/sp-add-ins/sharepoint-net-server-csom-jsom-and-rest-api-index),
 	// your AppIntegrations DataIntegration must have a FileConfiguration, including
 	// only file extensions that are among docx, pdf, html, htm, and txt.
@@ -43,19 +39,16 @@ type AppIntegrationsConfiguration struct {
 
 	// The fields from the source that are made available to your agents in Wisdom.
 	// Optional if ObjectConfiguration is included in the provided DataIntegration.
-	//
-	// *
+	// -
 	// For  Salesforce
 	// (https://developer.salesforce.com/docs/atlas.en-us.knowledge_dev.meta/knowledge_dev/sforce_api_objects_knowledge__kav.htm),
 	// you must include at least Id, ArticleNumber, VersionNumber, Title,
 	// PublishStatus, and IsDeleted.
-	//
-	// * For  ServiceNow
+	// - For  ServiceNow
 	// (https://developer.servicenow.com/dev.do#!/reference/api/rome/rest/knowledge-management-api),
 	// you must include at least number, short_description, sys_mod_count,
 	// workflow_state, and active.
-	//
-	// * For  Zendesk
+	// - For  Zendesk
 	// (https://developer.zendesk.com/api-reference/help_center/help-center-api/articles/),
 	// you must include at least id, title, updated_at, and draft.
 	//
@@ -655,11 +648,9 @@ type RecommendationTrigger struct {
 	RecommendationIds []string
 
 	// The source of the recommendation trigger.
-	//
-	// * ISSUE_DETECTION: The corresponding
+	// - ISSUE_DETECTION: The corresponding
 	// recommendations were triggered by a Contact Lens issue.
-	//
-	// * RULE_EVALUATION: The
+	// - RULE_EVALUATION: The
 	// corresponding recommendations were triggered by a Contact Lens rule.
 	//
 	// This member is required.
@@ -697,14 +688,11 @@ type RenderingConfiguration struct {
 	// A URI template containing exactly one variable in ${variableName} format. This
 	// can only be set for EXTERNAL knowledge bases. For Salesforce, ServiceNow, and
 	// Zendesk, the variable must be one of the following:
-	//
-	// * Salesforce: Id,
+	// - Salesforce: Id,
 	// ArticleNumber, VersionNumber, Title, PublishStatus, or IsDeleted
-	//
-	// * ServiceNow:
+	// - ServiceNow:
 	// number, short_description, sys_mod_count, workflow_state, or active
-	//
-	// * Zendesk:
+	// - Zendesk:
 	// id, title, updated_at, or draft
 	//
 	// The variable is replaced with the actual value

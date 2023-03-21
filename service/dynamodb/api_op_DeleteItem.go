@@ -56,16 +56,13 @@ type DeleteItemInput struct {
 
 	// A condition that must be satisfied in order for a conditional DeleteItem to
 	// succeed. An expression can contain any of the following:
-	//
-	// * Functions:
+	// - Functions:
 	// attribute_exists | attribute_not_exists | attribute_type | contains |
 	// begins_with | size These function names are case-sensitive.
-	//
-	// * Comparison
+	// - Comparison
 	// operators: = | <> | < | > | <= | >= | BETWEEN | IN
-	//
-	// * Logical operators: AND |
-	// OR | NOT
+	// - Logical operators: AND | OR
+	// | NOT
 	//
 	// For more information about condition expressions, see Condition
 	// Expressions
@@ -87,36 +84,29 @@ type DeleteItemInput struct {
 
 	// One or more substitution tokens for attribute names in an expression. The
 	// following are some use cases for using ExpressionAttributeNames:
-	//
-	// * To access an
+	// - To access an
 	// attribute whose name conflicts with a DynamoDB reserved word.
-	//
-	// * To create a
+	// - To create a
 	// placeholder for repeating occurrences of an attribute name in an expression.
-	//
-	// *
+	// -
 	// To prevent special characters in an attribute name from being misinterpreted in
 	// an expression.
 	//
 	// Use the # character in an expression to dereference an attribute
 	// name. For example, consider the following attribute name:
+	// - Percentile
 	//
-	// * Percentile
-	//
-	// The
-	// name of this attribute conflicts with a reserved word, so it cannot be used
-	// directly in an expression. (For the complete list of reserved words, see
-	// Reserved Words
+	// The name
+	// of this attribute conflicts with a reserved word, so it cannot be used directly
+	// in an expression. (For the complete list of reserved words, see Reserved Words
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html)
 	// in the Amazon DynamoDB Developer Guide). To work around this, you could specify
 	// the following for ExpressionAttributeNames:
-	//
-	// * {"#P":"Percentile"}
+	// - {"#P":"Percentile"}
 	//
 	// You could
 	// then use this substitution in an expression, as in this example:
-	//
-	// * #P =
+	// - #P =
 	// :val
 	//
 	// Tokens that begin with the : character are expression attribute values,
@@ -141,18 +131,15 @@ type DeleteItemInput struct {
 
 	// Determines the level of detail about either provisioned or on-demand throughput
 	// consumption that is returned in the response:
-	//
-	// * INDEXES - The response includes
+	// - INDEXES - The response includes
 	// the aggregate ConsumedCapacity for the operation, together with ConsumedCapacity
 	// for each table and secondary index that was accessed. Note that some operations,
 	// such as GetItem and BatchGetItem, do not access any indexes at all. In these
 	// cases, specifying INDEXES will only return ConsumedCapacity information for
 	// table(s).
-	//
-	// * TOTAL - The response includes only the aggregate ConsumedCapacity
+	// - TOTAL - The response includes only the aggregate ConsumedCapacity
 	// for the operation.
-	//
-	// * NONE - No ConsumedCapacity details are included in the
+	// - NONE - No ConsumedCapacity details are included in the
 	// response.
 	ReturnConsumedCapacity types.ReturnConsumedCapacity
 
@@ -164,12 +151,10 @@ type DeleteItemInput struct {
 
 	// Use ReturnValues if you want to get the item attributes as they appeared before
 	// they were deleted. For DeleteItem, the valid values are:
-	//
-	// * NONE - If
+	// - NONE - If
 	// ReturnValues is not specified, or if its value is NONE, then nothing is
 	// returned. (This setting is the default for ReturnValues.)
-	//
-	// * ALL_OLD - The
+	// - ALL_OLD - The
 	// content of the old item is returned.
 	//
 	// There is no additional cost associated
@@ -204,12 +189,10 @@ type DeleteItemOutput struct {
 	// ReturnItemCollectionMetrics parameter was specified. If the table does not have
 	// any local secondary indexes, this information is not returned in the response.
 	// Each ItemCollectionMetrics element consists of:
-	//
-	// * ItemCollectionKey - The
+	// - ItemCollectionKey - The
 	// partition key value of the item collection. This is the same as the partition
 	// key value of the item itself.
-	//
-	// * SizeEstimateRangeGB - An estimate of item
+	// - SizeEstimateRangeGB - An estimate of item
 	// collection size, in gigabytes. This value is a two-element array containing a
 	// lower bound and an upper bound for the estimate. The estimate includes the size
 	// of all the items in the table, plus the size of all attributes projected into

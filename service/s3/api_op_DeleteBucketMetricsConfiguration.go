@@ -25,20 +25,16 @@ import (
 // Metrics with Amazon CloudWatch
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html).
 // The following operations are related to DeleteBucketMetricsConfiguration:
-//
-// *
+// -
 // GetBucketMetricsConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetricsConfiguration.html)
-//
-// *
+// -
 // PutBucketMetricsConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketMetricsConfiguration.html)
-//
-// *
+// -
 // ListBucketMetricsConfigurations
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListBucketMetricsConfigurations.html)
-//
-// *
+// -
 // Monitoring Metrics with Amazon CloudWatch
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html)
 func (c *Client) DeleteBucketMetricsConfiguration(ctx context.Context, params *DeleteBucketMetricsConfigurationInput, optFns ...func(*Options)) (*DeleteBucketMetricsConfigurationOutput, error) {

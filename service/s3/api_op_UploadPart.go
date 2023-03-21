@@ -69,48 +69,36 @@ import (
 // If you requested server-side encryption using a customer-provided encryption key
 // in your initiate multipart upload request, you must provide identical encryption
 // information in each part upload using the following headers.
-//
-// *
+// -
 // x-amz-server-side-encryption-customer-algorithm
-//
-// *
+// -
 // x-amz-server-side-encryption-customer-key
-//
-// *
+// -
 // x-amz-server-side-encryption-customer-key-MD5
 //
 // # Special Errors
 //
-// * Code:
+// - Code:
 // NoSuchUpload
-//
-// * Cause: The specified multipart upload does not exist. The upload
+// - Cause: The specified multipart upload does not exist. The upload
 // ID might be invalid, or the multipart upload might have been aborted or
 // completed.
-//
-// * HTTP Status Code: 404 Not Found
-//
-// * SOAP Fault Code Prefix:
+// - HTTP Status Code: 404 Not Found
+// - SOAP Fault Code Prefix:
 // Client
 //
-// # Related Resources
-//
-// * CreateMultipartUpload
+// Related Resources
+// - CreateMultipartUpload
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html)
-//
-// *
+// -
 // CompleteMultipartUpload
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CompleteMultipartUpload.html)
-//
-// *
+// -
 // AbortMultipartUpload
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_AbortMultipartUpload.html)
-//
-// *
-// ListParts
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html)
-//
-// *
+// -
+// ListParts (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html)
+// -
 // ListMultipartUploads
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListMultipartUploads.html)
 func (c *Client) UploadPart(ctx context.Context, params *UploadPartInput, optFns ...func(*Options)) (*UploadPartOutput, error) {

@@ -35,11 +35,9 @@ import (
 // You should perform read and write operations only on an ACTIVE stream. You
 // receive a LimitExceededException when making a CreateStream request when you try
 // to do one of the following:
-//
-// * Have more than five streams in the CREATING state
+// - Have more than five streams in the CREATING state
 // at any point in time.
-//
-// * Create more shards than are authorized for your
+// - Create more shards than are authorized for your
 // account.
 //
 // For the default shard limit for an Amazon Web Services account, see

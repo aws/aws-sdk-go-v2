@@ -78,15 +78,11 @@ type CopyProjectVersionInput struct {
 	// results and manifest files written to the output Amazon S3 bucket
 	// (OutputConfig). If you choose to use your own KMS key, you need the following
 	// permissions on the KMS key.
-	//
-	// * kms:CreateGrant
-	//
-	// * kms:DescribeKey
-	//
-	// *
+	// - kms:CreateGrant
+	// - kms:DescribeKey
+	// -
 	// kms:GenerateDataKey
-	//
-	// * kms:Decrypt
+	// - kms:Decrypt
 	//
 	// If you don't specify a value for KmsKeyId,
 	// images copied into the service are encrypted using a key that AWS owns and

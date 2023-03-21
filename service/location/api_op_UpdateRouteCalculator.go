@@ -52,8 +52,7 @@ type UpdateRouteCalculatorOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated route calculator resource. Used to
 	// specify a resource across AWS.
-	//
-	// * Format example:
+	// - Format example:
 	// arn:aws:geo:region:account-id:route- calculator/ExampleCalculator
 	//
 	// This member is required.

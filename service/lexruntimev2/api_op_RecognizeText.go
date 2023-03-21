@@ -19,17 +19,14 @@ import (
 // specified, the messages are returned as follows. For more information, see
 // PostFulfillmentStatusSpecification
 // (https://docs.aws.amazon.com/lexv2/latest/dg/API_PostFulfillmentStatusSpecification.html).
-//
-// *
+// -
 // Success message - Returned if the Lambda function completes successfully and the
 // intent state is fulfilled or ready fulfillment if the message is present.
-//
-// *
+// -
 // Failed message - The failed message is returned if the Lambda function throws an
 // exception or if the Lambda function returns a failed intent state without a
 // message.
-//
-// * Timeout message - If you don't configure a timeout message and a
+// - Timeout message - If you don't configure a timeout message and a
 // timeout, and the Lambda function doesn't return within 30 seconds, the timeout
 // message is returned. If you configure a timeout, the timeout message is returned
 // when the period times out.

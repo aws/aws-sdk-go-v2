@@ -40,10 +40,8 @@ type DescribePrefixListsInput struct {
 	DryRun *bool
 
 	// One or more filters.
-	//
-	// * prefix-list-id: The ID of a prefix list.
-	//
-	// *
+	// - prefix-list-id: The ID of a prefix list.
+	// -
 	// prefix-list-name: The name of a prefix list.
 	Filters []types.Filter
 

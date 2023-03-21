@@ -36,21 +36,17 @@ type CreateIPSetInput struct {
 	// of IP addresses. All addresses must be specified using Classless Inter-Domain
 	// Routing (CIDR) notation. WAF supports all IPv4 and IPv6 CIDR ranges except for
 	// /0. Example address strings:
-	//
-	// * To configure WAF to allow, block, or count
+	// - To configure WAF to allow, block, or count
 	// requests that originated from the IP address 192.0.2.44, specify
 	// 192.0.2.44/32.
-	//
-	// * To configure WAF to allow, block, or count requests that
+	// - To configure WAF to allow, block, or count requests that
 	// originated from IP addresses from 192.0.2.0 to 192.0.2.255, specify
 	// 192.0.2.0/24.
-	//
-	// * To configure WAF to allow, block, or count requests that
+	// - To configure WAF to allow, block, or count requests that
 	// originated from the IP address 1111:0000:0000:0000:0000:0000:0000:0111, specify
 	// 1111:0000:0000:0000:0000:0000:0000:0111/128.
-	//
-	// * To configure WAF to allow,
-	// block, or count requests that originated from IP addresses
+	// - To configure WAF to allow, block,
+	// or count requests that originated from IP addresses
 	// 1111:0000:0000:0000:0000:0000:0000:0000 to
 	// 1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify
 	// 1111:0000:0000:0000:0000:0000:0000:0000/64.
@@ -59,16 +55,12 @@ type CreateIPSetInput struct {
 	// notation, see the Wikipedia entry Classless Inter-Domain Routing
 	// (https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing). Example JSON
 	// Addresses specifications:
-	//
-	// * Empty array: "Addresses": []
-	//
-	// * Array with one
+	// - Empty array: "Addresses": []
+	// - Array with one
 	// address: "Addresses": ["192.0.2.44/32"]
-	//
-	// * Array with three addresses:
+	// - Array with three addresses:
 	// "Addresses": ["192.0.2.44/32", "192.0.2.0/24", "192.0.0.0/16"]
-	//
-	// * INVALID
+	// - INVALID
 	// specification: "Addresses": [""] INVALID
 	//
 	// This member is required.
@@ -90,11 +82,9 @@ type CreateIPSetInput struct {
 	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, a Amazon Cognito
 	// user pool, or an App Runner service. To work with CloudFront, you must also
 	// specify the Region US East (N. Virginia) as follows:
-	//
-	// * CLI - Specify the Region
+	// - CLI - Specify the Region
 	// when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.
-	//
-	// * API
+	// - API
 	// and SDKs - For all calls, use the Region endpoint us-east-1.
 	//
 	// This member is required.

@@ -62,23 +62,18 @@ type GetOperationDetailOutput struct {
 
 	// Lists any outstanding operations that require customer action. Valid values
 	// are:
-	//
-	// * PENDING_ACCEPTANCE: The operation is waiting for acceptance from the
+	// - PENDING_ACCEPTANCE: The operation is waiting for acceptance from the
 	// account that is receiving the domain.
-	//
-	// * PENDING_CUSTOMER_ACTION: The operation
+	// - PENDING_CUSTOMER_ACTION: The operation
 	// is waiting for customer action, for example, returning an email.
-	//
-	// *
+	// -
 	// PENDING_AUTHORIZATION: The operation is waiting for the form of authorization.
 	// For more information, see ResendOperationAuthorization
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ResendOperationAuthorization.html).
-	//
-	// *
+	// -
 	// PENDING_PAYMENT_VERIFICATION: The operation is waiting for the payment method to
 	// validate.
-	//
-	// * PENDING_SUPPORT_CASE: The operation includes a support case and is
+	// - PENDING_SUPPORT_CASE: The operation includes a support case and is
 	// waiting for its resolution.
 	StatusFlag types.StatusFlag
 

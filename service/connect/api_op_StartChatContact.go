@@ -23,11 +23,9 @@ import (
 // (https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html)
 // with WEBSOCKET and CONNECTION_CREDENTIALS. A 429 error occurs in the following
 // situations:
-//
-// * API rate limit is exceeded. API TPS throttling returns a
+// - API rate limit is exceeded. API TPS throttling returns a
 // TooManyRequests exception.
-//
-// * The quota for concurrent active chats
+// - The quota for concurrent active chats
 // (https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html)
 // is exceeded. Active chat throttling returns a LimitExceededException.
 //

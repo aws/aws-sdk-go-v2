@@ -17,18 +17,16 @@ import (
 // has several potential purposes. It allows you to temporarily stop auto-scaling
 // activity but retain your scaling policies for use in the future. For
 // multi-location fleets, you can set up fleet-wide auto-scaling, and then opt out
-// of it for certain locations. This operation can be used in the following
-// ways:
-//
-// * To stop actions on instances in the fleet's home Region, provide a
-// fleet ID and the type of actions to suspend.
-//
-// * To stop actions on instances in
-// one of the fleet's remote locations, provide a fleet ID, a location name, and
+// of it for certain locations. This operation can be used in the following ways:
+// -
+// To stop actions on instances in the fleet's home Region, provide a fleet ID and
 // the type of actions to suspend.
+// - To stop actions on instances in one of the
+// fleet's remote locations, provide a fleet ID, a location name, and the type of
+// actions to suspend.
 //
-// If successful, GameLift no longer initiates
-// scaling events except in response to manual changes using UpdateFleetCapacity
+// If successful, GameLift no longer initiates scaling events
+// except in response to manual changes using UpdateFleetCapacity
 // (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateFleetCapacity.html).
 // Learn more Setting up GameLift Fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)

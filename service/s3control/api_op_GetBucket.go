@@ -35,15 +35,12 @@ import (
 // point ARN, see the Examples
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucket.html#API_control_GetBucket_Examples)
 // section.
-//
-// * PutObject
+// - PutObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
-//
-// *
+// -
 // CreateBucket
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html)
-//
-// *
+// -
 // DeleteBucket
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucket.html)
 func (c *Client) GetBucket(ctx context.Context, params *GetBucketInput, optFns ...func(*Options)) (*GetBucketOutput, error) {

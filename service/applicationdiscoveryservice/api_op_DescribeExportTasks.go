@@ -34,8 +34,7 @@ type DescribeExportTasksInput struct {
 	ExportIds []string
 
 	// One or more filters.
-	//
-	// * AgentId - ID of the agent whose collected data will be
+	// - AgentId - ID of the agent whose collected data will be
 	// exported
 	Filters []types.ExportFilter
 

@@ -45,27 +45,19 @@ type GetServiceSettingInput struct {
 
 	// The ID of the service setting to get. The setting ID can be one of the
 	// following.
-	//
-	// * /ssm/managed-instance/default-ec2-instance-management-role
-	//
-	// *
+	// - /ssm/managed-instance/default-ec2-instance-management-role
+	// -
 	// /ssm/automation/customer-script-log-destination
-	//
-	// *
+	// -
 	// /ssm/automation/customer-script-log-group-name
-	//
-	// *
+	// -
 	// /ssm/documents/console/public-sharing-permission
-	//
-	// *
+	// -
 	// /ssm/managed-instance/activation-tier
-	//
-	// * /ssm/opsinsights/opscenter
-	//
-	// *
+	// - /ssm/opsinsights/opscenter
+	// -
 	// /ssm/parameter-store/default-parameter-tier
-	//
-	// *
+	// -
 	// /ssm/parameter-store/high-throughput-enabled
 	//
 	// This member is required.

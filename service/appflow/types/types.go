@@ -1761,13 +1761,10 @@ type PrefixConfig struct {
 	// run. SCHEMA_VERSION The version number of your data schema. Amazon AppFlow
 	// assigns this version number. The version number increases by one when you change
 	// any of the following settings in your flow configuration:
-	//
-	// *
+	// -
 	// Source-to-destination field mappings
-	//
-	// * Field data types
-	//
-	// * Partition keys
+	// - Field data types
+	// - Partition keys
 	PathPrefixHierarchy []PathPrefix
 
 	// Determines the level of granularity for the date and time that's included in the
@@ -1974,12 +1971,10 @@ type S3OutputFormatConfig struct {
 	// If your file output format is Parquet, use this parameter to set whether Amazon
 	// AppFlow preserves the data types in your source data when it writes the output
 	// to Amazon S3.
-	//
-	// * true: Amazon AppFlow preserves the data types when it writes to
+	// - true: Amazon AppFlow preserves the data types when it writes to
 	// Amazon S3. For example, an integer or 1 in your source data is still an integer
 	// in your output.
-	//
-	// * false: Amazon AppFlow converts all of the source data into
+	// - false: Amazon AppFlow converts all of the source data into
 	// strings when it writes to Amazon S3. For example, an integer of 1 in your source
 	// data becomes the string "1" in the output.
 	PreserveSourceDataTyping *bool
@@ -2042,29 +2037,23 @@ type SalesforceConnectorProfileProperties struct {
 	// infrastructure without being exposed to the public internet. Set either of the
 	// following values: true Amazon AppFlow sends all calls to Salesforce over the
 	// private network. These private calls are:
-	//
-	// * Calls to get metadata about your
+	// - Calls to get metadata about your
 	// Salesforce records. This metadata describes your Salesforce objects and their
 	// fields.
-	//
-	// * Calls to get or refresh access tokens that allow Amazon AppFlow to
+	// - Calls to get or refresh access tokens that allow Amazon AppFlow to
 	// access your Salesforce records.
-	//
-	// * Calls to transfer your Salesforce records as
+	// - Calls to transfer your Salesforce records as
 	// part of a flow run.
 	//
 	// false The default value. Amazon AppFlow sends some calls to
 	// Salesforce privately and other calls over the public internet. The public calls
 	// are:
-	//
-	// * Calls to get metadata about your Salesforce records.
-	//
-	// * Calls to get or
+	// - Calls to get metadata about your Salesforce records.
+	// - Calls to get or
 	// refresh access tokens.
 	//
 	// The private calls are:
-	//
-	// * Calls to transfer your
+	// - Calls to transfer your
 	// Salesforce records as part of a flow run.
 	UsePrivateLinkForMetadataAndAuthorization bool
 

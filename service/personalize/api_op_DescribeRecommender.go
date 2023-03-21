@@ -13,14 +13,11 @@ import (
 
 // Describes the given recommender, including its status. A recommender can be in
 // one of the following states:
-//
-// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE
-// -or- CREATE FAILED
-//
-// * STOP PENDING > STOP IN_PROGRESS > INACTIVE > START PENDING
-// > START IN_PROGRESS > ACTIVE
-//
-// * DELETE PENDING > DELETE IN_PROGRESS
+// - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or-
+// CREATE FAILED
+// - STOP PENDING > STOP IN_PROGRESS > INACTIVE > START PENDING >
+// START IN_PROGRESS > ACTIVE
+// - DELETE PENDING > DELETE IN_PROGRESS
 //
 // When the
 // status is CREATE FAILED, the response includes the failureReason key, which

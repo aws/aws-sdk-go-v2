@@ -19,11 +19,9 @@ import (
 // Cross-Origin Resource Sharing
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html). The following
 // operations are related to GetBucketCors:
-//
-// * PutBucketCors
+// - PutBucketCors
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketCors.html)
-//
-// *
+// -
 // DeleteBucketCors
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketCors.html)
 func (c *Client) GetBucketCors(ctx context.Context, params *GetBucketCorsInput, optFns ...func(*Options)) (*GetBucketCorsOutput, error) {

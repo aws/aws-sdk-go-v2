@@ -124,20 +124,15 @@ type GetDataSourceOutput struct {
 
 	// The current status of the DataSource. This element can have one of the following
 	// values:
-	//
-	// * PENDING - Amazon ML submitted a request to create a DataSource.
-	//
-	// *
+	// - PENDING - Amazon ML submitted a request to create a DataSource.
+	// -
 	// INPROGRESS - The creation process is underway.
-	//
-	// * FAILED - The request to create
+	// - FAILED - The request to create
 	// a DataSource did not run to completion. It is not usable.
-	//
-	// * COMPLETED - The
+	// - COMPLETED - The
 	// creation process completed successfully.
-	//
-	// * DELETED - The DataSource is marked
-	// as deleted. It is not usable.
+	// - DELETED - The DataSource is marked as
+	// deleted. It is not usable.
 	Status types.EntityStatus
 
 	// Metadata pertaining to the operation's result.

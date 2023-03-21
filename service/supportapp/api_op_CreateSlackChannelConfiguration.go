@@ -12,11 +12,9 @@ import (
 )
 
 // Creates a Slack channel configuration for your Amazon Web Services account.
-//
-// *
+// -
 // You can add up to 5 Slack workspaces for your account.
-//
-// * You can add up to 20
+// - You can add up to 20
 // Slack channels for your account.
 //
 // A Slack channel can have up to 100 Amazon Web
@@ -62,22 +60,16 @@ type CreateSlackChannelConfigurationInput struct {
 	// The case severity for a support case that you want to receive notifications. If
 	// you specify high or all, you must specify true for at least one of the following
 	// parameters:
-	//
-	// * notifyOnAddCorrespondenceToCase
-	//
-	// * notifyOnCreateOrReopenCase
-	//
-	// *
+	// - notifyOnAddCorrespondenceToCase
+	// - notifyOnCreateOrReopenCase
+	// -
 	// notifyOnResolveCase
 	//
 	// If you specify none, the following parameters must be null
 	// or false:
-	//
-	// * notifyOnAddCorrespondenceToCase
-	//
-	// * notifyOnCreateOrReopenCase
-	//
-	// *
+	// - notifyOnAddCorrespondenceToCase
+	// - notifyOnCreateOrReopenCase
+	// -
 	// notifyOnResolveCase
 	//
 	// If you don't specify these parameters in your request, they

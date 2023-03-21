@@ -26,11 +26,9 @@ import (
 // action. For more information, see Bucket policy examples
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.html).
 // The following operations are related to PutBucketPolicy:
-//
-// * CreateBucket
+// - CreateBucket
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html)
-//
-// *
+// -
 // DeleteBucket
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html)
 func (c *Client) PutBucketPolicy(ctx context.Context, params *PutBucketPolicyInput, optFns ...func(*Options)) (*PutBucketPolicyOutput, error) {

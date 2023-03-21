@@ -14,14 +14,11 @@ import (
 
 // Retrieves properties for one or more player sessions. This action can be used in
 // the following ways:
-//
-// * To retrieve a specific player session, provide the player
+// - To retrieve a specific player session, provide the player
 // session ID only.
-//
-// * To retrieve all player sessions in a game session, provide
+// - To retrieve all player sessions in a game session, provide
 // the game session ID only.
-//
-// * To retrieve all player sessions for a specific
+// - To retrieve all player sessions for a specific
 // player, provide a player ID only.
 //
 // To request player sessions, specify either a
@@ -71,19 +68,15 @@ type DescribePlayerSessionsInput struct {
 	// PlayerId is provided in a DescribePlayerSessions request, then the
 	// PlayerSessionStatusFilter has no effect on the response. Possible player session
 	// statuses include the following:
-	//
-	// * RESERVED -- The player session request has
+	// - RESERVED -- The player session request has
 	// been received, but the player has not yet connected to the server process and/or
 	// been validated.
-	//
-	// * ACTIVE -- The player has been validated by the server process
+	// - ACTIVE -- The player has been validated by the server process
 	// and is currently connected.
-	//
-	// * COMPLETED -- The player connection has been
+	// - COMPLETED -- The player connection has been
 	// dropped.
-	//
-	// * TIMEDOUT -- A player session request was received, but the player
-	// did not connect and/or was not validated within the timeout limit (60 seconds).
+	// - TIMEDOUT -- A player session request was received, but the player did
+	// not connect and/or was not validated within the timeout limit (60 seconds).
 	PlayerSessionStatusFilter *string
 
 	noSmithyDocumentSerde

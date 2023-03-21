@@ -70,26 +70,17 @@ type GetModelVersionOutput struct {
 	ModelVersionNumber *string
 
 	// The model version status. Possible values are:
-	//
-	// * TRAINING_IN_PROGRESS
-	//
-	// *
+	// - TRAINING_IN_PROGRESS
+	// -
 	// TRAINING_COMPLETE
-	//
-	// * ACTIVATE_REQUESTED
-	//
-	// * ACTIVATE_IN_PROGRESS
-	//
-	// * ACTIVE
-	//
-	// *
+	// - ACTIVATE_REQUESTED
+	// - ACTIVATE_IN_PROGRESS
+	// - ACTIVE
+	// -
 	// INACTIVATE_REQUESTED
-	//
-	// * INACTIVATE_IN_PROGRESS
-	//
-	// * INACTIVE
-	//
-	// * ERROR
+	// - INACTIVATE_IN_PROGRESS
+	// - INACTIVE
+	// - ERROR
 	Status *string
 
 	// The training data schema.

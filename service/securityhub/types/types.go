@@ -23,29 +23,20 @@ type AccountDetails struct {
 
 // Provides details about one of the following actions that affects or that was
 // taken on a resource:
-//
-// * A remote IP address issued an Amazon Web Services API
+// - A remote IP address issued an Amazon Web Services API
 // call
-//
-// * A DNS request was received
-//
-// * A remote IP address attempted to connect
-// to an EC2 instance
-//
-// * A remote IP address attempted a port probe on an EC2
-// instance
+// - A DNS request was received
+// - A remote IP address attempted to connect to
+// an EC2 instance
+// - A remote IP address attempted a port probe on an EC2 instance
 type Action struct {
 
 	// The type of action that was detected. The possible action types are:
-	//
-	// *
+	// -
 	// NETWORK_CONNECTION
-	//
-	// * AWS_API_CALL
-	//
-	// * DNS_REQUEST
-	//
-	// * PORT_PROBE
+	// - AWS_API_CALL
+	// - DNS_REQUEST
+	// - PORT_PROBE
 	ActionType *string
 
 	// Included if ActionType is AWS_API_CALL. Provides details about the API call that
@@ -450,12 +441,9 @@ type AwsApiGatewayStageDetails struct {
 	// A map that defines the stage variables for the stage. Variable names can have
 	// alphanumeric and underscore characters. Variable values can contain the
 	// following characters:
-	//
-	// * Uppercase and lowercase letters
-	//
-	// * Numbers
-	//
-	// * Special
+	// - Uppercase and lowercase letters
+	// - Numbers
+	// - Special
 	// characters -._~:/?#&=,
 	Variables map[string]string
 
@@ -589,12 +577,9 @@ type AwsApiGatewayV2StageDetails struct {
 	// A map that defines the stage variables for the stage. Variable names can have
 	// alphanumeric and underscore characters. Variable values can contain the
 	// following characters:
-	//
-	// * Uppercase and lowercase letters
-	//
-	// * Numbers
-	//
-	// * Special
+	// - Uppercase and lowercase letters
+	// - Numbers
+	// - Special
 	// characters -._~:/?#&=,
 	StageVariables map[string]string
 
@@ -699,12 +684,9 @@ type AwsAutoScalingAutoScalingGroupMixedInstancesPolicyInstancesDistributionDeta
 
 	// How to allocate instances across Spot Instance pools. Valid values are as
 	// follows:
-	//
-	// * lowest-price
-	//
-	// * capacity-optimized
-	//
-	// * capacity-optimized-prioritized
+	// - lowest-price
+	// - capacity-optimized
+	// - capacity-optimized-prioritized
 	SpotAllocationStrategy *string
 
 	// The number of Spot Instance pools across which to allocate your Spot Instances.
@@ -804,35 +786,25 @@ type AwsAutoScalingLaunchConfigurationBlockDeviceMappingsEbsDetails struct {
 
 	// The volume size, in GiBs. The following are the supported volumes sizes for each
 	// volume type:
+	// - gp2 and gp3: 1-16,384
+	// - io1: 4-16,384
+	// - st1 and sc1: 125-16,384
+	// -
+	// standard: 1-1,024
 	//
-	// * gp2 and gp3: 1-16,384
-	//
-	// * io1: 4-16,384
-	//
-	// * st1 and sc1:
-	// 125-16,384
-	//
-	// * standard: 1-1,024
-	//
-	// You must specify either SnapshotId or
-	// VolumeSize. If you specify both SnapshotId and VolumeSize, the volume size must
-	// be equal or greater than the size of the snapshot.
+	// You must specify either SnapshotId or VolumeSize. If you
+	// specify both SnapshotId and VolumeSize, the volume size must be equal or greater
+	// than the size of the snapshot.
 	VolumeSize int32
 
 	// The volume type. Valid values are as follows:
-	//
-	// * gp2
-	//
-	// * gp3
-	//
-	// * io1
-	//
-	// * sc1
-	//
-	// *
-	// st1
-	//
-	// * standard
+	// - gp2
+	// - gp3
+	// - io1
+	// - sc1
+	// - st1
+	// -
+	// standard
 	VolumeType *string
 
 	noSmithyDocumentSerde
@@ -947,11 +919,9 @@ type AwsBackupBackupPlanAdvancedBackupSettingsDetails struct {
 	// Specifies the backup option for a selected resource. This option is only
 	// available for Windows Volume Shadow Copy Service (VSS) backup jobs. Valid values
 	// are as follows:
-	//
-	// * Set to WindowsVSS: enabled to enable the WindowsVSS backup
+	// - Set to WindowsVSS: enabled to enable the WindowsVSS backup
 	// option and create a Windows VSS backup.
-	//
-	// * Set to WindowsVSS: disabled to create
+	// - Set to WindowsVSS: disabled to create
 	// a regular backup. The WindowsVSS option is not enabled by default.
 	BackupOptions map[string]string
 
@@ -1116,17 +1086,13 @@ type AwsBackupBackupVaultNotificationsDetails struct {
 
 	// An array of events that indicate the status of jobs to back up resources to the
 	// backup vault. The following events are supported:
-	//
-	// * BACKUP_JOB_STARTED |
+	// - BACKUP_JOB_STARTED |
 	// BACKUP_JOB_COMPLETED
-	//
-	// * COPY_JOB_STARTED | COPY_JOB_SUCCESSFUL |
+	// - COPY_JOB_STARTED | COPY_JOB_SUCCESSFUL |
 	// COPY_JOB_FAILED
-	//
-	// * RESTORE_JOB_STARTED | RESTORE_JOB_COMPLETED |
+	// - RESTORE_JOB_STARTED | RESTORE_JOB_COMPLETED |
 	// RECOVERY_POINT_MODIFIED
-	//
-	// * S3_BACKUP_OBJECT_FAILED | S3_RESTORE_OBJECT_FAILED
+	// - S3_BACKUP_OBJECT_FAILED | S3_RESTORE_OBJECT_FAILED
 	BackupVaultEvents []string
 
 	// The Amazon Resource Name (ARN) that uniquely identifies the Amazon SNS topic for
@@ -1247,14 +1213,10 @@ type AwsBackupRecoveryPointDetails struct {
 
 	// A status code specifying the state of the recovery point. Valid values are as
 	// follows:
-	//
-	// * COMPLETED
-	//
-	// * DELETING
-	//
-	// * EXPIRED
-	//
-	// * PARTIAL
+	// - COMPLETED
+	// - DELETING
+	// - EXPIRED
+	// - PARTIAL
 	Status *string
 
 	// A message explaining the reason of the recovery point deletion failure.
@@ -1262,12 +1224,9 @@ type AwsBackupRecoveryPointDetails struct {
 
 	// Specifies the storage class of the recovery point. Valid values are as
 	// follows:
-	//
-	// * COLD
-	//
-	// * DELETED
-	//
-	// * WARM
+	// - COLD
+	// - DELETED
+	// - WARM
 	StorageClass *string
 
 	noSmithyDocumentSerde
@@ -1409,13 +1368,11 @@ type AwsCertificateManagerCertificateDetails struct {
 }
 
 // Contains information about one of the following:
-//
-// * The initial validation of
+// - The initial validation of
 // each domain name that occurs as a result of the RequestCertificate request
-//
-// *
-// The validation of each domain name in the certificate, as it pertains to
-// Certificate Manager managed renewal
+// - The
+// validation of each domain name in the certificate, as it pertains to Certificate
+// Manager managed renewal
 type AwsCertificateManagerCertificateDomainValidationOption struct {
 
 	// A fully qualified domain name (FQDN) in the certificate.
@@ -1609,16 +1566,13 @@ type AwsCloudFrontDistributionCacheBehavior struct {
 
 	// The protocol that viewers can use to access the files in an origin. You can
 	// specify the following options:
-	//
-	// * allow-all - Viewers can use HTTP or HTTPS.
-	//
-	// *
+	// - allow-all - Viewers can use HTTP or HTTPS.
+	// -
 	// redirect-to-https - CloudFront responds to HTTP requests with an HTTP status
 	// code of 301 (Moved Permanently) and the HTTPS URL. The viewer then uses the new
 	// URL to resubmit.
-	//
-	// * https-only - CloudFront responds to HTTP request with an
-	// HTTP status code of 403 (Forbidden).
+	// - https-only - CloudFront responds to HTTP request with an HTTP
+	// status code of 403 (Forbidden).
 	ViewerProtocolPolicy *string
 
 	noSmithyDocumentSerde
@@ -1639,16 +1593,13 @@ type AwsCloudFrontDistributionDefaultCacheBehavior struct {
 
 	// The protocol that viewers can use to access the files in an origin. You can
 	// specify the following options:
-	//
-	// * allow-all - Viewers can use HTTP or HTTPS.
-	//
-	// *
+	// - allow-all - Viewers can use HTTP or HTTPS.
+	// -
 	// redirect-to-https - CloudFront responds to HTTP requests with an HTTP status
 	// code of 301 (Moved Permanently) and the HTTPS URL. The viewer then uses the new
 	// URL to resubmit.
-	//
-	// * https-only - CloudFront responds to HTTP request with an
-	// HTTP status code of 403 (Forbidden).
+	// - https-only - CloudFront responds to HTTP request with an HTTP
+	// status code of 403 (Forbidden).
 	ViewerProtocolPolicy *string
 
 	noSmithyDocumentSerde
@@ -2142,12 +2093,10 @@ type AwsCodeBuildProjectEnvironment struct {
 
 	// The type of credentials CodeBuild uses to pull images in your build. Valid
 	// values:
-	//
-	// * CODEBUILD specifies that CodeBuild uses its own credentials. This
+	// - CODEBUILD specifies that CodeBuild uses its own credentials. This
 	// requires that you modify your ECR repository policy to trust the CodeBuild
 	// service principal.
-	//
-	// * SERVICE_ROLE specifies that CodeBuild uses your build
+	// - SERVICE_ROLE specifies that CodeBuild uses your build
 	// project's service role.
 	//
 	// When you use a cross-account or private registry image,
@@ -2266,58 +2215,44 @@ type AwsCodeBuildProjectSource struct {
 
 	// Information about the location of the source code to be built. Valid values
 	// include:
-	//
-	// * For source code settings that are specified in the source action of
-	// a pipeline in CodePipeline, location should not be specified. If it is
-	// specified, CodePipeline ignores it. This is because CodePipeline uses the
-	// settings in a pipeline's source action instead of this value.
-	//
-	// * For source code
-	// in an CodeCommit repository, the HTTPS clone URL to the repository that contains
-	// the source code and the build spec file (for example,
+	// - For source code settings that are specified in the source action of a
+	// pipeline in CodePipeline, location should not be specified. If it is specified,
+	// CodePipeline ignores it. This is because CodePipeline uses the settings in a
+	// pipeline's source action instead of this value.
+	// - For source code in an
+	// CodeCommit repository, the HTTPS clone URL to the repository that contains the
+	// source code and the build spec file (for example,
 	// https://git-codecommit.region-ID.amazonaws.com/v1/repos/repo-name ).
-	//
-	// * For
+	// - For
 	// source code in an S3 input bucket, one of the following.
-	//
-	// * The path to the ZIP
+	// - The path to the ZIP
 	// file that contains the source code (for example,
 	// bucket-name/path/to/object-name.zip).
+	// - The path to the folder that contains the
+	// source code (for example, bucket-name/path/to/source-code/folder/).
 	//
-	// * The path to the folder that contains
-	// the source code (for example, bucket-name/path/to/source-code/folder/).
-	//
-	// * For
+	// - For
 	// source code in a GitHub repository, the HTTPS clone URL to the repository that
 	// contains the source and the build spec file.
-	//
-	// * For source code in a Bitbucket
+	// - For source code in a Bitbucket
 	// repository, the HTTPS clone URL to the repository that contains the source and
 	// the build spec file.
 	Location *string
 
 	// The type of repository that contains the source code to be built. Valid values
 	// are:
-	//
-	// * BITBUCKET - The source code is in a Bitbucket repository.
-	//
-	// * CODECOMMIT
-	// - The source code is in an CodeCommit repository.
-	//
-	// * CODEPIPELINE - The source
-	// code settings are specified in the source action of a pipeline in
-	// CodePipeline.
-	//
-	// * GITHUB - The source code is in a GitHub repository.
-	//
-	// *
-	// GITHUB_ENTERPRISE - The source code is in a GitHub Enterprise repository.
-	//
-	// *
-	// NO_SOURCE - The project does not have input source code.
-	//
-	// * S3 - The source code
-	// is in an S3 input bucket.
+	// - BITBUCKET - The source code is in a Bitbucket repository.
+	// - CODECOMMIT -
+	// The source code is in an CodeCommit repository.
+	// - CODEPIPELINE - The source code
+	// settings are specified in the source action of a pipeline in CodePipeline.
+	// -
+	// GITHUB - The source code is in a GitHub repository.
+	// - GITHUB_ENTERPRISE - The
+	// source code is in a GitHub Enterprise repository.
+	// - NO_SOURCE - The project does
+	// not have input source code.
+	// - S3 - The source code is in an S3 input bucket.
 	Type *string
 
 	noSmithyDocumentSerde
@@ -2453,22 +2388,15 @@ type AwsDynamoDbTableDetails struct {
 	TableSizeBytes int64
 
 	// The current status of the table. Valid values are as follows:
-	//
-	// * ACTIVE
-	//
-	// *
+	// - ACTIVE
+	// -
 	// ARCHIVED
-	//
-	// * ARCHIVING
-	//
-	// * CREATING
-	//
-	// * DELETING
-	//
-	// *
+	// - ARCHIVING
+	// - CREATING
+	// - DELETING
+	// -
 	// INACCESSIBLE_ENCRYPTION_CREDENTIALS
-	//
-	// * UPDATING
+	// - UPDATING
 	TableStatus *string
 
 	noSmithyDocumentSerde
@@ -2490,14 +2418,10 @@ type AwsDynamoDbTableGlobalSecondaryIndex struct {
 	IndexSizeBytes int64
 
 	// The current status of the index.
-	//
-	// * ACTIVE
-	//
-	// * CREATING
-	//
-	// * DELETING
-	//
-	// * UPDATING
+	// - ACTIVE
+	// - CREATING
+	// - DELETING
+	// - UPDATING
 	IndexStatus *string
 
 	// The number of items in the index.
@@ -2559,12 +2483,9 @@ type AwsDynamoDbTableProjection struct {
 
 	// The types of attributes that are projected into the index. Valid values are as
 	// follows:
-	//
-	// * ALL
-	//
-	// * INCLUDE
-	//
-	// * KEYS_ONLY
+	// - ALL
+	// - INCLUDE
+	// - KEYS_ONLY
 	ProjectionType *string
 
 	noSmithyDocumentSerde
@@ -2629,17 +2550,12 @@ type AwsDynamoDbTableReplica struct {
 	RegionName *string
 
 	// The current status of the replica. Valid values are as follows:
-	//
-	// * ACTIVE
-	//
-	// *
+	// - ACTIVE
+	// -
 	// CREATING
-	//
-	// * CREATION_FAILED
-	//
-	// * DELETING
-	//
-	// * UPDATING
+	// - CREATION_FAILED
+	// - DELETING
+	// - UPDATING
 	ReplicaStatus *string
 
 	// Detailed information about the replica status.
@@ -4018,17 +3934,12 @@ type AwsEc2VolumeAttachment struct {
 	InstanceId *string
 
 	// The attachment state of the volume. Valid values are as follows:
-	//
-	// * attaching
-	//
-	// *
+	// - attaching
+	// -
 	// attached
-	//
-	// * busy
-	//
-	// * detaching
-	//
-	// * detached
+	// - busy
+	// - detaching
+	// - detached
 	Status *string
 
 	noSmithyDocumentSerde
@@ -4064,19 +3975,13 @@ type AwsEc2VolumeDetails struct {
 	SnapshotId *string
 
 	// The volume state. Valid values are as follows:
-	//
-	// * available
-	//
-	// * creating
-	//
-	// *
+	// - available
+	// - creating
+	// -
 	// deleted
-	//
-	// * deleting
-	//
-	// * error
-	//
-	// * in-use
+	// - deleting
+	// - error
+	// - in-use
 	Status *string
 
 	// The ID of the volume.
@@ -4143,17 +4048,12 @@ type AwsEc2VpcEndpointServiceDetails struct {
 	ServiceName *string
 
 	// The current state of the service. Valid values are as follows:
-	//
-	// * Available
-	//
-	// *
+	// - Available
+	// -
 	// Deleted
-	//
-	// * Deleting
-	//
-	// * Failed
-	//
-	// * Pending
+	// - Deleting
+	// - Failed
+	// - Pending
 	ServiceState *string
 
 	// The types for the service.
@@ -4256,15 +4156,11 @@ type AwsEc2VpnConnectionDetails struct {
 	Routes []AwsEc2VpnConnectionRoutesDetails
 
 	// The current state of the VPN connection. Valid values are as follows:
-	//
-	// *
+	// -
 	// available
-	//
-	// * deleted
-	//
-	// * deleting
-	//
-	// * pending
+	// - deleted
+	// - deleting
+	// - pending
 	State *string
 
 	// The identifier of the transit gateway that is associated with the VPN
@@ -4407,12 +4303,9 @@ type AwsEc2VpnConnectionVgwTelemetryDetails struct {
 type AwsEcrContainerImageDetails struct {
 
 	// The architecture of the image. Valid values are as follows:
-	//
-	// * arm64
-	//
-	// * i386
-	//
-	// *
+	// - arm64
+	// - i386
+	// -
 	// x86_64
 	Architecture *string
 
@@ -4922,14 +4815,10 @@ type AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails struct {
 	// The dependency condition of the dependent container. Indicates the required
 	// status of the dependent container before the current container can start. Valid
 	// values are as follows:
-	//
-	// * COMPLETE
-	//
-	// * HEALTHY
-	//
-	// * SUCCESS
-	//
-	// * START
+	// - COMPLETE
+	// - HEALTHY
+	// - SUCCESS
+	// - START
 	Condition *string
 
 	// The name of the dependent container.
@@ -5066,19 +4955,12 @@ type AwsEcsTaskDefinitionContainerDefinitionsDetails struct {
 
 	// The user to use inside the container. The value can use one of the following
 	// formats.
-	//
-	// * user
-	//
-	// * user : group
-	//
-	// * uid
-	//
-	// * uid : gid
-	//
-	// * user : gid
-	//
-	// * uid :
-	// group
+	// - user
+	// - user : group
+	// - uid
+	// - uid : gid
+	// - user : gid
+	// - uid : group
 	User *string
 
 	// Data volumes to mount from another container.
@@ -5133,14 +5015,11 @@ type AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails struct
 
 	// The options to use to configure the log router. The valid option keys are as
 	// follows:
-	//
-	// * enable-ecs-log-metadata. The value can be true or false.
-	//
-	// *
+	// - enable-ecs-log-metadata. The value can be true or false.
+	// -
 	// config-file-type. The value can be s3 or file.
-	//
-	// * config-file-value. The value
-	// is either an S3 ARN or a file path.
+	// - config-file-value. The value is
+	// either an S3 ARN or a file path.
 	Options map[string]string
 
 	// The log router to use. Valid values are fluentbit or fluentd.
@@ -5279,34 +5158,22 @@ type AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails struct {
 
 	// The log driver to use for the container. Valid values on Fargate are as
 	// follows:
-	//
-	// * awsfirelens
-	//
-	// * awslogs
-	//
-	// * splunk
+	// - awsfirelens
+	// - awslogs
+	// - splunk
 	//
 	// Valid values on Amazon EC2 are as
 	// follows:
-	//
-	// * awsfirelens
-	//
-	// * awslogs
-	//
-	// * fluentd
-	//
-	// * gelf
-	//
-	// * journald
-	//
-	// *
-	// json-file
-	//
-	// * logentries
-	//
-	// * splunk
-	//
-	// * syslog
+	// - awsfirelens
+	// - awslogs
+	// - fluentd
+	// - gelf
+	// - journald
+	// - json-file
+	// -
+	// logentries
+	// - splunk
+	// - syslog
 	LogDriver *string
 
 	// The configuration options to send to the log driver. Requires version 1.19 of
@@ -5423,38 +5290,23 @@ type AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails struct {
 	HardLimit int32
 
 	// The type of the ulimit. Valid values are as follows:
-	//
-	// * core
-	//
-	// * cpu
-	//
-	// * data
-	//
-	// *
+	// - core
+	// - cpu
+	// - data
+	// -
 	// fsize
-	//
-	// * locks
-	//
-	// * memlock
-	//
-	// * msgqueue
-	//
-	// * nice
-	//
-	// * nofile
-	//
-	// * nproc
-	//
-	// * rss
-	//
-	// *
-	// rtprio
-	//
-	// * rttime
-	//
-	// * sigpending
-	//
-	// * stack
+	// - locks
+	// - memlock
+	// - msgqueue
+	// - nice
+	// - nofile
+	// - nproc
+	// - rss
+	// - rtprio
+	// -
+	// rttime
+	// - sigpending
+	// - stack
 	Name *string
 
 	// The soft limit for the ulimit type.
@@ -5484,17 +5336,12 @@ type AwsEcsTaskDefinitionDetails struct {
 	ContainerDefinitions []AwsEcsTaskDefinitionContainerDefinitionsDetails
 
 	// The number of CPU units used by the task.Valid values are as follows:
-	//
-	// * 256
-	// (.25 vCPU)
-	//
-	// * 512 (.5 vCPU)
-	//
-	// * 1024 (1 vCPU)
-	//
-	// * 2048 (2 vCPU)
-	//
-	// * 4096 (4 vCPU)
+	// - 256 (.25
+	// vCPU)
+	// - 512 (.5 vCPU)
+	// - 1024 (1 vCPU)
+	// - 2048 (2 vCPU)
+	// - 4096 (4 vCPU)
 	Cpu *string
 
 	// The ARN of the task execution role that grants the container agent permission to
@@ -5509,12 +5356,9 @@ type AwsEcsTaskDefinitionDetails struct {
 
 	// The inter-process communication (IPC) resource namespace to use for the
 	// containers in the task. Valid values are as follows:
-	//
-	// * host
-	//
-	// * none
-	//
-	// * task
+	// - host
+	// - none
+	// - task
 	IpcMode *string
 
 	// The amount (in MiB) of memory used by the task. For tasks that are hosted on
@@ -5528,14 +5372,10 @@ type AwsEcsTaskDefinitionDetails struct {
 
 	// The Docker networking mode to use for the containers in the task. Valid values
 	// are as follows:
-	//
-	// * awsvpc
-	//
-	// * bridge
-	//
-	// * host
-	//
-	// * none
+	// - awsvpc
+	// - bridge
+	// - host
+	// - none
 	NetworkMode *string
 
 	// The process namespace to use for the containers in the task. Valid values are
@@ -5855,19 +5695,13 @@ type AwsEksClusterDetails struct {
 	CertificateAuthorityData *string
 
 	// The status of the cluster. Valid values are as follows:
-	//
-	// * ACTIVE
-	//
-	// * CREATING
-	//
-	// *
+	// - ACTIVE
+	// - CREATING
+	// -
 	// DELETING
-	//
-	// * FAILED
-	//
-	// * PENDING
-	//
-	// * UPDATING
+	// - FAILED
+	// - PENDING
+	// - UPDATING
 	ClusterStatus *string
 
 	// The endpoint for the Amazon EKS API server.
@@ -5899,17 +5733,12 @@ type AwsEksClusterLoggingClusterLoggingDetails struct {
 	Enabled bool
 
 	// A list of logging types. Valid values are as follows:
-	//
-	// * api
-	//
-	// * audit
-	//
-	// *
+	// - api
+	// - audit
+	// -
 	// authenticator
-	//
-	// * controllerManager
-	//
-	// * scheduler
+	// - controllerManager
+	// - scheduler
 	Types []string
 
 	noSmithyDocumentSerde
@@ -5983,23 +5812,15 @@ type AwsElasticBeanstalkEnvironmentDetails struct {
 
 	// The current operational status of the environment. Valid values are as
 	// follows:
-	//
-	// * Aborting
-	//
-	// * Launching
-	//
-	// * LinkingFrom
-	//
-	// * LinkingTo
-	//
-	// * Ready
-	//
-	// *
-	// Terminated
-	//
-	// * Terminating
-	//
-	// * Updating
+	// - Aborting
+	// - Launching
+	// - LinkingFrom
+	// - LinkingTo
+	// - Ready
+	// - Terminated
+	// -
+	// Terminating
+	// - Updating
 	Status *string
 
 	// The tier of the environment.
@@ -6117,11 +5938,9 @@ type AwsElasticsearchDomainDomainEndpointOptions struct {
 
 	// The TLS security policy to apply to the HTTPS endpoint of the OpenSearch domain.
 	// Valid values:
-	//
-	// * Policy-Min-TLS-1-0-2019-07, which supports TLSv1.0 and
-	// higher
-	//
-	// * Policy-Min-TLS-1-2-2019-07, which only supports TLSv1.2
+	// - Policy-Min-TLS-1-0-2019-07, which supports TLSv1.0 and higher
+	// -
+	// Policy-Min-TLS-1-2-2019-07, which only supports TLSv1.2
 	TLSSecurityPolicy *string
 
 	noSmithyDocumentSerde
@@ -6253,17 +6072,12 @@ type AwsElasticsearchDomainServiceSoftwareOptions struct {
 	UpdateAvailable bool
 
 	// The status of the service software update. Valid values are as follows:
-	//
-	// *
+	// -
 	// COMPLETED
-	//
-	// * ELIGIBLE
-	//
-	// * IN_PROGRESS
-	//
-	// * NOT_ELIGIBLE
-	//
-	// * PENDING_UPDATE
+	// - ELIGIBLE
+	// - IN_PROGRESS
+	// - NOT_ELIGIBLE
+	// - PENDING_UPDATE
 	UpdateStatus *string
 
 	noSmithyDocumentSerde
@@ -7088,17 +6902,12 @@ type AwsKmsKeyDetails struct {
 	KeyRotationStatus bool
 
 	// The state of the KMS key. Valid values are as follows:
-	//
-	// * Disabled
-	//
-	// * Enabled
-	//
-	// *
+	// - Disabled
+	// - Enabled
+	// -
 	// PendingDeletion
-	//
-	// * PendingImport
-	//
-	// * Unavailable
+	// - PendingImport
+	// - Unavailable
 	KeyState *string
 
 	// The source of the KMS key material. When this value is AWS_KMS, KMS created the
@@ -7648,17 +7457,12 @@ type AwsOpenSearchServiceDomainServiceSoftwareOptionsDetails struct {
 	UpdateAvailable bool
 
 	// The status of the service software update. Valid values are as follows:
-	//
-	// *
+	// -
 	// COMPLETED
-	//
-	// * ELIGIBLE
-	//
-	// * IN_PROGRESS
-	//
-	// * NOT_ELIGIBLE
-	//
-	// * PENDING_UPDATE
+	// - ELIGIBLE
+	// - IN_PROGRESS
+	// - NOT_ELIGIBLE
+	// - PENDING_UPDATE
 	UpdateStatus *string
 
 	noSmithyDocumentSerde
@@ -7686,12 +7490,9 @@ type AwsRdsDbClusterAssociatedRole struct {
 
 	// The status of the association between the IAM role and the DB cluster. Valid
 	// values are as follows:
-	//
-	// * ACTIVE
-	//
-	// * INVALID
-	//
-	// * PENDING
+	// - ACTIVE
+	// - INVALID
+	// - PENDING
 	Status *string
 
 	noSmithyDocumentSerde
@@ -7701,15 +7502,11 @@ type AwsRdsDbClusterAssociatedRole struct {
 type AwsRdsDbClusterDetails struct {
 
 	// The status of the database activity stream. Valid values are as follows:
-	//
-	// *
+	// -
 	// started
-	//
-	// * starting
-	//
-	// * stopped
-	//
-	// * stopping
+	// - starting
+	// - stopped
+	// - stopping
 	ActivityStreamStatus *string
 
 	// For all database engines except Aurora, specifies the allocated storage size in
@@ -7783,26 +7580,18 @@ type AwsRdsDbClusterDetails struct {
 
 	// The name of the database engine to use for this DB cluster. Valid values are as
 	// follows:
-	//
-	// * aurora
-	//
-	// * aurora-mysql
-	//
-	// * aurora-postgresql
+	// - aurora
+	// - aurora-mysql
+	// - aurora-postgresql
 	Engine *string
 
 	// The database engine mode of the DB cluster.Valid values are as follows:
-	//
-	// *
+	// -
 	// global
-	//
-	// * multimaster
-	//
-	// * parallelquery
-	//
-	// * provisioned
-	//
-	// * serverless
+	// - multimaster
+	// - parallelquery
+	// - provisioned
+	// - serverless
 	EngineMode *string
 
 	// The version number of the database engine to use.
@@ -7988,17 +7777,14 @@ type AwsRdsDbInstanceAssociatedRole struct {
 
 	// Describes the state of the association between the IAM role and the DB instance.
 	// The Status property returns one of the following values:
-	//
-	// * ACTIVE - The IAM
-	// role ARN is associated with the DB instance and can be used to access other
-	// Amazon Web Services services on your behalf.
-	//
-	// * PENDING - The IAM role ARN is
-	// being associated with the DB instance.
-	//
-	// * INVALID - The IAM role ARN is
-	// associated with the DB instance. But the DB instance is unable to assume the IAM
-	// role in order to access other Amazon Web Services services on your behalf.
+	// - ACTIVE - The IAM role
+	// ARN is associated with the DB instance and can be used to access other Amazon
+	// Web Services services on your behalf.
+	// - PENDING - The IAM role ARN is being
+	// associated with the DB instance.
+	// - INVALID - The IAM role ARN is associated with
+	// the DB instance. But the DB instance is unable to assume the IAM role in order
+	// to access other Amazon Web Services services on your behalf.
 	Status *string
 
 	noSmithyDocumentSerde
@@ -8098,13 +7884,10 @@ type AwsRdsDbInstanceDetails struct {
 	// True if mapping of IAM accounts to database accounts is enabled, and otherwise
 	// false. IAM database authentication can be enabled for the following database
 	// engines.
-	//
-	// * For MySQL 5.6, minor version 5.6.34 or higher
-	//
-	// * For MySQL 5.7,
-	// minor version 5.7.16 or higher
-	//
-	// * Aurora 5.6 or higher
+	// - For MySQL 5.6, minor version 5.6.34 or higher
+	// - For MySQL 5.7, minor
+	// version 5.7.16 or higher
+	// - Aurora 5.6 or higher
 	IAMDatabaseAuthenticationEnabled bool
 
 	// Indicates when the DB instance was created. Uses the date-time format specified
@@ -8426,36 +8209,22 @@ type AwsRdsDbSnapshotDetails struct {
 
 	// The name of the database engine to use for this DB instance. Valid values are as
 	// follows:
-	//
-	// * aurora
-	//
-	// * aurora-mysql
-	//
-	// * aurora-postgresql
-	//
-	// * c
-	//
-	// * mariadb
-	//
-	// *
-	// mysql
-	//
-	// * oracle-ee
-	//
-	// * oracle-se
-	//
-	// * oracle-se1
-	//
-	// * oracle-se2
-	//
-	// * sqlserver-ee
-	//
-	// *
-	// sqlserver-ex
-	//
-	// * sqlserver-se
-	//
-	// * sqlserver-web
+	// - aurora
+	// - aurora-mysql
+	// - aurora-postgresql
+	// - c
+	// - mariadb
+	// - mysql
+	// -
+	// oracle-ee
+	// - oracle-se
+	// - oracle-se1
+	// - oracle-se2
+	// - sqlserver-ee
+	// - sqlserver-ex
+	// -
+	// sqlserver-se
+	// - sqlserver-web
 	Engine *string
 
 	// The version of the database engine.
@@ -8510,14 +8279,11 @@ type AwsRdsDbSnapshotDetails struct {
 	// The status of this DB snapshot.
 	Status *string
 
-	// The storage type associated with the DB snapshot. Valid values are as
-	// follows:
-	//
-	// * gp2
-	//
-	// * io1
-	//
-	// * standard
+	// The storage type associated with the DB snapshot. Valid values are as follows:
+	// -
+	// gp2
+	// - io1
+	// - standard
 	StorageType *string
 
 	// The ARN from the key store with which to associate the instance for TDE
@@ -8779,20 +8545,15 @@ type AwsRedshiftClusterDetails struct {
 
 	// The availability status of the cluster for queries. Possible values are the
 	// following:
-	//
-	// * Available - The cluster is available for queries.
-	//
-	// * Unavailable -
+	// - Available - The cluster is available for queries.
+	// - Unavailable -
 	// The cluster is not available for queries.
-	//
-	// * Maintenance - The cluster is
+	// - Maintenance - The cluster is
 	// intermittently available for queries due to maintenance activities.
-	//
-	// * Modifying
+	// - Modifying
 	// -The cluster is intermittently available for queries due to changes that modify
 	// the cluster.
-	//
-	// * Failed - The cluster failed and is not available for queries.
+	// - Failed - The cluster failed and is not available for queries.
 	ClusterAvailabilityStatus *string
 
 	// Indicates when the cluster was created. Uses the date-time format specified in
@@ -9336,17 +9097,12 @@ type AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails struct {
 	Days int32
 
 	// The storage class to transition the object to. Valid values are as follows:
-	//
-	// *
+	// -
 	// DEEP_ARCHIVE
-	//
-	// * GLACIER
-	//
-	// * INTELLIGENT_TIERING
-	//
-	// * ONEZONE_IA
-	//
-	// * STANDARD_IA
+	// - GLACIER
+	// - INTELLIGENT_TIERING
+	// - ONEZONE_IA
+	// - STANDARD_IA
 	StorageClass *string
 
 	noSmithyDocumentSerde
@@ -9451,12 +9207,9 @@ type AwsS3BucketNotificationConfigurationDetail struct {
 	// Indicates the type of notification. Notifications can be generated using Lambda
 	// functions, Amazon SQS queues, or Amazon SNS topics, with corresponding valid
 	// values as follows:
-	//
-	// * LambdaConfiguration
-	//
-	// * QueueConfiguration
-	//
-	// *
+	// - LambdaConfiguration
+	// - QueueConfiguration
+	// -
 	// TopicConfiguration
 	Type *string
 
@@ -10375,40 +10128,32 @@ type AwsSecurityFindingFilters struct {
 
 	// The status of the investigation into a finding. Allowed values are the
 	// following.
-	//
-	// * NEW - The initial state of a finding, before it is reviewed.
+	// - NEW - The initial state of a finding, before it is reviewed.
 	// Security Hub also resets the workflow status from NOTIFIED or RESOLVED to NEW in
 	// the following cases:
-	//
-	// * RecordState changes from ARCHIVED to ACTIVE.
-	//
-	// *
+	// - RecordState changes from ARCHIVED to ACTIVE.
+	// -
 	// Compliance.Status changes from PASSED to either WARNING, FAILED, or
 	// NOT_AVAILABLE.
 	//
-	// * NOTIFIED - Indicates that the resource owner has been notified
+	// - NOTIFIED - Indicates that the resource owner has been notified
 	// about the security issue. Used when the initial reviewer is not the resource
 	// owner, and needs intervention from the resource owner. If one of the following
 	// occurs, the workflow status is changed automatically from NOTIFIED to NEW:
-	//
-	// *
+	// -
 	// RecordState changes from ARCHIVED to ACTIVE.
-	//
-	// * Compliance.Status changes from
+	// - Compliance.Status changes from
 	// PASSED to FAILED, WARNING, or NOT_AVAILABLE.
 	//
-	// * SUPPRESSED - Indicates that you
+	// - SUPPRESSED - Indicates that you
 	// reviewed the finding and do not believe that any action is needed. The workflow
 	// status of a SUPPRESSED finding does not change if RecordState changes from
 	// ARCHIVED to ACTIVE.
-	//
-	// * RESOLVED - The finding was reviewed and remediated and is
+	// - RESOLVED - The finding was reviewed and remediated and is
 	// now considered resolved. The finding remains RESOLVED unless one of the
 	// following occurs:
-	//
-	// * RecordState changes from ARCHIVED to ACTIVE.
-	//
-	// *
+	// - RecordState changes from ARCHIVED to ACTIVE.
+	// -
 	// Compliance.Status changes from PASSED to FAILED, WARNING, or NOT_AVAILABLE.
 	//
 	// In
@@ -10572,19 +10317,13 @@ type AwsSsmComplianceSummary struct {
 	NonCompliantUnspecifiedCount int32
 
 	// The highest severity for the patches. Valid values are as follows:
-	//
-	// *
-	// CRITICAL
-	//
-	// * HIGH
-	//
-	// * MEDIUM
-	//
-	// * LOW
-	//
-	// * INFORMATIONAL
-	//
-	// * UNSPECIFIED
+	// - CRITICAL
+	// -
+	// HIGH
+	// - MEDIUM
+	// - LOW
+	// - INFORMATIONAL
+	// - UNSPECIFIED
 	OverallSeverity *string
 
 	// The identifier of the patch baseline. The patch baseline lists the patches that
@@ -10597,13 +10336,10 @@ type AwsSsmComplianceSummary struct {
 	PatchGroup *string
 
 	// The current patch compliance status. Valid values are as follows:
-	//
-	// *
-	// COMPLIANT
-	//
-	// * NON_COMPLIANT
-	//
-	// * UNSPECIFIED_DATA
+	// - COMPLIANT
+	// -
+	// NON_COMPLIANT
+	// - UNSPECIFIED_DATA
 	Status *string
 
 	noSmithyDocumentSerde
@@ -10671,21 +10407,14 @@ type AwsWafRateBasedRuleMatchPredicate struct {
 	Negated bool
 
 	// The type of predicate. Valid values are as follows:
-	//
-	// * ByteMatch
-	//
-	// * GeoMatch
-	//
-	// *
+	// - ByteMatch
+	// - GeoMatch
+	// -
 	// IPMatch
-	//
-	// * RegexMatch
-	//
-	// * SizeConstraint
-	//
-	// * SqlInjectionMatch
-	//
-	// * XssMatch
+	// - RegexMatch
+	// - SizeConstraint
+	// - SqlInjectionMatch
+	// - XssMatch
 	Type *string
 
 	noSmithyDocumentSerde
@@ -10735,21 +10464,14 @@ type AwsWafRegionalRateBasedRuleMatchPredicate struct {
 	Negated bool
 
 	// The type of predicate. Valid values are as follows:
-	//
-	// * ByteMatch
-	//
-	// * GeoMatch
-	//
-	// *
+	// - ByteMatch
+	// - GeoMatch
+	// -
 	// IPMatch
-	//
-	// * RegexMatch
-	//
-	// * SizeConstraint
-	//
-	// * SqlInjectionMatch
-	//
-	// * XssMatch
+	// - RegexMatch
+	// - SizeConstraint
+	// - SqlInjectionMatch
+	// - XssMatch
 	Type *string
 
 	noSmithyDocumentSerde
@@ -11372,31 +11094,24 @@ type AwsXrayEncryptionConfigDetails struct {
 type BatchUpdateFindingsUnprocessedFinding struct {
 
 	// The code associated with the error. Possible values are:
-	//
-	// *
-	// ConcurrentUpdateError - Another request attempted to update the finding while
-	// this request was being processed. This error may also occur if you call
-	// BatchUpdateFindings
+	// - ConcurrentUpdateError
+	// - Another request attempted to update the finding while this request was being
+	// processed. This error may also occur if you call BatchUpdateFindings
 	// (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)
 	// and BatchImportFindings
 	// (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html)
 	// at the same time.
-	//
-	// * DuplicatedFindingIdentifier - The request included two or
+	// - DuplicatedFindingIdentifier - The request included two or
 	// more findings with the same FindingIdentifier.
-	//
-	// * FindingNotFound - The
+	// - FindingNotFound - The
 	// FindingIdentifier included in the request did not match an existing finding.
-	//
-	// *
+	// -
 	// FindingSizeExceeded - The finding size was greater than the permissible value of
 	// 240 KB.
-	//
-	// * InternalFailure - An internal service failure occurred when updating
+	// - InternalFailure - An internal service failure occurred when updating
 	// the finding.
-	//
-	// * InvalidInput - The finding update contained an invalid value
-	// that did not satisfy the Amazon Web Services Security Finding Format
+	// - InvalidInput - The finding update contained an invalid value that
+	// did not satisfy the Amazon Web Services Security Finding Format
 	// (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html)
 	// syntax.
 	//
@@ -11404,21 +11119,14 @@ type BatchUpdateFindingsUnprocessedFinding struct {
 	ErrorCode *string
 
 	// The message associated with the error. Possible values are:
-	//
-	// * Concurrent
-	// finding updates detected
-	//
-	// * Finding Identifier is duplicated
-	//
-	// * Finding Not
-	// Found
-	//
-	// * Finding size exceeded 240 KB
-	//
-	// * Internal service failure
-	//
-	// * Invalid
-	// Input
+	// - Concurrent finding
+	// updates detected
+	// - Finding Identifier is duplicated
+	// - Finding Not Found
+	// -
+	// Finding size exceeded 240 KB
+	// - Internal service failure
+	// - Invalid Input
 	//
 	// This member is required.
 	ErrorMessage *string
@@ -11546,16 +11254,13 @@ type Compliance struct {
 
 	// The result of a standards check. The valid values for Status are as follows.
 	//
-	// *
+	// -
 	// PASSED - Standards check passed for all evaluated resources.
-	//
-	// * WARNING - Some
+	// - WARNING - Some
 	// information is missing or this check is not supported for your configuration.
-	//
-	// *
+	// -
 	// FAILED - Standards check failed for at least one evaluated resource.
-	//
-	// *
+	// -
 	// NOT_AVAILABLE - Check could not be performed due to a service outage, API error,
 	// or because the result of the Config evaluation was NOT_APPLICABLE. If the Config
 	// evaluation result was NOT_APPLICABLE, then after 3 days, Security Hub
@@ -12035,20 +11740,13 @@ type Ipv6CidrBlockAssociation struct {
 	AssociationId *string
 
 	// Information about the state of the CIDR block. Valid values are as follows:
-	//
-	// *
+	// -
 	// associating
-	//
-	// * associated
-	//
-	// * disassociating
-	//
-	// * disassociated
-	//
-	// * failed
-	//
-	// *
-	// failing
+	// - associated
+	// - disassociating
+	// - disassociated
+	// - failed
+	// - failing
 	CidrBlockState *string
 
 	// The IPv6 CIDR block.
@@ -12154,32 +11852,25 @@ type Member struct {
 
 	// The status of the relationship between the member account and its administrator
 	// account. The status can have one of the following values:
-	//
-	// * Created - Indicates
+	// - Created - Indicates
 	// that the administrator account added the member account, but has not yet invited
 	// the member account.
-	//
-	// * Invited - Indicates that the administrator account
-	// invited the member account. The member account has not yet responded to the
+	// - Invited - Indicates that the administrator account invited
+	// the member account. The member account has not yet responded to the
 	// invitation.
-	//
-	// * Enabled - Indicates that the member account is currently active.
+	// - Enabled - Indicates that the member account is currently active.
 	// For manually invited member accounts, indicates that the member account accepted
 	// the invitation.
-	//
-	// * Removed - Indicates that the administrator account
+	// - Removed - Indicates that the administrator account
 	// disassociated the member account.
-	//
-	// * Resigned - Indicates that the member
-	// account disassociated themselves from the administrator account.
-	//
-	// * Deleted -
-	// Indicates that the administrator account deleted the member account.
-	//
-	// *
-	// AccountSuspended - Indicates that an organization account was suspended from
-	// Amazon Web Services at the same time that the administrator account tried to
-	// enable the organization account as a member account.
+	// - Resigned - Indicates that the member account
+	// disassociated themselves from the administrator account.
+	// - Deleted - Indicates
+	// that the administrator account deleted the member account.
+	// - AccountSuspended -
+	// Indicates that an organization account was suspended from Amazon Web Services at
+	// the same time that the administrator account tried to enable the organization
+	// account as a member account.
 	MemberStatus *string
 
 	// The timestamp for the date and time when the member account was updated.
@@ -12571,14 +12262,11 @@ type Product struct {
 
 	// The types of integration that the product supports. Available values are the
 	// following.
-	//
-	// * SEND_FINDINGS_TO_SECURITY_HUB - The integration sends findings to
+	// - SEND_FINDINGS_TO_SECURITY_HUB - The integration sends findings to
 	// Security Hub.
-	//
-	// * RECEIVE_FINDINGS_FROM_SECURITY_HUB - The integration receives
+	// - RECEIVE_FINDINGS_FROM_SECURITY_HUB - The integration receives
 	// findings from Security Hub.
-	//
-	// * UPDATE_FINDINGS_IN_SECURITY_HUB - The integration
+	// - UPDATE_FINDINGS_IN_SECURITY_HUB - The integration
 	// does not send new findings to Security Hub, but does make updates to the
 	// findings that it receives from Security Hub.
 	IntegrationTypes []IntegrationType
@@ -12980,13 +12668,11 @@ type ResourceDetails struct {
 
 	// Details about a resource that are not available in a type-specific details
 	// object. Use the Other object in the following cases.
-	//
-	// * The type-specific object
+	// - The type-specific object
 	// does not contain all of the fields that you want to populate. In this case,
 	// first use the type-specific object to populate those fields. Use the Other
 	// object to populate the fields that are missing from the type-specific object.
-	//
-	// *
+	// -
 	// The resource type does not have a corresponding object. This includes resources
 	// for which the type is Other.
 	Other map[string]string
@@ -13435,52 +13121,35 @@ type SensitiveDataResult struct {
 type Severity struct {
 
 	// The severity value of the finding. The allowed values are the following.
-	//
-	// *
+	// -
 	// INFORMATIONAL - No issue was found.
+	// - LOW - The issue does not require action on
+	// its own.
+	// - MEDIUM - The issue must be addressed but not urgently.
+	// - HIGH - The
+	// issue must be addressed as a priority.
+	// - CRITICAL - The issue must be remediated
+	// immediately to avoid it escalating.
 	//
-	// * LOW - The issue does not require action
-	// on its own.
-	//
-	// * MEDIUM - The issue must be addressed but not urgently.
-	//
-	// * HIGH -
-	// The issue must be addressed as a priority.
-	//
-	// * CRITICAL - The issue must be
-	// remediated immediately to avoid it escalating.
-	//
-	// If you provide Normalized and do
-	// not provide Label, then Label is set automatically as follows.
-	//
-	// * 0 -
-	// INFORMATIONAL
-	//
-	// * 1–39 - LOW
-	//
-	// * 40–69 - MEDIUM
-	//
-	// * 70–89 - HIGH
-	//
-	// * 90–100 -
-	// CRITICAL
+	// If you provide Normalized and do not
+	// provide Label, then Label is set automatically as follows.
+	// - 0 - INFORMATIONAL
+	// -
+	// 1–39 - LOW
+	// - 40–69 - MEDIUM
+	// - 70–89 - HIGH
+	// - 90–100 - CRITICAL
 	Label SeverityLabel
 
 	// Deprecated. The normalized severity of a finding. This attribute is being
 	// deprecated. Instead of providing Normalized, provide Label. If you provide Label
 	// and do not provide Normalized, then Normalized is set automatically as
 	// follows.
-	//
-	// * INFORMATIONAL - 0
-	//
-	// * LOW - 1
-	//
-	// * MEDIUM - 40
-	//
-	// * HIGH - 70
-	//
-	// * CRITICAL
-	// - 90
+	// - INFORMATIONAL - 0
+	// - LOW - 1
+	// - MEDIUM - 40
+	// - HIGH - 70
+	// - CRITICAL - 90
 	Normalized int32
 
 	// The native severity from the finding product that generated the finding.
@@ -13498,36 +13167,26 @@ type Severity struct {
 type SeverityUpdate struct {
 
 	// The severity value of the finding. The allowed values are the following.
-	//
-	// *
+	// -
 	// INFORMATIONAL - No issue was found.
-	//
-	// * LOW - The issue does not require action
-	// on its own.
-	//
-	// * MEDIUM - The issue must be addressed but not urgently.
-	//
-	// * HIGH -
-	// The issue must be addressed as a priority.
-	//
-	// * CRITICAL - The issue must be
-	// remediated immediately to avoid it escalating.
+	// - LOW - The issue does not require action on
+	// its own.
+	// - MEDIUM - The issue must be addressed but not urgently.
+	// - HIGH - The
+	// issue must be addressed as a priority.
+	// - CRITICAL - The issue must be remediated
+	// immediately to avoid it escalating.
 	Label SeverityLabel
 
 	// The normalized severity for the finding. This attribute is to be deprecated in
 	// favor of Label. If you provide Normalized and do not provide Label, Label is set
 	// automatically as follows.
-	//
-	// * 0 - INFORMATIONAL
-	//
-	// * 1–39 - LOW
-	//
-	// * 40–69 -
-	// MEDIUM
-	//
-	// * 70–89 - HIGH
-	//
-	// * 90–100 - CRITICAL
+	// - 0 - INFORMATIONAL
+	// - 1–39 - LOW
+	// - 40–69 - MEDIUM
+	// -
+	// 70–89 - HIGH
+	// - 90–100 - CRITICAL
 	Normalized int32
 
 	// The native severity as defined by the Amazon Web Services service or integrated
@@ -13855,20 +13514,15 @@ type StandardsSubscription struct {
 	StandardsInput map[string]string
 
 	// The status of the standard subscription. The status values are as follows:
-	//
-	// *
+	// -
 	// PENDING - Standard is in the process of being enabled.
-	//
-	// * READY - Standard is
+	// - READY - Standard is
 	// enabled.
-	//
-	// * INCOMPLETE - Standard could not be enabled completely. Some controls
+	// - INCOMPLETE - Standard could not be enabled completely. Some controls
 	// may not be available.
-	//
-	// * DELETING - Standard is in the process of being
+	// - DELETING - Standard is in the process of being
 	// disabled.
-	//
-	// * FAILED - Standard could not be disabled.
+	// - FAILED - Standard could not be disabled.
 	//
 	// This member is required.
 	StandardsStatus StandardsStatus
@@ -13950,13 +13604,11 @@ type StringFilter struct {
 	// The condition to apply to a string value when querying for findings. To search
 	// for values that contain the filter criteria value, use one of the following
 	// comparison operators:
-	//
-	// * To search for values that exactly match the filter
+	// - To search for values that exactly match the filter
 	// value, use EQUALS. For example, the filter ResourceType EQUALS
 	// AwsEc2SecurityGroup only matches findings that have a resource type of
 	// AwsEc2SecurityGroup.
-	//
-	// * To search for values that start with the filter value,
+	// - To search for values that start with the filter value,
 	// use PREFIX. For example, the filter ResourceType PREFIX AwsIam matches findings
 	// that have a resource type that starts with AwsIam. Findings with a resource type
 	// of AwsIamPolicy, AwsIamRole, or AwsIamUser would all match.
@@ -13965,13 +13617,11 @@ type StringFilter struct {
 	// filters on the same field are joined by OR. A finding matches if it matches any
 	// one of those filters. To search for values that do not contain the filter
 	// criteria value, use one of the following comparison operators:
-	//
-	// * To search for
+	// - To search for
 	// values that do not exactly match the filter value, use NOT_EQUALS. For example,
 	// the filter ResourceType NOT_EQUALS AwsIamPolicy matches findings that have a
 	// resource type other than AwsIamPolicy.
-	//
-	// * To search for values that do not start
+	// - To search for values that do not start
 	// with the filter value, use PREFIX_NOT_EQUALS. For example, the filter
 	// ResourceType PREFIX_NOT_EQUALS AwsIam matches findings that have a resource type
 	// that does not start with AwsIam. Findings with a resource type of AwsIamPolicy,
@@ -13989,16 +13639,12 @@ type StringFilter struct {
 	// first identifies findings that have resource types that start with either AwsIAM
 	// or AwsEc2. It then excludes findings that have a resource type of AwsIamPolicy
 	// and findings that have a resource type of AwsEc2NetworkInterface.
-	//
-	// *
-	// ResourceType PREFIX AwsIam
-	//
-	// * ResourceType PREFIX AwsEc2
-	//
-	// * ResourceType
-	// NOT_EQUALS AwsIamPolicy
-	//
-	// * ResourceType NOT_EQUALS AwsEc2NetworkInterface
+	// - ResourceType
+	// PREFIX AwsIam
+	// - ResourceType PREFIX AwsEc2
+	// - ResourceType NOT_EQUALS
+	// AwsIamPolicy
+	// - ResourceType NOT_EQUALS AwsEc2NetworkInterface
 	Comparison StringFilterComparison
 
 	// The string filter value. Filter values are case sensitive. For example, the
@@ -14195,15 +13841,12 @@ type Vulnerability struct {
 	// FixedInVersion and Remediation. This field is evaluated for each vulnerability
 	// Id based on the number of vulnerable packages that have a value for both
 	// FixedInVersion and Remediation. Valid values are as follows:
-	//
-	// * YES if all
+	// - YES if all
 	// vulnerable packages have a value for both FixedInVersion and Remediation
-	//
-	// * NO
-	// if no vulnerable packages have a value for FixedInVersion and Remediation
-	//
-	// *
-	// PARTIAL otherwise
+	// - NO if
+	// no vulnerable packages have a value for FixedInVersion and Remediation
+	// - PARTIAL
+	// otherwise
 	FixAvailable VulnerabilityFixAvailable
 
 	// A list of URLs that provide additional information about the vulnerability.
@@ -14258,13 +13901,10 @@ type WafAction struct {
 
 	// Specifies how you want WAF to respond to requests that match the settings in a
 	// rule. Valid settings include the following:
-	//
-	// * ALLOW - WAF allows requests
-	//
-	// *
+	// - ALLOW - WAF allows requests
+	// -
 	// BLOCK - WAF blocks requests
-	//
-	// * COUNT - WAF increments a counter of the requests
+	// - COUNT - WAF increments a counter of the requests
 	// that match all of the conditions in the rule. WAF then continues to inspect the
 	// web request based on the remaining rules in the web ACL. You can't specify COUNT
 	// for the default action for a web ACL.
@@ -14300,26 +13940,21 @@ type Workflow struct {
 	// findings. For example, setting the workflow status to SUPPRESSED or RESOLVED
 	// does not prevent a new finding for the same issue. The allowed values are the
 	// following.
-	//
-	// * NEW - The initial state of a finding, before it is reviewed.
+	// - NEW - The initial state of a finding, before it is reviewed.
 	// Security Hub also resets the workflow status from NOTIFIED or RESOLVED to NEW in
 	// the following cases:
-	//
-	// * RecordState changes from ARCHIVED to ACTIVE.
-	//
-	// *
+	// - RecordState changes from ARCHIVED to ACTIVE.
+	// -
 	// ComplianceStatus changes from PASSED to either WARNING, FAILED, or
 	// NOT_AVAILABLE.
 	//
-	// * NOTIFIED - Indicates that you notified the resource owner
+	// - NOTIFIED - Indicates that you notified the resource owner
 	// about the security issue. Used when the initial reviewer is not the resource
 	// owner, and needs intervention from the resource owner.
-	//
-	// * SUPPRESSED - Indicates
+	// - SUPPRESSED - Indicates
 	// that you reviewed the finding and do not believe that any action is needed. The
 	// finding is no longer updated.
-	//
-	// * RESOLVED - The finding was reviewed and
+	// - RESOLVED - The finding was reviewed and
 	// remediated and is now considered resolved.
 	Status WorkflowStatus
 
@@ -14334,25 +13969,20 @@ type WorkflowUpdate struct {
 	// findings. For example, setting the workflow status to SUPPRESSED or RESOLVED
 	// does not prevent a new finding for the same issue. The allowed values are the
 	// following.
-	//
-	// * NEW - The initial state of a finding, before it is reviewed.
+	// - NEW - The initial state of a finding, before it is reviewed.
 	// Security Hub also resets WorkFlowStatus from NOTIFIED or RESOLVED to NEW in the
 	// following cases:
-	//
-	// * The record state changes from ARCHIVED to ACTIVE.
-	//
-	// * The
+	// - The record state changes from ARCHIVED to ACTIVE.
+	// - The
 	// compliance status changes from PASSED to either WARNING, FAILED, or
 	// NOT_AVAILABLE.
 	//
-	// * NOTIFIED - Indicates that you notified the resource owner
+	// - NOTIFIED - Indicates that you notified the resource owner
 	// about the security issue. Used when the initial reviewer is not the resource
 	// owner, and needs intervention from the resource owner.
-	//
-	// * RESOLVED - The finding
+	// - RESOLVED - The finding
 	// was reviewed and remediated and is now considered resolved.
-	//
-	// * SUPPRESSED -
+	// - SUPPRESSED -
 	// Indicates that you reviewed the finding and do not believe that any action is
 	// needed. The finding is no longer updated.
 	Status WorkflowStatus

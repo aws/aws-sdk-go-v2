@@ -61,24 +61,18 @@ type CreatePredictorBacktestExportJobInput struct {
 	// Optional metadata to help you categorize and organize your backtests. Each tag
 	// consists of a key and an optional value, both of which you define. Tag keys and
 	// values are case sensitive. The following restrictions apply to tags:
-	//
-	// * For each
+	// - For each
 	// resource, each tag key must be unique and each tag key must have one value.
-	//
-	// *
+	// -
 	// Maximum number of tags per resource: 50.
-	//
-	// * Maximum key length: 128 Unicode
+	// - Maximum key length: 128 Unicode
 	// characters in UTF-8.
-	//
-	// * Maximum value length: 256 Unicode characters in
-	// UTF-8.
-	//
-	// * Accepted characters: all letters and numbers, spaces representable in
-	// UTF-8, and + - = . _ : / @. If your tagging schema is used across other services
-	// and resources, the character restrictions of those services also apply.
-	//
-	// * Key
+	// - Maximum value length: 256 Unicode characters in UTF-8.
+	// -
+	// Accepted characters: all letters and numbers, spaces representable in UTF-8, and
+	// + - = . _ : / @. If your tagging schema is used across other services and
+	// resources, the character restrictions of those services also apply.
+	// - Key
 	// prefixes cannot include any upper or lowercase combination of aws: or AWS:.
 	// Values can have this prefix. If a tag value has aws as its prefix but the key
 	// does not, Forecast considers it to be a user tag and will count against the

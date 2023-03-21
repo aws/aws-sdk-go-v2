@@ -34,14 +34,11 @@ func (c *Client) DeleteFunction(ctx context.Context, params *DeleteFunctionInput
 type DeleteFunctionInput struct {
 
 	// The name of the Lambda function or version. Name formats
-	//
-	// * Function name –
+	// - Function name –
 	// my-function (name-only), my-function:1 (with version).
-	//
-	// * Function ARN –
+	// - Function ARN –
 	// arn:aws:lambda:us-west-2:123456789012:function:my-function.
-	//
-	// * Partial ARN –
+	// - Partial ARN –
 	// 123456789012:function:my-function.
 	//
 	// You can append a version number or alias to

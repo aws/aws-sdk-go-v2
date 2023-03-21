@@ -12,13 +12,10 @@ import (
 )
 
 // Describes a recipe. A recipe contains three items:
-//
-// * An algorithm that trains a
+// - An algorithm that trains a
 // model.
-//
-// * Hyperparameters that govern the training.
-//
-// * Feature transformation
+// - Hyperparameters that govern the training.
+// - Feature transformation
 // information for modifying the input data before training.
 //
 // Amazon Personalize

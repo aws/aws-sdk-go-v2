@@ -37,14 +37,11 @@ func (c *Client) CreateKey(ctx context.Context, params *CreateKeyInput, optFns .
 type CreateKeyInput struct {
 
 	// A custom name for the API key resource. Requirements:
-	//
-	// * Contain only
+	// - Contain only
 	// alphanumeric characters (A–Z, a–z, 0–9), hyphens (-), periods (.), and
 	// underscores (_).
-	//
-	// * Must be a unique API key name.
-	//
-	// * No spaces allowed. For
+	// - Must be a unique API key name.
+	// - No spaces allowed. For
 	// example, ExampleAPIKey.
 	//
 	// This member is required.
@@ -70,22 +67,16 @@ type CreateKeyInput struct {
 	// Applies one or more tags to the map resource. A tag is a key-value pair that
 	// helps manage, identify, search, and filter your resources by labelling them.
 	// Format: "key" : "value" Restrictions:
-	//
-	// * Maximum 50 tags per resource
-	//
-	// * Each
+	// - Maximum 50 tags per resource
+	// - Each
 	// resource tag must be unique with a maximum of one value.
-	//
-	// * Maximum key length:
+	// - Maximum key length:
 	// 128 Unicode characters in UTF-8
-	//
-	// * Maximum value length: 256 Unicode characters
+	// - Maximum value length: 256 Unicode characters
 	// in UTF-8
-	//
-	// * Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
+	// - Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
 	// characters: + - = . _ : / @.
-	//
-	// * Cannot use "aws:" as a prefix for a key.
+	// - Cannot use "aws:" as a prefix for a key.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -109,8 +100,7 @@ type CreateKeyOutput struct {
 
 	// The Amazon Resource Name (ARN) for the API key resource. Used when you need to
 	// specify a resource across all Amazon Web Services.
-	//
-	// * Format example:
+	// - Format example:
 	// arn:aws:geo:region:account-id:key/ExampleKey
 	//
 	// This member is required.

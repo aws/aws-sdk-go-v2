@@ -270,56 +270,43 @@ type CertificateAuthorityConfiguration struct {
 // typically updated approximately 30 minutes after a certificate is revoked. If
 // for any reason a CRL update fails, Amazon Web Services Private CA makes further
 // attempts every 15 minutes. CRLs contain the following fields:
-//
-// * Version: The
+// - Version: The
 // current version number defined in RFC 5280 is V2. The integer value is 0x1.
-//
-// *
+// -
 // Signature Algorithm: The name of the algorithm used to sign the CRL.
-//
-// * Issuer:
+// - Issuer:
 // The X.500 distinguished name of your private CA that issued the CRL.
-//
-// * Last
+// - Last
 // Update: The issue date and time of this CRL.
-//
-// * Next Update: The day and time by
+// - Next Update: The day and time by
 // which the next CRL will be issued.
-//
-// * Revoked Certificates: List of revoked
+// - Revoked Certificates: List of revoked
 // certificates. Each list item contains the following information.
-//
-// * Serial
+// - Serial
 // Number: The serial number, in hexadecimal format, of the revoked certificate.
-//
-// *
+// -
 // Revocation Date: Date and time the certificate was revoked.
-//
-// * CRL Entry
+// - CRL Entry
 // Extensions: Optional extensions for the CRL entry.
-//
-// * X509v3 CRL Reason Code:
+// - X509v3 CRL Reason Code:
 // Reason the certificate was revoked.
 //
-// * CRL Extensions: Optional extensions for
+// - CRL Extensions: Optional extensions for
 // the CRL.
+// - X509v3 Authority Key Identifier: Identifies the public key associated
+// with the private key used to sign the certificate.
+// - X509v3 CRL Number:: Decimal
+// sequence number for the CRL.
 //
-// * X509v3 Authority Key Identifier: Identifies the public key
-// associated with the private key used to sign the certificate.
+// - Signature Algorithm: Algorithm used by your
+// private CA to sign the CRL.
+// - Signature Value: Signature computed over the
+// CRL.
 //
-// * X509v3 CRL
-// Number:: Decimal sequence number for the CRL.
-//
-// * Signature Algorithm: Algorithm
-// used by your private CA to sign the CRL.
-//
-// * Signature Value: Signature computed
-// over the CRL.
-//
-// Certificate revocation lists created by Amazon Web Services
-// Private CA are DER-encoded. You can use the following OpenSSL command to list a
-// CRL. openssl crl -inform DER -text -in crl_path -noout For more information, see
-// Planning a certificate revocation list (CRL)
+// Certificate revocation lists created by Amazon Web Services Private CA are
+// DER-encoded. You can use the following OpenSSL command to list a CRL. openssl
+// crl -inform DER -text -in crl_path -noout For more information, see Planning a
+// certificate revocation list (CRL)
 // (https://docs.aws.amazon.com/privateca/latest/userguide/crl-planning.html) in
 // the Amazon Web Services Private Certificate Authority User Guide
 type CrlConfiguration struct {
@@ -772,35 +759,28 @@ type Validity struct {
 	// (YYMMDDHHMMSS) or GeneralizedTime (YYYYMMDDHHMMSS) format. When UTCTime is used,
 	// if the year field (YY) is greater than or equal to 50, the year is interpreted
 	// as 19YY. If the year field is less than 50, the year is interpreted as 20YY.
-	//
-	// *
+	// -
 	// Sample input value: 491231235959 (UTCTime format)
+	// - Output expiration date/time:
+	// 12/31/2049 23:59:59
 	//
-	// * Output expiration
-	// date/time: 12/31/2049 23:59:59
+	// ABSOLUTE: The specific date and time when the validity of a
+	// certificate will start or expire, expressed in seconds since the Unix Epoch.
+	// -
+	// Sample input value: 2524608000
+	// - Output expiration date/time: 01/01/2050
+	// 00:00:00
 	//
-	// ABSOLUTE: The specific date and time when the
-	// validity of a certificate will start or expire, expressed in seconds since the
-	// Unix Epoch.
+	// DAYS, MONTHS, YEARS: The relative time from the moment of issuance
+	// until the certificate will expire, expressed in days, months, or years. Example
+	// if DAYS, issued on 10/12/2020 at 12:34:54 UTC:
+	// - Sample input value: 90
+	// - Output
+	// expiration date: 01/10/2020 12:34:54 UTC
 	//
-	// * Sample input value: 2524608000
-	//
-	// * Output expiration date/time:
-	// 01/01/2050 00:00:00
-	//
-	// DAYS, MONTHS, YEARS: The relative time from the moment of
-	// issuance until the certificate will expire, expressed in days, months, or years.
-	// Example if DAYS, issued on 10/12/2020 at 12:34:54 UTC:
-	//
-	// * Sample input value:
-	// 90
-	//
-	// * Output expiration date: 01/10/2020 12:34:54 UTC
-	//
-	// The minimum validity
-	// duration for a certificate using relative time (DAYS) is one day. The minimum
-	// validity for a certificate using absolute time (ABSOLUTE or END_DATE) is one
-	// second.
+	// The minimum validity duration for a
+	// certificate using relative time (DAYS) is one day. The minimum validity for a
+	// certificate using absolute time (ABSOLUTE or END_DATE) is one second.
 	//
 	// This member is required.
 	Type ValidityPeriodType

@@ -13,29 +13,20 @@ import (
 
 // The related resources of an Audit finding. The following resources can be
 // returned from calling this API:
-//
-// * DEVICE_CERTIFICATE
-//
-// * CA_CERTIFICATE
-//
-// *
+// - DEVICE_CERTIFICATE
+// - CA_CERTIFICATE
+// -
 // IOT_POLICY
+// - COGNITO_IDENTITY_POOL
+// - CLIENT_ID
+// - ACCOUNT_SETTINGS
+// - ROLE_ALIAS
+// -
+// IAM_ROLE
+// - ISSUER_CERTIFICATE
 //
-// * COGNITO_IDENTITY_POOL
-//
-// * CLIENT_ID
-//
-// * ACCOUNT_SETTINGS
-//
-// *
-// ROLE_ALIAS
-//
-// * IAM_ROLE
-//
-// * ISSUER_CERTIFICATE
-//
-// This API is similar to
-// DescribeAuditFinding's RelatedResources
+// This API is similar to DescribeAuditFinding's
+// RelatedResources
 // (https://docs.aws.amazon.com/iot/latest/apireference/API_DescribeAuditFinding.html)
 // but provides pagination and is not limited to 10 resources. When calling
 // DescribeAuditFinding

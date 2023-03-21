@@ -17,12 +17,10 @@ import (
 // For multi-location fleets, fleet actions are managed separately for each
 // location. Currently, this operation is used to restart a fleet's auto-scaling
 // activity. This operation can be used in the following ways:
-//
-// * To restart
-// actions on instances in the fleet's home Region, provide a fleet ID and the type
-// of actions to resume.
-//
-// * To restart actions on instances in one of the fleet's
+// - To restart actions
+// on instances in the fleet's home Region, provide a fleet ID and the type of
+// actions to resume.
+// - To restart actions on instances in one of the fleet's
 // remote locations, provide a fleet ID, a location name, and the type of actions
 // to resume.
 //

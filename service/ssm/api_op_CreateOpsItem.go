@@ -101,14 +101,11 @@ type CreateOpsItemInput struct {
 
 	// The type of OpsItem to create. Systems Manager supports the following types of
 	// OpsItems:
-	//
-	// * /aws/issue This type of OpsItem is used for default OpsItems
-	// created by OpsCenter.
-	//
-	// * /aws/changerequest This type of OpsItem is used by
-	// Change Manager for reviewing and approving or rejecting change requests.
-	//
-	// *
+	// - /aws/issue This type of OpsItem is used for default OpsItems created
+	// by OpsCenter.
+	// - /aws/changerequest This type of OpsItem is used by Change
+	// Manager for reviewing and approving or rejecting change requests.
+	// -
 	// /aws/insights This type of OpsItem is used by OpsCenter for aggregating and
 	// reporting on duplicate OpsItems.
 	OpsItemType *string

@@ -54,13 +54,10 @@ type CreateDBParameterGroupInput struct {
 	DBParameterGroupFamily *string
 
 	// The name of the DB parameter group. Constraints:
-	//
-	// * Must be 1 to 255 letters,
+	// - Must be 1 to 255 letters,
 	// numbers, or hyphens.
-	//
-	// * First character must be a letter
-	//
-	// * Cannot end with a
+	// - First character must be a letter
+	// - Cannot end with a
 	// hyphen or contain two consecutive hyphens
 	//
 	// This value is stored as a lowercase

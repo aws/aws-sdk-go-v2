@@ -31,16 +31,14 @@ import (
 // in the IAM User Guide. The GenerateServiceLastAccessedDetails operation returns
 // a JobId. Use this parameter in the following operations to retrieve the
 // following details from your report:
-//
-// * GetServiceLastAccessedDetails – Use this
+// - GetServiceLastAccessedDetails – Use this
 // operation for users, groups, roles, or policies to list every Amazon Web
 // Services service that the resource could access using permissions policies. For
 // each service, the response includes information about the most recent access
 // attempt. The JobId returned by GenerateServiceLastAccessedDetail must be used by
 // the same role within a session, or by the same user when used to call
 // GetServiceLastAccessedDetail.
-//
-// * GetServiceLastAccessedDetailsWithEntities – Use
+// - GetServiceLastAccessedDetailsWithEntities – Use
 // this operation for groups and policies to list information about the associated
 // entities (users or roles) that attempted to access a specific Amazon Web
 // Services service.

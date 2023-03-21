@@ -67,18 +67,14 @@ type DescribeFrameworkOutput struct {
 	// A framework consists of one or more controls. Each control governs a resource,
 	// such as backup plans, backup selections, backup vaults, or recovery points. You
 	// can also turn Config recording on or off for each resource. The statuses are:
-	//
-	// *
+	// -
 	// ACTIVE when recording is turned on for all resources governed by the
 	// framework.
-	//
-	// * PARTIALLY_ACTIVE when recording is turned off for at least one
+	// - PARTIALLY_ACTIVE when recording is turned off for at least one
 	// resource governed by the framework.
-	//
-	// * INACTIVE when recording is turned off for
+	// - INACTIVE when recording is turned off for
 	// all resources governed by the framework.
-	//
-	// * UNAVAILABLE when Backup is unable to
+	// - UNAVAILABLE when Backup is unable to
 	// validate recording status at this time.
 	FrameworkStatus *string
 

@@ -35,19 +35,16 @@ type DescribeDBClusterSnapshotsInput struct {
 	// The ID of the cluster to retrieve the list of cluster snapshots for. This
 	// parameter can't be used with the DBClusterSnapshotIdentifier parameter. This
 	// parameter is not case sensitive. Constraints:
-	//
-	// * If provided, must match the
+	// - If provided, must match the
 	// identifier of an existing DBCluster.
 	DBClusterIdentifier *string
 
 	// A specific cluster snapshot identifier to describe. This parameter can't be used
 	// with the DBClusterIdentifier parameter. This value is stored as a lowercase
 	// string. Constraints:
-	//
-	// * If provided, must match the identifier of an existing
+	// - If provided, must match the identifier of an existing
 	// DBClusterSnapshot.
-	//
-	// * If this identifier is for an automated snapshot, the
+	// - If this identifier is for an automated snapshot, the
 	// SnapshotType parameter must also be specified.
 	DBClusterSnapshotIdentifier *string
 
@@ -77,19 +74,15 @@ type DescribeDBClusterSnapshotsInput struct {
 
 	// The type of cluster snapshots to be returned. You can specify one of the
 	// following values:
-	//
-	// * automated - Return all cluster snapshots that Amazon
+	// - automated - Return all cluster snapshots that Amazon
 	// DocumentDB has automatically created for your Amazon Web Services account.
-	//
-	// *
+	// -
 	// manual - Return all cluster snapshots that you have manually created for your
 	// Amazon Web Services account.
-	//
-	// * shared - Return all manual cluster snapshots
-	// that have been shared to your Amazon Web Services account.
-	//
-	// * public - Return
-	// all cluster snapshots that have been marked as public.
+	// - shared - Return all manual cluster snapshots that
+	// have been shared to your Amazon Web Services account.
+	// - public - Return all
+	// cluster snapshots that have been marked as public.
 	//
 	// If you don't specify a
 	// SnapshotType value, then both automated and manual cluster snapshots are

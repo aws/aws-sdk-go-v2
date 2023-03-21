@@ -15,12 +15,10 @@ import (
 // that you specified. You can get the check IDs by calling the
 // DescribeTrustedAdvisorChecks operation. The response contains an array of
 // TrustedAdvisorCheckSummary objects.
-//
-// * You must have a Business, Enterprise
+// - You must have a Business, Enterprise
 // On-Ramp, or Enterprise Support plan to use the Amazon Web Services Support
 // API.
-//
-// * If you call the Amazon Web Services Support API from an account that
+// - If you call the Amazon Web Services Support API from an account that
 // doesn't have a Business, Enterprise On-Ramp, or Enterprise Support plan, the
 // SubscriptionRequiredException error message appears. For information about
 // changing your support plan, see Amazon Web Services Support

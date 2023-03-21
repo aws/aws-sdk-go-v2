@@ -48,46 +48,33 @@ type DescribeOpsItemsInput struct {
 	NextToken *string
 
 	// One or more filters to limit the response.
-	//
-	// * Key: CreatedTime Operations:
+	// - Key: CreatedTime Operations:
 	// GreaterThan, LessThan
-	//
-	// * Key: LastModifiedBy Operations: Contains, Equals
-	//
-	// *
-	// Key: LastModifiedTime Operations: GreaterThan, LessThan
-	//
-	// * Key: Priority
+	// - Key: LastModifiedBy Operations: Contains, Equals
+	// - Key:
+	// LastModifiedTime Operations: GreaterThan, LessThan
+	// - Key: Priority Operations:
+	// Equals
+	// - Key: Source Operations: Contains, Equals
+	// - Key: Status Operations:
+	// Equals
+	// - Key: Title* Operations: Equals,Contains
+	// - Key: OperationalData**
 	// Operations: Equals
-	//
-	// * Key: Source Operations: Contains, Equals
-	//
-	// * Key: Status
-	// Operations: Equals
-	//
-	// * Key: Title* Operations: Equals,Contains
-	//
-	// * Key:
-	// OperationalData** Operations: Equals
-	//
-	// * Key: OperationalDataKey Operations:
+	// - Key: OperationalDataKey Operations: Equals
+	// - Key:
+	// OperationalDataValue Operations: Equals, Contains
+	// - Key: OpsItemId Operations:
+	// Equals
+	// - Key: ResourceId Operations: Contains
+	// - Key: AutomationId Operations:
 	// Equals
 	//
-	// * Key: OperationalDataValue Operations: Equals, Contains
-	//
-	// * Key:
-	// OpsItemId Operations: Equals
-	//
-	// * Key: ResourceId Operations: Contains
-	//
-	// * Key:
-	// AutomationId Operations: Equals
-	//
-	// *The Equals operator for Title matches the
-	// first 100 characters. If you specify more than 100 characters, they system
-	// returns an error that the filter value exceeds the length limit. **If you filter
-	// the response by using the OperationalData operator, specify a key-value pair by
-	// using the following JSON format: {"key":"key_name","value":"a_value"}
+	// *The Equals operator for Title matches the first 100 characters. If you
+	// specify more than 100 characters, they system returns an error that the filter
+	// value exceeds the length limit. **If you filter the response by using the
+	// OperationalData operator, specify a key-value pair by using the following JSON
+	// format: {"key":"key_name","value":"a_value"}
 	OpsItemFilters []types.OpsItemFilter
 
 	noSmithyDocumentSerde

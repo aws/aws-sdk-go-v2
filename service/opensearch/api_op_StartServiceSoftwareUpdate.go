@@ -43,15 +43,12 @@ type StartServiceSoftwareUpdateInput struct {
 	DesiredStartTime *int64
 
 	// When to start the service software update.
-	//
-	// * NOW - Immediately schedules the
+	// - NOW - Immediately schedules the
 	// update to happen in the current hour if there's capacity available.
-	//
-	// * TIMESTAMP
+	// - TIMESTAMP
 	// - Lets you specify a custom date and time to apply the update. If you specify
 	// this value, you must also provide a value for DesiredStartTime.
-	//
-	// *
+	// -
 	// OFF_PEAK_WINDOW - Marks the update to be picked up during an upcoming off-peak
 	// window. There's no guarantee that the update will happen during the next
 	// immediate window. Depending on capacity, it might happen in subsequent

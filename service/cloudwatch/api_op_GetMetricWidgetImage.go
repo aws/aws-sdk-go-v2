@@ -18,11 +18,9 @@ import (
 // graph features, including metric math and horizontal and vertical annotations.
 // There is a limit of 20 transactions per second for this API. Each
 // GetMetricWidgetImage action has the following limits:
-//
-// * As many as 100 metrics
+// - As many as 100 metrics
 // in the graph.
-//
-// * Up to 100 KB uncompressed payload.
+// - Up to 100 KB uncompressed payload.
 func (c *Client) GetMetricWidgetImage(ctx context.Context, params *GetMetricWidgetImageInput, optFns ...func(*Options)) (*GetMetricWidgetImageOutput, error) {
 	if params == nil {
 		params = &GetMetricWidgetImageInput{}

@@ -77,16 +77,13 @@ type CreateVolumeInput struct {
 	// volumes, this represents the baseline performance of the volume and the rate at
 	// which the volume accumulates I/O credits for bursting. The following are the
 	// supported values for each volume type:
-	//
-	// * gp3: 3,000-16,000 IOPS
-	//
-	// * io1:
+	// - gp3: 3,000-16,000 IOPS
+	// - io1:
 	// 100-64,000 IOPS
+	// - io2: 100-64,000 IOPS
 	//
-	// * io2: 100-64,000 IOPS
-	//
-	// io1 and io2 volumes support up to
-	// 64,000 IOPS only on Instances built on the Nitro System
+	// io1 and io2 volumes support up to 64,000
+	// IOPS only on Instances built on the Nitro System
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances).
 	// Other instance families support performance up to 32,000 IOPS. This parameter is
 	// required for io1 and io2 volumes. The default for gp3 volumes is 3,000 IOPS.
@@ -97,17 +94,13 @@ type CreateVolumeInput struct {
 	// encryption. If this parameter is not specified, your KMS key for Amazon EBS is
 	// used. If KmsKeyId is specified, the encrypted state must be true. You can
 	// specify the KMS key using any of the following:
-	//
-	// * Key ID. For example,
+	// - Key ID. For example,
 	// 1234abcd-12ab-34cd-56ef-1234567890ab.
-	//
-	// * Key alias. For example,
+	// - Key alias. For example,
 	// alias/ExampleAlias.
-	//
-	// * Key ARN. For example,
+	// - Key ARN. For example,
 	// arn:aws:kms:us-east-1:012345678910:key/1234abcd-12ab-34cd-56ef-1234567890ab.
-	//
-	// *
+	// -
 	// Alias ARN. For example,
 	// arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
 	//
@@ -133,16 +126,11 @@ type CreateVolumeInput struct {
 	// volume size. If you specify a snapshot, the default is the snapshot size. You
 	// can specify a volume size that is equal to or larger than the snapshot size. The
 	// following are the supported volumes sizes for each volume type:
-	//
-	// * gp2 and gp3:
+	// - gp2 and gp3:
 	// 1-16,384
-	//
-	// * io1 and io2: 4-16,384
-	//
-	// * st1 and sc1: 125-16,384
-	//
-	// * standard:
-	// 1-1,024
+	// - io1 and io2: 4-16,384
+	// - st1 and sc1: 125-16,384
+	// - standard: 1-1,024
 	Size *int32
 
 	// The snapshot from which to create the volume. You must specify either a snapshot
@@ -158,22 +146,17 @@ type CreateVolumeInput struct {
 	Throughput *int32
 
 	// The volume type. This parameter can be one of the following values:
-	//
-	// * General
+	// - General
 	// Purpose SSD: gp2 | gp3
+	// - Provisioned IOPS SSD: io1 | io2
+	// - Throughput Optimized
+	// HDD: st1
+	// - Cold HDD: sc1
+	// - Magnetic: standard
 	//
-	// * Provisioned IOPS SSD: io1 | io2
-	//
-	// * Throughput
-	// Optimized HDD: st1
-	//
-	// * Cold HDD: sc1
-	//
-	// * Magnetic: standard
-	//
-	// Throughput Optimized
-	// HDD (st1) and Cold HDD (sc1) volumes can't be used as boot volumes. For more
-	// information, see Amazon EBS volume types
+	// Throughput Optimized HDD (st1)
+	// and Cold HDD (sc1) volumes can't be used as boot volumes. For more information,
+	// see Amazon EBS volume types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) in the
 	// Amazon Elastic Compute Cloud User Guide. Default: gp2
 	VolumeType types.VolumeType

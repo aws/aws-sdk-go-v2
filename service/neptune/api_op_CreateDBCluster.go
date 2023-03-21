@@ -39,13 +39,10 @@ type CreateDBClusterInput struct {
 
 	// The DB cluster identifier. This parameter is stored as a lowercase string.
 	// Constraints:
-	//
-	// * Must contain from 1 to 63 letters, numbers, or hyphens.
-	//
-	// * First
+	// - Must contain from 1 to 63 letters, numbers, or hyphens.
+	// - First
 	// character must be a letter.
-	//
-	// * Cannot end with a hyphen or contain two
+	// - Cannot end with a hyphen or contain two
 	// consecutive hyphens.
 	//
 	// Example: my-cluster1
@@ -65,8 +62,7 @@ type CreateDBClusterInput struct {
 
 	// The number of days for which automated backups are retained. You must specify a
 	// minimum value of 1. Default: 1 Constraints:
-	//
-	// * Must be a value from 1 to 35
+	// - Must be a value from 1 to 35
 	BackupRetentionPeriod *int32
 
 	// (Not supported by Neptune)
@@ -78,8 +74,7 @@ type CreateDBClusterInput struct {
 
 	// The name of the DB cluster parameter group to associate with this DB cluster. If
 	// this argument is omitted, the default is used. Constraints:
-	//
-	// * If supplied, must
+	// - If supplied, must
 	// match the name of an existing DBClusterParameterGroup.
 	DBClusterParameterGroupName *string
 
@@ -119,13 +114,11 @@ type CreateDBClusterInput struct {
 	// encryption key used to encrypt the new DB cluster, then you can use the KMS key
 	// alias instead of the ARN for the KMS encryption key. If an encryption key is not
 	// specified in KmsKeyId:
-	//
-	// * If ReplicationSourceIdentifier identifies an encrypted
+	// - If ReplicationSourceIdentifier identifies an encrypted
 	// source, then Amazon Neptune will use the encryption key used to encrypt the
 	// source. Otherwise, Amazon Neptune will use your default encryption key.
-	//
-	// * If
-	// the StorageEncrypted parameter is true and ReplicationSourceIdentifier is not
+	// - If the
+	// StorageEncrypted parameter is true and ReplicationSourceIdentifier is not
 	// specified, then Amazon Neptune will use your default encryption key.
 	//
 	// Amazon KMS
@@ -159,16 +152,12 @@ type CreateDBClusterInput struct {
 	// Maintenance Window
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html)
 	// in the Amazon Neptune User Guide. Constraints:
-	//
-	// * Must be in the format
+	// - Must be in the format
 	// hh24:mi-hh24:mi.
-	//
-	// * Must be in Universal Coordinated Time (UTC).
-	//
-	// * Must not
+	// - Must be in Universal Coordinated Time (UTC).
+	// - Must not
 	// conflict with the preferred maintenance window.
-	//
-	// * Must be at least 30 minutes.
+	// - Must be at least 30 minutes.
 	PreferredBackupWindow *string
 
 	// The weekly time range during which system maintenance can occur, in Universal

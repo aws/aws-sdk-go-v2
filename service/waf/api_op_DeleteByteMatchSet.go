@@ -21,15 +21,12 @@ import (
 // objects (any filters). If you just want to remove a ByteMatchSet from a Rule,
 // use UpdateRule. To permanently delete a ByteMatchSet, perform the following
 // steps:
-//
-// * Update the ByteMatchSet to remove filters, if any. For more
+// - Update the ByteMatchSet to remove filters, if any. For more
 // information, see UpdateByteMatchSet.
-//
-// * Use GetChangeToken to get the change
+// - Use GetChangeToken to get the change
 // token that you provide in the ChangeToken parameter of a DeleteByteMatchSet
 // request.
-//
-// * Submit a DeleteByteMatchSet request.
+// - Submit a DeleteByteMatchSet request.
 func (c *Client) DeleteByteMatchSet(ctx context.Context, params *DeleteByteMatchSetInput, optFns ...func(*Options)) (*DeleteByteMatchSetOutput, error) {
 	if params == nil {
 		params = &DeleteByteMatchSetInput{}

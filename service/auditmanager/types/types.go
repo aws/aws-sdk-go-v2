@@ -460,12 +460,10 @@ type AWSAccount struct {
 // An Amazon Web Service such as Amazon S3 or CloudTrail. For an example of how to
 // find an Amazon Web Service name and how to define it in your assessment scope,
 // see the following:
-//
-// * Finding an Amazon Web Service name to use in your
+// - Finding an Amazon Web Service name to use in your
 // assessment scope
 // (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_GetServicesInScope.html#API_GetServicesInScope_Example_2)
-//
-// *
+// -
 // Defining an Amazon Web Service name in your assessment scope
 // (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_GetServicesInScope.html#API_GetServicesInScope_Example_3)
 type AWSService struct {
@@ -706,19 +704,15 @@ type ControlMappingSource struct {
 	// and Amazon Web Services API names. To learn more about the supported keywords
 	// that you can use when mapping a control data source, see the following pages in
 	// the Audit Manager User Guide:
-	//
-	// * Config rules supported by Audit Manager
+	// - Config rules supported by Audit Manager
 	// (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html)
-	//
-	// *
+	// -
 	// Security Hub controls supported by Audit Manager
 	// (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-config.html)
-	//
-	// *
+	// -
 	// API calls supported by Audit Manager
 	// (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-api.html)
-	//
-	// *
+	// -
 	// CloudTrail event names supported by Audit Manager
 	// (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-cloudtrail.html)
 	SourceKeyword *SourceKeyword
@@ -823,19 +817,15 @@ type CreateControlMappingSource struct {
 	// and Amazon Web Services API names. To learn more about the supported keywords
 	// that you can use when mapping a control data source, see the following pages in
 	// the Audit Manager User Guide:
-	//
-	// * Config rules supported by Audit Manager
+	// - Config rules supported by Audit Manager
 	// (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html)
-	//
-	// *
+	// -
 	// Security Hub controls supported by Audit Manager
 	// (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-config.html)
-	//
-	// *
+	// -
 	// API calls supported by Audit Manager
 	// (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-api.html)
-	//
-	// *
+	// -
 	// CloudTrail event names supported by Audit Manager
 	// (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-cloudtrail.html)
 	SourceKeyword *SourceKeyword
@@ -965,15 +955,13 @@ type DeregistrationPolicy struct {
 
 	// Specifies which Audit Manager data will be deleted when you deregister Audit
 	// Manager.
-	//
-	// * If you set the value to ALL, all of your data is deleted within
-	// seven days of deregistration.
-	//
-	// * If you set the value to DEFAULT, none of your
-	// data is deleted at the time of deregistration. However, keep in mind that the
-	// Audit Manager data retention policy still applies. As a result, any evidence
-	// data will be deleted two years after its creation date. Your other Audit Manager
-	// resources will continue to exist indefinitely.
+	// - If you set the value to ALL, all of your data is deleted within seven
+	// days of deregistration.
+	// - If you set the value to DEFAULT, none of your data is
+	// deleted at the time of deregistration. However, keep in mind that the Audit
+	// Manager data retention policy still applies. As a result, any evidence data will
+	// be deleted two years after its creation date. Your other Audit Manager resources
+	// will continue to exist indefinitely.
 	DeleteResources DeleteResources
 
 	noSmithyDocumentSerde
@@ -1001,17 +989,14 @@ type Evidence struct {
 
 	// The evaluation status for automated evidence that falls under the compliance
 	// check category.
-	//
-	// * Audit Manager classes evidence as non-compliant if Security
+	// - Audit Manager classes evidence as non-compliant if Security
 	// Hub reports a Fail result, or if Config reports a Non-compliant result.
-	//
-	// * Audit
+	// - Audit
 	// Manager classes evidence as compliant if Security Hub reports a Pass result, or
 	// if Config reports a Compliant result.
-	//
-	// * If a compliance check isn't available
-	// or applicable, then no compliance evaluation can be made for that evidence. This
-	// is the case if the evidence uses Config or Security Hub as the underlying data
+	// - If a compliance check isn't available or
+	// applicable, then no compliance evaluation can be made for that evidence. This is
+	// the case if the evidence uses Config or Security Hub as the underlying data
 	// source type, but those services aren't enabled. This is also the case if the
 	// evidence uses an underlying data source type that doesn't support compliance
 	// checks (such as manual evidence, Amazon Web Services API calls, or CloudTrail).
@@ -1059,35 +1044,28 @@ type EvidenceFinderEnablement struct {
 	// after you enable evidence finder. During this task, Audit Manager populates an
 	// event data store with your past two years’ worth of evidence data so that your
 	// evidence can be queried.
-	//
-	// * NOT_STARTED means that the backfill hasn’t started
+	// - NOT_STARTED means that the backfill hasn’t started
 	// yet.
-	//
-	// * IN_PROGRESS means that the backfill is in progress. This can take up to
-	// 7 days to complete, depending on the amount of evidence data.
-	//
-	// * COMPLETED means
+	// - IN_PROGRESS means that the backfill is in progress. This can take up to 7
+	// days to complete, depending on the amount of evidence data.
+	// - COMPLETED means
 	// that the backfill is complete. All of your past evidence is now queryable.
 	BackfillStatus EvidenceFinderBackfillStatus
 
 	// The current status of the evidence finder feature and the related event data
 	// store.
-	//
-	// * ENABLE_IN_PROGRESS means that you requested to enable evidence finder.
+	// - ENABLE_IN_PROGRESS means that you requested to enable evidence finder.
 	// An event data store is currently being created to support evidence finder
 	// queries.
-	//
-	// * ENABLED means that an event data store was successfully created and
+	// - ENABLED means that an event data store was successfully created and
 	// evidence finder is enabled. We recommend that you wait 7 days until the event
 	// data store is backfilled with your past two years’ worth of evidence data. You
 	// can use evidence finder in the meantime, but not all data might be available
 	// until the backfill is complete.
-	//
-	// * DISABLE_IN_PROGRESS means that you requested
+	// - DISABLE_IN_PROGRESS means that you requested
 	// to disable evidence finder, and your request is pending the deletion of the
 	// event data store.
-	//
-	// * DISABLED means that you have permanently disabled evidence
+	// - DISABLED means that you have permanently disabled evidence
 	// finder and the event data store has been deleted. You can't re-enable evidence
 	// finder after this point.
 	EnablementStatus EvidenceFinderEnablementStatus
@@ -1208,12 +1186,10 @@ type FrameworkMetadata struct {
 // hours, the response should return the latest data. If you delete an assessment
 // or change its status to inactive, InsightsByAssessment includes data for that
 // assessment as follows.
-//
-// * Inactive assessments - If Audit Manager collected
+// - Inactive assessments - If Audit Manager collected
 // evidence for your assessment before you changed it inactive, that evidence is
 // included in the InsightsByAssessment counts for that day.
-//
-// * Deleted assessments
+// - Deleted assessments
 // - If Audit Manager collected evidence for your assessment before you deleted it,
 // that evidence isn't included in the InsightsByAssessment counts for that day.
 type Insights struct {
@@ -1264,12 +1240,10 @@ type Insights struct {
 // your read request after a few hours, the response returns the latest data. If
 // you delete an assessment or change its status to inactive, InsightsByAssessment
 // includes data for that assessment as follows.
-//
-// * Inactive assessments - If Audit
+// - Inactive assessments - If Audit
 // Manager collected evidence for your assessment before you changed it inactive,
 // that evidence is included in the InsightsByAssessment counts for that day.
-//
-// *
+// -
 // Deleted assessments - If Audit Manager collected evidence for your assessment
 // before you deleted it, that evidence isn't included in the InsightsByAssessment
 // counts for that day.
@@ -1355,21 +1329,18 @@ type Resource struct {
 
 	// The evaluation status for a resource that was assessed when collecting
 	// compliance check evidence.
-	//
-	// * Audit Manager classes the resource as
-	// non-compliant if Security Hub reports a Fail result, or if Config reports a
-	// Non-compliant result.
-	//
-	// * Audit Manager classes the resource as compliant if
-	// Security Hub reports a Pass result, or if Config reports a Compliant result.
-	//
-	// *
-	// If a compliance check isn't available or applicable, then no compliance
-	// evaluation can be made for that resource. This is the case if a resource
-	// assessment uses Config or Security Hub as the underlying data source type, but
-	// those services aren't enabled. This is also the case if the resource assessment
-	// uses an underlying data source type that doesn't support compliance checks (such
-	// as manual evidence, Amazon Web Services API calls, or CloudTrail).
+	// - Audit Manager classes the resource as non-compliant
+	// if Security Hub reports a Fail result, or if Config reports a Non-compliant
+	// result.
+	// - Audit Manager classes the resource as compliant if Security Hub
+	// reports a Pass result, or if Config reports a Compliant result.
+	// - If a
+	// compliance check isn't available or applicable, then no compliance evaluation
+	// can be made for that resource. This is the case if a resource assessment uses
+	// Config or Security Hub as the underlying data source type, but those services
+	// aren't enabled. This is also the case if the resource assessment uses an
+	// underlying data source type that doesn't support compliance checks (such as
+	// manual evidence, Amazon Web Services API calls, or CloudTrail).
 	ComplianceCheck *string
 
 	// The value of the resource.
@@ -1464,19 +1435,15 @@ type Settings struct {
 // and Amazon Web Services API names. To learn more about the supported keywords
 // that you can use when mapping a control data source, see the following pages in
 // the Audit Manager User Guide:
-//
-// * Config rules supported by Audit Manager
+// - Config rules supported by Audit Manager
 // (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html)
-//
-// *
+// -
 // Security Hub controls supported by Audit Manager
 // (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-config.html)
-//
-// *
+// -
 // API calls supported by Audit Manager
 // (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-api.html)
-//
-// *
+// -
 // CloudTrail event names supported by Audit Manager
 // (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-cloudtrail.html)
 type SourceKeyword struct {
@@ -1489,38 +1456,33 @@ type SourceKeyword struct {
 	// Hub control, or the name of an Amazon Web Services API call. If you’re mapping a
 	// data source to a rule in Config, the keywordValue that you specify depends on
 	// the type of rule:
-	//
-	// * For managed rules
+	// - For managed rules
 	// (https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html),
 	// you can use the rule identifier as the keywordValue. You can find the rule
 	// identifier from the list of Config managed rules
 	// (https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html).
-	//
-	// *
+	// -
 	// Managed rule name: s3-bucket-acl-prohibited
 	// (https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-acl-prohibited.html)keywordValue:
 	// S3_BUCKET_ACL_PROHIBITED
 	//
-	// * For custom rules
+	// - For custom rules
 	// (https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_develop-rules.html),
 	// you form the keywordValue by adding the Custom_ prefix to the rule name. This
 	// prefix distinguishes the rule from a managed rule.
-	//
-	// * Custom rule name:
+	// - Custom rule name:
 	// my-custom-config-rule keywordValue: Custom_my-custom-config-rule
 	//
-	// * For
+	// - For
 	// service-linked rules
 	// (https://docs.aws.amazon.com/config/latest/developerguide/service-linked-awsconfig-rules.html),
 	// you form the keywordValue by adding the Custom_ prefix to the rule name. In
 	// addition, you remove the suffix ID that appears at the end of the rule name.
-	//
-	// *
+	// -
 	// Service-linked rule name: CustomRuleForAccount-conformance-pack-szsm1uv0w
 	// keywordValue: Custom_CustomRuleForAccount-conformance-pack
-	//
-	// * Service-linked
-	// rule name: OrgConfigRule-s3-bucket-versioning-enabled-dbgzf8ba keywordValue:
+	// - Service-linked rule
+	// name: OrgConfigRule-s3-bucket-versioning-enabled-dbgzf8ba keywordValue:
 	// Custom_OrgConfigRule-s3-bucket-versioning-enabled
 	KeywordValue *string
 

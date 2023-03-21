@@ -32,14 +32,11 @@ type UpdateFirewallDomainsInput struct {
 	// A list of domains to use in the update operation. There is a limit of 1000
 	// domains per request. Each domain specification in your domain list must satisfy
 	// the following requirements:
-	//
-	// * It can optionally start with * (asterisk).
-	//
-	// *
-	// With the exception of the optional starting asterisk, it must only contain the
+	// - It can optionally start with * (asterisk).
+	// - With
+	// the exception of the optional starting asterisk, it must only contain the
 	// following characters: A-Z, a-z, 0-9, - (hyphen).
-	//
-	// * It must be from 1-255
+	// - It must be from 1-255
 	// characters in length.
 	//
 	// This member is required.
@@ -51,14 +48,11 @@ type UpdateFirewallDomainsInput struct {
 	FirewallDomainListId *string
 
 	// What you want DNS Firewall to do with the domains that you are providing:
-	//
-	// * ADD
+	// - ADD
 	// - Add the domains to the ones that are already in the domain list.
-	//
-	// * REMOVE -
+	// - REMOVE -
 	// Search the domain list for the domains and remove them from the list.
-	//
-	// * REPLACE
+	// - REPLACE
 	// - Update the domain list to exactly match the list that you are providing.
 	//
 	// This member is required.

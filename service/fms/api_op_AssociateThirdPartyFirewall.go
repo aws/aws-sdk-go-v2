@@ -44,22 +44,17 @@ type AssociateThirdPartyFirewallOutput struct {
 
 	// The current status for setting a Firewall Manager policy administrator's account
 	// as an administrator of the third-party firewall tenant.
-	//
-	// * ONBOARDING - The
+	// - ONBOARDING - The
 	// Firewall Manager policy administrator is being designated as a tenant
 	// administrator.
-	//
-	// * ONBOARD_COMPLETE - The Firewall Manager policy administrator
-	// is designated as a tenant administrator.
-	//
-	// * OFFBOARDING - The Firewall Manager
+	// - ONBOARD_COMPLETE - The Firewall Manager policy administrator is
+	// designated as a tenant administrator.
+	// - OFFBOARDING - The Firewall Manager
 	// policy administrator is being removed as a tenant administrator.
-	//
-	// *
+	// -
 	// OFFBOARD_COMPLETE - The Firewall Manager policy administrator has been removed
 	// as a tenant administrator.
-	//
-	// * NOT_EXIST - The Firewall Manager policy
+	// - NOT_EXIST - The Firewall Manager policy
 	// administrator doesn't exist as a tenant administrator.
 	ThirdPartyFirewallStatus types.ThirdPartyFirewallAssociationStatus
 

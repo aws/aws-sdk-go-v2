@@ -38,14 +38,11 @@ type ListExplainabilityExportsInput struct {
 	// The condition is either IS or IS_NOT, which specifies whether to include or
 	// exclude resources that match the statement from the list. The match statement
 	// consists of a key and a value. Filter properties
-	//
-	// * Condition - The condition to
+	// - Condition - The condition to
 	// apply. Valid values are IS and IS_NOT.
-	//
-	// * Key - The name of the parameter to
+	// - Key - The name of the parameter to
 	// filter on. Valid values are ResourceArn and Status.
-	//
-	// * Value - The value to
+	// - Value - The value to
 	// match.
 	Filters []types.Filter
 

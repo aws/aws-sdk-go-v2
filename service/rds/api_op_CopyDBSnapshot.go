@@ -48,8 +48,7 @@ type CopyDBSnapshotInput struct {
 	// Amazon Resource Name (ARN) of the shared DB snapshot. If you are copying an
 	// encrypted snapshot this parameter must be in the ARN format for the source
 	// Amazon Web Services Region. Constraints:
-	//
-	// * Must specify a valid system snapshot
+	// - Must specify a valid system snapshot
 	// in the "available" state.
 	//
 	// Example: rds:mydb-2012-04-02-00-01 Example:
@@ -59,16 +58,12 @@ type CopyDBSnapshotInput struct {
 	SourceDBSnapshotIdentifier *string
 
 	// The identifier for the copy of the snapshot. Constraints:
-	//
-	// * Can't be null,
+	// - Can't be null,
 	// empty, or blank
-	//
-	// * Must contain from 1 to 255 letters, numbers, or hyphens
-	//
-	// *
+	// - Must contain from 1 to 255 letters, numbers, or hyphens
+	// -
 	// First character must be a letter
-	//
-	// * Can't end with a hyphen or contain two
+	// - Can't end with a hyphen or contain two
 	// consecutive hyphens
 	//
 	// Example: my-db-snapshot
@@ -125,8 +120,7 @@ type CopyDBSnapshotInput struct {
 	// the CopyDBClusterSnapshot API operation that can run in the source Amazon Web
 	// Services Region that contains the encrypted DB cluster snapshot to copy. The
 	// presigned URL request must contain the following parameter values:
-	//
-	// *
+	// -
 	// DestinationRegion - The Amazon Web Services Region that the encrypted DB
 	// snapshot is copied to. This Amazon Web Services Region is the same one where the
 	// CopyDBSnapshot operation is called that contains this presigned URL. For
@@ -136,20 +130,17 @@ type CopyDBSnapshotInput struct {
 	// a presigned URL that contains a call to the CopyDBSnapshot operation in the
 	// us-west-2 Amazon Web Services Region. For this example, the DestinationRegion in
 	// the presigned URL must be set to the us-east-1 Amazon Web Services Region.
-	//
-	// *
+	// -
 	// KmsKeyId - The KMS key identifier for the KMS key to use to encrypt the copy of
 	// the DB snapshot in the destination Amazon Web Services Region. This is the same
 	// identifier for both the CopyDBSnapshot operation that is called in the
 	// destination Amazon Web Services Region, and the operation contained in the
 	// presigned URL.
-	//
-	// * SourceDBSnapshotIdentifier - The DB snapshot identifier for
-	// the encrypted snapshot to be copied. This identifier must be in the Amazon
-	// Resource Name (ARN) format for the source Amazon Web Services Region. For
-	// example, if you are copying an encrypted DB snapshot from the us-west-2 Amazon
-	// Web Services Region, then your SourceDBSnapshotIdentifier looks like the
-	// following example:
+	// - SourceDBSnapshotIdentifier - The DB snapshot identifier for the
+	// encrypted snapshot to be copied. This identifier must be in the Amazon Resource
+	// Name (ARN) format for the source Amazon Web Services Region. For example, if you
+	// are copying an encrypted DB snapshot from the us-west-2 Amazon Web Services
+	// Region, then your SourceDBSnapshotIdentifier looks like the following example:
 	// arn:aws:rds:us-west-2:123456789012:snapshot:mysql-instance1-snapshot-20161115.
 	//
 	// To

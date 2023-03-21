@@ -14,13 +14,11 @@ import (
 // Updates the specified fleet. If the fleet is in the STOPPED state, you can
 // update any attribute except the fleet name. If the fleet is in the RUNNING
 // state, you can update the following based on the fleet type:
-//
-// * Always-On and
+// - Always-On and
 // On-Demand fleet types You can update the DisplayName, ComputeCapacity, ImageARN,
 // ImageName, IdleDisconnectTimeoutInSeconds, and DisconnectTimeoutInSeconds
 // attributes.
-//
-// * Elastic fleet type You can update the DisplayName,
+// - Elastic fleet type You can update the DisplayName,
 // IdleDisconnectTimeoutInSeconds, DisconnectTimeoutInSeconds,
 // MaxConcurrentSessions, SessionScriptS3Location and UsbDeviceFilterStrings
 // attributes.
@@ -115,104 +113,64 @@ type UpdateFleetInput struct {
 
 	// The instance type to use when launching fleet instances. The following instance
 	// types are available:
-	//
-	// * stream.standard.small
-	//
-	// * stream.standard.medium
-	//
-	// *
+	// - stream.standard.small
+	// - stream.standard.medium
+	// -
 	// stream.standard.large
-	//
-	// * stream.standard.xlarge
-	//
-	// * stream.standard.2xlarge
-	//
-	// *
+	// - stream.standard.xlarge
+	// - stream.standard.2xlarge
+	// -
 	// stream.compute.large
-	//
-	// * stream.compute.xlarge
-	//
-	// * stream.compute.2xlarge
-	//
-	// *
+	// - stream.compute.xlarge
+	// - stream.compute.2xlarge
+	// -
 	// stream.compute.4xlarge
-	//
-	// * stream.compute.8xlarge
-	//
-	// * stream.memory.large
-	//
-	// *
+	// - stream.compute.8xlarge
+	// - stream.memory.large
+	// -
 	// stream.memory.xlarge
-	//
-	// * stream.memory.2xlarge
-	//
-	// * stream.memory.4xlarge
-	//
-	// *
+	// - stream.memory.2xlarge
+	// - stream.memory.4xlarge
+	// -
 	// stream.memory.8xlarge
-	//
-	// * stream.memory.z1d.large
-	//
-	// * stream.memory.z1d.xlarge
-	//
-	// *
+	// - stream.memory.z1d.large
+	// - stream.memory.z1d.xlarge
+	// -
 	// stream.memory.z1d.2xlarge
-	//
-	// * stream.memory.z1d.3xlarge
-	//
-	// *
+	// - stream.memory.z1d.3xlarge
+	// -
 	// stream.memory.z1d.6xlarge
-	//
-	// * stream.memory.z1d.12xlarge
-	//
-	// *
+	// - stream.memory.z1d.12xlarge
+	// -
 	// stream.graphics-design.large
-	//
-	// * stream.graphics-design.xlarge
-	//
-	// *
+	// - stream.graphics-design.xlarge
+	// -
 	// stream.graphics-design.2xlarge
-	//
-	// * stream.graphics-design.4xlarge
-	//
-	// *
+	// - stream.graphics-design.4xlarge
+	// -
 	// stream.graphics-desktop.2xlarge
-	//
-	// * stream.graphics.g4dn.xlarge
-	//
-	// *
+	// - stream.graphics.g4dn.xlarge
+	// -
 	// stream.graphics.g4dn.2xlarge
-	//
-	// * stream.graphics.g4dn.4xlarge
-	//
-	// *
+	// - stream.graphics.g4dn.4xlarge
+	// -
 	// stream.graphics.g4dn.8xlarge
-	//
-	// * stream.graphics.g4dn.12xlarge
-	//
-	// *
+	// - stream.graphics.g4dn.12xlarge
+	// -
 	// stream.graphics.g4dn.16xlarge
-	//
-	// * stream.graphics-pro.4xlarge
-	//
-	// *
+	// - stream.graphics-pro.4xlarge
+	// -
 	// stream.graphics-pro.8xlarge
-	//
-	// * stream.graphics-pro.16xlarge
+	// - stream.graphics-pro.16xlarge
 	//
 	// The following
 	// instance types are available for Elastic fleets:
-	//
-	// * stream.standard.small
-	//
-	// *
+	// - stream.standard.small
+	// -
 	// stream.standard.medium
-	//
-	// * stream.standard.large
-	//
-	// * stream.standard.xlarge
-	//
-	// *
+	// - stream.standard.large
+	// - stream.standard.xlarge
+	// -
 	// stream.standard.2xlarge
 	InstanceType *string
 

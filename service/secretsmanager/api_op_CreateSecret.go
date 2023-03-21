@@ -96,16 +96,13 @@ type CreateSecretInput struct {
 	// if there are failures and retries during a rotation. We recommend that you
 	// generate a UUID-type (https://wikipedia.org/wiki/Universally_unique_identifier)
 	// value to ensure uniqueness of your versions within the specified secret.
-	//
-	// * If
+	// - If
 	// the ClientRequestToken value isn't already associated with a version of the
 	// secret then a new version of the secret is created.
-	//
-	// * If a version with this
+	// - If a version with this
 	// value already exists and the version SecretString and SecretBinary values are
 	// the same as those in the request, then the request is ignored.
-	//
-	// * If a version
+	// - If a version
 	// with this value already exists and that version's SecretString and SecretBinary
 	// values are different from those in the request, then the request fails because
 	// you cannot modify an existing version. Instead, use PutSecretValue to create a
@@ -169,28 +166,21 @@ type CreateSecretInput struct {
 	// If your command-line tool or SDK requires quotation marks around the parameter,
 	// you should use single quotes to avoid confusion with the double quotes required
 	// in the JSON text. The following restrictions apply to tags:
-	//
-	// * Maximum number of
+	// - Maximum number of
 	// tags per secret: 50
-	//
-	// * Maximum key length: 127 Unicode characters in UTF-8
-	//
-	// *
+	// - Maximum key length: 127 Unicode characters in UTF-8
+	// -
 	// Maximum value length: 255 Unicode characters in UTF-8
-	//
-	// * Tag keys and values are
+	// - Tag keys and values are
 	// case sensitive.
-	//
-	// * Do not use the aws: prefix in your tag names or values
-	// because Amazon Web Services reserves it for Amazon Web Services use. You can't
-	// edit or delete tag names or values with this prefix. Tags with this prefix do
-	// not count against your tags per secret limit.
-	//
-	// * If you use your tagging schema
-	// across multiple services and resources, other services might have restrictions
-	// on allowed characters. Generally allowed characters: letters, spaces, and
-	// numbers representable in UTF-8, plus the following special characters: + - = . _
-	// : / @.
+	// - Do not use the aws: prefix in your tag names or values because
+	// Amazon Web Services reserves it for Amazon Web Services use. You can't edit or
+	// delete tag names or values with this prefix. Tags with this prefix do not count
+	// against your tags per secret limit.
+	// - If you use your tagging schema across
+	// multiple services and resources, other services might have restrictions on
+	// allowed characters. Generally allowed characters: letters, spaces, and numbers
+	// representable in UTF-8, plus the following special characters: + - = . _ : / @.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -208,14 +198,11 @@ type CreateSecretOutput struct {
 	Name *string
 
 	// A list of the replicas of this secret and their status:
-	//
-	// * Failed, which
+	// - Failed, which
 	// indicates that the replica was not created.
-	//
-	// * InProgress, which indicates that
+	// - InProgress, which indicates that
 	// Secrets Manager is in the process of creating the replica.
-	//
-	// * InSync, which
+	// - InSync, which
 	// indicates that the replica was created.
 	ReplicationStatus []types.ReplicationStatusType
 

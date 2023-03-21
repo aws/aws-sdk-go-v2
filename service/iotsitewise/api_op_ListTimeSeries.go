@@ -44,10 +44,8 @@ type ListTimeSeriesInput struct {
 
 	// The type of the time series. The time series type can be one of the following
 	// values:
-	//
-	// * ASSOCIATED – The time series is associated with an asset property.
-	//
-	// *
+	// - ASSOCIATED – The time series is associated with an asset property.
+	// -
 	// DISASSOCIATED – The time series isn't associated with any asset property.
 	TimeSeriesType types.ListTimeSeriesType
 

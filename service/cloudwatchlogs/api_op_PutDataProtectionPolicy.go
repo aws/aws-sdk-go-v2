@@ -51,8 +51,7 @@ type PutDataProtectionPolicyInput struct {
 
 	// Specify the data protection policy, in JSON. This policy must include two JSON
 	// blocks:
-	//
-	// * The first block must include both a DataIdentifer array and an
+	// - The first block must include both a DataIdentifer array and an
 	// Operation property with an Audit action. The DataIdentifer array lists the types
 	// of sensitive data that you want to mask. For more information about the
 	// available options, see Types of data that you can mask
@@ -62,8 +61,7 @@ type PutDataProtectionPolicyInput struct {
 	// optionally use that FindingsDestination object to list one or more destinations
 	// to send audit findings to. If you specify destinations such as log groups,
 	// Kinesis Data Firehose streams, and S3 buckets, they must already exist.
-	//
-	// * The
+	// - The
 	// second block must include both a DataIdentifer array and an Operation property
 	// with an Deidentify action. The DataIdentifer array must exactly match the
 	// DataIdentifer array in the first block of the policy. The Operation property

@@ -36,20 +36,15 @@ func (c *Client) CreateStorediSCSIVolume(ctx context.Context, params *CreateStor
 }
 
 // A JSON object containing one or more of the following fields:
-//
-// *
+// -
 // CreateStorediSCSIVolumeInput$DiskId
-//
-// *
+// -
 // CreateStorediSCSIVolumeInput$NetworkInterfaceId
-//
-// *
+// -
 // CreateStorediSCSIVolumeInput$PreserveExistingData
-//
-// *
+// -
 // CreateStorediSCSIVolumeInput$SnapshotId
-//
-// *
+// -
 // CreateStorediSCSIVolumeInput$TargetName
 type CreateStorediSCSIVolumeInput struct {
 

@@ -954,24 +954,19 @@ type ContainerProperties struct {
 	// image architecture must match the processor architecture of the compute
 	// resources that they're scheduled on. For example, ARM-based Docker images can
 	// only run on ARM-based compute resources.
-	//
-	// * Images in Amazon ECR Public
+	// - Images in Amazon ECR Public
 	// repositories use the full registry/repository[:tag] or
 	// registry/repository[@digest] naming conventions. For example,
 	// public.ecr.aws/registry_alias/my-web-app:latest .
-	//
-	// * Images in Amazon ECR
+	// - Images in Amazon ECR
 	// repositories use the full registry and repository URI (for example,
 	// 123456789012.dkr.ecr..amazonaws.com/).
-	//
-	// * Images in official repositories on
+	// - Images in official repositories on
 	// Docker Hub use a single name (for example, ubuntu or mongo).
-	//
-	// * Images in other
+	// - Images in other
 	// repositories on Docker Hub are qualified with an organization name (for example,
 	// amazon/amazon-ecs-agent).
-	//
-	// * Images in other online repositories are qualified
+	// - Images in other online repositories are qualified
 	// further by a domain name (for example, quay.io/assemblyline/ubuntu).
 	Image *string
 
@@ -2466,8 +2461,7 @@ type LinuxParameters struct {
 	// doesn't use swap. This parameter maps to the --memory-swappiness option to
 	// docker run (https://docs.docker.com/engine/reference/run/). Consider the
 	// following when you use a per-container swap configuration.
-	//
-	// * Swap space must be
+	// - Swap space must be
 	// enabled and allocated on the container instance for the containers to use. By
 	// default, the Amazon ECS optimized AMIs don't have swap enabled. You must enable
 	// swap on the instance to use this feature. For more information, see Instance
@@ -2476,12 +2470,10 @@ type LinuxParameters struct {
 	// in the Amazon EC2 User Guide for Linux Instances or How do I allocate memory to
 	// work as swap space in an Amazon EC2 instance by using a swap file?
 	// (http://aws.amazon.com/premiumsupport/knowledge-center/ec2-memory-swap-file/)
-	//
-	// *
+	// -
 	// The swap space parameters are only supported for job definitions using EC2
 	// resources.
-	//
-	// * If the maxSwap and swappiness parameters are omitted from a job
+	// - If the maxSwap and swappiness parameters are omitted from a job
 	// definition, each container has a default swappiness value of 60. Moreover, the
 	// total swap usage is limited to two times the memory reservation of the
 	// container.
@@ -2640,15 +2632,12 @@ type NodeOverrides struct {
 	// The number of nodes to use with a multi-node parallel job. This value overrides
 	// the number of nodes that are specified in the job definition. To use this
 	// override, you must meet the following conditions:
-	//
-	// * There must be at least one
+	// - There must be at least one
 	// node range in your job definition that has an open upper boundary, such as : or
 	// n:.
-	//
-	// * The lower boundary of the node range that's specified in the job
+	// - The lower boundary of the node range that's specified in the job
 	// definition must be fewer than the number of nodes specified in the override.
-	//
-	// *
+	// -
 	// The main node index that's specified in the job definition must be fewer than
 	// the number of nodes specified in the override.
 	NumNodes *int32
@@ -2872,12 +2861,10 @@ type SchedulingPolicyListingDetail struct {
 
 // An object that represents the secret to expose to your container. Secrets can be
 // exposed to a container in the following ways:
-//
-// * To inject sensitive data into
+// - To inject sensitive data into
 // your containers as environment variables, use the secrets container definition
 // parameter.
-//
-// * To reference sensitive information in the log configuration of a
+// - To reference sensitive information in the log configuration of a
 // container, use the secretOptions container definition parameter.
 //
 // For more

@@ -56,15 +56,12 @@ type GetSensitiveDataOccurrencesOutput struct {
 
 	// The status of the request to retrieve occurrences of sensitive data reported by
 	// the finding. Possible values are:
-	//
-	// * ERROR - An error occurred when Amazon Macie
+	// - ERROR - An error occurred when Amazon Macie
 	// attempted to locate, retrieve, or encrypt the sensitive data. The error value
 	// indicates the nature of the error that occurred.
-	//
-	// * PROCESSING - Macie is
+	// - PROCESSING - Macie is
 	// processing the request.
-	//
-	// * SUCCESS - Macie successfully located, retrieved, and
+	// - SUCCESS - Macie successfully located, retrieved, and
 	// encrypted the sensitive data.
 	Status types.RevealRequestStatus
 

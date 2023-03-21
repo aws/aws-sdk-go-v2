@@ -15,16 +15,13 @@ import (
 // Adds a resource to the AWS Resilience Hub applicationand assigns it to the
 // specified Application Components. If you specify a new Application Component,
 // AWS Resilience Hub will automatically create the Application Component.
-//
-// * This
+// - This
 // action has no effect outside AWS Resilience Hub.
-//
-// * This API updates the AWS
+// - This API updates the AWS
 // Resilience Hub application draft version. To use this resource for running
 // resiliency assessments, you must publish the AWS Resilience Hub application
 // using the PublishAppVersion API.
-//
-// * To update application version with new
+// - To update application version with new
 // physicalResourceID, you must call ResolveAppVersionResources API.
 func (c *Client) CreateAppVersionResource(ctx context.Context, params *CreateAppVersionResourceInput, optFns ...func(*Options)) (*CreateAppVersionResourceOutput, error) {
 	if params == nil {

@@ -18,12 +18,10 @@ import (
 // though account initialization might still be in progress. You might need to wait
 // a few minutes before you can successfully access the account. To check the
 // status of the request, do one of the following:
-//
-// * Use the Id value of the
+// - Use the Id value of the
 // CreateAccountStatus response element from this operation to provide as a
 // parameter to the DescribeCreateAccountStatus operation.
-//
-// * Check the CloudTrail
+// - Check the CloudTrail
 // log for the CreateAccountResult event. For information on using CloudTrail with
 // Organizations, see Logging and monitoring in Organizations
 // (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_security_incident-response.html#orgs_cloudtrail-integration)
@@ -47,31 +45,27 @@ import (
 // Web Services account in Your Organization
 // (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html)
 // in the Organizations User Guide.
-//
-// * When you create an account in an
-// organization using the Organizations console, API, or CLI commands, the
-// information required for the account to operate as a standalone account, such as
-// a payment method and signing the end user license agreement (EULA) is not
-// automatically collected. If you must remove an account from your organization
-// later, you can do so only after you provide the missing information. Follow the
-// steps at  To leave an organization as a member account
+// - When you create an account in an organization
+// using the Organizations console, API, or CLI commands, the information required
+// for the account to operate as a standalone account, such as a payment method and
+// signing the end user license agreement (EULA) is not automatically collected. If
+// you must remove an account from your organization later, you can do so only
+// after you provide the missing information. Follow the steps at  To leave an
+// organization as a member account
 // (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info)
 // in the Organizations User Guide.
-//
-// * If you get an exception that indicates that
+// - If you get an exception that indicates that
 // you exceeded your account limits for the organization, contact Amazon Web
 // Services Support (https://console.aws.amazon.com/support/home#/).
-//
-// * If you get
+// - If you get
 // an exception that indicates that the operation failed because your organization
 // is still initializing, wait one hour and then try again. If the error persists,
 // contact Amazon Web Services Support
 // (https://console.aws.amazon.com/support/home#/).
-//
-// * Using CreateAccount to
-// create multiple temporary accounts isn't recommended. You can only close an
-// account from the Billing and Cost Management console, and you must be signed in
-// as the root user. For information on the requirements and process for closing an
+// - Using CreateAccount to create
+// multiple temporary accounts isn't recommended. You can only close an account
+// from the Billing and Cost Management console, and you must be signed in as the
+// root user. For information on the requirements and process for closing an
 // account, see Closing an Amazon Web Services account
 // (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html)
 // in the Organizations User Guide.
@@ -110,33 +104,25 @@ type CreateAccountInput struct {
 	// address must not already be associated with another Amazon Web Services account.
 	// You must use a valid email address to complete account creation. The rules for a
 	// valid email address:
-	//
-	// * The address must be a minimum of 6 and a maximum of 64
+	// - The address must be a minimum of 6 and a maximum of 64
 	// characters long.
-	//
-	// * All characters must be 7-bit ASCII characters.
-	//
-	// * There must
+	// - All characters must be 7-bit ASCII characters.
+	// - There must
 	// be one and only one @ symbol, which separates the local name from the domain
 	// name.
-	//
-	// * The local name can't contain any of the following characters:
+	// - The local name can't contain any of the following characters:
 	// whitespace, " ' ( ) < > [ ] : ; , \ | % &
-	//
-	// * The local name can't begin with a
+	// - The local name can't begin with a
 	// dot (.)
-	//
-	// * The domain name can consist of only the characters [a-z],[A-Z],[0-9],
+	// - The domain name can consist of only the characters [a-z],[A-Z],[0-9],
 	// hyphen (-), or dot (.)
+	// - The domain name can't begin or end with a hyphen (-) or
+	// dot (.)
+	// - The domain name must contain at least one dot
 	//
-	// * The domain name can't begin or end with a hyphen (-)
-	// or dot (.)
-	//
-	// * The domain name must contain at least one dot
-	//
-	// You can't access
-	// the root user of the account or remove an account that was created with an
-	// invalid email address.
+	// You can't access the
+	// root user of the account or remove an account that was created with an invalid
+	// email address.
 	//
 	// This member is required.
 	Email *string
@@ -159,13 +145,11 @@ type CreateAccountInput struct {
 	// account. If you don't specify this parameter, the role name defaults to
 	// OrganizationAccountAccessRole. For more information about how to use this role
 	// to access the member account, see the following links:
-	//
-	// * Accessing and
+	// - Accessing and
 	// Administering the Member Accounts in Your Organization
 	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html#orgs_manage_accounts_create-cross-account-role)
 	// in the Organizations User Guide
-	//
-	// * Steps 2 and 3 in Tutorial: Delegate Access
+	// - Steps 2 and 3 in Tutorial: Delegate Access
 	// Across Amazon Web Services accounts Using IAM Roles
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html)
 	// in the IAM User Guide

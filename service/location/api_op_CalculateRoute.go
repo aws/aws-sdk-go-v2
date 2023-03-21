@@ -21,15 +21,13 @@ import (
 // By default, a request that doesn't specify a departure time uses the best time
 // of day to travel with the best traffic conditions when calculating the route.
 // Additional options include:
-//
-// * Specifying a departure time
+// - Specifying a departure time
 // (https://docs.aws.amazon.com/location/latest/developerguide/departure-time.html)
 // using either DepartureTime or DepartNow. This calculates a route based on
 // predictive traffic data at the given time. You can't specify both DepartureTime
 // and DepartNow in a single request. Specifying both parameters returns a
 // validation error.
-//
-// * Specifying a travel mode
+// - Specifying a travel mode
 // (https://docs.aws.amazon.com/location/latest/developerguide/travel-mode.html)
 // using TravelMode sets the transportation mode used to calculate the routes. This
 // also lets you specify additional route preferences in CarModeOptions if
@@ -62,8 +60,7 @@ type CalculateRouteInput struct {
 	// The start position for the route. Defined in World Geodetic System (WGS 84)
 	// (https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84) format:
 	// [longitude, latitude].
-	//
-	// * For example, [-123.115, 49.285]
+	// - For example, [-123.115, 49.285]
 	//
 	// If you specify a
 	// departure that's not located on a road, Amazon Location moves the position to
@@ -79,8 +76,7 @@ type CalculateRouteInput struct {
 	// The finish position for the route. Defined in World Geodetic System (WGS 84)
 	// (https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84) format:
 	// [longitude, latitude].
-	//
-	// * For example, [-122.339, 47.615]
+	// - For example, [-122.339, 47.615]
 	//
 	// If you specify a
 	// destination that's not located on a road, Amazon Location moves the position to
@@ -105,8 +101,7 @@ type CalculateRouteInput struct {
 	// route. Otherwise, the best time of day to travel with the best traffic
 	// conditions is used to calculate the route. Setting a departure time in the past
 	// returns a 400 ValidationException error.
-	//
-	// * In ISO 8601
+	// - In ISO 8601
 	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
 	// YYYY-MM-DDThh:mm:ss.sssZ. For example, 2020–07-2T12:15:20.000Z+01:00
 	DepartureTime *time.Time
@@ -127,11 +122,9 @@ type CalculateRouteInput struct {
 	// (https://docs.aws.amazon.com/location/latest/developerguide/grab.html) in the
 	// Amazon Location Service Developer Guide. The TravelMode you specify also
 	// determines how you specify route preferences:
-	//
-	// * If traveling by Car use the
+	// - If traveling by Car use the
 	// CarModeOptions parameter.
-	//
-	// * If traveling by Truck use the TruckModeOptions
+	// - If traveling by Truck use the TruckModeOptions
 	// parameter.
 	//
 	// Default Value: Car
@@ -144,8 +137,7 @@ type CalculateRouteInput struct {
 
 	// Specifies an ordered list of up to 23 intermediate positions to include along a
 	// route between the departure position and destination position.
-	//
-	// * For example,
+	// - For example,
 	// from the DeparturePosition[-123.115, 49.285], the route follows the order that
 	// the waypoint positions are given [[-122.757, 49.0021],[-122.349, 47.620]]
 	//
@@ -173,21 +165,17 @@ type CalculateRouteOutput struct {
 	// position and destination position returns one leg with the positions snapped to
 	// a nearby road
 	// (https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html):
-	//
-	// *
+	// -
 	// The StartPosition is the departure position.
-	//
-	// * The EndPosition is the
+	// - The EndPosition is the
 	// destination position.
 	//
 	// A route with a waypoint between the departure and
 	// destination position returns two legs with the positions snapped to a nearby
 	// road:
-	//
-	// * Leg 1: The StartPosition is the departure position . The EndPosition is
+	// - Leg 1: The StartPosition is the departure position . The EndPosition is
 	// the waypoint positon.
-	//
-	// * Leg 2: The StartPosition is the waypoint position. The
+	// - Leg 2: The StartPosition is the waypoint position. The
 	// EndPosition is the destination position.
 	//
 	// This member is required.

@@ -92,12 +92,10 @@ type CreateCapacityReservationFleetInput struct {
 	// Indicates the tenancy of the Capacity Reservation Fleet. All Capacity
 	// Reservations in the Fleet inherit this tenancy. The Capacity Reservation Fleet
 	// can have one of the following tenancy settings:
-	//
-	// * default - The Capacity
+	// - default - The Capacity
 	// Reservation Fleet is created on hardware that is shared with other Amazon Web
 	// Services accounts.
-	//
-	// * dedicated - The Capacity Reservations are created on
+	// - dedicated - The Capacity Reservations are created on
 	// single-tenant hardware that is dedicated to a single Amazon Web Services
 	// account.
 	Tenancy types.FleetCapacityReservationTenancy

@@ -36,14 +36,11 @@ type CreateRelationalDatabaseInput struct {
 	// MySQL The name of the database to create when the Lightsail database resource is
 	// created. If this parameter isn't specified, no database is created in the
 	// database resource. Constraints:
-	//
-	// * Must contain 1 to 64 letters or numbers.
-	//
-	// *
+	// - Must contain 1 to 64 letters or numbers.
+	// -
 	// Must begin with a letter. Subsequent characters can be letters, underscores, or
 	// digits (0- 9).
-	//
-	// * Can't be a word reserved by the specified database engine. For
+	// - Can't be a word reserved by the specified database engine. For
 	// more information about reserved words in MySQL, see the Keywords and Reserved
 	// Words articles for MySQL 5.6
 	// (https://dev.mysql.com/doc/refman/5.6/en/keywords.html), MySQL 5.7
@@ -54,14 +51,11 @@ type CreateRelationalDatabaseInput struct {
 	// the database to create when the Lightsail database resource is created. If this
 	// parameter isn't specified, a database named postgres is created in the database
 	// resource. Constraints:
-	//
-	// * Must contain 1 to 63 letters or numbers.
-	//
-	// * Must begin
+	// - Must contain 1 to 63 letters or numbers.
+	// - Must begin
 	// with a letter. Subsequent characters can be letters, underscores, or digits (0-
 	// 9).
-	//
-	// * Can't be a word reserved by the specified database engine. For more
+	// - Can't be a word reserved by the specified database engine. For more
 	// information about reserved words in PostgreSQL, see the SQL Key Words articles
 	// for PostgreSQL 9.6
 	// (https://www.postgresql.org/docs/9.6/sql-keywords-appendix.html), PostgreSQL 10
@@ -73,17 +67,13 @@ type CreateRelationalDatabaseInput struct {
 	MasterDatabaseName *string
 
 	// The name for the master user. MySQL Constraints:
-	//
-	// * Required for MySQL.
-	//
-	// * Must
-	// be 1 to 16 letters or numbers. Can contain underscores.
-	//
-	// * First character must
-	// be a letter.
-	//
-	// * Can't be a reserved word for the chosen database engine. For
-	// more information about reserved words in MySQL 5.6 or 5.7, see the Keywords and
+	// - Required for MySQL.
+	// - Must be
+	// 1 to 16 letters or numbers. Can contain underscores.
+	// - First character must be a
+	// letter.
+	// - Can't be a reserved word for the chosen database engine. For more
+	// information about reserved words in MySQL 5.6 or 5.7, see the Keywords and
 	// Reserved Words articles for MySQL 5.6
 	// (https://dev.mysql.com/doc/refman/5.6/en/keywords.html), MySQL 5.7
 	// (https://dev.mysql.com/doc/refman/5.7/en/keywords.html), or MySQL 8.0
@@ -91,15 +81,11 @@ type CreateRelationalDatabaseInput struct {
 	//
 	// PostgreSQL
 	// Constraints:
-	//
-	// * Required for PostgreSQL.
-	//
-	// * Must be 1 to 63 letters or numbers.
+	// - Required for PostgreSQL.
+	// - Must be 1 to 63 letters or numbers.
 	// Can contain underscores.
-	//
-	// * First character must be a letter.
-	//
-	// * Can't be a
+	// - First character must be a letter.
+	// - Can't be a
 	// reserved word for the chosen database engine. For more information about
 	// reserved words in MySQL 5.6 or 5.7, see the Keywords and Reserved Words articles
 	// for PostgreSQL 9.6
@@ -126,11 +112,9 @@ type CreateRelationalDatabaseInput struct {
 	RelationalDatabaseBundleId *string
 
 	// The name to use for your new Lightsail database resource. Constraints:
-	//
-	// * Must
+	// - Must
 	// contain from 2 to 255 alphanumeric characters, or hyphens.
-	//
-	// * The first and last
+	// - The first and last
 	// character must be a letter or number.
 	//
 	// This member is required.
@@ -155,35 +139,26 @@ type CreateRelationalDatabaseInput struct {
 	// the Working With Backups
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupWindow)
 	// guide in the Amazon Relational Database Service documentation. Constraints:
-	//
-	// *
+	// -
 	// Must be in the hh24:mi-hh24:mi format. Example: 16:00-16:30
-	//
-	// * Specified in
+	// - Specified in
 	// Coordinated Universal Time (UTC).
-	//
-	// * Must not conflict with the preferred
+	// - Must not conflict with the preferred
 	// maintenance window.
-	//
-	// * Must be at least 30 minutes.
+	// - Must be at least 30 minutes.
 	PreferredBackupWindow *string
 
 	// The weekly time range during which system maintenance can occur on your new
 	// database. The default is a 30-minute window selected at random from an 8-hour
 	// block of time for each AWS Region, occurring on a random day of the week.
 	// Constraints:
-	//
-	// * Must be in the ddd:hh24:mi-ddd:hh24:mi format.
-	//
-	// * Valid days:
-	// Mon, Tue, Wed, Thu, Fri, Sat, Sun.
-	//
-	// * Must be at least 30 minutes.
-	//
-	// * Specified
-	// in Coordinated Universal Time (UTC).
-	//
-	// * Example: Tue:17:00-Tue:17:30
+	// - Must be in the ddd:hh24:mi-ddd:hh24:mi format.
+	// - Valid days: Mon,
+	// Tue, Wed, Thu, Fri, Sat, Sun.
+	// - Must be at least 30 minutes.
+	// - Specified in
+	// Coordinated Universal Time (UTC).
+	// - Example: Tue:17:00-Tue:17:30
 	PreferredMaintenanceWindow *string
 
 	// Specifies the accessibility options for your new database. A value of true

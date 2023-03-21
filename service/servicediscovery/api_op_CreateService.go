@@ -14,25 +14,19 @@ import (
 
 // Creates a service. This action defines the configuration for the following
 // entities:
-//
-// * For public and private DNS namespaces, one of the following
+// - For public and private DNS namespaces, one of the following
 // combinations of DNS records in Amazon Route 53:
+// - A
+// - AAAA
+// - A and AAAA
+// - SRV
+// -
+// CNAME
 //
-// * A
+// - Optionally, a health check
 //
-// * AAAA
-//
-// * A and AAAA
-//
-// *
-// SRV
-//
-// * CNAME
-//
-// * Optionally, a health check
-//
-// After you create the service, you
-// can submit a RegisterInstance
+// After you create the service, you can
+// submit a RegisterInstance
 // (https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html)
 // request, and Cloud Map uses the values in the configuration to create the
 // specified entities. For the current quota on the number of instances that you
@@ -61,21 +55,19 @@ type CreateServiceInput struct {
 	// If you want Cloud Map to create an SRV record when you register an instance and
 	// you're using a system that requires a specific SRV format, such as HAProxy
 	// (http://www.haproxy.org/), specify the following for Name:
+	// - Start the name with
+	// an underscore (_), such as _exampleservice.
+	// - End the name with ._protocol, such
+	// as ._tcp.
 	//
-	// * Start the name
-	// with an underscore (_), such as _exampleservice.
-	//
-	// * End the name with
-	// ._protocol, such as ._tcp.
-	//
-	// When you register an instance, Cloud Map creates an
-	// SRV record and assigns a name to the record by concatenating the service name
-	// and the namespace name (for example, _exampleservice._tcp.example.com). For
-	// services that are accessible by DNS queries, you can't create multiple services
-	// with names that differ only by case (such as EXAMPLE and example). Otherwise,
-	// these services have the same DNS name and can't be distinguished. However, if
-	// you use a namespace that's only accessible by API calls, then you can create
-	// services that with names that differ only by case.
+	// When you register an instance, Cloud Map creates an SRV record and
+	// assigns a name to the record by concatenating the service name and the namespace
+	// name (for example, _exampleservice._tcp.example.com). For services that are
+	// accessible by DNS queries, you can't create multiple services with names that
+	// differ only by case (such as EXAMPLE and example). Otherwise, these services
+	// have the same DNS name and can't be distinguished. However, if you use a
+	// namespace that's only accessible by API calls, then you can create services that
+	// with names that differ only by case.
 	//
 	// This member is required.
 	Name *string

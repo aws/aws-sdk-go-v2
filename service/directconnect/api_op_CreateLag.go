@@ -134,25 +134,18 @@ type CreateLagOutput struct {
 	LagName *string
 
 	// The state of the LAG. The following are the possible values:
-	//
-	// * requested: The
+	// - requested: The
 	// initial state of a LAG. The LAG stays in the requested state until the Letter of
 	// Authorization (LOA) is available.
-	//
-	// * pending: The LAG has been approved and is
+	// - pending: The LAG has been approved and is
 	// being initialized.
-	//
-	// * available: The network link is established and the LAG is
+	// - available: The network link is established and the LAG is
 	// ready for use.
-	//
-	// * down: The network link is down.
-	//
-	// * deleting: The LAG is being
+	// - down: The network link is down.
+	// - deleting: The LAG is being
 	// deleted.
-	//
-	// * deleted: The LAG is deleted.
-	//
-	// * unknown: The state of the LAG is not
+	// - deleted: The LAG is deleted.
+	// - unknown: The state of the LAG is not
 	// available.
 	LagState types.LagState
 

@@ -46,15 +46,11 @@ type CreateModelCardInput struct {
 	// The approval status of the model card within your organization. Different
 	// organizations might have different criteria for model card review and
 	// approval.
-	//
-	// * Draft: The model card is a work in progress.
-	//
-	// * PendingReview: The
+	// - Draft: The model card is a work in progress.
+	// - PendingReview: The
 	// model card is pending review.
-	//
-	// * Approved: The model card is approved.
-	//
-	// *
+	// - Approved: The model card is approved.
+	// -
 	// Archived: The model card is archived. No more updates should be made to the
 	// model card, but it can still be exported.
 	//

@@ -76,15 +76,11 @@ type CreateProjectVersionInput struct {
 	// are unaffected. The key is also used to encrypt training results and manifest
 	// files written to the output Amazon S3 bucket (OutputConfig). If you choose to
 	// use your own KMS key, you need the following permissions on the KMS key.
-	//
-	// *
+	// -
 	// kms:CreateGrant
-	//
-	// * kms:DescribeKey
-	//
-	// * kms:GenerateDataKey
-	//
-	// * kms:Decrypt
+	// - kms:DescribeKey
+	// - kms:GenerateDataKey
+	// - kms:Decrypt
 	//
 	// If you
 	// don't specify a value for KmsKeyId, images copied into the service are encrypted

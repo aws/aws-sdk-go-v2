@@ -21,11 +21,9 @@ import (
 // error is thrown after invoking a Kinesis Video Streams archived media API, in
 // addition to the HTTP status code and the response body, it includes the
 // following pieces of information:
-//
-// * x-amz-ErrorType HTTP header – contains a
-// more specific error type in addition to what the HTTP status code provides.
-//
-// *
+// - x-amz-ErrorType HTTP header – contains a more
+// specific error type in addition to what the HTTP status code provides.
+// -
 // x-amz-RequestId HTTP header – if you want to report an issue to AWS, the support
 // team can better diagnose the problem if given the Request Id.
 //
@@ -80,27 +78,21 @@ type GetMediaForFragmentListOutput struct {
 	// (http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_dataplane_PutMedia.html).
 	// The chunks that Kinesis Video Streams returns in the GetMediaForFragmentList
 	// call also include the following additional Matroska (MKV) tags:
-	//
-	// *
+	// -
 	// AWS_KINESISVIDEO_FRAGMENT_NUMBER - Fragment number returned in the chunk.
-	//
-	// *
+	// -
 	// AWS_KINESISVIDEO_SERVER_SIDE_TIMESTAMP - Server-side timestamp of the
 	// fragment.
-	//
-	// * AWS_KINESISVIDEO_PRODUCER_SIDE_TIMESTAMP - Producer-side timestamp
+	// - AWS_KINESISVIDEO_PRODUCER_SIDE_TIMESTAMP - Producer-side timestamp
 	// of the fragment.
 	//
 	// The following tags will be included if an exception occurs:
-	//
-	// *
+	// -
 	// AWS_KINESISVIDEO_FRAGMENT_NUMBER - The number of the fragment that threw the
 	// exception
-	//
-	// * AWS_KINESISVIDEO_EXCEPTION_ERROR_CODE - The integer code of the
+	// - AWS_KINESISVIDEO_EXCEPTION_ERROR_CODE - The integer code of the
 	// exception
-	//
-	// * AWS_KINESISVIDEO_EXCEPTION_MESSAGE - A text description of the
+	// - AWS_KINESISVIDEO_EXCEPTION_MESSAGE - A text description of the
 	// exception
 	Payload io.ReadCloser
 

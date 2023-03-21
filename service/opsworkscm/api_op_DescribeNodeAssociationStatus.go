@@ -59,14 +59,11 @@ type DescribeNodeAssociationStatusOutput struct {
 	EngineAttributes []types.EngineAttribute
 
 	// The status of the association or disassociation request. Possible values:
-	//
-	// *
+	// -
 	// SUCCESS: The association or disassociation succeeded.
-	//
-	// * FAILED: The association
+	// - FAILED: The association
 	// or disassociation failed.
-	//
-	// * IN_PROGRESS: The association or disassociation is
+	// - IN_PROGRESS: The association or disassociation is
 	// still in progress.
 	NodeAssociationStatus types.NodeAssociationStatus
 

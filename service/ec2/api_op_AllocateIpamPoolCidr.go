@@ -42,12 +42,10 @@ type AllocateIpamPoolCidrInput struct {
 	IpamPoolId *string
 
 	// The CIDR you would like to allocate from the IPAM pool. Note the following:
-	//
-	// *
-	// If there is no DefaultNetmaskLength allocation rule set on the pool, you must
+	// - If
+	// there is no DefaultNetmaskLength allocation rule set on the pool, you must
 	// specify either the NetmaskLength or the CIDR.
-	//
-	// * If the DefaultNetmaskLength
+	// - If the DefaultNetmaskLength
 	// allocation rule is set on the pool, you can specify either the NetmaskLength or
 	// the CIDR and the DefaultNetmaskLength allocation rule will be ignored.
 	//
@@ -75,11 +73,9 @@ type AllocateIpamPoolCidrInput struct {
 
 	// The netmask length of the CIDR you would like to allocate from the IPAM pool.
 	// Note the following:
-	//
-	// * If there is no DefaultNetmaskLength allocation rule set
-	// on the pool, you must specify either the NetmaskLength or the CIDR.
-	//
-	// * If the
+	// - If there is no DefaultNetmaskLength allocation rule set on
+	// the pool, you must specify either the NetmaskLength or the CIDR.
+	// - If the
 	// DefaultNetmaskLength allocation rule is set on the pool, you can specify either
 	// the NetmaskLength or the CIDR and the DefaultNetmaskLength allocation rule will
 	// be ignored.

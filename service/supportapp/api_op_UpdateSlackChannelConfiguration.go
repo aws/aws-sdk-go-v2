@@ -57,23 +57,17 @@ type UpdateSlackChannelConfigurationInput struct {
 	// The case severity for a support case that you want to receive notifications. If
 	// you specify high or all, at least one of the following parameters must be
 	// true:
-	//
-	// * notifyOnAddCorrespondenceToCase
-	//
-	// * notifyOnCreateOrReopenCase
-	//
-	// *
+	// - notifyOnAddCorrespondenceToCase
+	// - notifyOnCreateOrReopenCase
+	// -
 	// notifyOnResolveCase
 	//
 	// If you specify none, any of the following parameters that
 	// you specify in your request must be false:
-	//
-	// * notifyOnAddCorrespondenceToCase
-	//
-	// *
+	// - notifyOnAddCorrespondenceToCase
+	// -
 	// notifyOnCreateOrReopenCase
-	//
-	// * notifyOnResolveCase
+	// - notifyOnResolveCase
 	//
 	// If you don't specify these
 	// parameters in your request, the Amazon Web Services Support App uses the current

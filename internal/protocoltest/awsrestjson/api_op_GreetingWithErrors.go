@@ -10,16 +10,12 @@ import (
 )
 
 // This operation has four possible return values:
-//
-// * A successful response in the
+// - A successful response in the
 // form of GreetingWithErrorsOutput
-//
-// * An InvalidGreeting error.
-//
-// * A BadRequest
+// - An InvalidGreeting error.
+// - A BadRequest
 // error.
-//
-// * A FooError.
+// - A FooError.
 //
 // Implementations must be able to successfully take a
 // response and properly (de)serialize successful and error responses based on the

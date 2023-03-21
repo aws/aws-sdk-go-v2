@@ -60,36 +60,28 @@ import (
 // x-amz-copy-source-if Headers To only copy an object under certain conditions,
 // such as whether the Etag matches or whether the object was modified before or
 // after a specified date, use the following request parameters:
-//
-// *
+// -
 // x-amz-copy-source-if-match
-//
-// * x-amz-copy-source-if-none-match
-//
-// *
+// - x-amz-copy-source-if-none-match
+// -
 // x-amz-copy-source-if-unmodified-since
-//
-// * x-amz-copy-source-if-modified-since
+// - x-amz-copy-source-if-modified-since
 //
 // If
 // both the x-amz-copy-source-if-match and x-amz-copy-source-if-unmodified-since
 // headers are present in the request and evaluate as follows, Amazon S3 returns
 // 200 OK and copies the data:
-//
-// * x-amz-copy-source-if-match condition evaluates to
+// - x-amz-copy-source-if-match condition evaluates to
 // true
-//
-// * x-amz-copy-source-if-unmodified-since condition evaluates to false
+// - x-amz-copy-source-if-unmodified-since condition evaluates to false
 //
 // If
 // both the x-amz-copy-source-if-none-match and x-amz-copy-source-if-modified-since
 // headers are present in the request and evaluate as follows, Amazon S3 returns
 // the 412 Precondition Failed response code:
-//
-// * x-amz-copy-source-if-none-match
+// - x-amz-copy-source-if-none-match
 // condition evaluates to false
-//
-// * x-amz-copy-source-if-modified-since condition
+// - x-amz-copy-source-if-modified-since condition
 // evaluates to true
 //
 // All headers with the x-amz- prefix, including
@@ -147,12 +139,9 @@ import (
 // information, see RestoreObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html). The
 // following operations are related to CopyObject:
-//
-// * PutObject
+// - PutObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
-//
-// *
-// GetObject
+// - GetObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
 //
 // For more
@@ -199,14 +188,12 @@ type CopyObjectInput struct {
 	// of two formats, depending on whether you want to access the source object
 	// through an access point
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html):
-	//
-	// *
+	// -
 	// For objects not accessed through an access point, specify the name of the source
 	// bucket and the key of the source object, separated by a slash (/). For example,
 	// to copy the object reports/january.pdf from the bucket awsexamplebucket, use
 	// awsexamplebucket/reports/january.pdf. The value must be URL-encoded.
-	//
-	// * For
+	// - For
 	// objects accessed through access points, specify the Amazon Resource Name (ARN)
 	// of the object as accessed through the access point, in the format
 	// arn:aws:s3:::accesspoint//object/. For example, to copy the object

@@ -52,12 +52,10 @@ type Resource struct {
 	ResourceGroupArn *string
 
 	// Specifies the scope of visibility of this resource:
-	//
-	// * REGIONAL – The resource
+	// - REGIONAL – The resource
 	// can be accessed only by using requests that target the Amazon Web Services
 	// Region in which the resource exists.
-	//
-	// * GLOBAL – The resource can be accessed
+	// - GLOBAL – The resource can be accessed
 	// from any Amazon Web Services Region.
 	ResourceRegionScope ResourceRegionScope
 
@@ -89,19 +87,16 @@ type ResourceShare struct {
 	CreationTime *time.Time
 
 	// Indicates how the resource share was created. Possible values include:
-	//
-	// *
+	// -
 	// CREATED_FROM_POLICY - Indicates that the resource share was created from an
 	// Identity and Access Management (IAM) resource-based permission policy attached
 	// to the resource. This type of resource share is visible only to the Amazon Web
 	// Services account that created it. You can't modify it in RAM unless you promote
 	// it. For more information, see PromoteResourceShareCreatedFromPolicy.
-	//
-	// *
+	// -
 	// PROMOTING_TO_STANDARD - The resource share is in the process of being promoted.
 	// For more information, see PromoteResourceShareCreatedFromPolicy.
-	//
-	// * STANDARD -
+	// - STANDARD -
 	// Indicates that the resource share was created in RAM using the console or APIs.
 	// These resource shares are visible to all principals you share the resource share
 	// with. You can modify these resource shares in RAM using the console or APIs.
@@ -138,27 +133,20 @@ type ResourceShare struct {
 type ResourceShareAssociation struct {
 
 	// The associated entity. This can be either of the following:
-	//
-	// * For a resource
+	// - For a resource
 	// association, this is the Amazon Resoure Name (ARN)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
 	// the resource.
-	//
-	// * For principal associations, this is one of the following:
-	//
-	// *
-	// The ID of an Amazon Web Services account
-	//
-	// * The Amazon Resoure Name (ARN)
+	// - For principal associations, this is one of the following:
+	// - The
+	// ID of an Amazon Web Services account
+	// - The Amazon Resoure Name (ARN)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
 	// an organization in Organizations
-	//
-	// * The ARN of an organizational unit (OU) in
+	// - The ARN of an organizational unit (OU) in
 	// Organizations
-	//
-	// * The ARN of an IAM role
-	//
-	// * The ARN of an IAM user
+	// - The ARN of an IAM role
+	// - The ARN of an IAM user
 	AssociatedEntity *string
 
 	// The type of entity included in this association.
@@ -316,12 +304,10 @@ type ResourceSharePermissionSummary struct {
 type ServiceNameAndResourceType struct {
 
 	// Specifies the scope of visibility of resources of this type:
-	//
-	// * REGIONAL – The
+	// - REGIONAL – The
 	// resource can be accessed only by using requests that target the Amazon Web
 	// Services Region in which the resource exists.
-	//
-	// * GLOBAL – The resource can be
+	// - GLOBAL – The resource can be
 	// accessed from any Amazon Web Services Region.
 	ResourceRegionScope ResourceRegionScope
 

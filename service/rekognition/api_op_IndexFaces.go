@@ -47,49 +47,39 @@ import (
 // about faces detected in an image, but not indexed, is returned in an array of
 // UnindexedFace objects, UnindexedFaces. Faces aren't indexed for reasons such
 // as:
-//
-// * The number of faces detected exceeds the value of the MaxFaces request
+// - The number of faces detected exceeds the value of the MaxFaces request
 // parameter.
+// - The face is too small compared to the image dimensions.
+// - The face
+// is too blurry.
+// - The image is too dark.
+// - The face has an extreme pose.
+// - The
+// face doesn’t have enough detail to be suitable for face search.
 //
-// * The face is too small compared to the image dimensions.
+// In response,
+// the IndexFaces operation returns an array of metadata for all detected faces,
+// FaceRecords. This includes:
+// - The bounding box, BoundingBox, of the detected
+// face.
+// - A confidence value, Confidence, which indicates the confidence that the
+// bounding box contains a face.
+// - A face ID, FaceId, assigned by the service for
+// each face that's detected and stored.
+// - An image ID, ImageId, assigned by the
+// service for the input image.
 //
-// * The
-// face is too blurry.
-//
-// * The image is too dark.
-//
-// * The face has an extreme
-// pose.
-//
-// * The face doesn’t have enough detail to be suitable for face search.
-//
-// In
-// response, the IndexFaces operation returns an array of metadata for all detected
-// faces, FaceRecords. This includes:
-//
-// * The bounding box, BoundingBox, of the
-// detected face.
-//
-// * A confidence value, Confidence, which indicates the confidence
-// that the bounding box contains a face.
-//
-// * A face ID, FaceId, assigned by the
-// service for each face that's detected and stored.
-//
-// * An image ID, ImageId,
-// assigned by the service for the input image.
-//
-// If you request all facial
-// attributes (by using the detectionAttributes parameter), Amazon Rekognition
-// returns detailed facial attributes, such as facial landmarks (for example,
-// location of eye and mouth) and other facial attributes. If you provide the same
-// image, specify the same collection, and use the same external ID in the
-// IndexFaces operation, Amazon Rekognition doesn't save duplicate face metadata.
-// The input image is passed either as base64-encoded image bytes, or as a
-// reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call
-// Amazon Rekognition operations, passing image bytes isn't supported. The image
-// must be formatted as a PNG or JPEG file. This operation requires permissions to
-// perform the rekognition:IndexFaces action.
+// If you request all facial attributes (by using the
+// detectionAttributes parameter), Amazon Rekognition returns detailed facial
+// attributes, such as facial landmarks (for example, location of eye and mouth)
+// and other facial attributes. If you provide the same image, specify the same
+// collection, and use the same external ID in the IndexFaces operation, Amazon
+// Rekognition doesn't save duplicate face metadata. The input image is passed
+// either as base64-encoded image bytes, or as a reference to an image in an Amazon
+// S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing
+// image bytes isn't supported. The image must be formatted as a PNG or JPEG file.
+// This operation requires permissions to perform the rekognition:IndexFaces
+// action.
 func (c *Client) IndexFaces(ctx context.Context, params *IndexFacesInput, optFns ...func(*Options)) (*IndexFacesOutput, error) {
 	if params == nil {
 		params = &IndexFacesInput{}
@@ -177,8 +167,7 @@ type IndexFacesOutput struct {
 	// version 3.0, the value of OrientationCorrection is always null and no
 	// orientation information is returned. If your collection is associated with a
 	// face detection model that's version 3.0 or earlier, the following applies:
-	//
-	// * If
+	// - If
 	// the input image is in .jpeg format, it might contain exchangeable image file
 	// format (Exif) metadata that includes the image's orientation. Amazon Rekognition
 	// uses this orientation information to perform image correction - the bounding box
@@ -186,8 +175,7 @@ type IndexFacesOutput struct {
 	// information in the Exif metadata is used to correct the image orientation.
 	// Images in .png format don't contain Exif metadata. The value of
 	// OrientationCorrection is null.
-	//
-	// * If the image doesn't contain orientation
+	// - If the image doesn't contain orientation
 	// information in its Exif metadata, Amazon Rekognition returns an estimated
 	// orientation (ROTATE_0, ROTATE_90, ROTATE_180, ROTATE_270). Amazon Rekognition
 	// doesn’t perform image correction for images. The bounding box coordinates aren't

@@ -40,12 +40,9 @@ type AssociateProductWithPortfolioInput struct {
 	ProductId *string
 
 	// The language code.
-	//
-	// * en - English (default)
-	//
-	// * jp - Japanese
-	//
-	// * zh - Chinese
+	// - en - English (default)
+	// - jp - Japanese
+	// - zh - Chinese
 	AcceptLanguage *string
 
 	// The identifier of the source portfolio.

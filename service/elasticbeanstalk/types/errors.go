@@ -254,13 +254,10 @@ func (e *ResourceTypeNotSupportedException) ErrorFault() smithy.ErrorFault { ret
 
 // The specified S3 bucket does not belong to the S3 region in which the service is
 // running. The following regions are supported:
-//
-// * IAD/us-east-1
-//
-// *
-// PDX/us-west-2
-//
-// * DUB/eu-west-1
+// - IAD/us-east-1
+// - PDX/us-west-2
+// -
+// DUB/eu-west-1
 type S3LocationNotInServiceRegionException struct {
 	Message *string
 

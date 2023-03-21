@@ -33,16 +33,13 @@ import (
 // metrics, see Monitoring Metrics with Amazon CloudWatch
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html).
 // The following operations are related to ListBucketMetricsConfigurations:
-//
-// *
+// -
 // PutBucketMetricsConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketMetricsConfiguration.html)
-//
-// *
+// -
 // GetBucketMetricsConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetricsConfiguration.html)
-//
-// *
+// -
 // DeleteBucketMetricsConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketMetricsConfiguration.html)
 func (c *Client) ListBucketMetricsConfigurations(ctx context.Context, params *ListBucketMetricsConfigurationsInput, optFns ...func(*Options)) (*ListBucketMetricsConfigurationsOutput, error) {

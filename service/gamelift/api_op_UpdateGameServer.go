@@ -17,21 +17,18 @@ import (
 // server process that is running on an instance in a game server group. Use this
 // operation to update the following types of game server information. You can make
 // all three types of updates in the same request:
-//
-// * To update the game server's
+// - To update the game server's
 // utilization status, identify the game server and game server group and specify
 // the current utilization status. Use this status to identify when game servers
 // are currently hosting games and when they are available to be claimed.
-//
-// * To
+// - To
 // report health status, identify the game server and game server group and set
 // health check to HEALTHY. If a game server does not report health status for a
 // certain length of time, the game server is no longer considered healthy. As a
 // result, it will be eventually deregistered from the game server group to avoid
 // affecting utilization metrics. The best practice is to report health every 60
 // seconds.
-//
-// * To change game server metadata, provide updated game server
+// - To change game server metadata, provide updated game server
 // data.
 //
 // Once a game server is successfully updated, the relevant statuses and

@@ -132,14 +132,10 @@ type BatchInferenceJob struct {
 
 	// The status of the batch inference job. The status is one of the following
 	// values:
-	//
-	// * PENDING
-	//
-	// * IN PROGRESS
-	//
-	// * ACTIVE
-	//
-	// * CREATE FAILED
+	// - PENDING
+	// - IN PROGRESS
+	// - ACTIVE
+	// - CREATE FAILED
 	Status *string
 
 	noSmithyDocumentSerde
@@ -209,14 +205,10 @@ type BatchInferenceJobSummary struct {
 
 	// The status of the batch inference job. The status is one of the following
 	// values:
-	//
-	// * PENDING
-	//
-	// * IN PROGRESS
-	//
-	// * ACTIVE
-	//
-	// * CREATE FAILED
+	// - PENDING
+	// - IN PROGRESS
+	// - ACTIVE
+	// - CREATE FAILED
 	Status *string
 
 	noSmithyDocumentSerde
@@ -265,14 +257,10 @@ type BatchSegmentJob struct {
 
 	// The status of the batch segment job. The status is one of the following
 	// values:
-	//
-	// * PENDING
-	//
-	// * IN PROGRESS
-	//
-	// * ACTIVE
-	//
-	// * CREATE FAILED
+	// - PENDING
+	// - IN PROGRESS
+	// - ACTIVE
+	// - CREATE FAILED
 	Status *string
 
 	noSmithyDocumentSerde
@@ -328,14 +316,10 @@ type BatchSegmentJobSummary struct {
 
 	// The status of the batch segment job. The status is one of the following
 	// values:
-	//
-	// * PENDING
-	//
-	// * IN PROGRESS
-	//
-	// * ACTIVE
-	//
-	// * CREATE FAILED
+	// - PENDING
+	// - IN PROGRESS
+	// - ACTIVE
+	// - CREATE FAILED
 	Status *string
 
 	noSmithyDocumentSerde
@@ -378,12 +362,10 @@ type Campaign struct {
 	SolutionVersionArn *string
 
 	// The status of the campaign. A campaign can be in one of the following states:
-	//
-	// *
+	// -
 	// CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
-	//
-	// * DELETE
-	// PENDING > DELETE IN_PROGRESS
+	// - DELETE PENDING
+	// > DELETE IN_PROGRESS
 	Status *string
 
 	noSmithyDocumentSerde
@@ -426,12 +408,10 @@ type CampaignSummary struct {
 	Name *string
 
 	// The status of the campaign. A campaign can be in one of the following states:
-	//
-	// *
+	// -
 	// CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
-	//
-	// * DELETE
-	// PENDING > DELETE IN_PROGRESS
+	// - DELETE PENDING
+	// > DELETE IN_PROGRESS
 	Status *string
 
 	noSmithyDocumentSerde
@@ -464,11 +444,9 @@ type CampaignUpdateSummary struct {
 
 	// The status of the campaign update. A campaign update can be in one of the
 	// following states:
-	//
-	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
+	// - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
 	// FAILED
-	//
-	// * DELETE PENDING > DELETE IN_PROGRESS
+	// - DELETE PENDING > DELETE IN_PROGRESS
 	Status *string
 
 	noSmithyDocumentSerde
@@ -514,12 +492,9 @@ type Dataset struct {
 	DatasetGroupArn *string
 
 	// One of the following values:
-	//
-	// * Interactions
-	//
-	// * Items
-	//
-	// * Users
+	// - Interactions
+	// - Items
+	// - Users
 	DatasetType *string
 
 	// A time stamp that shows when the dataset was updated.
@@ -532,12 +507,10 @@ type Dataset struct {
 	SchemaArn *string
 
 	// The status of the dataset. A dataset can be in one of the following states:
-	//
-	// *
+	// -
 	// CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
-	//
-	// * DELETE
-	// PENDING > DELETE IN_PROGRESS
+	// - DELETE PENDING
+	// > DELETE IN_PROGRESS
 	Status *string
 
 	noSmithyDocumentSerde
@@ -547,8 +520,7 @@ type Dataset struct {
 // information, see CreateDatasetExportJob
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetExportJob.html).
 // A dataset export job can be in one of the following states:
-//
-// * CREATE PENDING >
+// - CREATE PENDING >
 // CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 type DatasetExportJob struct {
 
@@ -587,8 +559,7 @@ type DatasetExportJob struct {
 
 	// The status of the dataset export job. A dataset export job can be in one of the
 	// following states:
-	//
-	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
+	// - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
 	// FAILED
 	Status *string
 
@@ -630,8 +601,7 @@ type DatasetExportJobSummary struct {
 
 	// The status of the dataset export job. A dataset export job can be in one of the
 	// following states:
-	//
-	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
+	// - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
 	// FAILED
 	Status *string
 
@@ -676,11 +646,9 @@ type DatasetGroup struct {
 
 	// The current status of the dataset group. A dataset group can be in one of the
 	// following states:
-	//
-	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
+	// - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
 	// FAILED
-	//
-	// * DELETE PENDING
+	// - DELETE PENDING
 	Status *string
 
 	noSmithyDocumentSerde
@@ -712,10 +680,8 @@ type DatasetGroupSummary struct {
 
 	// The status of the dataset group. A dataset group can be in one of the following
 	// states:
-	//
-	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
-	//
-	// *
+	// - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
+	// -
 	// DELETE PENDING
 	Status *string
 
@@ -727,8 +693,7 @@ type DatasetGroupSummary struct {
 // CreateDatasetImportJob
 // (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetImportJob.html).
 // A dataset import job can be in one of the following states:
-//
-// * CREATE PENDING >
+// - CREATE PENDING >
 // CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 type DatasetImportJob struct {
 
@@ -765,8 +730,7 @@ type DatasetImportJob struct {
 
 	// The status of the dataset import job. A dataset import job can be in one of the
 	// following states:
-	//
-	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
+	// - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
 	// FAILED
 	Status *string
 
@@ -802,8 +766,7 @@ type DatasetImportJobSummary struct {
 
 	// The status of the dataset import job. A dataset import job can be in one of the
 	// following states:
-	//
-	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
+	// - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
 	// FAILED
 	Status *string
 
@@ -872,15 +835,11 @@ type DatasetSummary struct {
 	DatasetArn *string
 
 	// The dataset type. One of the following values:
-	//
-	// * Interactions
-	//
-	// * Items
-	//
-	// *
-	// Users
-	//
-	// * Event-Interactions
+	// - Interactions
+	// - Items
+	// - Users
+	// -
+	// Event-Interactions
 	DatasetType *string
 
 	// The date and time (in Unix time) that the dataset was last updated.
@@ -890,12 +849,10 @@ type DatasetSummary struct {
 	Name *string
 
 	// The status of the dataset. A dataset can be in one of the following states:
-	//
-	// *
+	// -
 	// CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
-	//
-	// * DELETE
-	// PENDING > DELETE IN_PROGRESS
+	// - DELETE PENDING
+	// > DELETE IN_PROGRESS
 	Status *string
 
 	noSmithyDocumentSerde
@@ -1008,10 +965,8 @@ type EventTracker struct {
 
 	// The status of the event tracker. An event tracker can be in one of the following
 	// states:
-	//
-	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
-	//
-	// *
+	// - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
+	// -
 	// DELETE PENDING > DELETE IN_PROGRESS
 	Status *string
 
@@ -1042,10 +997,8 @@ type EventTrackerSummary struct {
 
 	// The status of the event tracker. An event tracker can be in one of the following
 	// states:
-	//
-	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
-	//
-	// *
+	// - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
+	// -
 	// DELETE PENDING > DELETE IN_PROGRESS
 	Status *string
 
@@ -1074,8 +1027,7 @@ type FeatureTransformation struct {
 
 	// The status of the feature transformation. A feature transformation can be in one
 	// of the following states:
-	//
-	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or-
+	// - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or-
 	// CREATE FAILED
 	Status *string
 
@@ -1370,12 +1322,9 @@ type Recipe struct {
 	RecipeArn *string
 
 	// One of the following values:
-	//
-	// * PERSONALIZED_RANKING
-	//
-	// * RELATED_ITEMS
-	//
-	// *
+	// - PERSONALIZED_RANKING
+	// - RELATED_ITEMS
+	// -
 	// USER_PERSONALIZATION
 	RecipeType *string
 
@@ -1454,14 +1403,11 @@ type Recommender struct {
 
 	// The status of the recommender. A recommender can be in one of the following
 	// states:
-	//
-	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
-	//
-	// *
-	// STOP PENDING > STOP IN_PROGRESS > INACTIVE > START PENDING > START IN_PROGRESS >
+	// - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
+	// - STOP
+	// PENDING > STOP IN_PROGRESS > INACTIVE > START PENDING > START IN_PROGRESS >
 	// ACTIVE
-	//
-	// * DELETE PENDING > DELETE IN_PROGRESS
+	// - DELETE PENDING > DELETE IN_PROGRESS
 	Status *string
 
 	noSmithyDocumentSerde
@@ -1512,14 +1458,11 @@ type RecommenderSummary struct {
 
 	// The status of the recommender. A recommender can be in one of the following
 	// states:
-	//
-	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
-	//
-	// *
-	// STOP PENDING > STOP IN_PROGRESS > INACTIVE > START PENDING > START IN_PROGRESS >
+	// - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
+	// - STOP
+	// PENDING > STOP IN_PROGRESS > INACTIVE > START PENDING > START IN_PROGRESS >
 	// ACTIVE
-	//
-	// * DELETE PENDING > DELETE IN_PROGRESS
+	// - DELETE PENDING > DELETE IN_PROGRESS
 	Status *string
 
 	noSmithyDocumentSerde
@@ -1545,14 +1488,11 @@ type RecommenderUpdateSummary struct {
 
 	// The status of the recommender update. A recommender can be in one of the
 	// following states:
-	//
-	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
+	// - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
 	// FAILED
-	//
-	// * STOP PENDING > STOP IN_PROGRESS > INACTIVE > START PENDING > START
+	// - STOP PENDING > STOP IN_PROGRESS > INACTIVE > START PENDING > START
 	// IN_PROGRESS > ACTIVE
-	//
-	// * DELETE PENDING > DELETE IN_PROGRESS
+	// - DELETE PENDING > DELETE IN_PROGRESS
 	Status *string
 
 	noSmithyDocumentSerde
@@ -1621,12 +1561,10 @@ type Solution struct {
 	SolutionConfig *SolutionConfig
 
 	// The status of the solution. A solution can be in one of the following states:
-	//
-	// *
+	// -
 	// CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
-	//
-	// * DELETE
-	// PENDING > DELETE IN_PROGRESS
+	// - DELETE PENDING
+	// > DELETE IN_PROGRESS
 	Status *string
 
 	noSmithyDocumentSerde
@@ -1684,12 +1622,10 @@ type SolutionSummary struct {
 	SolutionArn *string
 
 	// The status of the solution. A solution can be in one of the following states:
-	//
-	// *
+	// -
 	// CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
-	//
-	// * DELETE
-	// PENDING > DELETE IN_PROGRESS
+	// - DELETE PENDING
+	// > DELETE IN_PROGRESS
 	Status *string
 
 	noSmithyDocumentSerde
@@ -1742,19 +1678,13 @@ type SolutionVersion struct {
 
 	// The status of the solution version. A solution version can be in one of the
 	// following states:
-	//
-	// * CREATE PENDING
-	//
-	// * CREATE IN_PROGRESS
-	//
-	// * ACTIVE
-	//
-	// * CREATE
+	// - CREATE PENDING
+	// - CREATE IN_PROGRESS
+	// - ACTIVE
+	// - CREATE
 	// FAILED
-	//
-	// * CREATE STOPPING
-	//
-	// * CREATE STOPPED
+	// - CREATE STOPPING
+	// - CREATE STOPPED
 	Status *string
 
 	// The time used to train the model. You are billed for the time it takes to train
@@ -1803,8 +1733,7 @@ type SolutionVersionSummary struct {
 
 	// The status of the solution version. A solution version can be in one of the
 	// following states:
-	//
-	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
+	// - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
 	// FAILED
 	Status *string
 

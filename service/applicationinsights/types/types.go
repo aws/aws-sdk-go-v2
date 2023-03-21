@@ -64,11 +64,9 @@ type ApplicationInfo struct {
 
 	// The issues on the user side that block Application Insights from successfully
 	// monitoring an application. Example remarks include:
-	//
-	// * “Configuring application,
+	// - “Configuring application,
 	// detected 1 Errors, 3 Warnings”
-	//
-	// * “Configuring application, detected 1
+	// - “Configuring application, detected 1
 	// Unconfigured Components”
 	Remarks *string
 
@@ -345,14 +343,11 @@ type RelatedObservations struct {
 // tag value can contain as many as 256 characters. The characters can be Unicode
 // letters, digits, white space, or one of the following symbols: _ . : / = + -.
 // The following additional restrictions apply to tags:
-//
-// * Tag keys and values are
+// - Tag keys and values are
 // case sensitive.
-//
-// * For each associated resource, each tag key must be unique and
+// - For each associated resource, each tag key must be unique and
 // it can have only one value.
-//
-// * The aws: prefix is reserved for use by AWS; you
+// - The aws: prefix is reserved for use by AWS; you
 // can’t use it in any tag keys or values that you define. In addition, you can't
 // edit or remove tag keys or values that use this prefix.
 type Tag struct {

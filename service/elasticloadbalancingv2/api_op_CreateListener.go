@@ -13,16 +13,13 @@ import (
 
 // Creates a listener for the specified Application Load Balancer, Network Load
 // Balancer, or Gateway Load Balancer. For more information, see the following:
-//
-// *
+// -
 // Listeners for your Application Load Balancers
 // (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html)
-//
-// *
+// -
 // Listeners for your Network Load Balancers
 // (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-listeners.html)
-//
-// *
+// -
 // Listeners for your Gateway Load Balancers
 // (https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/gateway-listeners.html)
 //
@@ -59,19 +56,14 @@ type CreateListenerInput struct {
 	// [TLS listeners] The name of the Application-Layer Protocol Negotiation (ALPN)
 	// policy. You can specify one policy name. The following are the possible
 	// values:
+	// - HTTP1Only
+	// - HTTP2Only
+	// - HTTP2Optional
+	// - HTTP2Preferred
+	// - None
 	//
-	// * HTTP1Only
-	//
-	// * HTTP2Only
-	//
-	// * HTTP2Optional
-	//
-	// * HTTP2Preferred
-	//
-	// *
-	// None
-	//
-	// For more information, see ALPN policies
+	// For
+	// more information, see ALPN policies
 	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#alpn-policies)
 	// in the Network Load Balancers Guide.
 	AlpnPolicy []string

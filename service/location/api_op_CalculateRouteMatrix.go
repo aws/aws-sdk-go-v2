@@ -29,15 +29,13 @@ import (
 // By default, a request that doesn't specify a departure time uses the best time
 // of day to travel with the best traffic conditions when calculating routes.
 // Additional options include:
-//
-// * Specifying a departure time
+// - Specifying a departure time
 // (https://docs.aws.amazon.com/location/latest/developerguide/departure-time.html)
 // using either DepartureTime or DepartNow. This calculates routes based on
 // predictive traffic data at the given time. You can't specify both DepartureTime
 // and DepartNow in a single request. Specifying both parameters returns a
 // validation error.
-//
-// * Specifying a travel mode
+// - Specifying a travel mode
 // (https://docs.aws.amazon.com/location/latest/developerguide/travel-mode.html)
 // using TravelMode sets the transportation mode used to calculate the routes. This
 // also lets you specify additional route preferences in CarModeOptions if
@@ -115,8 +113,7 @@ type CalculateRouteMatrixInput struct {
 	// the best time of day to travel with the best traffic conditions is used to
 	// calculate the route matrix. Setting a departure time in the past returns a 400
 	// ValidationException error.
-	//
-	// * In ISO 8601
+	// - In ISO 8601
 	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
 	// YYYY-MM-DDThh:mm:ss.sssZ. For example, 2020–07-2T12:15:20.000Z+01:00
 	DepartureTime *time.Time
@@ -127,11 +124,9 @@ type CalculateRouteMatrixInput struct {
 	// Specifies the mode of transport when calculating a route. Used in estimating the
 	// speed of travel and road compatibility. The TravelMode you specify also
 	// determines how you specify route preferences:
-	//
-	// * If traveling by Car use the
+	// - If traveling by Car use the
 	// CarModeOptions parameter.
-	//
-	// * If traveling by Truck use the TruckModeOptions
+	// - If traveling by Truck use the TruckModeOptions
 	// parameter.
 	//
 	// Bicycle or Motorcycle are only valid when using Grab as a data

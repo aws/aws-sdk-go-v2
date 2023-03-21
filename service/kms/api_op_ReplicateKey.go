@@ -73,22 +73,17 @@ import (
 // For details, see the parameter descriptions. Cross-account use: No. You cannot
 // use this operation to create a replica key in a different Amazon Web Services
 // account. Required permissions:
-//
-// * kms:ReplicateKey on the primary key (in the
+// - kms:ReplicateKey on the primary key (in the
 // primary key's Region). Include this permission in the primary key's key
 // policy.
-//
-// * kms:CreateKey in an IAM policy in the replica Region.
-//
-// * To use the
+// - kms:CreateKey in an IAM policy in the replica Region.
+// - To use the
 // Tags parameter, kms:TagResource in an IAM policy in the replica Region.
 //
 // Related
 // operations
-//
-// * CreateKey
-//
-// * UpdatePrimaryRegion
+// - CreateKey
+// - UpdatePrimaryRegion
 func (c *Client) ReplicateKey(ctx context.Context, params *ReplicateKeyInput, optFns ...func(*Options)) (*ReplicateKeyOutput, error) {
 	if params == nil {
 		params = &ReplicateKeyInput{}
@@ -110,11 +105,9 @@ type ReplicateKeyInput struct {
 	// whether a KMS key is a multi-Region primary key, use the DescribeKey operation
 	// to check the value of the MultiRegionKeyType property. Specify the key ID or key
 	// ARN of a multi-Region primary key. For example:
-	//
-	// * Key ID:
+	// - Key ID:
 	// mrk-1234abcd12ab34cd56ef1234567890ab
-	//
-	// * Key ARN:
+	// - Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/mrk-1234abcd12ab34cd56ef1234567890ab
 	//
 	// To
@@ -173,18 +166,16 @@ type ReplicateKeyInput struct {
 	// You can specify the same key policy or a different key policy for each key in a
 	// set of related multi-Region keys. KMS does not synchronize this property. If you
 	// provide a key policy, it must meet the following criteria:
-	//
-	// * The key policy
-	// must allow the calling principal to make a subsequent PutKeyPolicy request on
-	// the KMS key. This reduces the risk that the KMS key becomes unmanageable. For
-	// more information, see Default key policy
+	// - The key policy must
+	// allow the calling principal to make a subsequent PutKeyPolicy request on the KMS
+	// key. This reduces the risk that the KMS key becomes unmanageable. For more
+	// information, see Default key policy
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-default.html#prevent-unmanageable-key)
 	// in the Key Management Service Developer Guide. (To omit this condition, set
 	// BypassPolicyLockoutSafetyCheck to true.)
-	//
-	// * Each statement in the key policy
-	// must contain one or more principals. The principals in the key policy must exist
-	// and be visible to KMS. When you create a new Amazon Web Services principal, you
+	// - Each statement in the key policy must
+	// contain one or more principals. The principals in the key policy must exist and
+	// be visible to KMS. When you create a new Amazon Web Services principal, you
 	// might need to enforce a delay before including the new principal in a key policy
 	// because the new principal might not be immediately visible to KMS. For more
 	// information, see Changes that I make are not always immediately visible
@@ -193,15 +184,12 @@ type ReplicateKeyInput struct {
 	//
 	// A key
 	// policy document can include only the following characters:
-	//
-	// * Printable ASCII
+	// - Printable ASCII
 	// characters from the space character (\u0020) through the end of the ASCII
 	// character range.
-	//
-	// * Printable characters in the Basic Latin and Latin-1
+	// - Printable characters in the Basic Latin and Latin-1
 	// Supplement character set (through \u00FF).
-	//
-	// * The tab (\u0009), line feed
+	// - The tab (\u0009), line feed
 	// (\u000A), and carriage return (\u000D) special characters
 	//
 	// For information about

@@ -75,8 +75,7 @@ type CreateInferenceExperimentInput struct {
 
 	// The type of the inference experiment that you want to run. The following types
 	// of experiments are possible:
-	//
-	// * ShadowMode: You can use this type to validate a
+	// - ShadowMode: You can use this type to validate a
 	// shadow variant. For more information, see Shadow tests
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/shadow-tests.html).
 	//
@@ -96,17 +95,13 @@ type CreateInferenceExperimentInput struct {
 	// that Amazon SageMaker uses to encrypt data on the storage volume attached to the
 	// ML compute instance that hosts the endpoint. The KmsKey can be any of the
 	// following formats:
-	//
-	// * KMS key ID "1234abcd-12ab-34cd-56ef-1234567890ab"
-	//
-	// *
-	// Amazon Resource Name (ARN) of a KMS key
+	// - KMS key ID "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// - Amazon
+	// Resource Name (ARN) of a KMS key
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
-	//
-	// *
+	// -
 	// KMS key Alias "alias/ExampleAlias"
-	//
-	// * Amazon Resource Name (ARN) of a KMS key
+	// - Amazon Resource Name (ARN) of a KMS key
 	// Alias "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"
 	//
 	// If you use a KMS
