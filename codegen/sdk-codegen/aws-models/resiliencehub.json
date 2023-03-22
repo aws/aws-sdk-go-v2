@@ -303,7 +303,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines an AWS Resilience Hub application.</p>"
+                "smithy.api#documentation": "<p>Defines an Resilience Hub application.</p>"
             }
         },
         "com.amazonaws.resiliencehub#AppAssessment": {
@@ -662,12 +662,18 @@
                     "target": "com.amazonaws.resiliencehub#Integer",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The number of resources that were imported.</p>"
+                        "smithy.api#documentation": "<p>The number of resources.</p>"
+                    }
+                },
+                "eksSourceClusterNamespace": {
+                    "target": "com.amazonaws.resiliencehub#EksSourceClusterNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace on your Amazon Elastic Kubernetes Service cluster.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The list of AWS Resilience Hub application input sources.</p>"
+                "smithy.api#documentation": "<p>The list of Resilience Hub application input sources.</p>"
             }
         },
         "com.amazonaws.resiliencehub#AppInputSourceList": {
@@ -764,7 +770,7 @@
                     "min": 0,
                     "max": 204800
                 },
-                "smithy.api#pattern": "^[\\w\\s:,-\\.'{}\\[\\]:\"]+$"
+                "smithy.api#pattern": "^[\\w\\s:,-\\.'\\/{}\\[\\]:\"\\\\]+$"
             }
         },
         "com.amazonaws.resiliencehub#AppVersionList": {
@@ -1042,7 +1048,7 @@
                         "*,authorization,date,x-amz-date,x-amz-security-token,x-amz-target,content-type,x-amz-content-sha256,x-amz-user-agent,x-amzn-platform-id,x-amzn-trace-id,amz-sdk-invocation-id,amz-sdk-request"
                     ]
                 },
-                "smithy.api#documentation": "<p>AWS Resilience Hub helps you proactively prepare and protect your Amazon Web Services applications from\n      disruptions. Resilience Hub offers continuous resiliency assessment and validation that integrates\n      into your software development lifecycle. This enables you to uncover resiliency weaknesses,\n      ensure recovery time objective (RTO) and recovery point objective (RPO) targets for your\n      applications are met, and resolve issues before they are released into production. </p>",
+                "smithy.api#documentation": "<p>Resilience Hub helps you proactively prepare and protect your Amazon Web Services applications from\n      disruptions. It offers continual resiliency assessment and validation that integrates\n      into your software development lifecycle. This enables you to uncover resiliency weaknesses,\n      ensure recovery time objective (RTO) and recovery point objective (RPO) targets for your\n      applications are met, and resolve issues before they are released into production. </p>",
                 "smithy.api#title": "AWS Resilience Hub",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -1404,9 +1410,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "af-south-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "af-south-1"
                             }
                         },
                         {
@@ -1417,9 +1423,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-east-1"
                             }
                         },
                         {
@@ -1430,9 +1436,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -1443,9 +1449,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -1456,9 +1462,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-south-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-south-1"
                             }
                         },
                         {
@@ -1469,9 +1475,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -1482,9 +1488,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -1495,9 +1501,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ca-central-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -1508,9 +1514,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-central-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -1521,9 +1527,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-north-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-north-1"
                             }
                         },
                         {
@@ -1534,9 +1540,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-south-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-south-1"
                             }
                         },
                         {
@@ -1547,9 +1553,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -1560,9 +1566,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -1573,9 +1579,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-3",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-west-3"
                             }
                         },
                         {
@@ -1586,9 +1592,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "me-south-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "me-south-1"
                             }
                         },
                         {
@@ -1599,9 +1605,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "sa-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "sa-east-1"
                             }
                         },
                         {
@@ -1612,9 +1618,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -1625,9 +1631,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -1638,9 +1644,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-west-1"
                             }
                         },
                         {
@@ -1651,9 +1657,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -1664,9 +1670,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -1677,9 +1683,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -1690,9 +1696,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -1703,9 +1709,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -1716,9 +1722,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -1729,9 +1735,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -1742,9 +1748,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -1755,9 +1761,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -1768,9 +1774,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -1781,9 +1787,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -1794,9 +1800,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -1807,9 +1813,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -1820,9 +1826,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -1833,9 +1839,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -1846,9 +1852,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -1859,9 +1865,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1873,8 +1879,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1884,9 +1890,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1896,9 +1902,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -1967,7 +1973,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines recommendations for an AWS Resilience Hub Application Component, returned as an object. This\n      object contains component names, configuration recommendations, and recommendation\n      statuses.</p>"
+                "smithy.api#documentation": "<p>Defines recommendations for an Resilience Hub Application Component, returned as an object. This\n      object contains component names, configuration recommendations, and recommendation\n      statuses.</p>"
             }
         },
         "com.amazonaws.resiliencehub#ComponentRecommendationList": {
@@ -2194,7 +2200,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an AWS Resilience Hub application. An AWS Resilience Hub application is a collection of Amazon Web Services\n      resources structured to prevent and recover Amazon Web Services application disruptions. To describe a\n      AWS Resilience Hub application, you provide an application name, resources from one or more–up to\n      five–CloudFormation stacks, and an appropriate resiliency policy.</p>\n         <p>After you create an AWS Resilience Hub application, you publish it so that you can run a resiliency\n      assessment on it. You can then use recommendations from the assessment to improve resiliency\n      by running another assessment, comparing results, and then iterating the process until you\n      achieve your goals for recovery time objective (RTO) and recovery point objective\n      (RPO).</p>",
+                "smithy.api#documentation": "<p>Creates an Resilience Hub application. An Resilience Hub application is a collection of Amazon Web Services\n      resources structured to prevent and recover Amazon Web Services application disruptions. To describe a\n      Resilience Hub application, you provide an application name, resources from one or more–up to\n      five–CloudFormation stacks, and an appropriate resiliency policy.</p>\n         <p>After you create an Resilience Hub application, you publish it so that you can run a resiliency\n      assessment on it. You can then use recommendations from the assessment to improve resiliency\n      by running another assessment, comparing results, and then iterating the process until you\n      achieve your goals for recovery time objective (RTO) and recovery point objective\n      (RPO).</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/create-app",
@@ -2289,7 +2295,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new Application Component in the AWS Resilience Hub application.</p>\n         <note>\n            <p>This API updates the AWS Resilience Hub application draft version. To use this Application Component for running assessments, you must publish the AWS Resilience Hub application using the <code>PublishAppVersion</code> API.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Creates a new Application Component in the Resilience Hub application.</p>\n         <note>\n            <p>This API updates the Resilience Hub application draft version. To use this Application Component for running assessments, you must publish the Resilience Hub application using the <code>PublishAppVersion</code> API.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/create-app-version-app-component",
@@ -2360,7 +2366,10 @@
                     }
                 },
                 "appComponent": {
-                    "target": "com.amazonaws.resiliencehub#AppComponent"
+                    "target": "com.amazonaws.resiliencehub#AppComponent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Application Components that belong to this resource.</p>"
+                    }
                 }
             }
         },
@@ -2396,7 +2405,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds a resource to the AWS Resilience Hub applicationand assigns it to the specified\n      Application Components. If you specify a new Application Component, AWS Resilience Hub will automatically\n      create the Application Component.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>This action has no effect outside AWS Resilience Hub.</p>\n               </li>\n               <li>\n                  <p>This API updates the AWS Resilience Hub application draft version. To use this resource\n            for running resiliency assessments, you must publish the AWS Resilience Hub application using\n            the <code>PublishAppVersion</code> API.</p>\n               </li>\n               <li>\n                  <p>To update application version with new <code>physicalResourceID</code>, you must\n            call <code>ResolveAppVersionResources</code> API.</p>\n               </li>\n            </ul>\n         </note>",
+                "smithy.api#documentation": "<p>Adds a resource to the Resilience Hub application and assigns it to the specified\n      Application Components. If you specify a new Application Component, Resilience Hub will automatically\n      create the Application Component.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>This action has no effect outside Resilience Hub.</p>\n               </li>\n               <li>\n                  <p>This API updates the Resilience Hub application draft version. To use this resource\n            for running resiliency assessments, you must publish the Resilience Hub application using\n            the <code>PublishAppVersion</code> API.</p>\n               </li>\n               <li>\n                  <p>To update application version with new <code>physicalResourceID</code>, you must\n            call <code>ResolveAppVersionResources</code> API.</p>\n               </li>\n            </ul>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/create-app-version-resource",
@@ -2533,7 +2542,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new recommendation template for the AWS Resilience Hub application.</p>",
+                "smithy.api#documentation": "<p>Creates a new recommendation template for the Resilience Hub application.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/create-recommendation-template",
@@ -2768,7 +2777,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an AWS Resilience Hub application. This is a destructive action that can't be\n      undone.</p>",
+                "smithy.api#documentation": "<p>Deletes an Resilience Hub application. This is a destructive action that can't be\n      undone.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/delete-app",
@@ -2805,7 +2814,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an AWS Resilience Hub application assessment. This is a destructive action that can't\n      be undone.</p>",
+                "smithy.api#documentation": "<p>Deletes an Resilience Hub application assessment. This is a destructive action that can't\n      be undone.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/delete-app-assessment",
@@ -2880,7 +2889,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the input source and all of its imported resources from the AWS Resilience Hub application.</p>",
+                "smithy.api#documentation": "<p>Deletes the input source and all of its imported resources from the Resilience Hub application.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/delete-app-input-source",
@@ -2901,13 +2910,13 @@
                 "sourceArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the imported resource you want to remove from the\n      AWS Resilience Hub application. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the imported resource you want to remove from the\n      Resilience Hub application. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>"
                     }
                 },
                 "terraformSource": {
                     "target": "com.amazonaws.resiliencehub#TerraformSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>The imported Terraform s3 state ﬁle you want to remove from the AWS Resilience Hub application.</p>"
+                        "smithy.api#documentation": "<p>The imported Terraform s3 state ﬁle you want to remove from the Resilience Hub application.</p>"
                     }
                 },
                 "clientToken": {
@@ -2915,6 +2924,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Used for an idempotency token. A client token is a unique, case-sensitive string of up to 64 ASCII characters. \nYou should not reuse the same client token for other API requests.</p>",
                         "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "eksSourceClusterNamespace": {
+                    "target": "com.amazonaws.resiliencehub#EksSourceClusterNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace on your Amazon Elastic Kubernetes Service cluster that you want to delete from the Resilience Hub application.</p>"
                     }
                 }
             }
@@ -2949,7 +2964,7 @@
                 "forceDelete": {
                     "target": "com.amazonaws.resiliencehub#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>A boolean option to force the deletion of an AWS Resilience Hub application. </p>"
+                        "smithy.api#documentation": "<p>A boolean option to force the deletion of an Resilience Hub application. </p>"
                     }
                 },
                 "clientToken": {
@@ -3002,7 +3017,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an Application Component from the AWS Resilience Hub application.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>This API updates the AWS Resilience Hub application draft version. To use this Application Component for running assessments, you must publish the AWS Resilience Hub application using the <code>PublishAppVersion</code> API.</p>\n               </li>\n               <li>\n                  <p>You will not be able to delete an Application Component if it has resources associated with it.</p>\n               </li>\n            </ul>\n         </note>",
+                "smithy.api#documentation": "<p>Deletes an Application Component from the Resilience Hub application.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>This API updates the Resilience Hub application draft version. To use this Application Component for running assessments, you must publish the Resilience Hub application using the <code>PublishAppVersion</code> API.</p>\n               </li>\n               <li>\n                  <p>You will not be able to delete an Application Component if it has resources associated with it.</p>\n               </li>\n            </ul>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/delete-app-version-app-component",
@@ -3054,7 +3069,10 @@
                     }
                 },
                 "appComponent": {
-                    "target": "com.amazonaws.resiliencehub#AppComponent"
+                    "target": "com.amazonaws.resiliencehub#AppComponent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Application Components that belong to this resource.</p>"
+                    }
                 }
             }
         },
@@ -3087,7 +3105,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a resource from the AWS Resilience Hub application.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>You can only delete a manually added resource. To exclude non-manually added resources, use the <code>UpdateAppVersionResource</code> API.</p>\n               </li>\n               <li>\n                  <p>This action has no effect outside AWS Resilience Hub.</p>\n               </li>\n               <li>\n                  <p>This API updates the AWS Resilience Hub application draft version. To use this resource for running resiliency assessments, you must publish the AWS Resilience Hub application using the <code>PublishAppVersion</code> API.</p>\n               </li>\n            </ul>\n         </note>",
+                "smithy.api#documentation": "<p>Deletes a resource from the Resilience Hub application.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>You can only delete a manually added resource. To exclude non-manually added resources, use the <code>UpdateAppVersionResource</code> API.</p>\n               </li>\n               <li>\n                  <p>This action has no effect outside Resilience Hub.</p>\n               </li>\n               <li>\n                  <p>This API updates the Resilience Hub application draft version. To use this resource for running resiliency assessments, you must publish the Resilience Hub application using the <code>PublishAppVersion</code> API.</p>\n               </li>\n            </ul>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/delete-app-version-resource",
@@ -3335,7 +3353,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes an AWS Resilience Hub application.</p>",
+                "smithy.api#documentation": "<p>Describes an Resilience Hub application.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/describe-app",
@@ -3369,7 +3387,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes an assessment for an AWS Resilience Hub application.</p>",
+                "smithy.api#documentation": "<p>Describes an assessment for an Resilience Hub application.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/describe-app-assessment",
@@ -3395,7 +3413,7 @@
                 "assessment": {
                     "target": "com.amazonaws.resiliencehub#AppAssessment",
                     "traits": {
-                        "smithy.api#documentation": "<p>The assessment for an AWS Resilience Hub application, returned as an object. This object\n      includes Amazon Resource Names (ARNs), compliance information, compliance status, cost,\n      messages, resiliency scores, and more.</p>",
+                        "smithy.api#documentation": "<p>The assessment for an Resilience Hub application, returned as an object. This object\n      includes Amazon Resource Names (ARNs), compliance information, compliance status, cost,\n      messages, resiliency scores, and more.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3451,7 +3469,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the AWS Resilience Hub application version.</p>",
+                "smithy.api#documentation": "<p>Describes the Resilience Hub application version.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/describe-app-version",
@@ -3488,7 +3506,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes an Application Component in the AWS Resilience Hub application.</p>",
+                "smithy.api#documentation": "<p>Describes an Application Component in the Resilience Hub application.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/describe-app-version-app-component",
@@ -3540,7 +3558,10 @@
                     }
                 },
                 "appComponent": {
-                    "target": "com.amazonaws.resiliencehub#AppComponent"
+                    "target": "com.amazonaws.resiliencehub#AppComponent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Application Components that belong to this resource.</p>"
+                    }
                 }
             }
         },
@@ -3592,7 +3613,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes a resource of the AWS Resilience Hub application.</p>\n         <note>\n            <p>This API accepts only one of the following parameters to descibe the resource:</p>\n            <ul>\n               <li>\n                  <p>\n                     <code>resourceName</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>logicalResourceId</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>physicalResourceId</code> (Along with <code>physicalResourceId</code>, you can also\n            provide <code>awsAccountId</code>, and <code>awsRegion</code>)</p>\n               </li>\n            </ul>\n         </note>",
+                "smithy.api#documentation": "<p>Describes a resource of the Resilience Hub application.</p>\n         <note>\n            <p>This API accepts only one of the following parameters to descibe the resource:</p>\n            <ul>\n               <li>\n                  <p>\n                     <code>resourceName</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>logicalResourceId</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>physicalResourceId</code> (Along with <code>physicalResourceId</code>, you can also\n            provide <code>awsAccountId</code>, and <code>awsRegion</code>)</p>\n               </li>\n            </ul>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/describe-app-version-resource",
@@ -3823,7 +3844,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes details about an AWS Resilience Hub application.</p>",
+                "smithy.api#documentation": "<p>Describes details about an Resilience Hub application.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/describe-app-version-template",
@@ -3870,7 +3891,7 @@
                 "appTemplateBody": {
                     "target": "com.amazonaws.resiliencehub#AppTemplateBody",
                     "traits": {
-                        "smithy.api#documentation": "<p>A JSON string that provides information about your application structure. To learn more\n      about the <code>appTemplateBody</code> template, see the sample template provided in the\n      <i>Examples</i> section.</p>\n         <p>The <code>appTemplateBody</code> JSON string has the following structure:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>resources</code>\n                  </b>\n               </p>\n               <p>The list of logical resources that needs to be included in the application.</p>\n               <p>Type: Array</p>\n               <note>\n                  <p>Don't add the resources that you want to exclude.</p>\n               </note>\n               <p>Each <code>resources</code> array item includes the following fields:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>\n                           <code>logicalResourceId</code>\n                        </i>\n                     </p>\n                     <p>The logical identifier of the resource.</p>\n                     <p>Type: Object</p>\n                     <p>Each <code>logicalResourceId</code> object includes the following fields:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>identifier</code>\n                           </p>\n                           <p>The identifier of the resource.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>logicalStackName</code>\n                           </p>\n                           <p>The name of the CloudFormation stack this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>resourceGroupName</code>\n                           </p>\n                           <p>The name of the resource group this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>terraformSourceName</code>\n                           </p>\n                           <p>The name of the Terraform S3 state file this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <i>\n                           <code>type</code>\n                        </i>\n                     </p>\n                     <p>The type of resource.</p>\n                     <p>Type: string</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>\n                           <code>name</code>\n                        </i>\n                     </p>\n                     <p>The name of the resource.</p>\n                     <p>Type: String</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>appComponents</code>\n                  </b>\n               </p>\n               <p>The list of Application Components that this resource belongs to. If an Application Component is not part of the AWS Resilience Hub application, it will be added.</p>\n               <p>Type: Array</p>\n               <p>Each <code>appComponents</code> array item includes the following fields:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>name</code>\n                     </p>\n                     <p>The name of the Application Component.</p>\n                     <p>Type: String</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>type</code>\n                     </p>\n                     <p>The type of Application Component. For more information about the types of Application Component, see <a href=\"https://docs.aws.amazon.com/resilience-hub/latest/userguide/AppComponent.grouping.html\">Grouping resources in an AppComponent</a>.</p>\n                     <p>Type: String</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>resourceNames</code>\n                     </p>\n                     <p>The list of included resources that are assigned to the Application Component.</p>\n                     <p>Type: Array of strings</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>additionalInfo</code>\n                     </p>\n                     <p>Additional configuration parameters for an AWS Resilience Hub application.</p>\n                     <note>\n                        <p>Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account.</p>\n                        <p>Key: <code>\"failover-regions\"</code>\n                        </p>\n                        <p>Value: <code>\"[{\"region\":\"&lt;REGION&gt;\", \"accounts\":[{\"id\":\"&lt;ACCOUNT_ID&gt;\"}]}]\"</code>\n                        </p>\n                     </note>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>excludedResources</code>\n                  </b>\n               </p>\n               <p>The list of logical resource identifiers to be excluded from the application.</p>\n               <p>Type: Array</p>\n               <note>\n                  <p>Don't add the resources that you want to include.</p>\n               </note>\n               <p>Each <code>excludedResources</code> array item includes the following fields:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>\n                           <code>logicalResourceIds</code>\n                        </i>\n                     </p>\n                     <p>The logical identifier of the resource.</p>\n                     <p>Type: Object</p>\n                     <note>\n                        <p>You can configure only one of the following fields:</p>\n                        <ul>\n                           <li>\n                              <p>\n                                 <code>logicalStackName</code>\n                              </p>\n                           </li>\n                           <li>\n                              <p>\n                                 <code>resourceGroupName</code>\n                              </p>\n                           </li>\n                           <li>\n                              <p>\n                                 <code>terraformSourceName</code>\n                              </p>\n                           </li>\n                        </ul>\n                     </note>\n                     <p>Each <code>logicalResourceIds</code> object includes the following fields:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>identifier</code>\n                           </p>\n                           <p>The identifier of the resource.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>logicalStackName</code>\n                           </p>\n                           <p>The name of the CloudFormation stack this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>resourceGroupName</code>\n                           </p>\n                           <p>The name of the resource group this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>terraformSourceName</code>\n                           </p>\n                           <p>The name of the Terraform S3 state file this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>A JSON string that provides information about your application structure. To learn more\n      about the <code>appTemplateBody</code> template, see the sample template provided in the\n      <i>Examples</i> section.</p>\n         <p>The <code>appTemplateBody</code> JSON string has the following structure:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>resources</code>\n                  </b>\n               </p>\n               <p>The list of logical resources that needs to be included in the Resilience Hub application.</p>\n               <p>Type: Array</p>\n               <note>\n                  <p>Don't add the resources that you want to exclude.</p>\n               </note>\n               <p>Each <code>resources</code> array item includes the following fields:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>\n                           <code>logicalResourceId</code>\n                        </i>\n                     </p>\n                     <p>The logical identifier of the resource.</p>\n                     <p>Type: Object</p>\n                     <p>Each <code>logicalResourceId</code> object includes the following fields:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>identifier</code>\n                           </p>\n                           <p>The identifier of the resource.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>logicalStackName</code>\n                           </p>\n                           <p>The name of the CloudFormation stack this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>resourceGroupName</code>\n                           </p>\n                           <p>The name of the resource group this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>terraformSourceName</code>\n                           </p>\n                           <p>The name of the Terraform S3 state file this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <i>\n                           <code>type</code>\n                        </i>\n                     </p>\n                     <p>The type of resource.</p>\n                     <p>Type: string</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>\n                           <code>name</code>\n                        </i>\n                     </p>\n                     <p>The name of the resource.</p>\n                     <p>Type: String</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>additionalInfo</code>\n                     </p>\n                     <p>Additional configuration parameters for an AWS Resilience Hub application.</p>\n                     <note>\n                        <p>Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account.</p>\n                        <p>Key: <code>\"failover-regions\"</code>\n                        </p>\n                        <p>Value: <code>\"[{\"region\":\"&lt;REGION&gt;\", \"accounts\":[{\"id\":\"&lt;ACCOUNT_ID&gt;\"}]}]\"</code>\n                        </p>\n                     </note>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>appComponents</code>\n                  </b>\n               </p>\n               <p>The list of Application Components that this resource belongs to. If an Application Component is not part of the AWS Resilience Hub application, it will be added.</p>\n               <p>Type: Array</p>\n               <p>Each <code>appComponents</code> array item includes the following fields:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>name</code>\n                     </p>\n                     <p>The name of the Application Component.</p>\n                     <p>Type: String</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>type</code>\n                     </p>\n                     <p>The type of Application Component. For more information about the types of Application Component, see <a href=\"https://docs.aws.amazon.com/resilience-hub/latest/userguide/AppComponent.grouping.html\">Grouping resources in an AppComponent</a>.</p>\n                     <p>Type: String</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>resourceNames</code>\n                     </p>\n                     <p>The list of included resources that are assigned to the Application Component.</p>\n                     <p>Type: Array of strings</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>additionalInfo</code>\n                     </p>\n                     <p>Additional configuration parameters for an AWS Resilience Hub application.</p>\n                     <note>\n                        <p>Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account.</p>\n                        <p>Key: <code>\"failover-regions\"</code>\n                        </p>\n                        <p>Value: <code>\"[{\"region\":\"&lt;REGION&gt;\", \"accounts\":[{\"id\":\"&lt;ACCOUNT_ID&gt;\"}]}]\"</code>\n                        </p>\n                     </note>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>excludedResources</code>\n                  </b>\n               </p>\n               <p>The list of logical resource identifiers to be excluded from the application.</p>\n               <p>Type: Array</p>\n               <note>\n                  <p>Don't add the resources that you want to include.</p>\n               </note>\n               <p>Each <code>excludedResources</code> array item includes the following fields:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>\n                           <code>logicalResourceIds</code>\n                        </i>\n                     </p>\n                     <p>The logical identifier of the resource.</p>\n                     <p>Type: Object</p>\n                     <note>\n                        <p>You can configure only one of the following fields:</p>\n                        <ul>\n                           <li>\n                              <p>\n                                 <code>logicalStackName</code>\n                              </p>\n                           </li>\n                           <li>\n                              <p>\n                                 <code>resourceGroupName</code>\n                              </p>\n                           </li>\n                           <li>\n                              <p>\n                                 <code>terraformSourceName</code>\n                              </p>\n                           </li>\n                        </ul>\n                     </note>\n                     <p>Each <code>logicalResourceIds</code> object includes the following fields:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>identifier</code>\n                           </p>\n                           <p>The identifier of the resource.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>logicalStackName</code>\n                           </p>\n                           <p>The name of the CloudFormation stack this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>resourceGroupName</code>\n                           </p>\n                           <p>The name of the resource group this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>terraformSourceName</code>\n                           </p>\n                           <p>The name of the Terraform S3 state file this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>version</code>\n                  </b>\n               </p>\n               <p>The AWS Resilience Hub application version.</p>\n            </li>\n            <li>\n               <p>\n                  <code>additionalInfo</code>\n               </p>\n               <p>Additional configuration parameters for an AWS Resilience Hub application.</p>\n               <note>\n                  <p>Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account.</p>\n                  <p>Key: <code>\"failover-regions\"</code>\n                  </p>\n                  <p>Value: <code>\"[{\"region\":\"&lt;REGION&gt;\", \"accounts\":[{\"id\":\"&lt;ACCOUNT_ID&gt;\"}]}]\"</code>\n                  </p>\n               </note>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3987,7 +4008,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes a specified resiliency policy for an AWS Resilience Hub application. The returned\n      policy object includes creation time, data location constraints, the Amazon Resource Name\n      (ARN) for the policy, tags, tier, and more.</p>",
+                "smithy.api#documentation": "<p>Describes a specified resiliency policy for an Resilience Hub application. The returned\n      policy object includes creation time, data location constraints, the Amazon Resource Name\n      (ARN) for the policy, tags, tier, and more.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/describe-resiliency-policy",
@@ -4148,6 +4169,72 @@
                 "smithy.api#default": 0
             }
         },
+        "com.amazonaws.resiliencehub#EksNamespace": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+            }
+        },
+        "com.amazonaws.resiliencehub#EksNamespaceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resiliencehub#EksNamespace"
+            }
+        },
+        "com.amazonaws.resiliencehub#EksSource": {
+            "type": "structure",
+            "members": {
+                "eksClusterArn": {
+                    "target": "com.amazonaws.resiliencehub#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Elastic Kubernetes Service cluster. The format for this ARN is: \narn:<code>aws</code>:eks:<code>region</code>:<code>account-id</code>:cluster/<code>cluster-name</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "namespaces": {
+                    "target": "com.amazonaws.resiliencehub#EksNamespaceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of namespaces located on your Amazon Elastic Kubernetes Service cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input source of the Amazon Elastic Kubernetes Service cluster.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehub#EksSourceClusterNamespace": {
+            "type": "structure",
+            "members": {
+                "eksClusterArn": {
+                    "target": "com.amazonaws.resiliencehub#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Elastic Kubernetes Service cluster. The format for this ARN is: \narn:<code>aws</code>:eks:<code>region</code>:<code>account-id</code>:cluster/<code>cluster-name</code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>AWS General Reference</i> guide.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "namespace": {
+                    "target": "com.amazonaws.resiliencehub#EksNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the namespace that is located on your Amazon Elastic Kubernetes Service cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input source of the namespace that is located on your Amazon Elastic Kubernetes Service cluster.</p>"
+            }
+        },
+        "com.amazonaws.resiliencehub#EksSourceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.resiliencehub#EksSource"
+            }
+        },
         "com.amazonaws.resiliencehub#EntityDescription": {
             "type": "string",
             "traits": {
@@ -4293,7 +4380,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Imports resources to AWS Resilience Hub application draft version from different input sources. For more information about the input sources supported by AWS Resilience Hub, see <a href=\"https://docs.aws.amazon.com/resilience-hub/latest/userguide/discover-structure.html\">Discover\n        the structure and describe your Resilience Hub application</a>.</p>",
+                "smithy.api#documentation": "<p>Imports resources to Resilience Hub application draft version from different input sources. For more information about the input sources supported by Resilience Hub, see <a href=\"https://docs.aws.amazon.com/resilience-hub/latest/userguide/discover-structure.html\">Discover\n        the structure and describe your Resilience Hub application</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/import-resources-to-draft-app-version",
@@ -4314,7 +4401,7 @@
                 "sourceArns": {
                     "target": "com.amazonaws.resiliencehub#ArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) for the resources that you want to import.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) for the resources.</p>"
                     }
                 },
                 "terraformSources": {
@@ -4326,7 +4413,13 @@
                 "importStrategy": {
                     "target": "com.amazonaws.resiliencehub#ResourceImportStrategyType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The import strategy you would like to set to import resources into AWS Resilience Hub\n      application.</p>"
+                        "smithy.api#documentation": "<p>The import strategy you would like to set to import resources into Resilience Hub\n      application.</p>"
+                    }
+                },
+                "eksSources": {
+                    "target": "com.amazonaws.resiliencehub#EksSourceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input sources of the Amazon Elastic Kubernetes Service resources you need to import.</p>"
                     }
                 }
             }
@@ -4351,7 +4444,7 @@
                 "sourceArns": {
                     "target": "com.amazonaws.resiliencehub#ArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) for the resources that you imported.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) for the resources you have imported.</p>"
                     }
                 },
                 "status": {
@@ -4364,7 +4457,13 @@
                 "terraformSources": {
                     "target": "com.amazonaws.resiliencehub#TerraformSourceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      A list of terraform file s3 URLs you need to import.\n    </p>"
+                        "smithy.api#documentation": "<p>\n      A list of terraform file s3 URLs you have imported.\n    </p>"
+                    }
+                },
+                "eksSources": {
+                    "target": "com.amazonaws.resiliencehub#EksSourceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input sources of the Amazon Elastic Kubernetes Service resources you have imported.</p>"
                     }
                 }
             }
@@ -4383,7 +4482,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This exception occurs when there is an internal failure in the AWS Resilience Hub\n      service.</p>",
+                "smithy.api#documentation": "<p>This exception occurs when there is an internal failure in the Resilience Hub\n      service.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
             }
@@ -4414,7 +4513,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the alarm recommendations for an AWS Resilience Hub application.</p>",
+                "smithy.api#documentation": "<p>Lists the alarm recommendations for an Resilience Hub application.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/list-alarm-recommendations",
@@ -4457,7 +4556,7 @@
                 "alarmRecommendations": {
                     "target": "com.amazonaws.resiliencehub#AlarmRecommendationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The alarm recommendations for an AWS Resilience Hub application, returned as an object. This\n      object includes Application Component names, descriptions, information about whether a\n      recommendation has already been implemented or not, prerequisites, and more.</p>",
+                        "smithy.api#documentation": "<p>The alarm recommendations for an Resilience Hub application, returned as an object. This\n      object includes Application Component names, descriptions, information about whether a\n      recommendation has already been implemented or not, prerequisites, and more.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4495,7 +4594,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the assessments for an AWS Resilience Hub application. You can use request parameters to\n      refine the results for the response object.</p>",
+                "smithy.api#documentation": "<p>Lists the assessments for an Resilience Hub application. You can use request parameters to\n      refine the results for the response object.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/list-app-assessments",
@@ -4614,7 +4713,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the compliances for an AWS Resilience Hub Application Component.</p>",
+                "smithy.api#documentation": "<p>Lists the compliances for an Resilience Hub Application Component.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/list-app-component-compliances",
@@ -4657,7 +4756,7 @@
                 "componentCompliances": {
                     "target": "com.amazonaws.resiliencehub#ComponentCompliancesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The compliances for an AWS Resilience Hub Application Component, returned as an object. This\n      object contains the names of the Application Components, compliances, costs, resiliency scores, outage scores, and\n      more.</p>",
+                        "smithy.api#documentation": "<p>The compliances for an Resilience Hub Application Component, returned as an object. This\n      object contains the names of the Application Components, compliances, costs, resiliency scores, outage scores, and\n      more.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4695,7 +4794,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the recommendations for an AWS Resilience Hub Application Component.</p>",
+                "smithy.api#documentation": "<p>Lists the recommendations for an Resilience Hub Application Component.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/list-app-component-recommendations",
@@ -4738,7 +4837,7 @@
                 "componentRecommendations": {
                     "target": "com.amazonaws.resiliencehub#ComponentRecommendationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The recommendations for an AWS Resilience Hub Application Component, returned as an object. This\n      object contains the names of the Application Components, configuration recommendations, and recommendation\n      statuses.</p>",
+                        "smithy.api#documentation": "<p>The recommendations for an Resilience Hub Application Component, returned as an object. This\n      object contains the names of the Application Components, configuration recommendations, and recommendation\n      statuses.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4776,7 +4875,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all the input sources of the AWS Resilience Hub application. For more information about the\n      input sources supported by AWS Resilience Hub, see <a href=\"https://docs.aws.amazon.com/resilience-hub/latest/userguide/discover-structure.html\">Discover\n        the structure and describe your Resilience Hub application</a>.</p>",
+                "smithy.api#documentation": "<p>Lists all the input sources of the Resilience Hub application. For more information about the\n      input sources supported by Resilience Hub, see <a href=\"https://docs.aws.amazon.com/resilience-hub/latest/userguide/discover-structure.html\">Discover\n        the structure and describe your Resilience Hub application</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/list-app-input-sources",
@@ -4815,7 +4914,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.resiliencehub#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>Maximum number of input sources to be displayed per AWS Resilience Hub application.</p>"
+                        "smithy.api#documentation": "<p>Maximum number of input sources to be displayed per Resilience Hub application.</p>"
                     }
                 }
             }
@@ -4826,7 +4925,7 @@
                 "appInputSources": {
                     "target": "com.amazonaws.resiliencehub#AppInputSourceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of AWS Resilience Hub application input sources.</p>",
+                        "smithy.api#documentation": "<p>The list of Resilience Hub application input sources.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4867,7 +4966,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all the Application Components in the AWS Resilience Hub application.</p>",
+                "smithy.api#documentation": "<p>Lists all the Application Components in the Resilience Hub application.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/list-app-version-app-components",
@@ -5059,7 +5158,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all the resources in an AWS Resilience Hub application.</p>",
+                "smithy.api#documentation": "<p>Lists all the resources in an Resilience Hub application.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/list-app-version-resources",
@@ -5157,7 +5256,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the different versions for the AWS Resilience Hub applications.</p>",
+                "smithy.api#documentation": "<p>Lists the different versions for the Resilience Hub applications.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/list-app-versions",
@@ -5235,7 +5334,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists your AWS Resilience Hub applications.</p>\n         <note>\n            <p>You can filter applications using only one filter at a time or without using any filter.\n        If you try to filter applications using multiple filters, you will get the following\n        error:</p>\n            <p>\n               <code>An error occurred (ValidationException) when calling the ListApps operation: Only\n          one filter is supported for this operation.</code>\n            </p>\n         </note>",
+                "smithy.api#documentation": "<p>Lists your Resilience Hub applications.</p>\n         <note>\n            <p>You can filter applications using only one filter at a time or without using any filter.\n        If you try to filter applications using multiple filters, you will get the following\n        error:</p>\n            <p>\n               <code>An error occurred (ValidationException) when calling the ListApps operation: Only\n          one filter is supported for this operation.</code>\n            </p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/list-apps",
@@ -5288,7 +5387,7 @@
                 "appSummaries": {
                     "target": "com.amazonaws.resiliencehub#AppSummaryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Summaries for the AWS Resilience Hub application.</p>",
+                        "smithy.api#documentation": "<p>Summaries for the Resilience Hub application.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5323,7 +5422,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the recommendation templates for the AWS Resilience Hub applications.</p>",
+                "smithy.api#documentation": "<p>Lists the recommendation templates for the Resilience Hub applications.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/list-recommendation-templates",
@@ -5404,7 +5503,7 @@
                 "recommendationTemplates": {
                     "target": "com.amazonaws.resiliencehub#RecommendationTemplateList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The recommendation templates for the AWS Resilience Hub applications.</p>"
+                        "smithy.api#documentation": "<p>The recommendation templates for the Resilience Hub applications.</p>"
                     }
                 }
             }
@@ -5435,7 +5534,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the resiliency policies for the AWS Resilience Hub applications.</p>",
+                "smithy.api#documentation": "<p>Lists the resiliency policies for the Resilience Hub applications.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/list-resiliency-policies",
@@ -5481,7 +5580,7 @@
                 "resiliencyPolicies": {
                     "target": "com.amazonaws.resiliencehub#ResiliencyPolicies",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resiliency policies for the AWS Resilience Hub applications.</p>",
+                        "smithy.api#documentation": "<p>The resiliency policies for the Resilience Hub applications.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5522,7 +5621,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the standard operating procedure (SOP) recommendations for the AWS Resilience Hub\n      applications.</p>",
+                "smithy.api#documentation": "<p>Lists the standard operating procedure (SOP) recommendations for the Resilience Hub\n      applications.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/list-sop-recommendations",
@@ -5571,7 +5670,7 @@
                 "sopRecommendations": {
                     "target": "com.amazonaws.resiliencehub#SopRecommendationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The standard operating procedure (SOP) recommendations for the AWS Resilience Hub\n      applications.</p>",
+                        "smithy.api#documentation": "<p>The standard operating procedure (SOP) recommendations for the Resilience Hub\n      applications.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5603,7 +5702,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the suggested resiliency policies for the AWS Resilience Hub applications.</p>",
+                "smithy.api#documentation": "<p>Lists the suggested resiliency policies for the Resilience Hub applications.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/list-suggested-resiliency-policies",
@@ -5642,7 +5741,7 @@
                 "resiliencyPolicies": {
                     "target": "com.amazonaws.resiliencehub#ResiliencyPolicies",
                     "traits": {
-                        "smithy.api#documentation": "<p>The suggested resiliency policies for the AWS Resilience Hub applications.</p>",
+                        "smithy.api#documentation": "<p>The suggested resiliency policies for the Resilience Hub applications.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5680,7 +5779,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the tags for your resources in your AWS Resilience Hub applications.</p>",
+                "smithy.api#documentation": "<p>Lists the tags for your resources in your Resilience Hub applications.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/tags/{resourceArn}",
@@ -5695,7 +5794,7 @@
                 "resourceArn": {
                     "target": "com.amazonaws.resiliencehub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for a specific resource in your AWS Resilience Hub\n      application.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for a specific resource in your Resilience Hub\n      application.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5742,7 +5841,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the test recommendations for the AWS Resilience Hub application.</p>",
+                "smithy.api#documentation": "<p>Lists the test recommendations for the Resilience Hub application.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/list-test-recommendations",
@@ -5791,7 +5890,7 @@
                 "testRecommendations": {
                     "target": "com.amazonaws.resiliencehub#TestRecommendationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The test recommendations for the AWS Resilience Hub application.</p>",
+                        "smithy.api#documentation": "<p>The test recommendations for the Resilience Hub application.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5826,7 +5925,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the resources that are not currently supported in AWS Resilience Hub. An unsupported\n      resource is a resource that exists in the object that was used to create an app, but is not\n      supported by AWS Resilience Hub.</p>",
+                "smithy.api#documentation": "<p>Lists the resources that are not currently supported in Resilience Hub. An unsupported\n      resource is a resource that exists in the object that was used to create an app, but is not\n      supported by Resilience Hub.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/list-unsupported-app-version-resources",
@@ -5928,6 +6027,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n      The name of the Terraform S3 state file this resource belongs to. \n    </p>"
                     }
+                },
+                "eksSourceName": {
+                    "target": "com.amazonaws.resiliencehub#String255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon Elastic Kubernetes Service cluster and namespace this resource belongs to.</p>\n         <note>\n            <p>This parameter accepts values in \"eks-cluster/namespace\" format.</p>\n         </note>"
+                    }
                 }
             },
             "traits": {
@@ -6014,7 +6119,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines a physical resource. A physical resource is a resource that exists in your\n      account. It can be identified using an Amazon Resource Name (ARN) or an AWS Resilience Hub-native\n      identifier. </p>"
+                "smithy.api#documentation": "<p>Defines a physical resource. A physical resource is a resource that exists in your\n      account. It can be identified using an Amazon Resource Name (ARN) or an Resilience Hub-native\n      identifier. </p>"
             }
         },
         "com.amazonaws.resiliencehub#PhysicalResourceId": {
@@ -6030,7 +6135,7 @@
                 "type": {
                     "target": "com.amazonaws.resiliencehub#PhysicalIdentifierType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the type of physical resource identifier.</p>\n         <dl>\n            <dt>Arn</dt>\n            <dd>\n               <p>The resource identifier is an Amazon Resource Name (ARN) .</p>\n            </dd>\n            <dt>Native</dt>\n            <dd>\n               <p>The resource identifier is an AWS Resilience Hub-native identifier.</p>\n            </dd>\n         </dl>",
+                        "smithy.api#documentation": "<p>Specifies the type of physical resource identifier.</p>\n         <dl>\n            <dt>Arn</dt>\n            <dd>\n               <p>The resource identifier is an Amazon Resource Name (ARN) .</p>\n            </dd>\n            <dt>Native</dt>\n            <dd>\n               <p>The resource identifier is an Resilience Hub-native identifier.</p>\n            </dd>\n         </dl>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6086,7 +6191,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Publishes a new version of a specific AWS Resilience Hub application.</p>",
+                "smithy.api#documentation": "<p>Publishes a new version of a specific Resilience Hub application.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/publish-app-version",
@@ -6153,7 +6258,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds or updates the app template for an AWS Resilience Hub application draft version.</p>",
+                "smithy.api#documentation": "<p>Adds or updates the app template for an Resilience Hub application draft version.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/put-draft-app-version-template",
@@ -6174,7 +6279,7 @@
                 "appTemplateBody": {
                     "target": "com.amazonaws.resiliencehub#AppTemplateBody",
                     "traits": {
-                        "smithy.api#documentation": "<p>A JSON string that provides information about your application structure. To learn more\n      about the <code>appTemplateBody</code> template, see the sample template provided in the\n      <i>Examples</i> section.</p>\n         <p>The <code>appTemplateBody</code> JSON string has the following structure:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>resources</code>\n                  </b>\n               </p>\n               <p>The list of logical resources that needs to be included in the application.</p>\n               <p>Type: Array</p>\n               <note>\n                  <p>Don't add the resources that you want to exclude.</p>\n               </note>\n               <p>Each <code>resources</code> array item includes the following fields:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>\n                           <code>logicalResourceId</code>\n                        </i>\n                     </p>\n                     <p>The logical identifier of the resource.</p>\n                     <p>Type: Object</p>\n                     <p>Each <code>logicalResourceId</code> object includes the following fields:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>identifier</code>\n                           </p>\n                           <p>The identifier of the resource.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>logicalStackName</code>\n                           </p>\n                           <p>The name of the CloudFormation stack this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>resourceGroupName</code>\n                           </p>\n                           <p>The name of the resource group this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>terraformSourceName</code>\n                           </p>\n                           <p>The name of the Terraform S3 state file this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <i>\n                           <code>type</code>\n                        </i>\n                     </p>\n                     <p>The type of resource.</p>\n                     <p>Type: string</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>\n                           <code>name</code>\n                        </i>\n                     </p>\n                     <p>The name of the resource.</p>\n                     <p>Type: String</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>appComponents</code>\n                  </b>\n               </p>\n               <p>The list of Application Components that this resource belongs to. If an Application Component is not part of the AWS Resilience Hub application, it will be added.</p>\n               <p>Type: Array</p>\n               <p>Each <code>appComponents</code> array item includes the following fields:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>name</code>\n                     </p>\n                     <p>The name of the Application Component.</p>\n                     <p>Type: String</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>type</code>\n                     </p>\n                     <p>The type of Application Component. For more information about the types of Application Component, see <a href=\"https://docs.aws.amazon.com/resilience-hub/latest/userguide/AppComponent.grouping.html\">Grouping resources in an AppComponent</a>.</p>\n                     <p>Type: String</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>resourceNames</code>\n                     </p>\n                     <p>The list of included resources that are assigned to the Application Component.</p>\n                     <p>Type: Array of strings</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>additionalInfo</code>\n                     </p>\n                     <p>Additional configuration parameters for an AWS Resilience Hub application.</p>\n                     <note>\n                        <p>Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account.</p>\n                        <p>Key: <code>\"failover-regions\"</code>\n                        </p>\n                        <p>Value: <code>\"[{\"region\":\"&lt;REGION&gt;\", \"accounts\":[{\"id\":\"&lt;ACCOUNT_ID&gt;\"}]}]\"</code>\n                        </p>\n                     </note>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>excludedResources</code>\n                  </b>\n               </p>\n               <p>The list of logical resource identifiers to be excluded from the application.</p>\n               <p>Type: Array</p>\n               <note>\n                  <p>Don't add the resources that you want to include.</p>\n               </note>\n               <p>Each <code>excludedResources</code> array item includes the following fields:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>\n                           <code>logicalResourceIds</code>\n                        </i>\n                     </p>\n                     <p>The logical identifier of the resource.</p>\n                     <p>Type: Object</p>\n                     <note>\n                        <p>You can configure only one of the following fields:</p>\n                        <ul>\n                           <li>\n                              <p>\n                                 <code>logicalStackName</code>\n                              </p>\n                           </li>\n                           <li>\n                              <p>\n                                 <code>resourceGroupName</code>\n                              </p>\n                           </li>\n                           <li>\n                              <p>\n                                 <code>terraformSourceName</code>\n                              </p>\n                           </li>\n                        </ul>\n                     </note>\n                     <p>Each <code>logicalResourceIds</code> object includes the following fields:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>identifier</code>\n                           </p>\n                           <p>The identifier of the resource.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>logicalStackName</code>\n                           </p>\n                           <p>The name of the CloudFormation stack this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>resourceGroupName</code>\n                           </p>\n                           <p>The name of the resource group this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>terraformSourceName</code>\n                           </p>\n                           <p>The name of the Terraform S3 state file this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>A JSON string that provides information about your application structure. To learn more\n      about the <code>appTemplateBody</code> template, see the sample template provided in the\n      <i>Examples</i> section.</p>\n         <p>The <code>appTemplateBody</code> JSON string has the following structure:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>resources</code>\n                  </b>\n               </p>\n               <p>The list of logical resources that needs to be included in the Resilience Hub application.</p>\n               <p>Type: Array</p>\n               <note>\n                  <p>Don't add the resources that you want to exclude.</p>\n               </note>\n               <p>Each <code>resources</code> array item includes the following fields:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>\n                           <code>logicalResourceId</code>\n                        </i>\n                     </p>\n                     <p>The logical identifier of the resource.</p>\n                     <p>Type: Object</p>\n                     <p>Each <code>logicalResourceId</code> object includes the following fields:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>identifier</code>\n                           </p>\n                           <p>The identifier of the resource.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>logicalStackName</code>\n                           </p>\n                           <p>The name of the CloudFormation stack this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>resourceGroupName</code>\n                           </p>\n                           <p>The name of the resource group this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>terraformSourceName</code>\n                           </p>\n                           <p>The name of the Terraform S3 state file this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <i>\n                           <code>type</code>\n                        </i>\n                     </p>\n                     <p>The type of resource.</p>\n                     <p>Type: string</p>\n                  </li>\n                  <li>\n                     <p>\n                        <i>\n                           <code>name</code>\n                        </i>\n                     </p>\n                     <p>The name of the resource.</p>\n                     <p>Type: String</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>additionalInfo</code>\n                     </p>\n                     <p>Additional configuration parameters for an AWS Resilience Hub application.</p>\n                     <note>\n                        <p>Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account.</p>\n                        <p>Key: <code>\"failover-regions\"</code>\n                        </p>\n                        <p>Value: <code>\"[{\"region\":\"&lt;REGION&gt;\", \"accounts\":[{\"id\":\"&lt;ACCOUNT_ID&gt;\"}]}]\"</code>\n                        </p>\n                     </note>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>appComponents</code>\n                  </b>\n               </p>\n               <p>The list of Application Components that this resource belongs to. If an Application Component is not part of the AWS Resilience Hub application, it will be added.</p>\n               <p>Type: Array</p>\n               <p>Each <code>appComponents</code> array item includes the following fields:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>name</code>\n                     </p>\n                     <p>The name of the Application Component.</p>\n                     <p>Type: String</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>type</code>\n                     </p>\n                     <p>The type of Application Component. For more information about the types of Application Component, see <a href=\"https://docs.aws.amazon.com/resilience-hub/latest/userguide/AppComponent.grouping.html\">Grouping resources in an AppComponent</a>.</p>\n                     <p>Type: String</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>resourceNames</code>\n                     </p>\n                     <p>The list of included resources that are assigned to the Application Component.</p>\n                     <p>Type: Array of strings</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>additionalInfo</code>\n                     </p>\n                     <p>Additional configuration parameters for an AWS Resilience Hub application.</p>\n                     <note>\n                        <p>Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account.</p>\n                        <p>Key: <code>\"failover-regions\"</code>\n                        </p>\n                        <p>Value: <code>\"[{\"region\":\"&lt;REGION&gt;\", \"accounts\":[{\"id\":\"&lt;ACCOUNT_ID&gt;\"}]}]\"</code>\n                        </p>\n                     </note>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>excludedResources</code>\n                  </b>\n               </p>\n               <p>The list of logical resource identifiers to be excluded from the application.</p>\n               <p>Type: Array</p>\n               <note>\n                  <p>Don't add the resources that you want to include.</p>\n               </note>\n               <p>Each <code>excludedResources</code> array item includes the following fields:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <i>\n                           <code>logicalResourceIds</code>\n                        </i>\n                     </p>\n                     <p>The logical identifier of the resource.</p>\n                     <p>Type: Object</p>\n                     <note>\n                        <p>You can configure only one of the following fields:</p>\n                        <ul>\n                           <li>\n                              <p>\n                                 <code>logicalStackName</code>\n                              </p>\n                           </li>\n                           <li>\n                              <p>\n                                 <code>resourceGroupName</code>\n                              </p>\n                           </li>\n                           <li>\n                              <p>\n                                 <code>terraformSourceName</code>\n                              </p>\n                           </li>\n                        </ul>\n                     </note>\n                     <p>Each <code>logicalResourceIds</code> object includes the following fields:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>identifier</code>\n                           </p>\n                           <p>The identifier of the resource.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>logicalStackName</code>\n                           </p>\n                           <p>The name of the CloudFormation stack this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>resourceGroupName</code>\n                           </p>\n                           <p>The name of the resource group this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>terraformSourceName</code>\n                           </p>\n                           <p>The name of the Terraform S3 state file this resource belongs to.</p>\n                           <p>Type: String</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>version</code>\n                  </b>\n               </p>\n               <p>The AWS Resilience Hub application version.</p>\n            </li>\n            <li>\n               <p>\n                  <code>additionalInfo</code>\n               </p>\n               <p>Additional configuration parameters for an AWS Resilience Hub application.</p>\n               <note>\n                  <p>Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account.</p>\n                  <p>Key: <code>\"failover-regions\"</code>\n                  </p>\n                  <p>Value: <code>\"[{\"region\":\"&lt;REGION&gt;\", \"accounts\":[{\"id\":\"&lt;ACCOUNT_ID&gt;\"}]}]\"</code>\n                  </p>\n               </note>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6530,6 +6635,12 @@
                     "target": "com.amazonaws.resiliencehub#String255List",
                     "traits": {
                         "smithy.api#documentation": "<p>The names of the Terraform sources you want to remove from the resource mappings.</p>"
+                    }
+                },
+                "eksSourceNames": {
+                    "target": "com.amazonaws.resiliencehub#String255List",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names of the Amazon Elastic Kubernetes Service clusters and namespaces you want to remove from the resource mappings.</p>\n         <note>\n            <p>This parameter accepts values in \"eks-cluster/namespace\" format.</p>\n         </note>"
                     }
                 }
             }
@@ -6915,7 +7026,7 @@
                 "mappingType": {
                     "target": "com.amazonaws.resiliencehub#ResourceMappingType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the type of resource mapping.</p>\n         <dl>\n            <dt>AppRegistryApp</dt>\n            <dd>\n               <p>The resource is mapped to another application. The name of the application is\n            contained in the <code>appRegistryAppName</code> property.</p>\n            </dd>\n            <dt>CfnStack</dt>\n            <dd>\n               <p>The resource is mapped to a CloudFormation stack. The name of the CloudFormation stack is contained in\n            the <code>logicalStackName</code> property.</p>\n            </dd>\n            <dt>Resource</dt>\n            <dd>\n               <p>The resource is mapped to another resource. The name of the resource is contained in\n            the <code>resourceName</code> property.</p>\n            </dd>\n            <dt>ResourceGroup</dt>\n            <dd>\n               <p>The resource is mapped to a resource group. The name of the resource group is\n            contained in the <code>resourceGroupName</code> property.</p>\n            </dd>\n         </dl>",
+                        "smithy.api#documentation": "<p>Specifies the type of resource mapping.</p>\n         <dl>\n            <dt>AppRegistryApp</dt>\n            <dd>\n               <p>The resource is mapped to another application. The name of the application is\n            contained in the <code>appRegistryAppName</code> property.</p>\n            </dd>\n            <dt>CfnStack</dt>\n            <dd>\n               <p>The resource is mapped to a CloudFormation stack. The name of the CloudFormation stack is contained in\n            the <code>logicalStackName</code> property.</p>\n            </dd>\n            <dt>Resource</dt>\n            <dd>\n               <p>The resource is mapped to another resource. The name of the resource is contained in\n            the <code>resourceName</code> property.</p>\n            </dd>\n            <dt>ResourceGroup</dt>\n            <dd>\n               <p>The resource is mapped to an Resource Groups. The name of the resource group is\n            contained in the <code>resourceGroupName</code> property.</p>\n            </dd>\n         </dl>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6930,6 +7041,12 @@
                     "target": "com.amazonaws.resiliencehub#String255",
                     "traits": {
                         "smithy.api#documentation": "<p>\n      The short name of the Terraform source.\n    </p>"
+                    }
+                },
+                "eksSourceName": {
+                    "target": "com.amazonaws.resiliencehub#String255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon Elastic Kubernetes Service cluster and namespace this resource belongs to.</p>\n         <note>\n            <p>This parameter accepts values in \"eks-cluster/namespace\" format.</p>\n         </note>"
                     }
                 }
             },
@@ -6966,6 +7083,10 @@
                     {
                         "value": "Terraform",
                         "name": "TERRAFORM"
+                    },
+                    {
+                        "value": "EKS",
+                        "name": "EKS"
                     }
                 ]
             }
@@ -7436,7 +7557,7 @@
                 "s3StateFileUrl": {
                     "target": "com.amazonaws.resiliencehub#S3Url",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The Terraform s3 state file you need to import.\n    </p>",
+                        "smithy.api#documentation": "<p>\n      The URL of the Terraform s3 state file you need to import.\n    </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7619,10 +7740,16 @@
                         "smithy.api#documentation": "<p>The type of resource.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "unsupportedResourceStatus": {
+                    "target": "com.amazonaws.resiliencehub#String255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of unsupported resource.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines a resource that is not supported by AWS Resilience Hub.</p>"
+                "smithy.api#documentation": "<p>Defines a resource that is not supported by Resilience Hub.</p>"
             }
         },
         "com.amazonaws.resiliencehub#UnsupportedResourceList": {
@@ -7804,7 +7931,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the AWS Resilience Hub application version.</p>\n         <note>\n            <p>This API updates the AWS Resilience Hub application draft version. To use this information\n        for running resiliency assessments, you must publish the AWS Resilience Hub application using the\n          <code>PublishAppVersion</code> API.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Updates the Resilience Hub application version.</p>\n         <note>\n            <p>This API updates the Resilience Hub application draft version. To use this information\n        for running resiliency assessments, you must publish the Resilience Hub application using the\n          <code>PublishAppVersion</code> API.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/update-app-version",
@@ -7841,7 +7968,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an existing Application Component in the AWS Resilience Hub application.</p>\n         <note>\n            <p>This API updates the AWS Resilience Hub application draft version. To use this Application Component for running assessments, you must publish the AWS Resilience Hub application using the <code>PublishAppVersion</code> API.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Updates an existing Application Component in the Resilience Hub application.</p>\n         <note>\n            <p>This API updates the Resilience Hub application draft version. To use this Application Component for running assessments, you must publish the Resilience Hub application using the <code>PublishAppVersion</code> API.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/update-app-version-app-component",
@@ -7904,7 +8031,10 @@
                     }
                 },
                 "appComponent": {
-                    "target": "com.amazonaws.resiliencehub#AppComponent"
+                    "target": "com.amazonaws.resiliencehub#AppComponent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Application Components that belong to this resource.</p>"
+                    }
                 }
             }
         },
@@ -7958,7 +8088,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the resource details in the AWS Resilience Hub application.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>This action has no effect outside AWS Resilience Hub.</p>\n               </li>\n               <li>\n                  <p>This API updates the AWS Resilience Hub application draft version. To use this resource for running resiliency assessments, you must publish the AWS Resilience Hub application using the <code>PublishAppVersion</code> API.</p>\n               </li>\n               <li>\n                  <p>To update application version with new <code>physicalResourceID</code>, you must call\n              <code>ResolveAppVersionResources</code> API.</p>\n               </li>\n            </ul>\n         </note>",
+                "smithy.api#documentation": "<p>Updates the resource details in the Resilience Hub application.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>This action has no effect outside Resilience Hub.</p>\n               </li>\n               <li>\n                  <p>This API updates the Resilience Hub application draft version. To use this resource for running resiliency assessments, you must publish the Resilience Hub application using the <code>PublishAppVersion</code> API.</p>\n               </li>\n               <li>\n                  <p>To update application version with new <code>physicalResourceID</code>, you must call\n              <code>ResolveAppVersionResources</code> API.</p>\n               </li>\n            </ul>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/update-app-version-resource",
@@ -8027,7 +8157,7 @@
                 "excluded": {
                     "target": "com.amazonaws.resiliencehub#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates if a resource is excluded from an AWS Resilience Hub application.</p>\n         <note>\n            <p>You can exclude only imported resources from an AWS Resilience Hub application.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Indicates if a resource is excluded from an Resilience Hub application.</p>\n         <note>\n            <p>You can exclude only imported resources from an Resilience Hub application.</p>\n         </note>"
                     }
                 }
             }
