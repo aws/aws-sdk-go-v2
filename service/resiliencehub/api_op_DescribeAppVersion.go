@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the AWS Resilience Hub application version.
+// Describes the Resilience Hub application version.
 func (c *Client) DescribeAppVersion(ctx context.Context, params *DescribeAppVersionInput, optFns ...func(*Options)) (*DescribeAppVersionOutput, error) {
 	if params == nil {
 		params = &DescribeAppVersionInput{}

@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the assessments for an AWS Resilience Hub application. You can use request
+// Lists the assessments for an Resilience Hub application. You can use request
 // parameters to refine the results for the response object.
 func (c *Client) ListAppAssessments(ctx context.Context, params *ListAppAssessmentsInput, optFns ...func(*Options)) (*ListAppAssessmentsOutput, error) {
 	if params == nil {

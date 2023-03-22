@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes an AWS Resilience Hub application.
+// Describes an Resilience Hub application.
 func (c *Client) DescribeApp(ctx context.Context, params *DescribeAppInput, optFns ...func(*Options)) (*DescribeAppOutput, error) {
 	if params == nil {
 		params = &DescribeAppInput{}

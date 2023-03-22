@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes an assessment for an AWS Resilience Hub application.
+// Describes an assessment for an Resilience Hub application.
 func (c *Client) DescribeAppAssessment(ctx context.Context, params *DescribeAppAssessmentInput, optFns ...func(*Options)) (*DescribeAppAssessmentOutput, error) {
 	if params == nil {
 		params = &DescribeAppAssessmentInput{}
@@ -43,9 +43,9 @@ type DescribeAppAssessmentInput struct {
 
 type DescribeAppAssessmentOutput struct {
 
-	// The assessment for an AWS Resilience Hub application, returned as an object.
-	// This object includes Amazon Resource Names (ARNs), compliance information,
-	// compliance status, cost, messages, resiliency scores, and more.
+	// The assessment for an Resilience Hub application, returned as an object. This
+	// object includes Amazon Resource Names (ARNs), compliance information, compliance
+	// status, cost, messages, resiliency scores, and more.
 	//
 	// This member is required.
 	Assessment *types.AppAssessment

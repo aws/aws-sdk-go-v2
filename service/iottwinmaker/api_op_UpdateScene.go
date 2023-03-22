@@ -49,6 +49,9 @@ type UpdateSceneInput struct {
 	// The description of this scene.
 	Description *string
 
+	// The scene metadata.
+	SceneMetadata map[string]string
+
 	noSmithyDocumentSerde
 }
 

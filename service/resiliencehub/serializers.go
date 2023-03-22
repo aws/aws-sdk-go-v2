@@ -830,6 +830,13 @@ func awsRestjson1_serializeOpDocumentDeleteAppInputSourceInput(v *DeleteAppInput
 		ok.String(*v.ClientToken)
 	}
 
+	if v.EksSourceClusterNamespace != nil {
+		ok := object.Key("eksSourceClusterNamespace")
+		if err := awsRestjson1_serializeDocumentEksSourceClusterNamespace(v.EksSourceClusterNamespace, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SourceArn != nil {
 		ok := object.Key("sourceArn")
 		ok.String(*v.SourceArn)
@@ -1906,6 +1913,13 @@ func awsRestjson1_serializeOpDocumentImportResourcesToDraftAppVersionInput(v *Im
 	if v.AppArn != nil {
 		ok := object.Key("appArn")
 		ok.String(*v.AppArn)
+	}
+
+	if v.EksSources != nil {
+		ok := object.Key("eksSources")
+		if err := awsRestjson1_serializeDocumentEksSourceList(v.EksSources, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.ImportStrategy) > 0 {
@@ -3439,6 +3453,13 @@ func awsRestjson1_serializeOpDocumentRemoveDraftAppVersionResourceMappingsInput(
 		}
 	}
 
+	if v.EksSourceNames != nil {
+		ok := object.Key("eksSourceNames")
+		if err := awsRestjson1_serializeDocumentString255List(v.EksSourceNames, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.LogicalStackNames != nil {
 		ok := object.Key("logicalStackNames")
 		if err := awsRestjson1_serializeDocumentString255List(v.LogicalStackNames, ok); err != nil {
@@ -4310,6 +4331,66 @@ func awsRestjson1_serializeDocumentDisruptionPolicy(v map[string]types.FailurePo
 	return nil
 }
 
+func awsRestjson1_serializeDocumentEksNamespaceList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEksSource(v *types.EksSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EksClusterArn != nil {
+		ok := object.Key("eksClusterArn")
+		ok.String(*v.EksClusterArn)
+	}
+
+	if v.Namespaces != nil {
+		ok := object.Key("namespaces")
+		if err := awsRestjson1_serializeDocumentEksNamespaceList(v.Namespaces, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEksSourceClusterNamespace(v *types.EksSourceClusterNamespace, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EksClusterArn != nil {
+		ok := object.Key("eksClusterArn")
+		ok.String(*v.EksClusterArn)
+	}
+
+	if v.Namespace != nil {
+		ok := object.Key("namespace")
+		ok.String(*v.Namespace)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEksSourceList(v []types.EksSource, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentEksSource(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEntityNameList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -4341,6 +4422,11 @@ func awsRestjson1_serializeDocumentFailurePolicy(v *types.FailurePolicy, value s
 func awsRestjson1_serializeDocumentLogicalResourceId(v *types.LogicalResourceId, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.EksSourceName != nil {
+		ok := object.Key("eksSourceName")
+		ok.String(*v.EksSourceName)
+	}
 
 	if v.Identifier != nil {
 		ok := object.Key("identifier")
@@ -4421,6 +4507,11 @@ func awsRestjson1_serializeDocumentResourceMapping(v *types.ResourceMapping, val
 	if v.AppRegistryAppName != nil {
 		ok := object.Key("appRegistryAppName")
 		ok.String(*v.AppRegistryAppName)
+	}
+
+	if v.EksSourceName != nil {
+		ok := object.Key("eksSourceName")
+		ok.String(*v.EksSourceName)
 	}
 
 	if v.LogicalStackName != nil {

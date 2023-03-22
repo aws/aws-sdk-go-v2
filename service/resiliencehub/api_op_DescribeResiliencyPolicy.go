@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes a specified resiliency policy for an AWS Resilience Hub application.
-// The returned policy object includes creation time, data location constraints,
-// the Amazon Resource Name (ARN) for the policy, tags, tier, and more.
+// Describes a specified resiliency policy for an Resilience Hub application. The
+// returned policy object includes creation time, data location constraints, the
+// Amazon Resource Name (ARN) for the policy, tags, tier, and more.
 func (c *Client) DescribeResiliencyPolicy(ctx context.Context, params *DescribeResiliencyPolicyInput, optFns ...func(*Options)) (*DescribeResiliencyPolicyOutput, error) {
 	if params == nil {
 		params = &DescribeResiliencyPolicyInput{}

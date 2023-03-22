@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the test recommendations for the AWS Resilience Hub application.
+// Lists the test recommendations for the Resilience Hub application.
 func (c *Client) ListTestRecommendations(ctx context.Context, params *ListTestRecommendationsInput, optFns ...func(*Options)) (*ListTestRecommendationsOutput, error) {
 	if params == nil {
 		params = &ListTestRecommendationsInput{}
@@ -52,7 +52,7 @@ type ListTestRecommendationsInput struct {
 
 type ListTestRecommendationsOutput struct {
 
-	// The test recommendations for the AWS Resilience Hub application.
+	// The test recommendations for the Resilience Hub application.
 	//
 	// This member is required.
 	TestRecommendations []types.TestRecommendation

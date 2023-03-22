@@ -12,17 +12,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds a resource to the AWS Resilience Hub applicationand assigns it to the
+// Adds a resource to the Resilience Hub application and assigns it to the
 // specified Application Components. If you specify a new Application Component,
-// AWS Resilience Hub will automatically create the Application Component.
+// Resilience Hub will automatically create the Application Component.
 //
 // * This
-// action has no effect outside AWS Resilience Hub.
+// action has no effect outside Resilience Hub.
 //
-// * This API updates the AWS
-// Resilience Hub application draft version. To use this resource for running
-// resiliency assessments, you must publish the AWS Resilience Hub application
-// using the PublishAppVersion API.
+// * This API updates the Resilience
+// Hub application draft version. To use this resource for running resiliency
+// assessments, you must publish the Resilience Hub application using the
+// PublishAppVersion API.
 //
 // * To update application version with new
 // physicalResourceID, you must call ResolveAppVersionResources API.

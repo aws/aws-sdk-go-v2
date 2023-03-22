@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new recommendation template for the AWS Resilience Hub application.
+// Creates a new recommendation template for the Resilience Hub application.
 func (c *Client) CreateRecommendationTemplate(ctx context.Context, params *CreateRecommendationTemplateInput, optFns ...func(*Options)) (*CreateRecommendationTemplateOutput, error) {
 	if params == nil {
 		params = &CreateRecommendationTemplateInput{}

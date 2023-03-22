@@ -11,15 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the resource details in the AWS Resilience Hub application.
+// Updates the resource details in the Resilience Hub application.
 //
-// * This
-// action has no effect outside AWS Resilience Hub.
+// * This action
+// has no effect outside Resilience Hub.
 //
-// * This API updates the AWS
-// Resilience Hub application draft version. To use this resource for running
-// resiliency assessments, you must publish the AWS Resilience Hub application
-// using the PublishAppVersion API.
+// * This API updates the Resilience Hub
+// application draft version. To use this resource for running resiliency
+// assessments, you must publish the Resilience Hub application using the
+// PublishAppVersion API.
 //
 // * To update application version with new
 // physicalResourceID, you must call ResolveAppVersionResources API.
@@ -63,8 +63,8 @@ type UpdateAppVersionResourceInput struct {
 	// The Amazon Web Services region that owns the physical resource.
 	AwsRegion *string
 
-	// Indicates if a resource is excluded from an AWS Resilience Hub application. You
-	// can exclude only imported resources from an AWS Resilience Hub application.
+	// Indicates if a resource is excluded from an Resilience Hub application. You can
+	// exclude only imported resources from an Resilience Hub application.
 	Excluded *bool
 
 	// The logical identifier of the resource.

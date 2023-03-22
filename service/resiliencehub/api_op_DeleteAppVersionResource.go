@@ -12,18 +12,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a resource from the AWS Resilience Hub application.
+// Deletes a resource from the Resilience Hub application.
 //
-// * You can only
-// delete a manually added resource. To exclude non-manually added resources, use
-// the UpdateAppVersionResource API.
+// * You can only delete a
+// manually added resource. To exclude non-manually added resources, use the
+// UpdateAppVersionResource API.
 //
-// * This action has no effect outside AWS
-// Resilience Hub.
+// * This action has no effect outside Resilience
+// Hub.
 //
-// * This API updates the AWS Resilience Hub application draft
-// version. To use this resource for running resiliency assessments, you must
-// publish the AWS Resilience Hub application using the PublishAppVersion API.
+// * This API updates the Resilience Hub application draft version. To use
+// this resource for running resiliency assessments, you must publish the
+// Resilience Hub application using the PublishAppVersion API.
 func (c *Client) DeleteAppVersionResource(ctx context.Context, params *DeleteAppVersionResourceInput, optFns ...func(*Options)) (*DeleteAppVersionResourceOutput, error) {
 	if params == nil {
 		params = &DeleteAppVersionResourceInput{}

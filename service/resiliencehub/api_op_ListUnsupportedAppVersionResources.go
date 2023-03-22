@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the resources that are not currently supported in AWS Resilience Hub. An
+// Lists the resources that are not currently supported in Resilience Hub. An
 // unsupported resource is a resource that exists in the object that was used to
-// create an app, but is not supported by AWS Resilience Hub.
+// create an app, but is not supported by Resilience Hub.
 func (c *Client) ListUnsupportedAppVersionResources(ctx context.Context, params *ListUnsupportedAppVersionResourcesInput, optFns ...func(*Options)) (*ListUnsupportedAppVersionResourcesOutput, error) {
 	if params == nil {
 		params = &ListUnsupportedAppVersionResourcesInput{}

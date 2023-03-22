@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an AWS Resilience Hub application. This is a destructive action that
-// can't be undone.
+// Deletes an Resilience Hub application. This is a destructive action that can't
+// be undone.
 func (c *Client) DeleteApp(ctx context.Context, params *DeleteAppInput, optFns ...func(*Options)) (*DeleteAppOutput, error) {
 	if params == nil {
 		params = &DeleteAppInput{}
@@ -44,7 +44,7 @@ type DeleteAppInput struct {
 	// other API requests.
 	ClientToken *string
 
-	// A boolean option to force the deletion of an AWS Resilience Hub application.
+	// A boolean option to force the deletion of an Resilience Hub application.
 	ForceDelete *bool
 
 	noSmithyDocumentSerde

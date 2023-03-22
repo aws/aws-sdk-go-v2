@@ -1,0 +1,8 @@
+{
+    "id": "ec4eb7b2-66c0-449e-92b6-9d9b5d09496e",
+    "type": "feature",
+    "description": "This release improves validation on the ARNs in the API model",
+    "modules": [
+        "service/pipes"
+    ]
+}

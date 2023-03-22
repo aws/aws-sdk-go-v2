@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the recommendation templates for the AWS Resilience Hub applications.
+// Lists the recommendation templates for the Resilience Hub applications.
 func (c *Client) ListRecommendationTemplates(ctx context.Context, params *ListRecommendationTemplatesInput, optFns ...func(*Options)) (*ListRecommendationTemplatesOutput, error) {
 	if params == nil {
 		params = &ListRecommendationTemplatesInput{}
@@ -68,7 +68,7 @@ type ListRecommendationTemplatesOutput struct {
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
 
-	// The recommendation templates for the AWS Resilience Hub applications.
+	// The recommendation templates for the Resilience Hub applications.
 	RecommendationTemplates []types.RecommendationTemplate
 
 	// Metadata pertaining to the operation's result.

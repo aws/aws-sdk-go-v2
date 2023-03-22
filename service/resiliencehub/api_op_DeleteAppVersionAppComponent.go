@@ -12,15 +12,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Application Component from the AWS Resilience Hub application.
+// Deletes an Application Component from the Resilience Hub application.
 //
-// *
-// This API updates the AWS Resilience Hub application draft version. To use this
-// Application Component for running assessments, you must publish the AWS
-// Resilience Hub application using the PublishAppVersion API.
+// * This
+// API updates the Resilience Hub application draft version. To use this
+// Application Component for running assessments, you must publish the Resilience
+// Hub application using the PublishAppVersion API.
 //
-// * You will not be
-// able to delete an Application Component if it has resources associated with it.
+// * You will not be able to
+// delete an Application Component if it has resources associated with it.
 func (c *Client) DeleteAppVersionAppComponent(ctx context.Context, params *DeleteAppVersionAppComponentInput, optFns ...func(*Options)) (*DeleteAppVersionAppComponentOutput, error) {
 	if params == nil {
 		params = &DeleteAppVersionAppComponentInput{}
@@ -76,7 +76,7 @@ type DeleteAppVersionAppComponentOutput struct {
 	// This member is required.
 	AppVersion *string
 
-	// Defines an Application Component.
+	// The list of Application Components that belong to this resource.
 	AppComponent *types.AppComponent
 
 	// Metadata pertaining to the operation's result.

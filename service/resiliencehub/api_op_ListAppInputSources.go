@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the input sources of the AWS Resilience Hub application. For more
-// information about the input sources supported by AWS Resilience Hub, see
-// Discover the structure and describe your Resilience Hub application
+// Lists all the input sources of the Resilience Hub application. For more
+// information about the input sources supported by Resilience Hub, see Discover
+// the structure and describe your Resilience Hub application
 // (https://docs.aws.amazon.com/resilience-hub/latest/userguide/discover-structure.html).
 func (c *Client) ListAppInputSources(ctx context.Context, params *ListAppInputSourcesInput, optFns ...func(*Options)) (*ListAppInputSourcesOutput, error) {
 	if params == nil {
@@ -47,8 +47,7 @@ type ListAppInputSourcesInput struct {
 	// This member is required.
 	AppVersion *string
 
-	// Maximum number of input sources to be displayed per AWS Resilience Hub
-	// application.
+	// Maximum number of input sources to be displayed per Resilience Hub application.
 	MaxResults *int32
 
 	// Null, or the token from a previous call to get the next set of results.
@@ -59,7 +58,7 @@ type ListAppInputSourcesInput struct {
 
 type ListAppInputSourcesOutput struct {
 
-	// The list of AWS Resilience Hub application input sources.
+	// The list of Resilience Hub application input sources.
 	//
 	// This member is required.
 	AppInputSources []types.AppInputSource
@@ -147,8 +146,7 @@ var _ ListAppInputSourcesAPIClient = (*Client)(nil)
 // ListAppInputSourcesPaginatorOptions is the paginator options for
 // ListAppInputSources
 type ListAppInputSourcesPaginatorOptions struct {
-	// Maximum number of input sources to be displayed per AWS Resilience Hub
-	// application.
+	// Maximum number of input sources to be displayed per Resilience Hub application.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds or updates the app template for an AWS Resilience Hub application draft
+// Adds or updates the app template for an Resilience Hub application draft
 // version.
 func (c *Client) PutDraftAppVersionTemplate(ctx context.Context, params *PutDraftAppVersionTemplateInput, optFns ...func(*Options)) (*PutDraftAppVersionTemplateOutput, error) {
 	if params == nil {
@@ -44,8 +44,8 @@ type PutDraftAppVersionTemplateInput struct {
 	// structure:
 	//
 	// * resources The list of logical resources that needs to be included
-	// in the application. Type: Array Don't add the resources that you want to
-	// exclude. Each resources array item includes the following fields:
+	// in the Resilience Hub application. Type: Array Don't add the resources that you
+	// want to exclude. Each resources array item includes the following fields:
 	//
 	// *
 	// logicalResourceId The logical identifier of the resource. Type: Object Each
@@ -68,6 +68,12 @@ type PutDraftAppVersionTemplateInput struct {
 	//
 	// * name The
 	// name of the resource. Type: String
+	//
+	// * additionalInfo Additional configuration
+	// parameters for an AWS Resilience Hub application. Currently, this parameter
+	// accepts a key-value mapping (in a string format) of only one failover region and
+	// one associated account. Key: "failover-regions" Value: "[{"region":"<REGION>",
+	// "accounts":[{"id":"<ACCOUNT_ID>"}]}]"
 	//
 	// * appComponents The list of Application
 	// Components that this resource belongs to. If an Application Component is not
@@ -122,6 +128,15 @@ type PutDraftAppVersionTemplateInput struct {
 	//
 	// * terraformSourceName The name of
 	// the Terraform S3 state file this resource belongs to. Type: String
+	//
+	// * version
+	// The AWS Resilience Hub application version.
+	//
+	// * additionalInfo Additional
+	// configuration parameters for an AWS Resilience Hub application. Currently, this
+	// parameter accepts a key-value mapping (in a string format) of only one failover
+	// region and one associated account. Key: "failover-regions" Value:
+	// "[{"region":"<REGION>", "accounts":[{"id":"<ACCOUNT_ID>"}]}]"
 	//
 	// This member is required.
 	AppTemplateBody *string

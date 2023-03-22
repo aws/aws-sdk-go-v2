@@ -31,12 +31,12 @@ func (c *Client) GetSyncJob(ctx context.Context, params *GetSyncJobInput, optFns
 
 type GetSyncJobInput struct {
 
-	// The sync soucre. Currently the only supported syncSoucre is SITEWISE .
+	// The sync source. Currently the only supported syncSource is SITEWISE .
 	//
 	// This member is required.
 	SyncSource *string
 
-	// The workspace Id.
+	// The workspace ID.
 	WorkspaceId *string
 
 	noSmithyDocumentSerde
@@ -64,7 +64,7 @@ type GetSyncJobOutput struct {
 	// This member is required.
 	SyncRole *string
 
-	// The sync soucre. Currently the only supported syncSoucre is SITEWISE .
+	// The sync soucre. Currently the only supported syncSource is SITEWISE .
 	//
 	// This member is required.
 	SyncSource *string

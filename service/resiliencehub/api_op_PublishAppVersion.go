@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Publishes a new version of a specific AWS Resilience Hub application.
+// Publishes a new version of a specific Resilience Hub application.
 func (c *Client) PublishAppVersion(ctx context.Context, params *PublishAppVersionInput, optFns ...func(*Options)) (*PublishAppVersionOutput, error) {
 	if params == nil {
 		params = &PublishAppVersionInput{}

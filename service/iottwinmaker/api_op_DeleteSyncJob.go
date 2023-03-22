@@ -30,12 +30,12 @@ func (c *Client) DeleteSyncJob(ctx context.Context, params *DeleteSyncJobInput, 
 
 type DeleteSyncJobInput struct {
 
-	// The sync source. Currently the only supported syncSoucre is SITEWISE .
+	// The sync source. Currently the only supported syncSource is SITEWISE .
 	//
 	// This member is required.
 	SyncSource *string
 
-	// The workspace Id.
+	// The workspace ID.
 	//
 	// This member is required.
 	WorkspaceId *string

@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an AWS Resilience Hub application assessment. This is a destructive
-// action that can't be undone.
+// Deletes an Resilience Hub application assessment. This is a destructive action
+// that can't be undone.
 func (c *Client) DeleteAppAssessment(ctx context.Context, params *DeleteAppAssessmentInput, optFns ...func(*Options)) (*DeleteAppAssessmentOutput, error) {
 	if params == nil {
 		params = &DeleteAppAssessmentInput{}

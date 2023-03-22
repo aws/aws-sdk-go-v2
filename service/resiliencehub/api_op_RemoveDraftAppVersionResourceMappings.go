@@ -41,6 +41,11 @@ type RemoveDraftAppVersionResourceMappingsInput struct {
 	// mappings.
 	AppRegistryAppNames []string
 
+	// The names of the Amazon Elastic Kubernetes Service clusters and namespaces you
+	// want to remove from the resource mappings. This parameter accepts values in
+	// "eks-cluster/namespace" format.
+	EksSourceNames []string
+
 	// The names of the CloudFormation stacks you want to remove from the resource
 	// mappings.
 	LogicalStackNames []string

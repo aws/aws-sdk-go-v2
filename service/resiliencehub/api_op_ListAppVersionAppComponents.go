@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the Application Components in the AWS Resilience Hub application.
+// Lists all the Application Components in the Resilience Hub application.
 func (c *Client) ListAppVersionAppComponents(ctx context.Context, params *ListAppVersionAppComponentsInput, optFns ...func(*Options)) (*ListAppVersionAppComponentsOutput, error) {
 	if params == nil {
 		params = &ListAppVersionAppComponentsInput{}

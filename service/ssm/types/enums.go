@@ -1144,6 +1144,8 @@ const (
 	OperatingSystemMacOS                 OperatingSystem = "MACOS"
 	OperatingSystemRaspbian              OperatingSystem = "RASPBIAN"
 	OperatingSystemRockyLinux            OperatingSystem = "ROCKY_LINUX"
+	OperatingSystemAlmaLinux             OperatingSystem = "ALMA_LINUX"
+	OperatingSystemAmazonLinux2023       OperatingSystem = "AMAZON_LINUX_2023"
 )
 
 // Values returns all known values for OperatingSystem. Note that this can be
@@ -1164,6 +1166,8 @@ func (OperatingSystem) Values() []OperatingSystem {
 		"MACOS",
 		"RASPBIAN",
 		"ROCKY_LINUX",
+		"ALMA_LINUX",
+		"AMAZON_LINUX_2023",
 	}
 }
 

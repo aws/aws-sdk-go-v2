@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes a resource of the AWS Resilience Hub application. This API accepts
-// only one of the following parameters to descibe the resource:
+// Describes a resource of the Resilience Hub application. This API accepts only
+// one of the following parameters to descibe the resource:
 //
 // * resourceName
 //

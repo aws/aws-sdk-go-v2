@@ -31,18 +31,18 @@ func (c *Client) CreateSyncJob(ctx context.Context, params *CreateSyncJobInput, 
 
 type CreateSyncJobInput struct {
 
-	// The SyncJob IAM role. This IAM role is used by the sync job to read from the
-	// syncSource, and create, update or delete the corresponding resources.
+	// The SyncJob IAM role. This IAM role is used by the SyncJob to read from the
+	// syncSource, and create, update, or delete the corresponding resources.
 	//
 	// This member is required.
 	SyncRole *string
 
-	// The sync source. Currently the only supported syncSoucre is SITEWISE .
+	// The sync source. Currently the only supported syncSoource is SITEWISE .
 	//
 	// This member is required.
 	SyncSource *string
 
-	// The workspace Id.
+	// The workspace ID.
 	//
 	// This member is required.
 	WorkspaceId *string
