@@ -1,3 +1,17 @@
+# Release (2023-03-22)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.19.8](service/iam/CHANGELOG.md#v1198-2023-03-22)
+  * **Documentation**: Documentation updates for AWS Identity and Access Management (IAM).
+* `github.com/aws/aws-sdk-go-v2/service/iottwinmaker`: [v1.11.0](service/iottwinmaker/CHANGELOG.md#v1110-2023-03-22)
+  * **Feature**: This release adds support of adding metadata when creating a new scene or updating an existing scene.
+* `github.com/aws/aws-sdk-go-v2/service/networkmanager`: [v1.17.8](service/networkmanager/CHANGELOG.md#v1178-2023-03-22)
+  * **Documentation**: This release includes an update to create-transit-gateway-route-table-attachment, showing example usage for TransitGatewayRouteTableArn.
+* `github.com/aws/aws-sdk-go-v2/service/resiliencehub`: [v1.10.0](service/resiliencehub/CHANGELOG.md#v1100-2023-03-22)
+  * **Feature**: This release provides customers with the ability to import resources from within an EKS cluster and assess the resiliency of EKS cluster workloads.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.36.0](service/ssm/CHANGELOG.md#v1360-2023-03-22)
+  * **Feature**: This Patch Manager release supports creating, updating, and deleting Patch Baselines for AmazonLinux2023, AlmaLinux.
+
 # Release (2023-03-21)
 
 ## General Highlights

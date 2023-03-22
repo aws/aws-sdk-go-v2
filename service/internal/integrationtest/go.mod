@@ -48,7 +48,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.14.7
 	github.com/aws/aws-sdk-go-v2/service/glue v1.43.4
 	github.com/aws/aws-sdk-go-v2/service/health v1.16.6
-	github.com/aws/aws-sdk-go-v2/service/iam v1.19.7
+	github.com/aws/aws-sdk-go-v2/service/iam v1.19.8
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.13.6
 	github.com/aws/aws-sdk-go-v2/service/iot v1.35.2
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.17.8
@@ -77,7 +77,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.18.5
 	github.com/aws/aws-sdk-go-v2/service/sns v1.20.6
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.20.6
-	github.com/aws/aws-sdk-go-v2/service/ssm v1.35.7
+	github.com/aws/aws-sdk-go-v2/service/ssm v1.36.0
 	github.com/aws/aws-sdk-go-v2/service/sts v1.18.7
 	github.com/aws/aws-sdk-go-v2/service/support v1.14.7
 	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.16.2

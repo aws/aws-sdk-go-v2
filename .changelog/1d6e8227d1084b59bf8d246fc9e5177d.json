@@ -1,8 +1,0 @@
-{
-    "id": "1d6e8227-d108-4b59-bf8d-246fc9e5177d",
-    "type": "feature",
-    "description": "This Patch Manager release supports creating, updating, and deleting Patch Baselines for AmazonLinux2023, AlmaLinux.",
-    "modules": [
-        "service/ssm"
-    ]
-}

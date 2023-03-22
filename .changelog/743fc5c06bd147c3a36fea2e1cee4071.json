@@ -1,8 +1,0 @@
-{
-    "id": "743fc5c0-6bd1-47c3-a36f-ea2e1cee4071",
-    "type": "feature",
-    "description": "This release provides customers with the ability to import resources from within an EKS cluster and assess the resiliency of EKS cluster workloads.",
-    "modules": [
-        "service/resiliencehub"
-    ]
-}

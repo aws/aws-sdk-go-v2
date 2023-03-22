@@ -1,8 +1,0 @@
-{
-    "id": "5b25f907-7aa4-49ae-b37a-d46601e8f2c1",
-    "type": "feature",
-    "description": "This release adds support of adding metadata when creating a new scene or updating an existing scene.",
-    "modules": [
-        "service/iottwinmaker"
-    ]
-}

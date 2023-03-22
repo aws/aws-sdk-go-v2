@@ -1,8 +1,0 @@
-{
-    "id": "8dfbe1df-09a2-4c0e-8c8b-c6a3867f2be8",
-    "type": "documentation",
-    "description": "This release includes an update to create-transit-gateway-route-table-attachment, showing example usage for TransitGatewayRouteTableArn.",
-    "modules": [
-        "service/networkmanager"
-    ]
-}

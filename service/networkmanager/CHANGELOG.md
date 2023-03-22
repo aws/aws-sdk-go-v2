@@ -1,3 +1,7 @@
+# v1.17.8 (2023-03-22)
+
+* **Documentation**: This release includes an update to create-transit-gateway-route-table-attachment, showing example usage for TransitGatewayRouteTableArn.
+
 # v1.17.7 (2023-03-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions
