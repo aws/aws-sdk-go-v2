@@ -57,7 +57,9 @@
         },
         "com.amazonaws.pinpointsmsvoice#Boolean": {
             "type": "boolean",
-            "traits": {}
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.pinpointsmsvoice#CallInstructionsMessageType": {
             "type": "structure",
@@ -345,6 +347,7 @@
                 "Enabled": {
                     "target": "com.amazonaws.pinpointsmsvoice#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "Indicates whether or not the event destination is enabled. If the event destination is enabled, then Amazon Pinpoint sends response data to the specified event destination."
                     }
                 },
@@ -377,6 +380,7 @@
                 "Enabled": {
                     "target": "com.amazonaws.pinpointsmsvoice#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "Indicates whether or not the event destination is enabled. If the event destination is enabled, then Amazon Pinpoint sends response data to the specified event destination."
                     }
                 },

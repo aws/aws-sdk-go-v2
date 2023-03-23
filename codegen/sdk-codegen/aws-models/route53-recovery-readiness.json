@@ -887,6 +887,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.route53recoveryreadiness#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of objects that you want to return with this call.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -1022,6 +1023,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.route53recoveryreadiness#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of objects that you want to return with this call.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -1207,6 +1209,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.route53recoveryreadiness#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of objects that you want to return with this call.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -1340,6 +1343,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.route53recoveryreadiness#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of objects that you want to return with this call.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -1474,6 +1478,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.route53recoveryreadiness#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of objects that you want to return with this call.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -1719,6 +1724,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.route53recoveryreadiness#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of objects that you want to return with this call.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -1794,6 +1800,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.route53recoveryreadiness#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of objects that you want to return with this call.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -1869,6 +1876,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.route53recoveryreadiness#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of objects that you want to return with this call.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -1944,6 +1952,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.route53recoveryreadiness#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of objects that you want to return with this call.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -2019,6 +2028,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.route53recoveryreadiness#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of objects that you want to return with this call.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -2126,6 +2136,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.route53recoveryreadiness#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of objects that you want to return with this call.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -2221,6 +2232,7 @@
         "com.amazonaws.route53recoveryreadiness#MaxResults": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 1000

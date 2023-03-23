@@ -159,6 +159,7 @@
                 "Bitrate": {
                     "target": "com.amazonaws.medialive#__double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Average bitrate in bits/second. Valid values depend on rate control mode and profile.",
                         "smithy.api#jsonName": "bitrate"
                     }
@@ -201,6 +202,7 @@
                 "SampleRate": {
                     "target": "com.amazonaws.medialive#__double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Sample rate in Hz. Valid values depend on rate control mode and profile.",
                         "smithy.api#jsonName": "sampleRate"
                     }
@@ -430,6 +432,7 @@
                 "Bitrate": {
                     "target": "com.amazonaws.medialive#__double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Average bitrate in bits/second. Valid bitrates depend on the coding mode.",
                         "smithy.api#jsonName": "bitrate"
                     }
@@ -451,6 +454,7 @@
                 "Dialnorm": {
                     "target": "com.amazonaws.medialive#__integerMin1Max31",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Sets the dialnorm for the output. If excluded and input audio is Dolby Digital, dialnorm will be passed through.",
                         "smithy.api#jsonName": "dialnorm"
                     }
@@ -618,6 +622,7 @@
                 "SourceAncillaryChannelNumber": {
                     "target": "com.amazonaws.medialive#__integerMin1Max4",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Specifies the number (1 to 4) of the captions channel you want to extract from the ancillary captions. If you plan to convert the ancillary captions to another format, complete this field. If you plan to choose Embedded as the captions destination in the output (to pass through all the channels in the ancillary captions), leave this field blank because MediaLive ignores the field.",
                         "smithy.api#jsonName": "sourceAncillaryChannelNumber"
                     }
@@ -682,6 +687,7 @@
                 "RolloverInterval": {
                     "target": "com.amazonaws.medialive#__integerMin1",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Number of seconds to write to archive file before closing and starting a new one.",
                         "smithy.api#jsonName": "rolloverInterval"
                     }
@@ -764,6 +770,7 @@
                 "OutputChannel": {
                     "target": "com.amazonaws.medialive#__integerMin0Max7",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The index of the output channel being produced.",
                         "smithy.api#jsonName": "outputChannel",
                         "smithy.api#required": {}
@@ -1088,6 +1095,7 @@
                 "TargetLkfs": {
                     "target": "com.amazonaws.medialive#__doubleMinNegative59Max0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Target LKFS(loudness) to adjust volume to. If no value is entered, a default value will be used according to the chosen algorithm.  The CALM Act (1770-1) recommends a target of -24 LKFS. The EBU R-128 specification (1770-2) recommends a target of -23 LKFS.",
                         "smithy.api#jsonName": "targetLkfs"
                     }
@@ -1191,6 +1199,7 @@
                 "Pid": {
                     "target": "com.amazonaws.medialive#__integerMin0Max8191",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Selects a specific PID from within a source.",
                         "smithy.api#jsonName": "pid",
                         "smithy.api#required": {}
@@ -1270,6 +1279,7 @@
                 "AudioSilenceThresholdMsec": {
                     "target": "com.amazonaws.medialive#__integerMin1000",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The amount of time (in milliseconds) that the active input must be silent before automatic input failover occurs. Silence is defined as audio loss or audio quieter than -50 dBFS.",
                         "smithy.api#jsonName": "audioSilenceThresholdMsec"
                     }
@@ -1285,6 +1295,7 @@
                 "Track": {
                     "target": "com.amazonaws.medialive#__integerMin1",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "1-based integer value that maps to a specific audio track",
                         "smithy.api#jsonName": "track",
                         "smithy.api#required": {}
@@ -1391,6 +1402,7 @@
                 "ErrorClearTimeMsec": {
                     "target": "com.amazonaws.medialive#__integerMin1",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "This clear time defines the requirement a recovered input must meet to be considered healthy. The input must have no failover conditions for this length of time. Enter a time in milliseconds. This value is particularly important if the input_preference for the failover pair is set to PRIMARY_INPUT_PREFERRED, because after this time, MediaLive will switch back to the primary input.",
                         "smithy.api#jsonName": "errorClearTimeMsec"
                     }
@@ -2199,6 +2211,7 @@
                 "BackgroundOpacity": {
                     "target": "com.amazonaws.medialive#__integerMin0Max255",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Specifies the opacity of the background rectangle. 255 is opaque; 0 is transparent. Leaving this parameter out is equivalent to setting it to 0 (transparent).  All burn-in and DVB-Sub font settings must match.",
                         "smithy.api#jsonName": "backgroundOpacity"
                     }
@@ -2220,6 +2233,7 @@
                 "FontOpacity": {
                     "target": "com.amazonaws.medialive#__integerMin0Max255",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Specifies the opacity of the burned-in captions. 255 is opaque; 0 is transparent.  All burn-in and DVB-Sub font settings must match.",
                         "smithy.api#jsonName": "fontOpacity"
                     }
@@ -2227,6 +2241,7 @@
                 "FontResolution": {
                     "target": "com.amazonaws.medialive#__integerMin96Max600",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Font resolution in DPI (dots per inch); default is 96 dpi.  All burn-in and DVB-Sub font settings must match.",
                         "smithy.api#jsonName": "fontResolution"
                     }
@@ -2248,6 +2263,7 @@
                 "OutlineSize": {
                     "target": "com.amazonaws.medialive#__integerMin0Max10",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Specifies font outline size in pixels. This option is not valid for source captions that are either 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.",
                         "smithy.api#jsonName": "outlineSize"
                     }
@@ -2262,6 +2278,7 @@
                 "ShadowOpacity": {
                     "target": "com.amazonaws.medialive#__integerMin0Max255",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Specifies the opacity of the shadow. 255 is opaque; 0 is transparent. Leaving this parameter out is equivalent to setting it to 0 (transparent).  All burn-in and DVB-Sub font settings must match.",
                         "smithy.api#jsonName": "shadowOpacity"
                     }
@@ -2269,6 +2286,7 @@
                 "ShadowXOffset": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Specifies the horizontal offset of the shadow relative to the captions in pixels. A value of -2 would result in a shadow offset 2 pixels to the left.  All burn-in and DVB-Sub font settings must match.",
                         "smithy.api#jsonName": "shadowXOffset"
                     }
@@ -2276,6 +2294,7 @@
                 "ShadowYOffset": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Specifies the vertical offset of the shadow relative to the captions in pixels. A value of -2 would result in a shadow offset 2 pixels above the text.  All burn-in and DVB-Sub font settings must match.",
                         "smithy.api#jsonName": "shadowYOffset"
                     }
@@ -2290,6 +2309,7 @@
                 "XPosition": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Specifies the horizontal position of the caption relative to the left side of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the left of the output. If no explicit xPosition is provided, the horizontal caption position will be determined by the alignment parameter.  All burn-in and DVB-Sub font settings must match.",
                         "smithy.api#jsonName": "xPosition"
                     }
@@ -2297,6 +2317,7 @@
                 "YPosition": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Specifies the vertical position of the caption relative to the top of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the top of the output. If no explicit yPosition is provided, the caption will be positioned towards the bottom of the output.  All burn-in and DVB-Sub font settings must match.",
                         "smithy.api#jsonName": "yPosition"
                     }
@@ -2655,6 +2676,7 @@
                 "CaptionChannel": {
                     "target": "com.amazonaws.medialive#__integerMin1Max4",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The closed caption channel being described by this CaptionLanguageMapping.  Each channel mapping must have a unique channel number (maximum of 4)",
                         "smithy.api#jsonName": "captionChannel",
                         "smithy.api#required": {}
@@ -2687,6 +2709,7 @@
                 "Height": {
                     "target": "com.amazonaws.medialive#__doubleMin0Max100",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "See the description in leftOffset.\nFor height, specify the entire height of the rectangle as a percentage of the underlying frame height. For example, \\\"80\\\" means the rectangle height is 80% of the underlying frame height. The topOffset and rectangleHeight must add up to 100% or less.\nThis field corresponds to tts:extent - Y in the TTML standard.",
                         "smithy.api#jsonName": "height",
                         "smithy.api#required": {}
@@ -2695,6 +2718,7 @@
                 "LeftOffset": {
                     "target": "com.amazonaws.medialive#__doubleMin0Max100",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Applies only if you plan to convert these source captions to EBU-TT-D or TTML in an output. (Make sure to leave the default if you don't have either of these formats in the output.) You can define a display rectangle for the captions that is smaller than the underlying video frame. You define the rectangle by specifying the position of the left edge, top edge, bottom edge, and right edge of the rectangle, all within the underlying video frame. The units for the measurements are percentages.\nIf you specify a value for one of these fields, you must specify a value for all of them.\nFor leftOffset, specify the position of the left edge of the rectangle, as a percentage of the underlying frame width, and relative to the left edge of the frame. For example, \\\"10\\\" means the measurement is 10% of the underlying frame width. The rectangle left edge starts at that position from the left edge of the frame.\nThis field corresponds to tts:origin - X in the TTML standard.",
                         "smithy.api#jsonName": "leftOffset",
                         "smithy.api#required": {}
@@ -2703,6 +2727,7 @@
                 "TopOffset": {
                     "target": "com.amazonaws.medialive#__doubleMin0Max100",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "See the description in leftOffset.\nFor topOffset, specify the position of the top edge of the rectangle, as a percentage of the underlying frame height, and relative to the top edge of the frame. For example, \\\"10\\\" means the measurement is 10% of the underlying frame height. The rectangle top edge starts at that position from the top edge of the frame.\nThis field corresponds to tts:origin - Y in the TTML standard.",
                         "smithy.api#jsonName": "topOffset",
                         "smithy.api#required": {}
@@ -2711,6 +2736,7 @@
                 "Width": {
                     "target": "com.amazonaws.medialive#__doubleMin0Max100",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "See the description in leftOffset.\nFor width, specify the entire width of the rectangle as a percentage of the underlying frame width. For example, \\\"80\\\" means the rectangle width is 80% of the underlying frame width. The leftOffset and rectangleWidth must add up to 100% or less.\nThis field corresponds to tts:extent - X in the TTML standard.",
                         "smithy.api#jsonName": "width",
                         "smithy.api#required": {}
@@ -2944,6 +2970,7 @@
                 "PipelinesRunningCount": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The number of currently healthy pipelines.",
                         "smithy.api#jsonName": "pipelinesRunningCount"
                     }
@@ -3172,6 +3199,7 @@
                 "PipelinesRunningCount": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The number of currently healthy pipelines.",
                         "smithy.api#jsonName": "pipelinesRunningCount"
                     }
@@ -4191,6 +4219,7 @@
                 "PipelinesRunningCount": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The number of currently healthy pipelines.",
                         "smithy.api#jsonName": "pipelinesRunningCount"
                     }
@@ -4581,6 +4610,7 @@
                 "PipelinesRunningCount": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The number of currently healthy pipelines.",
                         "smithy.api#jsonName": "pipelinesRunningCount"
                     }
@@ -4588,6 +4618,7 @@
                 "ProgramCount": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The number of programs in the multiplex.",
                         "smithy.api#jsonName": "programCount"
                     }
@@ -4685,6 +4716,7 @@
                 "Count": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Number of reserved resources",
                         "smithy.api#jsonName": "count"
                     }
@@ -4699,6 +4731,7 @@
                 "Duration": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Lease duration, e.g. '12'",
                         "smithy.api#jsonName": "duration"
                     }
@@ -4720,6 +4753,7 @@
                 "FixedPrice": {
                     "target": "com.amazonaws.medialive#__double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "One-time charge for each reserved resource, e.g. '0.0' for a NO_UPFRONT offering",
                         "smithy.api#jsonName": "fixedPrice"
                     }
@@ -4804,6 +4838,7 @@
                 "UsagePrice": {
                     "target": "com.amazonaws.medialive#__double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Recurring usage charge for each reserved resource, e.g. '157.0'",
                         "smithy.api#jsonName": "usagePrice"
                     }
@@ -5227,6 +5262,7 @@
                 "PipelinesRunningCount": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The number of currently healthy pipelines.",
                         "smithy.api#jsonName": "pipelinesRunningCount"
                     }
@@ -5649,6 +5685,7 @@
                 "ContentLength": {
                     "target": "com.amazonaws.medialive#__long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The length of the content.",
                         "smithy.api#httpHeader": "Content-Length"
                     }
@@ -6271,6 +6308,7 @@
                 "PipelinesRunningCount": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The number of currently healthy pipelines.",
                         "smithy.api#jsonName": "pipelinesRunningCount"
                     }
@@ -6278,6 +6316,7 @@
                 "ProgramCount": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The number of programs in the multiplex.",
                         "smithy.api#jsonName": "programCount"
                     }
@@ -6379,6 +6418,7 @@
                 "Duration": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Lease duration, e.g. '12'",
                         "smithy.api#jsonName": "duration"
                     }
@@ -6393,6 +6433,7 @@
                 "FixedPrice": {
                     "target": "com.amazonaws.medialive#__double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "One-time charge for each reserved resource, e.g. '0.0' for a NO_UPFRONT offering",
                         "smithy.api#jsonName": "fixedPrice"
                     }
@@ -6435,6 +6476,7 @@
                 "UsagePrice": {
                     "target": "com.amazonaws.medialive#__double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Recurring usage charge for each reserved resource, e.g. '157.0'",
                         "smithy.api#jsonName": "usagePrice"
                     }
@@ -6515,6 +6557,7 @@
                 "Count": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Number of reserved resources",
                         "smithy.api#jsonName": "count"
                     }
@@ -6529,6 +6572,7 @@
                 "Duration": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Lease duration, e.g. '12'",
                         "smithy.api#jsonName": "duration"
                     }
@@ -6550,6 +6594,7 @@
                 "FixedPrice": {
                     "target": "com.amazonaws.medialive#__double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "One-time charge for each reserved resource, e.g. '0.0' for a NO_UPFRONT offering",
                         "smithy.api#jsonName": "fixedPrice"
                     }
@@ -6634,6 +6679,7 @@
                 "UsagePrice": {
                     "target": "com.amazonaws.medialive#__double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Recurring usage charge for each reserved resource, e.g. '157.0'",
                         "smithy.api#jsonName": "usagePrice"
                     }
@@ -6704,6 +6750,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.medialive#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
@@ -6863,6 +6910,7 @@
                 "NetworkId": {
                     "target": "com.amazonaws.medialive#__integerMin0Max65536",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The numeric value placed in the Network Information Table (NIT).",
                         "smithy.api#jsonName": "networkId",
                         "smithy.api#required": {}
@@ -6879,6 +6927,7 @@
                 "RepInterval": {
                     "target": "com.amazonaws.medialive#__integerMin25Max10000",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The number of milliseconds between instances of this table in the output transport stream.",
                         "smithy.api#jsonName": "repInterval"
                     }
@@ -6933,6 +6982,7 @@
                 "RepInterval": {
                     "target": "com.amazonaws.medialive#__integerMin25Max2000",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The number of milliseconds between instances of this table in the output transport stream.",
                         "smithy.api#jsonName": "repInterval"
                     }
@@ -7116,6 +7166,7 @@
                 "BackgroundOpacity": {
                     "target": "com.amazonaws.medialive#__integerMin0Max255",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Specifies the opacity of the background rectangle. 255 is opaque; 0 is transparent. Leaving this parameter blank is equivalent to setting it to 0 (transparent).  All burn-in and DVB-Sub font settings must match.",
                         "smithy.api#jsonName": "backgroundOpacity"
                     }
@@ -7137,6 +7188,7 @@
                 "FontOpacity": {
                     "target": "com.amazonaws.medialive#__integerMin0Max255",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Specifies the opacity of the burned-in captions. 255 is opaque; 0 is transparent.  All burn-in and DVB-Sub font settings must match.",
                         "smithy.api#jsonName": "fontOpacity"
                     }
@@ -7144,6 +7196,7 @@
                 "FontResolution": {
                     "target": "com.amazonaws.medialive#__integerMin96Max600",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Font resolution in DPI (dots per inch); default is 96 dpi.  All burn-in and DVB-Sub font settings must match.",
                         "smithy.api#jsonName": "fontResolution"
                     }
@@ -7165,6 +7218,7 @@
                 "OutlineSize": {
                     "target": "com.amazonaws.medialive#__integerMin0Max10",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Specifies font outline size in pixels. This option is not valid for source captions that are either 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.",
                         "smithy.api#jsonName": "outlineSize"
                     }
@@ -7179,6 +7233,7 @@
                 "ShadowOpacity": {
                     "target": "com.amazonaws.medialive#__integerMin0Max255",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Specifies the opacity of the shadow. 255 is opaque; 0 is transparent. Leaving this parameter blank is equivalent to setting it to 0 (transparent).  All burn-in and DVB-Sub font settings must match.",
                         "smithy.api#jsonName": "shadowOpacity"
                     }
@@ -7186,6 +7241,7 @@
                 "ShadowXOffset": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Specifies the horizontal offset of the shadow relative to the captions in pixels. A value of -2 would result in a shadow offset 2 pixels to the left.  All burn-in and DVB-Sub font settings must match.",
                         "smithy.api#jsonName": "shadowXOffset"
                     }
@@ -7193,6 +7249,7 @@
                 "ShadowYOffset": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Specifies the vertical offset of the shadow relative to the captions in pixels. A value of -2 would result in a shadow offset 2 pixels above the text.  All burn-in and DVB-Sub font settings must match.",
                         "smithy.api#jsonName": "shadowYOffset"
                     }
@@ -7207,6 +7264,7 @@
                 "XPosition": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Specifies the horizontal position of the caption relative to the left side of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the left of the output. If no explicit xPosition is provided, the horizontal caption position will be determined by the alignment parameter.  This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream.  All burn-in and DVB-Sub font settings must match.",
                         "smithy.api#jsonName": "xPosition"
                     }
@@ -7214,6 +7272,7 @@
                 "YPosition": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Specifies the vertical position of the caption relative to the top of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the top of the output. If no explicit yPosition is provided, the caption will be positioned towards the bottom of the output.  This option is not valid for source captions that are STL, 608/embedded or teletext.  These source settings are already pre-defined by the caption stream.  All burn-in and DVB-Sub font settings must match.",
                         "smithy.api#jsonName": "yPosition"
                     }
@@ -7326,6 +7385,7 @@
                 "Pid": {
                     "target": "com.amazonaws.medialive#__integerMin1",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "When using DVB-Sub with Burn-In or SMPTE-TT, use this PID for the source content. Unused for DVB-Sub passthrough. All DVB-Sub content is passed through, regardless of selectors.",
                         "smithy.api#jsonName": "pid"
                     }
@@ -7341,6 +7401,7 @@
                 "RepInterval": {
                     "target": "com.amazonaws.medialive#__integerMin1000Max30000",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The number of milliseconds between instances of this table in the output transport stream.",
                         "smithy.api#jsonName": "repInterval"
                     }
@@ -7470,6 +7531,7 @@
                 "Bitrate": {
                     "target": "com.amazonaws.medialive#__double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Average bitrate in bits/second. Valid bitrates depend on the coding mode.\n//  * @affectsRightSizing true",
                         "smithy.api#jsonName": "bitrate"
                     }
@@ -7484,6 +7546,7 @@
                 "Dialnorm": {
                     "target": "com.amazonaws.medialive#__integerMin1Max31",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Sets the dialnorm for the output. Default 23.",
                         "smithy.api#jsonName": "dialnorm"
                     }
@@ -7505,6 +7568,7 @@
                 "HeightTrim": {
                     "target": "com.amazonaws.medialive#__double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Height dimensional trim. Sets the maximum amount to attenuate the height channels when the downstream player isn??t configured to handle Dolby Digital Plus with Dolby Atmos and must remix the channels.",
                         "smithy.api#jsonName": "heightTrim"
                     }
@@ -7512,6 +7576,7 @@
                 "SurroundTrim": {
                     "target": "com.amazonaws.medialive#__double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Surround dimensional trim. Sets the maximum amount to attenuate the surround channels when the downstream player isn't configured to handle Dolby Digital Plus with Dolby Atmos and must remix the channels.",
                         "smithy.api#jsonName": "surroundTrim"
                     }
@@ -7826,6 +7891,7 @@
                 "Bitrate": {
                     "target": "com.amazonaws.medialive#__double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Average bitrate in bits/second. Valid bitrates depend on the coding mode.",
                         "smithy.api#jsonName": "bitrate"
                     }
@@ -7854,6 +7920,7 @@
                 "Dialnorm": {
                     "target": "com.amazonaws.medialive#__integerMin1Max31",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Sets the dialnorm for the output. If blank and input audio is Dolby Digital Plus, dialnorm will be passed through.",
                         "smithy.api#jsonName": "dialnorm"
                     }
@@ -7889,6 +7956,7 @@
                 "LoRoCenterMixLevel": {
                     "target": "com.amazonaws.medialive#__double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Left only/Right only center mix level. Only used for 3/2 coding mode.",
                         "smithy.api#jsonName": "loRoCenterMixLevel"
                     }
@@ -7896,6 +7964,7 @@
                 "LoRoSurroundMixLevel": {
                     "target": "com.amazonaws.medialive#__double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Left only/Right only surround mix level. Only used for 3/2 coding mode.",
                         "smithy.api#jsonName": "loRoSurroundMixLevel"
                     }
@@ -7903,6 +7972,7 @@
                 "LtRtCenterMixLevel": {
                     "target": "com.amazonaws.medialive#__double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Left total/Right total center mix level. Only used for 3/2 coding mode.",
                         "smithy.api#jsonName": "ltRtCenterMixLevel"
                     }
@@ -7910,6 +7980,7 @@
                 "LtRtSurroundMixLevel": {
                     "target": "com.amazonaws.medialive#__double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Left total/Right total surround mix level. Only used for 3/2 coding mode.",
                         "smithy.api#jsonName": "ltRtSurroundMixLevel"
                     }
@@ -8195,6 +8266,7 @@
                 "Source608ChannelNumber": {
                     "target": "com.amazonaws.medialive#__integerMin1Max4",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Specifies the 608/708 channel number within the video track from which to extract captions. Unused for passthrough.",
                         "smithy.api#jsonName": "source608ChannelNumber"
                     }
@@ -8202,6 +8274,7 @@
                 "Source608TrackNumber": {
                     "target": "com.amazonaws.medialive#__integerMin1Max5",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "This field is unused and deprecated.",
                         "smithy.api#jsonName": "source608TrackNumber"
                     }
@@ -8318,6 +8391,7 @@
                 "AdAvailOffset": {
                     "target": "com.amazonaws.medialive#__integerMinNegative1000Max1000",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "When specified, this offset (in milliseconds) is added to the input Ad Avail PTS time. This only applies to embedded SCTE 104/35 messages and does not apply to OOB messages.",
                         "smithy.api#jsonName": "adAvailOffset"
                     }
@@ -8461,6 +8535,7 @@
                 "ColumnDepth": {
                     "target": "com.amazonaws.medialive#__integerMin4Max20",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Parameter D from SMPTE 2022-1. The height of the FEC protection matrix.  The number of transport stream packets per column error correction packet. Must be between 4 and 20, inclusive.",
                         "smithy.api#jsonName": "columnDepth"
                     }
@@ -8475,6 +8550,7 @@
                 "RowLength": {
                     "target": "com.amazonaws.medialive#__integerMin1Max20",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Parameter L from SMPTE 2022-1. The width of the FEC protection matrix.  Must be between 1 and 20, inclusive. If only Column FEC is used, then larger values increase robustness.  If Row FEC is used, then this is the number of transport stream packets per row error correction packet, and the value must be between 4 and 20, inclusive, if includeFec is columnAndRow. If includeFec is column, this value must be 1 to 20, inclusive.",
                         "smithy.api#jsonName": "rowLength"
                     }
@@ -8803,6 +8879,7 @@
                 "CaptureInterval": {
                     "target": "com.amazonaws.medialive#__integerMin1Max3600000",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The frequency at which to capture frames for inclusion in the output. May be specified in either seconds or milliseconds, as specified by captureIntervalUnits.",
                         "smithy.api#jsonName": "captureInterval"
                     }
@@ -8848,6 +8925,7 @@
                 "InitialAudioGain": {
                     "target": "com.amazonaws.medialive#__integerMinNegative60Max60",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Value to set the initial audio gain for the Live Event.",
                         "smithy.api#jsonName": "initialAudioGain"
                     }
@@ -9514,6 +9592,7 @@
                 "Bitrate": {
                     "target": "com.amazonaws.medialive#__integerMin1000",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Average bitrate in bits/second. Required when the rate control mode is VBR or CBR. Not used for QVBR. In an MS Smooth output group, each output must have a unique value when its bitrate is rounded down to the nearest multiple of 1000.",
                         "smithy.api#jsonName": "bitrate"
                     }
@@ -9521,6 +9600,7 @@
                 "BufFillPct": {
                     "target": "com.amazonaws.medialive#__integerMin0Max100",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Percentage of the buffer that should initially be filled (HRD buffer model).",
                         "smithy.api#jsonName": "bufFillPct"
                     }
@@ -9528,6 +9608,7 @@
                 "BufSize": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Size of buffer (HRD buffer model) in bits.",
                         "smithy.api#jsonName": "bufSize"
                     }
@@ -9591,6 +9672,7 @@
                 "FramerateDenominator": {
                     "target": "com.amazonaws.medialive#__integerMin1",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Framerate denominator.",
                         "smithy.api#jsonName": "framerateDenominator"
                     }
@@ -9598,6 +9680,7 @@
                 "FramerateNumerator": {
                     "target": "com.amazonaws.medialive#__integerMin1",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Framerate numerator - framerate is a fraction, e.g. 24000 / 1001 = 23.976 fps.",
                         "smithy.api#jsonName": "framerateNumerator"
                     }
@@ -9612,6 +9695,7 @@
                 "GopClosedCadence": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Frequency of closed GOPs. In streaming applications, it is recommended that this be set to 1 so a decoder joining mid-stream will receive an IDR frame as quickly as possible. Setting this value to 0 will break output segmenting.",
                         "smithy.api#jsonName": "gopClosedCadence"
                     }
@@ -9619,6 +9703,7 @@
                 "GopNumBFrames": {
                     "target": "com.amazonaws.medialive#__integerMin0Max7",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Number of B-frames between reference frames.",
                         "smithy.api#jsonName": "gopNumBFrames"
                     }
@@ -9626,6 +9711,7 @@
                 "GopSize": {
                     "target": "com.amazonaws.medialive#__double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "GOP size (keyframe interval) in units of either frames or seconds per gopSizeUnits.\nIf gopSizeUnits is frames, gopSize must be an integer and must be greater than or equal to 1.\nIf gopSizeUnits is seconds, gopSize must be greater than 0, but need not be an integer.",
                         "smithy.api#jsonName": "gopSize"
                     }
@@ -9654,6 +9740,7 @@
                 "MaxBitrate": {
                     "target": "com.amazonaws.medialive#__integerMin1000",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "For QVBR: See the tooltip for Quality level\n\nFor VBR: Set the maximum bitrate in order to accommodate expected spikes in the complexity of the video.",
                         "smithy.api#jsonName": "maxBitrate"
                     }
@@ -9661,6 +9748,7 @@
                 "MinIInterval": {
                     "target": "com.amazonaws.medialive#__integerMin0Max30",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Only meaningful if sceneChangeDetect is set to enabled.  Defaults to 5 if multiplex rate control is used.  Enforces separation between repeated (cadence) I-frames and I-frames inserted by Scene Change Detection. If a scene change I-frame is within I-interval frames of a cadence I-frame, the GOP is shrunk and/or stretched to the scene change I-frame. GOP stretch requires enabling lookahead as well as setting I-interval. The normal cadence resumes for the next GOP. Note: Maximum GOP stretch = GOP size + Min-I-interval - 1",
                         "smithy.api#jsonName": "minIInterval"
                     }
@@ -9668,6 +9756,7 @@
                 "NumRefFrames": {
                     "target": "com.amazonaws.medialive#__integerMin1Max6",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Number of reference frames to use. The encoder may use more than requested if using B-frames and/or interlaced encoding.",
                         "smithy.api#jsonName": "numRefFrames"
                     }
@@ -9682,6 +9771,7 @@
                 "ParDenominator": {
                     "target": "com.amazonaws.medialive#__integerMin1",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Pixel Aspect Ratio denominator.",
                         "smithy.api#jsonName": "parDenominator"
                     }
@@ -9689,6 +9779,7 @@
                 "ParNumerator": {
                     "target": "com.amazonaws.medialive#__integerMin1",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Pixel Aspect Ratio numerator.",
                         "smithy.api#jsonName": "parNumerator"
                     }
@@ -9710,6 +9801,7 @@
                 "QvbrQualityLevel": {
                     "target": "com.amazonaws.medialive#__integerMin1Max10",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Controls the target quality for the video encode. Applies only when the rate control mode is QVBR. You can set a target quality or you can let MediaLive determine the best quality. To set a target quality, enter values in the QVBR quality level field and the Max bitrate field. Enter values that suit your most important viewing devices. Recommended values are:\n- Primary screen: Quality level: 8 to 10. Max bitrate: 4M\n- PC or tablet: Quality level: 7. Max bitrate: 1.5M to 3M\n- Smartphone: Quality level: 6. Max bitrate: 1M to 1.5M\nTo let MediaLive decide, leave the QVBR quality level field empty, and in Max bitrate enter the maximum rate you want in the video. For more information, see the section called \"Video - rate control mode\" in the MediaLive user guide",
                         "smithy.api#jsonName": "qvbrQualityLevel"
                     }
@@ -9738,6 +9830,7 @@
                 "Slices": {
                     "target": "com.amazonaws.medialive#__integerMin1Max32",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Number of slices per picture. Must be less than or equal to the number of macroblock rows for progressive pictures, and less than or equal to half the number of macroblock rows for interlaced pictures.\nThis field is optional; when no value is specified the encoder will choose the number of slices based on encode resolution.",
                         "smithy.api#jsonName": "slices"
                     }
@@ -9745,6 +9838,7 @@
                 "Softness": {
                     "target": "com.amazonaws.medialive#__integerMin0Max128",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Softness. Selects quantizer matrix, larger values reduce high-frequency content in the encoded image.  If not set to zero, must be greater than 15.",
                         "smithy.api#jsonName": "softness"
                     }
@@ -10309,6 +10403,7 @@
                 "Bitrate": {
                     "target": "com.amazonaws.medialive#__integerMin100000Max40000000",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Average bitrate in bits/second. Required when the rate control mode is VBR or CBR. Not used for QVBR. In an MS Smooth output group, each output must have a unique value when its bitrate is rounded down to the nearest multiple of 1000.",
                         "smithy.api#jsonName": "bitrate"
                     }
@@ -10316,6 +10411,7 @@
                 "BufSize": {
                     "target": "com.amazonaws.medialive#__integerMin100000Max80000000",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Size of buffer (HRD buffer model) in bits.",
                         "smithy.api#jsonName": "bufSize"
                     }
@@ -10358,6 +10454,7 @@
                 "FramerateDenominator": {
                     "target": "com.amazonaws.medialive#__integerMin1Max3003",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Framerate denominator.",
                         "smithy.api#jsonName": "framerateDenominator",
                         "smithy.api#required": {}
@@ -10366,6 +10463,7 @@
                 "FramerateNumerator": {
                     "target": "com.amazonaws.medialive#__integerMin1",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Framerate numerator - framerate is a fraction, e.g. 24000 / 1001 = 23.976 fps.",
                         "smithy.api#jsonName": "framerateNumerator",
                         "smithy.api#required": {}
@@ -10374,6 +10472,7 @@
                 "GopClosedCadence": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Frequency of closed GOPs. In streaming applications, it is recommended that this be set to 1 so a decoder joining mid-stream will receive an IDR frame as quickly as possible. Setting this value to 0 will break output segmenting.",
                         "smithy.api#jsonName": "gopClosedCadence"
                     }
@@ -10381,6 +10480,7 @@
                 "GopSize": {
                     "target": "com.amazonaws.medialive#__double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "GOP size (keyframe interval) in units of either frames or seconds per gopSizeUnits.\nIf gopSizeUnits is frames, gopSize must be an integer and must be greater than or equal to 1.\nIf gopSizeUnits is seconds, gopSize must be greater than 0, but need not be an integer.",
                         "smithy.api#jsonName": "gopSize"
                     }
@@ -10409,6 +10509,7 @@
                 "MaxBitrate": {
                     "target": "com.amazonaws.medialive#__integerMin100000Max40000000",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "For QVBR: See the tooltip for Quality level",
                         "smithy.api#jsonName": "maxBitrate"
                     }
@@ -10416,6 +10517,7 @@
                 "MinIInterval": {
                     "target": "com.amazonaws.medialive#__integerMin0Max30",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Only meaningful if sceneChangeDetect is set to enabled.  Defaults to 5 if multiplex rate control is used.  Enforces separation between repeated (cadence) I-frames and I-frames inserted by Scene Change Detection. If a scene change I-frame is within I-interval frames of a cadence I-frame, the GOP is shrunk and/or stretched to the scene change I-frame. GOP stretch requires enabling lookahead as well as setting I-interval. The normal cadence resumes for the next GOP. Note: Maximum GOP stretch = GOP size + Min-I-interval - 1",
                         "smithy.api#jsonName": "minIInterval"
                     }
@@ -10423,6 +10525,7 @@
                 "ParDenominator": {
                     "target": "com.amazonaws.medialive#__integerMin1",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Pixel Aspect Ratio denominator.",
                         "smithy.api#jsonName": "parDenominator"
                     }
@@ -10430,6 +10533,7 @@
                 "ParNumerator": {
                     "target": "com.amazonaws.medialive#__integerMin1",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Pixel Aspect Ratio numerator.",
                         "smithy.api#jsonName": "parNumerator"
                     }
@@ -10444,6 +10548,7 @@
                 "QvbrQualityLevel": {
                     "target": "com.amazonaws.medialive#__integerMin1Max10",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Controls the target quality for the video encode. Applies only when the rate control mode is QVBR. Set values for the QVBR quality level field and Max bitrate field that suit your most important viewing devices. Recommended values are:\n- Primary screen: Quality level: 8 to 10. Max bitrate: 4M\n- PC or tablet: Quality level: 7. Max bitrate: 1.5M to 3M\n- Smartphone: Quality level: 6. Max bitrate: 1M to 1.5M",
                         "smithy.api#jsonName": "qvbrQualityLevel"
                     }
@@ -10472,6 +10577,7 @@
                 "Slices": {
                     "target": "com.amazonaws.medialive#__integerMin1Max16",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Number of slices per picture. Must be less than or equal to the number of macroblock rows for progressive pictures, and less than or equal to half the number of macroblock rows for interlaced pictures.\nThis field is optional; when no value is specified the encoder will choose the number of slices based on encode resolution.",
                         "smithy.api#jsonName": "slices"
                     }
@@ -10548,6 +10654,7 @@
                 "MaxCll": {
                     "target": "com.amazonaws.medialive#__integerMin0Max32768",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Maximum Content Light Level\nAn integer metadata value defining the maximum light level, in nits,\nof any single pixel within an encoded HDR video stream or file.",
                         "smithy.api#jsonName": "maxCll"
                     }
@@ -10555,6 +10662,7 @@
                 "MaxFall": {
                     "target": "com.amazonaws.medialive#__integerMin0Max32768",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Maximum Frame Average Light Level\nAn integer metadata value defining the maximum average light level, in nits,\nfor any single frame within an encoded HDR video stream or file.",
                         "smithy.api#jsonName": "maxFall"
                     }
@@ -10616,6 +10724,7 @@
                 "ConnectionRetryInterval": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Number of seconds to wait before retrying connection to the CDN if the connection is lost.",
                         "smithy.api#jsonName": "connectionRetryInterval"
                     }
@@ -10623,6 +10732,7 @@
                 "FilecacheDuration": {
                     "target": "com.amazonaws.medialive#__integerMin0Max600",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Size in seconds of file cache for streaming outputs.",
                         "smithy.api#jsonName": "filecacheDuration"
                     }
@@ -10637,6 +10747,7 @@
                 "NumRetries": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Number of retry attempts that will be made before the Live Event is put into an error state. Applies only if the CDN destination URI begins with \"s3\" or \"mediastore\". For other URIs, the value is always 3.",
                         "smithy.api#jsonName": "numRetries"
                     }
@@ -10644,6 +10755,7 @@
                 "RestartDelay": {
                     "target": "com.amazonaws.medialive#__integerMin0Max15",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "If a streaming output fails, number of seconds to wait until a restart is initiated. A value of 0 means never restart.",
                         "smithy.api#jsonName": "restartDelay"
                     }
@@ -10673,6 +10785,7 @@
                 "ConnectionRetryInterval": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Number of seconds to wait before retrying connection to the CDN if the connection is lost.",
                         "smithy.api#jsonName": "connectionRetryInterval"
                     }
@@ -10680,6 +10793,7 @@
                 "FilecacheDuration": {
                     "target": "com.amazonaws.medialive#__integerMin0Max600",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Size in seconds of file cache for streaming outputs.",
                         "smithy.api#jsonName": "filecacheDuration"
                     }
@@ -10687,6 +10801,7 @@
                 "NumRetries": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Number of retry attempts that will be made before the Live Event is put into an error state. Applies only if the CDN destination URI begins with \"s3\" or \"mediastore\". For other URIs, the value is always 3.",
                         "smithy.api#jsonName": "numRetries"
                     }
@@ -10694,6 +10809,7 @@
                 "RestartDelay": {
                     "target": "com.amazonaws.medialive#__integerMin0Max15",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "If a streaming output fails, number of seconds to wait until a restart is initiated. A value of 0 means never restart.",
                         "smithy.api#jsonName": "restartDelay"
                     }
@@ -11000,6 +11116,7 @@
                 "IndexNSegments": {
                     "target": "com.amazonaws.medialive#__integerMin3",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Applies only if Mode field is LIVE.\n\nSpecifies the maximum number of segments in the media manifest file. After this maximum, older segments are removed from the media manifest. This number must be smaller than the number in the Keep Segments field.",
                         "smithy.api#jsonName": "indexNSegments"
                     }
@@ -11028,6 +11145,7 @@
                 "KeepSegments": {
                     "target": "com.amazonaws.medialive#__integerMin1",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Applies only if Mode field is LIVE.\n\nSpecifies the number of media segments to retain in the destination directory. This number should be bigger than indexNSegments (Num segments). We recommend (value = (2 x indexNsegments) + 1).\n\nIf this \"keep segments\" number is too low, the following might happen: the player is still reading a media manifest file that lists this segment, but that segment has been removed from the destination directory (as directed by indexNSegments). This situation would result in a 404 HTTP error on the player.",
                         "smithy.api#jsonName": "keepSegments"
                     }
@@ -11070,6 +11188,7 @@
                 "MinSegmentLength": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Minimum length of MPEG-2 Transport Stream segments in seconds. When set, minimum segment length is enforced by looking ahead and back within the specified range for a nearby avail and extending the segment size if needed.",
                         "smithy.api#jsonName": "minSegmentLength"
                     }
@@ -11105,6 +11224,7 @@
                 "ProgramDateTimePeriod": {
                     "target": "com.amazonaws.medialive#__integerMin0Max3600",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Period of insertion of EXT-X-PROGRAM-DATE-TIME entry, in seconds.",
                         "smithy.api#jsonName": "programDateTimePeriod"
                     }
@@ -11119,6 +11239,7 @@
                 "SegmentLength": {
                     "target": "com.amazonaws.medialive#__integerMin1",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Length of MPEG-2 Transport Stream segments to create in seconds. Note that segments will end on the next keyframe after this duration, so actual segment length may be longer.",
                         "smithy.api#jsonName": "segmentLength"
                     }
@@ -11133,6 +11254,7 @@
                 "SegmentsPerSubdirectory": {
                     "target": "com.amazonaws.medialive#__integerMin1",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Number of segments to write to a subdirectory before starting a new one. directoryStructure must be subdirectoryPerStream for this setting to have an effect.",
                         "smithy.api#jsonName": "segmentsPerSubdirectory"
                     }
@@ -11154,6 +11276,7 @@
                 "TimedMetadataId3Period": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Timed Metadata interval in seconds.",
                         "smithy.api#jsonName": "timedMetadataId3Period"
                     }
@@ -11161,6 +11284,7 @@
                 "TimestampDeltaMilliseconds": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Provides an extra millisecond delta offset to fine tune the timestamps.",
                         "smithy.api#jsonName": "timestampDeltaMilliseconds"
                     }
@@ -11259,6 +11383,7 @@
                 "Bandwidth": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "When specified the HLS stream with the m3u8 BANDWIDTH that most closely matches this value will be chosen, otherwise the highest bandwidth stream in the m3u8 will be chosen.  The bitrate is specified in bits per second, as in an HLS manifest.",
                         "smithy.api#jsonName": "bandwidth"
                     }
@@ -11266,6 +11391,7 @@
                 "BufferSegments": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "When specified, reading of the HLS input will begin this many buffer segments from the end (most recently written segment).  When not specified, the HLS input will begin with the first segment specified in the m3u8.",
                         "smithy.api#jsonName": "bufferSegments"
                     }
@@ -11273,6 +11399,7 @@
                 "Retries": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The number of consecutive times that attempts to read a manifest or segment must fail before the input is considered unavailable.",
                         "smithy.api#jsonName": "retries"
                     }
@@ -11280,6 +11407,7 @@
                 "RetryInterval": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The number of seconds between retries when an attempt to read a manifest or segment fails.",
                         "smithy.api#jsonName": "retryInterval"
                     }
@@ -11382,6 +11510,7 @@
                 "ConnectionRetryInterval": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Number of seconds to wait before retrying connection to the CDN if the connection is lost.",
                         "smithy.api#jsonName": "connectionRetryInterval"
                     }
@@ -11389,6 +11518,7 @@
                 "FilecacheDuration": {
                     "target": "com.amazonaws.medialive#__integerMin0Max600",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Size in seconds of file cache for streaming outputs.",
                         "smithy.api#jsonName": "filecacheDuration"
                     }
@@ -11403,6 +11533,7 @@
                 "NumRetries": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Number of retry attempts that will be made before the Live Event is put into an error state. Applies only if the CDN destination URI begins with \"s3\" or \"mediastore\". For other URIs, the value is always 3.",
                         "smithy.api#jsonName": "numRetries"
                     }
@@ -11410,6 +11541,7 @@
                 "RestartDelay": {
                     "target": "com.amazonaws.medialive#__integerMin0Max15",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "If a streaming output fails, number of seconds to wait until a restart is initiated. A value of 0 means never restart.",
                         "smithy.api#jsonName": "restartDelay"
                     }
@@ -11771,6 +11903,7 @@
                 "ConnectionRetryInterval": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Number of seconds to wait before retrying connection to the CDN if the connection is lost.",
                         "smithy.api#jsonName": "connectionRetryInterval"
                     }
@@ -11778,6 +11911,7 @@
                 "FilecacheDuration": {
                     "target": "com.amazonaws.medialive#__integerMin0Max600",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Size in seconds of file cache for streaming outputs.",
                         "smithy.api#jsonName": "filecacheDuration"
                     }
@@ -11792,6 +11926,7 @@
                 "NumRetries": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Number of retry attempts that will be made before the Live Event is put into an error state. Applies only if the CDN destination URI begins with \"s3\" or \"mediastore\". For other URIs, the value is always 3.",
                         "smithy.api#jsonName": "numRetries"
                     }
@@ -11799,6 +11934,7 @@
                 "RestartDelay": {
                     "target": "com.amazonaws.medialive#__integerMin0Max15",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "If a streaming output fails, number of seconds to wait until a restart is initiated. A value of 0 means never restart.",
                         "smithy.api#jsonName": "restartDelay"
                     }
@@ -12002,6 +12138,7 @@
                 "Gain": {
                     "target": "com.amazonaws.medialive#__integerMinNegative60Max6",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Remixing value. Units are in dB and acceptable values are within the range from -60 (mute) and 6 dB.",
                         "smithy.api#jsonName": "gain",
                         "smithy.api#required": {}
@@ -12010,6 +12147,7 @@
                 "InputChannel": {
                     "target": "com.amazonaws.medialive#__integerMin0Max15",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The index of the input channel used as a source.",
                         "smithy.api#jsonName": "inputChannel",
                         "smithy.api#required": {}
@@ -12241,6 +12379,7 @@
                 "MaxBitrate": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The maximum bitrate in bits per second. Set a value here to throttle the bitrate of the source video.",
                         "smithy.api#jsonName": "maxBitrate"
                     }
@@ -12248,6 +12387,7 @@
                 "LatencyMs": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The Link device's buffer size (latency) in milliseconds (ms).",
                         "smithy.api#jsonName": "latencyMs"
                     }
@@ -12330,6 +12470,7 @@
                 "Framerate": {
                     "target": "com.amazonaws.medialive#__double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The frame rate of the video source.",
                         "smithy.api#jsonName": "framerate"
                     }
@@ -12337,6 +12478,7 @@
                 "Height": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The height of the video source, in pixels.",
                         "smithy.api#jsonName": "height"
                     }
@@ -12344,6 +12486,7 @@
                 "MaxBitrate": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The current maximum bitrate for ingesting this source, in bits per second. You can specify this maximum.",
                         "smithy.api#jsonName": "maxBitrate"
                     }
@@ -12358,6 +12501,7 @@
                 "Width": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The width of the video source, in pixels.",
                         "smithy.api#jsonName": "width"
                     }
@@ -12365,6 +12509,7 @@
                 "LatencyMs": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The Link device's buffer size (latency) in milliseconds (ms). You can specify this value.",
                         "smithy.api#jsonName": "latencyMs"
                     }
@@ -12673,6 +12818,7 @@
                 "Framerate": {
                     "target": "com.amazonaws.medialive#__double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The frame rate of the video source.",
                         "smithy.api#jsonName": "framerate"
                     }
@@ -12680,6 +12826,7 @@
                 "Height": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The height of the video source, in pixels.",
                         "smithy.api#jsonName": "height"
                     }
@@ -12687,6 +12834,7 @@
                 "MaxBitrate": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The current maximum bitrate for ingesting this source, in bits per second. You can specify this maximum.",
                         "smithy.api#jsonName": "maxBitrate"
                     }
@@ -12701,6 +12849,7 @@
                 "Width": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The width of the video source, in pixels.",
                         "smithy.api#jsonName": "width"
                     }
@@ -12708,6 +12857,7 @@
                 "LatencyMs": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The Link device's buffer size (latency) in milliseconds (ms). You can specify this value.",
                         "smithy.api#jsonName": "latencyMs"
                     }
@@ -12865,6 +13015,7 @@
                 "BlackFrameMsec": {
                     "target": "com.amazonaws.medialive#__integerMin0Max1000000",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Documentation update needed",
                         "smithy.api#jsonName": "blackFrameMsec"
                     }
@@ -12893,6 +13044,7 @@
                 "RepeatFrameMsec": {
                     "target": "com.amazonaws.medialive#__integerMin0Max1000000",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Documentation update needed",
                         "smithy.api#jsonName": "repeatFrameMsec"
                     }
@@ -12908,6 +13060,7 @@
                 "InputLossThresholdMsec": {
                     "target": "com.amazonaws.medialive#__integerMin100",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The amount of time (in milliseconds) that no input is detected. After that time, an input failover will occur.",
                         "smithy.api#jsonName": "inputLossThresholdMsec"
                     }
@@ -13154,6 +13307,7 @@
                 "FilterStrength": {
                     "target": "com.amazonaws.medialive#__integerMin1Max5",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Adjusts the magnitude of filtering from 1 (minimal) to 5 (strongest).",
                         "smithy.api#jsonName": "filterStrength"
                     }
@@ -13175,6 +13329,7 @@
                 "Scte35Pid": {
                     "target": "com.amazonaws.medialive#__integerMin32Max8191",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "PID from which to read SCTE-35 messages. If left undefined, EML will select the first SCTE-35 PID found in the input.",
                         "smithy.api#jsonName": "scte35Pid"
                     }
@@ -13640,6 +13795,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.medialive#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
@@ -13728,6 +13884,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.medialive#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
@@ -13822,6 +13979,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.medialive#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
@@ -13909,6 +14067,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.medialive#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
@@ -13995,6 +14154,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.medialive#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
@@ -14083,6 +14243,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.medialive#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The maximum number of items to return.",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -14180,6 +14341,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.medialive#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The maximum number of items to return.",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -14297,6 +14459,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.medialive#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
@@ -14440,6 +14603,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.medialive#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
@@ -15045,6 +15209,7 @@
                 "AudioFramesPerPes": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The number of audio frames to insert for each PES packet.",
                         "smithy.api#jsonName": "audioFramesPerPes"
                     }
@@ -15066,6 +15231,7 @@
                 "Bitrate": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The output bitrate of the transport stream in bits per second. Setting to 0 lets the muxer automatically determine the appropriate bitrate.",
                         "smithy.api#jsonName": "bitrate"
                     }
@@ -15136,6 +15302,7 @@
                 "EbpLookaheadMs": {
                     "target": "com.amazonaws.medialive#__integerMin0Max10000",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "When set, enforces that Encoder Boundary Points do not come within the specified time interval of each other by looking ahead at input video. If another EBP is going to come in within the specified time interval, the current EBP is not emitted, and the segment is \"stretched\" to the next marker.  The lookahead value does not add latency to the system. The Live Event must be configured elsewhere to create sufficient latency to make the lookahead accurate.",
                         "smithy.api#jsonName": "ebpLookaheadMs"
                     }
@@ -15178,6 +15345,7 @@
                 "FragmentTime": {
                     "target": "com.amazonaws.medialive#__doubleMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The length in seconds of each fragment. Only used with EBP markers.",
                         "smithy.api#jsonName": "fragmentTime"
                     }
@@ -15206,6 +15374,7 @@
                 "NullPacketBitrate": {
                     "target": "com.amazonaws.medialive#__doubleMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Value in bits per second of extra null packets to insert into the transport stream. This can be used if a downstream encryption system requires periodic null packets.",
                         "smithy.api#jsonName": "nullPacketBitrate"
                     }
@@ -15213,6 +15382,7 @@
                 "PatInterval": {
                     "target": "com.amazonaws.medialive#__integerMin0Max1000",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The number of milliseconds between instances of this table in the output transport stream.  Valid values are 0, 10..1000.",
                         "smithy.api#jsonName": "patInterval"
                     }
@@ -15227,6 +15397,7 @@
                 "PcrPeriod": {
                     "target": "com.amazonaws.medialive#__integerMin0Max500",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Maximum time in milliseconds between Program Clock Reference (PCRs) inserted into the transport stream.",
                         "smithy.api#jsonName": "pcrPeriod"
                     }
@@ -15241,6 +15412,7 @@
                 "PmtInterval": {
                     "target": "com.amazonaws.medialive#__integerMin0Max1000",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The number of milliseconds between instances of this table in the output transport stream. Valid values are 0, 10..1000.",
                         "smithy.api#jsonName": "pmtInterval"
                     }
@@ -15255,6 +15427,7 @@
                 "ProgramNum": {
                     "target": "com.amazonaws.medialive#__integerMin0Max65535",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The value of the program number field in the Program Map Table.",
                         "smithy.api#jsonName": "programNum"
                     }
@@ -15304,6 +15477,7 @@
                 "SegmentationTime": {
                     "target": "com.amazonaws.medialive#__doubleMin1",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The length in seconds of each segment. Required unless markers is set to _none_.",
                         "smithy.api#jsonName": "segmentationTime"
                     }
@@ -15325,6 +15499,7 @@
                 "TransportStreamId": {
                     "target": "com.amazonaws.medialive#__integerMin0Max65535",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The value of the transport stream ID field in the Program Map Table.",
                         "smithy.api#jsonName": "transportStreamId"
                     }
@@ -15339,6 +15514,7 @@
                 "Scte35PrerollPullupMilliseconds": {
                     "target": "com.amazonaws.medialive#__doubleMin0Max5000",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Defines the amount SCTE-35 preroll will be increased (in milliseconds) on the output. Preroll is the amount of time between the presence of a SCTE-35 indication in a transport stream and the PTS of the video frame it references. Zero means don't add pullup (it doesn't mean set the preroll to zero). Negative pullup is not supported, which means that you can't make the preroll shorter. Be aware that latency in the output will increase by the pullup amount.",
                         "smithy.api#jsonName": "scte35PrerollPullupMilliseconds"
                     }
@@ -15434,6 +15610,7 @@
                 "AudioFramesPerPes": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The number of audio frames to insert for each PES packet.",
                         "smithy.api#jsonName": "audioFramesPerPes"
                     }
@@ -15462,6 +15639,7 @@
                 "PatInterval": {
                     "target": "com.amazonaws.medialive#__integerMin0Max1000",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The number of milliseconds between instances of this table in the output transport stream. A value of \\\"0\\\" writes out the PMT once per segment file.",
                         "smithy.api#jsonName": "patInterval"
                     }
@@ -15476,6 +15654,7 @@
                 "PcrPeriod": {
                     "target": "com.amazonaws.medialive#__integerMin0Max500",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Maximum time in milliseconds between Program Clock References (PCRs) inserted into the transport stream.",
                         "smithy.api#jsonName": "pcrPeriod"
                     }
@@ -15490,6 +15669,7 @@
                 "PmtInterval": {
                     "target": "com.amazonaws.medialive#__integerMin0Max1000",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The number of milliseconds between instances of this table in the output transport stream. A value of \\\"0\\\" writes out the PMT once per segment file.",
                         "smithy.api#jsonName": "pmtInterval"
                     }
@@ -15504,6 +15684,7 @@
                 "ProgramNum": {
                     "target": "com.amazonaws.medialive#__integerMin0Max65535",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The value of the program number field in the Program Map Table.",
                         "smithy.api#jsonName": "programNum"
                     }
@@ -15539,6 +15720,7 @@
                 "TransportStreamId": {
                     "target": "com.amazonaws.medialive#__integerMin0Max65535",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The value of the transport stream ID field in the Program Map Table.",
                         "smithy.api#jsonName": "transportStreamId"
                     }
@@ -15715,6 +15897,7 @@
         "com.amazonaws.medialive#MaxResults": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for MaxResults",
                 "smithy.api#range": {
                     "min": 1,
@@ -16803,6 +16986,7 @@
                 "Duration": {
                     "target": "com.amazonaws.medialive#__longMin0Max86400000",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Duration (in milliseconds) that motion graphics should render on to the video stream. Leaving out this property or setting to 0 will result in rendering continuing until a deactivate action is processed.",
                         "smithy.api#jsonName": "duration"
                     }
@@ -16922,6 +17106,7 @@
                 "Bitrate": {
                     "target": "com.amazonaws.medialive#__double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Average bitrate in bits/second.",
                         "smithy.api#jsonName": "bitrate"
                     }
@@ -16936,6 +17121,7 @@
                 "SampleRate": {
                     "target": "com.amazonaws.medialive#__double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Sample rate in Hz.",
                         "smithy.api#jsonName": "sampleRate"
                     }
@@ -17152,6 +17338,7 @@
                 "FramerateDenominator": {
                     "target": "com.amazonaws.medialive#__integerMin1",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "description\": \"The framerate denominator. For example, 1001. The framerate is the numerator divided by the denominator. For example, 24000 / 1001 = 23.976 FPS.",
                         "smithy.api#jsonName": "framerateDenominator",
                         "smithy.api#required": {}
@@ -17160,6 +17347,7 @@
                 "FramerateNumerator": {
                     "target": "com.amazonaws.medialive#__integerMin1",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The framerate numerator. For example, 24000. The framerate is the numerator divided by the denominator. For example, 24000 / 1001 = 23.976 FPS.",
                         "smithy.api#jsonName": "framerateNumerator",
                         "smithy.api#required": {}
@@ -17168,6 +17356,7 @@
                 "GopClosedCadence": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "MPEG2: default is open GOP.",
                         "smithy.api#jsonName": "gopClosedCadence"
                     }
@@ -17175,6 +17364,7 @@
                 "GopNumBFrames": {
                     "target": "com.amazonaws.medialive#__integerMin0Max7",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Relates to the GOP structure. The number of B-frames between reference frames. If you do not know what a B-frame is, use the default.",
                         "smithy.api#jsonName": "gopNumBFrames"
                     }
@@ -17182,6 +17372,7 @@
                 "GopSize": {
                     "target": "com.amazonaws.medialive#__double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Relates to the GOP structure. The GOP size (keyframe interval) in the units specified in gopSizeUnits. If you do not know what GOP is, use the default.\nIf gopSizeUnits is frames, then the gopSize must be an integer and must be greater than or equal to 1.\nIf gopSizeUnits is seconds, the gopSize must be greater than 0, but does not need to be an integer.",
                         "smithy.api#jsonName": "gopSize"
                     }
@@ -17293,6 +17484,7 @@
                 "ConnectionRetryInterval": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Number of seconds to wait before retrying connection to the IIS server if the connection is lost. Content will be cached during this time and the cache will be be delivered to the IIS server once the connection is re-established.",
                         "smithy.api#jsonName": "connectionRetryInterval"
                     }
@@ -17329,6 +17521,7 @@
                 "FilecacheDuration": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Size in seconds of file cache for streaming outputs.",
                         "smithy.api#jsonName": "filecacheDuration"
                     }
@@ -17336,6 +17529,7 @@
                 "FragmentLength": {
                     "target": "com.amazonaws.medialive#__integerMin1",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Length of mp4 fragments to generate (in seconds). Fragment length must be compatible with GOP size and framerate.",
                         "smithy.api#jsonName": "fragmentLength"
                     }
@@ -17350,6 +17544,7 @@
                 "NumRetries": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Number of retry attempts.",
                         "smithy.api#jsonName": "numRetries"
                     }
@@ -17357,6 +17552,7 @@
                 "RestartDelay": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Number of seconds before initiating a restart due to output failure, due to exhausting the numRetries on one segment, or exceeding filecacheDuration.",
                         "smithy.api#jsonName": "restartDelay"
                     }
@@ -17371,6 +17567,7 @@
                 "SendDelayMs": {
                     "target": "com.amazonaws.medialive#__integerMin0Max10000",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Number of milliseconds to delay the output from the second pipeline.",
                         "smithy.api#jsonName": "sendDelayMs"
                     }
@@ -17498,6 +17695,7 @@
                 "PipelinesRunningCount": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The number of currently healthy pipelines.",
                         "smithy.api#jsonName": "pipelinesRunningCount"
                     }
@@ -17505,6 +17703,7 @@
                 "ProgramCount": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The number of programs in the multiplex.",
                         "smithy.api#jsonName": "programCount"
                     }
@@ -17664,18 +17863,21 @@
                 "DvbTeletextPid": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#jsonName": "dvbTeletextPid"
                     }
                 },
                 "EtvPlatformPid": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#jsonName": "etvPlatformPid"
                     }
                 },
                 "EtvSignalPid": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#jsonName": "etvSignalPid"
                     }
                 },
@@ -17688,18 +17890,21 @@
                 "PcrPid": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#jsonName": "pcrPid"
                     }
                 },
                 "PmtPid": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#jsonName": "pmtPid"
                     }
                 },
                 "PrivateMetadataPid": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#jsonName": "privateMetadataPid"
                     }
                 },
@@ -17712,18 +17917,21 @@
                 "Scte35Pid": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#jsonName": "scte35Pid"
                     }
                 },
                 "TimedMetadataPid": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#jsonName": "timedMetadataPid"
                     }
                 },
                 "VideoPid": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#jsonName": "videoPid"
                     }
                 }
@@ -17791,6 +17999,7 @@
                 "ProgramNumber": {
                     "target": "com.amazonaws.medialive#__integerMin0Max65535",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Unique program number.",
                         "smithy.api#jsonName": "programNumber",
                         "smithy.api#required": {}
@@ -17843,6 +18052,7 @@
                 "MaximumVideoBufferDelayMilliseconds": {
                     "target": "com.amazonaws.medialive#__integerMin800Max3000",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Maximum video buffer delay in milliseconds.",
                         "smithy.api#jsonName": "maximumVideoBufferDelayMilliseconds"
                     }
@@ -17850,6 +18060,7 @@
                 "TransportStreamBitrate": {
                     "target": "com.amazonaws.medialive#__integerMin1000000Max100000000",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Transport stream bit rate.",
                         "smithy.api#jsonName": "transportStreamBitrate",
                         "smithy.api#required": {}
@@ -17858,6 +18069,7 @@
                 "TransportStreamId": {
                     "target": "com.amazonaws.medialive#__integerMin0Max65535",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Transport stream ID.",
                         "smithy.api#jsonName": "transportStreamId",
                         "smithy.api#required": {}
@@ -17866,6 +18078,7 @@
                 "TransportStreamReservedBitrate": {
                     "target": "com.amazonaws.medialive#__integerMin0Max100000000",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Transport stream reserved bit rate.",
                         "smithy.api#jsonName": "transportStreamReservedBitrate"
                     }
@@ -17881,6 +18094,7 @@
                 "TransportStreamBitrate": {
                     "target": "com.amazonaws.medialive#__integerMin1000000Max100000000",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Transport stream bit rate.",
                         "smithy.api#jsonName": "transportStreamBitrate"
                     }
@@ -17958,6 +18172,7 @@
                 "MaximumBitrate": {
                     "target": "com.amazonaws.medialive#__integerMin100000Max100000000",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Maximum statmux bitrate.",
                         "smithy.api#jsonName": "maximumBitrate"
                     }
@@ -17965,6 +18180,7 @@
                 "MinimumBitrate": {
                     "target": "com.amazonaws.medialive#__integerMin100000Max100000000",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Minimum statmux bitrate.",
                         "smithy.api#jsonName": "minimumBitrate"
                     }
@@ -17972,6 +18188,7 @@
                 "Priority": {
                     "target": "com.amazonaws.medialive#__integerMinNegative5Max5",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The purpose of the priority is to use a combination of the\\nmultiplex rate control algorithm and the QVBR capability of the\\nencoder to prioritize the video quality of some channels in a\\nmultiplex over others.  Channels that have a higher priority will\\nget higher video quality at the expense of the video quality of\\nother channels in the multiplex with lower priority.",
                         "smithy.api#jsonName": "priority"
                     }
@@ -18022,6 +18239,7 @@
                 "PipelinesRunningCount": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The number of currently healthy pipelines.",
                         "smithy.api#jsonName": "pipelinesRunningCount"
                     }
@@ -18029,6 +18247,7 @@
                 "ProgramCount": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The number of programs in the multiplex.",
                         "smithy.api#jsonName": "programCount"
                     }
@@ -18058,6 +18277,7 @@
                 "ConstantBitrate": {
                     "target": "com.amazonaws.medialive#__integerMin100000Max100000000",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The constant bitrate configuration for the video encode.\nWhen this field is defined, StatmuxSettings must be undefined.",
                         "smithy.api#jsonName": "constantBitrate"
                     }
@@ -18184,6 +18404,7 @@
                 "Sid": {
                     "target": "com.amazonaws.medialive#__doubleMin1Max65535",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Enter the Nielsen Source ID (SID) to include in the watermark",
                         "smithy.api#jsonName": "sid",
                         "smithy.api#required": {}
@@ -18394,6 +18615,7 @@
                 "Duration": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Lease duration, e.g. '12'",
                         "smithy.api#jsonName": "duration"
                     }
@@ -18408,6 +18630,7 @@
                 "FixedPrice": {
                     "target": "com.amazonaws.medialive#__double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "One-time charge for each reserved resource, e.g. '0.0' for a NO_UPFRONT offering",
                         "smithy.api#jsonName": "fixedPrice"
                     }
@@ -18450,6 +18673,7 @@
                 "UsagePrice": {
                     "target": "com.amazonaws.medialive#__double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Recurring usage charge for each reserved resource, e.g. '157.0'",
                         "smithy.api#jsonName": "usagePrice"
                     }
@@ -18934,6 +19158,7 @@
                 "Count": {
                     "target": "com.amazonaws.medialive#__integerMin1",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Number of resources",
                         "smithy.api#jsonName": "count",
                         "smithy.api#required": {}
@@ -19205,6 +19430,7 @@
                 "ChannelsIn": {
                     "target": "com.amazonaws.medialive#__integerMin1Max16",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Number of input channels to be used.",
                         "smithy.api#jsonName": "channelsIn"
                     }
@@ -19212,6 +19438,7 @@
                 "ChannelsOut": {
                     "target": "com.amazonaws.medialive#__integerMin1Max8",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Number of output channels to be produced.\nValid values: 1, 2, 4, 6, 8",
                         "smithy.api#jsonName": "channelsOut"
                     }
@@ -19234,6 +19461,7 @@
                 "RenewalCount": {
                     "target": "com.amazonaws.medialive#__integerMin1",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Count for the reservation renewal",
                         "smithy.api#jsonName": "renewalCount"
                     }
@@ -19256,6 +19484,7 @@
                 "Count": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Number of reserved resources",
                         "smithy.api#jsonName": "count"
                     }
@@ -19270,6 +19499,7 @@
                 "Duration": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Lease duration, e.g. '12'",
                         "smithy.api#jsonName": "duration"
                     }
@@ -19291,6 +19521,7 @@
                 "FixedPrice": {
                     "target": "com.amazonaws.medialive#__double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "One-time charge for each reserved resource, e.g. '0.0' for a NO_UPFRONT offering",
                         "smithy.api#jsonName": "fixedPrice"
                     }
@@ -19375,6 +19606,7 @@
                 "UsagePrice": {
                     "target": "com.amazonaws.medialive#__double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Recurring usage charge for each reserved resource, e.g. '157.0'",
                         "smithy.api#jsonName": "usagePrice"
                     }
@@ -19806,6 +20038,7 @@
                 "CacheLength": {
                     "target": "com.amazonaws.medialive#__integerMin30",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Cache length, in seconds, is used to calculate buffer size.",
                         "smithy.api#jsonName": "cacheLength"
                     }
@@ -19827,6 +20060,7 @@
                 "RestartDelay": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "If a streaming output fails, number of seconds to wait until a restart is initiated. A value of 0 means never restart.",
                         "smithy.api#jsonName": "restartDelay"
                     }
@@ -19869,6 +20103,7 @@
                 "ConnectionRetryInterval": {
                     "target": "com.amazonaws.medialive#__integerMin1",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Number of seconds to wait before retrying a connection to the Flash Media server if the connection is lost.",
                         "smithy.api#jsonName": "connectionRetryInterval"
                     }
@@ -19884,6 +20119,7 @@
                 "NumRetries": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Number of retry attempts.",
                         "smithy.api#jsonName": "numRetries"
                     }
@@ -20125,6 +20361,7 @@
                 "Source608ChannelNumber": {
                     "target": "com.amazonaws.medialive#__integerMin1Max4",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Specifies the 608/708 channel number within the video track from which to extract captions. Unused for passthrough.",
                         "smithy.api#jsonName": "source608ChannelNumber"
                     }
@@ -20198,6 +20435,7 @@
                 "Pid": {
                     "target": "com.amazonaws.medialive#__integerMin1",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The pid field is used in conjunction with the caption selector languageCode field as follows:\n  - Specify PID and Language: Extracts captions from that PID; the language is \"informational\".\n  - Specify PID and omit Language: Extracts the specified PID.\n  - Omit PID and specify Language: Extracts the specified language, whichever PID that happens to be.\n  - Omit PID and omit Language: Valid only if source is DVB-Sub that is being passed through; all languages will be passed through.",
                         "smithy.api#jsonName": "pid"
                     }
@@ -20440,6 +20678,7 @@
                 "SpliceEventId": {
                     "target": "com.amazonaws.medialive#__longMin0Max4294967295",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The splice_event_id for the SCTE-35 splice_insert, as defined in SCTE-35.",
                         "smithy.api#jsonName": "spliceEventId",
                         "smithy.api#required": {}
@@ -20483,6 +20722,7 @@
                 "SegmentNum": {
                     "target": "com.amazonaws.medialive#__integerMin0Max255",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Corresponds to SCTE-35 segment_num. A value that is valid for the specified segmentation_type_id.",
                         "smithy.api#jsonName": "segmentNum"
                     }
@@ -20498,6 +20738,7 @@
                 "SegmentationDuration": {
                     "target": "com.amazonaws.medialive#__longMin0Max1099511627775",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Corresponds to SCTE-35 segmentation_duration. Optional. The duration for the time_signal, in 90 KHz ticks. To convert seconds to ticks, multiple the seconds by 90,000. Enter time in 90 KHz clock ticks. If you do not enter a duration, the time_signal will continue until you insert a cancellation message.",
                         "smithy.api#jsonName": "segmentationDuration"
                     }
@@ -20505,6 +20746,7 @@
                 "SegmentationEventId": {
                     "target": "com.amazonaws.medialive#__longMin0Max4294967295",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Corresponds to SCTE-35 segmentation_event_id.",
                         "smithy.api#jsonName": "segmentationEventId",
                         "smithy.api#required": {}
@@ -20513,6 +20755,7 @@
                 "SegmentationTypeId": {
                     "target": "com.amazonaws.medialive#__integerMin0Max255",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Corresponds to SCTE-35 segmentation_type_id. One of the segmentation_type_id values listed in the SCTE-35 specification. On the console, enter the ID in decimal (for example, \"52\"). In the CLI, API, or an SDK, enter the ID in hex (for example, \"0x34\") or decimal (for example, \"52\").",
                         "smithy.api#jsonName": "segmentationTypeId"
                     }
@@ -20527,6 +20770,7 @@
                 "SegmentationUpidType": {
                     "target": "com.amazonaws.medialive#__integerMin0Max255",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Corresponds to SCTE-35 segmentation_upid_type. On the console, enter one of the types listed in the SCTE-35 specification, converted to a decimal. For example, \"0x0C\" hex from the specification is \"12\" in decimal. In the CLI, API, or an SDK, enter one of the types listed in the SCTE-35 specification, in either hex (for example, \"0x0C\" ) or in decimal (for example, \"12\").",
                         "smithy.api#jsonName": "segmentationUpidType"
                     }
@@ -20534,6 +20778,7 @@
                 "SegmentsExpected": {
                     "target": "com.amazonaws.medialive#__integerMin0Max255",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Corresponds to SCTE-35 segments_expected. A value that is valid for the specified segmentation_type_id.",
                         "smithy.api#jsonName": "segmentsExpected"
                     }
@@ -20541,6 +20786,7 @@
                 "SubSegmentNum": {
                     "target": "com.amazonaws.medialive#__integerMin0Max255",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Corresponds to SCTE-35 sub_segment_num. A value that is valid for the specified segmentation_type_id.",
                         "smithy.api#jsonName": "subSegmentNum"
                     }
@@ -20548,6 +20794,7 @@
                 "SubSegmentsExpected": {
                     "target": "com.amazonaws.medialive#__integerMin0Max255",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Corresponds to SCTE-35 sub_segments_expected. A value that is valid for the specified segmentation_type_id.",
                         "smithy.api#jsonName": "subSegmentsExpected"
                     }
@@ -20563,6 +20810,7 @@
                 "AdAvailOffset": {
                     "target": "com.amazonaws.medialive#__integerMinNegative1000Max1000",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "When specified, this offset (in milliseconds) is added to the input Ad Avail PTS time. This only applies to embedded SCTE 104/35 messages and does not apply to OOB messages.",
                         "smithy.api#jsonName": "adAvailOffset"
                     }
@@ -20612,6 +20860,7 @@
                 "Duration": {
                     "target": "com.amazonaws.medialive#__longMin0Max8589934591",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Optional, the duration for the splice_insert, in 90 KHz ticks. To convert seconds to ticks, multiple the seconds by 90,000. If you enter a duration, there is an expectation that the downstream system can read the duration and cue in at that time. If you do not enter a duration, the splice_insert will continue indefinitely and there is an expectation that you will enter a return_to_network to end the splice_insert at the appropriate time.",
                         "smithy.api#jsonName": "duration"
                     }
@@ -20619,6 +20868,7 @@
                 "SpliceEventId": {
                     "target": "com.amazonaws.medialive#__longMin0Max4294967295",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The splice_event_id for the SCTE-35 splice_insert, as defined in SCTE-35.",
                         "smithy.api#jsonName": "spliceEventId",
                         "smithy.api#required": {}
@@ -20655,6 +20905,7 @@
                 "AdAvailOffset": {
                     "target": "com.amazonaws.medialive#__integerMinNegative1000Max1000",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "When specified, this offset (in milliseconds) is added to the input Ad Avail PTS time. This only applies to embedded SCTE 104/35 messages and does not apply to OOB messages.",
                         "smithy.api#jsonName": "adAvailOffset"
                     }
@@ -21091,6 +21342,7 @@
                 "PipelinesRunningCount": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The number of currently healthy pipelines.",
                         "smithy.api#jsonName": "pipelinesRunningCount"
                     }
@@ -21304,6 +21556,7 @@
                 "PipelinesRunningCount": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The number of currently healthy pipelines.",
                         "smithy.api#jsonName": "pipelinesRunningCount"
                     }
@@ -21311,6 +21564,7 @@
                 "ProgramCount": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The number of programs in the multiplex.",
                         "smithy.api#jsonName": "programCount"
                     }
@@ -21356,6 +21610,7 @@
                 "Duration": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The duration in milliseconds for the image to remain on the video. If omitted or set to 0 the duration is unlimited and the image will remain until it is explicitly deactivated.",
                         "smithy.api#jsonName": "duration"
                     }
@@ -21363,6 +21618,7 @@
                 "FadeIn": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The time in milliseconds for the image to fade in. The fade-in starts at the start time of the overlay. Default is 0 (no fade-in).",
                         "smithy.api#jsonName": "fadeIn"
                     }
@@ -21370,6 +21626,7 @@
                 "FadeOut": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Applies only if a duration is specified. The time in milliseconds for the image to fade out. The fade-out starts when the duration time is hit, so it effectively extends the duration. Default is 0 (no fade-out).",
                         "smithy.api#jsonName": "fadeOut"
                     }
@@ -21377,6 +21634,7 @@
                 "Height": {
                     "target": "com.amazonaws.medialive#__integerMin1",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The height of the image when inserted into the video, in pixels. The overlay will be scaled up or down to the specified height. Leave blank to use the native height of the overlay.",
                         "smithy.api#jsonName": "height"
                     }
@@ -21392,6 +21650,7 @@
                 "ImageX": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Placement of the left edge of the overlay relative to the left edge of the video frame, in pixels. 0 (the default) is the left edge of the frame. If the placement causes the overlay to extend beyond the right edge of the underlying video, then the overlay is cropped on the right.",
                         "smithy.api#jsonName": "imageX"
                     }
@@ -21399,6 +21658,7 @@
                 "ImageY": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Placement of the top edge of the overlay relative to the top edge of the video frame, in pixels. 0 (the default) is the top edge of the frame. If the placement causes the overlay to extend beyond the bottom edge of the underlying video, then the overlay is cropped on the bottom.",
                         "smithy.api#jsonName": "imageY"
                     }
@@ -21406,6 +21666,7 @@
                 "Layer": {
                     "target": "com.amazonaws.medialive#__integerMin0Max7",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The number of the layer, 0 to 7. There are 8 layers that can be overlaid on the video, each layer with a different image. The layers are in Z order, which means that overlays with higher values of layer are inserted on top of overlays with lower values of layer. Default is 0.",
                         "smithy.api#jsonName": "layer"
                     }
@@ -21413,6 +21674,7 @@
                 "Opacity": {
                     "target": "com.amazonaws.medialive#__integerMin0Max100",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Opacity of image where 0 is transparent and 100 is fully opaque. Default is 100.",
                         "smithy.api#jsonName": "opacity"
                     }
@@ -21420,6 +21682,7 @@
                 "Width": {
                     "target": "com.amazonaws.medialive#__integerMin1",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The width of the image when inserted into the video, in pixels. The overlay will be scaled up or down to the specified width. Leave blank to use the native width of the overlay.",
                         "smithy.api#jsonName": "width"
                     }
@@ -21435,6 +21698,7 @@
                 "FadeOut": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The time in milliseconds for the image to fade out. Default is 0 (no fade-out).",
                         "smithy.api#jsonName": "fadeOut"
                     }
@@ -21442,6 +21706,7 @@
                 "Layer": {
                     "target": "com.amazonaws.medialive#__integerMin0Max7",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The image overlay layer to deactivate, 0 to 7. Default is 0.",
                         "smithy.api#jsonName": "layer"
                     }
@@ -21630,6 +21895,7 @@
                 "PipelinesRunningCount": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The number of currently healthy pipelines.",
                         "smithy.api#jsonName": "pipelinesRunningCount"
                     }
@@ -21775,6 +22041,7 @@
                 "PipelinesRunningCount": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The number of currently healthy pipelines.",
                         "smithy.api#jsonName": "pipelinesRunningCount"
                     }
@@ -21782,6 +22049,7 @@
                 "ProgramCount": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The number of programs in the multiplex.",
                         "smithy.api#jsonName": "programCount"
                     }
@@ -22166,6 +22434,7 @@
                 "SyncThreshold": {
                     "target": "com.amazonaws.medialive#__integerMin1Max1000000",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Threshold in frames beyond which output timecode is resynchronized to the input timecode. Discrepancies below this threshold are permitted to avoid unnecessary discontinuities in the output timecode. No timecode sync when this is not specified.",
                         "smithy.api#jsonName": "syncThreshold"
                     }
@@ -22414,6 +22683,7 @@
                 "TimedMetadataId3Period": {
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Timed Metadata interval in seconds.",
                         "smithy.api#jsonName": "timedMetadataId3Period"
                     }
@@ -22429,6 +22699,7 @@
                 "BufferMsec": {
                     "target": "com.amazonaws.medialive#__integerMin0Max10000",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "UDP output buffering in milliseconds. Larger values increase latency through the transcoder but simultaneously assist the transcoder in maintaining a constant, low-jitter UDP/RTP output while accommodating clock recovery, input switching, input disruptions, picture reordering, etc.",
                         "smithy.api#jsonName": "bufferMsec"
                     }
@@ -23416,6 +23687,7 @@
                 "BlackDetectThreshold": {
                     "target": "com.amazonaws.medialive#__doubleMin0Max1",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "A value used in calculating the threshold below which MediaLive considers a pixel to be 'black'. For the input to be considered black, every pixel in a frame must be below this threshold. The threshold is calculated as a percentage (expressed as a decimal) of white. Therefore .1 means 10% white (or 90% black). Note how the formula works for any color depth. For example, if you set this field to 0.1 in 10-bit color depth: (1023*0.1=102.3), which means a pixel value of 102 or less is 'black'. If you set this field to .1 in an 8-bit color depth: (255*0.1=25.5), which means a pixel value of 25 or less is 'black'. The range is 0.0 to 1.0, with any number of decimal places.",
                         "smithy.api#jsonName": "blackDetectThreshold"
                     }
@@ -23423,6 +23695,7 @@
                 "VideoBlackThresholdMsec": {
                     "target": "com.amazonaws.medialive#__integerMin1000",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The amount of time (in milliseconds) that the active input must be black before automatic input failover occurs.",
                         "smithy.api#jsonName": "videoBlackThresholdMsec"
                     }
@@ -23477,6 +23750,7 @@
                 "Height": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Output video height, in pixels. Must be an even number. For most codecs, you can leave this field and width blank in order to use the height and width (resolution) from the source. Note, however, that leaving blank is not recommended. For the Frame Capture codec, height and width are required.",
                         "smithy.api#jsonName": "height"
                     }
@@ -23506,6 +23780,7 @@
                 "Sharpness": {
                     "target": "com.amazonaws.medialive#__integerMin0Max100",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Changes the strength of the anti-alias filter used for scaling. 0 is the softest setting, 100 is the sharpest. A setting of 50 is recommended for most content.",
                         "smithy.api#jsonName": "sharpness"
                     }
@@ -23513,6 +23788,7 @@
                 "Width": {
                     "target": "com.amazonaws.medialive#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Output video width, in pixels. Must be an even number. For most codecs, you can leave this field and height blank in order to use the height and width (resolution) from the source. Note, however, that leaving blank is not recommended. For the Frame Capture codec, height and width are required.",
                         "smithy.api#jsonName": "width"
                     }
@@ -23682,6 +23958,7 @@
                 "Pid": {
                     "target": "com.amazonaws.medialive#__integerMin0Max8191",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Selects a specific PID from within a video source.",
                         "smithy.api#jsonName": "pid"
                     }
@@ -23697,6 +23974,7 @@
                 "ProgramId": {
                     "target": "com.amazonaws.medialive#__integerMin0Max65536",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Selects a specific program from within a multi-program transport stream. If the program doesn't exist, the first program within the transport stream will be selected by default.",
                         "smithy.api#jsonName": "programId"
                     }
@@ -23830,6 +24108,7 @@
                 "BitDepth": {
                     "target": "com.amazonaws.medialive#__double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Bits per sample.",
                         "smithy.api#jsonName": "bitDepth"
                     }
@@ -23844,6 +24123,7 @@
                 "SampleRate": {
                     "target": "com.amazonaws.medialive#__double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Sample rate in Hz.",
                         "smithy.api#jsonName": "sampleRate"
                     }
@@ -23891,60 +24171,70 @@
         "com.amazonaws.medialive#__double": {
             "type": "double",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __double"
             }
         },
         "com.amazonaws.medialive#__doubleMin0": {
             "type": "double",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __doubleMin0"
             }
         },
         "com.amazonaws.medialive#__doubleMin0Max1": {
             "type": "double",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __doubleMin0Max1"
             }
         },
         "com.amazonaws.medialive#__doubleMin0Max100": {
             "type": "double",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __doubleMin0Max100"
             }
         },
         "com.amazonaws.medialive#__doubleMin0Max5000": {
             "type": "double",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __doubleMin0Max5000"
             }
         },
         "com.amazonaws.medialive#__doubleMin1": {
             "type": "double",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __doubleMin1"
             }
         },
         "com.amazonaws.medialive#__doubleMin1Max65535": {
             "type": "double",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __doubleMin1Max65535"
             }
         },
         "com.amazonaws.medialive#__doubleMinNegative59Max0": {
             "type": "double",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __doubleMinNegative59Max0"
             }
         },
         "com.amazonaws.medialive#__integer": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integer"
             }
         },
         "com.amazonaws.medialive#__integerMin0": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin0",
                 "smithy.api#range": {
                     "min": 0
@@ -23954,6 +24244,7 @@
         "com.amazonaws.medialive#__integerMin0Max10": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin0Max10",
                 "smithy.api#range": {
                     "min": 0,
@@ -23964,6 +24255,7 @@
         "com.amazonaws.medialive#__integerMin0Max100": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin0Max100",
                 "smithy.api#range": {
                     "min": 0,
@@ -23974,6 +24266,7 @@
         "com.amazonaws.medialive#__integerMin0Max1000": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin0Max1000",
                 "smithy.api#range": {
                     "min": 0,
@@ -23984,6 +24277,7 @@
         "com.amazonaws.medialive#__integerMin0Max10000": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin0Max10000",
                 "smithy.api#range": {
                     "min": 0,
@@ -23994,6 +24288,7 @@
         "com.amazonaws.medialive#__integerMin0Max1000000": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin0Max1000000",
                 "smithy.api#range": {
                     "min": 0,
@@ -24004,6 +24299,7 @@
         "com.amazonaws.medialive#__integerMin0Max100000000": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin0Max100000000",
                 "smithy.api#range": {
                     "min": 0,
@@ -24014,6 +24310,7 @@
         "com.amazonaws.medialive#__integerMin0Max128": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin0Max128",
                 "smithy.api#range": {
                     "min": 0,
@@ -24024,6 +24321,7 @@
         "com.amazonaws.medialive#__integerMin0Max15": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin0Max15",
                 "smithy.api#range": {
                     "min": 0,
@@ -24034,6 +24332,7 @@
         "com.amazonaws.medialive#__integerMin0Max255": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin0Max255",
                 "smithy.api#range": {
                     "min": 0,
@@ -24044,6 +24343,7 @@
         "com.amazonaws.medialive#__integerMin0Max30": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin0Max30",
                 "smithy.api#range": {
                     "min": 0,
@@ -24054,6 +24354,7 @@
         "com.amazonaws.medialive#__integerMin0Max32768": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin0Max32768",
                 "smithy.api#range": {
                     "min": 0,
@@ -24064,6 +24365,7 @@
         "com.amazonaws.medialive#__integerMin0Max3600": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin0Max3600",
                 "smithy.api#range": {
                     "min": 0,
@@ -24074,6 +24376,7 @@
         "com.amazonaws.medialive#__integerMin0Max500": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin0Max500",
                 "smithy.api#range": {
                     "min": 0,
@@ -24084,6 +24387,7 @@
         "com.amazonaws.medialive#__integerMin0Max600": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin0Max600",
                 "smithy.api#range": {
                     "min": 0,
@@ -24094,6 +24398,7 @@
         "com.amazonaws.medialive#__integerMin0Max65535": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin0Max65535",
                 "smithy.api#range": {
                     "min": 0,
@@ -24104,6 +24409,7 @@
         "com.amazonaws.medialive#__integerMin0Max65536": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin0Max65536",
                 "smithy.api#range": {
                     "min": 0,
@@ -24114,6 +24420,7 @@
         "com.amazonaws.medialive#__integerMin0Max7": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin0Max7",
                 "smithy.api#range": {
                     "min": 0,
@@ -24124,6 +24431,7 @@
         "com.amazonaws.medialive#__integerMin0Max8191": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin0Max8191",
                 "smithy.api#range": {
                     "min": 0,
@@ -24134,6 +24442,7 @@
         "com.amazonaws.medialive#__integerMin1": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin1",
                 "smithy.api#range": {
                     "min": 1
@@ -24143,6 +24452,7 @@
         "com.amazonaws.medialive#__integerMin100": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin100",
                 "smithy.api#range": {
                     "min": 100
@@ -24152,6 +24462,7 @@
         "com.amazonaws.medialive#__integerMin1000": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin1000",
                 "smithy.api#range": {
                     "min": 1000
@@ -24161,6 +24472,7 @@
         "com.amazonaws.medialive#__integerMin1000000Max100000000": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin1000000Max100000000",
                 "smithy.api#range": {
                     "min": 1000000,
@@ -24171,6 +24483,7 @@
         "com.amazonaws.medialive#__integerMin100000Max100000000": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin100000Max100000000",
                 "smithy.api#range": {
                     "min": 100000,
@@ -24181,6 +24494,7 @@
         "com.amazonaws.medialive#__integerMin100000Max40000000": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin100000Max40000000",
                 "smithy.api#range": {
                     "min": 100000,
@@ -24191,6 +24505,7 @@
         "com.amazonaws.medialive#__integerMin100000Max80000000": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin100000Max80000000",
                 "smithy.api#range": {
                     "min": 100000,
@@ -24201,6 +24516,7 @@
         "com.amazonaws.medialive#__integerMin1000Max30000": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin1000Max30000",
                 "smithy.api#range": {
                     "min": 1000,
@@ -24211,6 +24527,7 @@
         "com.amazonaws.medialive#__integerMin1Max10": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin1Max10",
                 "smithy.api#range": {
                     "min": 1,
@@ -24221,6 +24538,7 @@
         "com.amazonaws.medialive#__integerMin1Max1000000": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin1Max1000000",
                 "smithy.api#range": {
                     "min": 1,
@@ -24231,6 +24549,7 @@
         "com.amazonaws.medialive#__integerMin1Max16": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin1Max16",
                 "smithy.api#range": {
                     "min": 1,
@@ -24241,6 +24560,7 @@
         "com.amazonaws.medialive#__integerMin1Max20": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin1Max20",
                 "smithy.api#range": {
                     "min": 1,
@@ -24251,6 +24571,7 @@
         "com.amazonaws.medialive#__integerMin1Max3003": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin1Max3003",
                 "smithy.api#range": {
                     "min": 1,
@@ -24261,6 +24582,7 @@
         "com.amazonaws.medialive#__integerMin1Max31": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin1Max31",
                 "smithy.api#range": {
                     "min": 1,
@@ -24271,6 +24593,7 @@
         "com.amazonaws.medialive#__integerMin1Max32": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin1Max32",
                 "smithy.api#range": {
                     "min": 1,
@@ -24281,6 +24604,7 @@
         "com.amazonaws.medialive#__integerMin1Max3600000": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin1Max3600000",
                 "smithy.api#range": {
                     "min": 1,
@@ -24291,6 +24615,7 @@
         "com.amazonaws.medialive#__integerMin1Max4": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin1Max4",
                 "smithy.api#range": {
                     "min": 1,
@@ -24301,6 +24626,7 @@
         "com.amazonaws.medialive#__integerMin1Max5": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin1Max5",
                 "smithy.api#range": {
                     "min": 1,
@@ -24311,6 +24637,7 @@
         "com.amazonaws.medialive#__integerMin1Max6": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin1Max6",
                 "smithy.api#range": {
                     "min": 1,
@@ -24321,6 +24648,7 @@
         "com.amazonaws.medialive#__integerMin1Max8": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin1Max8",
                 "smithy.api#range": {
                     "min": 1,
@@ -24331,6 +24659,7 @@
         "com.amazonaws.medialive#__integerMin25Max10000": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin25Max10000",
                 "smithy.api#range": {
                     "min": 25,
@@ -24341,6 +24670,7 @@
         "com.amazonaws.medialive#__integerMin25Max2000": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin25Max2000",
                 "smithy.api#range": {
                     "min": 25,
@@ -24351,6 +24681,7 @@
         "com.amazonaws.medialive#__integerMin3": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin3",
                 "smithy.api#range": {
                     "min": 3
@@ -24360,6 +24691,7 @@
         "com.amazonaws.medialive#__integerMin30": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin30",
                 "smithy.api#range": {
                     "min": 30
@@ -24369,6 +24701,7 @@
         "com.amazonaws.medialive#__integerMin32Max8191": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin32Max8191",
                 "smithy.api#range": {
                     "min": 32,
@@ -24379,6 +24712,7 @@
         "com.amazonaws.medialive#__integerMin4Max20": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin4Max20",
                 "smithy.api#range": {
                     "min": 4,
@@ -24389,6 +24723,7 @@
         "com.amazonaws.medialive#__integerMin800Max3000": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin800Max3000",
                 "smithy.api#range": {
                     "min": 800,
@@ -24399,6 +24734,7 @@
         "com.amazonaws.medialive#__integerMin96Max600": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMin96Max600",
                 "smithy.api#range": {
                     "min": 96,
@@ -24409,6 +24745,7 @@
         "com.amazonaws.medialive#__integerMinNegative1000Max1000": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMinNegative1000Max1000",
                 "smithy.api#range": {
                     "min": -1000,
@@ -24419,6 +24756,7 @@
         "com.amazonaws.medialive#__integerMinNegative5Max5": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMinNegative5Max5",
                 "smithy.api#range": {
                     "min": -5,
@@ -24429,6 +24767,7 @@
         "com.amazonaws.medialive#__integerMinNegative60Max6": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMinNegative60Max6",
                 "smithy.api#range": {
                     "min": -60,
@@ -24439,6 +24778,7 @@
         "com.amazonaws.medialive#__integerMinNegative60Max60": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __integerMinNegative60Max60",
                 "smithy.api#range": {
                     "min": -60,
@@ -24890,12 +25230,14 @@
         "com.amazonaws.medialive#__long": {
             "type": "long",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __long"
             }
         },
         "com.amazonaws.medialive#__longMin0Max1099511627775": {
             "type": "long",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __longMin0Max1099511627775",
                 "smithy.api#range": {
                     "min": 0,
@@ -24906,6 +25248,7 @@
         "com.amazonaws.medialive#__longMin0Max4294967295": {
             "type": "long",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __longMin0Max4294967295",
                 "smithy.api#range": {
                     "min": 0,
@@ -24916,6 +25259,7 @@
         "com.amazonaws.medialive#__longMin0Max8589934591": {
             "type": "long",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __longMin0Max8589934591",
                 "smithy.api#range": {
                     "min": 0,
@@ -24926,6 +25270,7 @@
         "com.amazonaws.medialive#__longMin0Max86400000": {
             "type": "long",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#documentation": "Placeholder documentation for __longMin0Max86400000",
                 "smithy.api#range": {
                     "min": 0,

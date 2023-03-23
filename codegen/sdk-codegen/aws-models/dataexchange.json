@@ -887,6 +887,7 @@
                 "Finalized": {
                     "target": "com.amazonaws.dataexchange#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>To publish a revision to a data set in a product, the revision must first be finalized. Finalizing a revision tells AWS Data Exchange that your changes to the assets in the revision are complete. After it's in this read-only state, you can publish the revision to your products. Finalized revisions can be published through the AWS Data Exchange console or the AWS Marketplace Catalog API, using the StartChangeSet AWS Marketplace Catalog API action. When using the API, revisions are uniquely identified by their ARN.</p>"
                     }
                 },
@@ -923,6 +924,7 @@
                 "Revoked": {
                     "target": "com.amazonaws.dataexchange#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A status indicating that subscribers' access to the revision was revoked.</p>"
                     }
                 },
@@ -3019,6 +3021,7 @@
                 "Finalized": {
                     "target": "com.amazonaws.dataexchange#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>To publish a revision to a data set in a product, the revision must first be finalized. Finalizing a revision tells AWS Data Exchange that your changes to the assets in the revision are complete. After it's in this read-only state, you can publish the revision to your products. Finalized revisions can be published through the AWS Data Exchange console or the AWS Marketplace Catalog API, using the StartChangeSet AWS Marketplace Catalog API action. When using the API, revisions are uniquely identified by their ARN.</p>"
                     }
                 },
@@ -3055,6 +3058,7 @@
                 "Revoked": {
                     "target": "com.amazonaws.dataexchange#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A status indicating that subscribers' access to the revision was revoked.</p>"
                     }
                 },
@@ -3636,6 +3640,7 @@
                 "LimitValue": {
                     "target": "com.amazonaws.dataexchange#__double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The value of the exceeded limit.</p>"
                     }
                 },
@@ -4065,6 +4070,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.dataexchange#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of results returned by a single call.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -4139,6 +4145,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.dataexchange#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of results returned by a single call.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -4227,6 +4234,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.dataexchange#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of results returned by a single call.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -4308,6 +4316,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.dataexchange#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of results returned by a single call.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -4506,6 +4515,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.dataexchange#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of results returned by a single call.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -4599,6 +4609,7 @@
         "com.amazonaws.dataexchange#MaxResults": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 25
@@ -4923,6 +4934,7 @@
                 "Finalized": {
                     "target": "com.amazonaws.dataexchange#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>To publish a revision to a data set in a product, the revision must first be finalized. Finalizing a revision tells AWS Data Exchange that your changes to the assets in the revision are complete. After it's in this read-only state, you can publish the revision to your products. Finalized revisions can be published through the AWS Data Exchange console or the AWS Marketplace Catalog API, using the StartChangeSet AWS Marketplace Catalog API action. When using the API, revisions are uniquely identified by their ARN.</p>"
                     }
                 },
@@ -4955,6 +4967,7 @@
                 "Revoked": {
                     "target": "com.amazonaws.dataexchange#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A status indicating that subscribers' access to the revision was revoked.</p>"
                     }
                 },
@@ -5079,6 +5092,7 @@
                 "Finalized": {
                     "target": "com.amazonaws.dataexchange#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>To publish a revision to a data set in a product, the revision must first be finalized. Finalizing a revision tells AWS Data Exchange that changes to the assets in the revision are complete. After it's in this read-only state, you can publish the revision to your products. Finalized revisions can be published through the AWS Data Exchange console or the AWS Marketplace Catalog API, using the StartChangeSet AWS Marketplace Catalog API action. When using the API, revisions are uniquely identified by their ARN.</p>"
                     }
                 },
@@ -5109,6 +5123,7 @@
                 "Revoked": {
                     "target": "com.amazonaws.dataexchange#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A status indicating that subscribers' access to the revision was revoked.</p>"
                     }
                 },
@@ -5210,6 +5225,7 @@
                 "Size": {
                     "target": "com.amazonaws.dataexchange#__doubleMin0",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The size of the Amazon S3 object that is the object.</p>",
                         "smithy.api#required": {}
                     }
@@ -5366,6 +5382,7 @@
                 "LimitValue": {
                     "target": "com.amazonaws.dataexchange#__double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The value of the exceeded limit.</p>"
                     }
                 },
@@ -6076,6 +6093,7 @@
                 "Finalized": {
                     "target": "com.amazonaws.dataexchange#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Finalizing a revision tells AWS Data Exchange that your changes to the assets in the revision are complete. After it's in this read-only state, you can publish the revision to your products.</p>"
                     }
                 },
@@ -6119,6 +6137,7 @@
                 "Finalized": {
                     "target": "com.amazonaws.dataexchange#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>To publish a revision to a data set in a product, the revision must first be finalized. Finalizing a revision tells AWS Data Exchange that changes to the assets in the revision are complete. After it's in this read-only state, you can publish the revision to your products. Finalized revisions can be published through the AWS Data Exchange console or the AWS Marketplace Catalog API, using the StartChangeSet AWS Marketplace Catalog API action. When using the API, revisions are uniquely identified by their ARN.</p>"
                     }
                 },
@@ -6149,6 +6168,7 @@
                 "Revoked": {
                     "target": "com.amazonaws.dataexchange#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A status indicating that subscribers' access to the revision was revoked.</p>"
                     }
                 },
@@ -6185,15 +6205,21 @@
         },
         "com.amazonaws.dataexchange#__boolean": {
             "type": "boolean",
-            "traits": {}
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.dataexchange#__double": {
             "type": "double",
-            "traits": {}
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.dataexchange#__doubleMin0": {
             "type": "double",
-            "traits": {}
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.dataexchange#__string": {
             "type": "string"

@@ -87,6 +87,7 @@
                 "Total": {
                     "target": "com.amazonaws.iot1clickdevicesservice#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of devices associated with the claim code that has been processed in\n the claim request.</p>",
                         "smithy.api#jsonName": "total"
                     }
@@ -211,6 +212,7 @@
                 "Enabled": {
                     "target": "com.amazonaws.iot1clickdevicesservice#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A Boolean value indicating whether or not the device is enabled.</p>",
                         "smithy.api#jsonName": "enabled"
                     }
@@ -218,6 +220,7 @@
                 "RemainingLife": {
                     "target": "com.amazonaws.iot1clickdevicesservice#__doubleMin0Max100",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>A value between 0 and 1 inclusive, representing the fraction of life remaining for the\n device.</p>",
                         "smithy.api#jsonName": "remainingLife"
                     }
@@ -1323,6 +1326,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.iot1clickdevicesservice#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of results to return per request. If not set, a default value of\n 100 is used.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -1404,6 +1408,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.iot1clickdevicesservice#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of results to return per request. If not set, a default value of\n 100 is used.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -1489,6 +1494,7 @@
         "com.amazonaws.iot1clickdevicesservice#MaxResults": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 250
@@ -1780,6 +1786,7 @@
                 "Enabled": {
                     "target": "com.amazonaws.iot1clickdevicesservice#__boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>If true, the device is enabled. If false, the device is\n disabled.</p>",
                         "smithy.api#jsonName": "enabled"
                     }
@@ -1792,15 +1799,21 @@
         },
         "com.amazonaws.iot1clickdevicesservice#__boolean": {
             "type": "boolean",
-            "traits": {}
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.iot1clickdevicesservice#__doubleMin0Max100": {
             "type": "double",
-            "traits": {}
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.iot1clickdevicesservice#__integer": {
             "type": "integer",
-            "traits": {}
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.iot1clickdevicesservice#__listOfDeviceDescription": {
             "type": "list",

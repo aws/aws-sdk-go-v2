@@ -411,6 +411,7 @@
                 "ClockRate": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The sample rate (in Hz) for the stream. If the media stream type is video or ancillary data, set this value to 90000. If the media stream type is audio, set this value to either 48000 or 96000.",
                         "smithy.api#jsonName": "clockRate"
                     }
@@ -425,6 +426,7 @@
                 "MediaStreamId": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "A unique identifier for the media stream.",
                         "smithy.api#jsonName": "mediaStreamId",
                         "smithy.api#required": {}
@@ -492,6 +494,7 @@
                 "MaxLatency": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams.",
                         "smithy.api#jsonName": "maxLatency"
                     }
@@ -506,6 +509,7 @@
                 "MinLatency": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency.",
                         "smithy.api#jsonName": "minLatency"
                     }
@@ -520,6 +524,7 @@
                 "Port": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The port to use when content is distributed to this output.",
                         "smithy.api#jsonName": "port"
                     }
@@ -542,6 +547,7 @@
                 "SenderControlPort": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The port that the flow uses to send outbound requests to initiate connection with the sender.",
                         "smithy.api#jsonName": "senderControlPort"
                     }
@@ -549,6 +555,7 @@
                 "SmoothingLatency": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.",
                         "smithy.api#jsonName": "smoothingLatency"
                     }
@@ -1219,6 +1226,7 @@
                 "DestinationPort": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The port to use when the content of the media stream is distributed to the output.",
                         "smithy.api#jsonName": "destinationPort",
                         "smithy.api#required": {}
@@ -1259,6 +1267,7 @@
                 "DestinationPort": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The port that you want MediaConnect to use when it distributes the media stream to the output.",
                         "smithy.api#jsonName": "destinationPort",
                         "smithy.api#required": {}
@@ -1340,6 +1349,7 @@
                 "CompressionFactor": {
                     "target": "com.amazonaws.mediaconnect#__double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "A value that is used to calculate compression for an output. The bitrate of the output is calculated as follows: Output bitrate = (1 / compressionFactor) * (source bitrate) This property only applies to outputs that use the ST 2110 JPEG XS protocol, with a flow source that uses the CDI protocol. Valid values are floating point numbers in the range of 3.0 to 10.0, inclusive.",
                         "smithy.api#jsonName": "compressionFactor",
                         "smithy.api#required": {}
@@ -1364,6 +1374,7 @@
                 "CompressionFactor": {
                     "target": "com.amazonaws.mediaconnect#__double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "A value that is used to calculate compression for an output. The bitrate of the output is calculated as follows: Output bitrate = (1 / compressionFactor) * (source bitrate) This property only applies to outputs that use the ST 2110 JPEG XS protocol, with a flow source that uses the CDI protocol. Valid values are floating point numbers in the range of 3.0 to 10.0, inclusive.",
                         "smithy.api#jsonName": "compressionFactor",
                         "smithy.api#required": {}
@@ -1460,6 +1471,7 @@
                 "DataTransferSubscriberFeePercent": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Percentage from 0-100 of the data transfer cost to be billed to the subscriber.",
                         "smithy.api#jsonName": "dataTransferSubscriberFeePercent"
                     }
@@ -1544,6 +1556,7 @@
                 "RecoveryWindow": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Search window time to look for dash-7 packets",
                         "smithy.api#jsonName": "recoveryWindow"
                     }
@@ -1830,6 +1843,7 @@
                 "DataTransferSubscriberFeePercent": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Percentage from 0-100 of the data transfer cost to be billed to the subscriber.",
                         "smithy.api#jsonName": "dataTransferSubscriberFeePercent"
                     }
@@ -1991,6 +2005,7 @@
                 "InputPort": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The port that the flow listens on for an incoming media stream.",
                         "smithy.api#jsonName": "inputPort",
                         "smithy.api#required": {}
@@ -2015,6 +2030,7 @@
                 "InputPort": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The port that you want the flow to listen on for an incoming media stream.",
                         "smithy.api#jsonName": "inputPort",
                         "smithy.api#required": {}
@@ -2149,6 +2165,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mediaconnect#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The maximum number of results to return per API request. For example, you submit a ListEntitlements request with MaxResults set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a NextToken value that you can use to fetch the next batch of results.) The service might return fewer results than the MaxResults value. If MaxResults is not included in the request, the service defaults to pagination with a maximum of 20 results per page.",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -2224,6 +2241,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mediaconnect#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The maximum number of results to return per API request. For example, you submit a ListFlows request with MaxResults set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a NextToken value that you can use to fetch the next batch of results.) The service might return fewer results than the MaxResults value. If MaxResults is not included in the request, the service defaults to pagination with a maximum of 10 results per page.",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -2299,6 +2317,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mediaconnect#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The maximum number of results to return per API request. For example, you submit a ListOfferings request with MaxResults set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a NextToken value that you can use to fetch the next batch of results.) The service might return fewer results than the MaxResults value. If MaxResults is not included in the request, the service defaults to pagination with a maximum of 10 results per page.",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -2374,6 +2393,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mediaconnect#MaxResults",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The maximum number of results to return per API request. For example, you submit a ListReservations request with MaxResults set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a NextToken value that you can use to fetch the next batch of results.) The service might return fewer results than the MaxResults value. If MaxResults is not included in the request, the service defaults to pagination with a maximum of 10 results per page.",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -2465,6 +2485,7 @@
                 "DataTransferSubscriberFeePercent": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Percentage from 0-100 of the data transfer cost to be billed to the subscriber.",
                         "smithy.api#jsonName": "dataTransferSubscriberFeePercent"
                     }
@@ -2638,6 +2659,7 @@
         "com.amazonaws.mediaconnect#MaxResults": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 1000
@@ -3577,6 +3599,7 @@
                 "ClockRate": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The sample rate for the stream. This value is measured in Hz.",
                         "smithy.api#jsonName": "clockRate"
                     }
@@ -3591,6 +3614,7 @@
                 "Fmt": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The format type number (sometimes referred to as RTP payload type) of the media stream. MediaConnect assigns this value to the media stream. For ST 2110 JPEG XS outputs, you need to provide this value to the receiver.",
                         "smithy.api#jsonName": "fmt",
                         "smithy.api#required": {}
@@ -3599,6 +3623,7 @@
                 "MediaStreamId": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "A unique identifier for the media stream.",
                         "smithy.api#jsonName": "mediaStreamId",
                         "smithy.api#required": {}
@@ -3903,6 +3928,7 @@
                 "Duration": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The length of time that your reservation would be active.",
                         "smithy.api#jsonName": "duration",
                         "smithy.api#required": {}
@@ -3967,6 +3993,7 @@
                 "DataTransferSubscriberFeePercent": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Percentage from 0-100 of the data transfer cost to be billed to the subscriber.",
                         "smithy.api#jsonName": "dataTransferSubscriberFeePercent"
                     }
@@ -4039,6 +4066,7 @@
                 "Port": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The port to use when content is distributed to this output.",
                         "smithy.api#jsonName": "port"
                     }
@@ -4571,6 +4599,7 @@
                 "Duration": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The length of time that this reservation is active. MediaConnect defines this value in the offering.",
                         "smithy.api#jsonName": "duration",
                         "smithy.api#required": {}
@@ -4704,6 +4733,7 @@
                 "ReservedBitrate": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The amount of outbound bandwidth that is discounted in the offering.",
                         "smithy.api#jsonName": "reservedBitrate"
                     }
@@ -4877,6 +4907,7 @@
                 "IngestPort": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The port that the flow will be listening on for incoming content.",
                         "smithy.api#jsonName": "ingestPort"
                     }
@@ -4884,6 +4915,7 @@
                 "MaxBitrate": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.",
                         "smithy.api#jsonName": "maxBitrate"
                     }
@@ -4891,6 +4923,7 @@
                 "MaxLatency": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams.",
                         "smithy.api#jsonName": "maxLatency"
                     }
@@ -4898,6 +4931,7 @@
                 "MaxSyncBuffer": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The size of the buffer (in milliseconds) to use to sync incoming source data.",
                         "smithy.api#jsonName": "maxSyncBuffer"
                     }
@@ -4912,6 +4946,7 @@
                 "MinLatency": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency.",
                         "smithy.api#jsonName": "minLatency"
                     }
@@ -4933,6 +4968,7 @@
                 "SenderControlPort": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The port that the flow uses to send outbound requests to initiate connection with the sender.",
                         "smithy.api#jsonName": "senderControlPort"
                     }
@@ -4954,6 +4990,7 @@
                 "SourceListenerPort": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Source port for SRT-caller protocol.",
                         "smithy.api#jsonName": "sourceListenerPort"
                     }
@@ -4990,6 +5027,7 @@
                 "DataTransferSubscriberFeePercent": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Percentage from 0-100 of the data transfer cost to be billed to the subscriber.",
                         "smithy.api#jsonName": "dataTransferSubscriberFeePercent"
                     }
@@ -5025,6 +5063,7 @@
                 "IngestPort": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The port that the flow will be listening on for incoming content.",
                         "smithy.api#jsonName": "ingestPort"
                     }
@@ -5047,6 +5086,7 @@
                 "SenderControlPort": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The port that the flow uses to send outbound requests to initiate connection with the sender.",
                         "smithy.api#jsonName": "senderControlPort"
                     }
@@ -5470,6 +5510,7 @@
                 "MaxBitrate": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.",
                         "smithy.api#jsonName": "maxBitrate"
                     }
@@ -5477,6 +5518,7 @@
                 "MaxLatency": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams.",
                         "smithy.api#jsonName": "maxLatency"
                     }
@@ -5484,6 +5526,7 @@
                 "MaxSyncBuffer": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The size of the buffer (in milliseconds) to use to sync incoming source data.",
                         "smithy.api#jsonName": "maxSyncBuffer"
                     }
@@ -5491,6 +5534,7 @@
                 "MinLatency": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency.",
                         "smithy.api#jsonName": "minLatency"
                     }
@@ -5513,6 +5557,7 @@
                 "SenderControlPort": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The port that the flow uses to send outbound requests to initiate connection with the sender.",
                         "smithy.api#jsonName": "senderControlPort"
                     }
@@ -5527,6 +5572,7 @@
                 "SmoothingLatency": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.",
                         "smithy.api#jsonName": "smoothingLatency"
                     }
@@ -5541,6 +5587,7 @@
                 "SourceListenerPort": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Source port for SRT-caller protocol.",
                         "smithy.api#jsonName": "sourceListenerPort"
                     }
@@ -5690,6 +5737,7 @@
                 "RecoveryWindow": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Recovery window time to look for dash-7 packets",
                         "smithy.api#jsonName": "recoveryWindow"
                     }
@@ -5907,6 +5955,7 @@
                 "ClockRate": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The sample rate (in Hz) for the stream. If the media stream type is video or ancillary data, set this value to 90000. If the media stream type is audio, set this value to either 48000 or 96000.",
                         "smithy.api#jsonName": "clockRate"
                     }
@@ -6052,6 +6101,7 @@
                 "MaxLatency": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams.",
                         "smithy.api#jsonName": "maxLatency"
                     }
@@ -6066,6 +6116,7 @@
                 "MinLatency": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency.",
                         "smithy.api#jsonName": "minLatency"
                     }
@@ -6081,6 +6132,7 @@
                 "Port": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The port to use when content is distributed to this output.",
                         "smithy.api#jsonName": "port"
                     }
@@ -6102,6 +6154,7 @@
                 "SenderControlPort": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The port that the flow uses to send outbound requests to initiate connection with the sender.",
                         "smithy.api#jsonName": "senderControlPort"
                     }
@@ -6116,6 +6169,7 @@
                 "SmoothingLatency": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.",
                         "smithy.api#jsonName": "smoothingLatency"
                     }
@@ -6269,6 +6323,7 @@
                 "IngestPort": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The port that the flow will be listening on for incoming content.",
                         "smithy.api#jsonName": "ingestPort"
                     }
@@ -6276,6 +6331,7 @@
                 "MaxBitrate": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.",
                         "smithy.api#jsonName": "maxBitrate"
                     }
@@ -6283,6 +6339,7 @@
                 "MaxLatency": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams.",
                         "smithy.api#jsonName": "maxLatency"
                     }
@@ -6290,6 +6347,7 @@
                 "MaxSyncBuffer": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The size of the buffer (in milliseconds) to use to sync incoming source data.",
                         "smithy.api#jsonName": "maxSyncBuffer"
                     }
@@ -6304,6 +6362,7 @@
                 "MinLatency": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency.",
                         "smithy.api#jsonName": "minLatency"
                     }
@@ -6318,6 +6377,7 @@
                 "SenderControlPort": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "The port that the flow uses to send outbound requests to initiate connection with the sender.",
                         "smithy.api#jsonName": "senderControlPort"
                     }
@@ -6347,6 +6407,7 @@
                 "SourceListenerPort": {
                     "target": "com.amazonaws.mediaconnect#__integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "Source port for SRT-caller protocol.",
                         "smithy.api#jsonName": "sourceListenerPort"
                     }
@@ -6545,11 +6606,15 @@
         },
         "com.amazonaws.mediaconnect#__double": {
             "type": "double",
-            "traits": {}
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.mediaconnect#__integer": {
             "type": "integer",
-            "traits": {}
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.mediaconnect#__listOfAddMediaStreamRequest": {
             "type": "list",
