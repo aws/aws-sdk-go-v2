@@ -226,7 +226,7 @@
                 "externalConnection": {
                     "target": "com.amazonaws.codeartifact#ExternalConnectionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The name of the external connection to add to the repository. The following values are supported:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>public:npmjs</code> - for the npm public repository.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>public:nuget-org</code> - for the NuGet Gallery.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>public:pypi</code> - for the Python Package Index.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>public:maven-central</code> - for Maven Central.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>public:maven-googleandroid</code> - for the Google Android repository.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>public:maven-gradleplugins</code> - for the Gradle plugins repository.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>public:maven-commonsware</code> - for the CommonsWare Android repository.\n        </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>\n      The name of the external connection to add to the repository. The following values are supported:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>public:npmjs</code> - for the npm public repository.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>public:nuget-org</code> - for the NuGet Gallery.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>public:pypi</code> - for the Python Package Index.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>public:maven-central</code> - for Maven Central.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>public:maven-googleandroid</code> - for the Google Android repository.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>public:maven-gradleplugins</code> - for the Gradle plugins repository.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>public:maven-commonsware</code> - for the CommonsWare Android repository.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>public:maven-clojars</code> - for the Clojars repository. </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "external-connection",
                         "smithy.api#required": {}
                     }
@@ -752,9 +752,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -765,9 +765,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-south-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-south-1"
                             }
                         },
                         {
@@ -778,9 +778,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -791,9 +791,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -804,9 +804,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-central-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -817,9 +817,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-north-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-north-1"
                             }
                         },
                         {
@@ -830,9 +830,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-south-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-south-1"
                             }
                         },
                         {
@@ -843,9 +843,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -856,9 +856,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -869,9 +869,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-3",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-west-3"
                             }
                         },
                         {
@@ -882,9 +882,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -895,9 +895,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -908,9 +908,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -921,9 +921,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -934,9 +934,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -947,9 +947,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -960,9 +960,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -973,9 +973,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -986,9 +986,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -999,9 +999,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -1012,9 +1012,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -1025,9 +1025,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -1038,9 +1038,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -1051,9 +1051,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -1064,9 +1075,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -1077,9 +1099,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -1090,9 +1123,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -1103,9 +1147,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -1116,9 +1160,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1130,8 +1174,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1141,9 +1185,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1153,10 +1197,16 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -1277,7 +1327,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package versions to be copied. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>. The namespace is required when copying Maven package versions.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of a generic package is it’s <code>namespace</code>.\n        </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the package versions to be copied. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>. The namespace is required when copying Maven package versions.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -1734,7 +1784,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package to delete. The package component that specifies its namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package is its <code>groupId</code>. The namespace is required when deleting Maven package versions.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet packages do not contain corresponding components, packages of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the package to delete. The package component that specifies its namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package is its <code>groupId</code>. The namespace is required when deleting Maven package versions.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of an npm package is its <code>scope</code>.</p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet packages do not contain corresponding components, packages of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -1833,7 +1883,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package versions to be deleted. The package version component that specifies its \n        namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n            The namespace of a Maven package version is its <code>groupId</code>. The namespace is required when deleting Maven package versions.\n          </p>\n            </li>\n            <li>\n               <p>\n            The namespace of an npm package version is its <code>scope</code>.\n          </p>\n            </li>\n            <li>\n               <p>\n            Python and NuGet package versions do not contain a corresponding component, package versions \n            of those formats do not have a namespace.\n          </p>\n            </li>\n            <li>\n               <p>\n            The namespace of a generic package is it’s <code>namespace</code>.\n          </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the package versions to be deleted. The package version component that specifies its \n        namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n            The namespace of a Maven package version is its <code>groupId</code>. The namespace is required when deleting Maven package versions.\n          </p>\n            </li>\n            <li>\n               <p>\n            The namespace of an npm package version is its <code>scope</code>.\n          </p>\n            </li>\n            <li>\n               <p>\n            Python and NuGet package versions do not contain a corresponding component, package versions \n            of those formats do not have a namespace.\n          </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -2181,7 +2231,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the requested package. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package is its <code>groupId</code>. The namespace is required when requesting Maven packages.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet packages do not contain a corresponding component, packages \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of a generic package is it’s <code>namespace</code>.\n        </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the requested package. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package is its <code>groupId</code>. The namespace is required when requesting Maven packages.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet packages do not contain a corresponding component, packages \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -2284,7 +2334,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the requested package version. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of a generic package is it’s <code>namespace</code>.\n        </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the requested package version. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -2571,7 +2621,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package versions to be disposed. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of a generic package is it’s <code>namespace</code>.\n        </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the package versions to be disposed. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -3032,7 +3082,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package version with the requested asset file. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of a generic package is it’s <code>namespace</code>.\n        </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the package version with the requested asset file. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -3177,7 +3227,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package version with the requested readme file. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the package version with the requested readme file. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p> The namespace of an npm package version is its <code>scope</code>. </p>\n            </li>\n            <li>\n               <p> Python and NuGet package versions do not contain a corresponding component, package\n          versions of those formats do not have a namespace. </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -3659,7 +3709,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package version that contains the requested package version assets. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of a generic package is it’s <code>namespace</code>.\n        </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the package version that contains the requested package version assets. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -3816,7 +3866,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package version with the requested dependencies. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of a generic package is it’s <code>namespace</code>.\n        </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the package version with the requested dependencies. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -3981,7 +4031,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package that contains the requested package versions. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet packages do not contain a corresponding component, packages \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of a generic package is it’s <code>namespace</code>.\n        </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the package that contains the requested package versions. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet packages do not contain a corresponding component, packages \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -4159,7 +4209,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace prefix used to filter requested packages. Only packages with a namespace that starts with the provided string value are returned. Note that although this option is called <code>--namespace</code> and not <code>--namespace-prefix</code>, it has prefix-matching behavior.</p>\n         <p>Each package format uses namespace as follows:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet packages do not contain a corresponding component, packages \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of a generic package is it’s <code>namespace</code>.\n        </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace prefix used to filter requested packages. Only packages with a namespace that starts with the provided string value are returned. Note that although this option is called <code>--namespace</code> and not <code>--namespace-prefix</code>, it has prefix-matching behavior.</p>\n         <p>Each package format uses namespace as follows:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet packages do not contain a corresponding component, packages \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -4546,7 +4596,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet packages do not contain a corresponding component, packages \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of a generic package is it’s <code>namespace</code>.\n        </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The namespace of the package. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet packages do not contain a corresponding component, packages \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>"
                     }
                 },
                 "name": {
@@ -4669,7 +4719,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet packages do not contain a corresponding component, packages \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of a generic package is it’s <code>namespace</code>.\n        </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The namespace of the package. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet packages do not contain a corresponding component, packages \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>"
                     }
                 },
                 "package": {
@@ -4717,7 +4767,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package version. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of a generic package is it’s <code>namespace</code>.\n        </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The namespace of the package version. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>"
                     }
                 },
                 "packageName": {
@@ -5089,7 +5139,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new package version containing one or more assets (or files).</p>\n         <p>The <code>unfinished</code> flag can be used to keep the package version in the <code>Unfinished</code> state until all of it’s assets have been uploaded (see <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/packages-overview.html#package-version-status.html#package-version-status\">Package version status</a> in the <i>CodeArtifact user guide</i>). To set the package version’s status to <code>Published</code>, omit the <code>unfinished</code> flag when uploading the final asset, or set the status using <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_UpdatePackageVersionsStatus.html\">UpdatePackageVersionStatus</a>. Once a package version’s status is set to <code>Published</code>, it cannot change back to <code>Unfinished</code>.</p>\n         <note>\n            <p>Only generic packages can be published using this API.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Creates a new package version containing one or more assets (or files).</p>\n         <p>The <code>unfinished</code> flag can be used to keep the package version in the\n        <code>Unfinished</code> state until all of its assets have been uploaded (see <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/packages-overview.html#package-version-status.html#package-version-status\">Package version status</a> in the <i>CodeArtifact user guide</i>). To set\n      the package version’s status to <code>Published</code>, omit the <code>unfinished</code> flag\n      when uploading the final asset, or set the status using <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_UpdatePackageVersionsStatus.html\">UpdatePackageVersionStatus</a>. Once a package version’s status is set to\n        <code>Published</code>, it cannot change back to <code>Unfinished</code>.</p>\n         <note>\n            <p>Only generic packages can be published using this API. For more information, see <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/using-generic.html\">Using generic\n          packages</a> in the <i>CodeArtifact User Guide</i>.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/package/version/publish",
@@ -5173,7 +5223,7 @@
                 "assetSHA256": {
                     "target": "com.amazonaws.codeartifact#SHA256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The SHA256 hash of the <code>assetContent</code> to publish. This value must be calculated\n      by the caller and provided with the\n      request.</p>\n         <p>This value is used as an integrity check to verify that the <code>assetContent</code> has\n      not changed after it was originally sent.</p>",
+                        "smithy.api#documentation": "<p>The SHA256 hash of the <code>assetContent</code> to publish. This value must be calculated\n      by the caller and provided with the request (see <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/using-generic.html#publishing-generic-packages\">Publishing a generic package</a> in the <i>CodeArtifact User\n        Guide</i>).</p>\n         <p>This value is used as an integrity check to verify that the <code>assetContent</code> has\n      not changed after it was originally sent.</p>",
                         "smithy.api#httpHeader": "x-amz-content-sha256",
                         "smithy.api#required": {}
                     }
@@ -5181,7 +5231,7 @@
                 "unfinished": {
                     "target": "com.amazonaws.codeartifact#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the package version should remain in the <code>unfinished</code>\n      state. If omitted, the package version status will be set to <code>Published</code> (see\n        <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/packages-overview.html#package-version-status.html#package-version-status\">Package version status</a> in the <i>CodeArtifact User Guide</i>).</p>\n         <p>Valid values: <code>unfinished</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Specifies whether the package version should remain in the <code>unfinished</code>\n      state. If omitted, the package version status will be set to <code>Published</code> (see\n        <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/packages-overview.html#package-version-status\">Package version status</a> in the <i>CodeArtifact User Guide</i>).</p>\n         <p>Valid values: <code>unfinished</code>\n         </p>",
                         "smithy.api#httpQuery": "unfinished"
                     }
                 }
@@ -5393,7 +5443,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package to be updated. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet packages do not contain a corresponding component, packages \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of a generic package is it’s <code>namespace</code>.\n        </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the package to be updated. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet packages do not contain a corresponding component, packages \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -5573,6 +5623,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n      An array of external connections associated with the repository.\n    </p>"
                     }
+                },
+                "createdTime": {
+                    "target": "com.amazonaws.codeartifact#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp that represents the date and time the repository was created.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5658,6 +5714,12 @@
                     "target": "com.amazonaws.codeartifact#Description",
                     "traits": {
                         "smithy.api#documentation": "<p>\n      The description of the repository.\n    </p>"
+                    }
+                },
+                "createdTime": {
+                    "target": "com.amazonaws.codeartifact#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp that represents the date and time the repository was created.</p>"
                     }
                 }
             },
@@ -6127,7 +6189,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package version to be updated. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of a generic package is it’s <code>namespace</code>.\n        </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the package version to be updated. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },

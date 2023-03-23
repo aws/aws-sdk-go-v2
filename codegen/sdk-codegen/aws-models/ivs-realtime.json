@@ -1,0 +1,1787 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.ivsrealtime#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "exceptionMessage": {
+                    "target": "com.amazonaws.ivsrealtime#errorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>User does not have sufficient access to perform this action.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.ivsrealtime#AmazonInteractiveVideoServiceRealTime": {
+            "type": "service",
+            "version": "2020-07-14",
+            "operations": [
+                {
+                    "target": "com.amazonaws.ivsrealtime#CreateParticipantToken"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#CreateStage"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#DeleteStage"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#DisconnectParticipant"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#GetStage"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ListStages"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#UpdateStage"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "IVS RealTime",
+                    "arnNamespace": "ivs",
+                    "cloudFormationName": "IVS",
+                    "cloudTrailEventSource": "REPLACE_WITH_EVENT_SOURCE",
+                    "endpointPrefix": "ivsrealtime"
+                },
+                "aws.auth#sigv4": {
+                    "name": "ivs"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "additionalAllowedHeaders": [
+                        "Content-Type",
+                        "X-Api-Key",
+                        "X-Amz-Content-Sha256",
+                        "X-Amz-User-Agent",
+                        "amz-sdk-invocation-id",
+                        "amz-sdk-request"
+                    ],
+                    "additionalExposedHeaders": [
+                        "x-amzn-errortype",
+                        "x-amzn-requestid",
+                        "x-amzn-errormessage",
+                        "x-amzn-trace-id",
+                        "x-amzn-requestid",
+                        "x-amz-apigw-id",
+                        "date"
+                    ]
+                },
+                "smithy.api#documentation": "<p>\n            <b>Introduction</b>\n         </p>\n         <p>The Amazon Interactive Video Service (IVS) stage API is REST compatible, using a standard HTTP \n\t  API and an AWS EventBridge event stream for responses. JSON is used for both requests and responses, \n\t  including errors.\n    </p>\n         <p>Terminology: The IVS stage API sometimes is referred to as the IVS RealTime API.</p>\n         <p>\n            <b>Resources</b>\n         </p>\n         <p>The following resources contain information about your IVS live stream (see <a href=\"https://docs.aws.amazon.com/ivs/latest/userguide/getting-started.html\">Getting Started with Amazon IVS</a>):</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Stage</b> — A stage is a virtual space where multiple participants can exchange audio and video in real time.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Tagging</b>\n         </p>\n         <p>A <i>tag</i> is a metadata label that you assign to an AWS resource. A tag\n      comprises a <i>key</i> and a <i>value</i>, both set by you. For\n      example, you might set a tag as <code>topic:nature</code> to label a particular video\n      category. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS Resources</a> for more information, including restrictions that apply to\n      tags and \"Tag naming limits and requirements\"; Amazon IVS stages has no service-specific\n      constraints beyond what is documented there.</p>\n         <p>Tags can help you identify and organize your AWS resources. For example, you can use the\n      same tag for different resources to indicate that they are related. You can also use tags to\n      manage access (see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html\">Access Tags</a>).</p>\n         <p>The Amazon IVS stage API has these tag-related endpoints: <a>TagResource</a>, <a>UntagResource</a>, and\n      <a>ListTagsForResource</a>. The following resource supports tagging: Stage.</p>\n         <p>At most 50 tags can be applied to a resource.</p>\n         <p>\n            <b>Stages Endpoints</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateParticipantToken</a> — Creates an additional token for a specified stage. This can be done after stage creation or when tokens expire.</p>\n            </li>\n            <li>\n               <p>\n                  <a>CreateStage</a> — Creates a new stage (and optionally participant tokens).</p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteStage</a> — Shuts down and deletes the specified stage (disconnecting all participants).</p>\n            </li>\n            <li>\n               <p>\n                  <a>DisconnectParticipant</a> — Disconnects a specified participant and revokes the participant permanently from a specified stage.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetStage</a> — Gets information for the specified stage.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListStages</a> — Gets summary information about all stages in your account, in the AWS region where the API request is processed.</p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateStage</a> — Updates a stage’s configuration.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Tags Endpoints</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ListTagsForResource</a> — Gets information about AWS tags for the\n          specified ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <a>TagResource</a> — Adds or updates tags for the AWS resource with\n          the specified ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <a>UntagResource</a> — Removes tags from the resource with the\n          specified ARN.</p>\n            </li>\n         </ul>",
+                "smithy.api#title": "Amazon Interactive Video Service RealTime",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://ivsrealtime-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://ivsrealtime-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://ivsrealtime.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://ivsrealtime.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ivsrealtime-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ivsrealtime-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ivsrealtime.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ivsrealtime.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ivsrealtime-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ivsrealtime-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ivsrealtime.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ivsrealtime.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ivsrealtime-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ivsrealtime.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ivsrealtime-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ivsrealtime-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ivsrealtime.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ivsrealtime.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ivsrealtime-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ivsrealtime.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#ConflictException": {
+            "type": "structure",
+            "members": {
+                "exceptionMessage": {
+                    "target": "com.amazonaws.ivsrealtime#errorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updating or deleting a resource can cause an inconsistent state.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.ivsrealtime#CreateParticipantToken": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ivsrealtime#CreateParticipantTokenRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ivsrealtime#CreateParticipantTokenResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ivsrealtime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#PendingVerification"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an additional token for a specified stage. This can be done after stage creation or when tokens expire. \n\t        Tokens always are scoped to the stage for which they are created.</p>\n         <p>Encryption keys are owned by Amazon IVS and never used directly by your application.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/CreateParticipantToken"
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#CreateParticipantTokenRequest": {
+            "type": "structure",
+            "members": {
+                "stageArn": {
+                    "target": "com.amazonaws.ivsrealtime#StageArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the stage to which this token is scoped.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "duration": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantTokenDurationMinutes",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Duration (in minutes), after which the token expires. Default: 60 (1 hour).</p>"
+                    }
+                },
+                "userId": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantTokenUserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name that can be specified to help identify the token. This can be any UTF-8 encoded text. <i>This field is exposed to all stage \n\t        participants and should not be used for personally identifying, confidential, or sensitive information.</i>\n         </p>"
+                    }
+                },
+                "attributes": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantTokenAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Application-provided attributes to encode into the token and attach to a stage. Map keys and values can contain UTF-8 \n\t        encoded text. The maximum length of this field is 1 KB total. <i>This field is exposed to all stage participants and \n\t\t\tshould not be used for personally identifying, confidential, or sensitive information.</i>\n         </p>"
+                    }
+                },
+                "capabilities": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantTokenCapabilities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set of capabilities that the user is allowed to perform in the stage. Default: <code>PUBLISH, SUBSCRIBE</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#CreateParticipantTokenResponse": {
+            "type": "structure",
+            "members": {
+                "participantToken": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The participant token that was created.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#CreateStage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ivsrealtime#CreateStageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ivsrealtime#CreateStageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ivsrealtime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#PendingVerification"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new stage (and optionally participant tokens).</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/CreateStage"
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#CreateStageRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.ivsrealtime#StageName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional name that can be specified for the stage being created.</p>"
+                    }
+                },
+                "participantTokenConfigurations": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantTokenConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Array of participant token configuration objects to attach to the new stage.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.ivsrealtime#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n            (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS\n            Resources</a> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is\n         documented there.\n      </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#CreateStageResponse": {
+            "type": "structure",
+            "members": {
+                "stage": {
+                    "target": "com.amazonaws.ivsrealtime#Stage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The stage that was created.</p>"
+                    }
+                },
+                "participantTokens": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantTokenList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Participant tokens attached to the stage. These correspond to the <code>participants</code> in the request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#DeleteStage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ivsrealtime#DeleteStageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ivsrealtime#DeleteStageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ivsrealtime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#PendingVerification"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Shuts down and deletes the specified stage (disconnecting all participants).</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/DeleteStage"
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#DeleteStageRequest": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ivsrealtime#StageArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the stage to be deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#DeleteStageResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ivsrealtime#DisconnectParticipant": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ivsrealtime#DisconnectParticipantRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ivsrealtime#DisconnectParticipantResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ivsrealtime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#PendingVerification"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disconnects a specified participant and revokes the participant permanently from a specified stage.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/DisconnectParticipant"
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#DisconnectParticipantReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#DisconnectParticipantRequest": {
+            "type": "structure",
+            "members": {
+                "stageArn": {
+                    "target": "com.amazonaws.ivsrealtime#StageArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the stage to which the participant is attached.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "participantId": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantTokenId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier of the participant to be disconnected. This is returned by <a>CreateParticipantToken</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "reason": {
+                    "target": "com.amazonaws.ivsrealtime#DisconnectParticipantReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description of why this participant is being disconnected.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#DisconnectParticipantResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ivsrealtime#GetStage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ivsrealtime#GetStageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ivsrealtime#GetStageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ivsrealtime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information for the specified stage.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetStage"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ivsrealtime#GetStageRequest": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ivsrealtime#StageArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the stage for which the information is to be retrieved.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#GetStageResponse": {
+            "type": "structure",
+            "members": {
+                "stage": {
+                    "target": "com.amazonaws.ivsrealtime#Stage",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "exceptionMessage": {
+                    "target": "com.amazonaws.ivsrealtime#errorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unexpected error during processing of request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.ivsrealtime#ListStages": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ivsrealtime#ListStagesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ivsrealtime#ListStagesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ivsrealtime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets summary information about all stages in your account, in the AWS region where the API request is processed.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListStages"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ivsrealtime#ListStagesRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.ivsrealtime#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The first stage to retrieve. This is used for pagination; see the <code>nextToken</code> response field.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.ivsrealtime#MaxStageResults",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Maximum number of results to return. Default: 50.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#ListStagesResponse": {
+            "type": "structure",
+            "members": {
+                "stages": {
+                    "target": "com.amazonaws.ivsrealtime#StageSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of the matching stages (summary information only).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ivsrealtime#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are more rooms than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ivsrealtime#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ivsrealtime#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ivsrealtime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information about AWS tags for the specified ARN.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/tags/{resourceArn}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ivsrealtime#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.ivsrealtime#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource to be retrieved. The ARN must be URL-encoded.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.ivsrealtime#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#MaxStageResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#PaginationToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9+/=_-]*$"
+            }
+        },
+        "com.amazonaws.ivsrealtime#ParticipantToken": {
+            "type": "structure",
+            "members": {
+                "participantId": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantTokenId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier for this participant token, assigned by IVS.</p>"
+                    }
+                },
+                "token": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantTokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The issued client token, encrypted.</p>"
+                    }
+                },
+                "userId": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantTokenUserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name to help identify the token. This can be any UTF-8 encoded text. <i>This field is exposed to all \n            stage participants and should not be used for personally identifying, confidential, or sensitive information.</i>\n         </p>"
+                    }
+                },
+                "attributes": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantTokenAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Application-provided attributes to encode into the token and attach to a stage. <i>This field is exposed to all \n            stage participants and should not be used for personally identifying, confidential, or sensitive information.</i>\n         </p>"
+                    }
+                },
+                "duration": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantTokenDurationMinutes",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Duration (in minutes), after which the participant token expires. Default: 60 (1 hour).</p>"
+                    }
+                },
+                "capabilities": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantTokenCapabilities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set of capabilities that the user is allowed to perform in the stage.</p>"
+                    }
+                },
+                "expirationTime": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantTokenExpirationTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ISO 8601 timestamp (returned as a string) for when this token expires.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object specifying a participant token in a stage.</p>"
+            }
+        },
+        "com.amazonaws.ivsrealtime#ParticipantTokenAttributes": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.ivsrealtime#String"
+            },
+            "value": {
+                "target": "com.amazonaws.ivsrealtime#String"
+            }
+        },
+        "com.amazonaws.ivsrealtime#ParticipantTokenCapabilities": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ivsrealtime#ParticipantTokenCapability"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#ParticipantTokenCapability": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PUBLISH",
+                        "name": "PUBLISH"
+                    },
+                    {
+                        "value": "SUBSCRIBE",
+                        "name": "SUBSCRIBE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ivsrealtime#ParticipantTokenConfiguration": {
+            "type": "structure",
+            "members": {
+                "duration": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantTokenDurationMinutes",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Duration (in minutes), after which the corresponding participant token expires. Default: 60 (1 hour).</p>"
+                    }
+                },
+                "userId": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantTokenUserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name that can be specified to help identify the corresponding participant token. This can be any UTF-8 encoded text. <i>This field is exposed to all \n            stage participants and should not be used for personally identifying, confidential, or sensitive information.</i>\n         </p>"
+                    }
+                },
+                "attributes": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantTokenAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Application-provided attributes to encode into the corresponding participant token and attach to a stage. Map keys and values can contain UTF-8 encoded text. \n            The maximum length of this field is 1 KB total. <i>This field is exposed to all stage participants and should not be used for personally \n            identifying, confidential, or sensitive information.</i>\n         </p>"
+                    }
+                },
+                "capabilities": {
+                    "target": "com.amazonaws.ivsrealtime#ParticipantTokenCapabilities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set of capabilities that the user is allowed to perform in the stage.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object specifying a participant token configuration in a stage.</p>"
+            }
+        },
+        "com.amazonaws.ivsrealtime#ParticipantTokenConfigurations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ivsrealtime#ParticipantTokenConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 12
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#ParticipantTokenDurationMinutes": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 20160
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#ParticipantTokenExpirationTime": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.ivsrealtime#ParticipantTokenId": {
+            "type": "string"
+        },
+        "com.amazonaws.ivsrealtime#ParticipantTokenList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ivsrealtime#ParticipantToken"
+            }
+        },
+        "com.amazonaws.ivsrealtime#ParticipantTokenString": {
+            "type": "string"
+        },
+        "com.amazonaws.ivsrealtime#ParticipantTokenUserId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#PendingVerification": {
+            "type": "structure",
+            "members": {
+                "exceptionMessage": {
+                    "target": "com.amazonaws.ivsrealtime#errorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Your account is pending verification. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.ivsrealtime#ResourceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^arn:aws:[is]vs:[a-z0-9-]+:[0-9]+:[a-z-]/[a-zA-Z0-9-]+$"
+            }
+        },
+        "com.amazonaws.ivsrealtime#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "exceptionMessage": {
+                    "target": "com.amazonaws.ivsrealtime#errorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Request references a resource which does not exist.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.ivsrealtime#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "exceptionMessage": {
+                    "target": "com.amazonaws.ivsrealtime#errorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Request would cause a service quota to be exceeded.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.ivsrealtime#Stage": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ivsrealtime#StageArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Stage ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.ivsrealtime#StageName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Stage name.</p>"
+                    }
+                },
+                "activeSessionId": {
+                    "target": "com.amazonaws.ivsrealtime#StageSessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ID of the active session within the stage.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.ivsrealtime#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n            (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS\n            Resources</a> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is\n         documented there.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Object specifying a stage.</p>"
+            }
+        },
+        "com.amazonaws.ivsrealtime#StageArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^arn:aws:ivs:[a-z0-9-]+:[0-9]+:stage/[a-zA-Z0-9-]+$"
+            }
+        },
+        "com.amazonaws.ivsrealtime#StageName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-_]*$"
+            }
+        },
+        "com.amazonaws.ivsrealtime#StageSessionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 16,
+                    "max": 16
+                },
+                "smithy.api#pattern": "^st-[a-zA-Z0-9]+$"
+            }
+        },
+        "com.amazonaws.ivsrealtime#StageSummary": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ivsrealtime#StageArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Stage ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.ivsrealtime#StageName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Stage name.</p>"
+                    }
+                },
+                "activeSessionId": {
+                    "target": "com.amazonaws.ivsrealtime#StageSessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ID of the active session within the stage.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.ivsrealtime#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags attached to the resource. Array of maps, each of the form <code>string:string\n            (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS\n            Resources</a> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints on tags beyond what is\n         documented there.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about a stage.</p>"
+            }
+        },
+        "com.amazonaws.ivsrealtime#StageSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ivsrealtime#StageSummary"
+            }
+        },
+        "com.amazonaws.ivsrealtime#String": {
+            "type": "string"
+        },
+        "com.amazonaws.ivsrealtime#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ivsrealtime#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ivsrealtime#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ivsrealtime#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ivsrealtime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds or updates tags for the AWS resource with the specified ARN.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/tags/{resourceArn}"
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.ivsrealtime#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource to be tagged. The ARN must be URL-encoded.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.ivsrealtime#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Array of tags to be added or updated. Array of maps, each of the form\n            <code>string:string (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS\n            Resources</a> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints beyond what is documented\n         there.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#TagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ivsrealtime#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#Tags": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.ivsrealtime#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.ivsrealtime#TagValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ivsrealtime#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ivsrealtime#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ivsrealtime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes tags from the resource with the specified ARN.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/tags/{resourceArn}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.ivsrealtime#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.ivsrealtime#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource to be untagged. The ARN must be URL-encoded.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.ivsrealtime#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Array of tags to be removed. Array of maps, each of the form <code>string:string\n            (key:value)</code>. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS\n            Resources</a> for details, including restrictions that apply to tags and \"Tag naming\n         limits and requirements\"; Amazon IVS has no constraints beyond what is documented\n         there.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#UntagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ivsrealtime#UpdateStage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ivsrealtime#UpdateStageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ivsrealtime#UpdateStageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ivsrealtime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#PendingVerification"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a stage’s configuration.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/UpdateStage"
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#UpdateStageRequest": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ivsrealtime#StageArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the stage to be updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.ivsrealtime#StageName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the stage to be updated.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#UpdateStageResponse": {
+            "type": "structure",
+            "members": {
+                "stage": {
+                    "target": "com.amazonaws.ivsrealtime#Stage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated stage.\n</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ivsrealtime#ValidationException": {
+            "type": "structure",
+            "members": {
+                "exceptionMessage": {
+                    "target": "com.amazonaws.ivsrealtime#errorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.ivsrealtime#errorMessage": {
+            "type": "string"
+        }
+    }
+}
