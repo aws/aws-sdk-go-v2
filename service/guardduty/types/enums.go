@@ -20,6 +20,26 @@ func (AdminStatus) Values() []AdminStatus {
 	}
 }
 
+type AutoEnableMembers string
+
+// Enum values for AutoEnableMembers
+const (
+	AutoEnableMembersNew  AutoEnableMembers = "NEW"
+	AutoEnableMembersAll  AutoEnableMembers = "ALL"
+	AutoEnableMembersNone AutoEnableMembers = "NONE"
+)
+
+// Values returns all known values for AutoEnableMembers. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AutoEnableMembers) Values() []AutoEnableMembers {
+	return []AutoEnableMembers{
+		"NEW",
+		"ALL",
+		"NONE",
+	}
+}
+
 type CriterionKey string
 
 // Enum values for CriterionKey

@@ -81,7 +81,7 @@ type GetPackageVersionAssetInput struct {
 	// versions do not contain a corresponding component, package versions of those
 	// formats do not have a namespace.
 	//
-	// * The namespace of a generic package is it’s
+	// * The namespace of a generic package is its
 	// namespace.
 	Namespace *string
 

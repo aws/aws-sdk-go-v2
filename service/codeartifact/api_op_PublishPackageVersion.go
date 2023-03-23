@@ -14,14 +14,17 @@ import (
 
 // Creates a new package version containing one or more assets (or files). The
 // unfinished flag can be used to keep the package version in the Unfinished state
-// until all of it’s assets have been uploaded (see Package version status
+// until all of its assets have been uploaded (see Package version status
 // (https://docs.aws.amazon.com/codeartifact/latest/ug/packages-overview.html#package-version-status.html#package-version-status)
 // in the CodeArtifact user guide). To set the package version’s status to
 // Published, omit the unfinished flag when uploading the final asset, or set the
 // status using UpdatePackageVersionStatus
 // (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_UpdatePackageVersionsStatus.html).
 // Once a package version’s status is set to Published, it cannot change back to
-// Unfinished. Only generic packages can be published using this API.
+// Unfinished. Only generic packages can be published using this API. For more
+// information, see Using generic packages
+// (https://docs.aws.amazon.com/codeartifact/latest/ug/using-generic.html) in the
+// CodeArtifact User Guide.
 func (c *Client) PublishPackageVersion(ctx context.Context, params *PublishPackageVersionInput, optFns ...func(*Options)) (*PublishPackageVersionOutput, error) {
 	if params == nil {
 		params = &PublishPackageVersionInput{}
@@ -52,9 +55,10 @@ type PublishPackageVersionInput struct {
 	AssetName *string
 
 	// The SHA256 hash of the assetContent to publish. This value must be calculated by
-	// the caller and provided with the request. This value is used as an integrity
-	// check to verify that the assetContent has not changed after it was originally
-	// sent.
+	// the caller and provided with the request (see Publishing a generic package
+	// (https://docs.aws.amazon.com/codeartifact/latest/ug/using-generic.html#publishing-generic-packages)
+	// in the CodeArtifact User Guide). This value is used as an integrity check to
+	// verify that the assetContent has not changed after it was originally sent.
 	//
 	// This member is required.
 	AssetSHA256 *string
@@ -96,7 +100,7 @@ type PublishPackageVersionInput struct {
 	// Specifies whether the package version should remain in the unfinished state. If
 	// omitted, the package version status will be set to Published (see Package
 	// version status
-	// (https://docs.aws.amazon.com/codeartifact/latest/ug/packages-overview.html#package-version-status.html#package-version-status)
+	// (https://docs.aws.amazon.com/codeartifact/latest/ug/packages-overview.html#package-version-status)
 	// in the CodeArtifact User Guide). Valid values: unfinished
 	Unfinished *bool
 

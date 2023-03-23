@@ -69,6 +69,8 @@ type DeletePackageInput struct {
 	// * Python and NuGet
 	// packages do not contain corresponding components, packages of those formats do
 	// not have a namespace.
+	//
+	// * The namespace of a generic package is its namespace.
 	Namespace *string
 
 	noSmithyDocumentSerde

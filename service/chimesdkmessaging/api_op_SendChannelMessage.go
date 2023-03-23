@@ -13,10 +13,10 @@ import (
 )
 
 // Sends a message to a particular channel that the member is a part of. The
-// x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of
-// the user that makes the API call as the value in the header. Also, STANDARD
-// messages can contain 4KB of data and the 1KB of metadata. CONTROL messages can
-// contain 30 bytes of data and no metadata.
+// x-amz-chime-bearer request header is mandatory. Use the ARN of the
+// AppInstanceUser or AppInstanceBot that makes the API call as the value in the
+// header. Also, STANDARD messages can contain 4KB of data and the 1KB of metadata.
+// CONTROL messages can contain 30 bytes of data and no metadata.
 func (c *Client) SendChannelMessage(ctx context.Context, params *SendChannelMessageInput, optFns ...func(*Options)) (*SendChannelMessageOutput, error) {
 	if params == nil {
 		params = &SendChannelMessageInput{}
@@ -39,7 +39,7 @@ type SendChannelMessageInput struct {
 	// This member is required.
 	ChannelArn *string
 
-	// The AppInstanceUserArn of the user that makes the API call.
+	// The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
 	//
 	// This member is required.
 	ChimeBearer *string
@@ -64,6 +64,9 @@ type SendChannelMessageInput struct {
 	//
 	// This member is required.
 	Type types.ChannelMessageType
+
+	// The content type of the channel message.
+	ContentType *string
 
 	// The attributes for the message, used for message filtering along with a
 	// FilterRule defined in the PushNotificationPreferences.

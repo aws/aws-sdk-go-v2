@@ -29,7 +29,7 @@ type AppInstance struct {
 	noSmithyDocumentSerde
 }
 
-// The details of an AppInstanceAdmin.
+// The name and ARN of the admin for the AppInstance.
 type AppInstanceAdmin struct {
 
 	// The AppInstanceAdmin data.
@@ -49,6 +49,45 @@ type AppInstanceAdminSummary struct {
 
 	// The details of the AppInstanceAdmin.
 	Admin *Identity
+
+	noSmithyDocumentSerde
+}
+
+// An Amazon Lex V2 chat bot created under an AppInstance.
+type AppInstanceBot struct {
+
+	// The ARN of the AppInstanceBot.
+	AppInstanceBotArn *string
+
+	// The data processing instructions for an AppInstanceBot.
+	Configuration *Configuration
+
+	// The time at which the AppInstanceBot was created.
+	CreatedTimestamp *time.Time
+
+	// The time at which the AppInstanceBot was last updated.
+	LastUpdatedTimestamp *time.Time
+
+	// The metadata for an AppInstanceBot.
+	Metadata *string
+
+	// The name of the AppInstanceBot.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// High-level information about an AppInstanceBot.
+type AppInstanceBotSummary struct {
+
+	// The ARN of the AppInstanceBot.
+	AppInstanceBotArn *string
+
+	// The metadata of the AppInstanceBot.
+	Metadata *string
+
+	// The name of the AppInstanceBox.
+	Name *string
 
 	noSmithyDocumentSerde
 }
@@ -85,6 +124,9 @@ type AppInstanceUser struct {
 
 	// The time at which the AppInstanceUser was created.
 	CreatedTimestamp *time.Time
+
+	// The interval after which an AppInstanceUser is automatically deleted.
+	ExpirationSettings *ExpirationSettings
 
 	// The time at which the AppInstanceUser was last updated.
 	LastUpdatedTimestamp *time.Time
@@ -204,6 +246,17 @@ type ChannelRetentionSettings struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that contains configuration data.
+type Configuration struct {
+
+	// The configuration for an Amazon Lex V2 bot.
+	//
+	// This member is required.
+	Lex *LexConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // The attributes of an Endpoint.
 type EndpointAttributes struct {
 
@@ -248,7 +301,23 @@ type EndpointState struct {
 	noSmithyDocumentSerde
 }
 
-// The details of a user.
+// Determines the interval after which an AppInstanceUser is automatically deleted.
+type ExpirationSettings struct {
+
+	// Specifies the conditions under which an AppInstanceUser will expire.
+	//
+	// This member is required.
+	ExpirationCriterion ExpirationCriterion
+
+	// The period in days after which an AppInstanceUser will be automatically deleted.
+	//
+	// This member is required.
+	ExpirationDays *int32
+
+	noSmithyDocumentSerde
+}
+
+// The details of a user or bot.
 type Identity struct {
 
 	// The ARN in an Identity.
@@ -256,6 +325,37 @@ type Identity struct {
 
 	// The name in an Identity.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for an Amazon Lex V2 bot.
+type LexConfiguration struct {
+
+	// The ARN of the Amazon Lex V2 bot's alias. The ARN uses this format:
+	// arn:aws:lex:REGION:ACCOUNT:bot-alias/MYBOTID/MYBOTALIAS
+	//
+	// This member is required.
+	LexBotAliasArn *string
+
+	// Identifies the Amazon Lex V2 bot's language and locale. The string must match
+	// one of the supported locales in Amazon Lex V2. All of the intents, slot types,
+	// and slots used in the bot must have the same locale. For more information, see
+	// Supported languages
+	// (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html) in the Amazon
+	// Lex V2 Developer Guide.
+	//
+	// This member is required.
+	LocaleId *string
+
+	// Determines whether the Amazon Lex V2 bot responds to all standard messages.
+	// Control messages are not supported.
+	//
+	// This member is required.
+	RespondsTo RespondsTo
+
+	// The name of the welcome intent configured in the Amazon Lex V2 bot.
+	WelcomeIntent *string
 
 	noSmithyDocumentSerde
 }

@@ -770,6 +770,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutChannelExpirationSettings struct {
+}
+
+func (*validateOpPutChannelExpirationSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutChannelExpirationSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutChannelExpirationSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutChannelExpirationSettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutChannelMembershipPreferences struct {
 }
 
@@ -1142,6 +1162,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpPutChannelExpirationSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutChannelExpirationSettings{}, middleware.After)
+}
+
 func addOpPutChannelMembershipPreferencesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutChannelMembershipPreferences{}, middleware.After)
 }
@@ -1231,6 +1255,24 @@ func validateElasticChannelConfiguration(v *types.ElasticChannelConfiguration) e
 	}
 	if v.MinimumMembershipPercentage == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MinimumMembershipPercentage"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateExpirationSettings(v *types.ExpirationSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExpirationSettings"}
+	if v.ExpirationDays == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExpirationDays"))
+	}
+	if len(v.ExpirationCriterion) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ExpirationCriterion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1590,6 +1632,11 @@ func validateOpCreateChannelInput(v *CreateChannelInput) error {
 	if v.ElasticChannelConfiguration != nil {
 		if err := validateElasticChannelConfiguration(v.ElasticChannelConfiguration); err != nil {
 			invalidParams.AddNested("ElasticChannelConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ExpirationSettings != nil {
+		if err := validateExpirationSettings(v.ExpirationSettings); err != nil {
+			invalidParams.AddNested("ExpirationSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2196,6 +2243,26 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	}
 }
 
+func validateOpPutChannelExpirationSettingsInput(v *PutChannelExpirationSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutChannelExpirationSettingsInput"}
+	if v.ChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
+	if v.ExpirationSettings != nil {
+		if err := validateExpirationSettings(v.ExpirationSettings); err != nil {
+			invalidParams.AddNested("ExpirationSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutChannelMembershipPreferencesInput(v *PutChannelMembershipPreferencesInput) error {
 	if v == nil {
 		return nil
@@ -2409,6 +2476,9 @@ func validateOpUpdateChannelMessageInput(v *UpdateChannelMessageInput) error {
 	}
 	if v.MessageId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MessageId"))
+	}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
 	}
 	if v.ChimeBearer == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChimeBearer"))

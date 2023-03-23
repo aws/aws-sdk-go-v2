@@ -18,6 +18,8 @@ const (
 	BlockTypeQuery            BlockType = "QUERY"
 	BlockTypeQueryResult      BlockType = "QUERY_RESULT"
 	BlockTypeSignature        BlockType = "SIGNATURE"
+	BlockTypeTableTitle       BlockType = "TABLE_TITLE"
+	BlockTypeTableFooter      BlockType = "TABLE_FOOTER"
 )
 
 // Values returns all known values for BlockType. Note that this can be expanded in
@@ -37,6 +39,8 @@ func (BlockType) Values() []BlockType {
 		"QUERY",
 		"QUERY_RESULT",
 		"SIGNATURE",
+		"TABLE_TITLE",
+		"TABLE_FOOTER",
 	}
 }
 
@@ -62,9 +66,15 @@ type EntityType string
 
 // Enum values for EntityType
 const (
-	EntityTypeKey          EntityType = "KEY"
-	EntityTypeValue        EntityType = "VALUE"
-	EntityTypeColumnHeader EntityType = "COLUMN_HEADER"
+	EntityTypeKey                 EntityType = "KEY"
+	EntityTypeValue               EntityType = "VALUE"
+	EntityTypeColumnHeader        EntityType = "COLUMN_HEADER"
+	EntityTypeTableTitle          EntityType = "TABLE_TITLE"
+	EntityTypeTableFooter         EntityType = "TABLE_FOOTER"
+	EntityTypeTableSectionTitle   EntityType = "TABLE_SECTION_TITLE"
+	EntityTypeTableSummary        EntityType = "TABLE_SUMMARY"
+	EntityTypeStructuredTable     EntityType = "STRUCTURED_TABLE"
+	EntityTypeSemiStructuredTable EntityType = "SEMI_STRUCTURED_TABLE"
 )
 
 // Values returns all known values for EntityType. Note that this can be expanded
@@ -75,6 +85,12 @@ func (EntityType) Values() []EntityType {
 		"KEY",
 		"VALUE",
 		"COLUMN_HEADER",
+		"TABLE_TITLE",
+		"TABLE_FOOTER",
+		"TABLE_SECTION_TITLE",
+		"TABLE_SUMMARY",
+		"STRUCTURED_TABLE",
+		"SEMI_STRUCTURED_TABLE",
 	}
 }
 
@@ -132,6 +148,9 @@ const (
 	RelationshipTypeMergedCell      RelationshipType = "MERGED_CELL"
 	RelationshipTypeTitle           RelationshipType = "TITLE"
 	RelationshipTypeAnswer          RelationshipType = "ANSWER"
+	RelationshipTypeTable           RelationshipType = "TABLE"
+	RelationshipTypeTableTitle      RelationshipType = "TABLE_TITLE"
+	RelationshipTypeTableFooter     RelationshipType = "TABLE_FOOTER"
 )
 
 // Values returns all known values for RelationshipType. Note that this can be
@@ -145,6 +164,9 @@ func (RelationshipType) Values() []RelationshipType {
 		"MERGED_CELL",
 		"TITLE",
 		"ANSWER",
+		"TABLE",
+		"TABLE_TITLE",
+		"TABLE_FOOTER",
 	}
 }
 

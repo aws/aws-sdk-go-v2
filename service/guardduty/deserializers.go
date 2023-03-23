@@ -2473,6 +2473,15 @@ func awsRestjson1_deserializeOpDocumentDescribeOrganizationConfigurationOutput(v
 				sv.AutoEnable = jtv
 			}
 
+		case "autoEnableOrganizationMembers":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutoEnableMembers to be of type string, got %T instead", value)
+				}
+				sv.AutoEnableOrganizationMembers = types.AutoEnableMembers(jtv)
+			}
+
 		case "dataSources":
 			if err := awsRestjson1_deserializeDocumentOrganizationDataSourceConfigurationsResult(&sv.DataSources, value); err != nil {
 				return err

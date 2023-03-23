@@ -1,0 +1,8 @@
+{
+    "id": "e1d261e0-06d1-4973-b568-41e0061776fb",
+    "type": "feature",
+    "description": "This feature allows Batch to support configuration of ephemeral storage size for jobs running on FARGATE",
+    "modules": [
+        "service/batch"
+    ]
+}

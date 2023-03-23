@@ -25,9 +25,9 @@ import (
 // * Only the message sender can invoke this
 // API.
 //
-// * The x-amz-chime-bearer request header is mandatory. Use the
-// AppInstanceUserArn of the user that makes the API call as the value in the
-// header
+// * The x-amz-chime-bearer request header is mandatory. Use the ARN of the
+// AppInstanceUser or AppInstanceBot that makes the API call as the value in the
+// header.
 func (c *Client) GetChannelMessageStatus(ctx context.Context, params *GetChannelMessageStatusInput, optFns ...func(*Options)) (*GetChannelMessageStatusOutput, error) {
 	if params == nil {
 		params = &GetChannelMessageStatusInput{}

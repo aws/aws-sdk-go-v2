@@ -31,6 +31,16 @@ type Address struct {
 	noSmithyDocumentSerde
 }
 
+type CallDetails struct {
+	IsCaller *bool
+
+	TransactionId *string
+
+	VoiceConnectorId *string
+
+	noSmithyDocumentSerde
+}
+
 type CandidateAddress struct {
 	City *string
 
@@ -91,6 +101,14 @@ type LoggingConfiguration struct {
 	EnableMediaMetricLogs *bool
 
 	EnableSIPLogs *bool
+
+	noSmithyDocumentSerde
+}
+
+type MediaInsightsConfiguration struct {
+	ConfigurationArn *string
+
+	Disabled *bool
 
 	noSmithyDocumentSerde
 }
@@ -269,6 +287,14 @@ type ProxySession struct {
 	noSmithyDocumentSerde
 }
 
+type ServerSideEncryptionConfiguration struct {
+
+	// This member is required.
+	KmsKeyArn *string
+
+	noSmithyDocumentSerde
+}
+
 type SipMediaApplication struct {
 	AwsRegion *string
 
@@ -344,6 +370,42 @@ type SipRuleTargetApplication struct {
 	noSmithyDocumentSerde
 }
 
+type SpeakerSearchDetails struct {
+	Results []SpeakerSearchResult
+
+	VoiceprintGenerationStatus *string
+
+	noSmithyDocumentSerde
+}
+
+type SpeakerSearchResult struct {
+	ConfidenceScore float32
+
+	VoiceProfileId *string
+
+	noSmithyDocumentSerde
+}
+
+type SpeakerSearchTask struct {
+	CallDetails *CallDetails
+
+	CreatedTimestamp *time.Time
+
+	SpeakerSearchDetails *SpeakerSearchDetails
+
+	SpeakerSearchTaskId *string
+
+	SpeakerSearchTaskStatus *string
+
+	StartedTimestamp *time.Time
+
+	StatusMessage *string
+
+	UpdatedTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
 type StreamingConfiguration struct {
 
 	// This member is required.
@@ -352,6 +414,8 @@ type StreamingConfiguration struct {
 	// This member is required.
 	Disabled *bool
 
+	MediaInsightsConfiguration *MediaInsightsConfiguration
+
 	StreamingNotificationTargets []StreamingNotificationTarget
 
 	noSmithyDocumentSerde
@@ -359,6 +423,17 @@ type StreamingConfiguration struct {
 
 type StreamingNotificationTarget struct {
 	NotificationTarget NotificationTarget
+
+	noSmithyDocumentSerde
+}
+
+type Tag struct {
+
+	// This member is required.
+	Key *string
+
+	// This member is required.
+	Value *string
 
 	noSmithyDocumentSerde
 }
@@ -446,6 +521,90 @@ type VoiceConnectorItem struct {
 
 type VoiceConnectorSettings struct {
 	CdrBucket *string
+
+	noSmithyDocumentSerde
+}
+
+type VoiceProfile struct {
+	CreatedTimestamp *time.Time
+
+	ExpirationTimestamp *time.Time
+
+	UpdatedTimestamp *time.Time
+
+	VoiceProfileArn *string
+
+	VoiceProfileDomainId *string
+
+	VoiceProfileId *string
+
+	noSmithyDocumentSerde
+}
+
+type VoiceProfileDomain struct {
+	CreatedTimestamp *time.Time
+
+	Description *string
+
+	Name *string
+
+	ServerSideEncryptionConfiguration *ServerSideEncryptionConfiguration
+
+	UpdatedTimestamp *time.Time
+
+	VoiceProfileDomainArn *string
+
+	VoiceProfileDomainId *string
+
+	noSmithyDocumentSerde
+}
+
+type VoiceProfileDomainSummary struct {
+	CreatedTimestamp *time.Time
+
+	Description *string
+
+	Name *string
+
+	UpdatedTimestamp *time.Time
+
+	VoiceProfileDomainArn *string
+
+	VoiceProfileDomainId *string
+
+	noSmithyDocumentSerde
+}
+
+type VoiceProfileSummary struct {
+	CreatedTimestamp *time.Time
+
+	ExpirationTimestamp *time.Time
+
+	UpdatedTimestamp *time.Time
+
+	VoiceProfileArn *string
+
+	VoiceProfileDomainId *string
+
+	VoiceProfileId *string
+
+	noSmithyDocumentSerde
+}
+
+type VoiceToneAnalysisTask struct {
+	CallDetails *CallDetails
+
+	CreatedTimestamp *time.Time
+
+	StartedTimestamp *time.Time
+
+	StatusMessage *string
+
+	UpdatedTimestamp *time.Time
+
+	VoiceToneAnalysisTaskId *string
+
+	VoiceToneAnalysisTaskStatus *string
 
 	noSmithyDocumentSerde
 }

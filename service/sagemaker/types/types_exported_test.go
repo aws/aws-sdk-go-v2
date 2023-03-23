@@ -7,6 +7,28 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
 
+func ExampleAutoMLProblemTypeConfig_outputUsage() {
+	var union types.AutoMLProblemTypeConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AutoMLProblemTypeConfigMemberImageClassificationJobConfig:
+		_ = v.Value // Value is types.ImageClassificationJobConfig
+
+	case *types.AutoMLProblemTypeConfigMemberTextClassificationJobConfig:
+		_ = v.Value // Value is types.TextClassificationJobConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.TextClassificationJobConfig
+var _ *types.ImageClassificationJobConfig
+
 func ExampleTrialComponentParameterValue_outputUsage() {
 	var union types.TrialComponentParameterValue
 	// type switches can be used to check the union value

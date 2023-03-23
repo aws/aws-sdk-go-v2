@@ -92,6 +92,34 @@ func (e *ForbiddenException) ErrorCode() string {
 }
 func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// One or more of the resources in the request does not exist in the system.
+type NotFoundException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Code ErrorCode
+
+	noSmithyDocumentSerde
+}
+
+func (e *NotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *NotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *NotFoundException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "NotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The request exceeds the resource limit.
 type ResourceLimitExceededException struct {
 	Message *string

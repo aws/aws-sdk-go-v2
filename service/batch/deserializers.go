@@ -4154,6 +4154,11 @@ func awsRestjson1_deserializeDocumentContainerDetail(v **types.ContainerDetail, 
 				return err
 			}
 
+		case "ephemeralStorage":
+			if err := awsRestjson1_deserializeDocumentEphemeralStorage(&sv.EphemeralStorage, value); err != nil {
+				return err
+			}
+
 		case "executionRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4371,6 +4376,11 @@ func awsRestjson1_deserializeDocumentContainerProperties(v **types.ContainerProp
 
 		case "environment":
 			if err := awsRestjson1_deserializeDocumentEnvironmentVariables(&sv.Environment, value); err != nil {
+				return err
+			}
+
+		case "ephemeralStorage":
+			if err := awsRestjson1_deserializeDocumentEphemeralStorage(&sv.EphemeralStorage, value); err != nil {
 				return err
 			}
 
@@ -5825,6 +5835,42 @@ func awsRestjson1_deserializeDocumentEksHostPath(v **types.EksHostPath, value in
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentEksLabelsMap(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentEksLimits(v *map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5858,6 +5904,42 @@ func awsRestjson1_deserializeDocumentEksLimits(v *map[string]string, value inter
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEksMetadata(v **types.EksMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EksMetadata
+	if *v == nil {
+		sv = &types.EksMetadata{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "labels":
+			if err := awsRestjson1_deserializeDocumentEksLabelsMap(&sv.Labels, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -5904,6 +5986,11 @@ func awsRestjson1_deserializeDocumentEksPodProperties(v **types.EksPodProperties
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.HostNetwork = ptr.Bool(jtv)
+			}
+
+		case "metadata":
+			if err := awsRestjson1_deserializeDocumentEksMetadata(&sv.Metadata, value); err != nil {
+				return err
 			}
 
 		case "serviceAccountName":
@@ -6292,6 +6379,50 @@ func awsRestjson1_deserializeDocumentEnvironmentVariables(v *[]types.KeyValuePai
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEphemeralStorage(v **types.EphemeralStorage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EphemeralStorage
+	if *v == nil {
+		sv = &types.EphemeralStorage{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "sizeInGiB":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SizeInGiB = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

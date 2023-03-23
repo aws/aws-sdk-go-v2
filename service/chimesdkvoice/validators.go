@@ -230,6 +230,46 @@ func (m *validateOpCreateVoiceConnector) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateVoiceProfileDomain struct {
+}
+
+func (*validateOpCreateVoiceProfileDomain) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateVoiceProfileDomain) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateVoiceProfileDomainInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateVoiceProfileDomainInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateVoiceProfile struct {
+}
+
+func (*validateOpCreateVoiceProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateVoiceProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateVoiceProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateVoiceProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeletePhoneNumber struct {
 }
 
@@ -470,6 +510,46 @@ func (m *validateOpDeleteVoiceConnectorTermination) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteVoiceProfileDomain struct {
+}
+
+func (*validateOpDeleteVoiceProfileDomain) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteVoiceProfileDomain) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteVoiceProfileDomainInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteVoiceProfileDomainInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteVoiceProfile struct {
+}
+
+func (*validateOpDeleteVoiceProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteVoiceProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteVoiceProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteVoiceProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisassociatePhoneNumbersFromVoiceConnectorGroup struct {
 }
 
@@ -645,6 +725,26 @@ func (m *validateOpGetSipRule) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetSipRuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetSpeakerSearchTask struct {
+}
+
+func (*validateOpGetSpeakerSearchTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSpeakerSearchTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSpeakerSearchTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSpeakerSearchTaskInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -830,6 +930,66 @@ func (m *validateOpGetVoiceConnectorTermination) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetVoiceProfileDomain struct {
+}
+
+func (*validateOpGetVoiceProfileDomain) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetVoiceProfileDomain) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetVoiceProfileDomainInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetVoiceProfileDomainInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetVoiceProfile struct {
+}
+
+func (*validateOpGetVoiceProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetVoiceProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetVoiceProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetVoiceProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetVoiceToneAnalysisTask struct {
+}
+
+func (*validateOpGetVoiceToneAnalysisTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetVoiceToneAnalysisTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetVoiceToneAnalysisTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetVoiceToneAnalysisTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListProxySessions struct {
 }
 
@@ -870,6 +1030,26 @@ func (m *validateOpListSupportedPhoneNumberCountries) HandleInitialize(ctx conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListTagsForResource struct {
+}
+
+func (*validateOpListTagsForResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTagsForResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListVoiceConnectorTerminationCredentials struct {
 }
 
@@ -885,6 +1065,26 @@ func (m *validateOpListVoiceConnectorTerminationCredentials) HandleInitialize(ct
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListVoiceConnectorTerminationCredentialsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListVoiceProfiles struct {
+}
+
+func (*validateOpListVoiceProfiles) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListVoiceProfiles) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListVoiceProfilesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListVoiceProfilesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1090,6 +1290,126 @@ func (m *validateOpRestorePhoneNumber) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartSpeakerSearchTask struct {
+}
+
+func (*validateOpStartSpeakerSearchTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartSpeakerSearchTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartSpeakerSearchTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartSpeakerSearchTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartVoiceToneAnalysisTask struct {
+}
+
+func (*validateOpStartVoiceToneAnalysisTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartVoiceToneAnalysisTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartVoiceToneAnalysisTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartVoiceToneAnalysisTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopSpeakerSearchTask struct {
+}
+
+func (*validateOpStopSpeakerSearchTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopSpeakerSearchTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopSpeakerSearchTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopSpeakerSearchTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopVoiceToneAnalysisTask struct {
+}
+
+func (*validateOpStopVoiceToneAnalysisTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopVoiceToneAnalysisTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopVoiceToneAnalysisTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopVoiceToneAnalysisTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpTagResource struct {
+}
+
+func (*validateOpTagResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TagResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUntagResource struct {
+}
+
+func (*validateOpUntagResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UntagResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUntagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdatePhoneNumber struct {
 }
 
@@ -1250,6 +1570,46 @@ func (m *validateOpUpdateVoiceConnector) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateVoiceProfileDomain struct {
+}
+
+func (*validateOpUpdateVoiceProfileDomain) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateVoiceProfileDomain) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateVoiceProfileDomainInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateVoiceProfileDomainInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateVoiceProfile struct {
+}
+
+func (*validateOpUpdateVoiceProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateVoiceProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateVoiceProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateVoiceProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpValidateE911Address struct {
 }
 
@@ -1314,6 +1674,14 @@ func addOpCreateVoiceConnectorValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpCreateVoiceConnector{}, middleware.After)
 }
 
+func addOpCreateVoiceProfileDomainValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateVoiceProfileDomain{}, middleware.After)
+}
+
+func addOpCreateVoiceProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateVoiceProfile{}, middleware.After)
+}
+
 func addOpDeletePhoneNumberValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeletePhoneNumber{}, middleware.After)
 }
@@ -1362,6 +1730,14 @@ func addOpDeleteVoiceConnectorTerminationValidationMiddleware(stack *middleware.
 	return stack.Initialize.Add(&validateOpDeleteVoiceConnectorTermination{}, middleware.After)
 }
 
+func addOpDeleteVoiceProfileDomainValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteVoiceProfileDomain{}, middleware.After)
+}
+
+func addOpDeleteVoiceProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteVoiceProfile{}, middleware.After)
+}
+
 func addOpDisassociatePhoneNumbersFromVoiceConnectorGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociatePhoneNumbersFromVoiceConnectorGroup{}, middleware.After)
 }
@@ -1396,6 +1772,10 @@ func addOpGetSipMediaApplicationLoggingConfigurationValidationMiddleware(stack *
 
 func addOpGetSipRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSipRule{}, middleware.After)
+}
+
+func addOpGetSpeakerSearchTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSpeakerSearchTask{}, middleware.After)
 }
 
 func addOpGetVoiceConnectorEmergencyCallingConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -1434,6 +1814,18 @@ func addOpGetVoiceConnectorTerminationValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpGetVoiceConnectorTermination{}, middleware.After)
 }
 
+func addOpGetVoiceProfileDomainValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetVoiceProfileDomain{}, middleware.After)
+}
+
+func addOpGetVoiceProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetVoiceProfile{}, middleware.After)
+}
+
+func addOpGetVoiceToneAnalysisTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetVoiceToneAnalysisTask{}, middleware.After)
+}
+
 func addOpListProxySessionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListProxySessions{}, middleware.After)
 }
@@ -1442,8 +1834,16 @@ func addOpListSupportedPhoneNumberCountriesValidationMiddleware(stack *middlewar
 	return stack.Initialize.Add(&validateOpListSupportedPhoneNumberCountries{}, middleware.After)
 }
 
+func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
 func addOpListVoiceConnectorTerminationCredentialsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListVoiceConnectorTerminationCredentials{}, middleware.After)
+}
+
+func addOpListVoiceProfilesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListVoiceProfiles{}, middleware.After)
 }
 
 func addOpPutSipMediaApplicationAlexaSkillConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -1486,6 +1886,30 @@ func addOpRestorePhoneNumberValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpRestorePhoneNumber{}, middleware.After)
 }
 
+func addOpStartSpeakerSearchTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartSpeakerSearchTask{}, middleware.After)
+}
+
+func addOpStartVoiceToneAnalysisTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartVoiceToneAnalysisTask{}, middleware.After)
+}
+
+func addOpStopSpeakerSearchTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopSpeakerSearchTask{}, middleware.After)
+}
+
+func addOpStopVoiceToneAnalysisTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopVoiceToneAnalysisTask{}, middleware.After)
+}
+
+func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
+}
+
+func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
 func addOpUpdatePhoneNumberValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdatePhoneNumber{}, middleware.After)
 }
@@ -1516,6 +1940,14 @@ func addOpUpdateVoiceConnectorGroupValidationMiddleware(stack *middleware.Stack)
 
 func addOpUpdateVoiceConnectorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateVoiceConnector{}, middleware.After)
+}
+
+func addOpUpdateVoiceProfileDomainValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateVoiceProfileDomain{}, middleware.After)
+}
+
+func addOpUpdateVoiceProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateVoiceProfile{}, middleware.After)
 }
 
 func addOpValidateE911AddressValidationMiddleware(stack *middleware.Stack) error {
@@ -1592,6 +2024,21 @@ func validateGeoMatchParams(v *types.GeoMatchParams) error {
 	}
 }
 
+func validateServerSideEncryptionConfiguration(v *types.ServerSideEncryptionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ServerSideEncryptionConfiguration"}
+	if v.KmsKeyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSipMediaApplicationAlexaSkillConfiguration(v *types.SipMediaApplicationAlexaSkillConfiguration) error {
 	if v == nil {
 		return nil
@@ -1620,6 +2067,41 @@ func validateStreamingConfiguration(v *types.StreamingConfiguration) error {
 	}
 	if v.Disabled == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Disabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTag(v *types.Tag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTagList(v []types.Tag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
+	for i := range v {
+		if err := validateTag(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1910,6 +2392,48 @@ func validateOpCreateVoiceConnectorInput(v *CreateVoiceConnectorInput) error {
 	}
 }
 
+func validateOpCreateVoiceProfileDomainInput(v *CreateVoiceProfileDomainInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateVoiceProfileDomainInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ServerSideEncryptionConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerSideEncryptionConfiguration"))
+	} else if v.ServerSideEncryptionConfiguration != nil {
+		if err := validateServerSideEncryptionConfiguration(v.ServerSideEncryptionConfiguration); err != nil {
+			invalidParams.AddNested("ServerSideEncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateVoiceProfileInput(v *CreateVoiceProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateVoiceProfileInput"}
+	if v.SpeakerSearchTaskId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpeakerSearchTaskId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeletePhoneNumberInput(v *DeletePhoneNumberInput) error {
 	if v == nil {
 		return nil
@@ -2096,6 +2620,36 @@ func validateOpDeleteVoiceConnectorTerminationInput(v *DeleteVoiceConnectorTermi
 	}
 }
 
+func validateOpDeleteVoiceProfileDomainInput(v *DeleteVoiceProfileDomainInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteVoiceProfileDomainInput"}
+	if v.VoiceProfileDomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VoiceProfileDomainId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteVoiceProfileInput(v *DeleteVoiceProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteVoiceProfileInput"}
+	if v.VoiceProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VoiceProfileId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDisassociatePhoneNumbersFromVoiceConnectorGroupInput(v *DisassociatePhoneNumbersFromVoiceConnectorGroupInput) error {
 	if v == nil {
 		return nil
@@ -2240,6 +2794,24 @@ func validateOpGetSipRuleInput(v *GetSipRuleInput) error {
 	}
 }
 
+func validateOpGetSpeakerSearchTaskInput(v *GetSpeakerSearchTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSpeakerSearchTaskInput"}
+	if v.VoiceConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VoiceConnectorId"))
+	}
+	if v.SpeakerSearchTaskId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpeakerSearchTaskId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetVoiceConnectorEmergencyCallingConfigurationInput(v *GetVoiceConnectorEmergencyCallingConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -2375,6 +2947,57 @@ func validateOpGetVoiceConnectorTerminationInput(v *GetVoiceConnectorTermination
 	}
 }
 
+func validateOpGetVoiceProfileDomainInput(v *GetVoiceProfileDomainInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetVoiceProfileDomainInput"}
+	if v.VoiceProfileDomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VoiceProfileDomainId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetVoiceProfileInput(v *GetVoiceProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetVoiceProfileInput"}
+	if v.VoiceProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VoiceProfileId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetVoiceToneAnalysisTaskInput(v *GetVoiceToneAnalysisTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetVoiceToneAnalysisTaskInput"}
+	if v.VoiceConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VoiceConnectorId"))
+	}
+	if v.VoiceToneAnalysisTaskId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VoiceToneAnalysisTaskId"))
+	}
+	if v.IsCaller == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IsCaller"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListProxySessionsInput(v *ListProxySessionsInput) error {
 	if v == nil {
 		return nil
@@ -2405,6 +3028,21 @@ func validateOpListSupportedPhoneNumberCountriesInput(v *ListSupportedPhoneNumbe
 	}
 }
 
+func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListVoiceConnectorTerminationCredentialsInput(v *ListVoiceConnectorTerminationCredentialsInput) error {
 	if v == nil {
 		return nil
@@ -2412,6 +3050,21 @@ func validateOpListVoiceConnectorTerminationCredentialsInput(v *ListVoiceConnect
 	invalidParams := smithy.InvalidParamsError{Context: "ListVoiceConnectorTerminationCredentialsInput"}
 	if v.VoiceConnectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VoiceConnectorId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListVoiceProfilesInput(v *ListVoiceProfilesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListVoiceProfilesInput"}
+	if v.VoiceProfileDomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VoiceProfileDomainId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2604,6 +3257,124 @@ func validateOpRestorePhoneNumberInput(v *RestorePhoneNumberInput) error {
 	}
 }
 
+func validateOpStartSpeakerSearchTaskInput(v *StartSpeakerSearchTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartSpeakerSearchTaskInput"}
+	if v.VoiceConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VoiceConnectorId"))
+	}
+	if v.TransactionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransactionId"))
+	}
+	if v.VoiceProfileDomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VoiceProfileDomainId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartVoiceToneAnalysisTaskInput(v *StartVoiceToneAnalysisTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartVoiceToneAnalysisTaskInput"}
+	if v.VoiceConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VoiceConnectorId"))
+	}
+	if v.TransactionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransactionId"))
+	}
+	if len(v.LanguageCode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopSpeakerSearchTaskInput(v *StopSpeakerSearchTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopSpeakerSearchTaskInput"}
+	if v.VoiceConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VoiceConnectorId"))
+	}
+	if v.SpeakerSearchTaskId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpeakerSearchTaskId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopVoiceToneAnalysisTaskInput(v *StopVoiceToneAnalysisTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopVoiceToneAnalysisTaskInput"}
+	if v.VoiceConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VoiceConnectorId"))
+	}
+	if v.VoiceToneAnalysisTaskId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VoiceToneAnalysisTaskId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpTagResourceInput(v *TagResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	} else if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUntagResourceInput(v *UntagResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdatePhoneNumberInput(v *UpdatePhoneNumberInput) error {
 	if v == nil {
 		return nil
@@ -2747,6 +3518,39 @@ func validateOpUpdateVoiceConnectorInput(v *UpdateVoiceConnectorInput) error {
 	}
 	if v.RequireEncryption == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RequireEncryption"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateVoiceProfileDomainInput(v *UpdateVoiceProfileDomainInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateVoiceProfileDomainInput"}
+	if v.VoiceProfileDomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VoiceProfileDomainId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateVoiceProfileInput(v *UpdateVoiceProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateVoiceProfileInput"}
+	if v.VoiceProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VoiceProfileId"))
+	}
+	if v.SpeakerSearchTaskId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpeakerSearchTaskId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

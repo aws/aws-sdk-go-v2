@@ -1,0 +1,8 @@
+{
+    "id": "30819622-b850-4dd2-a12b-c26640cd8cd2",
+    "type": "feature",
+    "description": "ExpirationSettings provides automatic resource deletion for Channels.",
+    "modules": [
+        "service/chimesdkmessaging"
+    ]
+}

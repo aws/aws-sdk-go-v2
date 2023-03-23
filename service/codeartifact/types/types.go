@@ -180,7 +180,7 @@ type PackageDescription struct {
 	// packages do not contain a corresponding component, packages of those formats do
 	// not have a namespace.
 	//
-	// * The namespace of a generic package is it’s namespace.
+	// * The namespace of a generic package is its namespace.
 	Namespace *string
 
 	// The package origin configuration for the package.
@@ -237,7 +237,7 @@ type PackageSummary struct {
 	// packages do not contain a corresponding component, packages of those formats do
 	// not have a namespace.
 	//
-	// * The namespace of a generic package is it’s namespace.
+	// * The namespace of a generic package is its namespace.
 	Namespace *string
 
 	// A PackageOriginConfiguration
@@ -284,7 +284,7 @@ type PackageVersionDescription struct {
 	// corresponding component, package versions of those formats do not have a
 	// namespace.
 	//
-	// * The namespace of a generic package is it’s namespace.
+	// * The namespace of a generic package is its namespace.
 	Namespace *string
 
 	// A PackageVersionOrigin
@@ -408,6 +408,9 @@ type RepositoryDescription struct {
 	// The Amazon Resource Name (ARN) of the repository.
 	Arn *string
 
+	// A timestamp that represents the date and time the repository was created.
+	CreatedTime *time.Time
+
 	// A text description of the repository.
 	Description *string
 
@@ -473,6 +476,9 @@ type RepositorySummary struct {
 
 	// The ARN of the repository.
 	Arn *string
+
+	// A timestamp that represents the date and time the repository was created.
+	CreatedTime *time.Time
 
 	// The description of the repository.
 	Description *string

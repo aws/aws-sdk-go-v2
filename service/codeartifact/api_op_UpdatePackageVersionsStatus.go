@@ -88,7 +88,7 @@ type UpdatePackageVersionsStatusInput struct {
 	// contain a corresponding component, package versions of those formats do not have
 	// a namespace.
 	//
-	// * The namespace of a generic package is it’s namespace.
+	// * The namespace of a generic package is its namespace.
 	Namespace *string
 
 	// A map of package versions and package version revisions. The map key is the

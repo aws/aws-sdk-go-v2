@@ -92,7 +92,7 @@ type PutPackageOriginConfigurationInput struct {
 	// those formats do not have a namespace.
 	//
 	// * The namespace of a generic package is
-	// it’s namespace.
+	// its namespace.
 	Namespace *string
 
 	noSmithyDocumentSerde

@@ -58,6 +58,9 @@ type AssociateExternalConnectionInput struct {
 	// *
 	// public:maven-commonsware - for the CommonsWare Android repository.
 	//
+	// *
+	// public:maven-clojars - for the Clojars repository.
+	//
 	// This member is required.
 	ExternalConnection *string
 

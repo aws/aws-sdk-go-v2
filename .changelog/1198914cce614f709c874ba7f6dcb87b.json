@@ -1,0 +1,8 @@
+{
+    "id": "1198914c-ce61-4f70-9c87-4ba7f6dcb87b",
+    "type": "feature",
+    "description": "AppInstanceBots can be used to add a bot powered by Amazon Lex to chat channels.  ExpirationSettings provides automatic resource deletion for AppInstanceUsers.",
+    "modules": [
+        "service/chimesdkidentity"
+    ]
+}

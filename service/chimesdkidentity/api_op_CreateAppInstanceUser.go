@@ -41,7 +41,8 @@ type CreateAppInstanceUserInput struct {
 	// This member is required.
 	AppInstanceUserId *string
 
-	// The token assigned to the user requesting an AppInstance.
+	// The unique ID of the request. Use different tokens to request additional
+	// AppInstances.
 	//
 	// This member is required.
 	ClientRequestToken *string
@@ -50,6 +51,10 @@ type CreateAppInstanceUserInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	// Settings that control the interval after which the AppInstanceUser is
+	// automatically deleted.
+	ExpirationSettings *types.ExpirationSettings
 
 	// The request's metadata. Limited to a 1KB string in UTF-8.
 	Metadata *string

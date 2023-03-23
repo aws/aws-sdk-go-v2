@@ -1,0 +1,8 @@
+{
+    "id": "95ec135b-f7e7-4beb-9c77-bcacde0cdb2a",
+    "type": "feature",
+    "description": "Reverted the throttling exception RequestLimitExceeded for AWS Cloud Map APIs introduced in SDK version 1.12.424 2023-03-09 to previous exception specified in the ErrorCode.",
+    "modules": [
+        "service/servicediscovery"
+    ]
+}

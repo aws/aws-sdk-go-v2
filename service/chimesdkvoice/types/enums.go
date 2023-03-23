@@ -124,6 +124,22 @@ func (GeoMatchLevel) Values() []GeoMatchLevel {
 	}
 }
 
+type LanguageCode string
+
+// Enum values for LanguageCode
+const (
+	LanguageCodeEnUs LanguageCode = "en-US"
+)
+
+// Values returns all known values for LanguageCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (LanguageCode) Values() []LanguageCode {
+	return []LanguageCode{
+		"en-US",
+	}
+}
+
 type NotificationTarget string
 
 // Enum values for NotificationTarget

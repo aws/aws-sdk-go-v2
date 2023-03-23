@@ -36,6 +36,36 @@ func (e *BadRequestException) ErrorCode() string {
 }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The request could not be processed because of conflict in the current state of
+// the resource.
+type ConflictException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Code      ErrorCode
+	RequestId *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ConflictException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ConflictException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The client is permanently forbidden from making the request.
 type ForbiddenException struct {
 	Message *string

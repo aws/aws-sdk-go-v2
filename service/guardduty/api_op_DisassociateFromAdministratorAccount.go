@@ -11,7 +11,9 @@ import (
 )
 
 // Disassociates the current GuardDuty member account from its administrator
-// account.
+// account. With autoEnableOrganizationMembers configuration for your organization
+// set to ALL, you'll receive an error if you attempt to disable GuardDuty in a
+// member account.
 func (c *Client) DisassociateFromAdministratorAccount(ctx context.Context, params *DisassociateFromAdministratorAccountInput, optFns ...func(*Options)) (*DisassociateFromAdministratorAccountOutput, error) {
 	if params == nil {
 		params = &DisassociateFromAdministratorAccountInput{}

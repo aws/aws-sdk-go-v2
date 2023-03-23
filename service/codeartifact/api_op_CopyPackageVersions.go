@@ -85,7 +85,7 @@ type CopyPackageVersionsInput struct {
 	// corresponding component, package versions of those formats do not have a
 	// namespace.
 	//
-	// * The namespace of a generic package is it’s namespace.
+	// * The namespace of a generic package is its namespace.
 	Namespace *string
 
 	// A list of key-value pairs. The keys are package versions and the values are

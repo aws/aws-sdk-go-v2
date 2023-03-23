@@ -1,0 +1,8 @@
+{
+    "id": "d25bd96e-05b4-4ddd-91e6-f33982a047df",
+    "type": "feature",
+    "description": "Initial release of the Amazon Interactive Video Service RealTime API.",
+    "modules": [
+        "service/ivsrealtime"
+    ]
+}

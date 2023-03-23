@@ -11,16 +11,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Promotes an AppInstanceUser to an AppInstanceAdmin. The promoted user can
-// perform the following actions.
+// Promotes an AppInstanceUser or AppInstanceBot to an AppInstanceAdmin. The
+// promoted entity can perform the following actions.
 //
-// * ChannelModerator actions across all channels
-// in the AppInstance.
+// * ChannelModerator actions
+// across all channels in the AppInstance.
 //
 // * DeleteChannelMessage actions.
 //
-// Only an AppInstanceUser
-// can be promoted to an AppInstanceAdmin role.
+// Only
+// an AppInstanceUser and AppInstanceBot can be promoted to an AppInstanceAdmin
+// role.
 func (c *Client) CreateAppInstanceAdmin(ctx context.Context, params *CreateAppInstanceAdminInput, optFns ...func(*Options)) (*CreateAppInstanceAdminOutput, error) {
 	if params == nil {
 		params = &CreateAppInstanceAdminInput{}
@@ -53,7 +54,8 @@ type CreateAppInstanceAdminInput struct {
 
 type CreateAppInstanceAdminOutput struct {
 
-	// The name and ARN of the admin for the AppInstance.
+	// The ARN and name of the administrator, the ARN of the AppInstance, and the
+	// created and last-updated timestamps. All timestamps use epoch milliseconds.
 	AppInstanceAdmin *types.Identity
 
 	// The ARN of the of the admin for the AppInstance.

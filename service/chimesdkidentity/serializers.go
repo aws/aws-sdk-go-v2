@@ -180,6 +180,103 @@ func awsRestjson1_serializeOpDocumentCreateAppInstanceAdminInput(v *CreateAppIns
 	return nil
 }
 
+type awsRestjson1_serializeOpCreateAppInstanceBot struct {
+}
+
+func (*awsRestjson1_serializeOpCreateAppInstanceBot) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateAppInstanceBot) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateAppInstanceBotInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/app-instance-bots")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateAppInstanceBotInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateAppInstanceBotInput(v *CreateAppInstanceBotInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateAppInstanceBotInput(v *CreateAppInstanceBotInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AppInstanceArn != nil {
+		ok := object.Key("AppInstanceArn")
+		ok.String(*v.AppInstanceArn)
+	}
+
+	if v.ClientRequestToken != nil {
+		ok := object.Key("ClientRequestToken")
+		ok.String(*v.ClientRequestToken)
+	}
+
+	if v.Configuration != nil {
+		ok := object.Key("Configuration")
+		if err := awsRestjson1_serializeDocumentConfiguration(v.Configuration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Metadata != nil {
+		ok := object.Key("Metadata")
+		ok.String(*v.Metadata)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsRestjson1_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateAppInstanceUser struct {
 }
 
@@ -253,6 +350,13 @@ func awsRestjson1_serializeOpDocumentCreateAppInstanceUserInput(v *CreateAppInst
 	if v.ClientRequestToken != nil {
 		ok := object.Key("ClientRequestToken")
 		ok.String(*v.ClientRequestToken)
+	}
+
+	if v.ExpirationSettings != nil {
+		ok := object.Key("ExpirationSettings")
+		if err := awsRestjson1_serializeDocumentExpirationSettings(v.ExpirationSettings, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Metadata != nil {
@@ -393,6 +497,64 @@ func awsRestjson1_serializeOpHttpBindingsDeleteAppInstanceAdminInput(v *DeleteAp
 	}
 	if v.AppInstanceArn != nil {
 		if err := encoder.SetURI("AppInstanceArn").String(*v.AppInstanceArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteAppInstanceBot struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteAppInstanceBot) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteAppInstanceBot) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteAppInstanceBotInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/app-instance-bots/{AppInstanceBotArn}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteAppInstanceBotInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteAppInstanceBotInput(v *DeleteAppInstanceBotInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AppInstanceBotArn == nil || len(*v.AppInstanceBotArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AppInstanceBotArn must not be empty")}
+	}
+	if v.AppInstanceBotArn != nil {
+		if err := encoder.SetURI("AppInstanceBotArn").String(*v.AppInstanceBotArn); err != nil {
 			return err
 		}
 	}
@@ -650,6 +812,64 @@ func awsRestjson1_serializeOpHttpBindingsDescribeAppInstanceAdminInput(v *Descri
 	return nil
 }
 
+type awsRestjson1_serializeOpDescribeAppInstanceBot struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeAppInstanceBot) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeAppInstanceBot) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeAppInstanceBotInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/app-instance-bots/{AppInstanceBotArn}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeAppInstanceBotInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeAppInstanceBotInput(v *DescribeAppInstanceBotInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AppInstanceBotArn == nil || len(*v.AppInstanceBotArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AppInstanceBotArn must not be empty")}
+	}
+	if v.AppInstanceBotArn != nil {
+		if err := encoder.SetURI("AppInstanceBotArn").String(*v.AppInstanceBotArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDescribeAppInstanceUser struct {
 }
 
@@ -886,6 +1106,67 @@ func awsRestjson1_serializeOpHttpBindingsListAppInstanceAdminsInput(v *ListAppIn
 		if err := encoder.SetURI("AppInstanceArn").String(*v.AppInstanceArn); err != nil {
 			return err
 		}
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("max-results").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("next-token").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListAppInstanceBots struct {
+}
+
+func (*awsRestjson1_serializeOpListAppInstanceBots) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListAppInstanceBots) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListAppInstanceBotsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/app-instance-bots")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListAppInstanceBotsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListAppInstanceBotsInput(v *ListAppInstanceBotsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AppInstanceArn != nil {
+		encoder.SetQuery("app-instance-arn").String(*v.AppInstanceArn)
 	}
 
 	if v.MaxResults != nil {
@@ -1212,6 +1493,89 @@ func awsRestjson1_serializeOpDocumentPutAppInstanceRetentionSettingsInput(v *Put
 	if v.AppInstanceRetentionSettings != nil {
 		ok := object.Key("AppInstanceRetentionSettings")
 		if err := awsRestjson1_serializeDocumentAppInstanceRetentionSettings(v.AppInstanceRetentionSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpPutAppInstanceUserExpirationSettings struct {
+}
+
+func (*awsRestjson1_serializeOpPutAppInstanceUserExpirationSettings) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpPutAppInstanceUserExpirationSettings) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutAppInstanceUserExpirationSettingsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/app-instance-users/{AppInstanceUserArn}/expiration-settings")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsPutAppInstanceUserExpirationSettingsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentPutAppInstanceUserExpirationSettingsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsPutAppInstanceUserExpirationSettingsInput(v *PutAppInstanceUserExpirationSettingsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AppInstanceUserArn == nil || len(*v.AppInstanceUserArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AppInstanceUserArn must not be empty")}
+	}
+	if v.AppInstanceUserArn != nil {
+		if err := encoder.SetURI("AppInstanceUserArn").String(*v.AppInstanceUserArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentPutAppInstanceUserExpirationSettingsInput(v *PutAppInstanceUserExpirationSettingsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ExpirationSettings != nil {
+		ok := object.Key("ExpirationSettings")
+		if err := awsRestjson1_serializeDocumentExpirationSettings(v.ExpirationSettings, ok); err != nil {
 			return err
 		}
 	}
@@ -1563,6 +1927,92 @@ func awsRestjson1_serializeOpDocumentUpdateAppInstanceInput(v *UpdateAppInstance
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateAppInstanceBot struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateAppInstanceBot) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateAppInstanceBot) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateAppInstanceBotInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/app-instance-bots/{AppInstanceBotArn}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateAppInstanceBotInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateAppInstanceBotInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateAppInstanceBotInput(v *UpdateAppInstanceBotInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AppInstanceBotArn == nil || len(*v.AppInstanceBotArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AppInstanceBotArn must not be empty")}
+	}
+	if v.AppInstanceBotArn != nil {
+		if err := encoder.SetURI("AppInstanceBotArn").String(*v.AppInstanceBotArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateAppInstanceBotInput(v *UpdateAppInstanceBotInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Metadata != nil {
+		ok := object.Key("Metadata")
+		ok.String(*v.Metadata)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdateAppInstanceUser struct {
 }
 
@@ -1770,6 +2220,20 @@ func awsRestjson1_serializeDocumentChannelRetentionSettings(v *types.ChannelRete
 	return nil
 }
 
+func awsRestjson1_serializeDocumentConfiguration(v *types.Configuration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Lex != nil {
+		ok := object.Key("Lex")
+		if err := awsRestjson1_serializeDocumentLexConfiguration(v.Lex, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEndpointAttributes(v *types.EndpointAttributes, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1782,6 +2246,50 @@ func awsRestjson1_serializeDocumentEndpointAttributes(v *types.EndpointAttribute
 	if v.VoipDeviceToken != nil {
 		ok := object.Key("VoipDeviceToken")
 		ok.String(*v.VoipDeviceToken)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentExpirationSettings(v *types.ExpirationSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ExpirationCriterion) > 0 {
+		ok := object.Key("ExpirationCriterion")
+		ok.String(string(v.ExpirationCriterion))
+	}
+
+	if v.ExpirationDays != nil {
+		ok := object.Key("ExpirationDays")
+		ok.Integer(*v.ExpirationDays)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLexConfiguration(v *types.LexConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LexBotAliasArn != nil {
+		ok := object.Key("LexBotAliasArn")
+		ok.String(*v.LexBotAliasArn)
+	}
+
+	if v.LocaleId != nil {
+		ok := object.Key("LocaleId")
+		ok.String(*v.LocaleId)
+	}
+
+	if len(v.RespondsTo) > 0 {
+		ok := object.Key("RespondsTo")
+		ok.String(string(v.RespondsTo))
+	}
+
+	if v.WelcomeIntent != nil {
+		ok := object.Key("WelcomeIntent")
+		ok.String(*v.WelcomeIntent)
 	}
 
 	return nil

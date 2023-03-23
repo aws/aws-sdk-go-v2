@@ -39,9 +39,12 @@ func (c *Client) SubmitJob(ctx context.Context, params *SubmitJobInput, optFns .
 // Contains the parameters for SubmitJob.
 type SubmitJobInput struct {
 
-	// The job definition used by this job. This value can be one of name,
-	// name:revision, or the Amazon Resource Name (ARN) for the job definition. If name
-	// is specified without a revision then the latest active revision is used.
+	// The job definition used by this job. This value can be one of definition-name,
+	// definition-name:revision, or the Amazon Resource Name (ARN) for the job
+	// definition, with or without the revision
+	// (arn:aws:batch:region:account:job-definition/definition-name:revision , or
+	// arn:aws:batch:region:account:job-definition/definition-name ). If the revision
+	// is not specified, then the latest active revision is used.
 	//
 	// This member is required.
 	JobDefinition *string

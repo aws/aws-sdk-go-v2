@@ -2357,6 +2357,13 @@ func awsRestjson1_serializeDocumentContainerProperties(v *types.ContainerPropert
 		}
 	}
 
+	if v.EphemeralStorage != nil {
+		ok := object.Key("ephemeralStorage")
+		if err := awsRestjson1_serializeDocumentEphemeralStorage(v.EphemeralStorage, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ExecutionRoleArn != nil {
 		ok := object.Key("executionRoleArn")
 		ok.String(*v.ExecutionRoleArn)
@@ -2896,6 +2903,17 @@ func awsRestjson1_serializeDocumentEksHostPath(v *types.EksHostPath, value smith
 	return nil
 }
 
+func awsRestjson1_serializeDocumentEksLabelsMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEksLimits(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2904,6 +2922,20 @@ func awsRestjson1_serializeDocumentEksLimits(v map[string]string, value smithyjs
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEksMetadata(v *types.EksMetadata, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Labels != nil {
+		ok := object.Key("labels")
+		if err := awsRestjson1_serializeDocumentEksLabelsMap(v.Labels, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -2928,6 +2960,13 @@ func awsRestjson1_serializeDocumentEksPodProperties(v *types.EksPodProperties, v
 		ok.Boolean(*v.HostNetwork)
 	}
 
+	if v.Metadata != nil {
+		ok := object.Key("metadata")
+		if err := awsRestjson1_serializeDocumentEksMetadata(v.Metadata, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ServiceAccountName != nil {
 		ok := object.Key("serviceAccountName")
 		ok.String(*v.ServiceAccountName)
@@ -2950,6 +2989,13 @@ func awsRestjson1_serializeDocumentEksPodPropertiesOverride(v *types.EksPodPrope
 	if v.Containers != nil {
 		ok := object.Key("containers")
 		if err := awsRestjson1_serializeDocumentEksContainerOverrideList(v.Containers, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Metadata != nil {
+		ok := object.Key("metadata")
+		if err := awsRestjson1_serializeDocumentEksMetadata(v.Metadata, ok); err != nil {
 			return err
 		}
 	}
@@ -3069,6 +3115,18 @@ func awsRestjson1_serializeDocumentEnvironmentVariables(v []types.KeyValuePair, 
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEphemeralStorage(v *types.EphemeralStorage, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SizeInGiB != nil {
+		ok := object.Key("sizeInGiB")
+		ok.Integer(*v.SizeInGiB)
+	}
+
 	return nil
 }
 

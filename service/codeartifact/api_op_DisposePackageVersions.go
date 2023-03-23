@@ -84,7 +84,7 @@ type DisposePackageVersionsInput struct {
 	// contain a corresponding component, package versions of those formats do not have
 	// a namespace.
 	//
-	// * The namespace of a generic package is it’s namespace.
+	// * The namespace of a generic package is its namespace.
 	Namespace *string
 
 	// The revisions of the package versions you want to dispose.

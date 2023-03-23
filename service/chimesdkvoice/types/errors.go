@@ -115,6 +115,33 @@ func (e *ForbiddenException) ErrorCode() string {
 }
 func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+type GoneException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Code ErrorCode
+
+	noSmithyDocumentSerde
+}
+
+func (e *GoneException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *GoneException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *GoneException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "GoneException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *GoneException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 type NotFoundException struct {
 	Message *string
 
@@ -276,3 +303,30 @@ func (e *UnauthorizedClientException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnauthorizedClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+type UnprocessableEntityException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Code ErrorCode
+
+	noSmithyDocumentSerde
+}
+
+func (e *UnprocessableEntityException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *UnprocessableEntityException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *UnprocessableEntityException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "UnprocessableEntityException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *UnprocessableEntityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

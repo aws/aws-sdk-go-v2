@@ -1,0 +1,8 @@
+{
+    "id": "288d5a4d-f0d3-4a55-b4ba-8d30d7a69bf1",
+    "type": "feature",
+    "description": "This release adds Amazon Chime SDK call analytics. Call analytics include voice analytics, which provides speaker search and voice tone analysis. These capabilities can be used with Amazon Transcribe and Transcribe Call Analytics to generate machine-learning-powered insights from real-time audio.",
+    "modules": [
+        "service/chimesdkvoice"
+    ]
+}

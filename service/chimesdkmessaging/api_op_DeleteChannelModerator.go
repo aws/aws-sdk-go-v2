@@ -11,8 +11,8 @@ import (
 )
 
 // Deletes a channel moderator. The x-amz-chime-bearer request header is mandatory.
-// Use the AppInstanceUserArn of the user that makes the API call as the value in
-// the header.
+// Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as
+// the value in the header.
 func (c *Client) DeleteChannelModerator(ctx context.Context, params *DeleteChannelModeratorInput, optFns ...func(*Options)) (*DeleteChannelModeratorOutput, error) {
 	if params == nil {
 		params = &DeleteChannelModeratorInput{}
@@ -40,7 +40,7 @@ type DeleteChannelModeratorInput struct {
 	// This member is required.
 	ChannelModeratorArn *string
 
-	// The AppInstanceUserArn of the user that makes the API call.
+	// The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
 	//
 	// This member is required.
 	ChimeBearer *string

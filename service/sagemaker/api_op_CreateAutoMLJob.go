@@ -63,7 +63,7 @@ type CreateAutoMLJobInput struct {
 
 	// Defines the objective metric used to measure the predictive quality of an AutoML
 	// job. You provide an AutoMLJobObjective$MetricName and Autopilot infers whether
-	// to minimize or maximize it.
+	// to minimize or maximize it. For , only Accuracy is supported.
 	AutoMLJobObjective *types.AutoMLJobObjective
 
 	// Generates possible candidates without training the models. A candidate is a
@@ -74,13 +74,17 @@ type CreateAutoMLJobInput struct {
 	// model deployment.
 	ModelDeployConfig *types.ModelDeployConfig
 
-	// Defines the type of supervised learning available for the candidates. For more
-	// information, see  Amazon SageMaker Autopilot problem types and algorithm support
+	// Defines the type of supervised learning problem available for the candidates.
+	// For more information, see  Amazon SageMaker Autopilot problem types and
+	// algorithm support
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-problem-types.html).
 	ProblemType types.ProblemType
 
-	// Each tag consists of a key and an optional value. Tag keys must be unique per
-	// resource.
+	// An array of key-value pairs. You can use tags to categorize your Amazon Web
+	// Services resources in different ways, for example, by purpose, owner, or
+	// environment. For more information, see Tagging Amazon Web ServicesResources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html). Tag keys must
+	// be unique per resource.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

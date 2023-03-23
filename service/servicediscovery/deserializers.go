@@ -127,9 +127,6 @@ func awsAwsjson11_deserializeOpErrorCreateHttpNamespace(response *smithyhttp.Res
 	case strings.EqualFold("NamespaceAlreadyExists", errorCode):
 		return awsAwsjson11_deserializeErrorNamespaceAlreadyExists(response, errorBody)
 
-	case strings.EqualFold("RequestLimitExceeded", errorCode):
-		return awsAwsjson11_deserializeErrorRequestLimitExceeded(response, errorBody)
-
 	case strings.EqualFold("ResourceLimitExceeded", errorCode):
 		return awsAwsjson11_deserializeErrorResourceLimitExceeded(response, errorBody)
 
@@ -252,9 +249,6 @@ func awsAwsjson11_deserializeOpErrorCreatePrivateDnsNamespace(response *smithyht
 
 	case strings.EqualFold("NamespaceAlreadyExists", errorCode):
 		return awsAwsjson11_deserializeErrorNamespaceAlreadyExists(response, errorBody)
-
-	case strings.EqualFold("RequestLimitExceeded", errorCode):
-		return awsAwsjson11_deserializeErrorRequestLimitExceeded(response, errorBody)
 
 	case strings.EqualFold("ResourceLimitExceeded", errorCode):
 		return awsAwsjson11_deserializeErrorResourceLimitExceeded(response, errorBody)
@@ -379,9 +373,6 @@ func awsAwsjson11_deserializeOpErrorCreatePublicDnsNamespace(response *smithyhtt
 	case strings.EqualFold("NamespaceAlreadyExists", errorCode):
 		return awsAwsjson11_deserializeErrorNamespaceAlreadyExists(response, errorBody)
 
-	case strings.EqualFold("RequestLimitExceeded", errorCode):
-		return awsAwsjson11_deserializeErrorRequestLimitExceeded(response, errorBody)
-
 	case strings.EqualFold("ResourceLimitExceeded", errorCode):
 		return awsAwsjson11_deserializeErrorResourceLimitExceeded(response, errorBody)
 
@@ -501,9 +492,6 @@ func awsAwsjson11_deserializeOpErrorCreateService(response *smithyhttp.Response,
 
 	case strings.EqualFold("NamespaceNotFound", errorCode):
 		return awsAwsjson11_deserializeErrorNamespaceNotFound(response, errorBody)
-
-	case strings.EqualFold("RequestLimitExceeded", errorCode):
-		return awsAwsjson11_deserializeErrorRequestLimitExceeded(response, errorBody)
 
 	case strings.EqualFold("ResourceLimitExceeded", errorCode):
 		return awsAwsjson11_deserializeErrorResourceLimitExceeded(response, errorBody)
@@ -631,9 +619,6 @@ func awsAwsjson11_deserializeOpErrorDeleteNamespace(response *smithyhttp.Respons
 	case strings.EqualFold("NamespaceNotFound", errorCode):
 		return awsAwsjson11_deserializeErrorNamespaceNotFound(response, errorBody)
 
-	case strings.EqualFold("RequestLimitExceeded", errorCode):
-		return awsAwsjson11_deserializeErrorRequestLimitExceeded(response, errorBody)
-
 	case strings.EqualFold("ResourceInUse", errorCode):
 		return awsAwsjson11_deserializeErrorResourceInUse(response, errorBody)
 
@@ -747,9 +732,6 @@ func awsAwsjson11_deserializeOpErrorDeleteService(response *smithyhttp.Response,
 	switch {
 	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidInput(response, errorBody)
-
-	case strings.EqualFold("RequestLimitExceeded", errorCode):
-		return awsAwsjson11_deserializeErrorRequestLimitExceeded(response, errorBody)
 
 	case strings.EqualFold("ResourceInUse", errorCode):
 		return awsAwsjson11_deserializeErrorResourceInUse(response, errorBody)
@@ -873,9 +855,6 @@ func awsAwsjson11_deserializeOpErrorDeregisterInstance(response *smithyhttp.Resp
 
 	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidInput(response, errorBody)
-
-	case strings.EqualFold("RequestLimitExceeded", errorCode):
-		return awsAwsjson11_deserializeErrorRequestLimitExceeded(response, errorBody)
 
 	case strings.EqualFold("ResourceInUse", errorCode):
 		return awsAwsjson11_deserializeErrorResourceInUse(response, errorBody)
@@ -1117,9 +1096,6 @@ func awsAwsjson11_deserializeOpErrorGetInstance(response *smithyhttp.Response, m
 	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidInput(response, errorBody)
 
-	case strings.EqualFold("RequestLimitExceeded", errorCode):
-		return awsAwsjson11_deserializeErrorRequestLimitExceeded(response, errorBody)
-
 	case strings.EqualFold("ServiceNotFound", errorCode):
 		return awsAwsjson11_deserializeErrorServiceNotFound(response, errorBody)
 
@@ -1236,9 +1212,6 @@ func awsAwsjson11_deserializeOpErrorGetInstancesHealthStatus(response *smithyhtt
 
 	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidInput(response, errorBody)
-
-	case strings.EqualFold("RequestLimitExceeded", errorCode):
-		return awsAwsjson11_deserializeErrorRequestLimitExceeded(response, errorBody)
 
 	case strings.EqualFold("ServiceNotFound", errorCode):
 		return awsAwsjson11_deserializeErrorServiceNotFound(response, errorBody)
@@ -1471,9 +1444,6 @@ func awsAwsjson11_deserializeOpErrorGetOperation(response *smithyhttp.Response, 
 	case strings.EqualFold("OperationNotFound", errorCode):
 		return awsAwsjson11_deserializeErrorOperationNotFound(response, errorBody)
 
-	case strings.EqualFold("RequestLimitExceeded", errorCode):
-		return awsAwsjson11_deserializeErrorRequestLimitExceeded(response, errorBody)
-
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -1584,9 +1554,6 @@ func awsAwsjson11_deserializeOpErrorGetService(response *smithyhttp.Response, me
 	switch {
 	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidInput(response, errorBody)
-
-	case strings.EqualFold("RequestLimitExceeded", errorCode):
-		return awsAwsjson11_deserializeErrorRequestLimitExceeded(response, errorBody)
 
 	case strings.EqualFold("ServiceNotFound", errorCode):
 		return awsAwsjson11_deserializeErrorServiceNotFound(response, errorBody)
@@ -1702,9 +1669,6 @@ func awsAwsjson11_deserializeOpErrorListInstances(response *smithyhttp.Response,
 	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidInput(response, errorBody)
 
-	case strings.EqualFold("RequestLimitExceeded", errorCode):
-		return awsAwsjson11_deserializeErrorRequestLimitExceeded(response, errorBody)
-
 	case strings.EqualFold("ServiceNotFound", errorCode):
 		return awsAwsjson11_deserializeErrorServiceNotFound(response, errorBody)
 
@@ -1819,9 +1783,6 @@ func awsAwsjson11_deserializeOpErrorListNamespaces(response *smithyhttp.Response
 	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidInput(response, errorBody)
 
-	case strings.EqualFold("RequestLimitExceeded", errorCode):
-		return awsAwsjson11_deserializeErrorRequestLimitExceeded(response, errorBody)
-
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -1932,9 +1893,6 @@ func awsAwsjson11_deserializeOpErrorListOperations(response *smithyhttp.Response
 	switch {
 	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidInput(response, errorBody)
-
-	case strings.EqualFold("RequestLimitExceeded", errorCode):
-		return awsAwsjson11_deserializeErrorRequestLimitExceeded(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -2047,9 +2005,6 @@ func awsAwsjson11_deserializeOpErrorListServices(response *smithyhttp.Response, 
 	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidInput(response, errorBody)
 
-	case strings.EqualFold("RequestLimitExceeded", errorCode):
-		return awsAwsjson11_deserializeErrorRequestLimitExceeded(response, errorBody)
-
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -2160,9 +2115,6 @@ func awsAwsjson11_deserializeOpErrorListTagsForResource(response *smithyhttp.Res
 	switch {
 	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidInput(response, errorBody)
-
-	case strings.EqualFold("RequestLimitExceeded", errorCode):
-		return awsAwsjson11_deserializeErrorRequestLimitExceeded(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -2280,9 +2232,6 @@ func awsAwsjson11_deserializeOpErrorRegisterInstance(response *smithyhttp.Respon
 
 	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidInput(response, errorBody)
-
-	case strings.EqualFold("RequestLimitExceeded", errorCode):
-		return awsAwsjson11_deserializeErrorRequestLimitExceeded(response, errorBody)
 
 	case strings.EqualFold("ResourceInUse", errorCode):
 		return awsAwsjson11_deserializeErrorResourceInUse(response, errorBody)
@@ -2404,9 +2353,6 @@ func awsAwsjson11_deserializeOpErrorTagResource(response *smithyhttp.Response, m
 	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidInput(response, errorBody)
 
-	case strings.EqualFold("RequestLimitExceeded", errorCode):
-		return awsAwsjson11_deserializeErrorRequestLimitExceeded(response, errorBody)
-
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -2523,9 +2469,6 @@ func awsAwsjson11_deserializeOpErrorUntagResource(response *smithyhttp.Response,
 	switch {
 	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidInput(response, errorBody)
-
-	case strings.EqualFold("RequestLimitExceeded", errorCode):
-		return awsAwsjson11_deserializeErrorRequestLimitExceeded(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -2647,9 +2590,6 @@ func awsAwsjson11_deserializeOpErrorUpdateHttpNamespace(response *smithyhttp.Res
 	case strings.EqualFold("NamespaceNotFound", errorCode):
 		return awsAwsjson11_deserializeErrorNamespaceNotFound(response, errorBody)
 
-	case strings.EqualFold("RequestLimitExceeded", errorCode):
-		return awsAwsjson11_deserializeErrorRequestLimitExceeded(response, errorBody)
-
 	case strings.EqualFold("ResourceInUse", errorCode):
 		return awsAwsjson11_deserializeErrorResourceInUse(response, errorBody)
 
@@ -2747,9 +2687,6 @@ func awsAwsjson11_deserializeOpErrorUpdateInstanceCustomHealthStatus(response *s
 
 	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidInput(response, errorBody)
-
-	case strings.EqualFold("RequestLimitExceeded", errorCode):
-		return awsAwsjson11_deserializeErrorRequestLimitExceeded(response, errorBody)
 
 	case strings.EqualFold("ServiceNotFound", errorCode):
 		return awsAwsjson11_deserializeErrorServiceNotFound(response, errorBody)
@@ -2871,9 +2808,6 @@ func awsAwsjson11_deserializeOpErrorUpdatePrivateDnsNamespace(response *smithyht
 	case strings.EqualFold("NamespaceNotFound", errorCode):
 		return awsAwsjson11_deserializeErrorNamespaceNotFound(response, errorBody)
 
-	case strings.EqualFold("RequestLimitExceeded", errorCode):
-		return awsAwsjson11_deserializeErrorRequestLimitExceeded(response, errorBody)
-
 	case strings.EqualFold("ResourceInUse", errorCode):
 		return awsAwsjson11_deserializeErrorResourceInUse(response, errorBody)
 
@@ -2994,9 +2928,6 @@ func awsAwsjson11_deserializeOpErrorUpdatePublicDnsNamespace(response *smithyhtt
 	case strings.EqualFold("NamespaceNotFound", errorCode):
 		return awsAwsjson11_deserializeErrorNamespaceNotFound(response, errorBody)
 
-	case strings.EqualFold("RequestLimitExceeded", errorCode):
-		return awsAwsjson11_deserializeErrorRequestLimitExceeded(response, errorBody)
-
 	case strings.EqualFold("ResourceInUse", errorCode):
 		return awsAwsjson11_deserializeErrorResourceInUse(response, errorBody)
 
@@ -3113,9 +3044,6 @@ func awsAwsjson11_deserializeOpErrorUpdateService(response *smithyhttp.Response,
 
 	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidInput(response, errorBody)
-
-	case strings.EqualFold("RequestLimitExceeded", errorCode):
-		return awsAwsjson11_deserializeErrorRequestLimitExceeded(response, errorBody)
 
 	case strings.EqualFold("ServiceNotFound", errorCode):
 		return awsAwsjson11_deserializeErrorServiceNotFound(response, errorBody)
