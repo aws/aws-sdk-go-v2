@@ -1054,7 +1054,6 @@
                 "ExpirationTime": {
                     "target": "com.amazonaws.amplifybackend#__double",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The API key expiration time for API_KEY, if it was used as an authentication mechanism to access your data models.</p>",
                         "smithy.api#jsonName": "expirationTime"
                     }
@@ -1684,7 +1683,6 @@
                 "UnauthenticatedLogin": {
                     "target": "com.amazonaws.amplifybackend#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Set to true or false based on whether you want to enable guest authorization to your Amplify app.</p>",
                         "smithy.api#jsonName": "unauthenticatedLogin",
                         "smithy.api#required": {}
@@ -1784,7 +1782,6 @@
                 "MinimumLength": {
                     "target": "com.amazonaws.amplifybackend#__double",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The minimum length of the password used to access the backend of your Amplify project.</p>",
                         "smithy.api#jsonName": "minimumLength",
                         "smithy.api#required": {}
@@ -2898,7 +2895,6 @@
                 "IsSuccess": {
                     "target": "com.amazonaws.amplifybackend#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether the request succeeded or failed.</p>",
                         "smithy.api#jsonName": "isSuccess"
                     }
@@ -3681,7 +3677,6 @@
                 "Imported": {
                     "target": "com.amazonaws.amplifybackend#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Returns True if the storage resource has been imported.</p>",
                         "smithy.api#jsonName": "imported",
                         "smithy.api#required": {}
@@ -4121,7 +4116,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.amplifybackend#__integerMin1Max25",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of results that you want in the response.</p>",
                         "smithy.api#jsonName": "maxResults"
                     }
@@ -4522,7 +4516,6 @@
                 "CleanAmplifyApp": {
                     "target": "com.amazonaws.amplifybackend#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Cleans up the Amplify Console app if this value is set to true.</p>",
                         "smithy.api#jsonName": "cleanAmplifyApp"
                     }
@@ -5148,7 +5141,6 @@
                 "UnauthenticatedLogin": {
                     "target": "com.amazonaws.amplifybackend#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A boolean value that can be set to allow or disallow guest-level authorization into your Amplify app.</p>",
                         "smithy.api#jsonName": "unauthenticatedLogin"
                     }
@@ -5242,7 +5234,6 @@
                 "MinimumLength": {
                     "target": "com.amazonaws.amplifybackend#__double",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Describes the minimum length of the password required to sign in to the auth resource, configured as a part of your Amplify project.</p>",
                         "smithy.api#jsonName": "minimumLength"
                     }
@@ -5806,20 +5797,15 @@
         },
         "com.amazonaws.amplifybackend#__boolean": {
             "type": "boolean",
-            "traits": {
-                "smithy.api#default": false
-            }
+            "traits": {}
         },
         "com.amazonaws.amplifybackend#__double": {
             "type": "double",
-            "traits": {
-                "smithy.api#default": 0
-            }
+            "traits": {}
         },
         "com.amazonaws.amplifybackend#__integerMin1Max25": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 25

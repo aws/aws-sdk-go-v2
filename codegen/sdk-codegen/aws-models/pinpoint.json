@@ -49,7 +49,6 @@
                 "Enabled": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether to enable the ADM channel for the application.</p>"
                     }
                 }
@@ -76,14 +75,12 @@
                 "Enabled": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the ADM channel is enabled for the application.</p>"
                     }
                 },
                 "HasCredential": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>(Not used) This property is retained only for backward compatibility.</p>"
                     }
                 },
@@ -96,7 +93,6 @@
                 "IsArchived": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the ADM channel is archived.</p>"
                     }
                 },
@@ -122,7 +118,6 @@
                 "Version": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The current version of the ADM channel.</p>"
                     }
                 }
@@ -197,7 +192,6 @@
                 "SilentPush": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the notification is a silent push notification, which is a push notification that doesn't display on a recipient's device. Silent push notifications can be used for cases such as updating an app's configuration or supporting phone home functionality.</p>"
                     }
                 },
@@ -260,7 +254,6 @@
                 "Enabled": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether to enable the APNs channel for the application.</p>"
                     }
                 },
@@ -317,21 +310,18 @@
                 "Enabled": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the APNs channel is enabled for the application.</p>"
                     }
                 },
                 "HasCredential": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>(Not used) This property is retained only for backward compatibility.</p>"
                     }
                 },
                 "HasTokenKey": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the APNs channel is configured to communicate with APNs by using APNs tokens. To provide an authentication key for APNs tokens, set the TokenKey property of the channel.</p>"
                     }
                 },
@@ -344,7 +334,6 @@
                 "IsArchived": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the APNs channel is archived.</p>"
                     }
                 },
@@ -370,7 +359,6 @@
                 "Version": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The current version of the APNs channel.</p>"
                     }
                 }
@@ -397,7 +385,6 @@
                 "Badge": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The key that indicates whether and how to modify the badge of your app's icon when the recipient receives the push notification. If this key isn't included in the dictionary, the badge doesn't change. To remove the badge, set this value to 0.</p>"
                     }
                 },
@@ -452,7 +439,6 @@
                 "SilentPush": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the notification is a silent push notification. A silent (or background) push notification isn't displayed on recipients' devices. You can use silent push notifications to make small updates to your app, or to display messages in an in-app message center.</p> <p>Amazon Pinpoint uses this property to determine the correct value for the apns-push-type request header when it sends the notification message to APNs. If you specify a value of true for this property, Amazon Pinpoint sets the value for the apns-push-type header field to background.</p> <note><p>If you specify the raw content of an APNs push notification, the message payload has to include the content-available key. For silent (background) notifications, set the value of content-available to 1. Additionally, the message payload for a silent notification can't include the alert, badge, or sound keys. For more information, see <a href=\"https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/generating_a_remote_notification\">Generating a Remote Notification</a> and <a href=\"https://developer.apple.com/documentation/usernotifications/setting_up_a_remote_notification_server/pushing_background_updates_to_your_app\">Pushing Background Updates to Your App</a> on the Apple Developer website.</p> <p>Apple has indicated that they will throttle \"excessive\" background notifications based on current traffic volumes. To prevent your notifications being throttled, Apple recommends that you send no more than 3 silent push notifications to each recipient per hour.</p></note>"
                     }
                 },
@@ -477,7 +463,6 @@
                 "TimeToLive": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The amount of time, in seconds, that APNs should store and attempt to deliver the push notification, if the service is unable to deliver the notification the first time. If this value is 0, APNs treats the notification as if it expires immediately and the service doesn't store or try to deliver the notification again.</p> <p>Amazon Pinpoint specifies this value in the apns-expiration request header when it sends the notification message to APNs.</p>"
                     }
                 },
@@ -572,7 +557,6 @@
                 "Enabled": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether to enable the APNs sandbox channel for the application.</p>"
                     }
                 },
@@ -629,21 +613,18 @@
                 "Enabled": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the APNs sandbox channel is enabled for the application.</p>"
                     }
                 },
                 "HasCredential": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>(Not used) This property is retained only for backward compatibility.</p>"
                     }
                 },
                 "HasTokenKey": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the APNs sandbox channel is configured to communicate with APNs by using APNs tokens. To provide an authentication key for APNs tokens, set the TokenKey property of the channel.</p>"
                     }
                 },
@@ -656,7 +637,6 @@
                 "IsArchived": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the APNs sandbox channel is archived.</p>"
                     }
                 },
@@ -682,7 +662,6 @@
                 "Version": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The current version of the APNs sandbox channel.</p>"
                     }
                 }
@@ -715,7 +694,6 @@
                 "Enabled": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether to enable the APNs VoIP channel for the application.</p>"
                     }
                 },
@@ -772,21 +750,18 @@
                 "Enabled": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the APNs VoIP channel is enabled for the application.</p>"
                     }
                 },
                 "HasCredential": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>(Not used) This property is retained only for backward compatibility.</p>"
                     }
                 },
                 "HasTokenKey": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the APNs VoIP channel is configured to communicate with APNs by using APNs tokens. To provide an authentication key for APNs tokens, set the TokenKey property of the channel.</p>"
                     }
                 },
@@ -799,7 +774,6 @@
                 "IsArchived": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the APNs VoIP channel is archived.</p>"
                     }
                 },
@@ -825,7 +799,6 @@
                 "Version": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The current version of the APNs VoIP channel.</p>"
                     }
                 }
@@ -858,7 +831,6 @@
                 "Enabled": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the APNs VoIP sandbox channel is enabled for the application.</p>"
                     }
                 },
@@ -915,21 +887,18 @@
                 "Enabled": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the APNs VoIP sandbox channel is enabled for the application.</p>"
                     }
                 },
                 "HasCredential": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>(Not used) This property is retained only for backward compatibility.</p>"
                     }
                 },
                 "HasTokenKey": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the APNs VoIP sandbox channel is configured to communicate with APNs by using APNs tokens. To provide an authentication key for APNs tokens, set the TokenKey property of the channel.</p>"
                     }
                 },
@@ -942,7 +911,6 @@
                 "IsArchived": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the APNs VoIP sandbox channel is archived.</p>"
                     }
                 },
@@ -968,7 +936,6 @@
                 "Version": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The current version of the APNs VoIP sandbox channel.</p>"
                     }
                 }
@@ -1148,28 +1115,24 @@
                 "SuccessfulEndpointCount": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of endpoints that the campaign successfully delivered messages to.</p>"
                     }
                 },
                 "TimezonesCompletedCount": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of time zones that were completed.</p>"
                     }
                 },
                 "TimezonesTotalCount": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of unique time zones that are in the segment for the campaign.</p>"
                     }
                 },
                 "TotalEndpointCount": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of endpoints that the campaign attempted to deliver messages to.</p>"
                     }
                 },
@@ -1578,7 +1541,6 @@
                 "Enabled": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether to enable the Baidu channel for the application.</p>"
                     }
                 },
@@ -1619,14 +1581,12 @@
                 "Enabled": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the Baidu channel is enabled for the application.</p>"
                     }
                 },
                 "HasCredential": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>(Not used) This property is retained only for backward compatibility.</p>"
                     }
                 },
@@ -1639,7 +1599,6 @@
                 "IsArchived": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the Baidu channel is archived.</p>"
                     }
                 },
@@ -1665,7 +1624,6 @@
                 "Version": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The current version of the Baidu channel.</p>"
                     }
                 }
@@ -1722,7 +1680,6 @@
                 "SilentPush": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the notification is a silent push notification, which is a push notification that doesn't display on a recipient's device. Silent push notifications can be used for cases such as updating an app's configuration or supporting phone home functionality.</p>"
                     }
                 },
@@ -1747,7 +1704,6 @@
                 "TimeToLive": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The amount of time, in seconds, that the Baidu Cloud Push service should store the message if the recipient's device is offline. The default value and maximum supported time is 604,800 seconds (7 days).</p>"
                     }
                 },
@@ -1990,35 +1946,30 @@
                 "Daily": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of messages that a campaign can send to a single endpoint during a 24-hour period. For an application, this value specifies the default limit for the number of messages that campaigns and journeys can send to a single endpoint during a 24-hour period. The maximum value is 100.</p>"
                     }
                 },
                 "MaximumDuration": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum amount of time, in seconds, that a campaign can attempt to deliver a message after the scheduled start time for the campaign. The minimum value is 60 seconds.</p>"
                     }
                 },
                 "MessagesPerSecond": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of messages that a campaign can send each second. For an application, this value specifies the default limit for the number of messages that campaigns can send each second. The minimum value is 50. The maximum value is 20,000.</p>"
                     }
                 },
                 "Total": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of messages that a campaign can send to a single endpoint during the course of the campaign. If a campaign recurs, this setting applies to all runs of the campaign. The maximum value is 100.</p>"
                     }
                 },
                 "Session": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum total number of messages that the campaign can send per user session.</p>"
                     }
                 }
@@ -2078,7 +2029,6 @@
                 "HoldoutPercent": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The allocated percentage of users (segment members) who shouldn't receive messages from the campaign.</p>"
                     }
                 },
@@ -2098,7 +2048,6 @@
                 "IsPaused": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the campaign is paused. A paused campaign doesn't run unless you resume it by changing this value to false.</p>"
                     }
                 },
@@ -2143,7 +2092,6 @@
                 "SegmentVersion": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The version number of the segment that's associated with the campaign.</p>",
                         "smithy.api#required": {}
                     }
@@ -2182,14 +2130,12 @@
                 "Version": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The version number of the campaign.</p>"
                     }
                 },
                 "Priority": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Defines the priority of the campaign, used to decide the order of messages displayed to user if there are multiple messages scheduled to be displayed at the same moment.</p>"
                     }
                 }
@@ -2330,14 +2276,12 @@
                 "Enabled": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the channel is enabled for the application.</p>"
                     }
                 },
                 "HasCredential": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>(Not used) This property is retained only for backward compatibility.</p>"
                     }
                 },
@@ -2350,7 +2294,6 @@
                 "IsArchived": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the channel is archived.</p>"
                     }
                 },
@@ -2369,7 +2312,6 @@
                 "Version": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The current version of the channel.</p>"
                     }
                 }
@@ -3293,7 +3235,6 @@
                 "RecommendationsPerMessage": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of recommended items to retrieve from the model for each endpoint or user, depending on the value for the RecommendationProviderIdType property. This number determines how many recommended items are available for use in message variables. The minimum value is 1. The maximum value is 5. The default value is 5.</p> <p>To use multiple recommended items and custom attributes with message variables, you have to use an AWS Lambda function (RecommendationTransformerUri) to perform additional processing of recommendation data.</p>"
                     }
                 }
@@ -3644,7 +3585,6 @@
                 "BorderRadius": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The border radius of the button.</p>"
                     }
                 },
@@ -3723,7 +3663,6 @@
                 "SilentPush": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the default notification is a silent push notification, which is a push notification that doesn't display on a recipient's device. Silent push notifications can be used for cases such as updating an app's configuration or delivering messages to an in-app notification center.</p>"
                     }
                 },
@@ -5505,7 +5444,6 @@
                 "Enabled": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether to enable the email channel for the application.</p>"
                     }
                 },
@@ -5558,7 +5496,6 @@
                 "Enabled": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the email channel is enabled for the application.</p>"
                     }
                 },
@@ -5571,7 +5508,6 @@
                 "HasCredential": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>(Not used) This property is retained only for backward compatibility.</p>"
                     }
                 },
@@ -5590,7 +5526,6 @@
                 "IsArchived": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the email channel is archived.</p>"
                     }
                 },
@@ -5609,7 +5544,6 @@
                 "MessagesPerSecond": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of emails that can be sent through the channel each second.</p>"
                     }
                 },
@@ -5629,7 +5563,6 @@
                 "Version": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The current version of the email channel.</p>"
                     }
                 }
@@ -6025,7 +5958,6 @@
                 "StatusCode": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The status code that's returned in the response as a result of processing the endpoint data.</p>"
                     }
                 }
@@ -6052,14 +5984,12 @@
                 "Latitude": {
                     "target": "com.amazonaws.pinpoint#__double",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The latitude coordinate of the endpoint location, rounded to one decimal place.</p>"
                     }
                 },
                 "Longitude": {
                     "target": "com.amazonaws.pinpoint#__double",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The longitude coordinate of the endpoint location, rounded to one decimal place.</p>"
                     }
                 },
@@ -6105,7 +6035,6 @@
                 "StatusCode": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The downstream service status code for delivering the message.</p>",
                         "smithy.api#required": {}
                     }
@@ -6522,7 +6451,6 @@
                 "StatusCode": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The status code that's returned in the response as a result of processing the event. Possible values are: 202, for events that were accepted; and, 400, for events that weren't valid.</p>"
                     }
                 }
@@ -6669,7 +6597,6 @@
                 "SegmentVersion": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The version of the segment to export endpoint definitions from, if specified.</p>"
                     }
                 }
@@ -6704,7 +6631,6 @@
                 "SegmentVersion": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The version of the segment that the endpoint definitions were exported from.</p>"
                     }
                 }
@@ -6726,7 +6652,6 @@
                 "CompletedPieces": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of pieces that were processed successfully (completed) by the export job, as of the time of the request.</p>"
                     }
                 },
@@ -6753,7 +6678,6 @@
                 "FailedPieces": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of pieces that weren't processed successfully (failed) by the export job, as of the time of the request.</p>"
                     }
                 },
@@ -6780,21 +6704,18 @@
                 "TotalFailures": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of endpoint definitions that weren't processed successfully (failed) by the export job, typically because an error, such as a syntax error, occurred.</p>"
                     }
                 },
                 "TotalPieces": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of pieces that must be processed to complete the export job. Each piece consists of an approximately equal portion of the endpoint definitions that are part of the export job.</p>"
                     }
                 },
                 "TotalProcessed": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of endpoint definitions that were processed by the export job.</p>"
                     }
                 },
@@ -6931,7 +6852,6 @@
                 "Enabled": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether to enable the GCM channel for the application.</p>"
                     }
                 }
@@ -6965,14 +6885,12 @@
                 "Enabled": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the GCM channel is enabled for the application.</p>"
                     }
                 },
                 "HasCredential": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>(Not used) This property is retained only for backward compatibility.</p>"
                     }
                 },
@@ -6985,7 +6903,6 @@
                 "IsArchived": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the GCM channel is archived.</p>"
                     }
                 },
@@ -7011,7 +6928,6 @@
                 "Version": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The current version of the GCM channel.</p>"
                     }
                 }
@@ -7086,7 +7002,6 @@
                 "SilentPush": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the notification is a silent push notification, which is a push notification that doesn't display on a recipient's device. Silent push notifications can be used for cases such as updating an app's configuration or supporting phone home functionality.</p>"
                     }
                 },
@@ -7111,7 +7026,6 @@
                 "TimeToLive": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The amount of time, in seconds, that FCM should store and attempt to deliver the push notification, if the service is unable to deliver the notification the first time. If you don't specify this value, FCM defaults to the maximum value, which is 2,419,200 seconds (28 days).</p> <p>Amazon Pinpoint specifies this value in the FCM time_to_live parameter when it sends the notification message to FCM.</p>"
                     }
                 },
@@ -7138,7 +7052,6 @@
                 "Latitude": {
                     "target": "com.amazonaws.pinpoint#__double",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The latitude coordinate of the location.</p>",
                         "smithy.api#required": {}
                     }
@@ -7146,7 +7059,6 @@
                 "Longitude": {
                     "target": "com.amazonaws.pinpoint#__double",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The longitude coordinate of the location.</p>",
                         "smithy.api#required": {}
                     }
@@ -7169,7 +7081,6 @@
                 "RangeInKilometers": {
                     "target": "com.amazonaws.pinpoint#__double",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The range, in kilometers, from the GPS coordinates.</p>"
                     }
                 }
@@ -10665,7 +10576,6 @@
                 "Percentage": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The percentage of participants who shouldn't continue the journey.</p> <p>To determine which participants are held out, Amazon Pinpoint applies a probability-based algorithm to the percentage that you specify. Therefore, the actual percentage of participants who are held out may not be equal to the percentage that you specify.</p>",
                         "smithy.api#required": {}
                     }
@@ -10681,7 +10591,6 @@
                 "DefineSegment": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether to create a segment that contains the endpoints, when the endpoint definitions are imported.</p>"
                     }
                 },
@@ -10701,7 +10610,6 @@
                 "RegisterEndpoints": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether to register the endpoints with Amazon Pinpoint, when the endpoint definitions are imported.</p>"
                     }
                 },
@@ -10742,7 +10650,6 @@
                 "DefineSegment": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the import job creates a segment that contains the endpoints, when the endpoint definitions are imported.</p>"
                     }
                 },
@@ -10762,7 +10669,6 @@
                 "RegisterEndpoints": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the import job registers the endpoints with Amazon Pinpoint, when the endpoint definitions are imported.</p>"
                     }
                 },
@@ -10810,7 +10716,6 @@
                 "CompletedPieces": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of pieces that were processed successfully (completed) by the import job, as of the time of the request.</p>"
                     }
                 },
@@ -10837,7 +10742,6 @@
                 "FailedPieces": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of pieces that weren't processed successfully (failed) by the import job, as of the time of the request.</p>"
                     }
                 },
@@ -10864,21 +10768,18 @@
                 "TotalFailures": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of endpoint definitions that weren't processed successfully (failed) by the import job, typically because an error, such as a syntax error, occurred.</p>"
                     }
                 },
                 "TotalPieces": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of pieces that must be processed to complete the import job. Each piece consists of an approximately equal portion of the endpoint definitions that are part of the import job.</p>"
                     }
                 },
                 "TotalProcessed": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of endpoint definitions that were processed by the import job.</p>"
                     }
                 },
@@ -11040,7 +10941,6 @@
                 "DailyCap": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Daily cap which controls the number of times any in-app messages can be shown to the endpoint during a day.</p>"
                     }
                 },
@@ -11053,7 +10953,6 @@
                 "Priority": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Priority of the in-app message.</p>"
                     }
                 },
@@ -11066,14 +10965,12 @@
                 "SessionCap": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Session cap which controls the number of times an in-app message can be shown to the endpoint during an application session.</p>"
                     }
                 },
                 "TotalCap": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Total cap which controls the number of times an in-app message can be shown to the endpoint.</p>"
                     }
                 },
@@ -11593,21 +11490,18 @@
                 "DailyCap": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of messages that the journey can send to a single participant during a 24-hour period. The maximum value is 100.</p>"
                     }
                 },
                 "EndpointReentryCap": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of times that a participant can enter the journey. The maximum value is 100. To allow participants to enter the journey an unlimited number of times, set this value to 0.</p>"
                     }
                 },
                 "MessagesPerSecond": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of messages that the journey can send each second.</p>"
                     }
                 },
@@ -11680,7 +11574,6 @@
                 "LocalTime": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the journey's scheduled start and end times use each participant's local time. If this value is true, the schedule uses each participant's local time.</p>"
                     }
                 },
@@ -11737,14 +11630,12 @@
                 "WaitForQuietTime": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether endpoints in quiet hours should enter a wait till the end of their quiet hours.</p>"
                     }
                 },
                 "RefreshOnSegmentUpdate": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether a journey should be refreshed on segment update.</p>"
                     }
                 },
@@ -11757,7 +11648,6 @@
                 "SendingSchedule": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates if journey have Advance Quiet Time (OpenHours and ClosedDays). This flag should be set to true in order to allow (OpenHours and ClosedDays)</p>"
                     }
                 },
@@ -12613,14 +12503,12 @@
                 "SilentPush": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the notification is a silent push notification, which is a push notification that doesn't display on a recipient's device. Silent push notifications can be used for cases such as updating an app's configuration, displaying messages in an in-app message center, or supporting phone home functionality.</p>"
                     }
                 },
                 "TimeToLive": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of seconds that the push-notification service should keep the message, if the service is unable to deliver the notification the first time. This value is converted to an expiration value when it's sent to a push-notification service. If this value is 0, the service treats the notification as if it expires immediately and the service doesn't store or try to deliver the notification again.</p> <p>This value doesn't apply to messages that are sent through the Amazon Device Messaging (ADM) service.</p>"
                     }
                 },
@@ -12820,7 +12708,6 @@
                 "StatusCode": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The downstream service status code for delivering the message.</p>",
                         "smithy.api#required": {}
                     }
@@ -12892,7 +12779,6 @@
                 "Value": {
                     "target": "com.amazonaws.pinpoint#__double",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The value to compare.</p>",
                         "smithy.api#required": {}
                     }
@@ -13077,7 +12963,6 @@
                 "PhoneTypeCode": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The phone type, represented by an integer. Valid values are: 0 (mobile), 1 (landline), 2 (VoIP), 3 (invalid), 4 (other), and 5 (prepaid).</p>"
                     }
                 },
@@ -15008,7 +14893,6 @@
                 "Percentage": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The percentage of participants to send down the activity path.</p> <p>To determine which participants are sent down each path, Amazon Pinpoint applies a probability-based algorithm to the percentages that you specify for the paths. Therefore, the actual percentage of participants who are sent down a path may not be equal to the percentage that you specify.</p>"
                     }
                 }
@@ -15145,7 +15029,6 @@
                 "RecommendationsPerMessage": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of recommended items that are retrieved from the model for each endpoint or user, depending on the value for the RecommendationProviderIdType property. This number determines how many recommended items are available for use in message variables.</p>"
                     }
                 }
@@ -15291,7 +15174,6 @@
                 "Enabled": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether to enable the SMS channel for the application.</p>"
                     }
                 },
@@ -15330,14 +15212,12 @@
                 "Enabled": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the SMS channel is enabled for the application.</p>"
                     }
                 },
                 "HasCredential": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>(Not used) This property is retained only for backward compatibility.</p>"
                     }
                 },
@@ -15350,7 +15230,6 @@
                 "IsArchived": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the SMS channel is archived.</p>"
                     }
                 },
@@ -15376,7 +15255,6 @@
                 "PromotionalMessagesPerSecond": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of promotional messages that you can send through the SMS channel each second.</p>"
                     }
                 },
@@ -15395,14 +15273,12 @@
                 "TransactionalMessagesPerSecond": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of transactional messages that you can send through the SMS channel each second.</p>"
                     }
                 },
                 "Version": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The current version of the SMS channel.</p>"
                     }
                 }
@@ -15647,7 +15523,6 @@
                 "IsLocalTime": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the start and end times for the campaign schedule use each recipient's local time. To base the schedule on each recipient's local time, set this value to true.</p>"
                     }
                 },
@@ -15884,7 +15759,6 @@
                 "Size": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of endpoint definitions that were imported successfully to create the segment.</p>",
                         "smithy.api#required": {}
                     }
@@ -15927,7 +15801,6 @@
                 "Version": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The version number of the segment.</p>"
                     }
                 }
@@ -16014,7 +15887,6 @@
                 "Version": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The version number of the segment.</p>"
                     }
                 }
@@ -16197,7 +16069,6 @@
                 "AllowedAttempts": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The attempts allowed to validate an OTP.</p>"
                     }
                 },
@@ -16218,7 +16089,6 @@
                 "CodeLength": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of characters in the generated OTP.</p>"
                     }
                 },
@@ -16264,7 +16134,6 @@
                 "ValidityPeriod": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The time in minutes before the OTP is no longer valid.</p>"
                     }
                 }
@@ -16430,7 +16299,6 @@
                 "Duration": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The duration of the session, in milliseconds.</p>"
                     }
                 },
@@ -17026,7 +16894,6 @@
                 "SizePercent": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The allocated percentage of users (segment members) that the treatment is sent to.</p>",
                         "smithy.api#required": {}
                     }
@@ -17833,7 +17700,6 @@
                 "CreateNewVersion": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether to save the updates as a new version of the message template. Valid values are: true, save the updates as a new version; and, false, save the updates to (overwrite) the latest existing version of the template.</p> <p>If you don't specify a value for this parameter, Amazon Pinpoint saves the updates to (overwrites) the latest existing version of the template. If you specify a value of true for this parameter, don't specify a value for the version parameter. Otherwise, an error will occur.</p>",
                         "smithy.api#httpQuery": "create-new-version"
                     }
@@ -18144,7 +18010,6 @@
                 "CreateNewVersion": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether to save the updates as a new version of the message template. Valid values are: true, save the updates as a new version; and, false, save the updates to (overwrite) the latest existing version of the template.</p> <p>If you don't specify a value for this parameter, Amazon Pinpoint saves the updates to (overwrites) the latest existing version of the template. If you specify a value of true for this parameter, don't specify a value for the version parameter. Otherwise, an error will occur.</p>",
                         "smithy.api#httpQuery": "create-new-version"
                     }
@@ -18394,7 +18259,6 @@
                 "CreateNewVersion": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether to save the updates as a new version of the message template. Valid values are: true, save the updates as a new version; and, false, save the updates to (overwrite) the latest existing version of the template.</p> <p>If you don't specify a value for this parameter, Amazon Pinpoint saves the updates to (overwrites) the latest existing version of the template. If you specify a value of true for this parameter, don't specify a value for the version parameter. Otherwise, an error will occur.</p>",
                         "smithy.api#httpQuery": "create-new-version"
                     }
@@ -18563,7 +18427,6 @@
                 "RecommendationsPerMessage": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of recommended items to retrieve from the model for each endpoint or user, depending on the value for the RecommendationProviderIdType property. This number determines how many recommended items are available for use in message variables. The minimum value is 1. The maximum value is 5. The default value is 5.</p> <p>To use multiple recommended items and custom attributes with message variables, you have to use an AWS Lambda function (RecommendationTransformerUri) to perform additional processing of recommendation data.</p>"
                     }
                 }
@@ -18770,7 +18633,6 @@
                 "CreateNewVersion": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether to save the updates as a new version of the message template. Valid values are: true, save the updates as a new version; and, false, save the updates to (overwrite) the latest existing version of the template.</p> <p>If you don't specify a value for this parameter, Amazon Pinpoint saves the updates to (overwrites) the latest existing version of the template. If you specify a value of true for this parameter, don't specify a value for the version parameter. Otherwise, an error will occur.</p>",
                         "smithy.api#httpQuery": "create-new-version"
                     }
@@ -19010,7 +18872,6 @@
                 "CreateNewVersion": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether to save the updates as a new version of the message template. Valid values are: true, save the updates as a new version; and, false, save the updates to (overwrite) the latest existing version of the template.</p> <p>If you don't specify a value for this parameter, Amazon Pinpoint saves the updates to (overwrites) the latest existing version of the template. If you specify a value of true for this parameter, don't specify a value for the version parameter. Otherwise, an error will occur.</p>",
                         "smithy.api#httpQuery": "create-new-version"
                     }
@@ -19057,7 +18918,6 @@
                 "Valid": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the OTP is valid or not.</p>"
                     }
                 }
@@ -19173,7 +19033,6 @@
                 "Enabled": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether to enable the voice channel for the application.</p>"
                     }
                 }
@@ -19200,14 +19059,12 @@
                 "Enabled": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the voice channel is enabled for the application.</p>"
                     }
                 },
                 "HasCredential": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>(Not used) This property is retained only for backward compatibility.</p>"
                     }
                 },
@@ -19220,7 +19077,6 @@
                 "IsArchived": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the voice channel is archived.</p>"
                     }
                 },
@@ -19246,7 +19102,6 @@
                 "Version": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The current version of the voice channel.</p>"
                     }
                 }
@@ -19475,15 +19330,12 @@
                 "CloudWatchMetricsEnabled": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether to enable application-related alarms in Amazon CloudWatch.</p>"
                     }
                 },
                 "EventTaggingEnabled": {
                     "target": "com.amazonaws.pinpoint#__boolean",
-                    "traits": {
-                        "smithy.api#default": false
-                    }
+                    "traits": {}
                 },
                 "Limits": {
                     "target": "com.amazonaws.pinpoint#CampaignLimits",
@@ -19526,7 +19378,6 @@
                 "HoldoutPercent": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The allocated percentage of users (segment members) who shouldn't receive messages from the campaign.</p>"
                     }
                 },
@@ -19539,7 +19390,6 @@
                 "IsPaused": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether to pause the campaign. A paused campaign doesn't run unless you resume it by changing this value to false.</p>"
                     }
                 },
@@ -19576,7 +19426,6 @@
                 "SegmentVersion": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The version of the segment to associate with the campaign.</p>"
                     }
                 },
@@ -19608,7 +19457,6 @@
                 "Priority": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Defines the priority of the campaign, used to decide the order of messages displayed to user if there are multiple messages scheduled to be displayed at the same moment.</p>"
                     }
                 }
@@ -19669,7 +19517,6 @@
                 "LocalTime": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the journey's scheduled start and end times use each participant's local time. To base the schedule on each participant's local time, set this value to true.</p>"
                     }
                 },
@@ -19719,14 +19566,12 @@
                 "WaitForQuietTime": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether endpoints in quiet hours should enter a wait till the end of their quiet hours.</p>"
                     }
                 },
                 "RefreshOnSegmentUpdate": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether a journey should be refreshed on segment update.</p>"
                     }
                 },
@@ -19739,7 +19584,6 @@
                 "SendingSchedule": {
                     "target": "com.amazonaws.pinpoint#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates if journey have Advance Quiet Time (OpenHours and ClosedDays). This flag should be set to true in order to allow (OpenHours and ClosedDays)</p>"
                     }
                 },
@@ -19817,7 +19661,6 @@
                 "SizePercent": {
                     "target": "com.amazonaws.pinpoint#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The allocated percentage of users (segment members) to send the treatment to.</p>",
                         "smithy.api#required": {}
                     }
@@ -19909,21 +19752,15 @@
         },
         "com.amazonaws.pinpoint#__boolean": {
             "type": "boolean",
-            "traits": {
-                "smithy.api#default": false
-            }
+            "traits": {}
         },
         "com.amazonaws.pinpoint#__double": {
             "type": "double",
-            "traits": {
-                "smithy.api#default": 0
-            }
+            "traits": {}
         },
         "com.amazonaws.pinpoint#__integer": {
             "type": "integer",
-            "traits": {
-                "smithy.api#default": 0
-            }
+            "traits": {}
         },
         "com.amazonaws.pinpoint#__string": {
             "type": "string"

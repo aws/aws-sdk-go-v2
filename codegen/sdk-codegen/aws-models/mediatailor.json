@@ -50,7 +50,6 @@
                 "OffsetMillis": {
                     "target": "com.amazonaws.mediatailor#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>How long (in milliseconds) after the beginning of the program that an ad starts. This value must fall within 100ms of a segment boundary, otherwise the ad break will be skipped.</p>"
                     }
                 },
@@ -83,7 +82,6 @@
                 "Enabled": {
                     "target": "com.amazonaws.mediatailor#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Enables ad marker passthrough for your configuration.</p>"
                     }
                 }
@@ -416,7 +414,6 @@
                 "EndOffsetMillis": {
                     "target": "com.amazonaws.mediatailor#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The end offset of the clip range, in milliseconds, starting from the beginning of the VOD source associated with the program.</p>",
                         "smithy.api#required": {}
                     }
@@ -539,7 +536,6 @@
                 "PercentEnabled": {
                     "target": "com.amazonaws.mediatailor#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The percentage of session logs that MediaTailor sends to your Cloudwatch Logs account. For example, if your playback configuration has 1000 sessions and percentEnabled is set to <code>60</code>, MediaTailor sends logs for 600 of the sessions to CloudWatch Logs. MediaTailor decides at random which of the playback configuration sessions to send logs for. If you want to view logs for a specific session, you can use the <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/debug-log-mode.html\">debug log mode</a>.</p>\n         <p>Valid values: <code>0</code> - <code>100</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -562,7 +558,6 @@
                 "PercentEnabled": {
                     "target": "com.amazonaws.mediatailor#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The percentage of session logs that MediaTailor sends to your Cloudwatch Logs account.</p>",
                         "smithy.api#required": {}
                     }
@@ -1043,7 +1038,6 @@
                 "DurationMillis": {
                     "target": "com.amazonaws.mediatailor#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The duration of the live program in milliseconds.</p>"
                     }
                 }
@@ -1325,28 +1319,24 @@
                 "ManifestWindowSeconds": {
                     "target": "com.amazonaws.mediatailor#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total duration (in seconds) of each manifest. Minimum value: <code>30</code> seconds. Maximum value: <code>3600</code> seconds.</p>"
                     }
                 },
                 "MinBufferTimeSeconds": {
                     "target": "com.amazonaws.mediatailor#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Minimum amount of content (measured in seconds) that a player must keep available in the buffer. Minimum value: <code>2</code> seconds. Maximum value: <code>60</code> seconds.</p>"
                     }
                 },
                 "MinUpdatePeriodSeconds": {
                     "target": "com.amazonaws.mediatailor#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Minimum amount of time (in seconds) that the player should wait before requesting updates to the manifest. Minimum value: <code>2</code> seconds. Maximum value: <code>60</code> seconds.</p>"
                     }
                 },
                 "SuggestedPresentationDelaySeconds": {
                     "target": "com.amazonaws.mediatailor#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Amount of time (in seconds) that the player should be from the live point at the end of the manifest. Minimum value: <code>2</code> seconds. Maximum value: <code>60</code> seconds.</p>"
                     }
                 }
@@ -2247,7 +2237,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mediatailor#MaxResults",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of channel schedules that you want MediaTailor to return in response to the current request. If there are more than <code>MaxResults</code> channel schedules, use the value of <code>NextToken</code> in the response to get the next page of results.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -2381,7 +2370,6 @@
                 "PersonalizationThresholdSeconds": {
                     "target": "com.amazonaws.mediatailor#__integerMin1",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Defines the maximum duration of underfilled ad time (in seconds) allowed in an ad break. If the duration of underfilled ad time exceeds the personalization threshold, then the personalization of the ad break is abandoned and the underlying content is shown. This feature applies to <i>ad replacement</i> in live and VOD streams, rather than ad insertion, because it relies on an underlying content stream. For more information about ad break behavior, including ad replacement and insertion, see <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html\">Ad Behavior in AWS Elemental MediaTailor</a>.</p>"
                     }
                 },
@@ -2530,7 +2518,6 @@
                 "ManifestWindowSeconds": {
                     "target": "com.amazonaws.mediatailor#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total duration (in seconds) of each manifest. Minimum value: <code>30</code> seconds. Maximum value: <code>3600</code> seconds.</p>"
                     }
                 }
@@ -2622,7 +2609,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mediatailor#MaxResults",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of alerts that you want MediaTailor to return in response to the current request. If there are more than <code>MaxResults</code> alerts, use the value of <code>NextToken</code> in the response to get the next page of results.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -2691,7 +2677,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mediatailor#MaxResults",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of channels that you want MediaTailor to return in response to the current request. If there are more than <code>MaxResults</code> channels, use the value of <code>NextToken</code> in the response to get the next page of results.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -2752,7 +2737,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mediatailor#MaxResults",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of live sources that you want MediaTailor to return in response to the current request. If there are more than <code>MaxResults</code> live sources, use the value of <code>NextToken</code> in the response to get the next page of results.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -2821,7 +2805,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mediatailor#MaxResults",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of playback configurations that you want MediaTailor to return in response to the current request. If there are more than <code>MaxResults</code> playback configurations, use the value of <code>NextToken</code> in the response to get the next page of results.</p>",
                         "smithy.api#httpQuery": "MaxResults"
                     }
@@ -2885,7 +2868,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mediatailor#__integerMin1Max100",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of prefetch schedules that you want MediaTailor to return in response to the current request. If there are more than <code>MaxResults</code> prefetch schedules, use the value of <code>NextToken</code> in the response to get the next page of results.</p>"
                     }
                 },
@@ -2958,7 +2940,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mediatailor#MaxResults",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p> The maximum number of source locations that you want MediaTailor to return in response to the current request. If there are more than <code>MaxResults</code> source locations, use the value of <code>NextToken</code> in the response to get the next page of results.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -3067,7 +3048,6 @@
                 "MaxResults": {
                     "target": "com.amazonaws.mediatailor#MaxResults",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p> The maximum number of VOD sources that you want MediaTailor to return in response to the current request. If there are more than <code>MaxResults</code> VOD sources, use the value of <code>NextToken</code> in the response to get the next page of results.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -3118,7 +3098,6 @@
                 "MaxDurationSeconds": {
                     "target": "com.amazonaws.mediatailor#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum allowed duration for the pre-roll ad avail. AWS Elemental MediaTailor won't play pre-roll ads to exceed this duration, regardless of the total duration of ads that the ADS returns.</p>"
                     }
                 }
@@ -3224,7 +3203,6 @@
                 "PercentEnabled": {
                     "target": "com.amazonaws.mediatailor#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The percentage of session logs that MediaTailor sends to your Cloudwatch Logs account. For example, if your playback configuration has 1000 sessions and <code>percentEnabled</code> is set to <code>60</code>, MediaTailor sends logs for 600 of the sessions to CloudWatch Logs. MediaTailor decides at random which of the playback configuration sessions to send logs for. If you want to view logs for a specific session, you can use the <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/debug-log-mode.html\">debug log mode</a>.</p>\n         <p>Valid values: <code>0</code> - <code>100</code>\n         </p>",
                         "smithy.api#required": {}
                     }
@@ -3282,7 +3260,6 @@
         "com.amazonaws.mediatailor#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -4195,7 +4172,6 @@
                 "PersonalizationThresholdSeconds": {
                     "target": "com.amazonaws.mediatailor#__integerMin1",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Defines the maximum duration of underfilled ad time (in seconds) allowed in an ad break. If the duration of underfilled ad time exceeds the personalization threshold, then the personalization of the ad break is abandoned and the underlying content is shown. This feature applies to <i>ad replacement</i> in live and VOD streams, rather than ad insertion, because it relies on an underlying content stream. For more information about ad break behavior, including ad replacement and insertion, see <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html\">Ad Behavior in AWS Elemental MediaTailor</a>.</p>"
                     }
                 },
@@ -4581,7 +4557,6 @@
                 "PersonalizationThresholdSeconds": {
                     "target": "com.amazonaws.mediatailor#__integerMin1",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Defines the maximum duration of underfilled ad time (in seconds) allowed in an ad break. If the duration of underfilled ad time exceeds the personalization threshold, then the personalization of the ad break is abandoned and the underlying content is shown. This feature applies to <i>ad replacement</i> in live and VOD streams, rather than ad insertion, because it relies on an underlying content stream. For more information about ad break behavior, including ad replacement and insertion, see <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html\">Ad Behavior in AWS Elemental MediaTailor</a>.</p>"
                     }
                 },
@@ -4684,7 +4659,6 @@
                 "PersonalizationThresholdSeconds": {
                     "target": "com.amazonaws.mediatailor#__integerMin1",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Defines the maximum duration of underfilled ad time (in seconds) allowed in an ad break. If the duration of underfilled ad time exceeds the personalization threshold, then the personalization of the ad break is abandoned and the underlying content is shown. This feature applies to <i>ad replacement</i> in live and VOD streams, rather than ad insertion, because it relies on an underlying content stream. For more information about ad break behavior, including ad replacement and insertion, see <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html\">Ad Behavior in AWS Elemental MediaTailor</a>.</p>"
                     }
                 },
@@ -4846,7 +4820,6 @@
                 "ApproximateDurationSeconds": {
                     "target": "com.amazonaws.mediatailor#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The approximate duration of the ad break, in seconds.</p>"
                     }
                 },
@@ -4900,7 +4873,6 @@
                 "ApproximateDurationSeconds": {
                     "target": "com.amazonaws.mediatailor#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The approximate duration of this program, in seconds.</p>"
                     }
                 },
@@ -5218,28 +5190,24 @@
                 "AvailNum": {
                     "target": "com.amazonaws.mediatailor#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>This is written to <code>splice_insert.avail_num</code>, as defined in section 9.7.3.1 of the SCTE-35 specification. The default value is <code>0</code>. Values must be between <code>0</code> and <code>256</code>, inclusive.</p>"
                     }
                 },
                 "AvailsExpected": {
                     "target": "com.amazonaws.mediatailor#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>This is written to <code>splice_insert.avails_expected</code>, as defined in section 9.7.3.1 of the SCTE-35 specification. The default value is <code>0</code>. Values must be between <code>0</code> and <code>256</code>, inclusive.</p>"
                     }
                 },
                 "SpliceEventId": {
                     "target": "com.amazonaws.mediatailor#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>This is written to <code>splice_insert.splice_event_id</code>, as defined in section 9.7.3.1 of the SCTE-35 specification. The default value is <code>1</code>.</p>"
                     }
                 },
                 "UniqueProgramId": {
                     "target": "com.amazonaws.mediatailor#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>This is written to <code>splice_insert.unique_program_id</code>, as defined in section 9.7.3.1 of the SCTE-35 specification. The default value is <code>0</code>. Values must be between <code>0</code> and <code>256</code>, inclusive.</p>"
                     }
                 }
@@ -5398,7 +5366,6 @@
                 "DurationMillis": {
                     "target": "com.amazonaws.mediatailor#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The duration of the live program in seconds.</p>"
                     }
                 },
@@ -5418,7 +5385,6 @@
                 "ScheduledStartTimeMillis": {
                     "target": "com.amazonaws.mediatailor#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The date and time that the program is scheduled to start, in epoch milliseconds.</p>"
                     }
                 },
@@ -5811,7 +5777,6 @@
                 "DurationMillis": {
                     "target": "com.amazonaws.mediatailor#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The duration of the live program in milliseconds.</p>"
                     }
                 },
@@ -5849,14 +5814,12 @@
                 "ScheduledStartTimeMillis": {
                     "target": "com.amazonaws.mediatailor#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The date and time that the program is scheduled to start, in epoch milliseconds.</p>"
                     }
                 },
                 "DurationMillis": {
                     "target": "com.amazonaws.mediatailor#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The duration of the live program in seconds.</p>"
                     }
                 }
@@ -6169,20 +6132,15 @@
         },
         "com.amazonaws.mediatailor#__boolean": {
             "type": "boolean",
-            "traits": {
-                "smithy.api#default": false
-            }
+            "traits": {}
         },
         "com.amazonaws.mediatailor#__integer": {
             "type": "integer",
-            "traits": {
-                "smithy.api#default": 0
-            }
+            "traits": {}
         },
         "com.amazonaws.mediatailor#__integerMin1": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -6191,7 +6149,6 @@
         "com.amazonaws.mediatailor#__integerMin1Max100": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -6278,9 +6235,7 @@
         },
         "com.amazonaws.mediatailor#__long": {
             "type": "long",
-            "traits": {
-                "smithy.api#default": 0
-            }
+            "traits": {}
         },
         "com.amazonaws.mediatailor#__mapOf__string": {
             "type": "map",

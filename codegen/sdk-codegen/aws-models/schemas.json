@@ -153,7 +153,6 @@
                 "CrossAccount": {
                     "target": "com.amazonaws.schemas#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Support discovery of schemas in events sent to the bus from another account. (default: true).</p>"
                     }
                 },
@@ -202,7 +201,6 @@
                 "CrossAccount": {
                     "target": "com.amazonaws.schemas#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>The Status if the discoverer will discover schemas from events sent from another account.</p>"
                     }
                 },
@@ -944,7 +942,6 @@
                 "CrossAccount": {
                     "target": "com.amazonaws.schemas#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>The Status if the discoverer will discover schemas from events sent from another account.</p>"
                     }
                 },
@@ -1207,7 +1204,6 @@
                 "CrossAccount": {
                     "target": "com.amazonaws.schemas#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>The Status if the discoverer will discover schemas from events sent from another account.</p>"
                     }
                 },
@@ -1659,7 +1655,6 @@
                 "Limit": {
                     "target": "com.amazonaws.schemas#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#httpQuery": "limit"
                     }
                 },
@@ -1742,7 +1737,6 @@
                 "Limit": {
                     "target": "com.amazonaws.schemas#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#httpQuery": "limit"
                     }
                 },
@@ -1835,7 +1829,6 @@
                 "Limit": {
                     "target": "com.amazonaws.schemas#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#httpQuery": "limit"
                     }
                 },
@@ -1927,7 +1920,6 @@
                 "Limit": {
                     "target": "com.amazonaws.schemas#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#httpQuery": "limit"
                     }
                 },
@@ -2318,7 +2310,6 @@
                 "VersionCount": {
                     "target": "com.amazonaws.schemas#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of versions available for the schema.</p>"
                     }
                 }
@@ -2462,7 +2453,6 @@
                 "Limit": {
                     "target": "com.amazonaws.schemas#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#httpQuery": "limit"
                     }
                 },
@@ -2900,7 +2890,6 @@
                 "CrossAccount": {
                     "target": "com.amazonaws.schemas#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Support discovery of schemas in events sent to the bus from another account. (default: true)</p>"
                     }
                 }
@@ -2942,7 +2931,6 @@
                 "CrossAccount": {
                     "target": "com.amazonaws.schemas#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>The Status if the discoverer will discover schemas from events sent from another account.</p>"
                     }
                 },
@@ -3179,15 +3167,11 @@
         },
         "com.amazonaws.schemas#__boolean": {
             "type": "boolean",
-            "traits": {
-                "smithy.api#default": false
-            }
+            "traits": {}
         },
         "com.amazonaws.schemas#__integer": {
             "type": "integer",
-            "traits": {
-                "smithy.api#default": 0
-            }
+            "traits": {}
         },
         "com.amazonaws.schemas#__listOfDiscovererSummary": {
             "type": "list",
@@ -3245,9 +3229,7 @@
         },
         "com.amazonaws.schemas#__long": {
             "type": "long",
-            "traits": {
-                "smithy.api#default": 0
-            }
+            "traits": {}
         },
         "com.amazonaws.schemas#__string": {
             "type": "string"

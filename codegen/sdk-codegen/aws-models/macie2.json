@@ -112,7 +112,6 @@
                 "allowsPublicReadAccess": {
                     "target": "com.amazonaws.macie2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the ACL grants the general public with read access permissions for the bucket.</p>",
                         "smithy.api#jsonName": "allowsPublicReadAccess"
                     }
@@ -120,7 +119,6 @@
                 "allowsPublicWriteAccess": {
                     "target": "com.amazonaws.macie2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the ACL grants the general public with write access permissions for the bucket.</p>",
                         "smithy.api#jsonName": "allowsPublicWriteAccess"
                     }
@@ -578,7 +576,6 @@
                 "deleted": {
                     "target": "com.amazonaws.macie2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the custom data identifier was deleted. If you delete a custom data identifier, Amazon Macie doesn't delete it permanently. Instead, it soft deletes the identifier.</p>",
                         "smithy.api#jsonName": "deleted"
                     }
@@ -692,7 +689,6 @@
                 "blockPublicAcls": {
                     "target": "com.amazonaws.macie2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether Amazon S3 blocks public access control lists (ACLs) for the bucket and objects in the bucket.</p>",
                         "smithy.api#jsonName": "blockPublicAcls"
                     }
@@ -700,7 +696,6 @@
                 "blockPublicPolicy": {
                     "target": "com.amazonaws.macie2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether Amazon S3 blocks public bucket policies for the bucket.</p>",
                         "smithy.api#jsonName": "blockPublicPolicy"
                     }
@@ -708,7 +703,6 @@
                 "ignorePublicAcls": {
                     "target": "com.amazonaws.macie2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether Amazon S3 ignores public ACLs for the bucket and objects in the bucket.</p>",
                         "smithy.api#jsonName": "ignorePublicAcls"
                     }
@@ -716,7 +710,6 @@
                 "restrictPublicBuckets": {
                     "target": "com.amazonaws.macie2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether Amazon S3 restricts public bucket policies for the bucket.</p>",
                         "smithy.api#jsonName": "restrictPublicBuckets"
                     }
@@ -732,7 +725,6 @@
                 "publiclyAccessible": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of buckets that allow the general public to have read or write access to the bucket.</p>",
                         "smithy.api#jsonName": "publiclyAccessible"
                     }
@@ -740,7 +732,6 @@
                 "publiclyReadable": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of buckets that allow the general public to have read access to the bucket.</p>",
                         "smithy.api#jsonName": "publiclyReadable"
                     }
@@ -748,7 +739,6 @@
                 "publiclyWritable": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of buckets that allow the general public to have write access to the bucket.</p>",
                         "smithy.api#jsonName": "publiclyWritable"
                     }
@@ -756,7 +746,6 @@
                 "unknown": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of buckets that Amazon Macie wasn't able to evaluate permissions settings for. Macie can't determine whether these buckets are publicly accessible.</p>",
                         "smithy.api#jsonName": "unknown"
                     }
@@ -772,7 +761,6 @@
                 "kmsManaged": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of buckets whose default encryption settings are configured to encrypt new objects with an Amazon Web Services managed KMS key or a customer managed KMS key. By default, these buckets encrypt new objects automatically using SSE-KMS encryption.</p>",
                         "smithy.api#jsonName": "kmsManaged"
                     }
@@ -780,7 +768,6 @@
                 "s3Managed": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of buckets whose default encryption settings are configured to encrypt new objects with an Amazon S3 managed key. By default, these buckets encrypt new objects automatically using SSE-S3 encryption.</p>",
                         "smithy.api#jsonName": "s3Managed"
                     }
@@ -788,7 +775,6 @@
                 "unencrypted": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of buckets that don't specify default server-side encryption behavior for new objects. Default encryption settings aren't configured for these buckets.</p>",
                         "smithy.api#jsonName": "unencrypted"
                     }
@@ -796,7 +782,6 @@
                 "unknown": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of buckets that Amazon Macie doesn't have current encryption metadata for. Macie can't provide current data about the default encryption settings for these buckets.</p>",
                         "smithy.api#jsonName": "unknown"
                     }
@@ -812,7 +797,6 @@
                 "external": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of buckets that are shared with one or more of the following or any combination of the following: an Amazon CloudFront OAI, a CloudFront OAC, or an Amazon Web Services account that isn't in the same Amazon Macie organization.</p>",
                         "smithy.api#jsonName": "external"
                     }
@@ -820,7 +804,6 @@
                 "internal": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of buckets that are shared with one or more Amazon Web Services accounts in the same Amazon Macie organization. These buckets aren't shared with Amazon CloudFront OAIs or OACs.</p>",
                         "smithy.api#jsonName": "internal"
                     }
@@ -828,7 +811,6 @@
                 "notShared": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of buckets that aren't shared with other Amazon Web Services accounts, Amazon CloudFront OAIs, or CloudFront OACs.</p>",
                         "smithy.api#jsonName": "notShared"
                     }
@@ -836,7 +818,6 @@
                 "unknown": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of buckets that Amazon Macie wasn't able to evaluate shared access settings for. Macie can't determine whether these buckets are shared with other Amazon Web Services accounts, Amazon CloudFront OAIs, or CloudFront OACs.</p>",
                         "smithy.api#jsonName": "unknown"
                     }
@@ -852,7 +833,6 @@
                 "allowsUnencryptedObjectUploads": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of buckets that don't have a bucket policy or have a bucket policy that doesn't require server-side encryption of new objects. If a bucket policy exists, the policy doesn't require PutObject requests to include a valid server-side encryption header: the x-amz-server-side-encryption header with a value of AES256 or aws:kms, or the x-amz-server-side-encryption-customer-algorithm header with a value of AES256.</p>",
                         "smithy.api#jsonName": "allowsUnencryptedObjectUploads"
                     }
@@ -860,7 +840,6 @@
                 "deniesUnencryptedObjectUploads": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of buckets whose bucket policies require server-side encryption of new objects. PutObject requests for these buckets must include a valid server-side encryption header: the x-amz-server-side-encryption header with a value of AES256 or aws:kms, or the x-amz-server-side-encryption-customer-algorithm header with a value of AES256.</p>",
                         "smithy.api#jsonName": "deniesUnencryptedObjectUploads"
                     }
@@ -868,7 +847,6 @@
                 "unknown": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of buckets that Amazon Macie wasn't able to evaluate server-side encryption requirements for. Macie can't determine whether the bucket policies for these buckets require server-side encryption of new objects.</p>",
                         "smithy.api#jsonName": "unknown"
                     }
@@ -903,7 +881,6 @@
                 "gt": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The value for the property is greater than the specified value.</p>",
                         "smithy.api#jsonName": "gt"
                     }
@@ -911,7 +888,6 @@
                 "gte": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The value for the property is greater than or equal to the specified value.</p>",
                         "smithy.api#jsonName": "gte"
                     }
@@ -919,7 +895,6 @@
                 "lt": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The value for the property is less than the specified value.</p>",
                         "smithy.api#jsonName": "lt"
                     }
@@ -927,7 +902,6 @@
                 "lte": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The value for the property is less than or equal to the specified value.</p>",
                         "smithy.api#jsonName": "lte"
                     }
@@ -1021,7 +995,6 @@
                 "classifiableObjectCount": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of objects that Amazon Macie can analyze in the bucket. These objects use a supported storage class and have a file name extension for a supported file or storage format.</p>",
                         "smithy.api#jsonName": "classifiableObjectCount"
                     }
@@ -1029,7 +1002,6 @@
                 "classifiableSizeInBytes": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total storage size, in bytes, of the objects that Amazon Macie can analyze in the bucket. These objects use a supported storage class and have a file name extension for a supported file or storage format.</p> <p>If versioning is enabled for the bucket, Macie calculates this value based on the size of the latest version of each applicable object in the bucket. This value doesn't reflect the storage size of all versions of each applicable object in the bucket.</p>",
                         "smithy.api#jsonName": "classifiableSizeInBytes"
                     }
@@ -1072,7 +1044,6 @@
                 "objectCount": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of objects in the bucket.</p>",
                         "smithy.api#jsonName": "objectCount"
                     }
@@ -1108,7 +1079,6 @@
                 "sensitivityScore": {
                     "target": "com.amazonaws.macie2#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The sensitivity score for the bucket, ranging from -1 (classification error) to 100 (sensitive). This value is null if automated sensitive data discovery is currently disabled for your account.</p>",
                         "smithy.api#jsonName": "sensitivityScore"
                     }
@@ -1130,7 +1100,6 @@
                 "sizeInBytes": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total storage size, in bytes, of the bucket.</p> <p>If versioning is enabled for the bucket, Amazon Macie calculates this value based on the size of the latest version of each object in the bucket. This value doesn't reflect the storage size of all versions of each object in the bucket.</p>",
                         "smithy.api#jsonName": "sizeInBytes"
                     }
@@ -1138,7 +1107,6 @@
                 "sizeInBytesCompressed": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total storage size, in bytes, of the objects that are compressed (.gz, .gzip, .zip) files in the bucket.</p> <p>If versioning is enabled for the bucket, Amazon Macie calculates this value based on the size of the latest version of each applicable object in the bucket. This value doesn't reflect the storage size of all versions of each applicable object in the bucket.</p>",
                         "smithy.api#jsonName": "sizeInBytesCompressed"
                     }
@@ -1167,7 +1135,6 @@
                 "versioning": {
                     "target": "com.amazonaws.macie2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether versioning is enabled for the bucket.</p>",
                         "smithy.api#jsonName": "versioning"
                     }
@@ -1219,7 +1186,6 @@
                 "allowsPublicReadAccess": {
                     "target": "com.amazonaws.macie2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the bucket policy allows the general public to have read access to the bucket.</p>",
                         "smithy.api#jsonName": "allowsPublicReadAccess"
                     }
@@ -1227,7 +1193,6 @@
                 "allowsPublicWriteAccess": {
                     "target": "com.amazonaws.macie2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the bucket policy allows the general public to have write access to the bucket.</p>",
                         "smithy.api#jsonName": "allowsPublicWriteAccess"
                     }
@@ -1352,7 +1317,6 @@
                 "column": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The column number of the column that contains the sensitive data. For a Microsoft Excel workbook, this value correlates to the alphabetical character(s) for a column identifier, for example: 1 for column A, 2 for column B, and so on.</p>",
                         "smithy.api#jsonName": "column"
                     }
@@ -1367,7 +1331,6 @@
                 "row": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The row number of the row that contains the sensitive data.</p>",
                         "smithy.api#jsonName": "row"
                     }
@@ -1450,7 +1413,6 @@
                 "additionalOccurrences": {
                     "target": "com.amazonaws.macie2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether Amazon Macie detected additional occurrences of sensitive data in the S3 object. A finding includes location data for a maximum of 15 occurrences of sensitive data.</p> <p>This value can help you determine whether to investigate additional occurrences of sensitive data in an object. You can do this by referring to the corresponding sensitive data discovery result for the finding (ClassificationDetails.detailedResultsLocation).</p>",
                         "smithy.api#jsonName": "additionalOccurrences"
                     }
@@ -1479,7 +1441,6 @@
                 "sizeClassified": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total size, in bytes, of the data that the finding applies to.</p>",
                         "smithy.api#jsonName": "sizeClassified"
                     }
@@ -1782,7 +1743,6 @@
                 "initialRun": {
                     "target": "com.amazonaws.macie2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>For a recurring job, specifies whether to analyze all existing, eligible objects immediately after the job is created (true). To analyze only those objects that are created or changed after you create the job and before the job's first scheduled run, set this value to false.</p> <p>If you configure the job to run only once, don't specify a value for this property.</p>",
                         "smithy.api#jsonName": "initialRun"
                     }
@@ -1828,7 +1788,6 @@
                 "samplingPercentage": {
                     "target": "com.amazonaws.macie2#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The sampling depth, as a percentage, for the job to apply when processing objects. This value determines the percentage of eligible objects that the job analyzes. If this value is less than 100, Amazon Macie selects the objects to analyze at random, up to the specified percentage, and analyzes all the data in those objects.</p>",
                         "smithy.api#jsonName": "samplingPercentage"
                     }
@@ -1949,7 +1908,6 @@
                 "maximumMatchDistance": {
                     "target": "com.amazonaws.macie2#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of characters that can exist between the end of at least one complete character sequence specified by the keywords array and the end of the text that matches the regex pattern. If a complete keyword precedes all the text that matches the pattern and the keyword is within the specified distance, Amazon Macie includes the result. The distance can be 1-300 characters. The default value is 50.</p>",
                         "smithy.api#jsonName": "maximumMatchDistance"
                     }
@@ -2089,7 +2047,6 @@
                 "position": {
                     "target": "com.amazonaws.macie2#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The position of the filter in the list of saved filters on the Amazon Macie console. This value also determines the order in which the filter is applied to findings, relative to other filters that are also applied to the findings.</p>",
                         "smithy.api#jsonName": "position"
                     }
@@ -2182,7 +2139,6 @@
                 "disableEmailNotification": {
                     "target": "com.amazonaws.macie2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether to send the invitation as an email message. If this value is false, Amazon Macie sends the invitation (as an email message) to the email address that you specified for the recipient's account when you associated the account with your account. The default value is false.</p>",
                         "smithy.api#jsonName": "disableEmailNotification"
                     }
@@ -2423,7 +2379,6 @@
                 "gt": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The value for the property is greater than the specified value.</p>",
                         "smithy.api#jsonName": "gt"
                     }
@@ -2431,7 +2386,6 @@
                 "gte": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The value for the property is greater than or equal to the specified value.</p>",
                         "smithy.api#jsonName": "gte"
                     }
@@ -2439,7 +2393,6 @@
                 "lt": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The value for the property is less than the specified value.</p>",
                         "smithy.api#jsonName": "lt"
                     }
@@ -2447,7 +2400,6 @@
                 "lte": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The value for the property is less than or equal to the specified value.</p>",
                         "smithy.api#jsonName": "lte"
                     }
@@ -2534,7 +2486,6 @@
                 "totalCount": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of occurrences of the data that was detected by the custom data identifiers and produced the finding.</p>",
                         "smithy.api#jsonName": "totalCount"
                     }
@@ -2557,7 +2508,6 @@
                 "count": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of occurrences of the sensitive data that the custom data identifier detected.</p>",
                         "smithy.api#jsonName": "count"
                     }
@@ -2767,7 +2717,6 @@
                 "count": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of occurrences of the type of sensitive data that was detected.</p>",
                         "smithy.api#jsonName": "count"
                     }
@@ -3183,7 +3132,6 @@
                 "maxResults": {
                     "target": "com.amazonaws.macie2#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of items to include in each page of the response. The default value is 50.</p>",
                         "smithy.api#jsonName": "maxResults"
                     }
@@ -3327,7 +3275,6 @@
                 "initialRun": {
                     "target": "com.amazonaws.macie2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>For a recurring job, specifies whether you configured the job to analyze all existing, eligible objects immediately after the job was created (true). If you configured the job to analyze only those objects that were created or changed after the job was created and before the job's first scheduled run, this value is false. This value is also false for a one-time job.</p>",
                         "smithy.api#jsonName": "initialRun"
                     }
@@ -3405,7 +3352,6 @@
                 "samplingPercentage": {
                     "target": "com.amazonaws.macie2#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The sampling depth, as a percentage, that determines the percentage of eligible objects that the job analyzes.</p>",
                         "smithy.api#jsonName": "samplingPercentage"
                     }
@@ -3496,7 +3442,6 @@
                 "autoEnable": {
                     "target": "com.amazonaws.macie2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether Amazon Macie is enabled automatically for accounts that are added to the organization.</p>",
                         "smithy.api#jsonName": "autoEnable"
                     }
@@ -3504,7 +3449,6 @@
                 "maxAccountLimitReached": {
                     "target": "com.amazonaws.macie2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the maximum number of Amazon Macie member accounts are part of the organization.</p>",
                         "smithy.api#jsonName": "maxAccountLimitReached"
                     }
@@ -3543,7 +3487,6 @@
                 "count": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of occurrences of the sensitive data.</p>",
                         "smithy.api#jsonName": "count"
                     }
@@ -3565,7 +3508,6 @@
                 "suppressed": {
                     "target": "com.amazonaws.macie2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether occurrences of this type of sensitive data are excluded (true) or included (false) in the bucket's sensitivity score.</p>",
                         "smithy.api#jsonName": "suppressed"
                     }
@@ -4164,7 +4106,6 @@
                 "archived": {
                     "target": "com.amazonaws.macie2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the finding is archived (suppressed).</p>",
                         "smithy.api#jsonName": "archived"
                     }
@@ -4186,7 +4127,6 @@
                 "count": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of occurrences of the finding. For sensitive data findings, this value is always 1. All sensitive data findings are considered unique.</p>",
                         "smithy.api#jsonName": "count"
                     }
@@ -4243,7 +4183,6 @@
                 "sample": {
                     "target": "com.amazonaws.macie2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the finding is a sample finding. A <i>sample finding</i> is a finding that uses example data to demonstrate what a finding might contain.</p>",
                         "smithy.api#jsonName": "sample"
                     }
@@ -4925,7 +4864,6 @@
                 "bucketCount": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of buckets.</p>",
                         "smithy.api#jsonName": "bucketCount"
                     }
@@ -4968,7 +4906,6 @@
                 "classifiableObjectCount": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of objects that Amazon Macie can analyze in the buckets. These objects use a supported storage class and have a file name extension for a supported file or storage format.</p>",
                         "smithy.api#jsonName": "classifiableObjectCount"
                     }
@@ -4976,7 +4913,6 @@
                 "classifiableSizeInBytes": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total storage size, in bytes, of all the objects that Amazon Macie can analyze in the buckets. These objects use a supported storage class and have a file name extension for a supported file or storage format.</p> <p>If versioning is enabled for any of the buckets, this value is based on the size of the latest version of each applicable object in the buckets. This value doesn't reflect the storage size of all versions of all applicable objects in the buckets.</p>",
                         "smithy.api#jsonName": "classifiableSizeInBytes"
                     }
@@ -4991,7 +4927,6 @@
                 "objectCount": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of objects in the buckets.</p>",
                         "smithy.api#jsonName": "objectCount"
                     }
@@ -4999,7 +4934,6 @@
                 "sizeInBytes": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total storage size, in bytes, of the buckets.</p> <p>If versioning is enabled for any of the buckets, this value is based on the size of the latest version of each object in the buckets. This value doesn't reflect the storage size of all versions of the objects in the buckets.</p>",
                         "smithy.api#jsonName": "sizeInBytes"
                     }
@@ -5007,7 +4941,6 @@
                 "sizeInBytesCompressed": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total storage size, in bytes, of the objects that are compressed (.gz, .gzip, .zip) files in the buckets.</p> <p>If versioning is enabled for any of the buckets, this value is based on the size of the latest version of each applicable object in the buckets. This value doesn't reflect the storage size of all versions of the applicable objects in the buckets.</p>",
                         "smithy.api#jsonName": "sizeInBytesCompressed"
                     }
@@ -5248,7 +5181,6 @@
                 "deleted": {
                     "target": "com.amazonaws.macie2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the custom data identifier was deleted. If you delete a custom data identifier, Amazon Macie doesn't delete it permanently. Instead, it soft deletes the identifier.</p>",
                         "smithy.api#jsonName": "deleted"
                     }
@@ -5284,7 +5216,6 @@
                 "maximumMatchDistance": {
                     "target": "com.amazonaws.macie2#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of characters that can exist between the end of at least one complete character sequence specified by the keywords array and the end of the text that matches the regex pattern. If a complete keyword precedes all the text that matches the pattern and the keyword is within the specified distance, Amazon Macie includes the result. Otherwise, Macie excludes the result.</p>",
                         "smithy.api#jsonName": "maximumMatchDistance"
                     }
@@ -5383,7 +5314,6 @@
                 "size": {
                     "target": "com.amazonaws.macie2#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of items to include in each page of the response.</p>",
                         "smithy.api#jsonName": "size"
                     }
@@ -5559,7 +5489,6 @@
                 "position": {
                     "target": "com.amazonaws.macie2#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The position of the filter in the list of saved filters on the Amazon Macie console. This value also determines the order in which the filter is applied to findings, relative to other filters that are also applied to the findings.</p>",
                         "smithy.api#jsonName": "position"
                     }
@@ -5729,7 +5658,6 @@
                 "invitationsCount": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of invitations that were received by the account, not including the currently accepted invitation.</p>",
                         "smithy.api#jsonName": "invitationsCount"
                     }
@@ -6084,7 +6012,6 @@
                 "sensitivityScore": {
                     "target": "com.amazonaws.macie2#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The current sensitivity score for the bucket, ranging from -1 (classification error) to 100 (sensitive). By default, this score is calculated automatically based on the amount of data that Amazon Macie has analyzed in the bucket and the amount of sensitive data that Macie has found in the bucket.</p>",
                         "smithy.api#jsonName": "sensitivityScore"
                     }
@@ -6092,7 +6019,6 @@
                 "sensitivityScoreOverridden": {
                     "target": "com.amazonaws.macie2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the bucket's current sensitivity score was set manually. If this value is true, the score was manually changed to 100. If this value is false, the score was calculated automatically by Amazon Macie.</p>",
                         "smithy.api#jsonName": "sensitivityScoreOverridden"
                     }
@@ -6492,7 +6418,6 @@
                 "maxResults": {
                     "target": "com.amazonaws.macie2#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of items to include in each page of the response.</p>",
                         "smithy.api#jsonName": "maxResults"
                     }
@@ -6664,7 +6589,6 @@
                 "count": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of findings in the group of query results.</p>",
                         "smithy.api#jsonName": "count"
                     }
@@ -6856,7 +6780,6 @@
                 "lat": {
                     "target": "com.amazonaws.macie2#__double",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The latitude coordinate of the location, rounded to four decimal places.</p>",
                         "smithy.api#jsonName": "lat"
                     }
@@ -6864,7 +6787,6 @@
                 "lon": {
                     "target": "com.amazonaws.macie2#__double",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The longitude coordinate of the location, rounded to four decimal places.</p>",
                         "smithy.api#jsonName": "lon"
                     }
@@ -7358,7 +7280,6 @@
                 "maxResults": {
                     "target": "com.amazonaws.macie2#MaxResults",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of items to include in each page of a paginated response.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -7456,7 +7377,6 @@
                 "maxResults": {
                     "target": "com.amazonaws.macie2#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of items to include in each page of the response.</p>",
                         "smithy.api#jsonName": "maxResults"
                     }
@@ -7634,7 +7554,6 @@
                 "maxResults": {
                     "target": "com.amazonaws.macie2#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of items to include in each page of the response.</p>",
                         "smithy.api#jsonName": "maxResults"
                     }
@@ -7771,7 +7690,6 @@
                 "maxResults": {
                     "target": "com.amazonaws.macie2#MaxResults",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of items to include in each page of a paginated response.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -7823,7 +7741,6 @@
                 "maxResults": {
                     "target": "com.amazonaws.macie2#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of items to include in each page of the response.</p>",
                         "smithy.api#jsonName": "maxResults"
                     }
@@ -7921,7 +7838,6 @@
                 "maxResults": {
                     "target": "com.amazonaws.macie2#MaxResults",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of items to include in each page of a paginated response.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -8208,7 +8124,6 @@
                 "maxResults": {
                     "target": "com.amazonaws.macie2#MaxResults",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of items to include in each page of a paginated response.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -8306,7 +8221,6 @@
                 "maxResults": {
                     "target": "com.amazonaws.macie2#MaxResults",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of items to include in each page of a paginated response.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -8478,7 +8392,6 @@
                 "maxResults": {
                     "target": "com.amazonaws.macie2#MaxResults",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of items to include in each page of a paginated response.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -8571,7 +8484,6 @@
                 "maxResults": {
                     "target": "com.amazonaws.macie2#MaxResults",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of items to include in each page of a paginated response.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
@@ -9923,7 +9835,6 @@
                 "classifiableObjectCount": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of objects that Amazon Macie can analyze in the bucket. These objects use a supported storage class and have a file name extension for a supported file or storage format.</p>",
                         "smithy.api#jsonName": "classifiableObjectCount"
                     }
@@ -9931,7 +9842,6 @@
                 "classifiableSizeInBytes": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total storage size, in bytes, of the objects that Amazon Macie can analyze in the bucket. These objects use a supported storage class and have a file name extension for a supported file or storage format.</p> <p>If versioning is enabled for the bucket, Macie calculates this value based on the size of the latest version of each applicable object in the bucket. This value doesn't reflect the storage size of all versions of each applicable object in the bucket.</p>",
                         "smithy.api#jsonName": "classifiableSizeInBytes"
                     }
@@ -9967,7 +9877,6 @@
                 "objectCount": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of objects in the bucket.</p>",
                         "smithy.api#jsonName": "objectCount"
                     }
@@ -9982,7 +9891,6 @@
                 "sensitivityScore": {
                     "target": "com.amazonaws.macie2#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The current sensitivity score for the bucket, ranging from -1 (classification error) to 100 (sensitive). This value is null if automated sensitive data discovery is currently disabled for your account.</p>",
                         "smithy.api#jsonName": "sensitivityScore"
                     }
@@ -9990,7 +9898,6 @@
                 "sizeInBytes": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total storage size, in bytes, of the bucket.</p> <p>If versioning is enabled for the bucket, Amazon Macie calculates this value based on the size of the latest version of each object in the bucket. This value doesn't reflect the storage size of all versions of each object in the bucket.</p>",
                         "smithy.api#jsonName": "sizeInBytes"
                     }
@@ -9998,7 +9905,6 @@
                 "sizeInBytesCompressed": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total storage size, in bytes, of the objects that are compressed (.gz, .gzip, .zip) files in the bucket.</p> <p>If versioning is enabled for the bucket, Amazon Macie calculates this value based on the size of the latest version of each applicable object in the bucket. This value doesn't reflect the storage size of all versions of each applicable object in the bucket.</p>",
                         "smithy.api#jsonName": "sizeInBytesCompressed"
                     }
@@ -10040,7 +9946,6 @@
         "com.amazonaws.macie2#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 25
@@ -10124,7 +10029,6 @@
                 "dayOfMonth": {
                     "target": "com.amazonaws.macie2#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The numeric day of the month when Amazon Macie runs the job. This value can be an integer from 1 through 31.</p> <p>If this value exceeds the number of days in a certain month, Macie doesn't run the job that month. Macie runs the job only during months that have the specified day. For example, if this value is 31 and a month has only 30 days, Macie doesn't run the job that month. To run the job every month, specify a value that's less than 29.</p>",
                         "smithy.api#jsonName": "dayOfMonth"
                     }
@@ -10147,7 +10051,6 @@
                 "customerManaged": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of objects that are encrypted with a customer-provided key. The objects use customer-provided server-side encryption (SSE-C).</p>",
                         "smithy.api#jsonName": "customerManaged"
                     }
@@ -10155,7 +10058,6 @@
                 "kmsManaged": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of objects that are encrypted with an KMS key, either an Amazon Web Services managed key or a customer managed key. The objects use KMS encryption (SSE-KMS).</p>",
                         "smithy.api#jsonName": "kmsManaged"
                     }
@@ -10163,7 +10065,6 @@
                 "s3Managed": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of objects that are encrypted with an Amazon S3 managed key. The objects use Amazon S3 managed encryption (SSE-S3).</p>",
                         "smithy.api#jsonName": "s3Managed"
                     }
@@ -10171,7 +10072,6 @@
                 "unencrypted": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of objects that use client-side encryption or aren't encrypted.</p>",
                         "smithy.api#jsonName": "unencrypted"
                     }
@@ -10179,7 +10079,6 @@
                 "unknown": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of objects that Amazon Macie doesn't have current encryption metadata for. Macie can't provide current data about the encryption settings for these objects.</p>",
                         "smithy.api#jsonName": "unknown"
                     }
@@ -10195,7 +10094,6 @@
                 "fileType": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total storage size (in bytes) or number of objects that Amazon Macie can't analyze because the objects don't have a file name extension for a supported file or storage format.</p>",
                         "smithy.api#jsonName": "fileType"
                     }
@@ -10203,7 +10101,6 @@
                 "storageClass": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total storage size (in bytes) or number of objects that Amazon Macie can't analyze because the objects use an unsupported storage class.</p>",
                         "smithy.api#jsonName": "storageClass"
                     }
@@ -10211,7 +10108,6 @@
                 "total": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total storage size (in bytes) or number of objects that Amazon Macie can't analyze because the objects use an unsupported storage class or don't have a file name extension for a supported file or storage format.</p>",
                         "smithy.api#jsonName": "total"
                     }
@@ -10321,7 +10217,6 @@
                 "pageNumber": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The page number of the page that contains the sensitive data.</p>",
                         "smithy.api#jsonName": "pageNumber"
                     }
@@ -10509,7 +10404,6 @@
                 "end": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of lines from the beginning of the file to the end of the sensitive data.</p>",
                         "smithy.api#jsonName": "end"
                     }
@@ -10517,7 +10411,6 @@
                 "start": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of lines from the beginning of the file to the beginning of the sensitive data.</p>",
                         "smithy.api#jsonName": "start"
                     }
@@ -10525,7 +10418,6 @@
                 "startColumn": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of characters, with spaces and starting from 1, from the beginning of the first line that contains the sensitive data (start) to the beginning of the sensitive data.</p>",
                         "smithy.api#jsonName": "startColumn"
                     }
@@ -10557,7 +10449,6 @@
                 "recordIndex": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>For an Avro object container or Parquet file, the record index, starting from 0, for the record that contains the sensitive data. For a JSON Lines file, the line index, starting from 0, for the line that contains the sensitive data. This value is always 0 for JSON files.</p>",
                         "smithy.api#jsonName": "recordIndex"
                     }
@@ -10650,7 +10541,6 @@
                 "replicated": {
                     "target": "com.amazonaws.macie2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the bucket is configured to replicate one or more objects to any destination.</p>",
                         "smithy.api#jsonName": "replicated"
                     }
@@ -10658,7 +10548,6 @@
                 "replicatedExternally": {
                     "target": "com.amazonaws.macie2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the bucket is configured to replicate one or more objects to a bucket for an Amazon Web Services account that isn't part of your Amazon Macie organization. An <i>Amazon Macie organization</i> is a set of Macie accounts that are centrally managed as a group of related accounts through Organizations or by Macie invitation.</p>",
                         "smithy.api#jsonName": "replicatedExternally"
                     }
@@ -10714,7 +10603,6 @@
                 "sensitive": {
                     "target": "com.amazonaws.macie2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether Amazon Macie found sensitive data in the object.</p>",
                         "smithy.api#jsonName": "sensitive"
                     }
@@ -10730,7 +10618,6 @@
                 "totalBytesClassified": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total amount of data, in bytes, that Amazon Macie has analyzed in the bucket.</p>",
                         "smithy.api#jsonName": "totalBytesClassified"
                     }
@@ -10738,7 +10625,6 @@
                 "totalDetections": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of occurrences of sensitive data that Amazon Macie has found in the bucket's objects. This includes occurrences that are currently suppressed by the sensitivity scoring settings for the bucket (totalDetectionsSuppressed).</p>",
                         "smithy.api#jsonName": "totalDetections"
                     }
@@ -10746,7 +10632,6 @@
                 "totalDetectionsSuppressed": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of occurrences of sensitive data that are currently suppressed by the sensitivity scoring settings for the bucket. These represent occurrences of sensitive data that Amazon Macie found in the bucket's objects, but the occurrences were manually suppressed. By default, suppressed occurrences are excluded from the bucket's sensitivity score.</p>",
                         "smithy.api#jsonName": "totalDetectionsSuppressed"
                     }
@@ -10754,7 +10639,6 @@
                 "totalItemsClassified": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of objects that Amazon Macie has analyzed in the bucket.</p>",
                         "smithy.api#jsonName": "totalItemsClassified"
                     }
@@ -10762,7 +10646,6 @@
                 "totalItemsSensitive": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of the bucket's objects that Amazon Macie has found sensitive data in.</p>",
                         "smithy.api#jsonName": "totalItemsSensitive"
                     }
@@ -10770,7 +10653,6 @@
                 "totalItemsSkipped": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of objects that Amazon Macie hasn't analyzed in the bucket due to an error or issue. For example, the object is a malformed file. This value includes objects that Macie hasn't analyzed for reasons reported by other statistics in the ResourceStatistics object.</p>",
                         "smithy.api#jsonName": "totalItemsSkipped"
                     }
@@ -10778,7 +10660,6 @@
                 "totalItemsSkippedInvalidEncryption": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of objects that Amazon Macie hasn't analyzed in the bucket because the objects are encrypted with a key that Macie isn't allowed to use.</p>",
                         "smithy.api#jsonName": "totalItemsSkippedInvalidEncryption"
                     }
@@ -10786,7 +10667,6 @@
                 "totalItemsSkippedInvalidKms": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of objects that Amazon Macie hasn't analyzed in the bucket because the objects are encrypted with an KMS key that was disabled or deleted.</p>",
                         "smithy.api#jsonName": "totalItemsSkippedInvalidKms"
                     }
@@ -10794,7 +10674,6 @@
                 "totalItemsSkippedPermissionDenied": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of objects that Amazon Macie hasn't analyzed in the bucket because Macie isn't allowed to access the objects.</p>",
                         "smithy.api#jsonName": "totalItemsSkippedPermissionDenied"
                     }
@@ -11214,7 +11093,6 @@
                 "publicAccess": {
                     "target": "com.amazonaws.macie2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the object is publicly accessible due to the combination of permissions settings that apply to the object.</p>",
                         "smithy.api#jsonName": "publicAccess"
                     }
@@ -11229,7 +11107,6 @@
                 "size": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total storage size, in bytes, of the object.</p>",
                         "smithy.api#jsonName": "size"
                     }
@@ -11476,7 +11353,6 @@
                 "maxResults": {
                     "target": "com.amazonaws.macie2#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of items to include in each page of the response. The default value is 50.</p>",
                         "smithy.api#jsonName": "maxResults"
                     }
@@ -11687,7 +11563,6 @@
                 "publishClassificationFindings": {
                     "target": "com.amazonaws.macie2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether to publish sensitive data findings to Security Hub. If you set this value to true, Amazon Macie automatically publishes all sensitive data findings that weren't suppressed by a findings filter. The default value is false.</p>",
                         "smithy.api#jsonName": "publishClassificationFindings",
                         "smithy.api#required": {}
@@ -11696,7 +11571,6 @@
                 "publishPolicyFindings": {
                     "target": "com.amazonaws.macie2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether to publish policy findings to Security Hub. If you set this value to true, Amazon Macie automatically publishes all new and updated policy findings that weren't suppressed by a findings filter. The default value is true.</p>",
                         "smithy.api#jsonName": "publishPolicyFindings",
                         "smithy.api#required": {}
@@ -11736,7 +11610,6 @@
                 "totalCount": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of occurrences of the sensitive data that was detected.</p>",
                         "smithy.api#jsonName": "totalCount"
                     }
@@ -11796,7 +11669,6 @@
                 "classifiableSizeInBytes": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total storage size, in bytes, of all the objects that Amazon Macie can analyze in the buckets. These objects use a supported storage class and have a file name extension for a supported file or storage format.</p> <p>If versioning is enabled for any of the buckets, this value is based on the size of the latest version of each applicable object in the buckets. This value doesn't reflect the storage size of all versions of all applicable objects in the buckets.</p>",
                         "smithy.api#jsonName": "classifiableSizeInBytes"
                     }
@@ -11804,7 +11676,6 @@
                 "publiclyAccessibleCount": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of buckets that are publicly accessible due to a combination of permissions settings for each bucket.</p>",
                         "smithy.api#jsonName": "publiclyAccessibleCount"
                     }
@@ -11812,7 +11683,6 @@
                 "totalCount": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of buckets.</p>",
                         "smithy.api#jsonName": "totalCount"
                     }
@@ -11820,7 +11690,6 @@
                 "totalSizeInBytes": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total storage size, in bytes, of the buckets.</p> <p>If versioning is enabled for any of the buckets, this value is based on the size of the latest version of each object in the buckets. This value doesn't reflect the storage size of all versions of the objects in the buckets.</p>",
                         "smithy.api#jsonName": "totalSizeInBytes"
                     }
@@ -11930,7 +11799,6 @@
                 "isServiceLimited": {
                     "target": "com.amazonaws.macie2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the account has met the quota that corresponds to the metric specified by the UsageByAccount.type field in the response.</p>",
                         "smithy.api#jsonName": "isServiceLimited"
                     }
@@ -11945,7 +11813,6 @@
                 "value": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The value for the metric specified by the UsageByAccount.type field in the response.</p>",
                         "smithy.api#jsonName": "value"
                     }
@@ -12007,7 +11874,6 @@
                 "mfaAuthenticated": {
                     "target": "com.amazonaws.macie2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the credentials were authenticated with a multi-factor authentication (MFA) device.</p>",
                         "smithy.api#jsonName": "mfaAuthenticated"
                     }
@@ -12073,7 +11939,6 @@
                 "score": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The numerical representation of the finding's severity, ranging from 1 (least severe) to 3 (most severe).</p>",
                         "smithy.api#jsonName": "score"
                     }
@@ -12115,7 +11980,6 @@
                 "occurrencesThreshold": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The minimum number of occurrences of text that must match the custom data identifier's detection criteria in order to produce a finding with the specified severity (severity).</p>",
                         "smithy.api#jsonName": "occurrencesThreshold",
                         "smithy.api#required": {}
@@ -12290,7 +12154,6 @@
                 "approximateNumberOfObjectsToProcess": {
                     "target": "com.amazonaws.macie2#__double",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The approximate number of objects that the job has yet to process during its current run.</p>",
                         "smithy.api#jsonName": "approximateNumberOfObjectsToProcess"
                     }
@@ -12298,7 +12161,6 @@
                 "numberOfRuns": {
                     "target": "com.amazonaws.macie2#__double",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of times that the job has run.</p>",
                         "smithy.api#jsonName": "numberOfRuns"
                     }
@@ -12628,7 +12490,6 @@
                 "maximumMatchDistance": {
                     "target": "com.amazonaws.macie2#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of characters that can exist between the end of at least one complete character sequence specified by the keywords array and the end of the text that matches the regex pattern. If a complete keyword precedes all the text that matches the pattern and the keyword is within the specified distance, Amazon Macie includes the result. The distance can be 1-300 characters. The default value is 50.</p>",
                         "smithy.api#jsonName": "maximumMatchDistance"
                     }
@@ -12660,7 +12521,6 @@
                 "matchCount": {
                     "target": "com.amazonaws.macie2#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of occurrences of sample text that matched the criteria specified by the custom data identifier.</p>",
                         "smithy.api#jsonName": "matchCount"
                     }
@@ -13255,7 +13115,6 @@
                 "position": {
                     "target": "com.amazonaws.macie2#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The position of the filter in the list of saved filters on the Amazon Macie console. This value also determines the order in which the filter is applied to findings, relative to other filters that are also applied to the findings.</p>",
                         "smithy.api#jsonName": "position"
                     }
@@ -13473,7 +13332,6 @@
                 "autoEnable": {
                     "target": "com.amazonaws.macie2#__boolean",
                     "traits": {
-                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether to enable Amazon Macie automatically for an account when the account is added to the organization in Organizations.</p>",
                         "smithy.api#jsonName": "autoEnable",
                         "smithy.api#required": {}
@@ -13609,7 +13467,6 @@
                 "sensitivityScoreOverride": {
                     "target": "com.amazonaws.macie2#__integer",
                     "traits": {
-                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The new sensitivity score for the bucket. Valid values are: 100, assign the maximum score and apply the <i>Sensitive</i> label to the bucket; and, null (empty), assign a score that Amazon Macie calculates automatically after you submit the request.</p>",
                         "smithy.api#jsonName": "sensitivityScoreOverride"
                     }
@@ -14257,21 +14114,15 @@
         },
         "com.amazonaws.macie2#__boolean": {
             "type": "boolean",
-            "traits": {
-                "smithy.api#default": false
-            }
+            "traits": {}
         },
         "com.amazonaws.macie2#__double": {
             "type": "double",
-            "traits": {
-                "smithy.api#default": 0
-            }
+            "traits": {}
         },
         "com.amazonaws.macie2#__integer": {
             "type": "integer",
-            "traits": {
-                "smithy.api#default": 0
-            }
+            "traits": {}
         },
         "com.amazonaws.macie2#__listOfAdminAccount": {
             "type": "list",
@@ -14502,9 +14353,7 @@
         },
         "com.amazonaws.macie2#__long": {
             "type": "long",
-            "traits": {
-                "smithy.api#default": 0
-            }
+            "traits": {}
         },
         "com.amazonaws.macie2#__string": {
             "type": "string"
