@@ -1,3 +1,32 @@
+# Release (2023-03-23)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.22.0](service/batch/CHANGELOG.md#v1220-2023-03-23)
+  * **Feature**: This feature allows Batch to support configuration of ephemeral storage size for jobs running on FARGATE
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkidentity`: [v1.11.0](service/chimesdkidentity/CHANGELOG.md#v1110-2023-03-23)
+  * **Feature**: AppInstanceBots can be used to add a bot powered by Amazon Lex to chat channels.  ExpirationSettings provides automatic resource deletion for AppInstanceUsers.
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines`: [v1.3.0](service/chimesdkmediapipelines/CHANGELOG.md#v130-2023-03-23)
+  * **Feature**: This release adds Amazon Chime SDK call analytics. Call analytics include voice analytics, which provides speaker search and voice tone analysis. These capabilities can be used with Amazon Transcribe and Transcribe Call Analytics to generate machine-learning-powered insights from real-time audio.
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging`: [v1.14.0](service/chimesdkmessaging/CHANGELOG.md#v1140-2023-03-23)
+  * **Feature**: ExpirationSettings provides automatic resource deletion for Channels.
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkvoice`: [v1.3.0](service/chimesdkvoice/CHANGELOG.md#v130-2023-03-23)
+  * **Feature**: This release adds Amazon Chime SDK call analytics. Call analytics include voice analytics, which provides speaker search and voice tone analysis. These capabilities can be used with Amazon Transcribe and Transcribe Call Analytics to generate machine-learning-powered insights from real-time audio.
+* `github.com/aws/aws-sdk-go-v2/service/codeartifact`: [v1.18.0](service/codeartifact/CHANGELOG.md#v1180-2023-03-23)
+  * **Feature**: Repository CreationTime is added to the CreateRepository and ListRepositories API responses.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.19.0](service/guardduty/CHANGELOG.md#v1190-2023-03-23)
+  * **Feature**: Adds AutoEnableOrganizationMembers attribute to DescribeOrganizationConfiguration and UpdateOrganizationConfiguration APIs.
+* `github.com/aws/aws-sdk-go-v2/service/ivsrealtime`: [v1.0.0](service/ivsrealtime/CHANGELOG.md#v100-2023-03-23)
+  * **Release**: New AWS service client module
+  * **Feature**: Initial release of the Amazon Interactive Video Service RealTime API.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.34.0](service/mediaconvert/CHANGELOG.md#v1340-2023-03-23)
+  * **Feature**: AWS Elemental MediaConvert SDK now supports passthrough of ID3v2 tags for audio inputs to audio-only HLS outputs.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.72.0](service/sagemaker/CHANGELOG.md#v1720-2023-03-23)
+  * **Feature**: Amazon SageMaker Autopilot adds two new APIs - CreateAutoMLJobV2 and DescribeAutoMLJobV2. Amazon SageMaker Notebook Instances now supports the ml.geospatial.interactive instance type.
+* `github.com/aws/aws-sdk-go-v2/service/servicediscovery`: [v1.21.0](service/servicediscovery/CHANGELOG.md#v1210-2023-03-23)
+  * **Feature**: Reverted the throttling exception RequestLimitExceeded for AWS Cloud Map APIs introduced in SDK version 1.12.424 2023-03-09 to previous exception specified in the ErrorCode.
+* `github.com/aws/aws-sdk-go-v2/service/textract`: [v1.21.0](service/textract/CHANGELOG.md#v1210-2023-03-23)
+  * **Feature**: The AnalyzeDocument - Tables feature adds support for new elements in the API: table titles, footers, section titles, summary cells/tables, and table type.
+
 # Release (2023-03-22)
 
 ## Module Highlights

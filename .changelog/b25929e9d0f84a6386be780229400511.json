@@ -1,8 +1,0 @@
-{
-    "id": "b25929e9-d0f8-4a63-86be-780229400511",
-    "type": "feature",
-    "description": "Amazon SageMaker Autopilot adds two new APIs - CreateAutoMLJobV2 and DescribeAutoMLJobV2. Amazon SageMaker Notebook Instances now supports the ml.geospatial.interactive instance type.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

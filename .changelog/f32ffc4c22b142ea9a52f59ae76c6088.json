@@ -1,8 +1,0 @@
-{
-    "id": "f32ffc4c-22b1-42ea-9a52-f59ae76c6088",
-    "type": "feature",
-    "description": "The AnalyzeDocument - Tables feature adds support for new elements in the API: table titles, footers, section titles, summary cells/tables, and table type.",
-    "modules": [
-        "service/textract"
-    ]
-}

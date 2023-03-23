@@ -1,8 +1,0 @@
-{
-    "id": "46f6743f-fb7c-490b-9f56-1b6075d341f1",
-    "type": "feature",
-    "description": "AWS Elemental MediaConvert SDK now supports passthrough of ID3v2 tags for audio inputs to audio-only HLS outputs.",
-    "modules": [
-        "service/mediaconvert"
-    ]
-}

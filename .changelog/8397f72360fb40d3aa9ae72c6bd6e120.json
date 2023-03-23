@@ -1,8 +1,0 @@
-{
-    "id": "8397f723-60fb-40d3-aa9a-e72c6bd6e120",
-    "type": "feature",
-    "description": "Adds AutoEnableOrganizationMembers attribute to DescribeOrganizationConfiguration and UpdateOrganizationConfiguration APIs.",
-    "modules": [
-        "service/guardduty"
-    ]
-}

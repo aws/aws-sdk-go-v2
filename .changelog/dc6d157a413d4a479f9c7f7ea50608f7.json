@@ -1,8 +1,0 @@
-{
-    "id": "dc6d157a-413d-4a47-9f9c-7f7ea50608f7",
-    "type": "feature",
-    "description": "Repository CreationTime is added to the CreateRepository and ListRepositories API responses.",
-    "modules": [
-        "service/codeartifact"
-    ]
-}
