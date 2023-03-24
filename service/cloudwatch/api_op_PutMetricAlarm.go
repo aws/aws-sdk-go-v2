@@ -25,16 +25,16 @@ import (
 // user, you must have Amazon EC2 permissions for some alarm operations:
 //
 // * The
-// iam:CreateServiceLinkedRole for all alarms with EC2 actions
+// iam:CreateServiceLinkedRole permission for all alarms with EC2 actions
 //
 // * The
-// iam:CreateServiceLinkedRole to create an alarm with Systems Manager OpsItem
-// actions.
+// iam:CreateServiceLinkedRole permissions to create an alarm with Systems Manager
+// OpsItem or response plan actions.
 //
-// The first time you create an alarm in the Amazon Web Services
-// Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch
-// creates the necessary service-linked role for you. The service-linked roles are
-// called AWSServiceRoleForCloudWatchEvents and
+// The first time you create an alarm in the
+// Amazon Web Services Management Console, the CLI, or by using the PutMetricAlarm
+// API, CloudWatch creates the necessary service-linked role for you. The
+// service-linked roles are called AWSServiceRoleForCloudWatchEvents and
 // AWSServiceRoleForCloudWatchAlarms_ActionSSM. For more information, see Amazon
 // Web Services service-linked role
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role).
@@ -75,7 +75,8 @@ func (c *Client) PutMetricAlarm(ctx context.Context, params *PutMetricAlarmInput
 
 type PutMetricAlarmInput struct {
 
-	// The name for the alarm. This name must be unique within the Region.
+	// The name for the alarm. This name must be unique within the Region. The name
+	// must contain only UTF-8 characters, and can't contain ASCII control characters
 	//
 	// This member is required.
 	AlarmName *string
@@ -105,17 +106,50 @@ type PutMetricAlarmInput struct {
 
 	// The actions to execute when this alarm transitions to the ALARM state from any
 	// other state. Each action is specified as an Amazon Resource Name (ARN). Valid
-	// Values: arn:aws:automate:region:ec2:stop | arn:aws:automate:region:ec2:terminate
-	// | arn:aws:automate:region:ec2:recover | arn:aws:automate:region:ec2:reboot |
-	// arn:aws:sns:region:account-id:sns-topic-name  |
-	// arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
-	// | arn:aws:ssm:region:account-id:opsitem:severity  |
-	// arn:aws:ssm-incidents::account-id:response-plan:response-plan-name  Valid Values
-	// (for use with IAM roles):
-	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0 |
-	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0 |
-	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0 |
+	// values: EC2 actions:
+	//
+	// * arn:aws:automate:region:ec2:stop
+	//
+	// *
+	// arn:aws:automate:region:ec2:terminate
+	//
+	// * arn:aws:automate:region:ec2:reboot
+	//
+	// *
+	// arn:aws:automate:region:ec2:recover
+	//
+	// *
+	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0
+	//
+	// *
+	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0
+	//
+	// *
+	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0
+	//
+	// *
 	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Recover/1.0
+	//
+	// Autoscaling
+	// action:
+	//
+	// *
+	// arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+	//
+	// SSN
+	// notification action:
+	//
+	// *
+	// arn:aws:sns:region:account-id:sns-topic-name:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+	//
+	// SSM
+	// integration actions:
+	//
+	// *
+	// arn:aws:ssm:region:account-id:opsitem:severity#CATEGORY=category-name
+	//
+	// *
+	// arn:aws:ssm-incidents::account-id:responseplan/response-plan-name
 	AlarmActions []string
 
 	// The description for the alarm.
@@ -148,15 +182,50 @@ type PutMetricAlarmInput struct {
 
 	// The actions to execute when this alarm transitions to the INSUFFICIENT_DATA
 	// state from any other state. Each action is specified as an Amazon Resource Name
-	// (ARN). Valid Values: arn:aws:automate:region:ec2:stop |
-	// arn:aws:automate:region:ec2:terminate | arn:aws:automate:region:ec2:recover |
-	// arn:aws:automate:region:ec2:reboot |
-	// arn:aws:sns:region:account-id:sns-topic-name  |
-	// arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
-	// Valid Values (for use with IAM roles):
-	// >arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0 |
-	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0 |
+	// (ARN). Valid values: EC2 actions:
+	//
+	// * arn:aws:automate:region:ec2:stop
+	//
+	// *
+	// arn:aws:automate:region:ec2:terminate
+	//
+	// * arn:aws:automate:region:ec2:reboot
+	//
+	// *
+	// arn:aws:automate:region:ec2:recover
+	//
+	// *
+	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0
+	//
+	// *
+	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0
+	//
+	// *
 	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0
+	//
+	// *
+	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Recover/1.0
+	//
+	// Autoscaling
+	// action:
+	//
+	// *
+	// arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+	//
+	// SSN
+	// notification action:
+	//
+	// *
+	// arn:aws:sns:region:account-id:sns-topic-name:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+	//
+	// SSM
+	// integration actions:
+	//
+	// *
+	// arn:aws:ssm:region:account-id:opsitem:severity#CATEGORY=category-name
+	//
+	// *
+	// arn:aws:ssm-incidents::account-id:responseplan/response-plan-name
 	InsufficientDataActions []string
 
 	// The name for the metric associated with the alarm. For each PutMetricAlarm
@@ -184,16 +253,51 @@ type PutMetricAlarmInput struct {
 	Namespace *string
 
 	// The actions to execute when this alarm transitions to an OK state from any other
-	// state. Each action is specified as an Amazon Resource Name (ARN). Valid Values:
-	// arn:aws:automate:region:ec2:stop | arn:aws:automate:region:ec2:terminate |
-	// arn:aws:automate:region:ec2:recover | arn:aws:automate:region:ec2:reboot |
-	// arn:aws:sns:region:account-id:sns-topic-name  |
-	// arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
-	// Valid Values (for use with IAM roles):
-	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0 |
-	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0 |
-	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0 |
+	// state. Each action is specified as an Amazon Resource Name (ARN). Valid values:
+	// EC2 actions:
+	//
+	// * arn:aws:automate:region:ec2:stop
+	//
+	// *
+	// arn:aws:automate:region:ec2:terminate
+	//
+	// * arn:aws:automate:region:ec2:reboot
+	//
+	// *
+	// arn:aws:automate:region:ec2:recover
+	//
+	// *
+	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0
+	//
+	// *
+	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0
+	//
+	// *
+	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0
+	//
+	// *
 	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Recover/1.0
+	//
+	// Autoscaling
+	// action:
+	//
+	// *
+	// arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+	//
+	// SSN
+	// notification action:
+	//
+	// *
+	// arn:aws:sns:region:account-id:sns-topic-name:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
+	//
+	// SSM
+	// integration actions:
+	//
+	// *
+	// arn:aws:ssm:region:account-id:opsitem:severity#CATEGORY=category-name
+	//
+	// *
+	// arn:aws:ssm-incidents::account-id:responseplan/response-plan-name
 	OKActions []string
 
 	// The length, in seconds, used each time the metric specified in MetricName is

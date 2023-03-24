@@ -196,11 +196,9 @@ type ModifyDBClusterInput struct {
 	// The version number of the database engine to which you want to upgrade. Changing
 	// this parameter results in an outage. The change is applied during the next
 	// maintenance window unless ApplyImmediately is enabled. To list all of the
-	// available engine versions for MySQL 5.6-compatible Aurora, use the following
-	// command: aws rds describe-db-engine-versions --engine aurora --query
-	// "DBEngineVersions[].EngineVersion" To list all of the available engine versions
-	// for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora, use the following
-	// command: aws rds describe-db-engine-versions --engine aurora-mysql --query
+	// available engine versions for Aurora MySQL version 2 (5.7-compatible) and
+	// version 3 (MySQL 8.0-compatible), use the following command: aws rds
+	// describe-db-engine-versions --engine aurora-mysql --query
 	// "DBEngineVersions[].EngineVersion" To list all of the available engine versions
 	// for Aurora PostgreSQL, use the following command: aws rds
 	// describe-db-engine-versions --engine aurora-postgresql --query

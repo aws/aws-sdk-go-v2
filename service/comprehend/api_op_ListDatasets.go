@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List the datasets that you have configured in this region. For more information
+// List the datasets that you have configured in this Region. For more information
 // about datasets, see  Flywheel overview
 // (https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html) in the
 // Amazon Comprehend Developer Guide.

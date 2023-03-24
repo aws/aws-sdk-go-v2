@@ -42,11 +42,13 @@ type DetectDominantLanguageInput struct {
 
 type DetectDominantLanguageOutput struct {
 
-	// The languages that Amazon Comprehend detected in the input text. For each
-	// language, the response returns the RFC 5646 language code and the level of
-	// confidence that Amazon Comprehend has in the accuracy of its inference. For more
-	// information about RFC 5646, see Tags for Identifying Languages
-	// (https://tools.ietf.org/html/rfc5646) on the IETF Tools web site.
+	// Array of languages that Amazon Comprehend detected in the input text. The array
+	// is sorted in descending order of the score (the dominant language is always the
+	// first element in the array). For each language, the response returns the RFC
+	// 5646 language code and the level of confidence that Amazon Comprehend has in the
+	// accuracy of its inference. For more information about RFC 5646, see Tags for
+	// Identifying Languages (https://tools.ietf.org/html/rfc5646) on the IETF Tools
+	// web site.
 	Languages []types.DominantLanguage
 
 	// Metadata pertaining to the operation's result.

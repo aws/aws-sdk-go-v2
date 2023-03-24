@@ -183,10 +183,9 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// Valid for: Aurora DB clusters only
 	EngineMode *string
 
-	// The version of the database engine to use for the new DB cluster. To list all of
-	// the available engine versions for MySQL 5.6-compatible Aurora, use the following
-	// command: aws rds describe-db-engine-versions --engine aurora --query
-	// "DBEngineVersions[].EngineVersion" To list all of the available engine versions
+	// The version of the database engine to use for the new DB cluster. If you don't
+	// specify an engine version, the default version for the database engine in the
+	// Amazon Web Services Region is used. To list all of the available engine versions
 	// for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora, use the following
 	// command: aws rds describe-db-engine-versions --engine aurora-mysql --query
 	// "DBEngineVersions[].EngineVersion" To list all of the available engine versions
@@ -198,12 +197,13 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// "DBEngineVersions[].EngineVersion" To list all of the available engine versions
 	// for RDS for PostgreSQL, use the following command: aws rds
 	// describe-db-engine-versions --engine postgres --query
-	// "DBEngineVersions[].EngineVersion" Aurora MySQL See MySQL on Amazon RDS Versions
+	// "DBEngineVersions[].EngineVersion" Aurora MySQL See Database engine updates for
+	// Amazon Aurora MySQL
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.html)
 	// in the Amazon Aurora User Guide. Aurora PostgreSQL See Amazon Aurora PostgreSQL
 	// releases and engine versions
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Updates.20180305.html)
-	// in the Amazon Aurora User Guide. MySQL See MySQL on Amazon RDS Versions
+	// in the Amazon Aurora User Guide. MySQL See Amazon RDS for MySQL
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt)
 	// in the Amazon RDS User Guide. PostgreSQL See Amazon RDS for PostgreSQL versions
 	// and extensions

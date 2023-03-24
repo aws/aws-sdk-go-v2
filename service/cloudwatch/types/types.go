@@ -251,13 +251,15 @@ type Dimension struct {
 
 	// The name of the dimension. Dimension names must contain only ASCII characters,
 	// must include at least one non-whitespace character, and cannot start with a
-	// colon (:).
+	// colon (:). ASCII control characters are not supported as part of dimension
+	// names.
 	//
 	// This member is required.
 	Name *string
 
 	// The value of the dimension. Dimension values must contain only ASCII characters
-	// and must include at least one non-whitespace character.
+	// and must include at least one non-whitespace character. ASCII control characters
+	// are not supported as part of dimension values.
 	//
 	// This member is required.
 	Value *string
@@ -928,7 +930,9 @@ type MetricStreamEntry struct {
 }
 
 // This structure contains the name of one of the metric namespaces that is listed
-// in a filter of a metric stream.
+// in a filter of a metric stream. The namespace can contain only ASCII printable
+// characters (ASCII range 32 through 126). It must contain at least one
+// non-whitespace character.
 type MetricStreamFilter struct {
 
 	// The name of the metric namespace in the filter.

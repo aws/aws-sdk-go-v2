@@ -12,14 +12,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// A flywheel is an AWS resource that orchestrates the ongoing training of a model
-// for custom classification or custom entity recognition. You can create a
-// flywheel to start with an existing trained model, or Comprehend can create and
-// train a new model. When you create the flywheel, Comprehend creates a data lake
-// in your account. The data lake holds the training data and test data for all
-// versions of the model. To use a flywheel with an existing trained model, you
-// specify the active model version. Comprehend copies the model's training data
-// and test data into the flywheel's data lake. To use the flywheel with a new
+// A flywheel is an Amazon Web Services resource that orchestrates the ongoing
+// training of a model for custom classification or custom entity recognition. You
+// can create a flywheel to start with an existing trained model, or Comprehend can
+// create and train a new model. When you create the flywheel, Comprehend creates a
+// data lake in your account. The data lake holds the training data and test data
+// for all versions of the model. To use a flywheel with an existing trained model,
+// you specify the active model version. Comprehend copies the model's training
+// data and test data into the flywheel's data lake. To use the flywheel with a new
 // model, you need to provide a dataset for training data (and optional test data)
 // when you create the flywheel. For more information about flywheels, see
 // Flywheel overview
@@ -42,9 +42,8 @@ func (c *Client) CreateFlywheel(ctx context.Context, params *CreateFlywheelInput
 
 type CreateFlywheelInput struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role that grants Amazon Comprehend the permissions required to access the
-	// flywheel data in the data lake.
+	// The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend the
+	// permissions required to access the flywheel data in the data lake.
 	//
 	// This member is required.
 	DataAccessRoleArn *string

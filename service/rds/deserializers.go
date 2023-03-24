@@ -1660,6 +1660,9 @@ func awsAwsquery_deserializeOpErrorCreateCustomDBEngineVersion(response *smithyh
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
+	case strings.EqualFold("CreateCustomDBEngineVersionFault", errorCode):
+		return awsAwsquery_deserializeErrorCreateCustomDBEngineVersionFault(response, errorBody)
+
 	case strings.EqualFold("CustomDBEngineVersionAlreadyExistsFault", errorCode):
 		return awsAwsquery_deserializeErrorCustomDBEngineVersionAlreadyExistsFault(response, errorBody)
 
@@ -16449,6 +16452,50 @@ func awsAwsquery_deserializeErrorCertificateNotFoundFault(response *smithyhttp.R
 	return output
 }
 
+func awsAwsquery_deserializeErrorCreateCustomDBEngineVersionFault(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.CreateCustomDBEngineVersionFault{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsAwsquery_deserializeDocumentCreateCustomDBEngineVersionFault(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
 func awsAwsquery_deserializeErrorCustomAvailabilityZoneNotFoundFault(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.CustomAvailabilityZoneNotFoundFault{}
 	var buff [1024]byte
@@ -23624,6 +23671,55 @@ func awsAwsquery_deserializeDocumentConnectionPoolConfigurationInfo(v **types.Co
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentStringList(&sv.SessionPinningFilters, nodeDecoder); err != nil {
 				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentCreateCustomDBEngineVersionFault(v **types.CreateCustomDBEngineVersionFault, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.CreateCustomDBEngineVersionFault
+	if *v == nil {
+		sv = &types.CreateCustomDBEngineVersionFault{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:

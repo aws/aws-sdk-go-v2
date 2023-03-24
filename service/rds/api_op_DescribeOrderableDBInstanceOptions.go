@@ -34,15 +34,12 @@ type DescribeOrderableDBInstanceOptionsInput struct {
 	// The name of the engine to retrieve DB instance options for. Valid Values:
 	//
 	// *
-	// aurora (for MySQL 5.6-compatible Aurora)
-	//
-	// * aurora-mysql (for MySQL
-	// 5.7-compatible and MySQL 8.0-compatible Aurora)
-	//
-	// * aurora-postgresql
+	// aurora-mysql (for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora)
 	//
 	// *
-	// mariadb
+	// aurora-postgresql
+	//
+	// * mariadb
 	//
 	// * mysql
 	//
@@ -50,10 +47,10 @@ type DescribeOrderableDBInstanceOptionsInput struct {
 	//
 	// * oracle-ee-cdb
 	//
-	// * oracle-se2
-	//
 	// *
-	// oracle-se2-cdb
+	// oracle-se2
+	//
+	// * oracle-se2-cdb
 	//
 	// * postgres
 	//
@@ -61,10 +58,10 @@ type DescribeOrderableDBInstanceOptionsInput struct {
 	//
 	// * sqlserver-se
 	//
-	// * sqlserver-ex
-	//
 	// *
-	// sqlserver-web
+	// sqlserver-ex
+	//
+	// * sqlserver-web
 	//
 	// This member is required.
 	Engine *string

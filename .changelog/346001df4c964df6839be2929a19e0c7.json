@@ -1,0 +1,8 @@
+{
+    "id": "346001df-4c96-4df6-839b-e2929a19e0c7",
+    "type": "feature",
+    "description": "Added error code CreateCustomDBEngineVersionFault for when the create custom engine version for Custom engines fails.",
+    "modules": [
+        "service/rds"
+    ]
+}

@@ -13994,6 +13994,15 @@ func awsAwsjson11_deserializeDocumentEntitiesDetectionJobProperties(v **types.En
 				sv.EntityRecognizerArn = ptr.String(jtv)
 			}
 
+		case "FlywheelArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ComprehendFlywheelArn to be of type string, got %T instead", value)
+				}
+				sv.FlywheelArn = ptr.String(jtv)
+			}
+
 		case "InputDataConfig":
 			if err := awsAwsjson11_deserializeDocumentInputDataConfig(&sv.InputDataConfig, value); err != nil {
 				return err

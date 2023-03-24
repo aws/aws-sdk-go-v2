@@ -42,37 +42,35 @@ type DescribeDBEngineVersionsInput struct {
 
 	// The database engine to return. Valid Values:
 	//
-	// * aurora (for MySQL 5.6-compatible
-	// Aurora)
-	//
-	// * aurora-mysql (for MySQL 5.7-compatible and MySQL 8.0-compatible
-	// Aurora)
+	// * aurora-mysql (for MySQL
+	// 5.7-compatible and MySQL 8.0-compatible Aurora)
 	//
 	// * aurora-postgresql
 	//
-	// * mariadb
+	// *
+	// mariadb
 	//
 	// * mysql
 	//
 	// * oracle-ee
 	//
-	// *
-	// oracle-ee-cdb
+	// * oracle-ee-cdb
 	//
 	// * oracle-se2
 	//
-	// * oracle-se2-cdb
+	// *
+	// oracle-se2-cdb
 	//
 	// * postgres
 	//
 	// * sqlserver-ee
 	//
-	// *
-	// sqlserver-se
+	// * sqlserver-se
 	//
 	// * sqlserver-ex
 	//
-	// * sqlserver-web
+	// *
+	// sqlserver-web
 	Engine *string
 
 	// The database engine version to return. Example: 5.1.49

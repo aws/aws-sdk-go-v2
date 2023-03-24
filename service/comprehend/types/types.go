@@ -335,14 +335,14 @@ type DataSecurityConfig struct {
 	// lake.
 	DataLakeKmsKeyId *string
 
-	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
-	// encrypt trained custom models. The ModelKmsKeyId can be either of the following
-	// formats:
+	// ID for the KMS key that Amazon Comprehend uses to encrypt trained custom models.
+	// The ModelKmsKeyId can be either of the following formats:
 	//
-	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// * KMS Key ID:
+	// "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	// * Amazon
-	// Resource Name (ARN) of a KMS Key:
+	// * Amazon Resource Name (ARN) of a KMS
+	// Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	ModelKmsKeyId *string
 
@@ -403,7 +403,7 @@ type DatasetAugmentedManifestsListItem struct {
 // the Comprehend Developer Guide.
 type DatasetDocumentClassifierInputDataConfig struct {
 
-	// The Amazon S3 URI for the input data. The S3 bucket must be in the same region
+	// The Amazon S3 URI for the input data. The S3 bucket must be in the same Region
 	// as the API endpoint that you are calling. The URI can point to a single input
 	// file or it can provide the prefix for a collection of input files. For example,
 	// if you use the URI S3://bucketName/prefix, if the prefix is a single file,
@@ -429,7 +429,7 @@ type DatasetDocumentClassifierInputDataConfig struct {
 type DatasetEntityRecognizerAnnotations struct {
 
 	// Specifies the Amazon S3 location where the training documents for an entity
-	// recognizer are located. The URI must be in the same region as the API endpoint
+	// recognizer are located. The URI must be in the same Region as the API endpoint
 	// that you are calling.
 	//
 	// This member is required.
@@ -630,8 +630,8 @@ type DocumentClassificationJobFilter struct {
 // Provides information about a document classification job.
 type DocumentClassificationJobProperties struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role that grants Amazon Comprehend read access to your input data.
+	// The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend
+	// read access to your input data.
 	DataAccessRoleArn *string
 
 	// The Amazon Resource Name (ARN) that identifies the document classifier.
@@ -648,10 +648,10 @@ type DocumentClassificationJobProperties struct {
 	InputDataConfig *InputDataConfig
 
 	// The Amazon Resource Name (ARN) of the document classification job. It is a
-	// unique, fully qualified identifier for the job. It includes the AWS account,
-	// Region, and the job ID. The format of the ARN is as follows:
-	// arn::comprehend:::document-classification-job/ The following is an example job
-	// ARN:
+	// unique, fully qualified identifier for the job. It includes the Amazon Web
+	// Services account, Amazon Web Services Region, and the job ID. The format of the
+	// ARN is as follows: arn::comprehend:::document-classification-job/ The following
+	// is an example job ARN:
 	// arn:aws:comprehend:us-west-2:111122223333:document-classification-job/1234abcd12ab34cd56ef1234567890ab
 	JobArn *string
 
@@ -675,15 +675,15 @@ type DocumentClassificationJobProperties struct {
 	// The time that the document classification job was submitted for processing.
 	SubmitTime *time.Time
 
-	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
-	// encrypt data on the storage volume attached to the ML compute instance(s) that
-	// process the analysis job. The VolumeKmsKeyId can be either of the following
-	// formats:
+	// ID for the Amazon Web Services Key Management Service (KMS) key that Amazon
+	// Comprehend uses to encrypt data on the storage volume attached to the ML compute
+	// instance(s) that process the analysis job. The VolumeKmsKeyId can be either of
+	// the following formats:
 	//
 	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	// * Amazon
-	// Resource Name (ARN) of a KMS Key:
+	// *
+	// Amazon Resource Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 
@@ -757,7 +757,7 @@ type DocumentClassifierInputDataConfig struct {
 	// combined to make a single unique label, such as LABELLABELLABEL.
 	LabelDelimiter *string
 
-	// The Amazon S3 URI for the input data. The S3 bucket must be in the same region
+	// The Amazon S3 URI for the input data. The S3 bucket must be in the same Region
 	// as the API endpoint that you are calling. The URI can point to a single input
 	// file or it can provide the prefix for a collection of input files. For example,
 	// if you use the URI S3://bucketName/prefix, if the prefix is a single file,
@@ -767,8 +767,8 @@ type DocumentClassifierInputDataConfig struct {
 	S3Uri *string
 
 	// This specifies the Amazon S3 location where the test annotations for an entity
-	// recognizer are located. The URI must be in the same AWS Region as the API
-	// endpoint that you are calling.
+	// recognizer are located. The URI must be in the same Amazon Web Services Region
+	// as the API endpoint that you are calling.
 	TestS3Uri *string
 
 	noSmithyDocumentSerde
@@ -780,14 +780,15 @@ type DocumentClassifierOutputDataConfig struct {
 	// The Amazon S3 prefix for the data lake location of the flywheel statistics.
 	FlywheelStatsS3Prefix *string
 
-	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
-	// encrypt the output results from an analysis job. The KmsKeyId can be one of the
-	// following formats:
+	// ID for the Amazon Web Services Key Management Service (KMS) key that Amazon
+	// Comprehend uses to encrypt the output results from an analysis job. The KmsKeyId
+	// can be one of the following formats:
 	//
-	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// * KMS Key ID:
+	// "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	// *
-	// Amazon Resource Name (ARN) of a KMS Key:
+	// * Amazon Resource Name (ARN) of a KMS
+	// Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
 	// *
@@ -799,7 +800,7 @@ type DocumentClassifierOutputDataConfig struct {
 
 	// When you use the OutputDataConfig object while creating a custom classifier, you
 	// specify the Amazon S3 location where you want to write the confusion matrix. The
-	// URI must be in the same region as the API endpoint that you are calling. The
+	// URI must be in the same Region as the API endpoint that you are calling. The
 	// location is used as the prefix for the actual location of this output file. When
 	// the custom classifier job is finished, the service creates the output file in a
 	// directory specific to the job. The S3Uri field contains the location of the
@@ -818,8 +819,8 @@ type DocumentClassifierProperties struct {
 	// classifier, and an accuracy rating.
 	ClassifierMetadata *ClassifierMetadata
 
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role that grants Amazon Comprehend read access to your input data.
+	// The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend
+	// read access to your input data.
 	DataAccessRoleArn *string
 
 	// The Amazon Resource Name (ARN) that identifies the document classifier.
@@ -848,14 +849,14 @@ type DocumentClassifierProperties struct {
 	// the classifier is trained.
 	Mode DocumentClassifierMode
 
-	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
-	// encrypt trained custom models. The ModelKmsKeyId can be either of the following
-	// formats:
+	// ID for the KMS key that Amazon Comprehend uses to encrypt trained custom models.
+	// The ModelKmsKeyId can be either of the following formats:
 	//
-	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// * KMS Key ID:
+	// "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	// * Amazon
-	// Resource Name (ARN) of a KMS Key:
+	// * Amazon Resource Name (ARN) of a KMS
+	// Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	ModelKmsKeyId *string
 
@@ -863,8 +864,8 @@ type DocumentClassifierProperties struct {
 	OutputDataConfig *DocumentClassifierOutputDataConfig
 
 	// The Amazon Resource Name (ARN) of the source model. This model was imported from
-	// a different AWS account to create the document classifier model in your AWS
-	// account.
+	// a different Amazon Web Services account to create the document classifier model
+	// in your Amazon Web Services account.
 	SourceModelArn *string
 
 	// The status of the document classifier. If the status is TRAINED the classifier
@@ -888,15 +889,15 @@ type DocumentClassifierProperties struct {
 	// The version name that you assigned to the document classifier.
 	VersionName *string
 
-	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
-	// encrypt data on the storage volume attached to the ML compute instance(s) that
-	// process the analysis job. The VolumeKmsKeyId can be either of the following
-	// formats:
+	// ID for the Amazon Web Services Key Management Service (KMS) key that Amazon
+	// Comprehend uses to encrypt data on the storage volume attached to the ML compute
+	// instance(s) that process the analysis job. The VolumeKmsKeyId can be either of
+	// the following formats:
 	//
 	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	// * Amazon
-	// Resource Name (ARN) of a KMS Key:
+	// *
+	// Amazon Resource Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 
@@ -1074,8 +1075,8 @@ type DominantLanguageDetectionJobFilter struct {
 // Provides information about a dominant language detection job.
 type DominantLanguageDetectionJobProperties struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role that grants Amazon Comprehend read access to your input data.
+	// The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend
+	// read access to your input data.
 	DataAccessRoleArn *string
 
 	// The time that the dominant language detection job completed.
@@ -1086,10 +1087,10 @@ type DominantLanguageDetectionJobProperties struct {
 	InputDataConfig *InputDataConfig
 
 	// The Amazon Resource Name (ARN) of the dominant language detection job. It is a
-	// unique, fully qualified identifier for the job. It includes the AWS account,
-	// Region, and the job ID. The format of the ARN is as follows:
-	// arn::comprehend:::dominant-language-detection-job/ The following is an example
-	// job ARN:
+	// unique, fully qualified identifier for the job. It includes the Amazon Web
+	// Services account, Amazon Web Services Region, and the job ID. The format of the
+	// ARN is as follows: arn::comprehend:::dominant-language-detection-job/ The
+	// following is an example job ARN:
 	// arn:aws:comprehend:us-west-2:111122223333:dominant-language-detection-job/1234abcd12ab34cd56ef1234567890ab
 	JobArn *string
 
@@ -1113,15 +1114,15 @@ type DominantLanguageDetectionJobProperties struct {
 	// The time that the dominant language detection job was submitted for processing.
 	SubmitTime *time.Time
 
-	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
-	// encrypt data on the storage volume attached to the ML compute instance(s) that
-	// process the analysis job. The VolumeKmsKeyId can be either of the following
-	// formats:
+	// ID for the Amazon Web Services Key Management Service (KMS) key that Amazon
+	// Comprehend uses to encrypt data on the storage volume attached to the ML compute
+	// instance(s) that process the analysis job. The VolumeKmsKeyId can be either of
+	// the following formats:
 	//
 	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	// * Amazon
-	// Resource Name (ARN) of a KMS Key:
+	// *
+	// Amazon Resource Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 
@@ -1166,9 +1167,9 @@ type EndpointProperties struct {
 	// The number of inference units currently used by the model using this endpoint.
 	CurrentInferenceUnits *int32
 
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role that grants Amazon Comprehend read access to trained custom models
-	// encrypted with a customer managed key (ModelKmsKeyId).
+	// The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend
+	// read access to trained custom models encrypted with a customer managed key
+	// (ModelKmsKeyId).
 	DataAccessRoleArn *string
 
 	// Data access role ARN to use in case the new model is encrypted with a customer
@@ -1234,8 +1235,8 @@ type EntitiesDetectionJobFilter struct {
 // Provides information about an entities detection job.
 type EntitiesDetectionJobProperties struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role that grants Amazon Comprehend read access to your input data.
+	// The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend
+	// read access to your input data.
 	DataAccessRoleArn *string
 
 	// The time that the entities detection job completed
@@ -1244,14 +1245,18 @@ type EntitiesDetectionJobProperties struct {
 	// The Amazon Resource Name (ARN) that identifies the entity recognizer.
 	EntityRecognizerArn *string
 
+	// The Amazon Resource Name (ARN) of the flywheel associated with this job.
+	FlywheelArn *string
+
 	// The input data configuration that you supplied when you created the entities
 	// detection job.
 	InputDataConfig *InputDataConfig
 
 	// The Amazon Resource Name (ARN) of the entities detection job. It is a unique,
-	// fully qualified identifier for the job. It includes the AWS account, Region, and
-	// the job ID. The format of the ARN is as follows:
-	// arn::comprehend:::entities-detection-job/ The following is an example job ARN:
+	// fully qualified identifier for the job. It includes the Amazon Web Services
+	// account, Amazon Web Services Region, and the job ID. The format of the ARN is as
+	// follows: arn::comprehend:::entities-detection-job/ The following is an example
+	// job ARN:
 	// arn:aws:comprehend:us-west-2:111122223333:entities-detection-job/1234abcd12ab34cd56ef1234567890ab
 	JobArn *string
 
@@ -1278,15 +1283,15 @@ type EntitiesDetectionJobProperties struct {
 	// The time that the entities detection job was submitted for processing.
 	SubmitTime *time.Time
 
-	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
-	// encrypt data on the storage volume attached to the ML compute instance(s) that
-	// process the analysis job. The VolumeKmsKeyId can be either of the following
-	// formats:
+	// ID for the Amazon Web Services Key Management Service (KMS) key that Amazon
+	// Comprehend uses to encrypt data on the storage volume attached to the ML compute
+	// instance(s) that process the analysis job. The VolumeKmsKeyId can be either of
+	// the following formats:
 	//
 	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	// * Amazon
-	// Resource Name (ARN) of a KMS Key:
+	// *
+	// Amazon Resource Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 
@@ -1359,14 +1364,14 @@ type EntityRecognitionConfig struct {
 type EntityRecognizerAnnotations struct {
 
 	// Specifies the Amazon S3 location where the annotations for an entity recognizer
-	// are located. The URI must be in the same region as the API endpoint that you are
+	// are located. The URI must be in the same Region as the API endpoint that you are
 	// calling.
 	//
 	// This member is required.
 	S3Uri *string
 
 	// Specifies the Amazon S3 location where the test annotations for an entity
-	// recognizer are located. The URI must be in the same region as the API endpoint
+	// recognizer are located. The URI must be in the same Region as the API endpoint
 	// that you are calling.
 	TestS3Uri *string
 
@@ -1377,7 +1382,7 @@ type EntityRecognizerAnnotations struct {
 type EntityRecognizerDocuments struct {
 
 	// Specifies the Amazon S3 location where the training documents for an entity
-	// recognizer are located. The URI must be in the same region as the API endpoint
+	// recognizer are located. The URI must be in the same Region as the API endpoint
 	// that you are calling.
 	//
 	// This member is required.
@@ -1392,8 +1397,8 @@ type EntityRecognizerDocuments struct {
 	InputFormat InputFormat
 
 	// Specifies the Amazon S3 location where the test documents for an entity
-	// recognizer are located. The URI must be in the same AWS Region as the API
-	// endpoint that you are calling.
+	// recognizer are located. The URI must be in the same Amazon Web Services Region
+	// as the API endpoint that you are calling.
 	TestS3Uri *string
 
 	noSmithyDocumentSerde
@@ -1403,7 +1408,7 @@ type EntityRecognizerDocuments struct {
 type EntityRecognizerEntityList struct {
 
 	// Specifies the Amazon S3 location where the entity list is located. The URI must
-	// be in the same region as the API endpoint that you are calling.
+	// be in the same Region as the API endpoint that you are calling.
 	//
 	// This member is required.
 	S3Uri *string
@@ -1562,8 +1567,8 @@ type EntityRecognizerOutputDataConfig struct {
 // Describes information about an entity recognizer.
 type EntityRecognizerProperties struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role that grants Amazon Comprehend read access to your input data.
+	// The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend
+	// read access to your input data.
 	DataAccessRoleArn *string
 
 	// The time that the recognizer creation completed.
@@ -1585,14 +1590,14 @@ type EntityRecognizerProperties struct {
 	// A description of the status of the recognizer.
 	Message *string
 
-	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
-	// encrypt trained custom models. The ModelKmsKeyId can be either of the following
-	// formats:
+	// ID for the KMS key that Amazon Comprehend uses to encrypt trained custom models.
+	// The ModelKmsKeyId can be either of the following formats:
 	//
-	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// * KMS Key ID:
+	// "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	// * Amazon
-	// Resource Name (ARN) of a KMS Key:
+	// * Amazon Resource Name (ARN) of a KMS
+	// Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	ModelKmsKeyId *string
 
@@ -1603,8 +1608,8 @@ type EntityRecognizerProperties struct {
 	RecognizerMetadata *EntityRecognizerMetadata
 
 	// The Amazon Resource Name (ARN) of the source model. This model was imported from
-	// a different AWS account to create the entity recognizer model in your AWS
-	// account.
+	// a different Amazon Web Services account to create the entity recognizer model in
+	// your Amazon Web Services account.
 	SourceModelArn *string
 
 	// Provides the status of the entity recognizer.
@@ -1622,15 +1627,15 @@ type EntityRecognizerProperties struct {
 	// The version name you assigned to the entity recognizer.
 	VersionName *string
 
-	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
-	// encrypt data on the storage volume attached to the ML compute instance(s) that
-	// process the analysis job. The VolumeKmsKeyId can be either of the following
-	// formats:
+	// ID for the Amazon Web Services Key Management Service (KMS) key that Amazon
+	// Comprehend uses to encrypt data on the storage volume attached to the ML compute
+	// instance(s) that process the analysis job. The VolumeKmsKeyId can be either of
+	// the following formats:
 	//
 	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	// * Amazon
-	// Resource Name (ARN) of a KMS Key:
+	// *
+	// Amazon Resource Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 
@@ -1766,8 +1771,8 @@ type EventsDetectionJobFilter struct {
 // Provides information about an events detection job.
 type EventsDetectionJobProperties struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role that grants Amazon Comprehend read access to your input data.
+	// The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend
+	// read access to your input data.
 	DataAccessRoleArn *string
 
 	// The time that the events detection job completed.
@@ -1778,9 +1783,10 @@ type EventsDetectionJobProperties struct {
 	InputDataConfig *InputDataConfig
 
 	// The Amazon Resource Name (ARN) of the events detection job. It is a unique,
-	// fully qualified identifier for the job. It includes the AWS account, Region, and
-	// the job ID. The format of the ARN is as follows:
-	// arn::comprehend:::events-detection-job/ The following is an example job ARN:
+	// fully qualified identifier for the job. It includes the Amazon Web Services
+	// account, Amazon Web Services Region, and the job ID. The format of the ARN is as
+	// follows: arn::comprehend:::events-detection-job/ The following is an example job
+	// ARN:
 	// arn:aws:comprehend:us-west-2:111122223333:events-detection-job/1234abcd12ab34cd56ef1234567890ab
 	JobArn *string
 
@@ -1919,8 +1925,8 @@ type FlywheelProperties struct {
 	// Creation time of the flywheel.
 	CreationTime *time.Time
 
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role that grants Amazon Comprehend permission to access the flywheel data.
+	// The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend
+	// permission to access the flywheel data.
 	DataAccessRoleArn *string
 
 	// Amazon S3 URI of the data lake location.
@@ -2006,7 +2012,7 @@ type Geometry struct {
 // applies only to non-text inputs for custom analysis.
 type InputDataConfig struct {
 
-	// The Amazon S3 URI for the input data. The URI must be in same region as the API
+	// The Amazon S3 URI for the input data. The URI must be in same Region as the API
 	// endpoint that you are calling. The URI can point to a single input file or it
 	// can provide the prefix for a collection of data files. For example, if you use
 	// the URI S3://bucketName/prefix, if the prefix is a single file, Amazon
@@ -2104,8 +2110,8 @@ type KeyPhrasesDetectionJobFilter struct {
 // Provides information about a key phrases detection job.
 type KeyPhrasesDetectionJobProperties struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role that grants Amazon Comprehend read access to your input data.
+	// The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend
+	// read access to your input data.
 	DataAccessRoleArn *string
 
 	// The time that the key phrases detection job completed.
@@ -2116,10 +2122,10 @@ type KeyPhrasesDetectionJobProperties struct {
 	InputDataConfig *InputDataConfig
 
 	// The Amazon Resource Name (ARN) of the key phrases detection job. It is a unique,
-	// fully qualified identifier for the job. It includes the AWS account, Region, and
-	// the job ID. The format of the ARN is as follows:
-	// arn::comprehend:::key-phrases-detection-job/ The following is an example job
-	// ARN:
+	// fully qualified identifier for the job. It includes the Amazon Web Services
+	// account, Amazon Web Services Region, and the job ID. The format of the ARN is as
+	// follows: arn::comprehend:::key-phrases-detection-job/ The following is an
+	// example job ARN:
 	// arn:aws:comprehend:us-west-2:111122223333:key-phrases-detection-job/1234abcd12ab34cd56ef1234567890ab
 	JobArn *string
 
@@ -2146,15 +2152,15 @@ type KeyPhrasesDetectionJobProperties struct {
 	// The time that the key phrases detection job was submitted for processing.
 	SubmitTime *time.Time
 
-	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
-	// encrypt data on the storage volume attached to the ML compute instance(s) that
-	// process the analysis job. The VolumeKmsKeyId can be either of the following
-	// formats:
+	// ID for the KMS key that Amazon Comprehend uses to encrypt data on the storage
+	// volume attached to the ML compute instance(s) that process the analysis job. The
+	// VolumeKmsKeyId can be either of the following formats:
 	//
-	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// * KMS Key ID:
+	// "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	// * Amazon
-	// Resource Name (ARN) of a KMS Key:
+	// * Amazon Resource Name (ARN) of a KMS
+	// Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 
@@ -2187,7 +2193,7 @@ type OutputDataConfig struct {
 
 	// When you use the OutputDataConfig object with asynchronous operations, you
 	// specify the Amazon S3 location where you want to write the output data. The URI
-	// must be in the same region as the API endpoint that you are calling. The
+	// must be in the same Region as the API endpoint that you are calling. The
 	// location is used as the prefix for the actual location of the output file. When
 	// the topic detection job is finished, the service creates an output file in a
 	// directory specific to the job. The S3Uri field contains the location of the
@@ -2199,14 +2205,15 @@ type OutputDataConfig struct {
 	// This member is required.
 	S3Uri *string
 
-	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
-	// encrypt the output results from an analysis job. The KmsKeyId can be one of the
-	// following formats:
+	// ID for the Amazon Web Services Key Management Service (KMS) key that Amazon
+	// Comprehend uses to encrypt the output results from an analysis job. The KmsKeyId
+	// can be one of the following formats:
 	//
-	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// * KMS Key ID:
+	// "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	// *
-	// Amazon Resource Name (ARN) of a KMS Key:
+	// * Amazon Resource Name (ARN) of a KMS
+	// Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
 	// *
@@ -2262,8 +2269,8 @@ type PiiEntitiesDetectionJobFilter struct {
 // Provides information about a PII entities detection job.
 type PiiEntitiesDetectionJobProperties struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role that grants Amazon Comprehend read access to your input data.
+	// The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend
+	// read access to your input data.
 	DataAccessRoleArn *string
 
 	// The time that the PII entities detection job completed.
@@ -2273,10 +2280,10 @@ type PiiEntitiesDetectionJobProperties struct {
 	InputDataConfig *InputDataConfig
 
 	// The Amazon Resource Name (ARN) of the PII entities detection job. It is a
-	// unique, fully qualified identifier for the job. It includes the AWS account,
-	// Region, and the job ID. The format of the ARN is as follows:
-	// arn::comprehend:::pii-entities-detection-job/ The following is an example job
-	// ARN:
+	// unique, fully qualified identifier for the job. It includes the Amazon Web
+	// Services account, Amazon Web Services Region, and the job ID. The format of the
+	// ARN is as follows: arn::comprehend:::pii-entities-detection-job/ The following
+	// is an example job ARN:
 	// arn:aws:comprehend:us-west-2:111122223333:pii-entities-detection-job/1234abcd12ab34cd56ef1234567890ab
 	JobArn *string
 
@@ -2348,8 +2355,8 @@ type PiiOutputDataConfig struct {
 	// This member is required.
 	S3Uri *string
 
-	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
-	// encrypt the output results from an analysis job.
+	// ID for the Amazon Web Services Key Management Service (KMS) key that Amazon
+	// Comprehend uses to encrypt the output results from an analysis job.
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
@@ -2426,8 +2433,8 @@ type SentimentDetectionJobFilter struct {
 // Provides information about a sentiment detection job.
 type SentimentDetectionJobProperties struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role that grants Amazon Comprehend read access to your input data.
+	// The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend
+	// read access to your input data.
 	DataAccessRoleArn *string
 
 	// The time that the sentiment detection job ended.
@@ -2438,9 +2445,10 @@ type SentimentDetectionJobProperties struct {
 	InputDataConfig *InputDataConfig
 
 	// The Amazon Resource Name (ARN) of the sentiment detection job. It is a unique,
-	// fully qualified identifier for the job. It includes the AWS account, Region, and
-	// the job ID. The format of the ARN is as follows:
-	// arn::comprehend:::sentiment-detection-job/ The following is an example job ARN:
+	// fully qualified identifier for the job. It includes the Amazon Web Services
+	// account, Amazon Web Services Region, and the job ID. The format of the ARN is as
+	// follows: arn::comprehend:::sentiment-detection-job/ The following is an example
+	// job ARN:
 	// arn:aws:comprehend:us-west-2:111122223333:sentiment-detection-job/1234abcd12ab34cd56ef1234567890ab
 	JobArn *string
 
@@ -2467,15 +2475,15 @@ type SentimentDetectionJobProperties struct {
 	// The time that the sentiment detection job was submitted for processing.
 	SubmitTime *time.Time
 
-	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
-	// encrypt data on the storage volume attached to the ML compute instance(s) that
-	// process the analysis job. The VolumeKmsKeyId can be either of the following
-	// formats:
+	// ID for the Amazon Web Services Key Management Service (KMS) key that Amazon
+	// Comprehend uses to encrypt data on the storage volume attached to the ML compute
+	// instance(s) that process the analysis job. The VolumeKmsKeyId can be either of
+	// the following formats:
 	//
 	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	// * Amazon
-	// Resource Name (ARN) of a KMS Key:
+	// *
+	// Amazon Resource Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 
@@ -2588,8 +2596,8 @@ type TargetedSentimentDetectionJobFilter struct {
 // Provides information about a targeted sentiment detection job.
 type TargetedSentimentDetectionJobProperties struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role that grants Amazon Comprehend read access to your input data.
+	// The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend
+	// read access to your input data.
 	DataAccessRoleArn *string
 
 	// The time that the targeted sentiment detection job ended.
@@ -2600,10 +2608,10 @@ type TargetedSentimentDetectionJobProperties struct {
 	InputDataConfig *InputDataConfig
 
 	// The Amazon Resource Name (ARN) of the targeted sentiment detection job. It is a
-	// unique, fully qualified identifier for the job. It includes the AWS account,
-	// Region, and the job ID. The format of the ARN is as follows:
-	// arn::comprehend:::targeted-sentiment-detection-job/ The following is an example
-	// job ARN:
+	// unique, fully qualified identifier for the job. It includes the Amazon Web
+	// Services account, Amazon Web Services Region, and the job ID. The format of the
+	// ARN is as follows: arn::comprehend:::targeted-sentiment-detection-job/ The
+	// following is an example job ARN:
 	// arn:aws:comprehend:us-west-2:111122223333:targeted-sentiment-detection-job/1234abcd12ab34cd56ef1234567890ab
 	JobArn *string
 
@@ -2745,8 +2753,8 @@ type TopicsDetectionJobFilter struct {
 // Provides information about a topic detection job.
 type TopicsDetectionJobProperties struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role that grants Amazon Comprehend read access to your job data.
+	// The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend
+	// read access to your job data.
 	DataAccessRoleArn *string
 
 	// The time that the topic detection job was completed.
@@ -2756,9 +2764,10 @@ type TopicsDetectionJobProperties struct {
 	InputDataConfig *InputDataConfig
 
 	// The Amazon Resource Name (ARN) of the topics detection job. It is a unique,
-	// fully qualified identifier for the job. It includes the AWS account, Region, and
-	// the job ID. The format of the ARN is as follows:
-	// arn::comprehend:::topics-detection-job/ The following is an example job ARN:
+	// fully qualified identifier for the job. It includes the Amazon Web Services
+	// account, Amazon Web Services Region, and the job ID. The format of the ARN is as
+	// follows: arn::comprehend:::topics-detection-job/ The following is an example job
+	// ARN:
 	// arn:aws:comprehend:us-west-2:111122223333:topics-detection-job/1234abcd12ab34cd56ef1234567890ab
 	JobArn *string
 
@@ -2785,15 +2794,15 @@ type TopicsDetectionJobProperties struct {
 	// The time that the topic detection job was submitted for processing.
 	SubmitTime *time.Time
 
-	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
-	// encrypt data on the storage volume attached to the ML compute instance(s) that
-	// process the analysis job. The VolumeKmsKeyId can be either of the following
-	// formats:
+	// ID for the Amazon Web Services Key Management Service (KMS) key that Amazon
+	// Comprehend uses to encrypt data on the storage volume attached to the ML compute
+	// instance(s) that process the analysis job. The VolumeKmsKeyId can be either of
+	// the following formats:
 	//
 	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	// * Amazon
-	// Resource Name (ARN) of a KMS Key:
+	// *
+	// Amazon Resource Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 
@@ -2809,14 +2818,14 @@ type TopicsDetectionJobProperties struct {
 // Data security configuration.
 type UpdateDataSecurityConfig struct {
 
-	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
-	// encrypt trained custom models. The ModelKmsKeyId can be either of the following
-	// formats:
+	// ID for the KMS key that Amazon Comprehend uses to encrypt trained custom models.
+	// The ModelKmsKeyId can be either of the following formats:
 	//
-	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// * KMS Key ID:
+	// "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	// * Amazon
-	// Resource Name (ARN) of a KMS Key:
+	// * Amazon Resource Name (ARN) of a KMS
+	// Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	ModelKmsKeyId *string
 
@@ -2850,7 +2859,7 @@ type VpcConfig struct {
 
 	// The ID for each subnet being used in your private VPC. This subnet is a subset
 	// of the a range of IPv4 addresses used by the VPC and is specific to a given
-	// availability zone in the VPC’s region. This ID number is preceded by "subnet-",
+	// availability zone in the VPC’s Region. This ID number is preceded by "subnet-",
 	// for instance: "subnet-04ccf456919e69055". For more information, see VPCs and
 	// Subnets (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html).
 	//

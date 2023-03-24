@@ -50,9 +50,9 @@ type CreateEndpointInput struct {
 	// ResourceInUseException.
 	ClientRequestToken *string
 
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role that grants Amazon Comprehend read access to trained custom models
-	// encrypted with a customer managed key (ModelKmsKeyId).
+	// The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend
+	// read access to trained custom models encrypted with a customer managed key
+	// (ModelKmsKeyId).
 	DataAccessRoleArn *string
 
 	// The Amazon Resource Number (ARN) of the flywheel to which the endpoint will be

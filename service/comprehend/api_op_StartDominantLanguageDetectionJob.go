@@ -31,11 +31,9 @@ func (c *Client) StartDominantLanguageDetectionJob(ctx context.Context, params *
 
 type StartDominantLanguageDetectionJobInput struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role that grants Amazon Comprehend read access to your input data. For more
-	// information, see
-	// https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions
-	// (https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions).
+	// The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend
+	// read access to your input data. For more information, see Role-based permissions
+	// (https://docs.aws.amazon.com/comprehend/latest/dg/security_iam_id-based-policy-examples.html#auth-role-permissions).
 	//
 	// This member is required.
 	DataAccessRoleArn *string
@@ -63,15 +61,15 @@ type StartDominantLanguageDetectionJobInput struct {
 	// the sales department.
 	Tags []types.Tag
 
-	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
-	// encrypt data on the storage volume attached to the ML compute instance(s) that
-	// process the analysis job. The VolumeKmsKeyId can be either of the following
-	// formats:
+	// ID for the Amazon Web Services Key Management Service (KMS) key that Amazon
+	// Comprehend uses to encrypt data on the storage volume attached to the ML compute
+	// instance(s) that process the analysis job. The VolumeKmsKeyId can be either of
+	// the following formats:
 	//
 	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	// * Amazon
-	// Resource Name (ARN) of a KMS Key:
+	// *
+	// Amazon Resource Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 
@@ -87,10 +85,10 @@ type StartDominantLanguageDetectionJobInput struct {
 type StartDominantLanguageDetectionJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the dominant language detection job. It is a
-	// unique, fully qualified identifier for the job. It includes the AWS account,
-	// Region, and the job ID. The format of the ARN is as follows:
-	// arn::comprehend:::dominant-language-detection-job/ The following is an example
-	// job ARN:
+	// unique, fully qualified identifier for the job. It includes the Amazon Web
+	// Services account, Amazon Web Services Region, and the job ID. The format of the
+	// ARN is as follows: arn::comprehend:::dominant-language-detection-job/ The
+	// following is an example job ARN:
 	// arn:aws:comprehend:us-west-2:111122223333:dominant-language-detection-job/1234abcd12ab34cd56ef1234567890ab
 	JobArn *string
 

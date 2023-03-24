@@ -194,6 +194,32 @@ func (e *CertificateNotFoundFault) ErrorCode() string {
 }
 func (e *CertificateNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// An error occurred while trying to create the CEV.
+type CreateCustomDBEngineVersionFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *CreateCustomDBEngineVersionFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *CreateCustomDBEngineVersionFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *CreateCustomDBEngineVersionFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "CreateCustomDBEngineVersionFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *CreateCustomDBEngineVersionFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // CustomAvailabilityZoneId doesn't refer to an existing custom Availability Zone
 // identifier.
 type CustomAvailabilityZoneNotFoundFault struct {
