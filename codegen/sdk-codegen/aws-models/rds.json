@@ -1198,8 +1198,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "af-south-1",
                                 "UseDualStack": false,
+                                "Region": "af-south-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1211,8 +1211,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-east-1",
                                 "UseDualStack": false,
+                                "Region": "ap-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1224,8 +1224,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-1",
                                 "UseDualStack": false,
+                                "Region": "ap-northeast-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1237,8 +1237,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-2",
                                 "UseDualStack": false,
+                                "Region": "ap-northeast-2",
                                 "UseFIPS": false
                             }
                         },
@@ -1250,8 +1250,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-3",
                                 "UseDualStack": false,
+                                "Region": "ap-northeast-3",
                                 "UseFIPS": false
                             }
                         },
@@ -1263,8 +1263,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-south-1",
                                 "UseDualStack": false,
+                                "Region": "ap-south-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1276,8 +1276,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-1",
                                 "UseDualStack": false,
+                                "Region": "ap-southeast-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1289,8 +1289,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-2",
                                 "UseDualStack": false,
+                                "Region": "ap-southeast-2",
                                 "UseFIPS": false
                             }
                         },
@@ -1302,8 +1302,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-3",
                                 "UseDualStack": false,
+                                "Region": "ap-southeast-3",
                                 "UseFIPS": false
                             }
                         },
@@ -1315,8 +1315,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "ca-central-1",
                                 "UseDualStack": false,
+                                "Region": "ca-central-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1328,8 +1328,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "ca-central-1",
                                 "UseDualStack": false,
+                                "Region": "ca-central-1",
                                 "UseFIPS": true
                             }
                         },
@@ -1341,8 +1341,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-central-1",
                                 "UseDualStack": false,
+                                "Region": "eu-central-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1354,8 +1354,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-north-1",
                                 "UseDualStack": false,
+                                "Region": "eu-north-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1367,8 +1367,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-south-1",
                                 "UseDualStack": false,
+                                "Region": "eu-south-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1380,8 +1380,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-1",
                                 "UseDualStack": false,
+                                "Region": "eu-west-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1393,8 +1393,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-2",
                                 "UseDualStack": false,
+                                "Region": "eu-west-2",
                                 "UseFIPS": false
                             }
                         },
@@ -1406,8 +1406,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-3",
                                 "UseDualStack": false,
+                                "Region": "eu-west-3",
                                 "UseFIPS": false
                             }
                         },
@@ -1419,8 +1419,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "me-south-1",
                                 "UseDualStack": false,
+                                "Region": "me-south-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1432,8 +1432,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "sa-east-1",
                                 "UseDualStack": false,
+                                "Region": "sa-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1445,8 +1445,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1458,8 +1458,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": true
                             }
                         },
@@ -1471,8 +1471,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-2",
                                 "UseDualStack": false,
+                                "Region": "us-east-2",
                                 "UseFIPS": false
                             }
                         },
@@ -1484,8 +1484,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-2",
                                 "UseDualStack": false,
+                                "Region": "us-east-2",
                                 "UseFIPS": true
                             }
                         },
@@ -1497,8 +1497,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-1",
                                 "UseDualStack": false,
+                                "Region": "us-west-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1510,8 +1510,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-1",
                                 "UseDualStack": false,
+                                "Region": "us-west-1",
                                 "UseFIPS": true
                             }
                         },
@@ -1523,8 +1523,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-2",
                                 "UseDualStack": false,
+                                "Region": "us-west-2",
                                 "UseFIPS": false
                             }
                         },
@@ -1536,8 +1536,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-2",
                                 "UseDualStack": false,
+                                "Region": "us-west-2",
                                 "UseFIPS": true
                             }
                         },
@@ -1549,8 +1549,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": true
                             }
                         },
@@ -1562,8 +1562,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1575,8 +1575,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": false,
+                                "Region": "cn-north-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1588,8 +1588,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-northwest-1",
                                 "UseDualStack": false,
+                                "Region": "cn-northwest-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1601,8 +1601,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": true,
+                                "Region": "cn-north-1",
                                 "UseFIPS": true
                             }
                         },
@@ -1614,8 +1614,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": false,
+                                "Region": "cn-north-1",
                                 "UseFIPS": true
                             }
                         },
@@ -1627,8 +1627,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": true,
+                                "Region": "cn-north-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1640,8 +1640,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1653,8 +1653,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true
                             }
                         },
@@ -1666,8 +1666,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-west-1",
                                 "UseDualStack": false,
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1679,8 +1679,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-west-1",
                                 "UseDualStack": false,
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": true
                             }
                         },
@@ -1692,8 +1692,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true
                             }
                         },
@@ -1705,8 +1705,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1718,8 +1718,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1731,9 +1731,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-west-1",
                                 "UseDualStack": false,
+                                "Region": "us-iso-west-1",
                                 "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1744,9 +1755,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1757,9 +1779,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1770,9 +1803,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1783,8 +1827,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
@@ -1808,8 +1852,8 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
                                 "Endpoint": "https://example.com"
                             }
@@ -1820,10 +1864,16 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -3269,6 +3319,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.rds#CreateCustomDBEngineVersionFault"
+                },
+                {
                     "target": "com.amazonaws.rds#CustomDBEngineVersionAlreadyExistsFault"
                 },
                 {
@@ -3283,6 +3336,23 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Creates a custom DB engine version (CEV).</p>"
+            }
+        },
+        "com.amazonaws.rds#CreateCustomDBEngineVersionFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.rds#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "CreateCustomDBEngineVersionFault",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>An error occurred while trying to create the CEV.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
             }
         },
         "com.amazonaws.rds#CreateCustomDBEngineVersionMessage": {
@@ -3408,7 +3478,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new Amazon Aurora DB cluster or Multi-AZ DB cluster.</p>\n         <p>You can use the <code>ReplicationSourceIdentifier</code> parameter to create an Amazon\n            Aurora DB cluster as a read replica of another DB cluster or Amazon RDS MySQL or\n            PostgreSQL DB instance. For more information about Amazon Aurora, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html\">What is Amazon Aurora?</a> in the <i>Amazon Aurora User\n                    Guide</i>.</p>\n         <p>You can also use the <code>ReplicationSourceIdentifier</code> parameter to create a\n            Multi-AZ DB cluster read replica with an RDS for PostgreSQL DB instance as the source.\n            For more information about Multi-AZ DB clusters, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html\">Multi-AZ DB cluster deployments</a> in the <i>Amazon\n                    RDS User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates a new Amazon Aurora DB cluster or Multi-AZ DB cluster.</p>\n         <p>If you create an Aurora DB cluster, the request creates an empty cluster. You must\n            explicitly create the writer instance for your DB cluster using the <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html\">CreateDBInstance</a> operation. If you create a Multi-AZ DB cluster, the\n            request creates a writer and two reader DB instances for you, each in a different\n            Availability Zone.</p>\n         <p>You can use the <code>ReplicationSourceIdentifier</code> parameter to create an Amazon\n            Aurora DB cluster as a read replica of another DB cluster or Amazon RDS MySQL or\n            PostgreSQL DB instance. For more information about Amazon Aurora, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html\">What is Amazon Aurora?</a> in the <i>Amazon Aurora User\n                    Guide</i>.</p>\n         <p>You can also use the <code>ReplicationSourceIdentifier</code> parameter to create a\n            Multi-AZ DB cluster read replica with an RDS for PostgreSQL DB instance as the source.\n            For more information about Multi-AZ DB clusters, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html\">Multi-AZ DB cluster deployments</a> in the <i>Amazon\n                    RDS User Guide</i>.</p>"
             }
         },
         "com.amazonaws.rds#CreateDBClusterEndpoint": {
@@ -3542,14 +3612,14 @@
                 "Engine": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the database engine to be used for this DB cluster.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>aurora</code> (for MySQL 5.6-compatible Aurora)</p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-mysql</code> (for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora)</p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-postgresql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mysql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>postgres</code>\n               </p>\n            </li>\n         </ul>\n         <p>Valid for: Aurora DB clusters and Multi-AZ DB clusters</p>",
+                        "smithy.api#documentation": "<p>The name of the database engine to be used for this DB cluster.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>aurora-mysql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-postgresql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mysql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>postgres</code>\n               </p>\n            </li>\n         </ul>\n         <p>Valid for: Aurora DB clusters and Multi-AZ DB clusters</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "EngineVersion": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version number of the database engine to use.</p>\n         <p>To list all of the available engine versions for MySQL 5.6-compatible Aurora, use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine aurora --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>To list all of the available engine versions for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora, use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine aurora-mysql --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>To list all of the available engine versions for Aurora PostgreSQL, use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine aurora-postgresql --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>To list all of the available engine versions for RDS for MySQL, use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine mysql --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>To list all of the available engine versions for RDS for PostgreSQL, use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine postgres --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>\n            <b>Aurora MySQL</b>\n         </p>\n         <p>For information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.html\">MySQL on Amazon RDS Versions</a> in the \n          <i>Amazon Aurora User Guide</i>.</p>\n         <p>\n            <b>Aurora PostgreSQL</b>\n         </p>\n         <p>For information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Updates.20180305.html\">Amazon Aurora PostgreSQL releases and engine versions</a> in the \n           <i>Amazon Aurora User Guide</i>.</p>\n         <p>\n            <b>MySQL</b>\n         </p>\n         <p>For information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt\">MySQL on Amazon RDS Versions</a> in the \n          <i>Amazon RDS User Guide</i>.</p>\n         <p>\n            <b>PostgreSQL</b>\n         </p>\n         <p>For information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts\">Amazon RDS for PostgreSQL versions and extensions</a> in the \n          <i>Amazon RDS User Guide</i>.</p>\n         <p>Valid for: Aurora DB clusters and Multi-AZ DB clusters</p>"
+                        "smithy.api#documentation": "<p>The version number of the database engine to use.</p>\n         <p>To list all of the available engine versions for Aurora MySQL version 2 (5.7-compatible) and version 3 (MySQL 8.0-compatible),\n            use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine aurora-mysql --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>You can supply either <code>5.7</code> or <code>8.0</code> to use the default engine version for Aurora MySQL version 2 or\n            version 3, respectively.</p>\n         <p>To list all of the available engine versions for Aurora PostgreSQL, use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine aurora-postgresql --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>To list all of the available engine versions for RDS for MySQL, use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine mysql --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>To list all of the available engine versions for RDS for PostgreSQL, use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine postgres --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>\n            <b>Aurora MySQL</b>\n         </p>\n         <p>For information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.html\">Database engine updates for Amazon Aurora MySQL</a> in the \n          <i>Amazon Aurora User Guide</i>.</p>\n         <p>\n            <b>Aurora PostgreSQL</b>\n         </p>\n         <p>For information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Updates.20180305.html\">Amazon Aurora PostgreSQL releases and engine versions</a> in the \n           <i>Amazon Aurora User Guide</i>.</p>\n         <p>\n            <b>MySQL</b>\n         </p>\n         <p>For information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt\">Amazon RDS for MySQL</a> in the <i>Amazon RDS User Guide</i>.</p>\n         <p>\n            <b>PostgreSQL</b>\n         </p>\n         <p>For information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts\">Amazon RDS for PostgreSQL</a> in the <i>Amazon RDS User Guide</i>.</p>\n         <p>Valid for: Aurora DB clusters and Multi-AZ DB clusters</p>"
                     }
                 },
                 "Port": {
@@ -3639,7 +3709,7 @@
                 "EngineMode": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The DB engine mode of the DB cluster, either <code>provisioned</code>, <code>serverless</code>, \n            <code>parallelquery</code>, <code>global</code>, or <code>multimaster</code>.</p>\n         <p>The <code>parallelquery</code> engine mode isn't required for Aurora MySQL version 1.23 and higher 1.x versions, \n            and version 2.09 and higher 2.x versions.</p>\n         <p>The <code>global</code> engine mode isn't required for Aurora MySQL version 1.22 and higher 1.x versions, \n            and <code>global</code> engine mode isn't required for any 2.x versions.</p>\n         <p>The <code>multimaster</code> engine mode only applies for DB clusters created with Aurora MySQL version 5.6.10a.</p>\n         <p>The <code>serverless</code> engine mode only applies for Aurora Serverless v1 DB clusters.</p>\n         <p>For Aurora PostgreSQL, the <code>global</code> engine mode isn't required, and both the <code>parallelquery</code> \n            and the <code>multimaster</code> engine modes currently aren't supported.</p>\n         <p>Limitations and requirements apply to some DB engine modes. For more information, see the \n            following sections in the <i>Amazon Aurora User Guide</i>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html#aurora-serverless.limitations\">Limitations of Aurora\n                        Serverless v1</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.requirements.html\">Requirements\n                        for Aurora Serverless v2</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-mysql-parallel-query.html#aurora-mysql-parallel-query-limitations\">Limitations of Parallel Query</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html#aurora-global-database.limitations\">Limitations of\n                        Aurora Global Databases</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-multi-master.html#aurora-multi-master-limitations\">Limitations of\n                        Multi-Master Clusters</a>\n               </p>\n            </li>\n         </ul>\n         <p>Valid for: Aurora DB clusters only</p>"
+                        "smithy.api#documentation": "<p>The DB engine mode of the DB cluster, either <code>provisioned</code> or <code>serverless</code>.</p>\n         <p>The <code>serverless</code> engine mode only applies for Aurora Serverless v1 DB clusters.</p>\n         <p>Limitations and requirements apply to some DB engine modes. For more information, see the \n            following sections in the <i>Amazon Aurora User Guide</i>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html#aurora-serverless.limitations\">Limitations of Aurora\n                        Serverless v1</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.requirements.html\">Requirements\n                        for Aurora Serverless v2</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-mysql-parallel-query.html#aurora-mysql-parallel-query-limitations\">Limitations of parallel query</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html#aurora-global-database.limitations\">Limitations of\n                        Aurora global databases</a>\n               </p>\n            </li>\n         </ul>\n         <p>Valid for: Aurora DB clusters only</p>"
                     }
                 },
                 "ScalingConfiguration": {
@@ -3711,7 +3781,7 @@
                 "Iops": {
                     "target": "com.amazonaws.rds#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of Provisioned IOPS (input/output operations per second) to be initially allocated \n            for each DB instance in the Multi-AZ DB cluster.</p>\n         <p>For information about valid IOPS values, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS\">Amazon RDS Provisioned IOPS storage</a> \n            in the <i>Amazon RDS User Guide</i>.</p>\n         <p>This setting is required to create a Multi-AZ DB cluster.</p>\n         <p>Constraints: Must be a multiple between .5 and 50 of the storage amount for the DB cluster.</p>\n         <p>Valid for: Multi-AZ DB clusters only</p>"
+                        "smithy.api#documentation": "<p>The amount of Provisioned IOPS (input/output operations per second) to be initially allocated \n            for each DB instance in the Multi-AZ DB cluster.</p>\n         <p>For information about valid IOPS values, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS\">Provisioned IOPS storage</a> in the <i>Amazon RDS\n                User Guide</i>.</p>\n         <p>This setting is required to create a Multi-AZ DB cluster.</p>\n         <p>Constraints: Must be a multiple between .5 and 50 of the storage amount for the DB cluster.</p>\n         <p>Valid for: Multi-AZ DB clusters only</p>"
                     }
                 },
                 "PubliclyAccessible": {
@@ -11160,7 +11230,7 @@
                 "Engine": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The database engine to return.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>aurora</code> (for MySQL 5.6-compatible Aurora)</p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-mysql</code> (for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora)</p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-postgresql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mariadb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mysql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-ee-cdb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se2-cdb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>postgres</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-se</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ex</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-web</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The database engine to return.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>aurora-mysql</code> (for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora)</p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-postgresql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mariadb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mysql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-ee-cdb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se2-cdb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>postgres</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-se</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ex</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-web</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "EngineVersion": {
@@ -12970,7 +13040,7 @@
                 "Engine": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the engine to retrieve DB instance options for.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>aurora</code> (for MySQL 5.6-compatible Aurora)</p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-mysql</code> (for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora)</p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-postgresql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mariadb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mysql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-ee-cdb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se2-cdb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>postgres</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-se</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ex</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-web</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The name of the engine to retrieve DB instance options for.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>aurora-mysql</code> (for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora)</p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-postgresql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mariadb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mysql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-ee-cdb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se2-cdb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>postgres</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-se</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ex</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-web</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -14378,7 +14448,7 @@
                 "GlobalClusterMembers": {
                     "target": "com.amazonaws.rds#GlobalClusterMemberList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of cluster IDs for secondary clusters within the global database cluster. Currently limited to\n        1 item.</p>"
+                        "smithy.api#documentation": "<p>The list of primary and secondary clusters within the global database cluster.</p>"
                     }
                 },
                 "FailoverState": {
@@ -15742,7 +15812,7 @@
                 "EngineVersion": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version number of the database engine to which you want to upgrade. \n            Changing this parameter results in an outage. The change is applied during\n            the next maintenance window unless <code>ApplyImmediately</code> is enabled.</p>\n         <p>To list all of the available engine versions for MySQL 5.6-compatible Aurora, use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine aurora --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>To list all of the available engine versions for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora, use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine aurora-mysql --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>To list all of the available engine versions for Aurora PostgreSQL, use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine aurora-postgresql --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>To list all of the available engine versions for RDS for MySQL, use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine mysql --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>To list all of the available engine versions for RDS for PostgreSQL, use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine postgres --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>Valid for: Aurora DB clusters and Multi-AZ DB clusters</p>"
+                        "smithy.api#documentation": "<p>The version number of the database engine to which you want to upgrade. \n            Changing this parameter results in an outage. The change is applied during\n            the next maintenance window unless <code>ApplyImmediately</code> is enabled.</p>\n         <p>To list all of the available engine versions for Aurora MySQL version 2 (5.7-compatible) and version 3 (MySQL 8.0-compatible),\n            use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine aurora-mysql --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>To list all of the available engine versions for Aurora PostgreSQL, use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine aurora-postgresql --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>To list all of the available engine versions for RDS for MySQL, use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine mysql --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>To list all of the available engine versions for RDS for PostgreSQL, use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine postgres --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>Valid for: Aurora DB clusters and Multi-AZ DB clusters</p>"
                     }
                 },
                 "AllowMajorVersionUpgrade": {
@@ -19589,7 +19659,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon Aurora DB cluster from MySQL data stored in an Amazon S3 bucket.\n            Amazon RDS must be authorized to access the Amazon S3 bucket and the data must be\n            created using the Percona XtraBackup utility as described in <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Migrating.ExtMySQL.html#AuroraMySQL.Migrating.ExtMySQL.S3\"> Migrating Data from MySQL by Using an Amazon S3 Bucket</a> in the\n                <i>Amazon Aurora User Guide</i>.</p>\n         <note>\n            <p>This action only restores the DB cluster, not the DB instances for that DB\n                  cluster. You must invoke the <code>CreateDBInstance</code> action to create DB\n                  instances for the restored DB cluster, specifying the identifier of the restored DB\n                  cluster in <code>DBClusterIdentifier</code>. You can create DB instances only after\n                  the <code>RestoreDBClusterFromS3</code> action has completed and the DB\n                  cluster is available.</p>\n         </note>\n         <p>For more information on Amazon Aurora, see  \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html\">\n                What is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide</i>.</p>\n         <note>\n            <p>This action only applies to Aurora DB clusters. The source DB engine must be\n                MySQL.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Creates an Amazon Aurora DB cluster from MySQL data stored in an Amazon S3 bucket.\n            Amazon RDS must be authorized to access the Amazon S3 bucket and the data must be\n            created using the Percona XtraBackup utility as described in <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Migrating.ExtMySQL.html#AuroraMySQL.Migrating.ExtMySQL.S3\"> Migrating Data from MySQL by Using an Amazon S3 Bucket</a> in the\n                <i>Amazon Aurora User Guide</i>.</p>\n         <note>\n            <p>This action only restores the DB cluster, not the DB instances for that DB\n                  cluster. You must invoke the <code>CreateDBInstance</code> action to create DB\n                  instances for the restored DB cluster, specifying the identifier of the restored DB\n                  cluster in <code>DBClusterIdentifier</code>. You can create DB instances only after\n                  the <code>RestoreDBClusterFromS3</code> action has completed and the DB\n                  cluster is available.</p>\n         </note>\n         <p>For more information on Amazon Aurora, see  \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html\">\n                What is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide</i>.</p>\n         <note>\n            <p>This action only applies to Aurora DB clusters. The source DB engine must be MySQL.</p>\n         </note>"
             }
         },
         "com.amazonaws.rds#RestoreDBClusterFromS3Message": {
@@ -19647,14 +19717,14 @@
                 "Engine": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the database engine to be used for this DB cluster.</p>\n         <p>Valid Values: <code>aurora</code> (for MySQL 5.6-compatible Aurora) and <code>aurora-mysql</code> \n            (for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora)</p>",
+                        "smithy.api#documentation": "<p>The name of the database engine to be used for this DB cluster.</p>\n         <p>Valid Values: <code>aurora-mysql</code> (for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora)</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "EngineVersion": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version number of the database engine to use.</p>\n         <p>To list all of the available engine versions for <code>aurora</code> (for MySQL 5.6-compatible Aurora), use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine aurora --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>To list all of the available engine versions for <code>aurora-mysql</code> (for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora), use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine aurora-mysql --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>\n            <b>Aurora MySQL</b>\n         </p>\n         <p>Example: <code>5.6.10a</code>, <code>5.6.mysql_aurora.1.19.2</code>, <code>5.7.mysql_aurora.2.07.1</code>,\n                <code>8.0.mysql_aurora.3.02.0</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The version number of the database engine to use.</p>\n         <p>To list all of the available engine versions for <code>aurora-mysql</code> (MySQL 5.7-compatible and MySQL 8.0-compatible\n            Aurora), use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine aurora-mysql --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>\n            <b>Aurora MySQL</b>\n         </p>\n         <p>Examples: <code>5.7.mysql_aurora.2.07.1</code>, <code>8.0.mysql_aurora.3.02.0</code>\n         </p>"
                     }
                 },
                 "Port": {
@@ -19758,7 +19828,7 @@
                 "EnableCloudwatchLogsExports": {
                     "target": "com.amazonaws.rds#LogTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of logs that the restored DB cluster is to export to CloudWatch Logs. The values\n            in the list depend on the DB engine being used.</p>\n         <p>\n            <b>Aurora MySQL</b>\n         </p>\n         <p>Possible values are <code>audit</code>, <code>error</code>, <code>general</code>, and <code>slowquery</code>.</p>\n         <p>\n            <b>Aurora PostgreSQL</b>\n         </p>\n         <p>Possible value is <code>postgresql</code>.</p>\n         <p>For more information about exporting CloudWatch Logs for Amazon Aurora, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch\">Publishing Database Logs to Amazon CloudWatch Logs</a> in the <i>Amazon Aurora User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The list of logs that the restored DB cluster is to export to CloudWatch Logs. The values\n            in the list depend on the DB engine being used.</p>\n         <p>\n            <b>Aurora MySQL</b>\n         </p>\n         <p>Possible values are <code>audit</code>, <code>error</code>, <code>general</code>, and <code>slowquery</code>.</p>\n         <p>For more information about exporting CloudWatch Logs for Amazon Aurora, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch\">Publishing Database Logs to Amazon CloudWatch Logs</a> in the <i>Amazon Aurora User Guide</i>.</p>"
                     }
                 },
                 "DeletionProtection": {
@@ -19917,7 +19987,7 @@
                 "EngineVersion": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the database engine to use for the new DB cluster.</p>\n         <p>To list all of the available engine versions for MySQL 5.6-compatible Aurora, use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine aurora --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>To list all of the available engine versions for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora, use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine aurora-mysql --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>To list all of the available engine versions for Aurora PostgreSQL, use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine aurora-postgresql --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>To list all of the available engine versions for RDS for MySQL, use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine mysql --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>To list all of the available engine versions for RDS for PostgreSQL, use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine postgres --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>\n            <b>Aurora MySQL</b>\n         </p>\n         <p>See <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.html\">MySQL on Amazon RDS Versions</a> in the \n          <i>Amazon Aurora User Guide</i>.</p>\n         <p>\n            <b>Aurora PostgreSQL</b>\n         </p>\n         <p>See <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Updates.20180305.html\">Amazon Aurora PostgreSQL releases and engine versions</a> in the \n          <i>Amazon Aurora User Guide</i>.</p>\n         <p>\n            <b>MySQL</b>\n         </p>\n         <p>See <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt\">MySQL on Amazon RDS Versions</a> in the \n          <i>Amazon RDS User Guide.</i>\n         </p>\n         <p>\n            <b>PostgreSQL</b>\n         </p>\n         <p>See <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts\">Amazon RDS for PostgreSQL versions and extensions</a> in the \n          <i>Amazon RDS User Guide.</i>\n         </p>\n         <p>Valid for: Aurora DB clusters and Multi-AZ DB clusters</p>"
+                        "smithy.api#documentation": "<p>The version of the database engine to use for the new DB cluster. If you don't specify an engine version, the default version\n            for the database engine in the Amazon Web Services Region is used.</p>\n         <p>To list all of the available engine versions for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora, use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine aurora-mysql --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>To list all of the available engine versions for Aurora PostgreSQL, use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine aurora-postgresql --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>To list all of the available engine versions for RDS for MySQL, use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine mysql --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>To list all of the available engine versions for RDS for PostgreSQL, use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine postgres --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>\n            <b>Aurora MySQL</b>\n         </p>\n         <p>See <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.html\">Database \n            engine updates for Amazon Aurora MySQL</a> in the <i>Amazon Aurora User Guide</i>.</p>\n         <p>\n            <b>Aurora PostgreSQL</b>\n         </p>\n         <p>See <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Updates.20180305.html\">Amazon \n            Aurora PostgreSQL releases and engine versions</a> in the <i>Amazon Aurora User Guide</i>.</p>\n         <p>\n            <b>MySQL</b>\n         </p>\n         <p>See <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt\">Amazon \n            RDS for MySQL</a> in the <i>Amazon RDS User Guide.</i>\n         </p>\n         <p>\n            <b>PostgreSQL</b>\n         </p>\n         <p>See <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts\">Amazon \n            RDS for PostgreSQL versions and extensions</a> in the <i>Amazon RDS User Guide.</i>\n         </p>\n         <p>Valid for: Aurora DB clusters and Multi-AZ DB clusters</p>"
                     }
                 },
                 "Port": {
@@ -22143,7 +22213,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts an export of DB snapshot or DB cluster data to Amazon S3. \n            The provided IAM role must have access to the S3 bucket.</p>\n         <p>You can't export snapshot data from RDS Custom DB instances.</p>\n         <p>You can't export cluster data from Multi-AZ DB clusters.</p>\n         <p>For more information on exporting DB snapshot data, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ExportSnapshot.html\">Exporting DB snapshot \n            data to Amazon S3</a> in the <i>Amazon RDS User Guide</i>\n            or <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/aurora-export-snapshot.html\">Exporting DB \n            cluster snapshot data to Amazon S3</a> in the <i>Amazon Aurora User Guide</i>.</p>\n         <p>For more information on exporting DB cluster data, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/export-cluster-data.html\">Exporting DB \n            cluster data to Amazon S3</a> in the <i>Amazon Aurora User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Starts an export of DB snapshot or DB cluster data to Amazon S3. \n            The provided IAM role must have access to the S3 bucket.</p>\n         <p>You can't export snapshot data from RDS Custom DB instances.</p>\n         <p>You can't export cluster data from Multi-AZ DB clusters.</p>\n         <p>For more information on exporting DB snapshot data, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ExportSnapshot.html\">Exporting DB snapshot \n            data to Amazon S3</a> in the <i>Amazon RDS User Guide</i>\n            or <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-export-snapshot.html\">Exporting DB \n            cluster snapshot data to Amazon S3</a> in the <i>Amazon Aurora User Guide</i>.</p>\n         <p>For more information on exporting DB cluster data, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/export-cluster-data.html\">Exporting DB \n            cluster data to Amazon S3</a> in the <i>Amazon Aurora User Guide</i>.</p>"
             }
         },
         "com.amazonaws.rds#StartExportTaskMessage": {
@@ -22173,7 +22243,7 @@
                 "IamRoleArn": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the IAM role to use for writing to the Amazon S3 bucket \n            when exporting a snapshot or cluster.</p>",
+                        "smithy.api#documentation": "<p>The name of the IAM role to use for writing to the Amazon S3 bucket \n            when exporting a snapshot or cluster.</p>\n         <p>In the IAM policy attached to your IAM role, include the following required actions to allow the transfer of files from Amazon\n            RDS or Amazon Aurora to an S3 bucket:</p>\n         <ul>\n            <li>\n               <p>s3:PutObject*</p>\n            </li>\n            <li>\n               <p>s3:GetObject*</p>\n            </li>\n            <li>\n               <p>s3:ListBucket</p>\n            </li>\n            <li>\n               <p>s3:DeleteObject*</p>\n            </li>\n            <li>\n               <p>s3:GetBucketLocation </p>\n            </li>\n         </ul>\n         <p>In the policy, include the resources to identify the S3 bucket and objects in the bucket. The following list of resources shows\n            the Amazon Resource Name (ARN) format for accessing S3:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>arn:aws:s3:::<i>your-s3-bucket</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>arn:aws:s3:::<i>your-s3-bucket</i>/*</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -22668,12 +22738,12 @@
                 "Status": {
                     "target": "com.amazonaws.rds#SwitchoverDetailStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The switchover status of a resource in a blue/green deployment.</p>\n         <p>Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>preparing-for-switchover</code> - The resource is being prepared to switch over.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ready-for-switchover</code> - The resource is ready to switch\n                    over.</p>\n            </li>\n            <li>\n               <p>\n                  <code>switchover-in-progress</code> - The resource is being switched over.</p>\n            </li>\n            <li>\n               <p>\n                  <code>switchover-completed</code> - The resource has been switched over.</p>\n            </li>\n            <li>\n               <p>\n                  <code>switchover-failed</code> - The resource attempted to switch over but failed.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The switchover status of a resource in a blue/green deployment.</p>\n         <p>Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PROVISIONING</code> - The resource is being prepared to switch\n                    over.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AVAILABLE</code> - The resource is ready to switch over.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SWITCHOVER_IN_PROGRESS</code> - The resource is being switched\n                    over.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SWITCHOVER_COMPLETED</code> - The resource has been switched\n                    over.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SWITCHOVER_FAILED</code> - The resource attempted to switch over but\n                    failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MISSING_SOURCE</code> - The source resource has been deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MISSING_TARGET</code> - The target resource has been deleted.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the details about a blue/green deployment.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html\">Using Amazon RDS Blue/Green Deployments \n            for database updates</a> in the <i>Amazon RDS User Guide</i> and \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html\">\n            Using Amazon RDS Blue/Green Deployments for database updates</a> in the <i>Amazon Aurora \n            User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Contains the details about a blue/green deployment.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html\">Using Amazon RDS\n                Blue/Green Deployments for database updates</a> in the <i>Amazon RDS User\n                Guide</i> and <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html\">Using Amazon RDS\n                Blue/Green Deployments for database updates</a> in the <i>Amazon Aurora\n                User Guide</i>.</p>"
             }
         },
         "com.amazonaws.rds#SwitchoverDetailList": {
