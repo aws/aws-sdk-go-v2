@@ -1,8 +1,0 @@
-{
-    "id": "0c5f4550-b86f-4b14-8f9b-4304efdb606f",
-    "type": "documentation",
-    "description": "Doc-only update to correct alarm actions list",
-    "modules": [
-        "service/cloudwatch"
-    ]
-}

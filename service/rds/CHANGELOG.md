@@ -1,3 +1,7 @@
+# v1.41.0 (2023-03-24)
+
+* **Feature**: Added error code CreateCustomDBEngineVersionFault for when the create custom engine version for Custom engines fails.
+
 # v1.40.7 (2023-03-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,13 @@
+# Release (2023-03-24)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.25.7](service/cloudwatch/CHANGELOG.md#v1257-2023-03-24)
+  * **Documentation**: Doc-only update to correct alarm actions list
+* `github.com/aws/aws-sdk-go-v2/service/comprehend`: [v1.23.0](service/comprehend/CHANGELOG.md#v1230-2023-03-24)
+  * **Feature**: This release adds a new field (FlywheelArn) to the EntitiesDetectionJobProperties object. The FlywheelArn field is returned in the DescribeEntitiesDetectionJob and ListEntitiesDetectionJobs responses when the EntitiesDetection job is started with a FlywheelArn instead of an EntityRecognizerArn .
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.41.0](service/rds/CHANGELOG.md#v1410-2023-03-24)
+  * **Feature**: Added error code CreateCustomDBEngineVersionFault for when the create custom engine version for Custom engines fails.
+
 # Release (2023-03-23)
 
 ## Module Highlights

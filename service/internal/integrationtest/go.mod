@@ -16,7 +16,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.14.6
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.14.5
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.24.4
-	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.25.6
+	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.25.7
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.20.7
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.14.8
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.16.7
@@ -60,7 +60,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.14.6
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.12.6
 	github.com/aws/aws-sdk-go-v2/service/polly v1.25.5
-	github.com/aws/aws-sdk-go-v2/service/rds v1.40.7
+	github.com/aws/aws-sdk-go-v2/service/rds v1.41.0
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.27.7
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.23.6
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.27.5
