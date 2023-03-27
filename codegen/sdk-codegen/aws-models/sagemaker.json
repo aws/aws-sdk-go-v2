@@ -2234,7 +2234,7 @@
                 "AlgorithmsConfig": {
                     "target": "com.amazonaws.sagemaker#AutoMLAlgorithmsConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Stores the configuration information for the selection of algorithms used to train the\n         model candidates.</p>\n         <p>The list of available algorithms to choose from depends on the training mode set in\n            <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobConfig.html\">\n               <code>AutoMLJobConfig.Mode</code>\n            </a>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AlgorithmsConfig</code> should not be set in <code>AUTO</code> training\n               mode.</p>\n            </li>\n            <li>\n               <p>When <code>AlgorithmsConfig</code> is provided, one <code>AutoMLAlgorithms</code>\n               attribute must be set and one only.</p>\n               <p>If the list of algorithms provided as values for <code>AutoMLAlgorithms</code> is\n               empty, <code>AutoMLCandidateGenerationConfig</code> uses the full set of algorithms\n               for the given training mode.</p>\n            </li>\n            <li>\n               <p>When <code>AlgorithmsConfig</code> is not provided,\n                  <code>AutoMLCandidateGenerationConfig</code> uses the full set of algorithms for\n               the given training mode.</p>\n            </li>\n         </ul>\n         <p>For the list of all algorithms per training mode, see .</p>\n         <p>For more information on each algorithm, see the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support\">Algorithm support</a> section in Autopilot developer guide.</p>"
+                        "smithy.api#documentation": "<p>Stores the configuration information for the selection of algorithms used to train the\n         model candidates.</p>\n         <p>The list of available algorithms to choose from depends on the training mode set in\n            <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobConfig.html\">\n               <code>AutoMLJobConfig.Mode</code>\n            </a>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AlgorithmsConfig</code> should not be set in <code>AUTO</code> training\n               mode.</p>\n            </li>\n            <li>\n               <p>When <code>AlgorithmsConfig</code> is provided, one <code>AutoMLAlgorithms</code>\n               attribute must be set and one only.</p>\n               <p>If the list of algorithms provided as values for <code>AutoMLAlgorithms</code> is\n               empty, <code>AutoMLCandidateGenerationConfig</code> uses the full set of algorithms\n               for the given training mode.</p>\n            </li>\n            <li>\n               <p>When <code>AlgorithmsConfig</code> is not provided,\n                  <code>AutoMLCandidateGenerationConfig</code> uses the full set of algorithms for\n               the given training mode.</p>\n            </li>\n         </ul>\n         <p>For the list of all algorithms per training mode, see <code>\n               <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLAlgorithmConfig.html\">\n               AutoMLAlgorithmConfig</a>\n            </code>.</p>\n         <p>For more information on each algorithm, see the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support\">Algorithm support</a> section in Autopilot developer guide.</p>"
                     }
                 }
             },
@@ -2314,7 +2314,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A channel is a named input source that training algorithms can consume. The validation\n         dataset size is limited to less than 2 GB. The training dataset size must be less than 100\n         GB. For more information, see .</p>\n         <note>\n            <p>A validation dataset must contain the same headers as the training dataset.</p>\n         </note>\n         <p></p>"
+                "smithy.api#documentation": "<p>A channel is a named input source that training algorithms can consume. The validation\n         dataset size is limited to less than 2 GB. The training dataset size must be less than 100\n         GB. For more information, see <code>\n               <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Channel.html\"> Channel</a>\n            </code>.</p>\n         <note>\n            <p>A validation dataset must contain the same headers as the training dataset.</p>\n         </note>\n         <p></p>"
             }
         },
         "com.amazonaws.sagemaker#AutoMLChannelType": {
@@ -2340,26 +2340,26 @@
                 "Image": {
                     "target": "com.amazonaws.sagemaker#ContainerImage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Elastic Container Registry (Amazon ECR) path of the container. For more\n         information, see .</p>",
+                        "smithy.api#documentation": "<p>The Amazon Elastic Container Registry (Amazon ECR) path of the container. For more\n         information, see <code>\n               <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ContainerDefinition.html\">\n               ContainerDefinition</a>\n            </code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ModelDataUrl": {
                     "target": "com.amazonaws.sagemaker#Url",
                     "traits": {
-                        "smithy.api#documentation": "<p>The location of the model artifacts. For more information, see .</p>",
+                        "smithy.api#documentation": "<p>The location of the model artifacts. For more information, see <code>\n               <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ContainerDefinition.html\"> ContainerDefinition</a>\n            </code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Environment": {
                     "target": "com.amazonaws.sagemaker#EnvironmentMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The environment variables to set in the container. For more information, see .</p>"
+                        "smithy.api#documentation": "<p>The environment variables to set in the container. For more information, see\n               <code>\n               <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ContainerDefinition.html\">\n               ContainerDefinition</a>\n            </code>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of container definitions that describe the different containers that make up an\n         AutoML candidate. For more information, see .</p>"
+                "smithy.api#documentation": "<p>A list of container definitions that describe the different containers that make up an\n         AutoML candidate. For more information, see <code>\n               <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ContainerDefinition.html\">\n               ContainerDefinition</a>\n            </code>.</p>"
             }
         },
         "com.amazonaws.sagemaker#AutoMLContainerDefinitions": {
@@ -2417,7 +2417,7 @@
             "key": {
                 "target": "com.amazonaws.sagemaker#AutoMLProcessingUnit",
                 "traits": {
-                    "smithy.api#documentation": "<p>Processing unit for an inference container. \n       Currently Autopilot only supports <code>CPU</code> or <code>GPU</code>.</p>"
+                    "smithy.api#documentation": "<p>Processing unit for an inference container. Currently Autopilot only supports\n            <code>CPU</code> or <code>GPU</code>.</p>"
                 }
             },
             "value": {
@@ -2427,7 +2427,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The mapping of all supported processing unit (CPU, GPU, etc...) \n      to inference container definitions for the candidate.\n      This field is populated for the V2 API only (for example, \n      for jobs created by calling <code>CreateAutoMLJobV2</code>).</p>",
+                "smithy.api#documentation": "<p>The mapping of all supported processing unit (CPU, GPU, etc...) to inference container\n         definitions for the candidate. This field is populated for the V2 API only (for example,\n         for jobs created by calling <code>CreateAutoMLJobV2</code>).</p>",
                 "smithy.api#length": {
                     "min": 0,
                     "max": 2
@@ -2505,7 +2505,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A channel is a named input source that training algorithms can consume. This channel is\n         used for the non tabular training data of an AutoML job using the V2 API. For tabular\n         training data, see .\n         For more information, see .</p>"
+                "smithy.api#documentation": "<p>A channel is a named input source that training algorithms can consume. This channel is\n         used for the non tabular training data of an AutoML job using the V2 API. For tabular\n         training data, see <code>\n               <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLChannel.html\">\n            AutoMLChannel</a>\n            </code>. For more information, see <code>\n               <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Channel.html\">\n               Channel</a>\n            </code>.</p>"
             }
         },
         "com.amazonaws.sagemaker#AutoMLJobCompletionCriteria": {
@@ -2520,7 +2520,7 @@
                 "MaxRuntimePerTrainingJobInSeconds": {
                     "target": "com.amazonaws.sagemaker#MaxRuntimePerTrainingJobInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum time, in seconds, that each training job executed inside hyperparameter\n         tuning is allowed to run as part of a hyperparameter tuning job. For more information, see\n         the  used by the  action.</p>\n         <p>For V2 jobs (jobs created by calling <code>CreateAutoMLJobV2</code>),\n         this field controls the runtime of the job candidate.</p>"
+                        "smithy.api#documentation": "<p>The maximum time, in seconds, that each training job executed inside hyperparameter\n         tuning is allowed to run as part of a hyperparameter tuning job. For more information, see\n         the <code>\n               <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_StoppingCondition.html\">StoppingCondition</a>\n            </code> used by the <code>\n               <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateHyperParameterTuningJob.html\">CreateHyperParameterTuningJob</a>\n            </code> action.</p>\n         <p>For V2 jobs (jobs created by calling <code>CreateAutoMLJobV2</code>), this field\n         controls the runtime of the job candidate.</p>"
                     }
                 },
                 "MaxAutoMLJobRuntimeInSeconds": {
@@ -6507,7 +6507,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Autopilot job.</p>\n         <p>Find the best-performing model after you run an Autopilot job by calling .</p>\n         <p>For information about how to use Autopilot, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development.html\">Automate Model\n            Development with Amazon SageMaker Autopilot</a>.</p>"
+                "smithy.api#documentation": "<p>Creates an Autopilot job.</p>\n         <p>Find the best-performing model after you run an Autopilot job by calling <code>\n               <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJob.html\">DescribeAutoMLJob</a>\n            </code>.</p>\n         <p>For information about how to use Autopilot, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development.html\">Automate Model\n            Development with Amazon SageMaker Autopilot</a>.</p>"
             }
         },
         "com.amazonaws.sagemaker#CreateAutoMLJobRequest": {
@@ -6523,7 +6523,7 @@
                 "InputDataConfig": {
                     "target": "com.amazonaws.sagemaker#AutoMLInputDataConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of channel objects that describes the input data and its location. Each channel\n         is a named input source. Similar to <code>InputDataConfig</code> supported by . Format(s) supported: CSV, Parquet.\n         A minimum of 500 rows is required for the training dataset. There is not a minimum number\n         of rows required for the validation dataset.</p>",
+                        "smithy.api#documentation": "<p>An array of channel objects that describes the input data and its location. Each channel\n         is a named input source. Similar to <code>InputDataConfig</code> supported by <code>\n               <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html\">HyperParameterTrainingJobDefinition</a>\n            </code>. Format(s) supported: CSV,\n         Parquet. A minimum of 500 rows is required for the training dataset. There is not a minimum\n         number of rows required for the validation dataset.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6537,13 +6537,13 @@
                 "ProblemType": {
                     "target": "com.amazonaws.sagemaker#ProblemType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the type of supervised learning problem available for the candidates. For more\n         information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-problem-types.html\">\n            Amazon SageMaker Autopilot problem types and algorithm support</a>.</p>"
+                        "smithy.api#documentation": "<p>Defines the type of supervised learning problem available for the candidates. For more\n         information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-datasets-problem-types.html#autopilot-problem-types\">\n            Amazon SageMaker Autopilot problem types</a>.</p>"
                     }
                 },
                 "AutoMLJobObjective": {
                     "target": "com.amazonaws.sagemaker#AutoMLJobObjective",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the objective metric used to measure the predictive quality of an AutoML job. You\n         provide an <a>AutoMLJobObjective$MetricName</a> and Autopilot infers whether to\n         minimize or maximize it. For , only\n            <code>Accuracy</code> is supported.</p>"
+                        "smithy.api#documentation": "<p>Defines the objective metric used to measure the predictive quality of an AutoML job. You\n         provide an <code>\n               <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobObjective.html\">AutoMLJobObjective$MetricName</a>\n            </code> and Autopilot infers whether to minimize or\n         maximize it. For <code>\n               <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html\">CreateAutoMLJobV2</a>\n            </code>, only <code>Accuracy</code> is supported.</p>"
                     }
                 },
                 "AutoMLJobConfig": {
@@ -6615,7 +6615,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon SageMaker AutoML job that uses non-tabular data such as images or text for\n         Computer Vision or Natural Language Processing problems.</p>\n         <p>Find the resulting model after you run an AutoML job V2 by calling .</p>\n         <p>To create an <code>AutoMLJob</code> using tabular data, see .</p>\n         <note>\n            <p>This API action is callable through SageMaker Canvas only. Calling it directly from the CLI\n            or an SDK results in an error.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Creates an Amazon SageMaker AutoML job that uses non-tabular data such as images or text for\n         Computer Vision or Natural Language Processing problems.</p>\n         <p>Find the resulting model after you run an AutoML job V2 by calling <code>\n               <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html\">DescribeAutoMLJobV2</a>\n            </code>.</p>\n         <p>To create an <code>AutoMLJob</code> using tabular data, see <code>\n               <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html\">CreateAutoMLJob</a>\n            </code>.</p>\n         <note>\n            <p>This API action is callable through SageMaker Canvas only. Calling it directly from the CLI\n            or an SDK results in an error.</p>\n         </note>"
             }
         },
         "com.amazonaws.sagemaker#CreateAutoMLJobV2Request": {
@@ -6631,7 +6631,7 @@
                 "AutoMLJobInputDataConfig": {
                     "target": "com.amazonaws.sagemaker#AutoMLJobInputDataConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of channel objects describing the input data and their location. Each channel\n         is a named input source. Similar to <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html#sagemaker-CreateAutoMLJob-request-InputDataConfig\">InputDataConfig</a> supported by <code>CreateAutoMLJob</code>. The supported\n         formats depend on the problem type:</p>\n         <ul>\n            <li>\n               <p>ImageClassification: S3Prefix, <code>ManifestFile</code>,\n                  <code>AugmentedManifestFile</code>\n               </p>\n            </li>\n            <li>\n               <p>TextClassification: S3Prefix</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>An array of channel objects describing the input data and their location. Each channel\n         is a named input source. Similar to <code>\n               <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html#sagemaker-CreateAutoMLJob-request-InputDataConfig\">InputDataConfig</a>\n            </code> supported by <code>CreateAutoMLJob</code>. The\n         supported formats depend on the problem type:</p>\n         <ul>\n            <li>\n               <p>ImageClassification: S3Prefix, <code>ManifestFile</code>,\n                  <code>AugmentedManifestFile</code>\n               </p>\n            </li>\n            <li>\n               <p>TextClassification: S3Prefix</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6671,7 +6671,7 @@
                 "AutoMLJobObjective": {
                     "target": "com.amazonaws.sagemaker#AutoMLJobObjective",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a metric to minimize or maximize as the objective of a job.\n       For , only <code>Accuracy</code> is supported.</p>"
+                        "smithy.api#documentation": "<p>Specifies a metric to minimize or maximize as the objective of a job. For <code>\n               <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html\">CreateAutoMLJobV2</a>\n            </code>, only <code>Accuracy</code> is supported.</p>"
                     }
                 },
                 "ModelDeployConfig": {
@@ -14187,7 +14187,7 @@
                 "BestCandidate": {
                     "target": "com.amazonaws.sagemaker#AutoMLCandidate",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the candidate produced by an AutoML training job V2, \n      including its status, steps, and other properties.</p>"
+                        "smithy.api#documentation": "<p>Information about the candidate produced by an AutoML training job V2, including its\n         status, steps, and other properties.</p>"
                     }
                 },
                 "AutoMLJobStatus": {
@@ -14219,7 +14219,7 @@
                 "DataSplitConfig": {
                     "target": "com.amazonaws.sagemaker#AutoMLDataSplitConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns the configuration settings of how the data are split into train and validation datasets.</p>"
+                        "smithy.api#documentation": "<p>Returns the configuration settings of how the data are split into train and validation\n         datasets.</p>"
                     }
                 },
                 "SecurityConfig": {
@@ -23942,7 +23942,7 @@
                 "MetricName": {
                     "target": "com.amazonaws.sagemaker#AutoMLMetricEnum",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the metric with the best result. For a description of the possible objective\n         metrics, see <a>AutoMLJobObjective$MetricName</a>.</p>",
+                        "smithy.api#documentation": "<p>The name of the metric with the best result. For a description of the possible objective\n         metrics, see <code>\n               <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobObjective.html\">AutoMLJobObjective$MetricName</a>\n            </code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -25624,7 +25624,7 @@
                 "Environment": {
                     "target": "com.amazonaws.sagemaker#HyperParameterTrainingJobEnvironmentMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>An environment variable that you can pass into the SageMaker <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html\">CreateTrainingJob</a> API. You can use an existing <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html#sagemaker-CreateTrainingJob-request-Environment\">environment variable from the training container</a> or use your own. See\n                <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics.html\">Define metrics\n                and variables</a> for more information.</p>\n         <note>\n            <p>The maximum number of items specified for <code>Map Entries</code> refers to the\n                maximum number of environment variables for each <code>TrainingJobDefinition</code>\n                and also the maximum for the hyperparameter tuning job itself. That is, the sum of\n                the number of environment variables for all the training job definitions can't\n                exceed the maximum number specified.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>An environment variable that you can pass into the SageMaker <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html\">CreateTrainingJob</a> API. You can use an existing <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html#sagemaker-CreateTrainingJob-request-Environment\">environment variable from the training container</a> or use your own. See\n                <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics-variables.html\">Define metrics\n                and variables</a> for more information.</p>\n         <note>\n            <p>The maximum number of items specified for <code>Map Entries</code> refers to the\n                maximum number of environment variables for each <code>TrainingJobDefinition</code>\n                and also the maximum for the hyperparameter tuning job itself. That is, the sum of\n                the number of environment variables for all the training job definitions can't\n                exceed the maximum number specified.</p>\n         </note>"
                     }
                 }
             },
@@ -26404,7 +26404,7 @@
                 "MaxResource": {
                     "target": "com.amazonaws.sagemaker#HyperbandStrategyMaxResource",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of resources (such as epochs) that can be used by a training job\n         launched by a hyperparameter tuning job. Once a job reaches the <code>MaxResource</code>\n         value, it is stopped. If a value for <code>MaxResource</code> is not provided, and\n            <code>Hyperband</code> is selected as the hyperparameter tuning strategy,\n            <code>HyperbandTrainingJ</code> attempts to infer <code>MaxResource</code> from the\n         following keys (if present) in <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html#sagemaker-Type-HyperParameterTrainingJobDefinition-StaticHyperParameters\">StaticsHyperParameters</a>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>epochs</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>numepochs</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>n-epochs</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>n_epochs</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>num_epochs</code>\n               </p>\n            </li>\n         </ul>\n         <p>If <code>HyperbandStrategyConfig</code> is unable to infer a value for\n            <code>MaxResource</code>, it generates a validation error. The maximum value is 20,000\n         epochs. All metrics that correspond to an objective metric are used to derive <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-early-stopping.html\">early stopping\n            decisions</a>. For <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/distributed-training.html\">distributive</a> training jobs,\n         ensure that duplicate metrics are not printed in the logs across the individual nodes in a\n         training job. If multiple nodes are publishing duplicate or incorrect metrics, training\n         jobs may make an incorrect stopping decision and stop the job prematurely. </p>"
+                        "smithy.api#documentation": "<p>The maximum number of resources (such as epochs) that can be used by a training job\n         launched by a hyperparameter tuning job. Once a job reaches the <code>MaxResource</code>\n         value, it is stopped. If a value for <code>MaxResource</code> is not provided, and\n            <code>Hyperband</code> is selected as the hyperparameter tuning strategy,\n            <code>HyperbandTrainingJ</code> attempts to infer <code>MaxResource</code> from the\n         following keys (if present) in <code>\n               <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html#sagemaker-Type-HyperParameterTrainingJobDefinition-StaticHyperParameters\">StaticsHyperParameters</a>\n            </code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>epochs</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>numepochs</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>n-epochs</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>n_epochs</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>num_epochs</code>\n               </p>\n            </li>\n         </ul>\n         <p>If <code>HyperbandStrategyConfig</code> is unable to infer a value for\n            <code>MaxResource</code>, it generates a validation error. The maximum value is 20,000\n         epochs. All metrics that correspond to an objective metric are used to derive <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-early-stopping.html\">early stopping\n            decisions</a>. For <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/distributed-training.html\">distributive</a> training jobs,\n         ensure that duplicate metrics are not printed in the logs across the individual nodes in a\n         training job. If multiple nodes are publishing duplicate or incorrect metrics, training\n         jobs may make an incorrect stopping decision and stop the job prematurely. </p>"
                     }
                 }
             },
@@ -26550,7 +26550,7 @@
                 "CompletionCriteria": {
                     "target": "com.amazonaws.sagemaker#AutoMLJobCompletionCriteria",
                     "traits": {
-                        "smithy.api#documentation": "<p>How long a job is allowed to run, or how many candidates a job is allowed to generate.</p>"
+                        "smithy.api#documentation": "<p>How long a job is allowed to run, or how many candidates a job is allowed to\n         generate.</p>"
                     }
                 }
             },
@@ -36542,13 +36542,13 @@
                 "Regex": {
                     "target": "com.amazonaws.sagemaker#MetricRegex",
                     "traits": {
-                        "smithy.api#documentation": "<p>A regular expression that searches the output of a training job and gets the value of\n            the metric. For more information about using regular expressions to define metrics, see\n                <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics.html\">Defining\n                Objective Metrics</a>.</p>",
+                        "smithy.api#documentation": "<p>A regular expression that searches the output of a training job and gets the value of\n            the metric. For more information about using regular expressions to define metrics, see\n                <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics-variables.html\">Defining\n                metrics and environment variables</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies a metric that the training algorithm\n            writes\n            to <code>stderr</code> or <code>stdout</code>. SageMakerhyperparameter\n            tuning captures\n            all\n            defined metrics.\n            You\n            specify one metric that a hyperparameter tuning job uses as its\n            objective metric to choose the best training job.</p>"
+                "smithy.api#documentation": "<p>Specifies a metric that the training algorithm writes to <code>stderr</code> or\n                <code>stdout</code>. You can view these logs to understand how your training job\n            performs and check for any errors encountered during training. SageMaker hyperparameter\n            tuning captures all defined metrics. Specify one of the defined metrics to use as an\n            objective metric using the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html#sagemaker-Type-HyperParameterTrainingJobDefinition-TuningObjective\">TuningObjective</a> parameter in the\n                <code>HyperParameterTrainingJobDefinition</code> API to evaluate job performance\n            during hyperparameter tuning.</p>"
             }
         },
         "com.amazonaws.sagemaker#MetricDefinitionList": {
@@ -48617,8 +48617,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "af-south-1",
                                 "UseDualStack": false,
+                                "Region": "af-south-1",
                                 "UseFIPS": false
                             }
                         },
@@ -48630,8 +48630,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-east-1",
                                 "UseDualStack": false,
+                                "Region": "ap-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -48643,8 +48643,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-1",
                                 "UseDualStack": false,
+                                "Region": "ap-northeast-1",
                                 "UseFIPS": false
                             }
                         },
@@ -48656,8 +48656,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-2",
                                 "UseDualStack": false,
+                                "Region": "ap-northeast-2",
                                 "UseFIPS": false
                             }
                         },
@@ -48669,8 +48669,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-3",
                                 "UseDualStack": false,
+                                "Region": "ap-northeast-3",
                                 "UseFIPS": false
                             }
                         },
@@ -48682,8 +48682,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-south-1",
                                 "UseDualStack": false,
+                                "Region": "ap-south-1",
                                 "UseFIPS": false
                             }
                         },
@@ -48695,8 +48695,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-1",
                                 "UseDualStack": false,
+                                "Region": "ap-southeast-1",
                                 "UseFIPS": false
                             }
                         },
@@ -48708,8 +48708,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-2",
                                 "UseDualStack": false,
+                                "Region": "ap-southeast-2",
                                 "UseFIPS": false
                             }
                         },
@@ -48721,8 +48721,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "ca-central-1",
                                 "UseDualStack": false,
+                                "Region": "ca-central-1",
                                 "UseFIPS": false
                             }
                         },
@@ -48734,8 +48734,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-central-1",
                                 "UseDualStack": false,
+                                "Region": "eu-central-1",
                                 "UseFIPS": false
                             }
                         },
@@ -48747,8 +48747,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-north-1",
                                 "UseDualStack": false,
+                                "Region": "eu-north-1",
                                 "UseFIPS": false
                             }
                         },
@@ -48760,8 +48760,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-south-1",
                                 "UseDualStack": false,
+                                "Region": "eu-south-1",
                                 "UseFIPS": false
                             }
                         },
@@ -48773,8 +48773,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-1",
                                 "UseDualStack": false,
+                                "Region": "eu-west-1",
                                 "UseFIPS": false
                             }
                         },
@@ -48786,8 +48786,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-2",
                                 "UseDualStack": false,
+                                "Region": "eu-west-2",
                                 "UseFIPS": false
                             }
                         },
@@ -48799,8 +48799,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-3",
                                 "UseDualStack": false,
+                                "Region": "eu-west-3",
                                 "UseFIPS": false
                             }
                         },
@@ -48812,8 +48812,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "me-south-1",
                                 "UseDualStack": false,
+                                "Region": "me-south-1",
                                 "UseFIPS": false
                             }
                         },
@@ -48825,8 +48825,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "sa-east-1",
                                 "UseDualStack": false,
+                                "Region": "sa-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -48838,8 +48838,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -48851,8 +48851,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": true
                             }
                         },
@@ -48864,8 +48864,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-2",
                                 "UseDualStack": false,
+                                "Region": "us-east-2",
                                 "UseFIPS": false
                             }
                         },
@@ -48877,8 +48877,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-2",
                                 "UseDualStack": false,
+                                "Region": "us-east-2",
                                 "UseFIPS": true
                             }
                         },
@@ -48890,8 +48890,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-1",
                                 "UseDualStack": false,
+                                "Region": "us-west-1",
                                 "UseFIPS": false
                             }
                         },
@@ -48903,8 +48903,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-1",
                                 "UseDualStack": false,
+                                "Region": "us-west-1",
                                 "UseFIPS": true
                             }
                         },
@@ -48916,8 +48916,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-2",
                                 "UseDualStack": false,
+                                "Region": "us-west-2",
                                 "UseFIPS": false
                             }
                         },
@@ -48929,8 +48929,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-2",
                                 "UseDualStack": false,
+                                "Region": "us-west-2",
                                 "UseFIPS": true
                             }
                         },
@@ -48942,8 +48942,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": true
                             }
                         },
@@ -48955,8 +48955,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -48968,8 +48968,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": false,
+                                "Region": "cn-north-1",
                                 "UseFIPS": false
                             }
                         },
@@ -48981,8 +48981,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-northwest-1",
                                 "UseDualStack": false,
+                                "Region": "cn-northwest-1",
                                 "UseFIPS": false
                             }
                         },
@@ -48994,8 +48994,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": true,
+                                "Region": "cn-north-1",
                                 "UseFIPS": true
                             }
                         },
@@ -49007,8 +49007,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": false,
+                                "Region": "cn-north-1",
                                 "UseFIPS": true
                             }
                         },
@@ -49020,8 +49020,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": true,
+                                "Region": "cn-north-1",
                                 "UseFIPS": false
                             }
                         },
@@ -49033,8 +49033,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-west-1",
                                 "UseDualStack": false,
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": false
                             }
                         },
@@ -49046,8 +49046,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-west-1",
                                 "UseDualStack": false,
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": true
                             }
                         },
@@ -49059,8 +49059,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true
                             }
                         },
@@ -49072,8 +49072,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true
                             }
                         },
@@ -49085,8 +49085,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -49098,8 +49098,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -49111,8 +49111,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -49122,8 +49122,8 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true
                             }
                         },
@@ -49135,8 +49135,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true
                             }
                         },
@@ -49146,8 +49146,8 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -49157,8 +49157,8 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true
                             }
                         },
@@ -49170,8 +49170,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true
                             }
                         },
@@ -49181,8 +49181,8 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -49194,8 +49194,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -49207,8 +49207,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
@@ -49232,8 +49232,8 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
                                 "Endpoint": "https://example.com"
                             }
@@ -49244,8 +49244,8 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
@@ -52398,7 +52398,7 @@
                 "CompletionCriteria": {
                     "target": "com.amazonaws.sagemaker#AutoMLJobCompletionCriteria",
                     "traits": {
-                        "smithy.api#documentation": "<p>How long a job is allowed to run, or how many candidates a job is allowed to generate.</p>"
+                        "smithy.api#documentation": "<p>How long a job is allowed to run, or how many candidates a job is allowed to\n         generate.</p>"
                     }
                 },
                 "ContentColumn": {

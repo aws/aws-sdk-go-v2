@@ -154,6 +154,15 @@
                 }
             }
         },
+        "com.amazonaws.iotwireless#ApId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.iotwireless#AppEui": {
             "type": "string",
             "traits": {
@@ -215,6 +224,17 @@
                         "smithy.api#enumValue": "SemtechGeolocation"
                     }
                 }
+            }
+        },
+        "com.amazonaws.iotwireless#ApplicationServerPublicKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4096
+                },
+                "smithy.api#pattern": "^[a-fA-F0-9]{64}$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.iotwireless#Applications": {
@@ -1454,6 +1474,12 @@
                         "smithy.api#documentation": "<p>Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. </p>",
                         "smithy.api#idempotencyToken": {}
                     }
+                },
+                "Sidewalk": {
+                    "target": "com.amazonaws.iotwireless#SidewalkCreateDeviceProfile",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Sidewalk-related information for creating the Sidewalk device profile.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1934,6 +1960,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>FPort values for the GNSS, stream, and ClockSync functions of the positioning information.</p>"
                     }
+                },
+                "Sidewalk": {
+                    "target": "com.amazonaws.iotwireless#SidewalkCreateWirelessDevice",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The device configuration information to use to create the Sidewalk device.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2240,6 +2272,66 @@
         },
         "com.amazonaws.iotwireless#CreationDate": {
             "type": "timestamp"
+        },
+        "com.amazonaws.iotwireless#CreationTime": {
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#timestampFormat": "date-time"
+            }
+        },
+        "com.amazonaws.iotwireless#DakCertificateId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#DakCertificateMetadata": {
+            "type": "structure",
+            "members": {
+                "CertificateId": {
+                    "target": "com.amazonaws.iotwireless#DakCertificateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The certificate ID for the DAK.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxAllowedSignature": {
+                    "target": "com.amazonaws.iotwireless#MaxAllowedSignature",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of signatures that the DAK can sign. A value of <code>-1</code> indicates\n         that there's no device limit.</p>"
+                    }
+                },
+                "FactorySupport": {
+                    "target": "com.amazonaws.iotwireless#FactorySupport",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether factory support has been enabled.</p>"
+                    }
+                },
+                "ApId": {
+                    "target": "com.amazonaws.iotwireless#ApId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The advertised product ID (APID) that's used for pre-production and production applications.</p>"
+                    }
+                },
+                "DeviceTypeId": {
+                    "target": "com.amazonaws.iotwireless#DeviceTypeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The device type ID that's used for prototyping applications.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The device attestation key (DAK) information.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#DakCertificateMetadataList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotwireless#DakCertificateMetadata"
+            }
         },
         "com.amazonaws.iotwireless#DeleteDestination": {
             "type": "operation",
@@ -2701,6 +2793,66 @@
                 }
             }
         },
+        "com.amazonaws.iotwireless#DeleteWirelessDeviceImportTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#DeleteWirelessDeviceImportTaskRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#DeleteWirelessDeviceImportTaskResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete an import task.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/wireless_device_import_task/{Id}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#DeleteWirelessDeviceImportTaskRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.iotwireless#ImportTaskId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the import task to be deleted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iotwireless#DeleteWirelessDeviceImportTaskResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.iotwireless#DeleteWirelessDeviceRequest": {
             "type": "structure",
             "members": {
@@ -2895,6 +3047,67 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.iotwireless#DeregisterWirelessDevice": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#DeregisterWirelessDeviceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#DeregisterWirelessDeviceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deregister a wireless device from AWS IoT Wireless.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/wireless-devices/{Identifier}/deregister",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#DeregisterWirelessDeviceRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.iotwireless#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the wireless device to deregister from AWS IoT Wireless.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "WirelessDeviceType": {
+                    "target": "com.amazonaws.iotwireless#WirelessDeviceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of wireless device to deregister from AWS IoT Wireless, which can be <code>LoRaWAN</code> \n         or <code>Sidewalk</code>.</p>",
+                        "smithy.api#httpQuery": "WirelessDeviceType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iotwireless#DeregisterWirelessDeviceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.iotwireless#Description": {
             "type": "string",
             "traits": {
@@ -2998,6 +3211,24 @@
                 "smithy.api#documentation": "<p>List of device certificate chain.</p>"
             }
         },
+        "com.amazonaws.iotwireless#DeviceCreationFile": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#DeviceCreationFileList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotwireless#DeviceCreationFile"
+            }
+        },
+        "com.amazonaws.iotwireless#DeviceName": {
+            "type": "string"
+        },
         "com.amazonaws.iotwireless#DeviceProfile": {
             "type": "structure",
             "members": {
@@ -3048,6 +3279,23 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 256
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#DeviceProfileType": {
+            "type": "enum",
+            "members": {
+                "Sidewalk": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Sidewalk"
+                    }
+                },
+                "LoRaWAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LoRaWAN"
+                    }
                 }
             }
         },
@@ -3115,6 +3363,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Device state defines the device status of sidewalk device.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#DeviceTypeId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                }
             }
         },
         "com.amazonaws.iotwireless#DisassociateAwsAccountFromPartnerAccount": {
@@ -4009,6 +4266,9 @@
                 }
             }
         },
+        "com.amazonaws.iotwireless#FactorySupport": {
+            "type": "boolean"
+        },
         "com.amazonaws.iotwireless#Fingerprint": {
             "type": "string",
             "traits": {
@@ -4450,6 +4710,12 @@
                     "target": "com.amazonaws.iotwireless#LoRaWANDeviceProfile",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the device profile.</p>"
+                    }
+                },
+                "Sidewalk": {
+                    "target": "com.amazonaws.iotwireless#SidewalkGetDeviceProfile",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the Sidewalk parameters in the device profile.</p>"
                     }
                 }
             },
@@ -5696,6 +5962,133 @@
                 }
             }
         },
+        "com.amazonaws.iotwireless#GetWirelessDeviceImportTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#GetWirelessDeviceImportTaskRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#GetWirelessDeviceImportTaskResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get information about an import task and count of device onboarding summary information for the\n         import task.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/wireless_device_import_task/{Id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#GetWirelessDeviceImportTaskRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.iotwireless#ImportTaskId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the import task for which information is requested.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iotwireless#GetWirelessDeviceImportTaskResponse": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.iotwireless#ImportTaskId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the import task for which information is retrieved.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.iotwireless#ImportTaskArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) of the import task.</p>"
+                    }
+                },
+                "DestinationName": {
+                    "target": "com.amazonaws.iotwireless#DestinationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the destination that's assigned to the wireless devices in the import task.</p>"
+                    }
+                },
+                "Sidewalk": {
+                    "target": "com.amazonaws.iotwireless#SidewalkGetStartImportInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Sidewalk-related information about an import task.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.iotwireless#CreationTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the import task was created.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.iotwireless#ImportTaskStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The import task status.</p>"
+                    }
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.iotwireless#StatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the provided status information, such as a validation error that causes the import\n         task to fail.</p>"
+                    }
+                },
+                "InitializedImportedDeviceCount": {
+                    "target": "com.amazonaws.iotwireless#ImportedWirelessDeviceCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of devices in the import task that are waiting for the control log to start processing.</p>"
+                    }
+                },
+                "PendingImportedDeviceCount": {
+                    "target": "com.amazonaws.iotwireless#ImportedWirelessDeviceCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of devices in the import task that are waiting in the import task queue to be onboarded.</p>"
+                    }
+                },
+                "OnboardedImportedDeviceCount": {
+                    "target": "com.amazonaws.iotwireless#ImportedWirelessDeviceCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of devices in the import task that have been onboarded to the import task.</p>"
+                    }
+                },
+                "FailedImportedDeviceCount": {
+                    "target": "com.amazonaws.iotwireless#ImportedWirelessDeviceCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of devices in the import task that failed to onboard to the import task.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.iotwireless#GetWirelessDeviceRequest": {
             "type": "structure",
             "members": {
@@ -6658,6 +7051,120 @@
                 }
             }
         },
+        "com.amazonaws.iotwireless#ImportTaskArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#ImportTaskId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#ImportTaskStatus": {
+            "type": "enum",
+            "members": {
+                "INITIALIZING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INITIALIZING"
+                    }
+                },
+                "INITIALIZED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INITIALIZED"
+                    }
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETE"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#ImportedSidewalkDevice": {
+            "type": "structure",
+            "members": {
+                "SidewalkManufacturingSn": {
+                    "target": "com.amazonaws.iotwireless#SidewalkManufacturingSn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Sidewalk manufacturing serial number (SMSN) of the Sidewalk device.</p>"
+                    }
+                },
+                "OnboardingStatus": {
+                    "target": "com.amazonaws.iotwireless#OnboardStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The onboarding status of the Sidewalk device in the import task.</p>"
+                    }
+                },
+                "OnboardingStatusReason": {
+                    "target": "com.amazonaws.iotwireless#OnboardStatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the onboarding status information for the Sidewalk device.</p>"
+                    }
+                },
+                "LastUpdateTime": {
+                    "target": "com.amazonaws.iotwireless#LastUpdateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the status information was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a Sidewalk device that has been added to an import task.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#ImportedWirelessDevice": {
+            "type": "structure",
+            "members": {
+                "Sidewalk": {
+                    "target": "com.amazonaws.iotwireless#ImportedSidewalkDevice",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Sidewalk-related information about a device that has been added to an import task.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a wireless device that has been added to an import task.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#ImportedWirelessDeviceCount": {
+            "type": "long"
+        },
+        "com.amazonaws.iotwireless#ImportedWirelessDeviceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotwireless#ImportedWirelessDevice"
+            }
+        },
         "com.amazonaws.iotwireless#Integer": {
             "type": "integer"
         },
@@ -6771,6 +7278,12 @@
                     "min": 1,
                     "max": 65535
                 }
+            }
+        },
+        "com.amazonaws.iotwireless#LastUpdateTime": {
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#timestampFormat": "date-time"
             }
         },
         "com.amazonaws.iotwireless#ListDestinations": {
@@ -6905,6 +7418,13 @@
                         "smithy.api#documentation": "<p>The maximum number of results to return in this operation.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
+                },
+                "DeviceProfileType": {
+                    "target": "com.amazonaws.iotwireless#DeviceProfileType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter to list only device profiles that use this type, which can be <code>LoRaWAN</code>\n         or <code>Sidewalk</code>.</p>",
+                        "smithy.api#httpQuery": "deviceProfileType"
+                    }
                 }
             },
             "traits": {
@@ -6924,6 +7444,106 @@
                     "target": "com.amazonaws.iotwireless#DeviceProfileList",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of device profiles.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.iotwireless#ListDevicesForWirelessDeviceImportTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#ListDevicesForWirelessDeviceImportTaskRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#ListDevicesForWirelessDeviceImportTaskResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List the Sidewalk devices in an import task and their onboarding status.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/wireless_device_import_task",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#ListDevicesForWirelessDeviceImportTaskRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.iotwireless#ImportTaskId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the import task for which wireless devices are listed.</p>",
+                        "smithy.api#httpQuery": "id",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.iotwireless#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.iotwireless#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise\n         <code>null</code> to receive the first set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.iotwireless#OnboardStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the devices in the import task.</p>",
+                        "smithy.api#httpQuery": "status"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iotwireless#ListDevicesForWirelessDeviceImportTaskResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.iotwireless#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to get the next set of results, or <code>null</code> if there are no additional \n         results.</p>"
+                    }
+                },
+                "DestinationName": {
+                    "target": "com.amazonaws.iotwireless#DestinationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Sidewalk destination that describes the IoT rule to route messages received from\n         devices in an import task that are onboarded to AWS IoT Wireless.</p>"
+                    }
+                },
+                "ImportedWirelessDeviceList": {
+                    "target": "com.amazonaws.iotwireless#ImportedWirelessDeviceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of wireless devices in an import task and their onboarding status.</p>"
                     }
                 }
             },
@@ -7726,6 +8346,85 @@
                     "target": "com.amazonaws.iotwireless#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags to attach to the specified resource. Tags are metadata that you can use to manage a resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.iotwireless#ListWirelessDeviceImportTasks": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#ListWirelessDeviceImportTasksRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#ListWirelessDeviceImportTasksResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List wireless devices that have been added to an import task.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/wireless_device_import_tasks",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#ListWirelessDeviceImportTasksRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.iotwireless#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.iotwireless#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; otherwise\n         <code>null</code> to receive the first set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iotwireless#ListWirelessDeviceImportTasksResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.iotwireless#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to get the next set of results, or <code>null</code> if there are no additional \n         results.</p>"
+                    }
+                },
+                "WirelessDeviceImportTaskList": {
+                    "target": "com.amazonaws.iotwireless#WirelessDeviceImportTaskList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of import tasks and summary information of onboarding status of devices in each import task.</p>"
                     }
                 }
             },
@@ -9009,6 +9708,9 @@
                 }
             }
         },
+        "com.amazonaws.iotwireless#MaxAllowedSignature": {
+            "type": "integer"
+        },
         "com.amazonaws.iotwireless#MaxDutyCycle": {
             "type": "integer",
             "traits": {
@@ -9376,6 +10078,38 @@
             "traits": {
                 "smithy.api#pattern": "^[a-fA-F0-9]{32}$"
             }
+        },
+        "com.amazonaws.iotwireless#OnboardStatus": {
+            "type": "enum",
+            "members": {
+                "INITIALIZED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INITIALIZED"
+                    }
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "ONBOARDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ONBOARDED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#OnboardStatusReason": {
+            "type": "string"
         },
         "com.amazonaws.iotwireless#OtaaV1_0_x": {
             "type": "structure",
@@ -9786,6 +10520,12 @@
                 }
             }
         },
+        "com.amazonaws.iotwireless#PrivateKeysList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotwireless#CertificateList"
+            }
+        },
         "com.amazonaws.iotwireless#ProximityEventConfiguration": {
             "type": "structure",
             "members": {
@@ -9975,6 +10715,9 @@
             "traits": {
                 "smithy.api#output": {}
             }
+        },
+        "com.amazonaws.iotwireless#QualificationStatus": {
+            "type": "boolean"
         },
         "com.amazonaws.iotwireless#QueryString": {
             "type": "string",
@@ -10237,6 +10980,15 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 64
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#Role": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
                 }
             }
         },
@@ -10692,6 +11444,27 @@
                 "target": "com.amazonaws.iotwireless#SidewalkAccountInfoWithFingerprint"
             }
         },
+        "com.amazonaws.iotwireless#SidewalkCreateDeviceProfile": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>Sidewalk object for creating a device profile.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#SidewalkCreateWirelessDevice": {
+            "type": "structure",
+            "members": {
+                "DeviceProfileId": {
+                    "target": "com.amazonaws.iotwireless#DeviceProfileId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Sidewalk device profile.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Sidewalk object for creating a wireless device.</p>"
+            }
+        },
         "com.amazonaws.iotwireless#SidewalkDevice": {
             "type": "structure",
             "members": {
@@ -10714,6 +11487,30 @@
                     "target": "com.amazonaws.iotwireless#DeviceCertificateList",
                     "traits": {
                         "smithy.api#documentation": "<p>The sidewalk device certificates for Ed25519 and P256r1.</p>"
+                    }
+                },
+                "PrivateKeys": {
+                    "target": "com.amazonaws.iotwireless#PrivateKeysList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Sidewalk device private keys that will be used for onboarding the device.</p>"
+                    }
+                },
+                "DeviceProfileId": {
+                    "target": "com.amazonaws.iotwireless#DeviceProfileId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Sidewalk device profile.</p>"
+                    }
+                },
+                "CertificateId": {
+                    "target": "com.amazonaws.iotwireless#DakCertificateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Sidewalk device profile.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.iotwireless#WirelessDeviceSidewalkStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Sidewalk device status, such as provisioned or registered.</p>"
                     }
                 }
             },
@@ -10767,6 +11564,52 @@
                 "smithy.api#documentation": "<p>\n            <code>SidewalkEventNotificationConfigurations</code>  object, which is the event configuration\n            object for Sidewalk-related event topics.</p>"
             }
         },
+        "com.amazonaws.iotwireless#SidewalkGetDeviceProfile": {
+            "type": "structure",
+            "members": {
+                "ApplicationServerPublicKey": {
+                    "target": "com.amazonaws.iotwireless#ApplicationServerPublicKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Sidewalk application server public key.</p>"
+                    }
+                },
+                "QualificationStatus": {
+                    "target": "com.amazonaws.iotwireless#QualificationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Gets information about the certification status of a Sidewalk device profile.</p>"
+                    }
+                },
+                "DakCertificateMetadata": {
+                    "target": "com.amazonaws.iotwireless#DakCertificateMetadataList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DAK certificate information of the Sidewalk device profile.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information about a Sidewalk device profile.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#SidewalkGetStartImportInfo": {
+            "type": "structure",
+            "members": {
+                "DeviceCreationFileList": {
+                    "target": "com.amazonaws.iotwireless#DeviceCreationFileList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of Sidewalk devices that are added to the import task.</p>"
+                    }
+                },
+                "Role": {
+                    "target": "com.amazonaws.iotwireless#Role",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM role that allows AWS IoT Wireless to access the CSV file in the S3 bucket.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Sidewalk-related information for devices in an import task that are being onboarded.</p>"
+            }
+        },
         "com.amazonaws.iotwireless#SidewalkId": {
             "type": "string",
             "traits": {
@@ -10802,6 +11645,18 @@
                     "target": "com.amazonaws.iotwireless#DeviceCertificateList",
                     "traits": {
                         "smithy.api#documentation": "<p>The sidewalk device certificates for Ed25519 and P256r1.</p>"
+                    }
+                },
+                "DeviceProfileId": {
+                    "target": "com.amazonaws.iotwireless#DeviceProfileId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sidewalk object used by list functions.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.iotwireless#WirelessDeviceSidewalkStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the Sidewalk devices, such as provisioned or registered.</p>"
                     }
                 }
             },
@@ -10855,6 +11710,40 @@
                 "smithy.api#documentation": "<p>Information about a Sidewalk router.</p>"
             }
         },
+        "com.amazonaws.iotwireless#SidewalkSingleStartImportInfo": {
+            "type": "structure",
+            "members": {
+                "SidewalkManufacturingSn": {
+                    "target": "com.amazonaws.iotwireless#SidewalkManufacturingSn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Sidewalk manufacturing serial number (SMSN) of the device added to the import task.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an import task created for an individual Sidewalk device.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#SidewalkStartImportInfo": {
+            "type": "structure",
+            "members": {
+                "DeviceCreationFile": {
+                    "target": "com.amazonaws.iotwireless#DeviceCreationFile",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CSV file contained in an S3 bucket that's used for adding devices to an import task.</p>"
+                    }
+                },
+                "Role": {
+                    "target": "com.amazonaws.iotwireless#Role",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM role that allows AWS IoT Wireless to access the CSV file in the S3 bucket.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an import task created for bulk provisioning.</p>"
+            }
+        },
         "com.amazonaws.iotwireless#SidewalkUpdateAccount": {
             "type": "structure",
             "members": {
@@ -10867,6 +11756,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Sidewalk update.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#SidewalkUpdateImportInfo": {
+            "type": "structure",
+            "members": {
+                "DeviceCreationFile": {
+                    "target": "com.amazonaws.iotwireless#DeviceCreationFile",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CSV file contained in an S3 bucket that's used for appending devices to an existing import task.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Sidewalk object information for updating an import task.</p>"
             }
         },
         "com.amazonaws.iotwireless#SigningAlg": {
@@ -11140,11 +12043,193 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.iotwireless#StartSingleWirelessDeviceImportTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#StartSingleWirelessDeviceImportTaskRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#StartSingleWirelessDeviceImportTaskResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Start import task for a single wireless device.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/wireless_single_device_import_task",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#StartSingleWirelessDeviceImportTaskRequest": {
+            "type": "structure",
+            "members": {
+                "DestinationName": {
+                    "target": "com.amazonaws.iotwireless#DestinationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Sidewalk destination that describes the IoT rule to route messages from the device in the import \n         task that will be onboarded to AWS IoT Wireless.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.iotwireless#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "DeviceName": {
+                    "target": "com.amazonaws.iotwireless#DeviceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the wireless device for which an import task is being started.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.iotwireless#TagList"
+                },
+                "Sidewalk": {
+                    "target": "com.amazonaws.iotwireless#SidewalkSingleStartImportInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Sidewalk-related parameters for importing a single wireless device.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iotwireless#StartSingleWirelessDeviceImportTaskResponse": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.iotwireless#ImportTaskId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The import task ID.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.iotwireless#ImportTaskArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) of the import task.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.iotwireless#StartTime": {
             "type": "timestamp",
             "traits": {
                 "smithy.api#documentation": "<p>Start time of a FUOTA task.</p>",
                 "smithy.api#timestampFormat": "date-time"
+            }
+        },
+        "com.amazonaws.iotwireless#StartWirelessDeviceImportTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#StartWirelessDeviceImportTaskRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#StartWirelessDeviceImportTaskResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Start import task for provisioning Sidewalk devices in bulk using an S3 CSV file.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/wireless_device_import_task",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#StartWirelessDeviceImportTaskRequest": {
+            "type": "structure",
+            "members": {
+                "DestinationName": {
+                    "target": "com.amazonaws.iotwireless#DestinationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Sidewalk destination that describes the IoT rule to route messages from the devices in the import\n         task that are onboarded to AWS IoT Wireless.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.iotwireless#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.iotwireless#TagList"
+                },
+                "Sidewalk": {
+                    "target": "com.amazonaws.iotwireless#SidewalkStartImportInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Sidewalk-related parameters for importing wireless devices that need to be provisioned in bulk.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iotwireless#StartWirelessDeviceImportTaskResponse": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.iotwireless#ImportTaskId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The import task ID.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.iotwireless#ImportTaskArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) of the import task.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.iotwireless#Station": {
@@ -11155,6 +12240,9 @@
                     "max": 4096
                 }
             }
+        },
+        "com.amazonaws.iotwireless#StatusReason": {
+            "type": "string"
         },
         "com.amazonaws.iotwireless#SubBand": {
             "type": "integer",
@@ -11205,6 +12293,60 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "AS923-1"
+                    }
+                },
+                "AS923_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AS923-2"
+                    }
+                },
+                "AS923_3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AS923-3"
+                    }
+                },
+                "AS923_4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AS923-4"
+                    }
+                },
+                "EU433": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EU433"
+                    }
+                },
+                "CN470": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CN470"
+                    }
+                },
+                "CN779": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CN779"
+                    }
+                },
+                "RU864": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RU864"
+                    }
+                },
+                "KR920": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KR920"
+                    }
+                },
+                "IN865": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN865"
                     }
                 }
             },
@@ -12676,6 +13818,73 @@
                 }
             }
         },
+        "com.amazonaws.iotwireless#UpdateWirelessDeviceImportTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#UpdateWirelessDeviceImportTaskRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#UpdateWirelessDeviceImportTaskResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update an import task to add more devices to the task.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/wireless_device_import_task/{Id}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#UpdateWirelessDeviceImportTaskRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.iotwireless#ImportTaskId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the import task to be updated.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Sidewalk": {
+                    "target": "com.amazonaws.iotwireless#SidewalkUpdateImportInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Sidewalk-related parameters of the import task to be updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iotwireless#UpdateWirelessDeviceImportTaskResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.iotwireless#UpdateWirelessDeviceRequest": {
             "type": "structure",
             "members": {
@@ -13051,7 +14260,7 @@
                 "Rss": {
                     "target": "com.amazonaws.iotwireless#RSS",
                     "traits": {
-                        "smithy.api#documentation": "<p>Recived signal strength of the WLAN measurement data.</p>",
+                        "smithy.api#documentation": "<p>Received signal strength (dBm) of the WLAN measurement data.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -13195,6 +14404,86 @@
                 }
             }
         },
+        "com.amazonaws.iotwireless#WirelessDeviceImportTask": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.iotwireless#ImportTaskId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the wireless device import task.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.iotwireless#ImportTaskArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) of the wireless device import task.</p>"
+                    }
+                },
+                "DestinationName": {
+                    "target": "com.amazonaws.iotwireless#DestinationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Sidewalk destination that that describes the IoT rule to route messages from the device in \n         the import task that will be onboarded to AWS IoT Wireless</p>"
+                    }
+                },
+                "Sidewalk": {
+                    "target": "com.amazonaws.iotwireless#SidewalkGetStartImportInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Sidewalk-related information of the wireless device import task.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.iotwireless#CreationTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the import task was created.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.iotwireless#ImportTaskStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status information of the wireless device import task.</p>"
+                    }
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.iotwireless#StatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason that provides additional information about the import task status.</p>"
+                    }
+                },
+                "InitializedImportedDeviceCount": {
+                    "target": "com.amazonaws.iotwireless#ImportedWirelessDeviceCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summary information of count of wireless devices that are waiting for the control log to be \n         added to an import task.</p>"
+                    }
+                },
+                "PendingImportedDeviceCount": {
+                    "target": "com.amazonaws.iotwireless#ImportedWirelessDeviceCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summary information of count of wireless devices in an import task that are waiting in the queue \n         to be onboarded.</p>"
+                    }
+                },
+                "OnboardedImportedDeviceCount": {
+                    "target": "com.amazonaws.iotwireless#ImportedWirelessDeviceCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summary information of count of wireless devices in an import task that have been onboarded to the\n         import task.</p>"
+                    }
+                },
+                "FailedImportedDeviceCount": {
+                    "target": "com.amazonaws.iotwireless#ImportedWirelessDeviceCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summary information of count of wireless devices in an import task that failed to onboarded to the\n         import task.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an import task for wireless devices.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#WirelessDeviceImportTaskList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotwireless#WirelessDeviceImportTask"
+            }
+        },
         "com.amazonaws.iotwireless#WirelessDeviceList": {
             "type": "list",
             "member": {
@@ -13246,6 +14535,35 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 256
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#WirelessDeviceSidewalkStatus": {
+            "type": "enum",
+            "members": {
+                "PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROVISIONED"
+                    }
+                },
+                "REGISTERED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REGISTERED"
+                    }
+                },
+                "ACTIVATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVATED"
+                    }
+                },
+                "UNKNOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNKNOWN"
+                    }
                 }
             }
         },
@@ -13735,6 +15053,9 @@
                     "target": "com.amazonaws.iotwireless#DeleteWirelessDevice"
                 },
                 {
+                    "target": "com.amazonaws.iotwireless#DeleteWirelessDeviceImportTask"
+                },
+                {
                     "target": "com.amazonaws.iotwireless#DeleteWirelessGateway"
                 },
                 {
@@ -13742,6 +15063,9 @@
                 },
                 {
                     "target": "com.amazonaws.iotwireless#DeleteWirelessGatewayTaskDefinition"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#DeregisterWirelessDevice"
                 },
                 {
                     "target": "com.amazonaws.iotwireless#DisassociateAwsAccountFromPartnerAccount"
@@ -13819,6 +15143,9 @@
                     "target": "com.amazonaws.iotwireless#GetWirelessDevice"
                 },
                 {
+                    "target": "com.amazonaws.iotwireless#GetWirelessDeviceImportTask"
+                },
+                {
                     "target": "com.amazonaws.iotwireless#GetWirelessDeviceStatistics"
                 },
                 {
@@ -13844,6 +15171,9 @@
                 },
                 {
                     "target": "com.amazonaws.iotwireless#ListDeviceProfiles"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ListDevicesForWirelessDeviceImportTask"
                 },
                 {
                     "target": "com.amazonaws.iotwireless#ListEventConfigurations"
@@ -13874,6 +15204,9 @@
                 },
                 {
                     "target": "com.amazonaws.iotwireless#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ListWirelessDeviceImportTasks"
                 },
                 {
                     "target": "com.amazonaws.iotwireless#ListWirelessDevices"
@@ -13913,6 +15246,12 @@
                 },
                 {
                     "target": "com.amazonaws.iotwireless#StartMulticastGroupSession"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#StartSingleWirelessDeviceImportTask"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#StartWirelessDeviceImportTask"
                 },
                 {
                     "target": "com.amazonaws.iotwireless#TagResource"
@@ -13955,6 +15294,9 @@
                 },
                 {
                     "target": "com.amazonaws.iotwireless#UpdateWirelessDevice"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#UpdateWirelessDeviceImportTask"
                 },
                 {
                     "target": "com.amazonaws.iotwireless#UpdateWirelessGateway"
@@ -14301,101 +15643,6 @@
                                                     "type": "tree",
                                                     "rules": [
                                                         {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "ap-northeast-1"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://api.iotwireless.ap-northeast-1.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "ap-southeast-2"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://api.iotwireless.ap-southeast-2.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "eu-west-1"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://api.iotwireless.eu-west-1.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "us-east-1"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://api.iotwireless.us-east-1.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "us-west-2"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://api.iotwireless.us-west-2.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
                                                             "conditions": [],
                                                             "endpoint": {
                                                                 "url": "https://api.iotwireless.{Region}.{PartitionResult#dnsSuffix}",
@@ -14429,9 +15676,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -14442,9 +15689,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -14455,9 +15702,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -14468,9 +15715,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -14481,9 +15728,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -14494,9 +15741,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -14507,9 +15754,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -14520,9 +15767,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -14533,9 +15780,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -14546,9 +15793,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -14559,9 +15806,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -14572,9 +15819,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -14585,9 +15832,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -14598,9 +15845,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -14611,9 +15858,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -14624,9 +15871,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -14637,9 +15895,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -14650,9 +15919,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -14663,9 +15943,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -14676,9 +15967,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -14689,9 +15980,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -14703,8 +15994,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -14714,9 +16005,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -14726,10 +16017,16 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
