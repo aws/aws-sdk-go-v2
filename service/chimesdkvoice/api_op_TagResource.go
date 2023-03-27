@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Adds a tag to the specified resource.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -28,9 +29,13 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
+	// The ARN of the resource being tagged.
+	//
 	// This member is required.
 	ResourceARN *string
 
+	// A list of the tags being added to the resource.
+	//
 	// This member is required.
 	Tags []types.Tag
 

@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Lists the countries that you can order phone numbers from.
 func (c *Client) ListSupportedPhoneNumberCountries(ctx context.Context, params *ListSupportedPhoneNumberCountriesInput, optFns ...func(*Options)) (*ListSupportedPhoneNumberCountriesOutput, error) {
 	if params == nil {
 		params = &ListSupportedPhoneNumberCountriesInput{}
@@ -28,6 +29,8 @@ func (c *Client) ListSupportedPhoneNumberCountries(ctx context.Context, params *
 
 type ListSupportedPhoneNumberCountriesInput struct {
 
+	// The phone number product type.
+	//
 	// This member is required.
 	ProductType types.PhoneNumberProductType
 
@@ -35,6 +38,8 @@ type ListSupportedPhoneNumberCountriesInput struct {
 }
 
 type ListSupportedPhoneNumberCountriesOutput struct {
+
+	// The supported phone number countries.
 	PhoneNumberCountries []types.PhoneNumberCountry
 
 	// Metadata pertaining to the operation's result.

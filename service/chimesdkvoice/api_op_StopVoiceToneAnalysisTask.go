@@ -10,6 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Stops a voice tone analysis task.
 func (c *Client) StopVoiceToneAnalysisTask(ctx context.Context, params *StopVoiceToneAnalysisTaskInput, optFns ...func(*Options)) (*StopVoiceToneAnalysisTaskOutput, error) {
 	if params == nil {
 		params = &StopVoiceToneAnalysisTaskInput{}
@@ -27,9 +28,13 @@ func (c *Client) StopVoiceToneAnalysisTask(ctx context.Context, params *StopVoic
 
 type StopVoiceToneAnalysisTaskInput struct {
 
+	// The Voice Connector ID.
+	//
 	// This member is required.
 	VoiceConnectorId *string
 
+	// The ID of the voice tone analysis task.
+	//
 	// This member is required.
 	VoiceToneAnalysisTaskId *string
 

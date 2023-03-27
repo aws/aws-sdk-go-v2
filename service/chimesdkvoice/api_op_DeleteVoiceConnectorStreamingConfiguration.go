@@ -10,6 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Deletes a Voice Connector's streaming configuration.
 func (c *Client) DeleteVoiceConnectorStreamingConfiguration(ctx context.Context, params *DeleteVoiceConnectorStreamingConfigurationInput, optFns ...func(*Options)) (*DeleteVoiceConnectorStreamingConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteVoiceConnectorStreamingConfigurationInput{}
@@ -27,6 +28,8 @@ func (c *Client) DeleteVoiceConnectorStreamingConfiguration(ctx context.Context,
 
 type DeleteVoiceConnectorStreamingConfigurationInput struct {
 
+	// The Voice Connector ID.
+	//
 	// This member is required.
 	VoiceConnectorId *string
 

@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Retrieves the termination setting details for the specified Voice Connector.
 func (c *Client) GetVoiceConnectorTermination(ctx context.Context, params *GetVoiceConnectorTerminationInput, optFns ...func(*Options)) (*GetVoiceConnectorTerminationOutput, error) {
 	if params == nil {
 		params = &GetVoiceConnectorTerminationInput{}
@@ -28,6 +29,8 @@ func (c *Client) GetVoiceConnectorTermination(ctx context.Context, params *GetVo
 
 type GetVoiceConnectorTerminationInput struct {
 
+	// The Voice Connector ID.
+	//
 	// This member is required.
 	VoiceConnectorId *string
 
@@ -35,6 +38,8 @@ type GetVoiceConnectorTerminationInput struct {
 }
 
 type GetVoiceConnectorTerminationOutput struct {
+
+	// The termination setting details.
 	Termination *types.Termination
 
 	// Metadata pertaining to the operation's result.

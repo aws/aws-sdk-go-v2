@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Declines invitations to become a member account. This operation is only used by
-// accounts that are not part of an organization. Organization accounts do not
-// receive invitations.
+// Declines invitations to become a member account. A prospective member account
+// uses this operation to decline an invitation to become a member. This operation
+// is only called by member accounts that aren't part of an organization.
+// Organization accounts don't receive invitations.
 func (c *Client) DeclineInvitations(ctx context.Context, params *DeclineInvitationsInput, optFns ...func(*Options)) (*DeclineInvitationsOutput, error) {
 	if params == nil {
 		params = &DeclineInvitationsInput{}
@@ -31,8 +32,7 @@ func (c *Client) DeclineInvitations(ctx context.Context, params *DeclineInvitati
 
 type DeclineInvitationsInput struct {
 
-	// The list of account IDs for the accounts from which to decline the invitations
-	// to Security Hub.
+	// The list of prospective member account IDs for which to decline an invitation.
 	//
 	// This member is required.
 	AccountIds []string

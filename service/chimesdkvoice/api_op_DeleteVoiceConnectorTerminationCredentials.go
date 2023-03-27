@@ -10,6 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Deletes the specified SIP credentials used by your equipment to authenticate
+// during call termination.
 func (c *Client) DeleteVoiceConnectorTerminationCredentials(ctx context.Context, params *DeleteVoiceConnectorTerminationCredentialsInput, optFns ...func(*Options)) (*DeleteVoiceConnectorTerminationCredentialsOutput, error) {
 	if params == nil {
 		params = &DeleteVoiceConnectorTerminationCredentialsInput{}
@@ -27,9 +29,14 @@ func (c *Client) DeleteVoiceConnectorTerminationCredentials(ctx context.Context,
 
 type DeleteVoiceConnectorTerminationCredentialsInput struct {
 
+	// The RFC2617 compliant username associated with the SIP credentials, in US-ASCII
+	// format.
+	//
 	// This member is required.
 	Usernames []string
 
+	// The Voice Connector ID.
+	//
 	// This member is required.
 	VoiceConnectorId *string
 

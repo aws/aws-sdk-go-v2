@@ -36,7 +36,7 @@ type ListSpeakersInput struct {
 	DomainId *string
 
 	// The maximum number of results that are returned per call. You can use NextToken
-	// to obtain further pages of results. The default is 100; the maximum allowed page
+	// to obtain more pages of results. The default is 100; the maximum allowed page
 	// size is also 100.
 	MaxResults *int32
 
@@ -139,7 +139,7 @@ var _ ListSpeakersAPIClient = (*Client)(nil)
 // ListSpeakersPaginatorOptions is the paginator options for ListSpeakers
 type ListSpeakersPaginatorOptions struct {
 	// The maximum number of results that are returned per call. You can use NextToken
-	// to obtain further pages of results. The default is 100; the maximum allowed page
+	// to obtain more pages of results. The default is 100; the maximum allowed page
 	// size is also 100.
 	Limit int32
 

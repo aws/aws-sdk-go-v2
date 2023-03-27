@@ -59,6 +59,9 @@ type CreateWirelessDeviceInput struct {
 	// information.
 	Positioning types.PositioningConfigStatus
 
+	// The device configuration information to use to create the Sidewalk device.
+	Sidewalk *types.SidewalkCreateWirelessDevice
+
 	// The tags to attach to the new wireless device. Tags are metadata that you can
 	// use to manage a resource.
 	Tags []types.Tag

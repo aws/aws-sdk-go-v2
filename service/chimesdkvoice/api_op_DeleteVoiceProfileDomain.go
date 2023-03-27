@@ -10,6 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Deletes all voice profiles in the domain. WARNING: This action is not
+// reversible.
 func (c *Client) DeleteVoiceProfileDomain(ctx context.Context, params *DeleteVoiceProfileDomainInput, optFns ...func(*Options)) (*DeleteVoiceProfileDomainOutput, error) {
 	if params == nil {
 		params = &DeleteVoiceProfileDomainInput{}
@@ -27,6 +29,8 @@ func (c *Client) DeleteVoiceProfileDomain(ctx context.Context, params *DeleteVoi
 
 type DeleteVoiceProfileDomainInput struct {
 
+	// The voice profile domain ID.
+	//
 	// This member is required.
 	VoiceProfileDomainId *string
 

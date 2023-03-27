@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Creates an outbound call to a phone number from the phone number specified in
+// the request, and it invokes the endpoint of the specified sipMediaApplicationId.
 func (c *Client) CreateSipMediaApplicationCall(ctx context.Context, params *CreateSipMediaApplicationCallInput, optFns ...func(*Options)) (*CreateSipMediaApplicationCallOutput, error) {
 	if params == nil {
 		params = &CreateSipMediaApplicationCallInput{}
@@ -28,23 +30,35 @@ func (c *Client) CreateSipMediaApplicationCall(ctx context.Context, params *Crea
 
 type CreateSipMediaApplicationCallInput struct {
 
+	// The phone number that a user calls from. This is a phone number in your Amazon
+	// Chime SDK phone number inventory.
+	//
 	// This member is required.
 	FromPhoneNumber *string
 
+	// The ID of the SIP media application.
+	//
 	// This member is required.
 	SipMediaApplicationId *string
 
+	// The phone number that the service should call.
+	//
 	// This member is required.
 	ToPhoneNumber *string
 
+	// Context passed to a CreateSipMediaApplication API call. For example, you could
+	// pass key-value pairs such as: "FirstName": "John", "LastName": "Doe"
 	ArgumentsMap map[string]string
 
+	// The SIP headers added to an outbound call leg.
 	SipHeaders map[string]string
 
 	noSmithyDocumentSerde
 }
 
 type CreateSipMediaApplicationCallOutput struct {
+
+	// The actual call.
 	SipMediaApplicationCall *types.SipMediaApplicationCall
 
 	// Metadata pertaining to the operation's result.

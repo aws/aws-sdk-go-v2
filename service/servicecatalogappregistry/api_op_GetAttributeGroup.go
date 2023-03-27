@@ -11,8 +11,8 @@ import (
 	"time"
 )
 
-// Retrieves an attribute group, either by its name or its ID. The attribute group
-// can be specified either by its unique ID or by its name.
+// Retrieves an attribute group by its ARN, ID, or name. The attribute group can be
+// specified by its ARN, ID, or name.
 func (c *Client) GetAttributeGroup(ctx context.Context, params *GetAttributeGroupInput, optFns ...func(*Options)) (*GetAttributeGroupOutput, error) {
 	if params == nil {
 		params = &GetAttributeGroupInput{}
@@ -30,8 +30,8 @@ func (c *Client) GetAttributeGroup(ctx context.Context, params *GetAttributeGrou
 
 type GetAttributeGroupInput struct {
 
-	// The name or ID of the attribute group that holds the attributes to describe the
-	// application.
+	// The name, ID, or ARN of the attribute group that holds the attributes to
+	// describe the application.
 	//
 	// This member is required.
 	AttributeGroup *string
@@ -48,6 +48,9 @@ type GetAttributeGroupOutput struct {
 	// A JSON string in the form of nested key-value pairs that represent the
 	// attributes in the group and describes an application and its components.
 	Attributes *string
+
+	// The service principal that created the attribute group.
+	CreatedBy *string
 
 	// The ISO-8601 formatted timestamp of the moment the attribute group was created.
 	CreationTime *time.Time

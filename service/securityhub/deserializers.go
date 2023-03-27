@@ -9634,6 +9634,170 @@ func awsRestjson1_deserializeDocumentAssociatedStandardsList(v *[]types.Associat
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAssociationSetDetails(v **types.AssociationSetDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AssociationSetDetails
+	if *v == nil {
+		sv = &types.AssociationSetDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AssociationState":
+			if err := awsRestjson1_deserializeDocumentAssociationStateDetails(&sv.AssociationState, value); err != nil {
+				return err
+			}
+
+		case "GatewayId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.GatewayId = ptr.String(jtv)
+			}
+
+		case "Main":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Main = jtv
+			}
+
+		case "RouteTableAssociationId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.RouteTableAssociationId = ptr.String(jtv)
+			}
+
+		case "RouteTableId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.RouteTableId = ptr.String(jtv)
+			}
+
+		case "SubnetId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.SubnetId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssociationSetList(v *[]types.AssociationSetDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AssociationSetDetails
+	if *v == nil {
+		cv = []types.AssociationSetDetails{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AssociationSetDetails
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAssociationSetDetails(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssociationStateDetails(v **types.AssociationStateDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AssociationStateDetails
+	if *v == nil {
+		sv = &types.AssociationStateDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "State":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.State = ptr.String(jtv)
+			}
+
+		case "StatusMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.StatusMessage = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAvailabilityZone(v **types.AvailabilityZone, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17404,6 +17568,11 @@ func awsRestjson1_deserializeDocumentAwsEc2InstanceDetails(v **types.AwsEc2Insta
 				return err
 			}
 
+		case "Monitoring":
+			if err := awsRestjson1_deserializeDocumentAwsEc2InstanceMonitoringDetails(&sv.Monitoring, value); err != nil {
+				return err
+			}
+
 		case "NetworkInterfaces":
 			if err := awsRestjson1_deserializeDocumentAwsEc2InstanceNetworkInterfacesList(&sv.NetworkInterfaces, value); err != nil {
 				return err
@@ -17523,6 +17692,46 @@ func awsRestjson1_deserializeDocumentAwsEc2InstanceMetadataOptions(v **types.Aws
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
 				sv.InstanceMetadataTags = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsEc2InstanceMonitoringDetails(v **types.AwsEc2InstanceMonitoringDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsEc2InstanceMonitoringDetails
+	if *v == nil {
+		sv = &types.AwsEc2InstanceMonitoringDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "State":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.State = ptr.String(jtv)
 			}
 
 		default:
@@ -21103,6 +21312,79 @@ func awsRestjson1_deserializeDocumentAwsEc2NetworkInterfaceSecurityGroupList(v *
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsEc2RouteTableDetails(v **types.AwsEc2RouteTableDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsEc2RouteTableDetails
+	if *v == nil {
+		sv = &types.AwsEc2RouteTableDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AssociationSet":
+			if err := awsRestjson1_deserializeDocumentAssociationSetList(&sv.AssociationSet, value); err != nil {
+				return err
+			}
+
+		case "OwnerId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.OwnerId = ptr.String(jtv)
+			}
+
+		case "PropagatingVgwSet":
+			if err := awsRestjson1_deserializeDocumentPropagatingVgwSetList(&sv.PropagatingVgwSet, value); err != nil {
+				return err
+			}
+
+		case "RouteSet":
+			if err := awsRestjson1_deserializeDocumentRouteSetList(&sv.RouteSet, value); err != nil {
+				return err
+			}
+
+		case "RouteTableId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.RouteTableId = ptr.String(jtv)
+			}
+
+		case "VpcId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.VpcId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -28283,6 +28565,15 @@ func awsRestjson1_deserializeDocumentAwsEksClusterResourcesVpcConfigDetails(v **
 
 	for key, value := range shape {
 		switch key {
+		case "EndpointPublicAccess":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.EndpointPublicAccess = jtv
+			}
+
 		case "SecurityGroupIds":
 			if err := awsRestjson1_deserializeDocumentNonEmptyStringList(&sv.SecurityGroupIds, value); err != nil {
 				return err
@@ -39823,6 +40114,11 @@ func awsRestjson1_deserializeDocumentAwsS3BucketDetails(v **types.AwsS3BucketDet
 				sv.CreatedAt = ptr.String(jtv)
 			}
 
+		case "ObjectLockConfiguration":
+			if err := awsRestjson1_deserializeDocumentAwsS3BucketObjectLockConfiguration(&sv.ObjectLockConfiguration, value); err != nil {
+				return err
+			}
+
 		case "OwnerAccountId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -40235,6 +40531,153 @@ func awsRestjson1_deserializeDocumentAwsS3BucketNotificationConfigurationS3KeyFi
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsS3BucketObjectLockConfiguration(v **types.AwsS3BucketObjectLockConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsS3BucketObjectLockConfiguration
+	if *v == nil {
+		sv = &types.AwsS3BucketObjectLockConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ObjectLockEnabled":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.ObjectLockEnabled = ptr.String(jtv)
+			}
+
+		case "Rule":
+			if err := awsRestjson1_deserializeDocumentAwsS3BucketObjectLockConfigurationRuleDetails(&sv.Rule, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsS3BucketObjectLockConfigurationRuleDefaultRetentionDetails(v **types.AwsS3BucketObjectLockConfigurationRuleDefaultRetentionDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsS3BucketObjectLockConfigurationRuleDefaultRetentionDetails
+	if *v == nil {
+		sv = &types.AwsS3BucketObjectLockConfigurationRuleDefaultRetentionDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Days":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Days = int32(i64)
+			}
+
+		case "Mode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Mode = ptr.String(jtv)
+			}
+
+		case "Years":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Years = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAwsS3BucketObjectLockConfigurationRuleDetails(v **types.AwsS3BucketObjectLockConfigurationRuleDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsS3BucketObjectLockConfigurationRuleDetails
+	if *v == nil {
+		sv = &types.AwsS3BucketObjectLockConfigurationRuleDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DefaultRetention":
+			if err := awsRestjson1_deserializeDocumentAwsS3BucketObjectLockConfigurationRuleDefaultRetentionDetails(&sv.DefaultRetention, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -50121,6 +50564,80 @@ func awsRestjson1_deserializeDocumentProductSubscriptionArnList(v *[]string, val
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentPropagatingVgwSetDetails(v **types.PropagatingVgwSetDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PropagatingVgwSetDetails
+	if *v == nil {
+		sv = &types.PropagatingVgwSetDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "GatewayId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.GatewayId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPropagatingVgwSetList(v *[]types.PropagatingVgwSetDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.PropagatingVgwSetDetails
+	if *v == nil {
+		cv = []types.PropagatingVgwSetDetails{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.PropagatingVgwSetDetails
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentPropagatingVgwSetDetails(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentRange(v **types.Range, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -50783,6 +51300,11 @@ func awsRestjson1_deserializeDocumentResourceDetails(v **types.ResourceDetails, 
 				return err
 			}
 
+		case "AwsEc2RouteTable":
+			if err := awsRestjson1_deserializeDocumentAwsEc2RouteTableDetails(&sv.AwsEc2RouteTable, value); err != nil {
+				return err
+			}
+
 		case "AwsEc2SecurityGroup":
 			if err := awsRestjson1_deserializeDocumentAwsEc2SecurityGroupDetails(&sv.AwsEc2SecurityGroup, value); err != nil {
 				return err
@@ -51258,6 +51780,215 @@ func awsRestjson1_deserializeDocumentResultList(v *[]types.Result, value interfa
 		var col types.Result
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentResult(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteSetDetails(v **types.RouteSetDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RouteSetDetails
+	if *v == nil {
+		sv = &types.RouteSetDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CarrierGatewayId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.CarrierGatewayId = ptr.String(jtv)
+			}
+
+		case "CoreNetworkArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.CoreNetworkArn = ptr.String(jtv)
+			}
+
+		case "DestinationCidrBlock":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DestinationCidrBlock = ptr.String(jtv)
+			}
+
+		case "DestinationIpv6CidrBlock":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DestinationIpv6CidrBlock = ptr.String(jtv)
+			}
+
+		case "DestinationPrefixListId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.DestinationPrefixListId = ptr.String(jtv)
+			}
+
+		case "EgressOnlyInternetGatewayId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.EgressOnlyInternetGatewayId = ptr.String(jtv)
+			}
+
+		case "GatewayId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.GatewayId = ptr.String(jtv)
+			}
+
+		case "InstanceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.InstanceId = ptr.String(jtv)
+			}
+
+		case "InstanceOwnerId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.InstanceOwnerId = ptr.String(jtv)
+			}
+
+		case "LocalGatewayId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.LocalGatewayId = ptr.String(jtv)
+			}
+
+		case "NatGatewayId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.NatGatewayId = ptr.String(jtv)
+			}
+
+		case "NetworkInterfaceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.NetworkInterfaceId = ptr.String(jtv)
+			}
+
+		case "Origin":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Origin = ptr.String(jtv)
+			}
+
+		case "State":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.State = ptr.String(jtv)
+			}
+
+		case "TransitGatewayId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.TransitGatewayId = ptr.String(jtv)
+			}
+
+		case "VpcPeeringConnectionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.VpcPeeringConnectionId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRouteSetList(v *[]types.RouteSetDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RouteSetDetails
+	if *v == nil {
+		cv = []types.RouteSetDetails{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RouteSetDetails
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRouteSetDetails(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr

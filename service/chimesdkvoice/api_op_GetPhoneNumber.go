@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Retrieves details for the specified phone number ID, such as associations,
+// capabilities, and product type.
 func (c *Client) GetPhoneNumber(ctx context.Context, params *GetPhoneNumberInput, optFns ...func(*Options)) (*GetPhoneNumberOutput, error) {
 	if params == nil {
 		params = &GetPhoneNumberInput{}
@@ -28,6 +30,8 @@ func (c *Client) GetPhoneNumber(ctx context.Context, params *GetPhoneNumberInput
 
 type GetPhoneNumberInput struct {
 
+	// The phone number ID.
+	//
 	// This member is required.
 	PhoneNumberId *string
 
@@ -35,6 +39,8 @@ type GetPhoneNumberInput struct {
 }
 
 type GetPhoneNumberOutput struct {
+
+	// The phone number details.
 	PhoneNumber *types.PhoneNumber
 
 	// Metadata pertaining to the operation's result.

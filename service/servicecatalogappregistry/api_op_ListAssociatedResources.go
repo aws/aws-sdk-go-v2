@@ -34,7 +34,7 @@ func (c *Client) ListAssociatedResources(ctx context.Context, params *ListAssoci
 
 type ListAssociatedResourcesInput struct {
 
-	// The name or ID of the application.
+	// The name, ID, or ARN of the application.
 	//
 	// This member is required.
 	Application *string

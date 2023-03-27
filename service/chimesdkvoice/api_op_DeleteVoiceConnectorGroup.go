@@ -10,6 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Deletes an Amazon Chime SDK Voice Connector group. Any VoiceConnectorItems and
+// phone numbers associated with the group must be removed before it can be
+// deleted.
 func (c *Client) DeleteVoiceConnectorGroup(ctx context.Context, params *DeleteVoiceConnectorGroupInput, optFns ...func(*Options)) (*DeleteVoiceConnectorGroupOutput, error) {
 	if params == nil {
 		params = &DeleteVoiceConnectorGroupInput{}
@@ -27,6 +30,8 @@ func (c *Client) DeleteVoiceConnectorGroup(ctx context.Context, params *DeleteVo
 
 type DeleteVoiceConnectorGroupInput struct {
 
+	// The Voice Connector Group ID.
+	//
 	// This member is required.
 	VoiceConnectorGroupId *string
 

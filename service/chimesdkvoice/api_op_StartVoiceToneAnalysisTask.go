@@ -11,6 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Starts a voice tone analysis task. For more information about voice tone
+// analysis, see Using Amazon Chime SDK voice analytics
+// (https://docs.aws.amazon.com/chime-sdk/latest/dg/pstn-voice-analytics.html) in
+// the Amazon Chime SDK Developer Guide. Before starting any voice tone analysis
+// tasks, you must provide all notices and obtain all consents from the speaker as
+// required under applicable privacy and biometrics laws, and as required under the
+// AWS service terms (https://aws.amazon.com/service-terms/) for the Amazon Chime
+// SDK.
 func (c *Client) StartVoiceToneAnalysisTask(ctx context.Context, params *StartVoiceToneAnalysisTaskInput, optFns ...func(*Options)) (*StartVoiceToneAnalysisTaskOutput, error) {
 	if params == nil {
 		params = &StartVoiceToneAnalysisTaskInput{}
@@ -28,21 +36,31 @@ func (c *Client) StartVoiceToneAnalysisTask(ctx context.Context, params *StartVo
 
 type StartVoiceToneAnalysisTaskInput struct {
 
+	// The language code.
+	//
 	// This member is required.
 	LanguageCode types.LanguageCode
 
+	// The transaction ID.
+	//
 	// This member is required.
 	TransactionId *string
 
+	// The Voice Connector ID.
+	//
 	// This member is required.
 	VoiceConnectorId *string
 
+	// The unique identifier for the client request. Use a different token for
+	// different voice tone analysis tasks.
 	ClientRequestToken *string
 
 	noSmithyDocumentSerde
 }
 
 type StartVoiceToneAnalysisTaskOutput struct {
+
+	// The details of the voice tone analysis task.
 	VoiceToneAnalysisTask *types.VoiceToneAnalysisTask
 
 	// Metadata pertaining to the operation's result.

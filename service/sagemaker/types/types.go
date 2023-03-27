@@ -1634,8 +1634,10 @@ type AutoMLCandidateGenerationConfig struct {
 	// AutoMLCandidateGenerationConfig uses the full set of algorithms for the given
 	// training mode.
 	//
-	// For the list of all algorithms per training mode, see . For more
-	// information on each algorithm, see the Algorithm support
+	// For the list of all algorithms per training mode, see
+	// AutoMLAlgorithmConfig
+	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLAlgorithmConfig.html).
+	// For more information on each algorithm, see the Algorithm support
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support)
 	// section in Autopilot developer guide.
 	AlgorithmsConfig []AutoMLAlgorithmConfig
@@ -1684,8 +1686,9 @@ type AutoMLCandidateStep struct {
 
 // A channel is a named input source that training algorithms can consume. The
 // validation dataset size is limited to less than 2 GB. The training dataset size
-// must be less than 100 GB. For more information, see . A validation dataset must
-// contain the same headers as the training dataset.
+// must be less than 100 GB. For more information, see  Channel
+// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Channel.html). A
+// validation dataset must contain the same headers as the training dataset.
 type AutoMLChannel struct {
 
 	// The data source for an AutoML channel.
@@ -1718,21 +1721,27 @@ type AutoMLChannel struct {
 }
 
 // A list of container definitions that describe the different containers that make
-// up an AutoML candidate. For more information, see .
+// up an AutoML candidate. For more information, see  ContainerDefinition
+// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ContainerDefinition.html).
 type AutoMLContainerDefinition struct {
 
 	// The Amazon Elastic Container Registry (Amazon ECR) path of the container. For
-	// more information, see .
+	// more information, see  ContainerDefinition
+	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ContainerDefinition.html).
 	//
 	// This member is required.
 	Image *string
 
-	// The location of the model artifacts. For more information, see .
+	// The location of the model artifacts. For more information, see
+	// ContainerDefinition
+	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ContainerDefinition.html).
 	//
 	// This member is required.
 	ModelDataUrl *string
 
-	// The environment variables to set in the container. For more information, see .
+	// The environment variables to set in the container. For more information, see
+	// ContainerDefinition
+	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ContainerDefinition.html).
 	Environment map[string]string
 
 	noSmithyDocumentSerde
@@ -1780,7 +1789,10 @@ type AutoMLJobArtifacts struct {
 
 // A channel is a named input source that training algorithms can consume. This
 // channel is used for the non tabular training data of an AutoML job using the V2
-// API. For tabular training data, see . For more information, see .
+// API. For tabular training data, see  AutoMLChannel
+// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLChannel.html).
+// For more information, see  Channel
+// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Channel.html).
 type AutoMLJobChannel struct {
 
 	// The type of channel. Defines whether the data are used for training or
@@ -1826,9 +1838,12 @@ type AutoMLJobCompletionCriteria struct {
 
 	// The maximum time, in seconds, that each training job executed inside
 	// hyperparameter tuning is allowed to run as part of a hyperparameter tuning job.
-	// For more information, see the used by the action. For V2 jobs (jobs created by
-	// calling CreateAutoMLJobV2), this field controls the runtime of the job
-	// candidate.
+	// For more information, see the StoppingCondition
+	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_StoppingCondition.html)
+	// used by the CreateHyperParameterTuningJob
+	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateHyperParameterTuningJob.html)
+	// action. For V2 jobs (jobs created by calling CreateAutoMLJobV2), this field
+	// controls the runtime of the job candidate.
 	MaxRuntimePerTrainingJobInSeconds *int32
 
 	noSmithyDocumentSerde
@@ -5132,7 +5147,8 @@ type Filter struct {
 type FinalAutoMLJobObjectiveMetric struct {
 
 	// The name of the metric with the best result. For a description of the possible
-	// objective metrics, see AutoMLJobObjective$MetricName.
+	// objective metrics, see AutoMLJobObjective$MetricName
+	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobObjective.html).
 	//
 	// This member is required.
 	MetricName AutoMLMetricEnum
@@ -6908,7 +6924,7 @@ type HyperParameterTrainingJobDefinition struct {
 	// API. You can use an existing environment variable from the training container
 	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html#sagemaker-CreateTrainingJob-request-Environment)
 	// or use your own. See Define metrics and variables
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics.html)
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics-variables.html)
 	// for more information. The maximum number of items specified for Map Entries
 	// refers to the maximum number of environment variables for each
 	// TrainingJobDefinition and also the maximum for the hyperparameter tuning job
@@ -8697,10 +8713,14 @@ type MetricDatum struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies a metric that the training algorithm writes to stderr or stdout.
-// SageMakerhyperparameter tuning captures all defined metrics. You specify one
-// metric that a hyperparameter tuning job uses as its objective metric to choose
-// the best training job.
+// Specifies a metric that the training algorithm writes to stderr or stdout. You
+// can view these logs to understand how your training job performs and check for
+// any errors encountered during training. SageMaker hyperparameter tuning captures
+// all defined metrics. Specify one of the defined metrics to use as an objective
+// metric using the TuningObjective
+// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html#sagemaker-Type-HyperParameterTrainingJobDefinition-TuningObjective)
+// parameter in the HyperParameterTrainingJobDefinition API to evaluate job
+// performance during hyperparameter tuning.
 type MetricDefinition struct {
 
 	// The name of the metric.
@@ -8710,8 +8730,8 @@ type MetricDefinition struct {
 
 	// A regular expression that searches the output of a training job and gets the
 	// value of the metric. For more information about using regular expressions to
-	// define metrics, see Defining Objective Metrics
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics.html).
+	// define metrics, see Defining metrics and environment variables
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics-variables.html).
 	//
 	// This member is required.
 	Regex *string

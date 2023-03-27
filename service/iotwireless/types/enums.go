@@ -56,6 +56,24 @@ func (ConnectionStatus) Values() []ConnectionStatus {
 	}
 }
 
+type DeviceProfileType string
+
+// Enum values for DeviceProfileType
+const (
+	DeviceProfileTypeSidewalk DeviceProfileType = "Sidewalk"
+	DeviceProfileTypeLoRaWAN  DeviceProfileType = "LoRaWAN"
+)
+
+// Values returns all known values for DeviceProfileType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeviceProfileType) Values() []DeviceProfileType {
+	return []DeviceProfileType{
+		"Sidewalk",
+		"LoRaWAN",
+	}
+}
+
 type DeviceState string
 
 // Enum values for DeviceState
@@ -297,6 +315,32 @@ func (IdentifierType) Values() []IdentifierType {
 	}
 }
 
+type ImportTaskStatus string
+
+// Enum values for ImportTaskStatus
+const (
+	ImportTaskStatusInitializing ImportTaskStatus = "INITIALIZING"
+	ImportTaskStatusInitialized  ImportTaskStatus = "INITIALIZED"
+	ImportTaskStatusPending      ImportTaskStatus = "PENDING"
+	ImportTaskStatusComplete     ImportTaskStatus = "COMPLETE"
+	ImportTaskStatusFailed       ImportTaskStatus = "FAILED"
+	ImportTaskStatusDeleting     ImportTaskStatus = "DELETING"
+)
+
+// Values returns all known values for ImportTaskStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ImportTaskStatus) Values() []ImportTaskStatus {
+	return []ImportTaskStatus{
+		"INITIALIZING",
+		"INITIALIZED",
+		"PENDING",
+		"COMPLETE",
+		"FAILED",
+		"DELETING",
+	}
+}
+
 type LogLevel string
 
 // Enum values for LogLevel
@@ -336,6 +380,28 @@ func (MessageType) Values() []MessageType {
 		"CUSTOM_COMMAND_ID_GET",
 		"CUSTOM_COMMAND_ID_SET",
 		"CUSTOM_COMMAND_ID_RESP",
+	}
+}
+
+type OnboardStatus string
+
+// Enum values for OnboardStatus
+const (
+	OnboardStatusInitialized OnboardStatus = "INITIALIZED"
+	OnboardStatusPending     OnboardStatus = "PENDING"
+	OnboardStatusOnboarded   OnboardStatus = "ONBOARDED"
+	OnboardStatusFailed      OnboardStatus = "FAILED"
+)
+
+// Values returns all known values for OnboardStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OnboardStatus) Values() []OnboardStatus {
+	return []OnboardStatus{
+		"INITIALIZED",
+		"PENDING",
+		"ONBOARDED",
+		"FAILED",
 	}
 }
 
@@ -485,6 +551,15 @@ const (
 	SupportedRfRegionUs915  SupportedRfRegion = "US915"
 	SupportedRfRegionAu915  SupportedRfRegion = "AU915"
 	SupportedRfRegionAs9231 SupportedRfRegion = "AS923-1"
+	SupportedRfRegionAs9232 SupportedRfRegion = "AS923-2"
+	SupportedRfRegionAs9233 SupportedRfRegion = "AS923-3"
+	SupportedRfRegionAs9234 SupportedRfRegion = "AS923-4"
+	SupportedRfRegionEu433  SupportedRfRegion = "EU433"
+	SupportedRfRegionCn470  SupportedRfRegion = "CN470"
+	SupportedRfRegionCn779  SupportedRfRegion = "CN779"
+	SupportedRfRegionRu864  SupportedRfRegion = "RU864"
+	SupportedRfRegionKr920  SupportedRfRegion = "KR920"
+	SupportedRfRegionIn865  SupportedRfRegion = "IN865"
 )
 
 // Values returns all known values for SupportedRfRegion. Note that this can be
@@ -496,6 +571,15 @@ func (SupportedRfRegion) Values() []SupportedRfRegion {
 		"US915",
 		"AU915",
 		"AS923-1",
+		"AS923-2",
+		"AS923-3",
+		"AS923-4",
+		"EU433",
+		"CN470",
+		"CN779",
+		"RU864",
+		"KR920",
+		"IN865",
 	}
 }
 
@@ -560,6 +644,28 @@ func (WirelessDeviceIdType) Values() []WirelessDeviceIdType {
 		"DevEui",
 		"ThingName",
 		"SidewalkManufacturingSn",
+	}
+}
+
+type WirelessDeviceSidewalkStatus string
+
+// Enum values for WirelessDeviceSidewalkStatus
+const (
+	WirelessDeviceSidewalkStatusProvisioned WirelessDeviceSidewalkStatus = "PROVISIONED"
+	WirelessDeviceSidewalkStatusRegistered  WirelessDeviceSidewalkStatus = "REGISTERED"
+	WirelessDeviceSidewalkStatusActivated   WirelessDeviceSidewalkStatus = "ACTIVATED"
+	WirelessDeviceSidewalkStatusUnknown     WirelessDeviceSidewalkStatus = "UNKNOWN"
+)
+
+// Values returns all known values for WirelessDeviceSidewalkStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WirelessDeviceSidewalkStatus) Values() []WirelessDeviceSidewalkStatus {
+	return []WirelessDeviceSidewalkStatus{
+		"PROVISIONED",
+		"REGISTERED",
+		"ACTIVATED",
+		"UNKNOWN",
 	}
 }
 

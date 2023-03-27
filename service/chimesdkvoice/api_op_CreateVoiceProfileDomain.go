@@ -11,6 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Creates a voice profile domain, a collection of voice profiles, their voice
+// prints, and encrypted enrollment audio. Before creating any voice profiles, you
+// must provide all notices and obtain all consents from the speaker as required
+// under applicable privacy and biometrics laws, and as required under the AWS
+// service terms (https://aws.amazon.com/service-terms/) for the Amazon Chime SDK.
+// For more information about voice profile domains, see Using Amazon Chime SDK
+// Voice Analytics
+// (https://docs.aws.amazon.com/chime-sdk/latest/dg/pstn-voice-analytics.html) in
+// the Amazon Chime SDK Developer Guide.
 func (c *Client) CreateVoiceProfileDomain(ctx context.Context, params *CreateVoiceProfileDomainInput, optFns ...func(*Options)) (*CreateVoiceProfileDomainOutput, error) {
 	if params == nil {
 		params = &CreateVoiceProfileDomainInput{}
@@ -28,22 +37,32 @@ func (c *Client) CreateVoiceProfileDomain(ctx context.Context, params *CreateVoi
 
 type CreateVoiceProfileDomainInput struct {
 
+	// The name of the voice profile domain.
+	//
 	// This member is required.
 	Name *string
 
+	// The server-side encryption configuration for the request.
+	//
 	// This member is required.
 	ServerSideEncryptionConfiguration *types.ServerSideEncryptionConfiguration
 
+	// The unique identifier for the client request. Use a different token for
+	// different domain creation requests.
 	ClientRequestToken *string
 
+	// A description of the voice profile domain.
 	Description *string
 
+	// The tags assigned to the domain.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
 }
 
 type CreateVoiceProfileDomainOutput struct {
+
+	// The requested voice profile domain.
 	VoiceProfileDomain *types.VoiceProfileDomain
 
 	// Metadata pertaining to the operation's result.

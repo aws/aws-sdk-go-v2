@@ -12,7 +12,7 @@ import (
 )
 
 // Submits calculations for execution within a session. You can supply the code to
-// run as an inline code block within the request or as an Amazon S3 URL.
+// run as an inline code block within the request.
 func (c *Client) StartCalculationExecution(ctx context.Context, params *StartCalculationExecutionInput, optFns ...func(*Options)) (*StartCalculationExecutionOutput, error) {
 	if params == nil {
 		params = &StartCalculationExecutionInput{}

@@ -11,6 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Starts a speaker search task. Before starting any speaker search tasks, you must
+// provide all notices and obtain all consents from the speaker as required under
+// applicable privacy and biometrics laws, and as required under the AWS service
+// terms (https://aws.amazon.com/service-terms/) for the Amazon Chime SDK.
 func (c *Client) StartSpeakerSearchTask(ctx context.Context, params *StartSpeakerSearchTaskInput, optFns ...func(*Options)) (*StartSpeakerSearchTaskOutput, error) {
 	if params == nil {
 		params = &StartSpeakerSearchTaskInput{}
@@ -28,21 +32,31 @@ func (c *Client) StartSpeakerSearchTask(ctx context.Context, params *StartSpeake
 
 type StartSpeakerSearchTaskInput struct {
 
+	// The transaction ID of the call being analyzed.
+	//
 	// This member is required.
 	TransactionId *string
 
+	// The Voice Connector ID.
+	//
 	// This member is required.
 	VoiceConnectorId *string
 
+	// The ID of the voice profile domain that will store the voice profile.
+	//
 	// This member is required.
 	VoiceProfileDomainId *string
 
+	// The unique identifier for the client request. Use a different token for
+	// different speaker search tasks.
 	ClientRequestToken *string
 
 	noSmithyDocumentSerde
 }
 
 type StartSpeakerSearchTaskOutput struct {
+
+	// The details of the speaker search task.
 	SpeakerSearchTask *types.SpeakerSearchTask
 
 	// Metadata pertaining to the operation's result.

@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Retrieves the details of a voice tone analysis task.
 func (c *Client) GetVoiceToneAnalysisTask(ctx context.Context, params *GetVoiceToneAnalysisTaskInput, optFns ...func(*Options)) (*GetVoiceToneAnalysisTaskOutput, error) {
 	if params == nil {
 		params = &GetVoiceToneAnalysisTaskInput{}
@@ -28,12 +29,19 @@ func (c *Client) GetVoiceToneAnalysisTask(ctx context.Context, params *GetVoiceT
 
 type GetVoiceToneAnalysisTaskInput struct {
 
+	// Specifies whether the voice being analyzed is the caller (originator) or the
+	// callee (responder).
+	//
 	// This member is required.
 	IsCaller *bool
 
+	// The Voice Connector ID.
+	//
 	// This member is required.
 	VoiceConnectorId *string
 
+	// The ID of the voice tone anlysis task.
+	//
 	// This member is required.
 	VoiceToneAnalysisTaskId *string
 
@@ -41,6 +49,8 @@ type GetVoiceToneAnalysisTaskInput struct {
 }
 
 type GetVoiceToneAnalysisTaskOutput struct {
+
+	// The details of the voice tone analysis task.
 	VoiceToneAnalysisTask *types.VoiceToneAnalysisTask
 
 	// Metadata pertaining to the operation's result.

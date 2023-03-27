@@ -10,6 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Deletes the proxy configuration from the specified Amazon Chime SDK Voice
+// Connector.
 func (c *Client) DeleteVoiceConnectorProxy(ctx context.Context, params *DeleteVoiceConnectorProxyInput, optFns ...func(*Options)) (*DeleteVoiceConnectorProxyOutput, error) {
 	if params == nil {
 		params = &DeleteVoiceConnectorProxyInput{}
@@ -27,6 +29,8 @@ func (c *Client) DeleteVoiceConnectorProxy(ctx context.Context, params *DeleteVo
 
 type DeleteVoiceConnectorProxyInput struct {
 
+	// The Voice Connector ID.
+	//
 	// This member is required.
 	VoiceConnectorId *string
 

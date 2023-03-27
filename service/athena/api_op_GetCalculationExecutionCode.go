@@ -10,8 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a pre-signed URL to a copy of the code that was executed for the
-// calculation.
+// Retrieves the unencrypted code that was executed for the calculation.
 func (c *Client) GetCalculationExecutionCode(ctx context.Context, params *GetCalculationExecutionCodeInput, optFns ...func(*Options)) (*GetCalculationExecutionCodeOutput, error) {
 	if params == nil {
 		params = &GetCalculationExecutionCodeInput{}
@@ -39,7 +38,7 @@ type GetCalculationExecutionCodeInput struct {
 
 type GetCalculationExecutionCodeOutput struct {
 
-	// A pre-signed URL to the code that executed the calculation.
+	// The unencrypted code that was executed for the calculation.
 	CodeBlock *string
 
 	// Metadata pertaining to the operation's result.

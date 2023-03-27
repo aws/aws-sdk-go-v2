@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Retrieves information about the last time a SIP OPTIONS ping was received from
+// your SIP infrastructure for the specified Amazon Chime SDK Voice Connector.
 func (c *Client) GetVoiceConnectorTerminationHealth(ctx context.Context, params *GetVoiceConnectorTerminationHealthInput, optFns ...func(*Options)) (*GetVoiceConnectorTerminationHealthOutput, error) {
 	if params == nil {
 		params = &GetVoiceConnectorTerminationHealthInput{}
@@ -28,6 +30,8 @@ func (c *Client) GetVoiceConnectorTerminationHealth(ctx context.Context, params 
 
 type GetVoiceConnectorTerminationHealthInput struct {
 
+	// The Voice Connector ID.
+	//
 	// This member is required.
 	VoiceConnectorId *string
 
@@ -35,6 +39,8 @@ type GetVoiceConnectorTerminationHealthInput struct {
 }
 
 type GetVoiceConnectorTerminationHealthOutput struct {
+
+	// The termination health details.
 	TerminationHealth *types.TerminationHealth
 
 	// Metadata pertaining to the operation's result.

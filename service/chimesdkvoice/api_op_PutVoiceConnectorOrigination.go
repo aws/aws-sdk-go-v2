@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Updates a Voice Connector's origination settings.
 func (c *Client) PutVoiceConnectorOrigination(ctx context.Context, params *PutVoiceConnectorOriginationInput, optFns ...func(*Options)) (*PutVoiceConnectorOriginationOutput, error) {
 	if params == nil {
 		params = &PutVoiceConnectorOriginationInput{}
@@ -28,9 +29,13 @@ func (c *Client) PutVoiceConnectorOrigination(ctx context.Context, params *PutVo
 
 type PutVoiceConnectorOriginationInput struct {
 
+	// The origination settings being updated.
+	//
 	// This member is required.
 	Origination *types.Origination
 
+	// The Voice Connector ID.
+	//
 	// This member is required.
 	VoiceConnectorId *string
 
@@ -38,6 +43,8 @@ type PutVoiceConnectorOriginationInput struct {
 }
 
 type PutVoiceConnectorOriginationOutput struct {
+
+	// The updated origination settings.
 	Origination *types.Origination
 
 	// Metadata pertaining to the operation's result.

@@ -30,6 +30,10 @@ func (c *Client) ListDeviceProfiles(ctx context.Context, params *ListDeviceProfi
 
 type ListDeviceProfilesInput struct {
 
+	// A filter to list only device profiles that use this type, which can be LoRaWAN
+	// or Sidewalk.
+	DeviceProfileType types.DeviceProfileType
+
 	// The maximum number of results to return in this operation.
 	MaxResults int32
 

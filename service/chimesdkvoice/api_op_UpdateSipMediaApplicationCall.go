@@ -11,6 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Invokes the AWS Lambda function associated with the SIP media application and
+// transaction ID in an update request. The Lambda function can then return a new
+// set of actions.
 func (c *Client) UpdateSipMediaApplicationCall(ctx context.Context, params *UpdateSipMediaApplicationCallInput, optFns ...func(*Options)) (*UpdateSipMediaApplicationCallOutput, error) {
 	if params == nil {
 		params = &UpdateSipMediaApplicationCallInput{}
@@ -28,12 +31,19 @@ func (c *Client) UpdateSipMediaApplicationCall(ctx context.Context, params *Upda
 
 type UpdateSipMediaApplicationCallInput struct {
 
+	// Arguments made available to the Lambda function as part of the
+	// CALL_UPDATE_REQUESTED event. Can contain 0-20 key-value pairs.
+	//
 	// This member is required.
 	Arguments map[string]string
 
+	// The ID of the SIP media application handling the call.
+	//
 	// This member is required.
 	SipMediaApplicationId *string
 
+	// The ID of the call transaction.
+	//
 	// This member is required.
 	TransactionId *string
 
@@ -41,6 +51,8 @@ type UpdateSipMediaApplicationCallInput struct {
 }
 
 type UpdateSipMediaApplicationCallOutput struct {
+
+	// A Call instance for a SIP media application.
 	SipMediaApplicationCall *types.SipMediaApplicationCall
 
 	// Metadata pertaining to the operation's result.

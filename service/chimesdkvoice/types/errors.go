@@ -7,6 +7,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// You don't have the permissions needed to run this action.
 type AccessDeniedException struct {
 	Message *string
 
@@ -34,6 +35,7 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The input parameters don't match the service's restrictions.
 type BadRequestException struct {
 	Message *string
 
@@ -61,6 +63,7 @@ func (e *BadRequestException) ErrorCode() string {
 }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Multiple instances of the same request were made simultaneously.
 type ConflictException struct {
 	Message *string
 
@@ -88,6 +91,7 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The client is permanently forbidden from making the request.
 type ForbiddenException struct {
 	Message *string
 
@@ -115,6 +119,8 @@ func (e *ForbiddenException) ErrorCode() string {
 }
 func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Access to the target resource is no longer available at the origin server. This
+// condition is likely to be permanent.
 type GoneException struct {
 	Message *string
 
@@ -142,6 +148,7 @@ func (e *GoneException) ErrorCode() string {
 }
 func (e *GoneException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The requested resource couldn't be found.
 type NotFoundException struct {
 	Message *string
 
@@ -169,6 +176,7 @@ func (e *NotFoundException) ErrorCode() string {
 }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The request exceeds the resource limit.
 type ResourceLimitExceededException struct {
 	Message *string
 
@@ -196,6 +204,7 @@ func (e *ResourceLimitExceededException) ErrorCode() string {
 }
 func (e *ResourceLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The service encountered an unexpected error.
 type ServiceFailureException struct {
 	Message *string
 
@@ -223,6 +232,7 @@ func (e *ServiceFailureException) ErrorCode() string {
 }
 func (e *ServiceFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
+// The service is currently unavailable.
 type ServiceUnavailableException struct {
 	Message *string
 
@@ -250,6 +260,7 @@ func (e *ServiceUnavailableException) ErrorCode() string {
 }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
+// The number of customer requests exceeds the request rate limit.
 type ThrottledClientException struct {
 	Message *string
 
@@ -277,6 +288,7 @@ func (e *ThrottledClientException) ErrorCode() string {
 }
 func (e *ThrottledClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The client isn't authorized to request a resource.
 type UnauthorizedClientException struct {
 	Message *string
 
@@ -304,6 +316,7 @@ func (e *UnauthorizedClientException) ErrorCode() string {
 }
 func (e *UnauthorizedClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// A well-formed request couldn't be followed due to semantic errors.
 type UnprocessableEntityException struct {
 	Message *string
 

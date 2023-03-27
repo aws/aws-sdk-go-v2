@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Retrieves the details of the specified voice profile domain.
 func (c *Client) GetVoiceProfileDomain(ctx context.Context, params *GetVoiceProfileDomainInput, optFns ...func(*Options)) (*GetVoiceProfileDomainOutput, error) {
 	if params == nil {
 		params = &GetVoiceProfileDomainInput{}
@@ -28,6 +29,8 @@ func (c *Client) GetVoiceProfileDomain(ctx context.Context, params *GetVoiceProf
 
 type GetVoiceProfileDomainInput struct {
 
+	// The voice profile domain ID.
+	//
 	// This member is required.
 	VoiceProfileDomainId *string
 
@@ -35,6 +38,8 @@ type GetVoiceProfileDomainInput struct {
 }
 
 type GetVoiceProfileDomainOutput struct {
+
+	// The details of the voice profile domain.
 	VoiceProfileDomain *types.VoiceProfileDomain
 
 	// Metadata pertaining to the operation's result.

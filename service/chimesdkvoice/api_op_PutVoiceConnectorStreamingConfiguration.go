@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Updates a Voice Connector's streaming configuration settings.
 func (c *Client) PutVoiceConnectorStreamingConfiguration(ctx context.Context, params *PutVoiceConnectorStreamingConfigurationInput, optFns ...func(*Options)) (*PutVoiceConnectorStreamingConfigurationOutput, error) {
 	if params == nil {
 		params = &PutVoiceConnectorStreamingConfigurationInput{}
@@ -28,9 +29,13 @@ func (c *Client) PutVoiceConnectorStreamingConfiguration(ctx context.Context, pa
 
 type PutVoiceConnectorStreamingConfigurationInput struct {
 
+	// The streaming settings being updated.
+	//
 	// This member is required.
 	StreamingConfiguration *types.StreamingConfiguration
 
+	// The Voice Connector ID.
+	//
 	// This member is required.
 	VoiceConnectorId *string
 
@@ -38,6 +43,8 @@ type PutVoiceConnectorStreamingConfigurationInput struct {
 }
 
 type PutVoiceConnectorStreamingConfigurationOutput struct {
+
+	// The updated streaming settings.
 	StreamingConfiguration *types.StreamingConfiguration
 
 	// Metadata pertaining to the operation's result.

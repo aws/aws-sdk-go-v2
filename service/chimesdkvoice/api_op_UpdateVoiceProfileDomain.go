@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Updates the settings for the specified voice profile domain.
 func (c *Client) UpdateVoiceProfileDomain(ctx context.Context, params *UpdateVoiceProfileDomainInput, optFns ...func(*Options)) (*UpdateVoiceProfileDomainOutput, error) {
 	if params == nil {
 		params = &UpdateVoiceProfileDomainInput{}
@@ -28,17 +29,23 @@ func (c *Client) UpdateVoiceProfileDomain(ctx context.Context, params *UpdateVoi
 
 type UpdateVoiceProfileDomainInput struct {
 
+	// The domain ID.
+	//
 	// This member is required.
 	VoiceProfileDomainId *string
 
+	// The description of the voice profile domain.
 	Description *string
 
+	// The name of the voice profile domain.
 	Name *string
 
 	noSmithyDocumentSerde
 }
 
 type UpdateVoiceProfileDomainOutput struct {
+
+	// The updated details of the voice profile domain.
 	VoiceProfileDomain *types.VoiceProfileDomain
 
 	// Metadata pertaining to the operation's result.

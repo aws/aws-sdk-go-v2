@@ -12,6 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Lists the specified voice profile domains in the administrator's AWS account.
 func (c *Client) ListVoiceProfileDomains(ctx context.Context, params *ListVoiceProfileDomainsInput, optFns ...func(*Options)) (*ListVoiceProfileDomainsOutput, error) {
 	if params == nil {
 		params = &ListVoiceProfileDomainsInput{}
@@ -28,16 +29,22 @@ func (c *Client) ListVoiceProfileDomains(ctx context.Context, params *ListVoiceP
 }
 
 type ListVoiceProfileDomainsInput struct {
+
+	// The maximum number of results to return in a single call.
 	MaxResults *int32
 
+	// The token used to return the next page of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
 }
 
 type ListVoiceProfileDomainsOutput struct {
+
+	// The token used to return the next page of results.
 	NextToken *string
 
+	// The list of voice profile domains.
 	VoiceProfileDomains []types.VoiceProfileDomainSummary
 
 	// Metadata pertaining to the operation's result.
@@ -117,6 +124,7 @@ var _ ListVoiceProfileDomainsAPIClient = (*Client)(nil)
 // ListVoiceProfileDomainsPaginatorOptions is the paginator options for
 // ListVoiceProfileDomains
 type ListVoiceProfileDomainsPaginatorOptions struct {
+	// The maximum number of results to return in a single call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

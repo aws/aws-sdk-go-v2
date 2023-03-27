@@ -32,7 +32,7 @@ func (c *Client) ListSpeakerEnrollmentJobs(ctx context.Context, params *ListSpea
 
 type ListSpeakerEnrollmentJobsInput struct {
 
-	// The identifier of the domain containing the speaker enrollment jobs.
+	// The identifier of the domain that contains the speaker enrollment jobs.
 	//
 	// This member is required.
 	DomainId *string
@@ -41,7 +41,7 @@ type ListSpeakerEnrollmentJobsInput struct {
 	JobStatus types.SpeakerEnrollmentJobStatus
 
 	// The maximum number of results that are returned per call. You can use NextToken
-	// to obtain further pages of results. The default is 100; the maximum allowed page
+	// to obtain more pages of results. The default is 100; the maximum allowed page
 	// size is also 100.
 	MaxResults *int32
 
@@ -146,7 +146,7 @@ var _ ListSpeakerEnrollmentJobsAPIClient = (*Client)(nil)
 // ListSpeakerEnrollmentJobs
 type ListSpeakerEnrollmentJobsPaginatorOptions struct {
 	// The maximum number of results that are returned per call. You can use NextToken
-	// to obtain further pages of results. The default is 100; the maximum allowed page
+	// to obtain more pages of results. The default is 100; the maximum allowed page
 	// size is also 100.
 	Limit int32
 

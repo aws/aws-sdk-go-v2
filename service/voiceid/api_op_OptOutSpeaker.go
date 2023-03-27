@@ -34,7 +34,7 @@ func (c *Client) OptOutSpeaker(ctx context.Context, params *OptOutSpeakerInput, 
 
 type OptOutSpeakerInput struct {
 
-	// The identifier of the domain containing the speaker.
+	// The identifier of the domain that contains the speaker.
 	//
 	// This member is required.
 	DomainId *string

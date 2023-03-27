@@ -64,7 +64,7 @@ type ImportNotebookInput struct {
 
 type ImportNotebookOutput struct {
 
-	// The ID of the notebook to import.
+	// The ID assigned to the imported notebook.
 	NotebookId *string
 
 	// Metadata pertaining to the operation's result.

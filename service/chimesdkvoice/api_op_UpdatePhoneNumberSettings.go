@@ -10,6 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Updates the phone number settings for the administrator's AWS account, such as
+// the default outbound calling name. You can update the default outbound calling
+// name once every seven days. Outbound calling names can take up to 72 hours to
+// update.
 func (c *Client) UpdatePhoneNumberSettings(ctx context.Context, params *UpdatePhoneNumberSettingsInput, optFns ...func(*Options)) (*UpdatePhoneNumberSettingsOutput, error) {
 	if params == nil {
 		params = &UpdatePhoneNumberSettingsInput{}
@@ -27,6 +31,8 @@ func (c *Client) UpdatePhoneNumberSettings(ctx context.Context, params *UpdatePh
 
 type UpdatePhoneNumberSettingsInput struct {
 
+	// The default outbound calling name for the account.
+	//
 	// This member is required.
 	CallingName *string
 

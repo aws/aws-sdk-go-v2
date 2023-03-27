@@ -11,6 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Creates a voice profile, which consists of an enrolled user and their latest
+// voice print. Before creating any voice profiles, you must provide all notices
+// and obtain all consents from the speaker as required under applicable privacy
+// and biometrics laws, and as required under the AWS service terms
+// (https://aws.amazon.com/service-terms/) for the Amazon Chime SDK. For more
+// information about voice profiles and voice analytics, see Using Amazon Chime SDK
+// Voice Analytics
+// (https://docs.aws.amazon.com/chime-sdk/latest/dg/pstn-voice-analytics.html) in
+// the Amazon Chime SDK Developer Guide.
 func (c *Client) CreateVoiceProfile(ctx context.Context, params *CreateVoiceProfileInput, optFns ...func(*Options)) (*CreateVoiceProfileOutput, error) {
 	if params == nil {
 		params = &CreateVoiceProfileInput{}
@@ -28,6 +37,8 @@ func (c *Client) CreateVoiceProfile(ctx context.Context, params *CreateVoiceProf
 
 type CreateVoiceProfileInput struct {
 
+	// The ID of the speaker search task.
+	//
 	// This member is required.
 	SpeakerSearchTaskId *string
 
@@ -35,6 +46,8 @@ type CreateVoiceProfileInput struct {
 }
 
 type CreateVoiceProfileOutput struct {
+
+	// The requested voice profile.
 	VoiceProfile *types.VoiceProfile
 
 	// Metadata pertaining to the operation's result.

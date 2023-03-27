@@ -13,10 +13,12 @@ import (
 
 // Creates an Amazon SageMaker AutoML job that uses non-tabular data such as images
 // or text for Computer Vision or Natural Language Processing problems. Find the
-// resulting model after you run an AutoML job V2 by calling . To create an
-// AutoMLJob using tabular data, see . This API action is callable through
-// SageMaker Canvas only. Calling it directly from the CLI or an SDK results in an
-// error.
+// resulting model after you run an AutoML job V2 by calling DescribeAutoMLJobV2
+// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html).
+// To create an AutoMLJob using tabular data, see CreateAutoMLJob
+// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html).
+// This API action is callable through SageMaker Canvas only. Calling it directly
+// from the CLI or an SDK results in an error.
 func (c *Client) CreateAutoMLJobV2(ctx context.Context, params *CreateAutoMLJobV2Input, optFns ...func(*Options)) (*CreateAutoMLJobV2Output, error) {
 	if params == nil {
 		params = &CreateAutoMLJobV2Input{}
@@ -70,8 +72,10 @@ type CreateAutoMLJobV2Input struct {
 	// This member is required.
 	RoleArn *string
 
-	// Specifies a metric to minimize or maximize as the objective of a job. For , only
-	// Accuracy is supported.
+	// Specifies a metric to minimize or maximize as the objective of a job. For
+	// CreateAutoMLJobV2
+	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html),
+	// only Accuracy is supported.
 	AutoMLJobObjective *types.AutoMLJobObjective
 
 	// This structure specifies how to split the data into train and validation

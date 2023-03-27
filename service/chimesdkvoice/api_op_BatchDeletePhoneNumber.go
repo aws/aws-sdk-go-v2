@@ -11,6 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Moves phone numbers into the Deletion queue. Phone numbers must be disassociated
+// from any users or Amazon Chime SDK Voice Connectors before they can be deleted.
+// Phone numbers remain in the Deletion queue for 7 days before they are deleted
+// permanently.
 func (c *Client) BatchDeletePhoneNumber(ctx context.Context, params *BatchDeletePhoneNumberInput, optFns ...func(*Options)) (*BatchDeletePhoneNumberOutput, error) {
 	if params == nil {
 		params = &BatchDeletePhoneNumberInput{}
@@ -28,6 +32,8 @@ func (c *Client) BatchDeletePhoneNumber(ctx context.Context, params *BatchDelete
 
 type BatchDeletePhoneNumberInput struct {
 
+	// List of phone number IDs.
+	//
 	// This member is required.
 	PhoneNumberIds []string
 
@@ -35,6 +41,9 @@ type BatchDeletePhoneNumberInput struct {
 }
 
 type BatchDeletePhoneNumberOutput struct {
+
+	// If the action fails for one or more of the phone numbers in the request, a list
+	// of the phone numbers is returned, along with error codes and error messages.
 	PhoneNumberErrors []types.PhoneNumberError
 
 	// Metadata pertaining to the operation's result.

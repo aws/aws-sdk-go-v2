@@ -9725,6 +9725,11 @@ func awsRestjson1_serializeOpDocumentStartChatContactInput(v *StartChatContactIn
 		}
 	}
 
+	if v.RelatedContactId != nil {
+		ok := object.Key("RelatedContactId")
+		ok.String(*v.RelatedContactId)
+	}
+
 	if v.SupportedMessagingContentTypes != nil {
 		ok := object.Key("SupportedMessagingContentTypes")
 		if err := awsRestjson1_serializeDocumentSupportedMessagingContentTypes(v.SupportedMessagingContentTypes, ok); err != nil {

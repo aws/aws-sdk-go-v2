@@ -52,7 +52,7 @@ type UpdateNotebookInput struct {
 	// will fail.
 	ClientRequestToken *string
 
-	// The ID of the session in which the notebook will be updated.
+	// The active notebook session ID. Required if the notebook has an active session.
 	SessionId *string
 
 	noSmithyDocumentSerde

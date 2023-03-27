@@ -10,6 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Stops a speaker search task.
 func (c *Client) StopSpeakerSearchTask(ctx context.Context, params *StopSpeakerSearchTaskInput, optFns ...func(*Options)) (*StopSpeakerSearchTaskOutput, error) {
 	if params == nil {
 		params = &StopSpeakerSearchTaskInput{}
@@ -27,9 +28,13 @@ func (c *Client) StopSpeakerSearchTask(ctx context.Context, params *StopSpeakerS
 
 type StopSpeakerSearchTaskInput struct {
 
+	// The speaker search task ID.
+	//
 	// This member is required.
 	SpeakerSearchTaskId *string
 
+	// The Voice Connector ID.
+	//
 	// This member is required.
 	VoiceConnectorId *string
 

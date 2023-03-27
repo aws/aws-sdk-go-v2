@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Retrieves the details of a SIP rule, such as the rule ID, name, triggers, and
+// target endpoints.
 func (c *Client) GetSipRule(ctx context.Context, params *GetSipRuleInput, optFns ...func(*Options)) (*GetSipRuleOutput, error) {
 	if params == nil {
 		params = &GetSipRuleInput{}
@@ -28,6 +30,8 @@ func (c *Client) GetSipRule(ctx context.Context, params *GetSipRuleInput, optFns
 
 type GetSipRuleInput struct {
 
+	// The SIP rule ID.
+	//
 	// This member is required.
 	SipRuleId *string
 
@@ -35,6 +39,8 @@ type GetSipRuleInput struct {
 }
 
 type GetSipRuleOutput struct {
+
+	// The SIP rule details.
 	SipRule *types.SipRule
 
 	// Metadata pertaining to the operation's result.

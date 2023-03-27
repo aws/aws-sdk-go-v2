@@ -29,7 +29,7 @@ func (c *Client) GetAssociatedResource(ctx context.Context, params *GetAssociate
 
 type GetAssociatedResourceInput struct {
 
-	// The name or ID of the application.
+	// The name, ID, or ARN of the application.
 	//
 	// This member is required.
 	Application *string

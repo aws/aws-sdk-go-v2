@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Updates the specified proxy session details, such as voice or SMS capabilities.
 func (c *Client) UpdateProxySession(ctx context.Context, params *UpdateProxySessionInput, optFns ...func(*Options)) (*UpdateProxySessionOutput, error) {
 	if params == nil {
 		params = &UpdateProxySessionInput{}
@@ -28,21 +29,30 @@ func (c *Client) UpdateProxySession(ctx context.Context, params *UpdateProxySess
 
 type UpdateProxySessionInput struct {
 
+	// The proxy session capabilities.
+	//
 	// This member is required.
 	Capabilities []types.Capability
 
+	// The proxy session ID.
+	//
 	// This member is required.
 	ProxySessionId *string
 
+	// The Voice Connector ID.
+	//
 	// This member is required.
 	VoiceConnectorId *string
 
+	// The number of minutes allowed for the proxy session.
 	ExpiryMinutes *int32
 
 	noSmithyDocumentSerde
 }
 
 type UpdateProxySessionOutput struct {
+
+	// The updated proxy session details.
 	ProxySession *types.ProxySession
 
 	// Metadata pertaining to the operation's result.

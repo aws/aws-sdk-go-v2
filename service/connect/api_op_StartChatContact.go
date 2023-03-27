@@ -84,7 +84,7 @@ type StartChatContactInput struct {
 	Attributes map[string]string
 
 	// The total duration of the newly started chat session. If not specified, the chat
-	// session duration defaults to 25 hour. The minumum configurable time is 60
+	// session duration defaults to 25 hour. The minimum configurable time is 60
 	// minutes. The maximum configurable time is 10,080 minutes (7 days).
 	ChatDurationInMinutes *int32
 
@@ -104,11 +104,24 @@ type StartChatContactInput struct {
 	// (https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html).
 	PersistentChat *types.PersistentChat
 
-	// The supported chat message content types. Content types must always contain
-	// text/plain. You can then put any other supported type in the list. For example,
-	// all the following lists are valid because they contain text/plain: [text/plain,
-	// text/markdown, application/json], [text/markdown, text/plain], [text/plain,
-	// application/json].
+	// The unique identifier for an Amazon Connect contact. This identifier is related
+	// to the chat starting. You cannot provide data for both RelatedContactId and
+	// PersistentChat.
+	RelatedContactId *string
+
+	// The supported chat message content types. Supported types are text/plain,
+	// text/markdown, application/json,
+	// application/vnd.amazonaws.connect.message.interactive, and
+	// application/vnd.amazonaws.connect.message.interactive.response. Content types
+	// must always contain text/plain. You can then put any other supported type in the
+	// list. For example, all the following lists are valid because they contain
+	// text/plain: [text/plain, text/markdown, application/json], [text/markdown,
+	// text/plain], [text/plain, application/json,
+	// application/vnd.amazonaws.connect.message.interactive.response]. The type
+	// application/vnd.amazonaws.connect.message.interactive is required to use the
+	// Show view
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/show-view-block.html)
+	// flow block.
 	SupportedMessagingContentTypes []string
 
 	noSmithyDocumentSerde

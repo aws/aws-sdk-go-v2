@@ -11,6 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Creates an order for phone numbers to be provisioned. For numbers outside the
+// U.S., you must use the Amazon Chime SDK SIP media application dial-in product
+// type.
 func (c *Client) CreatePhoneNumberOrder(ctx context.Context, params *CreatePhoneNumberOrderInput, optFns ...func(*Options)) (*CreatePhoneNumberOrderOutput, error) {
 	if params == nil {
 		params = &CreatePhoneNumberOrderInput{}
@@ -28,9 +31,13 @@ func (c *Client) CreatePhoneNumberOrder(ctx context.Context, params *CreatePhone
 
 type CreatePhoneNumberOrderInput struct {
 
+	// List of phone numbers, in E.164 format.
+	//
 	// This member is required.
 	E164PhoneNumbers []string
 
+	// The phone number product type.
+	//
 	// This member is required.
 	ProductType types.PhoneNumberProductType
 
@@ -38,6 +45,8 @@ type CreatePhoneNumberOrderInput struct {
 }
 
 type CreatePhoneNumberOrderOutput struct {
+
+	// The phone number order details.
 	PhoneNumberOrder *types.PhoneNumberOrder
 
 	// Metadata pertaining to the operation's result.

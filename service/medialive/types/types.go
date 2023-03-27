@@ -2560,11 +2560,13 @@ type HlsGroupSettings struct {
 // Settings for the action to insert a user-defined ID3 tag in each HLS segment
 type HlsId3SegmentTaggingScheduleActionSettings struct {
 
+	// Base64 string formatted according to the ID3 specification:
+	// http://id3.org/id3v2.4.0-structure
+	Id3 *string
+
 	// ID3 tag to insert into each segment. Supports special keyword identifiers to
 	// substitute in segment-related values.\nSupported keyword identifiers:
 	// https://docs.aws.amazon.com/medialive/latest/ug/variable-data-identifiers.html
-	//
-	// This member is required.
 	Tag *string
 
 	noSmithyDocumentSerde
@@ -3016,6 +3018,9 @@ type InputDeviceSummary struct {
 
 	// The unique serial number of the input device.
 	SerialNumber *string
+
+	// A collection of key-value pairs.
+	Tags map[string]string
 
 	// The type of the input device.
 	Type InputDeviceType

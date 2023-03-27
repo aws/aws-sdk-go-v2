@@ -11,6 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Creates an Amazon Chime SDK Voice Connector group under the administrator's AWS
+// account. You can associate Amazon Chime SDK Voice Connectors with the Voice
+// Connector group by including VoiceConnectorItems in the request. You can include
+// Voice Connectors from different AWS Regions in your group. This creates a fault
+// tolerant mechanism for fallback in case of availability events.
 func (c *Client) CreateVoiceConnectorGroup(ctx context.Context, params *CreateVoiceConnectorGroupInput, optFns ...func(*Options)) (*CreateVoiceConnectorGroupOutput, error) {
 	if params == nil {
 		params = &CreateVoiceConnectorGroupInput{}
@@ -28,15 +33,20 @@ func (c *Client) CreateVoiceConnectorGroup(ctx context.Context, params *CreateVo
 
 type CreateVoiceConnectorGroupInput struct {
 
+	// The name of the Voice Connector group.
+	//
 	// This member is required.
 	Name *string
 
+	// Lists the Voice Connectors that inbound calls are routed to.
 	VoiceConnectorItems []types.VoiceConnectorItem
 
 	noSmithyDocumentSerde
 }
 
 type CreateVoiceConnectorGroupOutput struct {
+
+	// The details of the Voice Connector group.
 	VoiceConnectorGroup *types.VoiceConnectorGroup
 
 	// Metadata pertaining to the operation's result.

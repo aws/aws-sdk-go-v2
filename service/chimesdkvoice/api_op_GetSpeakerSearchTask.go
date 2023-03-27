@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Retrieves the details of the specified speaker search task.
 func (c *Client) GetSpeakerSearchTask(ctx context.Context, params *GetSpeakerSearchTaskInput, optFns ...func(*Options)) (*GetSpeakerSearchTaskOutput, error) {
 	if params == nil {
 		params = &GetSpeakerSearchTaskInput{}
@@ -28,9 +29,13 @@ func (c *Client) GetSpeakerSearchTask(ctx context.Context, params *GetSpeakerSea
 
 type GetSpeakerSearchTaskInput struct {
 
+	// The ID of the speaker search task.
+	//
 	// This member is required.
 	SpeakerSearchTaskId *string
 
+	// The Voice Connector ID.
+	//
 	// This member is required.
 	VoiceConnectorId *string
 
@@ -38,6 +43,8 @@ type GetSpeakerSearchTaskInput struct {
 }
 
 type GetSpeakerSearchTaskOutput struct {
+
+	// The details of the speaker search task.
 	SpeakerSearchTask *types.SpeakerSearchTask
 
 	// Metadata pertaining to the operation's result.
