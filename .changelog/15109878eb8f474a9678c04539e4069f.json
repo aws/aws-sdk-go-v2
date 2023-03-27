@@ -1,8 +1,0 @@
-{
-    "id": "15109878-eb8f-474a-9678-c04539e4069f",
-    "type": "feature",
-    "description": "Enforces a minimal level of encryption for the workgroup for query and calculation results that are written to Amazon S3. When enabled, workgroup users can set encryption only to the minimum level set by the administrator or higher when they submit queries.",
-    "modules": [
-        "service/athena"
-    ]
-}

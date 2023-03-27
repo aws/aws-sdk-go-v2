@@ -1,8 +1,0 @@
-{
-    "id": "b0a43d0c-2e6a-4191-9cc7-9a7dfa5d0d88",
-    "type": "feature",
-    "description": "AWS Elemental MediaLive now supports ID3 tag insertion for audio only HLS output groups. AWS Elemental Link devices now support tagging.",
-    "modules": [
-        "service/medialive"
-    ]
-}

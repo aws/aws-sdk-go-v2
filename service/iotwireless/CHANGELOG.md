@@ -1,3 +1,7 @@
+# v1.26.0 (2023-03-27)
+
+* **Feature**: Introducing new APIs that enable Sidewalk devices to communicate with AWS IoT Core through Sidewalk gateways. This will empower AWS customers to connect Sidewalk devices with other AWS IoT Services, creating  possibilities for seamless integration and advanced device management.
+
 # v1.25.2 (2023-03-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

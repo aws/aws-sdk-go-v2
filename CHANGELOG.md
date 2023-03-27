@@ -1,3 +1,27 @@
+# Release (2023-03-27)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.24.0](service/athena/CHANGELOG.md#v1240-2023-03-27)
+  * **Feature**: Enforces a minimal level of encryption for the workgroup for query and calculation results that are written to Amazon S3. When enabled, workgroup users can set encryption only to the minimum level set by the administrator or higher when they submit queries.
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkvoice`: [v1.4.0](service/chimesdkvoice/CHANGELOG.md#v140-2023-03-27)
+  * **Feature**: Documentation updates for Amazon Chime SDK Voice.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.50.0](service/connect/CHANGELOG.md#v1500-2023-03-27)
+  * **Feature**: This release introduces support for RelatedContactId in the StartChatContact API. Interactive message and interactive message response have been added to the list of supported message content types for this API as well.
+* `github.com/aws/aws-sdk-go-v2/service/connectparticipant`: [v1.15.7](service/connectparticipant/CHANGELOG.md#v1157-2023-03-27)
+  * **Documentation**: This release provides an update to the SendMessage API to handle interactive message response content-types.
+* `github.com/aws/aws-sdk-go-v2/service/iotwireless`: [v1.26.0](service/iotwireless/CHANGELOG.md#v1260-2023-03-27)
+  * **Feature**: Introducing new APIs that enable Sidewalk devices to communicate with AWS IoT Core through Sidewalk gateways. This will empower AWS customers to connect Sidewalk devices with other AWS IoT Services, creating  possibilities for seamless integration and advanced device management.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.31.0](service/medialive/CHANGELOG.md#v1310-2023-03-27)
+  * **Feature**: AWS Elemental MediaLive now supports ID3 tag insertion for audio only HLS output groups. AWS Elemental Link devices now support tagging.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.72.1](service/sagemaker/CHANGELOG.md#v1721-2023-03-27)
+  * **Documentation**: Fixed some improperly rendered links in SDK documentation.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.30.0](service/securityhub/CHANGELOG.md#v1300-2023-03-27)
+  * **Feature**: Added new resource detail objects to ASFF, including resources for AwsEksCluster, AWSS3Bucket, AwsEc2RouteTable and AwsEC2Instance.
+* `github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry`: [v1.17.0](service/servicecatalogappregistry/CHANGELOG.md#v1170-2023-03-27)
+  * **Feature**: In this release, we started supporting ARN in applicationSpecifier and attributeGroupSpecifier. GetAttributeGroup, ListAttributeGroups and ListAttributeGroupsForApplication APIs will now have CreatedBy field in the response.
+* `github.com/aws/aws-sdk-go-v2/service/voiceid`: [v1.13.0](service/voiceid/CHANGELOG.md#v1130-2023-03-27)
+  * **Feature**: Amazon Connect Voice ID now supports multiple fraudster watchlists. Every domain has a default watchlist where all existing fraudsters are placed by default. Custom watchlists may now be created, managed, and evaluated against for known fraudster detection.
+
 # Release (2023-03-24)
 
 ## Module Highlights

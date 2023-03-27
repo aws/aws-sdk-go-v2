@@ -1,8 +1,0 @@
-{
-    "id": "6b7be3c2-6c2b-4708-b80d-a542100a5757",
-    "type": "feature",
-    "description": "Amazon Connect Voice ID now supports multiple fraudster watchlists. Every domain has a default watchlist where all existing fraudsters are placed by default. Custom watchlists may now be created, managed, and evaluated against for known fraudster detection.",
-    "modules": [
-        "service/voiceid"
-    ]
-}

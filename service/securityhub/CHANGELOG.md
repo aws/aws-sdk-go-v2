@@ -1,3 +1,7 @@
+# v1.30.0 (2023-03-27)
+
+* **Feature**: Added new resource detail objects to ASFF, including resources for AwsEksCluster, AWSS3Bucket, AwsEc2RouteTable and AwsEC2Instance.
+
 # v1.29.3 (2023-03-22)
 
 * No change notes available for this release.

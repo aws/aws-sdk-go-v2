@@ -1,3 +1,7 @@
+# v1.13.0 (2023-03-27)
+
+* **Feature**: Amazon Connect Voice ID now supports multiple fraudster watchlists. Every domain has a default watchlist where all existing fraudsters are placed by default. Custom watchlists may now be created, managed, and evaluated against for known fraudster detection.
+
 # v1.12.6 (2023-03-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

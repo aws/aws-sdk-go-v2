@@ -1,8 +1,0 @@
-{
-    "id": "983f4cff-538f-4356-87b1-f663da8023f0",
-    "type": "documentation",
-    "description": "Fixed some improperly rendered links in SDK documentation.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

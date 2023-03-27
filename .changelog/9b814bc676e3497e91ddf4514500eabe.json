@@ -1,8 +1,0 @@
-{
-    "id": "9b814bc6-76e3-497e-91dd-f4514500eabe",
-    "type": "feature",
-    "description": "Added new resource detail objects to ASFF, including resources for AwsEksCluster, AWSS3Bucket, AwsEc2RouteTable and AwsEC2Instance.",
-    "modules": [
-        "service/securityhub"
-    ]
-}

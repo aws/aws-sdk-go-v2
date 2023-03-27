@@ -1,8 +1,0 @@
-{
-    "id": "1b7c745e-0b08-45ea-a2ca-b7f70fd5e66e",
-    "type": "feature",
-    "description": "Documentation updates for Amazon Chime SDK Voice.",
-    "modules": [
-        "service/chimesdkvoice"
-    ]
-}

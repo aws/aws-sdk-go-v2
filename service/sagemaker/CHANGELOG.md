@@ -1,3 +1,7 @@
+# v1.72.1 (2023-03-27)
+
+* **Documentation**: Fixed some improperly rendered links in SDK documentation.
+
 # v1.72.0 (2023-03-23)
 
 * **Feature**: Amazon SageMaker Autopilot adds two new APIs - CreateAutoMLJobV2 and DescribeAutoMLJobV2. Amazon SageMaker Notebook Instances now supports the ml.geospatial.interactive instance type.

@@ -1,8 +1,0 @@
-{
-    "id": "a1115a97-4e85-4344-af72-7156f9bdf820",
-    "type": "feature",
-    "description": "This release introduces support for RelatedContactId in the StartChatContact API. Interactive message and interactive message response have been added to the list of supported message content types for this API as well.",
-    "modules": [
-        "service/connect"
-    ]
-}

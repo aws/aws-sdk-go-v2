@@ -1,8 +1,0 @@
-{
-    "id": "d9a9c4f7-e8e2-4b0a-8da2-7551c3aab1a8",
-    "type": "documentation",
-    "description": "This release provides an update to the SendMessage API to handle interactive message response content-types.",
-    "modules": [
-        "service/connectparticipant"
-    ]
-}
