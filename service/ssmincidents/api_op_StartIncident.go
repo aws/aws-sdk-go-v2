@@ -62,7 +62,8 @@ type StartIncidentInput struct {
 	Impact *int32
 
 	// Add related items to the incident for other responders to use. Related items are
-	// AWS resources, external links, or files uploaded to an Amazon S3 bucket.
+	// Amazon Web Services resources, external links, or files uploaded to an Amazon S3
+	// bucket.
 	RelatedItems []types.RelatedItem
 
 	// Provide a title for the incident. Providing a title overwrites the title

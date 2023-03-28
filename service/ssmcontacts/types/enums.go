@@ -80,8 +80,9 @@ type ContactType string
 
 // Enum values for ContactType
 const (
-	ContactTypePersonal   ContactType = "PERSONAL"
-	ContactTypeEscalation ContactType = "ESCALATION"
+	ContactTypePersonal       ContactType = "PERSONAL"
+	ContactTypeEscalation     ContactType = "ESCALATION"
+	ContactTypeOncallSchedule ContactType = "ONCALL_SCHEDULE"
 )
 
 // Values returns all known values for ContactType. Note that this can be expanded
@@ -91,6 +92,35 @@ func (ContactType) Values() []ContactType {
 	return []ContactType{
 		"PERSONAL",
 		"ESCALATION",
+		"ONCALL_SCHEDULE",
+	}
+}
+
+type DayOfWeek string
+
+// Enum values for DayOfWeek
+const (
+	DayOfWeekMon DayOfWeek = "MON"
+	DayOfWeekTue DayOfWeek = "TUE"
+	DayOfWeekWed DayOfWeek = "WED"
+	DayOfWeekThu DayOfWeek = "THU"
+	DayOfWeekFri DayOfWeek = "FRI"
+	DayOfWeekSat DayOfWeek = "SAT"
+	DayOfWeekSun DayOfWeek = "SUN"
+)
+
+// Values returns all known values for DayOfWeek. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (DayOfWeek) Values() []DayOfWeek {
+	return []DayOfWeek{
+		"MON",
+		"TUE",
+		"WED",
+		"THU",
+		"FRI",
+		"SAT",
+		"SUN",
 	}
 }
 
@@ -115,6 +145,24 @@ func (ReceiptType) Values() []ReceiptType {
 		"READ",
 		"SENT",
 		"STOP",
+	}
+}
+
+type ShiftType string
+
+// Enum values for ShiftType
+const (
+	ShiftTypeRegular    ShiftType = "REGULAR"
+	ShiftTypeOverridden ShiftType = "OVERRIDDEN"
+)
+
+// Values returns all known values for ShiftType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (ShiftType) Values() []ShiftType {
+	return []ShiftType{
+		"REGULAR",
+		"OVERRIDDEN",
 	}
 }
 

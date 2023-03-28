@@ -36,7 +36,7 @@ type ListTimelineEventsInput struct {
 	IncidentRecordArn *string
 
 	// Filters the timeline events based on the provided conditional values. You can
-	// filter timeline events using the following keys:
+	// filter timeline events with the following keys:
 	//
 	// * eventTime
 	//
@@ -62,7 +62,7 @@ type ListTimelineEventsInput struct {
 	// The pagination token to continue to the next page of results.
 	NextToken *string
 
-	// Sort by the specified key value pair.
+	// Sort timeline events by the specified key value pair.
 	SortBy types.TimelineEventSort
 
 	// Sorts the order of timeline events by the value specified in the sortBy field.

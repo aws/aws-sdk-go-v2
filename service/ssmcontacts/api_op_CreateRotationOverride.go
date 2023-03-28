@@ -6,75 +6,77 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"time"
 )
 
-// Used to acknowledge an engagement to a contact channel during an incident.
-func (c *Client) AcceptPage(ctx context.Context, params *AcceptPageInput, optFns ...func(*Options)) (*AcceptPageOutput, error) {
+// Creates an override for a rotation in an on-call schedule.
+func (c *Client) CreateRotationOverride(ctx context.Context, params *CreateRotationOverrideInput, optFns ...func(*Options)) (*CreateRotationOverrideOutput, error) {
 	if params == nil {
-		params = &AcceptPageInput{}
+		params = &CreateRotationOverrideInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AcceptPage", params, optFns, c.addOperationAcceptPageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateRotationOverride", params, optFns, c.addOperationCreateRotationOverrideMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*AcceptPageOutput)
+	out := result.(*CreateRotationOverrideOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type AcceptPageInput struct {
+type CreateRotationOverrideInput struct {
 
-	// A 6-digit code used to acknowledge the page.
+	// The date and time when the override ends.
 	//
 	// This member is required.
-	AcceptCode *string
+	EndTime *time.Time
 
-	// The type indicates if the page was DELIVERED or READ.
+	// The Amazon Resource Names (ARNs) of the contacts to replace those in the current
+	// on-call rotation with. If you want to include any current team members in the
+	// override shift, you must include their ARNs in the new contact ID list.
 	//
 	// This member is required.
-	AcceptType types.AcceptType
+	NewContactIds []string
 
-	// The Amazon Resource Name (ARN) of the engagement to a contact channel.
+	// The Amazon Resource Name (ARN) of the rotation to create an override for.
 	//
 	// This member is required.
-	PageId *string
+	RotationId *string
 
-	// An optional field that Incident Manager uses to ENFORCEAcceptCode validation
-	// when acknowledging an page. Acknowledgement can occur by replying to a page, or
-	// when entering the AcceptCode in the console. Enforcing AcceptCode validation
-	// causes Incident Manager to verify that the code entered by the user matches the
-	// code sent by Incident Manager with the page. Incident Manager can also
-	// IGNOREAcceptCode validation. Ignoring AcceptCode validation causes Incident
-	// Manager to accept any value entered for the AcceptCode.
-	AcceptCodeValidation types.AcceptCodeValidation
+	// The date and time when the override goes into effect.
+	//
+	// This member is required.
+	StartTime *time.Time
 
-	// The ARN of the contact channel.
-	ContactChannelId *string
-
-	// Information provided by the user when the user acknowledges the page.
-	Note *string
+	// A token that ensures that the operation is called only once with the specified
+	// details.
+	IdempotencyToken *string
 
 	noSmithyDocumentSerde
 }
 
-type AcceptPageOutput struct {
+type CreateRotationOverrideOutput struct {
+
+	// The Amazon Resource Name (ARN) of the created rotation override.
+	//
+	// This member is required.
+	RotationOverrideId *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationAcceptPageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAcceptPage{}, middleware.After)
+func (c *Client) addOperationCreateRotationOverrideMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateRotationOverride{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAcceptPage{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateRotationOverride{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -114,10 +116,10 @@ func (c *Client) addOperationAcceptPageMiddlewares(stack *middleware.Stack, opti
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpAcceptPageValidationMiddleware(stack); err != nil {
+	if err = addOpCreateRotationOverrideValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAcceptPage(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRotationOverride(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -132,11 +134,11 @@ func (c *Client) addOperationAcceptPageMiddlewares(stack *middleware.Stack, opti
 	return nil
 }
 
-func newServiceMetadataMiddleware_opAcceptPage(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opCreateRotationOverride(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "ssm-contacts",
-		OperationName: "AcceptPage",
+		OperationName: "CreateRotationOverride",
 	}
 }

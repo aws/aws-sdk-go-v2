@@ -31,8 +31,8 @@ func (c *Client) ListIncidentRecords(ctx context.Context, params *ListIncidentRe
 
 type ListIncidentRecordsInput struct {
 
-	// Filters the list of incident records through which you are searching. You can
-	// filter on the following keys:
+	// Filters the list of incident records you want to search through. You can filter
+	// on the following keys:
 	//
 	// * creationTime
 	//
@@ -40,20 +40,20 @@ type ListIncidentRecordsInput struct {
 	//
 	// * status
 	//
-	// *
-	// createdBy
+	// * createdBy
 	//
-	// Note the following when deciding how to use Filters:
+	// Note
+	// the following when when you use Filters:
 	//
-	// * If you don't
-	// specify a Filter, the response includes all incident records.
+	// * If you don't specify a Filter, the
+	// response includes all incident records.
 	//
-	// * If you specify
-	// more than one filter in a single request, the response returns incident records
-	// that match all filters.
+	// * If you specify more than one filter
+	// in a single request, the response returns incident records that match all
+	// filters.
 	//
-	// * If you specify a filter with more than one value, the
-	// response returns incident records that match any of the values provided.
+	// * If you specify a filter with more than one value, the response
+	// returns incident records that match any of the values provided.
 	Filters []types.Filter
 
 	// The maximum number of results per page.

@@ -90,6 +90,46 @@ func (m *validateOpCreateContact) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateRotation struct {
+}
+
+func (*validateOpCreateRotation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRotation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRotationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRotationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateRotationOverride struct {
+}
+
+func (*validateOpCreateRotationOverride) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRotationOverride) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRotationOverrideInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRotationOverrideInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeactivateContactChannel struct {
 }
 
@@ -145,6 +185,46 @@ func (m *validateOpDeleteContact) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteContactInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteRotation struct {
+}
+
+func (*validateOpDeleteRotation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRotation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRotationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRotationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteRotationOverride struct {
+}
+
+func (*validateOpDeleteRotationOverride) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRotationOverride) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRotationOverrideInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRotationOverrideInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -250,6 +330,46 @@ func (m *validateOpGetContactPolicy) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetRotation struct {
+}
+
+func (*validateOpGetRotation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRotation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRotationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRotationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetRotationOverride struct {
+}
+
+func (*validateOpGetRotationOverride) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRotationOverride) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRotationOverrideInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRotationOverrideInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListContactChannels struct {
 }
 
@@ -290,6 +410,26 @@ func (m *validateOpListPageReceipts) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListPageResolutions struct {
+}
+
+func (*validateOpListPageResolutions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListPageResolutions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListPageResolutionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListPageResolutionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListPagesByContact struct {
 }
 
@@ -325,6 +465,66 @@ func (m *validateOpListPagesByEngagement) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListPagesByEngagementInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListPreviewRotationShifts struct {
+}
+
+func (*validateOpListPreviewRotationShifts) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListPreviewRotationShifts) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListPreviewRotationShiftsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListPreviewRotationShiftsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListRotationOverrides struct {
+}
+
+func (*validateOpListRotationOverrides) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListRotationOverrides) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListRotationOverridesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListRotationOverridesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListRotationShifts struct {
+}
+
+func (*validateOpListRotationShifts) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListRotationShifts) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListRotationShiftsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListRotationShiftsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -510,6 +710,26 @@ func (m *validateOpUpdateContact) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateRotation struct {
+}
+
+func (*validateOpUpdateRotation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRotation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRotationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRotationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAcceptPageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAcceptPage{}, middleware.After)
 }
@@ -526,6 +746,14 @@ func addOpCreateContactValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateContact{}, middleware.After)
 }
 
+func addOpCreateRotationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRotation{}, middleware.After)
+}
+
+func addOpCreateRotationOverrideValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRotationOverride{}, middleware.After)
+}
+
 func addOpDeactivateContactChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeactivateContactChannel{}, middleware.After)
 }
@@ -536,6 +764,14 @@ func addOpDeleteContactChannelValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpDeleteContactValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteContact{}, middleware.After)
+}
+
+func addOpDeleteRotationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRotation{}, middleware.After)
+}
+
+func addOpDeleteRotationOverrideValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRotationOverride{}, middleware.After)
 }
 
 func addOpDescribeEngagementValidationMiddleware(stack *middleware.Stack) error {
@@ -558,6 +794,14 @@ func addOpGetContactPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetContactPolicy{}, middleware.After)
 }
 
+func addOpGetRotationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRotation{}, middleware.After)
+}
+
+func addOpGetRotationOverrideValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRotationOverride{}, middleware.After)
+}
+
 func addOpListContactChannelsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListContactChannels{}, middleware.After)
 }
@@ -566,12 +810,28 @@ func addOpListPageReceiptsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListPageReceipts{}, middleware.After)
 }
 
+func addOpListPageResolutionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListPageResolutions{}, middleware.After)
+}
+
 func addOpListPagesByContactValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListPagesByContact{}, middleware.After)
 }
 
 func addOpListPagesByEngagementValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListPagesByEngagement{}, middleware.After)
+}
+
+func addOpListPreviewRotationShiftsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListPreviewRotationShifts{}, middleware.After)
+}
+
+func addOpListRotationOverridesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListRotationOverrides{}, middleware.After)
+}
+
+func addOpListRotationShiftsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListRotationShifts{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -610,6 +870,10 @@ func addOpUpdateContactValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateContact{}, middleware.After)
 }
 
+func addOpUpdateRotationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRotation{}, middleware.After)
+}
+
 func validateChannelTargetInfo(v *types.ChannelTargetInfo) error {
 	if v == nil {
 		return nil
@@ -640,16 +904,176 @@ func validateContactTargetInfo(v *types.ContactTargetInfo) error {
 	}
 }
 
+func validateCoverageTime(v *types.CoverageTime) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CoverageTime"}
+	if v.Start != nil {
+		if err := validateHandOffTime(v.Start); err != nil {
+			invalidParams.AddNested("Start", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.End != nil {
+		if err := validateHandOffTime(v.End); err != nil {
+			invalidParams.AddNested("End", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCoverageTimes(v []types.CoverageTime) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CoverageTimes"}
+	for i := range v {
+		if err := validateCoverageTime(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDailySettings(v []types.HandOffTime) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DailySettings"}
+	for i := range v {
+		if err := validateHandOffTime(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHandOffTime(v *types.HandOffTime) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HandOffTime"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMonthlySetting(v *types.MonthlySetting) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MonthlySetting"}
+	if v.DayOfMonth == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DayOfMonth"))
+	}
+	if v.HandOffTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HandOffTime"))
+	} else if v.HandOffTime != nil {
+		if err := validateHandOffTime(v.HandOffTime); err != nil {
+			invalidParams.AddNested("HandOffTime", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMonthlySettings(v []types.MonthlySetting) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MonthlySettings"}
+	for i := range v {
+		if err := validateMonthlySetting(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePlan(v *types.Plan) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Plan"}
-	if v.Stages == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Stages"))
-	} else if v.Stages != nil {
+	if v.Stages != nil {
 		if err := validateStagesList(v.Stages); err != nil {
 			invalidParams.AddNested("Stages", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRecurrenceSettings(v *types.RecurrenceSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecurrenceSettings"}
+	if v.MonthlySettings != nil {
+		if err := validateMonthlySettings(v.MonthlySettings); err != nil {
+			invalidParams.AddNested("MonthlySettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.WeeklySettings != nil {
+		if err := validateWeeklySettings(v.WeeklySettings); err != nil {
+			invalidParams.AddNested("WeeklySettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DailySettings != nil {
+		if err := validateDailySettings(v.DailySettings); err != nil {
+			invalidParams.AddNested("DailySettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NumberOfOnCalls == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NumberOfOnCalls"))
+	}
+	if v.ShiftCoverages != nil {
+		if err := validateShiftCoveragesMap(v.ShiftCoverages); err != nil {
+			invalidParams.AddNested("ShiftCoverages", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RecurrenceMultiplier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecurrenceMultiplier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateShiftCoveragesMap(v map[string][]types.CoverageTime) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ShiftCoveragesMap"}
+	for key := range v {
+		if err := validateCoverageTimes(v[key]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -727,6 +1151,45 @@ func validateTargetsList(v []types.Target) error {
 	invalidParams := smithy.InvalidParamsError{Context: "TargetsList"}
 	for i := range v {
 		if err := validateTarget(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWeeklySetting(v *types.WeeklySetting) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WeeklySetting"}
+	if len(v.DayOfWeek) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DayOfWeek"))
+	}
+	if v.HandOffTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HandOffTime"))
+	} else if v.HandOffTime != nil {
+		if err := validateHandOffTime(v.HandOffTime); err != nil {
+			invalidParams.AddNested("HandOffTime", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWeeklySettings(v []types.WeeklySetting) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WeeklySettings"}
+	for i := range v {
+		if err := validateWeeklySetting(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -825,6 +1288,58 @@ func validateOpCreateContactInput(v *CreateContactInput) error {
 	}
 }
 
+func validateOpCreateRotationInput(v *CreateRotationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRotationInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ContactIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactIds"))
+	}
+	if v.TimeZoneId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TimeZoneId"))
+	}
+	if v.Recurrence == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Recurrence"))
+	} else if v.Recurrence != nil {
+		if err := validateRecurrenceSettings(v.Recurrence); err != nil {
+			invalidParams.AddNested("Recurrence", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateRotationOverrideInput(v *CreateRotationOverrideInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRotationOverrideInput"}
+	if v.RotationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RotationId"))
+	}
+	if v.NewContactIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NewContactIds"))
+	}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeactivateContactChannelInput(v *DeactivateContactChannelInput) error {
 	if v == nil {
 		return nil
@@ -862,6 +1377,39 @@ func validateOpDeleteContactInput(v *DeleteContactInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteContactInput"}
 	if v.ContactId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteRotationInput(v *DeleteRotationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRotationInput"}
+	if v.RotationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RotationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteRotationOverrideInput(v *DeleteRotationOverrideInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRotationOverrideInput"}
+	if v.RotationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RotationId"))
+	}
+	if v.RotationOverrideId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RotationOverrideId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -945,6 +1493,39 @@ func validateOpGetContactPolicyInput(v *GetContactPolicyInput) error {
 	}
 }
 
+func validateOpGetRotationInput(v *GetRotationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRotationInput"}
+	if v.RotationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RotationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetRotationOverrideInput(v *GetRotationOverrideInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRotationOverrideInput"}
+	if v.RotationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RotationId"))
+	}
+	if v.RotationOverrideId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RotationOverrideId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListContactChannelsInput(v *ListContactChannelsInput) error {
 	if v == nil {
 		return nil
@@ -965,6 +1546,21 @@ func validateOpListPageReceiptsInput(v *ListPageReceiptsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListPageReceiptsInput"}
+	if v.PageId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PageId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListPageResolutionsInput(v *ListPageResolutionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListPageResolutionsInput"}
 	if v.PageId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PageId"))
 	}
@@ -997,6 +1593,73 @@ func validateOpListPagesByEngagementInput(v *ListPagesByEngagementInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListPagesByEngagementInput"}
 	if v.EngagementId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EngagementId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListPreviewRotationShiftsInput(v *ListPreviewRotationShiftsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListPreviewRotationShiftsInput"}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if v.Members == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Members"))
+	}
+	if v.TimeZoneId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TimeZoneId"))
+	}
+	if v.Recurrence == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Recurrence"))
+	} else if v.Recurrence != nil {
+		if err := validateRecurrenceSettings(v.Recurrence); err != nil {
+			invalidParams.AddNested("Recurrence", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListRotationOverridesInput(v *ListRotationOverridesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListRotationOverridesInput"}
+	if v.RotationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RotationId"))
+	}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListRotationShiftsInput(v *ListRotationShiftsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListRotationShiftsInput"}
+	if v.RotationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RotationId"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1154,6 +1817,28 @@ func validateOpUpdateContactInput(v *UpdateContactInput) error {
 	if v.Plan != nil {
 		if err := validatePlan(v.Plan); err != nil {
 			invalidParams.AddNested("Plan", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRotationInput(v *UpdateRotationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRotationInput"}
+	if v.RotationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RotationId"))
+	}
+	if v.Recurrence == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Recurrence"))
+	} else if v.Recurrence != nil {
+		if err := validateRecurrenceSettings(v.Recurrence); err != nil {
+			invalidParams.AddNested("Recurrence", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

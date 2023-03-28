@@ -9,72 +9,70 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"time"
 )
 
-// Used to acknowledge an engagement to a contact channel during an incident.
-func (c *Client) AcceptPage(ctx context.Context, params *AcceptPageInput, optFns ...func(*Options)) (*AcceptPageOutput, error) {
+// Updates the information specified for an on-call rotation.
+func (c *Client) UpdateRotation(ctx context.Context, params *UpdateRotationInput, optFns ...func(*Options)) (*UpdateRotationOutput, error) {
 	if params == nil {
-		params = &AcceptPageInput{}
+		params = &UpdateRotationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AcceptPage", params, optFns, c.addOperationAcceptPageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateRotation", params, optFns, c.addOperationUpdateRotationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*AcceptPageOutput)
+	out := result.(*UpdateRotationOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type AcceptPageInput struct {
+type UpdateRotationInput struct {
 
-	// A 6-digit code used to acknowledge the page.
+	// Information about how long the updated rotation lasts before restarting at the
+	// beginning of the shift order.
 	//
 	// This member is required.
-	AcceptCode *string
+	Recurrence *types.RecurrenceSettings
 
-	// The type indicates if the page was DELIVERED or READ.
+	// The Amazon Resource Name (ARN) of the rotation to update.
 	//
 	// This member is required.
-	AcceptType types.AcceptType
+	RotationId *string
 
-	// The Amazon Resource Name (ARN) of the engagement to a contact channel.
-	//
-	// This member is required.
-	PageId *string
+	// The Amazon Resource Names (ARNs) of the contacts to include in the updated
+	// rotation. The order in which you list the contacts is their shift order in the
+	// rotation schedule.
+	ContactIds []string
 
-	// An optional field that Incident Manager uses to ENFORCEAcceptCode validation
-	// when acknowledging an page. Acknowledgement can occur by replying to a page, or
-	// when entering the AcceptCode in the console. Enforcing AcceptCode validation
-	// causes Incident Manager to verify that the code entered by the user matches the
-	// code sent by Incident Manager with the page. Incident Manager can also
-	// IGNOREAcceptCode validation. Ignoring AcceptCode validation causes Incident
-	// Manager to accept any value entered for the AcceptCode.
-	AcceptCodeValidation types.AcceptCodeValidation
+	// The date and time the rotation goes into effect.
+	StartTime *time.Time
 
-	// The ARN of the contact channel.
-	ContactChannelId *string
-
-	// Information provided by the user when the user acknowledges the page.
-	Note *string
+	// The time zone to base the updated rotation’s activity on, in Internet Assigned
+	// Numbers Authority (IANA) format. For example: "America/Los_Angeles", "UTC", or
+	// "Asia/Seoul". For more information, see the Time Zone Database
+	// (https://www.iana.org/time-zones) on the IANA website. Designators for time
+	// zones that don’t support Daylight Savings Time Rules, such as Pacific Standard
+	// Time (PST) and Pacific Daylight Time (PDT), aren't supported.
+	TimeZoneId *string
 
 	noSmithyDocumentSerde
 }
 
-type AcceptPageOutput struct {
+type UpdateRotationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationAcceptPageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAcceptPage{}, middleware.After)
+func (c *Client) addOperationUpdateRotationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateRotation{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAcceptPage{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateRotation{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -114,10 +112,10 @@ func (c *Client) addOperationAcceptPageMiddlewares(stack *middleware.Stack, opti
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpAcceptPageValidationMiddleware(stack); err != nil {
+	if err = addOpUpdateRotationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAcceptPage(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateRotation(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -132,11 +130,11 @@ func (c *Client) addOperationAcceptPageMiddlewares(stack *middleware.Stack, opti
 	return nil
 }
 
-func newServiceMetadataMiddleware_opAcceptPage(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opUpdateRotation(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "ssm-contacts",
-		OperationName: "AcceptPage",
+		OperationName: "UpdateRotation",
 	}
 }
