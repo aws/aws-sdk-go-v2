@@ -1,8 +1,0 @@
-{
-    "id": "36a90181-d10a-42bb-ace7-0243dedd8250",
-    "type": "feature",
-    "description": "Add endpoint ruleset support for cn-north-1.",
-    "modules": [
-        "service/iotdataplane"
-    ]
-}

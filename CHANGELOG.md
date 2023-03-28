@@ -1,3 +1,11 @@
+# Release (2023-03-28)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ssmcontacts`: [v1.15.0](service/ssmcontacts/CHANGELOG.md#v1150-2023-03-28)
+  * **Feature**: This release adds 12 new APIs as part of Oncall Schedule feature release, adds support for a new contact type: ONCALL_SCHEDULE. Check public documentation for AWS ssm-contacts for more information
+* `github.com/aws/aws-sdk-go-v2/service/ssmincidents`: [v1.21.0](service/ssmincidents/CHANGELOG.md#v1210-2023-03-28)
+  * **Feature**: Increased maximum length of "TriggerDetails.rawData" to 10K characters and "IncidentSummary" to 8K characters.
+
 # Release (2023-03-27)
 
 ## Module Highlights
