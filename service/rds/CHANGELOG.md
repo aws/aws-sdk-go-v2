@@ -1,3 +1,7 @@
+# v1.42.0 (2023-03-29)
+
+* **Feature**: Add support for creating a read replica DB instance from a Multi-AZ DB cluster.
+
 # v1.41.0 (2023-03-24)
 
 * **Feature**: Added error code CreateCustomDBEngineVersionFault for when the create custom engine version for Custom engines fails.

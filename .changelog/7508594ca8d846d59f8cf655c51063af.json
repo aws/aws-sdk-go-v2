@@ -1,8 +1,0 @@
-{
-    "id": "7508594c-a8d8-46d5-9f8c-f655c51063af",
-    "type": "feature",
-    "description": "Add support for creating a read replica DB instance from a Multi-AZ DB cluster.",
-    "modules": [
-        "service/rds"
-    ]
-}

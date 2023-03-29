@@ -1,3 +1,11 @@
+# Release (2023-03-29)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/opensearchserverless`: [v1.2.0](service/opensearchserverless/CHANGELOG.md#v120-2023-03-29)
+  * **Feature**: This release includes two new exception types "ServiceQuotaExceededException" and "OcuLimitExceededException".
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.42.0](service/rds/CHANGELOG.md#v1420-2023-03-29)
+  * **Feature**: Add support for creating a read replica DB instance from a Multi-AZ DB cluster.
+
 # Release (2023-03-28)
 
 ## Module Highlights
