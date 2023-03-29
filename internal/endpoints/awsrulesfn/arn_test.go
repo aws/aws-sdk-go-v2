@@ -1,10 +1,7 @@
 package awsrulesfn
 
 import (
-	"strings"
 	"testing"
-
-	smithyrulesfn "github.com/aws/smithy-go/private/endpoints/rulesfn"
 	"github.com/google/go-cmp/cmp"
 )
 
@@ -12,15 +9,14 @@ func TestParseARN(t *testing.T) {
 	cases := []struct {
 		input     string
 		expect    *ARN
-		expectErr string
 	}{
 		{
 			input:     "invalid",
-			expectErr: "invalid ARN prefix",
+			expect: nil,
 		},
 		{
 			input:     "arn:nope",
-			expectErr: "invalid ARN, not enough sections",
+			expect: nil,
 		},
 		{
 			input: "arn:aws:ecr:us-west-2:123456789012:repository/foo/bar",
@@ -75,15 +71,7 @@ func TestParseARN(t *testing.T) {
 	}
 	for _, c := range cases {
 		t.Run(c.input, func(t *testing.T) {
-			ec := smithyrulesfn.NewErrorCollector()
-			actual := ParseARN(c.input, ec)
-			if c.expect != nil {
-				if e, a := c.expectErr, ec.Error(); !strings.Contains(a, e) {
-					t.Errorf("expect %q error in %q", e, a)
-				}
-				return
-			}
-
+			actual := ParseARN(c.input)
 			if diff := cmp.Diff(c.expect, actual); diff != "" {
 				t.Errorf("expect ARN match\n%s", diff)
 			}
