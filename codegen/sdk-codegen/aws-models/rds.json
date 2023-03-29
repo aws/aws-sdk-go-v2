@@ -1198,9 +1198,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "af-south-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1211,9 +1211,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "ap-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1224,9 +1224,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "ap-northeast-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1237,9 +1237,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "ap-northeast-2",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1250,9 +1250,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "ap-northeast-3",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1263,9 +1263,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "ap-south-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1276,9 +1276,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "ap-southeast-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1289,9 +1289,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "ap-southeast-2",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1302,9 +1302,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "ap-southeast-3",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1315,9 +1315,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "ca-central-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1328,9 +1328,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "ca-central-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1341,9 +1341,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "eu-central-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1354,9 +1354,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "eu-north-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1367,9 +1367,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "eu-south-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1380,9 +1380,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "eu-west-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1393,9 +1393,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "eu-west-2",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1406,9 +1406,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "eu-west-3",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1419,9 +1419,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "me-south-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1432,9 +1432,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "sa-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1445,9 +1445,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1458,9 +1458,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1471,9 +1471,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-east-2",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1484,9 +1484,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-east-2",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1497,9 +1497,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-west-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1510,9 +1510,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-west-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1523,9 +1523,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-west-2",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1536,9 +1536,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-west-2",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1549,9 +1549,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1562,9 +1562,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1575,9 +1575,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "cn-north-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1588,9 +1588,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "cn-northwest-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1601,9 +1601,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "cn-north-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1614,9 +1614,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "cn-north-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1627,9 +1627,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "cn-north-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1640,9 +1640,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-gov-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1653,9 +1653,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-gov-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1666,9 +1666,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-gov-west-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1679,9 +1679,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-gov-west-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1692,9 +1692,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-gov-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1705,9 +1705,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-gov-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1718,9 +1718,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-iso-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1731,9 +1731,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-iso-west-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1742,9 +1742,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-iso-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1755,9 +1755,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-iso-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1766,9 +1766,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-iso-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1779,9 +1779,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-isob-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1790,9 +1790,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-isob-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1803,9 +1803,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-isob-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1814,9 +1814,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-isob-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1827,9 +1827,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-east-1",
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1841,8 +1841,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1852,9 +1852,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "Region": "us-east-1",
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1864,9 +1864,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "Region": "us-east-1",
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3478,7 +3478,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new Amazon Aurora DB cluster or Multi-AZ DB cluster.</p>\n         <p>If you create an Aurora DB cluster, the request creates an empty cluster. You must\n            explicitly create the writer instance for your DB cluster using the <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html\">CreateDBInstance</a> operation. If you create a Multi-AZ DB cluster, the\n            request creates a writer and two reader DB instances for you, each in a different\n            Availability Zone.</p>\n         <p>You can use the <code>ReplicationSourceIdentifier</code> parameter to create an Amazon\n            Aurora DB cluster as a read replica of another DB cluster or Amazon RDS MySQL or\n            PostgreSQL DB instance. For more information about Amazon Aurora, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html\">What is Amazon Aurora?</a> in the <i>Amazon Aurora User\n                    Guide</i>.</p>\n         <p>You can also use the <code>ReplicationSourceIdentifier</code> parameter to create a\n            Multi-AZ DB cluster read replica with an RDS for PostgreSQL DB instance as the source.\n            For more information about Multi-AZ DB clusters, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html\">Multi-AZ DB cluster deployments</a> in the <i>Amazon\n                    RDS User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates a new Amazon Aurora DB cluster or Multi-AZ DB cluster.</p>\n         <p>If you create an Aurora DB cluster, the request creates an empty cluster. You must\n            explicitly create the writer instance for your DB cluster using the <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html\">CreateDBInstance</a> operation. If you create a Multi-AZ DB cluster, the\n            request creates a writer and two reader DB instances for you, each in a different\n            Availability Zone.</p>\n         <p>You can use the <code>ReplicationSourceIdentifier</code> parameter to create an Amazon\n            Aurora DB cluster as a read replica of another DB cluster or Amazon RDS for MySQL or\n            PostgreSQL DB instance. For more information about Amazon Aurora, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html\">What is Amazon Aurora?</a> in the <i>Amazon Aurora User\n            Guide</i>.</p>\n         <p>You can also use the <code>ReplicationSourceIdentifier</code> parameter to create a\n            Multi-AZ DB cluster read replica with an RDS for MySQL or PostgreSQL DB instance as the\n            source. For more information about Multi-AZ DB clusters, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html\">Multi-AZ DB\n                cluster deployments</a> in the <i>Amazon RDS User\n            Guide</i>.</p>"
             }
         },
         "com.amazonaws.rds#CreateDBClusterEndpoint": {
@@ -3661,7 +3661,7 @@
                 "ReplicationSourceIdentifier": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the source DB instance or DB cluster if this DB\n            cluster is created as a read replica.</p>\n         <p>Valid for: Aurora DB clusters and RDS for PostgreSQL Multi-AZ DB clusters</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the source DB instance or DB cluster if this DB\n            cluster is created as a read replica.</p>\n         <p>Valid for: Aurora DB clusters and Multi-AZ DB clusters</p>"
                     }
                 },
                 "Tags": {
@@ -4422,6 +4422,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.rds#DBClusterNotFoundFault"
+                },
+                {
                     "target": "com.amazonaws.rds#DBInstanceAlreadyExistsFault"
                 },
                 {
@@ -4450,6 +4453,9 @@
                 },
                 {
                     "target": "com.amazonaws.rds#InsufficientDBInstanceCapacityFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#InvalidDBClusterStateFault"
                 },
                 {
                     "target": "com.amazonaws.rds#InvalidDBInstanceStateFault"
@@ -4483,7 +4489,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new DB instance that acts as a read replica for an existing source DB\n            instance. You can create a read replica for a DB instance running MySQL, MariaDB,\n            Oracle, PostgreSQL, or SQL Server. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html\">Working with Read\n                Replicas</a> in the <i>Amazon RDS User Guide</i>.</p>\n         <p>Amazon Aurora doesn't support this operation. Call the <code>CreateDBInstance</code>\n            operation to create a DB instance for an Aurora DB cluster.</p>\n         <p>All read replica DB instances are created with backups disabled. All other DB\n            instance attributes (including DB security groups and DB parameter groups) are inherited\n            from the source DB instance, except as specified.</p>\n         <important>\n            <p>Your source DB instance must have backup retention enabled.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Creates a new DB instance that acts as a read replica for an existing source DB\n            instance or Multi-AZ DB cluster. You can create a read replica for a DB instance running\n            MySQL, MariaDB, Oracle, PostgreSQL, or SQL Server. You can create a read replica for a\n            Multi-AZ DB cluster running MySQL or PostgreSQL. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html\">Working\n                with read replicas</a> and <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html#multi-az-db-clusters-migrating-to-instance-with-read-replica\">Migrating from a Multi-AZ DB cluster to a DB instance using a read replica</a> in the <i>Amazon RDS User Guide</i>.</p>\n         <p>Amazon Aurora doesn't support this operation. Call the <code>CreateDBInstance</code>\n            operation to create a DB instance for an Aurora DB cluster.</p>\n         <p>All read replica DB instances are created with backups disabled. All other attributes\n            (including DB security groups and DB parameter groups) are inherited from the source DB\n            instance or cluster, except as specified.</p>\n         <important>\n            <p>Your source DB instance or cluster must have backup retention enabled.</p>\n         </important>"
             }
         },
         "com.amazonaws.rds#CreateDBInstanceReadReplicaMessage": {
@@ -4499,8 +4505,7 @@
                 "SourceDBInstanceIdentifier": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the DB instance that will act as the source for the read replica.\n            Each DB instance can have up to five read replicas.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be the identifier of an existing MySQL, MariaDB, Oracle, PostgreSQL, or SQL Server DB\n                    instance.</p>\n            </li>\n            <li>\n               <p>Can specify a DB instance that is a MySQL read replica only if the source is running MySQL\n                    5.6 or later.</p>\n            </li>\n            <li>\n               <p>For the limitations of Oracle read replicas, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html\">Read Replica Limitations with Oracle</a> in the\n                  <i>Amazon RDS User Guide</i>.</p>\n            </li>\n            <li>\n               <p>For the limitations of SQL Server read replicas, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/SQLServer.ReadReplicas.Limitations.html\">Read Replica\n                        Limitations with Microsoft SQL Server</a> in the <i>Amazon RDS User Guide</i>.</p>\n            </li>\n            <li>\n               <p>Can specify a PostgreSQL DB instance only if the source is running PostgreSQL 9.3.5 or\n                    later (9.4.7 and higher for cross-Region replication).</p>\n            </li>\n            <li>\n               <p>The specified DB instance must have automatic backups enabled, that is, its backup\n                    retention period must be greater than 0.</p>\n            </li>\n            <li>\n               <p>If the source DB instance is in the same Amazon Web Services Region as the read replica, specify a valid DB\n                    instance identifier.</p>\n            </li>\n            <li>\n               <p>If the source DB instance is in a different Amazon Web Services Region from the read replica, specify a valid DB instance ARN. \n             For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing\">Constructing an ARN for Amazon RDS</a> \n             in the <i>Amazon RDS User Guide</i>. This doesn't apply to SQL Server or RDS Custom, which don't support \n             cross-Region replicas.</p>\n            </li>\n         </ul>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The identifier of the DB instance that will act as the source for the read replica.\n            Each DB instance can have up to 15 read replicas, with the exception of Oracle and SQL\n            Server, which can have up to five.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be the identifier of an existing MySQL, MariaDB, Oracle, PostgreSQL, or SQL Server DB\n                    instance.</p>\n            </li>\n            <li>\n               <p>Can't be specified if the <code>SourceDBClusterIdentifier</code> parameter is\n                    also specified.</p>\n            </li>\n            <li>\n               <p>For the limitations of Oracle read replicas, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.limitations.html#oracle-read-replicas.limitations.versions-and-licenses\">Version and licensing considerations for RDS for Oracle replicas</a> in the\n                  <i>Amazon RDS User Guide</i>.</p>\n            </li>\n            <li>\n               <p>For the limitations of SQL Server read replicas, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/SQLServer.ReadReplicas.html#SQLServer.ReadReplicas.Limitations\">Read replica limitations with SQL Server</a> in the <i>Amazon RDS User Guide</i>.</p>\n            </li>\n            <li>\n               <p>The specified DB instance must have automatic backups enabled, that is, its backup\n                    retention period must be greater than 0.</p>\n            </li>\n            <li>\n               <p>If the source DB instance is in the same Amazon Web Services Region as the read replica, specify a valid DB\n                    instance identifier.</p>\n            </li>\n            <li>\n               <p>If the source DB instance is in a different Amazon Web Services Region from the read\n                    replica, specify a valid DB instance ARN. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing\">Constructing an ARN for Amazon RDS</a> in the <i>Amazon RDS User\n                        Guide</i>. This doesn't apply to SQL Server or RDS Custom, which\n                    don't support cross-Region replicas.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "DBInstanceClass": {
@@ -4524,7 +4529,7 @@
                 "MultiAZ": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that indicates whether the read replica is in a Multi-AZ deployment.</p>\n         <p>You can create a read replica as a Multi-AZ DB instance. RDS creates a standby of\n            your replica in another Availability Zone for failover support for the replica. Creating\n            your read replica as a Multi-AZ DB instance is independent of whether the source\n            database is a Multi-AZ DB instance.</p>\n         <p>This setting doesn't apply to RDS Custom.</p>"
+                        "smithy.api#documentation": "<p>A value that indicates whether the read replica is in a Multi-AZ deployment.</p>\n         <p>You can create a read replica as a Multi-AZ DB instance. RDS creates a standby of your\n            replica in another Availability Zone for failover support for the replica. Creating your\n            read replica as a Multi-AZ DB instance is independent of whether the source is a\n            Multi-AZ DB instance or a Multi-AZ DB cluster.</p>\n         <p>This setting doesn't apply to RDS Custom.</p>"
                     }
                 },
                 "AutoMinorVersionUpgrade": {
@@ -4542,7 +4547,7 @@
                 "OptionGroupName": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The option group the DB instance is associated with. If omitted, the option group associated with the source instance is used.</p>\n         <note>\n            <p>For SQL Server, you must use the option group associated with the source\n                instance.</p>\n         </note>\n         <p>This setting doesn't apply to RDS Custom.</p>"
+                        "smithy.api#documentation": "<p>The option group the DB instance is associated with. If omitted, the option group\n            associated with the source instance or cluster is used.</p>\n         <note>\n            <p>For SQL Server, you must use the option group associated with the source.</p>\n         </note>\n         <p>This setting doesn't apply to RDS Custom.</p>"
                     }
                 },
                 "DBParameterGroupName": {
@@ -4599,13 +4604,13 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key identifier for an encrypted read replica.</p>\n         <p>The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.</p>\n         <p>If you create an encrypted read replica in the same Amazon Web Services Region as the source DB\n            instance, then do not specify a value for this parameter. A read replica in the same Amazon Web Services Region\n            is always encrypted with the same KMS key as the source DB instance.</p>\n         <p>If you create an encrypted read replica in a different Amazon Web Services Region, then you must\n            specify a KMS key identifier for the destination Amazon Web Services Region. KMS keys are specific to\n            the Amazon Web Services Region that they are created in, and you can't use KMS keys from one\n            Amazon Web Services Region in another Amazon Web Services Region.</p>\n         <p>You can't create an encrypted read replica from an unencrypted DB instance.</p>\n         <p>This setting doesn't apply to RDS Custom, which uses the same KMS key as the primary \n            replica.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key identifier for an encrypted read replica.</p>\n         <p>The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.</p>\n         <p>If you create an encrypted read replica in the same Amazon Web Services Region as the source DB\n            instance or Multi-AZ DB cluster, don't specify a value for this parameter. A read\n            replica in the same Amazon Web Services Region is always encrypted with the same KMS key as the source\n            DB instance or cluster.</p>\n         <p>If you create an encrypted read replica in a different Amazon Web Services Region, then you must\n            specify a KMS key identifier for the destination Amazon Web Services Region. KMS keys are specific to\n            the Amazon Web Services Region that they are created in, and you can't use KMS keys from one\n            Amazon Web Services Region in another Amazon Web Services Region.</p>\n         <p>You can't create an encrypted read replica from an unencrypted DB instance or\n            Multi-AZ DB cluster.</p>\n         <p>This setting doesn't apply to RDS Custom, which uses the same KMS key as the primary \n            replica.</p>"
                     }
                 },
                 "PreSignedUrl": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>When you are creating a read replica from one Amazon Web Services GovCloud (US) Region to another or\n            from one China Amazon Web Services Region to another, the URL that contains a Signature Version 4\n            signed request for the <code>CreateDBInstanceReadReplica</code> API operation in the\n            source Amazon Web Services Region that contains the source DB instance.</p>\n         <p>This setting applies only to Amazon Web Services GovCloud (US) Regions and \n            China Amazon Web Services Regions. It's ignored in other Amazon Web Services Regions.</p>\n         <p>You must specify this parameter when you create an encrypted read replica from\n            another Amazon Web Services Region by using the Amazon RDS API. Don't specify\n                <code>PreSignedUrl</code> when you are creating an encrypted read replica in the\n            same Amazon Web Services Region.</p>\n         <p>The presigned URL must be a valid request for the\n                <code>CreateDBInstanceReadReplica</code> API operation that can run in the\n            source Amazon Web Services Region that contains the encrypted source DB instance. The presigned URL\n            request must contain the following parameter values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DestinationRegion</code> - The Amazon Web Services Region that the encrypted read\n                    replica is created in. This Amazon Web Services Region is the same one where the\n                        <code>CreateDBInstanceReadReplica</code> operation is called that contains\n                    this presigned URL.</p>\n               <p>For example, if you create an encrypted DB instance in the us-west-1\n                    Amazon Web Services Region, from a source DB instance in the us-east-2 Amazon Web Services Region, then you\n                    call the <code>CreateDBInstanceReadReplica</code> operation in the us-east-1\n                    Amazon Web Services Region and provide a presigned URL that contains a call to the\n                        <code>CreateDBInstanceReadReplica</code> operation in the us-west-2\n                    Amazon Web Services Region. For this example, the <code>DestinationRegion</code> in the\n                    presigned URL must be set to the us-east-1 Amazon Web Services Region.</p>\n            </li>\n            <li>\n               <p>\n                  <code>KmsKeyId</code> - The KMS key identifier for the key to use to\n                    encrypt the read replica in the destination Amazon Web Services Region. This is the same\n                    identifier for both the <code>CreateDBInstanceReadReplica</code> operation that\n                    is called in the destination Amazon Web Services Region, and the operation contained in the\n                    presigned URL.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SourceDBInstanceIdentifier</code> - The DB instance identifier for\n                    the encrypted DB instance to be replicated. This identifier must be in the\n                    Amazon Resource Name (ARN) format for the source Amazon Web Services Region. For example, if you\n                    are creating an encrypted read replica from a DB instance in the us-west-2 Amazon Web Services\n                    Region, then your <code>SourceDBInstanceIdentifier</code> looks like the\n                    following example:\n                        <code>arn:aws:rds:us-west-2:123456789012:instance:mysql-instance1-20161115</code>.</p>\n            </li>\n         </ul>\n         <p>To learn how to generate a Signature Version 4 signed request, see \n            <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html\">Authenticating Requests: Using Query Parameters (Amazon Web Services Signature Version 4)</a> and\n            <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 Signing Process</a>.</p>\n         <note>\n            <p>If you are using an Amazon Web Services SDK tool or the CLI, you can specify\n                    <code>SourceRegion</code> (or <code>--source-region</code> for the CLI)\n                instead of specifying <code>PreSignedUrl</code> manually. Specifying\n                    <code>SourceRegion</code> autogenerates a presigned URL that is a valid request\n                for the operation that can run in the source Amazon Web Services Region.</p>\n            <p>\n               <code>SourceRegion</code> isn't supported for SQL Server, because Amazon RDS for SQL Server \n                doesn't support cross-Region read replicas.</p>\n         </note>\n         <p>This setting doesn't apply to RDS Custom.</p>"
+                        "smithy.api#documentation": "<p>When you are creating a read replica from one Amazon Web Services GovCloud (US) Region to another or\n            from one China Amazon Web Services Region to another, the URL that contains a Signature Version 4\n            signed request for the <code>CreateDBInstanceReadReplica</code> API operation in the\n            source Amazon Web Services Region that contains the source DB instance.</p>\n         <p>This setting applies only to Amazon Web Services GovCloud (US) Regions and \n            China Amazon Web Services Regions. It's ignored in other Amazon Web Services Regions.</p>\n         <p>This setting applies only when replicating from a source DB\n                <i>instance</i>. Source DB clusters aren't supported in Amazon Web Services GovCloud (US) Regions and China Amazon Web Services Regions.</p>\n         <p>You must specify this parameter when you create an encrypted read replica from\n            another Amazon Web Services Region by using the Amazon RDS API. Don't specify\n                <code>PreSignedUrl</code> when you are creating an encrypted read replica in the\n            same Amazon Web Services Region.</p>\n         <p>The presigned URL must be a valid request for the\n                <code>CreateDBInstanceReadReplica</code> API operation that can run in the\n            source Amazon Web Services Region that contains the encrypted source DB instance. The presigned URL\n            request must contain the following parameter values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DestinationRegion</code> - The Amazon Web Services Region that the encrypted read\n                    replica is created in. This Amazon Web Services Region is the same one where the\n                        <code>CreateDBInstanceReadReplica</code> operation is called that contains\n                    this presigned URL.</p>\n               <p>For example, if you create an encrypted DB instance in the us-west-1\n                    Amazon Web Services Region, from a source DB instance in the us-east-2 Amazon Web Services Region, then you\n                    call the <code>CreateDBInstanceReadReplica</code> operation in the us-east-1\n                    Amazon Web Services Region and provide a presigned URL that contains a call to the\n                        <code>CreateDBInstanceReadReplica</code> operation in the us-west-2\n                    Amazon Web Services Region. For this example, the <code>DestinationRegion</code> in the\n                    presigned URL must be set to the us-east-1 Amazon Web Services Region.</p>\n            </li>\n            <li>\n               <p>\n                  <code>KmsKeyId</code> - The KMS key identifier for the key to use to\n                    encrypt the read replica in the destination Amazon Web Services Region. This is the same\n                    identifier for both the <code>CreateDBInstanceReadReplica</code> operation that\n                    is called in the destination Amazon Web Services Region, and the operation contained in the\n                    presigned URL.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SourceDBInstanceIdentifier</code> - The DB instance identifier for the\n                    encrypted DB instance to be replicated. This identifier must be in the Amazon\n                    Resource Name (ARN) format for the source Amazon Web Services Region. For example, if you are\n                    creating an encrypted read replica from a DB instance in the us-west-2\n                    Amazon Web Services Region, then your <code>SourceDBInstanceIdentifier</code> looks like the\n                    following example:\n                        <code>arn:aws:rds:us-west-2:123456789012:instance:mysql-instance1-20161115</code>.</p>\n            </li>\n         </ul>\n         <p>To learn how to generate a Signature Version 4 signed request, see \n            <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html\">Authenticating Requests: Using Query Parameters (Amazon Web Services Signature Version 4)</a> and\n            <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 Signing Process</a>.</p>\n         <note>\n            <p>If you are using an Amazon Web Services SDK tool or the CLI, you can specify\n                    <code>SourceRegion</code> (or <code>--source-region</code> for the CLI)\n                instead of specifying <code>PreSignedUrl</code> manually. Specifying\n                    <code>SourceRegion</code> autogenerates a presigned URL that is a valid request\n                for the operation that can run in the source Amazon Web Services Region.</p>\n            <p>\n               <code>SourceRegion</code> isn't supported for SQL Server, because Amazon RDS for SQL Server \n                doesn't support cross-Region read replicas.</p>\n         </note>\n         <p>This setting doesn't apply to RDS Custom.</p>"
                     }
                 },
                 "EnableIAMDatabaseAuthentication": {
@@ -4665,7 +4670,7 @@
                 "DomainIAMRoleName": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the name of the IAM role to be used when making API calls to the Directory Service.</p>\n         <p>This setting doesn't apply to RDS Custom.</p>"
+                        "smithy.api#documentation": "<p>The name of the IAM role to be used when making API calls to the Directory\n            Service.</p>\n         <p>This setting doesn't apply to RDS Custom.</p>"
                     }
                 },
                 "ReplicaMode": {
@@ -4708,6 +4713,12 @@
                     "target": "com.amazonaws.rds#IntegerOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>The amount of storage (in gibibytes) to allocate initially for the read replica.\n            Follow the allocation rules specified in <code>CreateDBInstance</code>.</p>\n         <note>\n            <p>Be sure to allocate enough storage for your read replica so that the create operation can succeed.\n                You can also allocate additional storage for future growth.</p>\n         </note>"
+                    }
+                },
+                "SourceDBClusterIdentifier": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Multi-AZ DB cluster that will act as the source for the read\n            replica. Each DB cluster can have up to 15 read replicas.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be the identifier of an existing Multi-AZ DB cluster.</p>\n            </li>\n            <li>\n               <p>Can't be specified if the <code>SourceDBInstanceIdentifier</code> parameter is\n                    also specified.</p>\n            </li>\n            <li>\n               <p>The specified DB cluster must have automatic backups enabled, that is, its\n                    backup retention period must be greater than 0.</p>\n            </li>\n            <li>\n               <p>The source DB cluster must be in the same Amazon Web Services Region as the read replica.\n                    Cross-Region replication isn't supported.</p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -7594,6 +7605,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The details of the DB instance's server certificate.</p>"
                     }
+                },
+                "ReadReplicaSourceDBClusterIdentifier": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the identifier of the source DB cluster if this DB instance is a read\n            replica.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9671,7 +9688,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The DeleteDBCluster action deletes a previously provisioned DB cluster. \n          When you delete a DB cluster, all automated backups for that DB cluster are deleted and can't be recovered. \n          Manual DB cluster snapshots of the specified DB cluster are not deleted.</p>\n         <p>For more information on Amazon Aurora, see  \n          <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html\">\n              What is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide</i>.</p>\n         <p>For more information on Multi-AZ DB clusters, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html\"> Multi-AZ DB\n                cluster deployments</a> in the <i>Amazon RDS User\n            Guide</i>.</p>"
+                "smithy.api#documentation": "<p>The DeleteDBCluster action deletes a previously provisioned DB cluster. \n          When you delete a DB cluster, all automated backups for that DB cluster are deleted and can't be recovered. \n          Manual DB cluster snapshots of the specified DB cluster are not deleted.</p>\n         <p>If you're deleting a Multi-AZ DB cluster with read replicas, all cluster members are\n            terminated and read replicas are promoted to standalone instances.</p>\n         <p>For more information on Amazon Aurora, see  \n          <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html\">\n              What is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide</i>.</p>\n         <p>For more information on Multi-AZ DB clusters, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html\"> Multi-AZ DB\n                cluster deployments</a> in the <i>Amazon RDS User\n            Guide</i>.</p>"
             }
         },
         "com.amazonaws.rds#DeleteDBClusterEndpoint": {
@@ -15812,7 +15829,7 @@
                 "EngineVersion": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version number of the database engine to which you want to upgrade. \n            Changing this parameter results in an outage. The change is applied during\n            the next maintenance window unless <code>ApplyImmediately</code> is enabled.</p>\n         <p>To list all of the available engine versions for Aurora MySQL version 2 (5.7-compatible) and version 3 (MySQL 8.0-compatible),\n            use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine aurora-mysql --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>To list all of the available engine versions for Aurora PostgreSQL, use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine aurora-postgresql --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>To list all of the available engine versions for RDS for MySQL, use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine mysql --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>To list all of the available engine versions for RDS for PostgreSQL, use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine postgres --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>Valid for: Aurora DB clusters and Multi-AZ DB clusters</p>"
+                        "smithy.api#documentation": "<p>The version number of the database engine to which you want to upgrade. Changing this\n            parameter results in an outage. The change is applied during the next maintenance window\n            unless <code>ApplyImmediately</code> is enabled. </p>\n         <p>If the cluster that you're modifying has one or more read replicas, all replicas must\n            be running an engine version that's the same or later than the version you\n            specify.</p>\n         <p>To list all of the available engine versions for Aurora MySQL version 2 (5.7-compatible) and version 3 (MySQL 8.0-compatible),\n            use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine aurora-mysql --query\n                \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>To list all of the available engine versions for MySQL 5.6-compatible Aurora, use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine aurora --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>To list all of the available engine versions for Aurora PostgreSQL, use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine aurora-postgresql --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>To list all of the available engine versions for RDS for MySQL, use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine mysql --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>To list all of the available engine versions for RDS for PostgreSQL, use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --engine postgres --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>\n         <p>Valid for: Aurora DB clusters and Multi-AZ DB clusters</p>"
                     }
                 },
                 "AllowMajorVersionUpgrade": {
@@ -16237,7 +16254,7 @@
                 "EngineVersion": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version number of the database engine to upgrade to. \n    Changing this parameter results in an outage and the change \n    is applied during the next maintenance window\n    unless the <code>ApplyImmediately</code> parameter is enabled for this request.</p>\n         <p>For major version upgrades, if a nondefault DB parameter group is currently in use, a\n            new DB parameter group in the DB parameter group family for the new engine version must\n            be specified. The new DB parameter group can be the default for that DB parameter group\n            family.</p>\n         <p>If you specify only a major version, Amazon RDS will update the DB instance to the \n          default minor version if the current minor version is lower.\n          For information about valid engine versions, see <code>CreateDBInstance</code>, \n          or call <code>DescribeDBEngineVersions</code>.</p>\n         <p>In RDS Custom for Oracle, this parameter is supported for read replicas only if they are in the \n          <code>PATCH_DB_FAILURE</code> lifecycle.</p>"
+                        "smithy.api#documentation": "<p>The version number of the database engine to upgrade to. \n    Changing this parameter results in an outage and the change \n    is applied during the next maintenance window\n    unless the <code>ApplyImmediately</code> parameter is enabled for this request.</p>\n         <p>For major version upgrades, if a nondefault DB parameter group is currently in use, a\n            new DB parameter group in the DB parameter group family for the new engine version must\n            be specified. The new DB parameter group can be the default for that DB parameter group\n            family.</p>\n         <p>If you specify only a major version, Amazon RDS will update the DB instance to the \n          default minor version if the current minor version is lower.\n          For information about valid engine versions, see <code>CreateDBInstance</code>, \n          or call <code>DescribeDBEngineVersions</code>.</p>\n         <p>If the instance that you're modifying is acting as a read replica, the engine version\n            that you specify must be the same or later than the version that the source DB instance\n            or cluster is running.</p>\n         <p>In RDS Custom for Oracle, this parameter is supported for read replicas only if they are in the \n          <code>PATCH_DB_FAILURE</code> lifecycle.</p>"
                     }
                 },
                 "AllowMajorVersionUpgrade": {
@@ -22442,7 +22459,7 @@
                 "SourceDBInstanceArn": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the source DB instance for which to stop replicating automated backups, for example, \n            <code>arn:aws:rds:us-west-2:123456789012:db:mydatabase</code>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the source DB instance for which to stop replicating\n            automate backups, for example,\n                <code>arn:aws:rds:us-west-2:123456789012:db:mydatabase</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }

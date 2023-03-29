@@ -300,7 +300,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The maximum capacity limits for all OpenSearch Serverless collections, in OpenSearch Compute Units\n            (OCUs). These limits are used to scale your collections based on the current workload.\n            For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-overview.html#serverless-scaling\">Autoscaling</a>.</p>"
+                "smithy.api#documentation": "<p>The maximum capacity limits for all OpenSearch Serverless collections, in OpenSearch Compute Units\n            (OCUs). These limits are used to scale your collections based on the current workload.\n            For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html\">Managing\n                capacity limits for Amazon OpenSearch Serverless</a>.</p>"
             }
         },
         "com.amazonaws.opensearchserverless#ClientToken": {
@@ -631,7 +631,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>When creating a collection, thrown when a collection with the same name already exists\n            or is being created. When deleting a collection, thrown when the collection is not in\n            the ACTIVE or FAILED state.</p>",
+                "smithy.api#documentation": "<p>When creating a resource, thrown when a resource with the same name already exists\n            or is being created. When deleting a resource, thrown when the resource is not in\n            the ACTIVE or FAILED state.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -650,6 +650,9 @@
                 },
                 {
                     "target": "com.amazonaws.opensearchserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.opensearchserverless#ServiceQuotaExceededException"
                 },
                 {
                     "target": "com.amazonaws.opensearchserverless#ValidationException"
@@ -725,6 +728,12 @@
                 },
                 {
                     "target": "com.amazonaws.opensearchserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.opensearchserverless#OcuLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.opensearchserverless#ServiceQuotaExceededException"
                 },
                 {
                     "target": "com.amazonaws.opensearchserverless#ValidationException"
@@ -865,6 +874,9 @@
                     "target": "com.amazonaws.opensearchserverless#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.opensearchserverless#ServiceQuotaExceededException"
+                },
+                {
                     "target": "com.amazonaws.opensearchserverless#ValidationException"
                 }
             ],
@@ -899,7 +911,7 @@
                 "samlOptions": {
                     "target": "com.amazonaws.opensearchserverless#SamlConfigOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes SAML options in in the form of a key-value map.</p>"
+                        "smithy.api#documentation": "<p>Describes SAML options in in the form of a key-value map. This field is required if\n            you specify <code>saml</code> for the <code>type</code> parameter.</p>"
                     }
                 },
                 "clientToken": {
@@ -937,6 +949,9 @@
                 },
                 {
                     "target": "com.amazonaws.opensearchserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.opensearchserverless#ServiceQuotaExceededException"
                 },
                 {
                     "target": "com.amazonaws.opensearchserverless#ValidationException"
@@ -1012,6 +1027,9 @@
                 },
                 {
                     "target": "com.amazonaws.opensearchserverless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.opensearchserverless#ServiceQuotaExceededException"
                 },
                 {
                     "target": "com.amazonaws.opensearchserverless#ValidationException"
@@ -1735,7 +1753,7 @@
                 "resource": {
                     "target": "com.amazonaws.opensearchserverless#ResourceFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>Resource filters (can be collection or indexes) that policies can apply to.</p>",
+                        "smithy.api#documentation": "<p>Resource filters (can be collections or indexes) that policies can apply to.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 1000
@@ -1794,7 +1812,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all OpenSearch Serverless collections. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html\">Creating and\n                managing Amazon OpenSearch Serverless collections</a>.</p>\n        <note>\n            <p>Make sure to include an empty request body {} if you don't include any collection\n                filters in the request.</p>\n        </note>",
+                "smithy.api#documentation": "<p>Lists all OpenSearch Serverless collections. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html\">Creating and\n                managing Amazon OpenSearch Serverless collections</a>.</p>\n         <note>\n            <p>Make sure to include an empty request body {} if you don't include any collection\n                filters in the request.</p>\n         </note>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -2115,6 +2133,23 @@
                 }
             }
         },
+        "com.amazonaws.opensearchserverless#OcuLimitExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Description of the error.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "OCU Limit Exceeded for service limits",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
         "com.amazonaws.opensearchserverless#OpenSearchServerless": {
             "type": "service",
             "version": "2021-11-01",
@@ -2177,7 +2212,7 @@
                 },
                 "aws.protocols#awsJson1_0": {},
                 "smithy.api#cors": {},
-                "smithy.api#documentation": "<p>Use the Amazon OpenSearch Serverless API to create, configure, and manage OpenSearch Serverless collections and\n            security policies.</p>\n        <p>OpenSearch Serverless is an on-demand, pre-provisioned serverless configuration for\n            Amazon OpenSearch Service. OpenSearch Serverless removes the operational complexities of provisioning,\n            configuring, and tuning your OpenSearch clusters. It enables you to easily search and\n            analyze petabytes of data without having to worry about the underlying infrastructure\n            and data management.</p>\n        <p> To learn more about OpenSearch Serverless, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-overview.html\">What is\n                Amazon OpenSearch Serverless?</a>\n         </p>",
+                "smithy.api#documentation": "<p>Use the Amazon OpenSearch Serverless API to create, configure, and manage OpenSearch Serverless collections and\n            security policies.</p>\n         <p>OpenSearch Serverless is an on-demand, pre-provisioned serverless configuration for\n            Amazon OpenSearch Service. OpenSearch Serverless removes the operational complexities of provisioning,\n            configuring, and tuning your OpenSearch clusters. It enables you to easily search and\n            analyze petabytes of data without having to worry about the underlying infrastructure\n            and data management.</p>\n         <p> To learn more about OpenSearch Serverless, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-overview.html\">What is\n                Amazon OpenSearch Serverless?</a>\n         </p>",
                 "smithy.api#title": "OpenSearch Service Serverless",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -2540,8 +2575,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2553,8 +2588,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2566,8 +2601,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2579,8 +2614,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2592,8 +2627,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2605,8 +2640,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2618,8 +2653,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2631,8 +2666,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2642,8 +2677,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2655,8 +2690,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2666,8 +2701,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2679,8 +2714,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2692,8 +2727,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2705,8 +2740,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2718,8 +2753,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2731,8 +2766,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2742,8 +2777,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2755,8 +2790,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2766,8 +2801,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2779,8 +2814,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2792,8 +2827,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2804,8 +2839,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": true,
                                 "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2816,8 +2851,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -2830,7 +2865,7 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 1000
                 }
             }
@@ -2912,7 +2947,7 @@
                 "sessionTimeout": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The session timeout, in minutes. Minimum is 15 minutes and maximum is 1440 minutes (24\n            hours or 1 day). Default is 60 minutes.</p>",
+                        "smithy.api#documentation": "<p>The session timeout, in minutes. Default is 60 minutes (12 hours).</p>",
                         "smithy.api#range": {
                             "min": 5,
                             "max": 720
@@ -3282,6 +3317,48 @@
                 ]
             }
         },
+        "com.amazonaws.opensearchserverless#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Description of the error.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Identifier of the resource affected."
+                    }
+                },
+                "resourceType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Type of the resource affected."
+                    }
+                },
+                "serviceCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Service Quotas requirement to identify originating service.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "quotaCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Service Quotas requirement to identify originating quota."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Thrown when you attempt to create more resources than the service allows based on service quotas.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
         "com.amazonaws.opensearchserverless#SubnetId": {
             "type": "string",
             "traits": {
@@ -3364,6 +3441,9 @@
                 },
                 {
                     "target": "com.amazonaws.opensearchserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.opensearchserverless#ServiceQuotaExceededException"
                 },
                 {
                     "target": "com.amazonaws.opensearchserverless#ValidationException"
@@ -3567,7 +3647,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Update the OpenSearch Serverless settings for the current Amazon Web Services account. For more\n            information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-overview.html#serverless-scaling\">Autoscaling</a>.</p>"
+                "smithy.api#documentation": "<p>Update the OpenSearch Serverless settings for the current Amazon Web Services account. For more\n            information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html\">Managing capacity limits for Amazon OpenSearch Serverless</a>.</p>"
             }
         },
         "com.amazonaws.opensearchserverless#UpdateAccountSettingsRequest": {
@@ -3803,6 +3883,9 @@
                 },
                 {
                     "target": "com.amazonaws.opensearchserverless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.opensearchserverless#ServiceQuotaExceededException"
                 },
                 {
                     "target": "com.amazonaws.opensearchserverless#ValidationException"
@@ -4046,7 +4129,7 @@
                 "vpcId": {
                     "target": "com.amazonaws.opensearchserverless#VpcId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the VPC from which you access OpenSearch Serverless</p>"
+                        "smithy.api#documentation": "<p>The ID of the VPC from which you access OpenSearch Serverless.</p>"
                     }
                 },
                 "subnetIds": {
