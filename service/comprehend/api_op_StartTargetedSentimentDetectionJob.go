@@ -32,9 +32,8 @@ func (c *Client) StartTargetedSentimentDetectionJob(ctx context.Context, params 
 
 type StartTargetedSentimentDetectionJobInput struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role that grants Amazon Comprehend read access to your input data. For more
-	// information, see Role-based permissions
+	// The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend
+	// read access to your input data. For more information, see Role-based permissions
 	// (https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions).
 	//
 	// This member is required.
@@ -92,10 +91,10 @@ type StartTargetedSentimentDetectionJobInput struct {
 type StartTargetedSentimentDetectionJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the targeted sentiment detection job. It is a
-	// unique, fully qualified identifier for the job. It includes the AWS account,
-	// Region, and the job ID. The format of the ARN is as follows:
-	// arn::comprehend:::targeted-sentiment-detection-job/ The following is an example
-	// job ARN:
+	// unique, fully qualified identifier for the job. It includes the Amazon Web
+	// Services account, Amazon Web Services Region, and the job ID. The format of the
+	// ARN is as follows: arn::comprehend:::targeted-sentiment-detection-job/ The
+	// following is an example job ARN:
 	// arn:aws:comprehend:us-west-2:111122223333:targeted-sentiment-detection-job/1234abcd12ab34cd56ef1234567890ab
 	JobArn *string
 

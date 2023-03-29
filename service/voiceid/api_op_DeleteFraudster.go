@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified fraudster from Voice ID.
+// Deletes the specified fraudster from Voice ID. This action disassociates the
+// fraudster from any watchlists it is a part of.
 func (c *Client) DeleteFraudster(ctx context.Context, params *DeleteFraudsterInput, optFns ...func(*Options)) (*DeleteFraudsterOutput, error) {
 	if params == nil {
 		params = &DeleteFraudsterInput{}
@@ -28,7 +29,7 @@ func (c *Client) DeleteFraudster(ctx context.Context, params *DeleteFraudsterInp
 
 type DeleteFraudsterInput struct {
 
-	// The identifier of the domain containing the fraudster.
+	// The identifier of the domain that contains the fraudster.
 	//
 	// This member is required.
 	DomainId *string

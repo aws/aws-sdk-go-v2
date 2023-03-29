@@ -43,11 +43,16 @@ type SendMessageInput struct {
 	// - For application/json, the
 	// Length Constraints are Minimum of 1, Maximum of 12000.
 	//
+	// * For
+	// application/vnd.amazonaws.connect.message.interactive.response, the Length
+	// Constraints are Minimum of 1, Maximum of 12288.
+	//
 	// This member is required.
 	Content *string
 
-	// The type of the content. Supported types are text/plain, text/markdown, and
-	// application/json.
+	// The type of the content. Supported types are text/plain, text/markdown,
+	// application/json, and
+	// application/vnd.amazonaws.connect.message.interactive.response.
 	//
 	// This member is required.
 	ContentType *string

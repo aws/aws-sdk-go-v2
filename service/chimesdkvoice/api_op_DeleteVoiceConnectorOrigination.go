@@ -10,6 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Deletes the origination settings for the specified Amazon Chime SDK Voice
+// Connector. If emergency calling is configured for the Voice Connector, it must
+// be deleted prior to deleting the origination settings.
 func (c *Client) DeleteVoiceConnectorOrigination(ctx context.Context, params *DeleteVoiceConnectorOriginationInput, optFns ...func(*Options)) (*DeleteVoiceConnectorOriginationOutput, error) {
 	if params == nil {
 		params = &DeleteVoiceConnectorOriginationInput{}
@@ -27,6 +30,8 @@ func (c *Client) DeleteVoiceConnectorOrigination(ctx context.Context, params *De
 
 type DeleteVoiceConnectorOriginationInput struct {
 
+	// The Voice Connector ID.
+	//
 	// This member is required.
 	VoiceConnectorId *string
 

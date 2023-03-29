@@ -146,8 +146,15 @@ type ComputeEnvironmentDetail struct {
 	// automatically based on the job queue demand. If the state is DISABLED, then the
 	// Batch scheduler doesn't attempt to place jobs within the environment. Jobs in a
 	// STARTING or RUNNING state continue to progress normally. Managed compute
-	// environments in the DISABLED state don't scale out. However, they scale in to
-	// minvCpus value after instances become idle.
+	// environments in the DISABLED state don't scale out. Compute environments in a
+	// DISABLED state may continue to incur billing charges. To prevent additional
+	// charges, turn off and then delete the compute environment. For more information,
+	// see State
+	// (https://docs.aws.amazon.com/batch/latest/userguide/compute_environment_parameters.html#compute_environment_state)
+	// in the Batch User Guide. When an instance is idle, the instance scales down to
+	// the minvCpus value. However, the instance size doesn't change. For example,
+	// consider a c5.8xlarge instance with a minvCpus value of 4 and a desiredvCpus
+	// value of 36. This instance doesn't scale down to a c5.large instance.
 	State CEState
 
 	// The current status of the compute environment (for example, CREATING or VALID).
@@ -482,7 +489,12 @@ type ComputeResourceUpdate struct {
 	// demand. This parameter isn't applicable to jobs that are running on Fargate
 	// resources. Don't specify it. Batch doesn't support changing the desired number
 	// of vCPUs of an existing compute environment. Don't specify this parameter for
-	// compute environments using Amazon EKS clusters.
+	// compute environments using Amazon EKS clusters. When you update the desiredvCpus
+	// setting, the value must be between the minvCpus and maxvCpus values.
+	// Additionally, the updated desiredvCpus value must be greater than or equal to
+	// the current desiredvCpus value. For more information, see Troubleshooting Batch
+	// (https://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#error-desired-vcpus-update)
+	// in the Batch User Guide.
 	DesiredvCpus *int32
 
 	// Provides information used to select Amazon Machine Images (AMIs) for EC2
@@ -701,6 +713,11 @@ type ContainerDetail struct {
 	// start with "AWS_BATCH". This naming convention is reserved for variables that
 	// Batch sets.
 	Environment []KeyValuePair
+
+	// The amount of ephemeral storage to allocate for the task. This parameter is used
+	// to expand the total amount of ephemeral storage available, beyond the default
+	// amount, for tasks hosted on Fargate.
+	EphemeralStorage *EphemeralStorage
 
 	// The Amazon Resource Name (ARN) of the execution role that Batch can assume. For
 	// more information, see Batch execution IAM role
@@ -930,6 +947,11 @@ type ContainerProperties struct {
 	// as credential data. Environment variables cannot start with "AWS_BATCH". This
 	// naming convention is reserved for variables that Batch sets.
 	Environment []KeyValuePair
+
+	// The amount of ephemeral storage to allocate for the task. This parameter is used
+	// to expand the total amount of ephemeral storage available, beyond the default
+	// amount, for tasks hosted on Fargate.
+	EphemeralStorage *EphemeralStorage
 
 	// The Amazon Resource Name (ARN) of the execution role that Batch can assume. For
 	// jobs that run on Fargate resources, you must provide an execution role. For more
@@ -1702,6 +1724,12 @@ type EksHostPath struct {
 	noSmithyDocumentSerde
 }
 
+type EksMetadata struct {
+	Labels map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // The properties for the pod.
 type EksPodProperties struct {
 
@@ -1727,6 +1755,8 @@ type EksPodProperties struct {
 	// (https://kubernetes.io/docs/concepts/workloads/pods/#pod-networking) in the
 	// Kubernetes documentation.
 	HostNetwork *bool
+
+	Metadata *EksMetadata
 
 	// The name of the service account that's used to run the pod. For more
 	// information, see Kubernetes service accounts
@@ -1807,6 +1837,8 @@ type EksPodPropertiesOverride struct {
 	// The overrides for the container that's used on the Amazon EKS pod.
 	Containers []EksContainerOverride
 
+	Metadata *EksMetadata
+
 	noSmithyDocumentSerde
 }
 
@@ -1883,6 +1915,20 @@ type EksVolume struct {
 	// see secret (https://kubernetes.io/docs/concepts/storage/volumes/#secret) in the
 	// Kubernetes documentation.
 	Secret *EksSecret
+
+	noSmithyDocumentSerde
+}
+
+// The amount of ephemeral storage to allocate for the task. This parameter is used
+// to expand the total amount of ephemeral storage available, beyond the default
+// amount, for tasks hosted on Fargate.
+type EphemeralStorage struct {
+
+	// The total amount, in GiB, of ephemeral storage to set for the task. The minimum
+	// supported value is 21 GiB and the maximum supported value is 200 GiB.
+	//
+	// This member is required.
+	SizeInGiB *int32
 
 	noSmithyDocumentSerde
 }
@@ -2765,14 +2811,14 @@ type ResourceRequirement struct {
 	// VCPU values must be one of the values supported for that memory value. value =
 	// 512 VCPU = 0.25 value = 1024 VCPU = 0.25 or 0.5 value = 2048 VCPU = 0.25, 0.5,
 	// or 1 value = 3072 VCPU = 0.5, or 1 value = 4096 VCPU = 0.5, 1, or 2 value =
-	// 5120, 6144, or 7168 VCPU = 1 or 2 value = 8192 VCPU = 1, 2, 4, or 8 value =
-	// 9216, 10240, 11264, 12288, 13312, 14336, or 15360 VCPU = 2 or 4 value = 16384
-	// VCPU = 2, 4, or 8 value = 17408, 18432, 19456, 21504, 22528, 23552, 25600,
-	// 26624, 27648, 29696, or 30720 VCPU = 4 value = 20480, 24576, or 28672 VCPU = 4
-	// or 8 value = 36864, 45056, 53248, or 61440 VCPU = 8 value = 32768, 40960, 49152,
-	// or 57344 VCPU = 8 or 16 value = 65536, 73728, 81920, 90112, 98304, 106496,
-	// 114688, or 122880 VCPU = 16 type="VCPU" The number of vCPUs reserved for the
-	// container. This parameter maps to CpuShares in the Create a container
+	// 5120, 6144, or 7168 VCPU = 1 or 2 value = 8192 VCPU = 1, 2, or 4 value = 9216,
+	// 10240, 11264, 12288, 13312, 14336, or 15360 VCPU = 2 or 4 value = 16384 VCPU =
+	// 2, 4, or 8 value = 17408, 18432, 19456, 21504, 22528, 23552, 25600, 26624,
+	// 27648, 29696, or 30720 VCPU = 4 value = 20480, 24576, or 28672 VCPU = 4 or 8
+	// value = 36864, 45056, 53248, or 61440 VCPU = 8 value = 32768, 40960, 49152, or
+	// 57344 VCPU = 8 or 16 value = 65536, 73728, 81920, 90112, 98304, 106496, 114688,
+	// or 122880 VCPU = 16 type="VCPU" The number of vCPUs reserved for the container.
+	// This parameter maps to CpuShares in the Create a container
 	// (https://docs.docker.com/engine/api/v1.23/#create-a-container) section of the
 	// Docker Remote API (https://docs.docker.com/engine/api/v1.23/) and the
 	// --cpu-shares option to docker run

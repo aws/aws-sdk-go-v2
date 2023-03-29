@@ -30,19 +30,19 @@ func (c *Client) UpdateRelatedItems(ctx context.Context, params *UpdateRelatedIt
 
 type UpdateRelatedItemsInput struct {
 
-	// The Amazon Resource Name (ARN) of the incident record containing the related
-	// items you are updating.
+	// The Amazon Resource Name (ARN) of the incident record that contains the related
+	// items that you update.
 	//
 	// This member is required.
 	IncidentRecordArn *string
 
-	// Details about the item you are adding or deleting.
+	// Details about the item that you are add to, or delete from, an incident.
 	//
 	// This member is required.
 	RelatedItemsUpdate types.RelatedItemsUpdate
 
-	// A token ensuring that the operation is called only once with the specified
-	// details.
+	// A token that ensures that a client calls the operation only once with the
+	// specified details.
 	ClientToken *string
 
 	noSmithyDocumentSerde

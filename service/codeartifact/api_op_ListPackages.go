@@ -58,14 +58,18 @@ type ListPackagesInput struct {
 	// namespace that starts with the provided string value are returned. Note that
 	// although this option is called --namespace and not --namespace-prefix, it has
 	// prefix-matching behavior. Each package format uses namespace as follows:
-	// - The
+	//
+	// * The
 	// namespace of a Maven package is its groupId.
-	// - The namespace of an npm package
+	//
+	// * The namespace of an npm package
 	// is its scope.
-	// - Python and NuGet packages do not contain a corresponding
+	//
+	// * Python and NuGet packages do not contain a corresponding
 	// component, packages of those formats do not have a namespace.
-	// - The namespace of
-	// a generic package is it’s namespace.
+	//
+	// * The namespace
+	// of a generic package is its namespace.
 	Namespace *string
 
 	// The token for the next set of results. Use the value returned in the previous

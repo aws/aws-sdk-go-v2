@@ -32,7 +32,8 @@ func (c *Client) CreateAppInstance(ctx context.Context, params *CreateAppInstanc
 
 type CreateAppInstanceInput struct {
 
-	// The ClientRequestToken of the AppInstance.
+	// The unique ID of the request. Use different tokens to create different
+	// AppInstances.
 	//
 	// This member is required.
 	ClientRequestToken *string
@@ -45,7 +46,7 @@ type CreateAppInstanceInput struct {
 	// The metadata of the AppInstance. Limited to a 1KB string in UTF-8.
 	Metadata *string
 
-	// Tags assigned to the AppInstanceUser.
+	// Tags assigned to the AppInstance.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

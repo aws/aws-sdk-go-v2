@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Lists the available AWS Regions in which you can create an Amazon Chime SDK
+// Voice Connector.
 func (c *Client) ListAvailableVoiceConnectorRegions(ctx context.Context, params *ListAvailableVoiceConnectorRegionsInput, optFns ...func(*Options)) (*ListAvailableVoiceConnectorRegionsOutput, error) {
 	if params == nil {
 		params = &ListAvailableVoiceConnectorRegionsInput{}
@@ -31,6 +33,8 @@ type ListAvailableVoiceConnectorRegionsInput struct {
 }
 
 type ListAvailableVoiceConnectorRegionsOutput struct {
+
+	// The list of AWS Regions.
 	VoiceConnectorRegions []types.VoiceConnectorAwsRegion
 
 	// Metadata pertaining to the operation's result.

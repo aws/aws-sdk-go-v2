@@ -1938,8 +1938,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "aws-global"
                             }
                         },
@@ -1960,8 +1960,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "aws-global"
                             }
                         },
@@ -1973,8 +1973,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "us-east-1"
                             }
                         },
@@ -1995,8 +1995,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "us-east-1"
                             }
                         },
@@ -2008,8 +2008,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "us-east-1"
                             }
                         },
@@ -2030,8 +2030,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "us-east-1"
                             }
                         },
@@ -2052,8 +2052,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "aws-cn-global"
                             }
                         },
@@ -2065,8 +2065,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "cn-north-1"
                             }
                         },
@@ -2078,8 +2078,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "cn-north-1"
                             }
                         },
@@ -2091,8 +2091,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "cn-north-1"
                             }
                         },
@@ -2113,8 +2113,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "cn-north-1"
                             }
                         },
@@ -2135,8 +2135,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "aws-us-gov-global"
                             }
                         },
@@ -2157,8 +2157,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "aws-us-gov-global"
                             }
                         },
@@ -2170,8 +2170,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "us-gov-east-1"
                             }
                         },
@@ -2192,8 +2192,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "us-gov-east-1"
                             }
                         },
@@ -2205,8 +2205,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "us-gov-east-1"
                             }
                         },
@@ -2227,8 +2227,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "us-gov-east-1"
                             }
                         },
@@ -2249,8 +2249,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "aws-iso-global"
                             }
                         },
@@ -2262,8 +2262,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "us-iso-east-1"
                             }
                         },
@@ -2284,8 +2284,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "us-iso-east-1"
                             }
                         },
@@ -2306,8 +2306,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "aws-iso-b-global"
                             }
                         },
@@ -2319,8 +2319,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "us-isob-east-1"
                             }
                         },
@@ -2341,8 +2341,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "us-isob-east-1"
                             }
                         },
@@ -2354,8 +2354,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
@@ -2368,8 +2368,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2379,8 +2379,8 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
@@ -2391,8 +2391,8 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
@@ -4120,7 +4120,7 @@
                 "VirtualMFADeviceName": {
                     "target": "com.amazonaws.iam#virtualMFADeviceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the virtual MFA device, which must be unique. Use with path to uniquely identify a virtual MFA\n            device.</p>\n         <p>This parameter allows (through its <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric \n    characters with no spaces. You can also include any of the following characters: _+=,.@-</p>",
+                        "smithy.api#documentation": "<p>The name of the virtual MFA device, which must be unique. Use with path to uniquely\n            identify a virtual MFA device.</p>\n         <p>This parameter allows (through its <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric \n    characters with no spaces. You can also include any of the following characters: _+=,.@-</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4725,7 +4725,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the permissions boundary for the specified IAM role. </p>\n         <important>\n            <p>Deleting the permissions boundary for a role might increase its permissions. For\n                example, it might allow anyone who assumes the role to perform all the actions\n                granted in its permissions policies. </p>\n         </important>"
+                "smithy.api#documentation": "<p>Deletes the permissions boundary for the specified IAM role. </p>\n         <p>You cannot set the boundary for a service-linked role.</p>\n         <important>\n            <p>Deleting the permissions boundary for a role might increase its permissions. For\n                example, it might allow anyone who assumes the role to perform all the actions\n                granted in its permissions policies.</p>\n         </important>"
             }
         },
         "com.amazonaws.iam#DeleteRolePermissionsBoundaryRequest": {
@@ -11411,7 +11411,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds or updates the policy that is specified as the IAM role's permissions boundary.\n            You can use an Amazon Web Services managed policy or a customer managed policy to set the boundary for\n            a role. Use the boundary to control the maximum permissions that the role can have.\n            Setting a permissions boundary is an advanced feature that can affect the permissions\n            for the role.</p>\n         <p>You cannot set the boundary for a service-linked role. </p>\n         <important>\n            <p>Policies used as permissions boundaries do not provide permissions. You must also\n                attach a permissions policy to the role. To learn how the effective permissions for\n                a role are evaluated, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html\">IAM JSON policy\n                    evaluation logic</a> in the IAM User Guide. </p>\n         </important>"
+                "smithy.api#documentation": "<p>Adds or updates the policy that is specified as the IAM role's permissions boundary.\n            You can use an Amazon Web Services managed policy or a customer managed policy to set the boundary for\n            a role. Use the boundary to control the maximum permissions that the role can have.\n            Setting a permissions boundary is an advanced feature that can affect the permissions\n            for the role.</p>\n         <p>You cannot set the boundary for a service-linked role.</p>\n         <important>\n            <p>Policies used as permissions boundaries do not provide permissions. You must also\n                attach a permissions policy to the role. To learn how the effective permissions for\n                a role are evaluated, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html\">IAM JSON policy\n                    evaluation logic</a> in the IAM User Guide. </p>\n         </important>"
             }
         },
         "com.amazonaws.iam#PutRolePermissionsBoundaryRequest": {
@@ -13514,7 +13514,7 @@
                     "code": "UnmodifiableEntity",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>The request was rejected because only the service that depends on the service-linked role\n      can modify or delete the role on your behalf. The error message includes the name of the\n      service that depends on this service-linked role. You must request the change through that\n      service.</p>",
+                "smithy.api#documentation": "<p>The request was rejected because service-linked roles are protected Amazon Web Services resources. Only\n      the service that depends on the service-linked role can modify or delete the role on your\n      behalf. The error message includes the name of the service that depends on this service-linked\n      role. You must request the change through that service.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }

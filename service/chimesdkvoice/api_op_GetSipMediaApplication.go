@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Retrieves the information for a SIP media application, including name, AWS
+// Region, and endpoints.
 func (c *Client) GetSipMediaApplication(ctx context.Context, params *GetSipMediaApplicationInput, optFns ...func(*Options)) (*GetSipMediaApplicationOutput, error) {
 	if params == nil {
 		params = &GetSipMediaApplicationInput{}
@@ -28,6 +30,8 @@ func (c *Client) GetSipMediaApplication(ctx context.Context, params *GetSipMedia
 
 type GetSipMediaApplicationInput struct {
 
+	// The SIP media application ID .
+	//
 	// This member is required.
 	SipMediaApplicationId *string
 
@@ -35,6 +39,8 @@ type GetSipMediaApplicationInput struct {
 }
 
 type GetSipMediaApplicationOutput struct {
+
+	// The details of the SIP media application.
 	SipMediaApplication *types.SipMediaApplication
 
 	// Metadata pertaining to the operation's result.

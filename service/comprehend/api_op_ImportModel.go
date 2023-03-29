@@ -12,11 +12,11 @@ import (
 )
 
 // Creates a new custom model that replicates a source custom model that you
-// import. The source model can be in your AWS account or another one. If the
-// source model is in another AWS account, then it must have a resource-based
-// policy that authorizes you to import it. The source model must be in the same
-// AWS region that you're using when you import. You can't import a model that's in
-// a different region.
+// import. The source model can be in your Amazon Web Services account or another
+// one. If the source model is in another Amazon Web Services account, then it must
+// have a resource-based policy that authorizes you to import it. The source model
+// must be in the same Amazon Web Services Region that you're using when you
+// import. You can't import a model that's in a different Region.
 func (c *Client) ImportModel(ctx context.Context, params *ImportModelInput, optFns ...func(*Options)) (*ImportModelOutput, error) {
 	if params == nil {
 		params = &ImportModelInput{}
@@ -39,17 +39,19 @@ type ImportModelInput struct {
 	// This member is required.
 	SourceModelArn *string
 
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role that grants Amazon Comprehend permission to use Amazon Key Management
-	// Service (KMS) to encrypt or decrypt the custom model.
+	// The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend
+	// permission to use Amazon Key Management Service (KMS) to encrypt or decrypt the
+	// custom model.
 	DataAccessRoleArn *string
 
-	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
-	// encrypt trained custom models. The ModelKmsKeyId can be either of the following
-	// formats:
-	// - KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
-	// - Amazon Resource
-	// Name (ARN) of a KMS Key:
+	// ID for the KMS key that Amazon Comprehend uses to encrypt trained custom models.
+	// The ModelKmsKeyId can be either of the following formats:
+	//
+	// * KMS Key ID:
+	// "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//
+	// * Amazon Resource Name (ARN) of a KMS
+	// Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	ModelKmsKeyId *string
 
@@ -66,7 +68,7 @@ type ImportModelInput struct {
 	// The version name given to the custom model that is created by this import.
 	// Version names can have a maximum of 256 characters. Alphanumeric characters,
 	// hyphens (-) and underscores (_) are allowed. The version name must be unique
-	// among all models with the same classifier name in the account/AWS Region.
+	// among all models with the same classifier name in the account/Region.
 	VersionName *string
 
 	noSmithyDocumentSerde

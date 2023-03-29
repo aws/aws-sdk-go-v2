@@ -57,8 +57,7 @@ type RestoreDBClusterFromS3Input struct {
 	DBClusterIdentifier *string
 
 	// The name of the database engine to be used for this DB cluster. Valid Values:
-	// aurora (for MySQL 5.6-compatible Aurora) and aurora-mysql (for MySQL
-	// 5.7-compatible and MySQL 8.0-compatible Aurora)
+	// aurora-mysql (for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora)
 	//
 	// This member is required.
 	Engine *string
@@ -156,9 +155,9 @@ type RestoreDBClusterFromS3Input struct {
 
 	// The list of logs that the restored DB cluster is to export to CloudWatch Logs.
 	// The values in the list depend on the DB engine being used. Aurora MySQL Possible
-	// values are audit, error, general, and slowquery. Aurora PostgreSQL Possible
-	// value is postgresql. For more information about exporting CloudWatch Logs for
-	// Amazon Aurora, see Publishing Database Logs to Amazon CloudWatch Logs
+	// values are audit, error, general, and slowquery. For more information about
+	// exporting CloudWatch Logs for Amazon Aurora, see Publishing Database Logs to
+	// Amazon CloudWatch Logs
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
 	// in the Amazon Aurora User Guide.
 	EnableCloudwatchLogsExports []string
@@ -171,13 +170,10 @@ type RestoreDBClusterFromS3Input struct {
 	EnableIAMDatabaseAuthentication *bool
 
 	// The version number of the database engine to use. To list all of the available
-	// engine versions for aurora (for MySQL 5.6-compatible Aurora), use the following
-	// command: aws rds describe-db-engine-versions --engine aurora --query
-	// "DBEngineVersions[].EngineVersion" To list all of the available engine versions
-	// for aurora-mysql (for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora), use
-	// the following command: aws rds describe-db-engine-versions --engine aurora-mysql
-	// --query "DBEngineVersions[].EngineVersion" Aurora MySQL Example: 5.6.10a,
-	// 5.6.mysql_aurora.1.19.2, 5.7.mysql_aurora.2.07.1, 8.0.mysql_aurora.3.02.0
+	// engine versions for aurora-mysql (MySQL 5.7-compatible and MySQL 8.0-compatible
+	// Aurora), use the following command: aws rds describe-db-engine-versions --engine
+	// aurora-mysql --query "DBEngineVersions[].EngineVersion" Aurora MySQL Examples:
+	// 5.7.mysql_aurora.2.07.1, 8.0.mysql_aurora.3.02.0
 	EngineVersion *string
 
 	// The Amazon Web Services KMS key identifier for an encrypted DB cluster. The

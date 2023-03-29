@@ -3249,6 +3249,11 @@ func awsRestjson1_deserializeOpDocumentGetSceneOutput(v **GetSceneOutput, value 
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "generatedSceneMetadata":
+			if err := awsRestjson1_deserializeDocumentGeneratedSceneMetadataMap(&sv.GeneratedSceneMetadata, value); err != nil {
+				return err
+			}
+
 		case "sceneId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3256,6 +3261,11 @@ func awsRestjson1_deserializeOpDocumentGetSceneOutput(v **GetSceneOutput, value 
 					return fmt.Errorf("expected Id to be of type string, got %T instead", value)
 				}
 				sv.SceneId = ptr.String(jtv)
+			}
+
+		case "sceneMetadata":
+			if err := awsRestjson1_deserializeDocumentSceneMetadataMap(&sv.SceneMetadata, value); err != nil {
+				return err
 			}
 
 		case "updateDateTime":
@@ -7963,6 +7973,42 @@ func awsRestjson1_deserializeDocumentFunctionsResponse(v *map[string]types.Funct
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentGeneratedSceneMetadataMap(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected SceneMetadataValue to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalServerException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9211,6 +9257,42 @@ func awsRestjson1_deserializeDocumentSceneCapabilities(v *[]string, value interf
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSceneMetadataMap(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected SceneMetadataValue to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 

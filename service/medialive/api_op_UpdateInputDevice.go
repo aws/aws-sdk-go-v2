@@ -84,6 +84,9 @@ type UpdateInputDeviceOutput struct {
 	// The unique serial number of the input device.
 	SerialNumber *string
 
+	// A collection of key-value pairs.
+	Tags map[string]string
+
 	// The type of the input device.
 	Type types.InputDeviceType
 

@@ -41,31 +41,36 @@ type UpdateIncidentRecordInput struct {
 	// The Chatbot chat channel where responders can collaborate.
 	ChatChannel types.ChatChannel
 
-	// A token that ensures that the operation is called only once with the specified
-	// details.
+	// A token that ensures that a client calls the operation only once with the
+	// specified details.
 	ClientToken *string
 
-	// Defines the impact of the incident to customers and applications. Providing an
-	// impact overwrites the impact provided by the response plan. Possible impacts:
-	// -
-	// 1 - Critical impact, full application failure that impacts many to all
-	// customers.
-	// - 2 - High impact, partial application failure with impact to many
-	// customers.
-	// - 3 - Medium impact, the application is providing reduced service to
-	// customers.
-	// - 4 - Low impact, customer aren't impacted by the problem yet.
-	// - 5 -
-	// No impact, customers aren't currently impacted but urgent action is needed to
-	// avoid impact.
+	// Defines the impact of the incident to customers and applications. If you provide
+	// an impact for an incident, it overwrites the impact provided by the response
+	// plan. Possible impacts:
+	//
+	// * 1 - Critical impact, full application failure that
+	// impacts many to all customers.
+	//
+	// * 2 - High impact, partial application failure
+	// with impact to many customers.
+	//
+	// * 3 - Medium impact, the application is
+	// providing reduced service to customers.
+	//
+	// * 4 - Low impact, customer aren't
+	// impacted by the problem yet.
+	//
+	// * 5 - No impact, customers aren't currently
+	// impacted but urgent action is needed to avoid impact.
 	Impact *int32
 
-	// The Amazon SNS targets that are notified when updates are made to an incident.
-	// Using multiple SNS topics creates redundancy in the event that a Region is down
-	// during the incident.
+	// The Amazon SNS targets that Incident Manager notifies when a client updates an
+	// incident. Using multiple SNS topics creates redundancy in the event that a
+	// Region is down during the incident.
 	NotificationTargets []types.NotificationTargetItem
 
-	// The status of the incident. An incident can be Open or Resolved.
+	// The status of the incident. Possible statuses are Open or Resolved.
 	Status types.IncidentRecordStatus
 
 	// A longer description of what occurred during the incident.

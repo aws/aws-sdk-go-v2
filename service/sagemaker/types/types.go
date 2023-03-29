@@ -1318,7 +1318,12 @@ type AutoMLCandidate struct {
 	// The best candidate result from an AutoML training job.
 	FinalAutoMLJobObjectiveMetric *FinalAutoMLJobObjectiveMetric
 
-	// Information about the inference container definitions.
+	// The mapping of all supported processing unit (CPU, GPU, etc...) to inference
+	// container definitions for the candidate. This field is populated for the V2 API
+	// only (for example, for jobs created by calling CreateAutoMLJobV2).
+	InferenceContainerDefinitions map[string][]AutoMLContainerDefinition
+
+	// Information about the recommended inference container definitions.
 	InferenceContainers []AutoMLContainerDefinition
 
 	noSmithyDocumentSerde
@@ -1343,8 +1348,10 @@ type AutoMLCandidateGenerationConfig struct {
 	// AutoMLCandidateGenerationConfig uses the full set of algorithms for the given
 	// training mode.
 	//
-	// For the list of all algorithms per training mode, see . For more
-	// information on each algorithm, see the Algorithm support
+	// For the list of all algorithms per training mode, see
+	// AutoMLAlgorithmConfig
+	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLAlgorithmConfig.html).
+	// For more information on each algorithm, see the Algorithm support
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support)
 	// section in Autopilot developer guide.
 	AlgorithmsConfig []AutoMLAlgorithmConfig
@@ -1393,8 +1400,9 @@ type AutoMLCandidateStep struct {
 
 // A channel is a named input source that training algorithms can consume. The
 // validation dataset size is limited to less than 2 GB. The training dataset size
-// must be less than 100 GB. For more information, see . A validation dataset must
-// contain the same headers as the training dataset.
+// must be less than 100 GB. For more information, see  Channel
+// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Channel.html). A
+// validation dataset must contain the same headers as the training dataset.
 type AutoMLChannel struct {
 
 	// The data source for an AutoML channel.
@@ -1427,21 +1435,27 @@ type AutoMLChannel struct {
 }
 
 // A list of container definitions that describe the different containers that make
-// up an AutoML candidate. For more information, see .
+// up an AutoML candidate. For more information, see  ContainerDefinition
+// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ContainerDefinition.html).
 type AutoMLContainerDefinition struct {
 
 	// The Amazon Elastic Container Registry (Amazon ECR) path of the container. For
-	// more information, see .
+	// more information, see  ContainerDefinition
+	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ContainerDefinition.html).
 	//
 	// This member is required.
 	Image *string
 
-	// The location of the model artifacts. For more information, see .
+	// The location of the model artifacts. For more information, see
+	// ContainerDefinition
+	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ContainerDefinition.html).
 	//
 	// This member is required.
 	ModelDataUrl *string
 
-	// The environment variables to set in the container. For more information, see .
+	// The environment variables to set in the container. For more information, see
+	// ContainerDefinition
+	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ContainerDefinition.html).
 	Environment map[string]string
 
 	noSmithyDocumentSerde
@@ -1459,8 +1473,11 @@ type AutoMLDataSource struct {
 }
 
 // This structure specifies how to split the data into train and validation
-// datasets. The validation and training datasets must contain the same headers.
-// The validation dataset must be less than 2 GB in size.
+// datasets. If you are using the V1 API (for example CreateAutoMLJob) or the V2
+// API for Natural Language Processing problems (for example CreateAutoMLJobV2 with
+// a TextClassificationJobConfig problem type), the validation and training
+// datasets must contain the same headers. Also, for V1 API jobs, the validation
+// dataset must be less than 2 GB in size.
 type AutoMLDataSplitConfig struct {
 
 	// The validation fraction (optional) is a float that specifies the portion of the
@@ -1484,6 +1501,40 @@ type AutoMLJobArtifacts struct {
 	noSmithyDocumentSerde
 }
 
+// A channel is a named input source that training algorithms can consume. This
+// channel is used for the non tabular training data of an AutoML job using the V2
+// API. For tabular training data, see  AutoMLChannel
+// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLChannel.html).
+// For more information, see  Channel
+// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Channel.html).
+type AutoMLJobChannel struct {
+
+	// The type of channel. Defines whether the data are used for training or
+	// validation. The default value is training. Channels for training and validation
+	// must share the same ContentType
+	ChannelType AutoMLChannelType
+
+	// The allowed compression types depend on the input format. We allow the
+	// compression type Gzip for S3Prefix inputs only. For all other inputs, the
+	// compression type should be None. If no compression type is provided, we default
+	// to None.
+	CompressionType CompressionType
+
+	// The content type of the data from the input source. The following are the
+	// allowed content types for different problems:
+	//
+	// * ImageClassification: image/png,
+	// image/jpeg, image/*
+	//
+	// * TextClassification: text/csv;header=present
+	ContentType *string
+
+	// The data source for an AutoML channel.
+	DataSource *AutoMLDataSource
+
+	noSmithyDocumentSerde
+}
+
 // How long a job is allowed to run, or how many candidates a job is allowed to
 // generate.
 type AutoMLJobCompletionCriteria struct {
@@ -1495,12 +1546,18 @@ type AutoMLJobCompletionCriteria struct {
 	// job, such as automatic one-click Autopilot model deployment, are not completed.
 	MaxAutoMLJobRuntimeInSeconds *int32
 
-	// The maximum number of times a training job is allowed to run.
+	// The maximum number of times a training job is allowed to run. For V2 jobs (jobs
+	// created by calling CreateAutoMLJobV2), the supported value is 1.
 	MaxCandidates *int32
 
 	// The maximum time, in seconds, that each training job executed inside
 	// hyperparameter tuning is allowed to run as part of a hyperparameter tuning job.
-	// For more information, see the used by the action.
+	// For more information, see the StoppingCondition
+	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_StoppingCondition.html)
+	// used by the CreateHyperParameterTuningJob
+	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateHyperParameterTuningJob.html)
+	// action. For V2 jobs (jobs created by calling CreateAutoMLJobV2), this field
+	// controls the runtime of the job candidate.
 	MaxRuntimePerTrainingJobInSeconds *int32
 
 	noSmithyDocumentSerde
@@ -1546,7 +1603,9 @@ type AutoMLJobConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies a metric to minimize or maximize as the objective of a job.
+// Specifies a metric to minimize or maximize as the objective of a job. V2 API
+// jobs (for example jobs created by calling CreateAutoMLJobV2), support Accuracy
+// only.
 type AutoMLJobObjective struct {
 
 	// The name of the objective metric used to measure the predictive quality of a
@@ -1736,25 +1795,72 @@ type AutoMLPartialFailureReason struct {
 	noSmithyDocumentSerde
 }
 
-// The Amazon S3 data source.
+// A collection of settings specific to the problem type used to configure an
+// AutoML job using the V2 API. There must be one and only one config of the
+// following type.
+//
+// The following types satisfy this interface:
+//
+//	AutoMLProblemTypeConfigMemberImageClassificationJobConfig
+//	AutoMLProblemTypeConfigMemberTextClassificationJobConfig
+type AutoMLProblemTypeConfig interface {
+	isAutoMLProblemTypeConfig()
+}
+
+// Settings used to configure an AutoML job using the V2 API for the image
+// classification problem type.
+type AutoMLProblemTypeConfigMemberImageClassificationJobConfig struct {
+	Value ImageClassificationJobConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*AutoMLProblemTypeConfigMemberImageClassificationJobConfig) isAutoMLProblemTypeConfig() {}
+
+// Settings used to configure an AutoML job using the V2 API for the text
+// classification problem type.
+type AutoMLProblemTypeConfigMemberTextClassificationJobConfig struct {
+	Value TextClassificationJobConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*AutoMLProblemTypeConfigMemberTextClassificationJobConfig) isAutoMLProblemTypeConfig() {}
+
+// Describes the Amazon S3 data source.
 type AutoMLS3DataSource struct {
 
-	// The data type. A ManifestFile should have the format shown below: [ {"prefix":
+	// The data type.
+	//
+	// * If you choose S3Prefix, S3Uri identifies a key name prefix.
+	// SageMaker uses all objects that match the specified key name prefix for model
+	// training. The S3Prefix should have the following format:
+	// s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER-OR-FILE
+	//
+	// * If you choose
+	// ManifestFile, S3Uri identifies an object that is a manifest file containing a
+	// list of object keys that you want SageMaker to use for model training. A
+	// ManifestFile should have the format shown below: [ {"prefix":
 	// "s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER/DOC-EXAMPLE-PREFIX/"},
+	// "DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-1","DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-2",...
+	// "DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-N" ]
 	//
-	// "DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-1",
-	//
-	//
-	// "DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-2",
-	//
-	// ...
-	// "DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-N" ] An S3Prefix should have
-	// the following format: s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER-OR-FILE
+	// * If you choose
+	// AugmentedManifestFile, S3Uri identifies an object that is an augmented manifest
+	// file in JSON lines format. This file contains the data you want to use for model
+	// training. AugmentedManifestFile is available for V2 API jobs only (for example,
+	// for jobs created by calling CreateAutoMLJobV2). Here is a minimal, single-record
+	// example of an AugmentedManifestFile: {"source-ref":
+	// "s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER/cats/cat.jpg","label-metadata":
+	// {"class-name": "cat" } For more information on AugmentedManifestFile, see
+	// Provide Dataset Metadata to Training Jobs with an Augmented Manifest File
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/augmented-manifest.html).
 	//
 	// This member is required.
 	S3DataType AutoMLS3DataType
 
-	// The URL to the Amazon S3 data source.
+	// The URL to the Amazon S3 data source. The Uri refers to the Amazon S3 prefix or
+	// ManifestFile depending on the data type.
 	//
 	// This member is required.
 	S3Uri *string
@@ -4712,7 +4818,8 @@ type Filter struct {
 type FinalAutoMLJobObjectiveMetric struct {
 
 	// The name of the metric with the best result. For a description of the possible
-	// objective metrics, see AutoMLJobObjective$MetricName.
+	// objective metrics, see AutoMLJobObjective$MetricName
+	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobObjective.html).
 	//
 	// This member is required.
 	MetricName AutoMLMetricEnum
@@ -6119,7 +6226,7 @@ type HyperParameterTrainingJobDefinition struct {
 	// API. You can use an existing environment variable from the training container
 	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html#sagemaker-CreateTrainingJob-request-Environment)
 	// or use your own. See Define metrics and variables
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics.html)
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics-variables.html)
 	// for more information. The maximum number of items specified for Map Entries
 	// refers to the maximum number of environment variables for each
 	// TrainingJobDefinition and also the maximum for the hyperparameter tuning job
@@ -6707,6 +6814,17 @@ type Image struct {
 
 	// When a create, update, or delete operation fails, the reason for the failure.
 	FailureReason *string
+
+	noSmithyDocumentSerde
+}
+
+// Stores the configuration information for the image classification problem of an
+// AutoML job using the V2 API.
+type ImageClassificationJobConfig struct {
+
+	// How long a job is allowed to run, or how many candidates a job is allowed to
+	// generate.
+	CompletionCriteria *AutoMLJobCompletionCriteria
 
 	noSmithyDocumentSerde
 }
@@ -7841,10 +7959,14 @@ type MetricDatum struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies a metric that the training algorithm writes to stderr or stdout.
-// SageMakerhyperparameter tuning captures all defined metrics. You specify one
-// metric that a hyperparameter tuning job uses as its objective metric to choose
-// the best training job.
+// Specifies a metric that the training algorithm writes to stderr or stdout. You
+// can view these logs to understand how your training job performs and check for
+// any errors encountered during training. SageMaker hyperparameter tuning captures
+// all defined metrics. Specify one of the defined metrics to use as an objective
+// metric using the TuningObjective
+// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html#sagemaker-Type-HyperParameterTrainingJobDefinition-TuningObjective)
+// parameter in the HyperParameterTrainingJobDefinition API to evaluate job
+// performance during hyperparameter tuning.
 type MetricDefinition struct {
 
 	// The name of the metric.
@@ -7854,8 +7976,8 @@ type MetricDefinition struct {
 
 	// A regular expression that searches the output of a training job and gets the
 	// value of the metric. For more information about using regular expressions to
-	// define metrics, see Defining Objective Metrics
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics.html).
+	// define metrics, see Defining metrics and environment variables
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics-variables.html).
 	//
 	// This member is required.
 	Regex *string
@@ -10055,7 +10177,7 @@ type OnlineStoreSecurityConfig struct {
 
 	// The Amazon Web Services Key Management Service (KMS) key ARN that SageMaker
 	// Feature Store uses to encrypt the Amazon S3 objects at rest using Amazon S3
-	// server-side encryption. The caller (either IAM user or IAM role) of
+	// server-side encryption. The caller (either user or IAM role) of
 	// CreateFeatureGroup must have below permissions to the OnlineStoreKmsKeyId:
 	// -
 	// "kms:Encrypt"
@@ -11179,7 +11301,7 @@ type ProductionVariant struct {
 
 	// You can use this parameter to turn on native Amazon Web Services Systems Manager
 	// (SSM) access for a production variant behind an endpoint. By default, SSM access
-	// is disabled for all production variants behind an endpoints. You can turn on or
+	// is disabled for all production variants behind an endpoint. You can turn on or
 	// turn off SSM access for a production variant behind an existing endpoint by
 	// creating a new endpoint configuration and calling UpdateEndpoint.
 	EnableSSMAccess *bool
@@ -12184,7 +12306,9 @@ type RepositoryAuthConfig struct {
 // The resolved attributes.
 type ResolvedAttributes struct {
 
-	// Specifies a metric to minimize or maximize as the objective of a job.
+	// Specifies a metric to minimize or maximize as the objective of a job. V2 API
+	// jobs (for example jobs created by calling CreateAutoMLJobV2), support Accuracy
+	// only.
 	AutoMLJobObjective *AutoMLJobObjective
 
 	// How long a job is allowed to run, or how many candidates a job is allowed to
@@ -13152,6 +13276,25 @@ type TensorBoardOutputConfig struct {
 	// Path to local storage location for tensorBoard output. Defaults to
 	// /opt/ml/output/tensorboard.
 	LocalPath *string
+
+	noSmithyDocumentSerde
+}
+
+// Stores the configuration information for the text classification problem of an
+// AutoML job using the V2 API.
+type TextClassificationJobConfig struct {
+
+	// How long a job is allowed to run, or how many candidates a job is allowed to
+	// generate.
+	CompletionCriteria *AutoMLJobCompletionCriteria
+
+	// The name of the column used to provide the sentences to be classified. It should
+	// not be the same as the target column.
+	ContentColumn *string
+
+	// The name of the column used to provide the class labels. It should not be same
+	// as the content column.
+	TargetLabelColumn *string
 
 	noSmithyDocumentSerde
 }
@@ -14865,4 +15008,5 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isAutoMLProblemTypeConfig()      {}
 func (*UnknownUnionMember) isTrialComponentParameterValue() {}

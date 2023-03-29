@@ -1,3 +1,7 @@
+# v1.19.0 (2023-03-23)
+
+* **Feature**: Adds AutoEnableOrganizationMembers attribute to DescribeOrganizationConfiguration and UpdateOrganizationConfiguration APIs.
+
 # v1.18.1 (2023-03-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

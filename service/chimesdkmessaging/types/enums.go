@@ -179,6 +179,24 @@ func (ErrorCode) Values() []ErrorCode {
 	}
 }
 
+type ExpirationCriterion string
+
+// Enum values for ExpirationCriterion
+const (
+	ExpirationCriterionCreatedTimestamp     ExpirationCriterion = "CREATED_TIMESTAMP"
+	ExpirationCriterionLastMessageTimestamp ExpirationCriterion = "LAST_MESSAGE_TIMESTAMP"
+)
+
+// Values returns all known values for ExpirationCriterion. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExpirationCriterion) Values() []ExpirationCriterion {
+	return []ExpirationCriterion{
+		"CREATED_TIMESTAMP",
+		"LAST_MESSAGE_TIMESTAMP",
+	}
+}
+
 type FallbackAction string
 
 // Enum values for FallbackAction

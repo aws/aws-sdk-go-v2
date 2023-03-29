@@ -12,6 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Searches the provisioned phone numbers in an organization.
 func (c *Client) SearchAvailablePhoneNumbers(ctx context.Context, params *SearchAvailablePhoneNumbersInput, optFns ...func(*Options)) (*SearchAvailablePhoneNumbersOutput, error) {
 	if params == nil {
 		params = &SearchAvailablePhoneNumbersInput{}
@@ -28,28 +29,44 @@ func (c *Client) SearchAvailablePhoneNumbers(ctx context.Context, params *Search
 }
 
 type SearchAvailablePhoneNumbersInput struct {
+
+	// Confines a search to just the phone numbers associated with the specified area
+	// code.
 	AreaCode *string
 
+	// Confines a search to just the phone numbers associated with the specified city.
 	City *string
 
+	// Confines a search to just the phone numbers associated with the specified
+	// country.
 	Country *string
 
+	// The maximum number of results to return.
 	MaxResults *int32
 
+	// The token used to return the next page of results.
 	NextToken *string
 
+	// Confines a search to just the phone numbers associated with the specified phone
+	// number type, either local or toll-free.
 	PhoneNumberType types.PhoneNumberType
 
+	// Confines a search to just the phone numbers associated with the specified state.
 	State *string
 
+	// Confines a search to just the phone numbers associated with the specified
+	// toll-free prefix.
 	TollFreePrefix *string
 
 	noSmithyDocumentSerde
 }
 
 type SearchAvailablePhoneNumbersOutput struct {
+
+	// Confines a search to just the phone numbers in the E.164 format.
 	E164PhoneNumbers []string
 
+	// The token used to return the next page of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -129,6 +146,7 @@ var _ SearchAvailablePhoneNumbersAPIClient = (*Client)(nil)
 // SearchAvailablePhoneNumbersPaginatorOptions is the paginator options for
 // SearchAvailablePhoneNumbers
 type SearchAvailablePhoneNumbersPaginatorOptions struct {
+	// The maximum number of results to return.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

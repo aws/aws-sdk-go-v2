@@ -13,8 +13,12 @@ import (
 // Deletes the specified alarms. You can delete up to 100 alarms in one operation.
 // However, this total can include no more than one composite alarm. For example,
 // you could delete 99 metric alarms and one composite alarms with one operation,
-// but you can't delete two composite alarms with one operation. In the event of an
-// error, no alarms are deleted. It is possible to create a loop or cycle of
+// but you can't delete two composite alarms with one operation. If you specify an
+// incorrect alarm name or make any other error in the operation, no alarms are
+// deleted. To confirm that alarms were deleted successfully, you can use the
+// DescribeAlarms
+// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeAlarms.html)
+// operation after using DeleteAlarms. It is possible to create a loop or cycle of
 // composite alarms, where composite alarm A depends on composite alarm B, and
 // composite alarm B also depends on composite alarm A. In this scenario, you can't
 // delete any composite alarm that is part of the cycle because there is always
@@ -41,7 +45,7 @@ func (c *Client) DeleteAlarms(ctx context.Context, params *DeleteAlarmsInput, op
 
 type DeleteAlarmsInput struct {
 
-	// The alarms to be deleted.
+	// The alarms to be deleted. Do not enclose the alarm names in quote marks.
 	//
 	// This member is required.
 	AlarmNames []string

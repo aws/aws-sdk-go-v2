@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAssociateFraudster struct {
+}
+
+func (*validateOpAssociateFraudster) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateFraudster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateFraudsterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateFraudsterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDomain struct {
 }
 
@@ -25,6 +45,26 @@ func (m *validateOpCreateDomain) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateDomainInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateWatchlist struct {
+}
+
+func (*validateOpCreateWatchlist) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateWatchlist) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateWatchlistInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateWatchlistInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -85,6 +125,26 @@ func (m *validateOpDeleteSpeaker) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteSpeakerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteWatchlist struct {
+}
+
+func (*validateOpDeleteWatchlist) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteWatchlist) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteWatchlistInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteWatchlistInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -190,6 +250,46 @@ func (m *validateOpDescribeSpeaker) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeWatchlist struct {
+}
+
+func (*validateOpDescribeWatchlist) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeWatchlist) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeWatchlistInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeWatchlistInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateFraudster struct {
+}
+
+func (*validateOpDisassociateFraudster) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateFraudster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateFraudsterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateFraudsterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpEvaluateSession struct {
 }
 
@@ -225,6 +325,26 @@ func (m *validateOpListFraudsterRegistrationJobs) HandleInitialize(ctx context.C
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListFraudsterRegistrationJobsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListFraudsters struct {
+}
+
+func (*validateOpListFraudsters) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListFraudsters) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListFraudstersInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListFraudstersInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -285,6 +405,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListWatchlists struct {
+}
+
+func (*validateOpListWatchlists) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListWatchlists) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListWatchlistsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListWatchlistsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -410,8 +550,36 @@ func (m *validateOpUpdateDomain) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateWatchlist struct {
+}
+
+func (*validateOpUpdateWatchlist) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateWatchlist) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateWatchlistInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateWatchlistInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+func addOpAssociateFraudsterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateFraudster{}, middleware.After)
+}
+
 func addOpCreateDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDomain{}, middleware.After)
+}
+
+func addOpCreateWatchlistValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateWatchlist{}, middleware.After)
 }
 
 func addOpDeleteDomainValidationMiddleware(stack *middleware.Stack) error {
@@ -424,6 +592,10 @@ func addOpDeleteFraudsterValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteSpeakerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteSpeaker{}, middleware.After)
+}
+
+func addOpDeleteWatchlistValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteWatchlist{}, middleware.After)
 }
 
 func addOpDescribeDomainValidationMiddleware(stack *middleware.Stack) error {
@@ -446,12 +618,24 @@ func addOpDescribeSpeakerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeSpeaker{}, middleware.After)
 }
 
+func addOpDescribeWatchlistValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeWatchlist{}, middleware.After)
+}
+
+func addOpDisassociateFraudsterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateFraudster{}, middleware.After)
+}
+
 func addOpEvaluateSessionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpEvaluateSession{}, middleware.After)
 }
 
 func addOpListFraudsterRegistrationJobsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListFraudsterRegistrationJobs{}, middleware.After)
+}
+
+func addOpListFraudstersValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListFraudsters{}, middleware.After)
 }
 
 func addOpListSpeakerEnrollmentJobsValidationMiddleware(stack *middleware.Stack) error {
@@ -464,6 +648,10 @@ func addOpListSpeakersValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpListWatchlistsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListWatchlists{}, middleware.After)
 }
 
 func addOpOptOutSpeakerValidationMiddleware(stack *middleware.Stack) error {
@@ -488,6 +676,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDomain{}, middleware.After)
+}
+
+func addOpUpdateWatchlistValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateWatchlist{}, middleware.After)
 }
 
 func validateInputDataConfig(v *types.InputDataConfig) error {
@@ -570,6 +762,27 @@ func validateTagList(v []types.Tag) error {
 	}
 }
 
+func validateOpAssociateFraudsterInput(v *AssociateFraudsterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateFraudsterInput"}
+	if v.DomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
+	}
+	if v.WatchlistId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WatchlistId"))
+	}
+	if v.FraudsterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FraudsterId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateDomainInput(v *CreateDomainInput) error {
 	if v == nil {
 		return nil
@@ -589,6 +802,24 @@ func validateOpCreateDomainInput(v *CreateDomainInput) error {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateWatchlistInput(v *CreateWatchlistInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateWatchlistInput"}
+	if v.DomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -640,6 +871,24 @@ func validateOpDeleteSpeakerInput(v *DeleteSpeakerInput) error {
 	}
 	if v.SpeakerId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SpeakerId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteWatchlistInput(v *DeleteWatchlistInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteWatchlistInput"}
+	if v.DomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
+	}
+	if v.WatchlistId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WatchlistId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -735,6 +984,45 @@ func validateOpDescribeSpeakerInput(v *DescribeSpeakerInput) error {
 	}
 }
 
+func validateOpDescribeWatchlistInput(v *DescribeWatchlistInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeWatchlistInput"}
+	if v.DomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
+	}
+	if v.WatchlistId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WatchlistId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateFraudsterInput(v *DisassociateFraudsterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateFraudsterInput"}
+	if v.DomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
+	}
+	if v.WatchlistId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WatchlistId"))
+	}
+	if v.FraudsterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FraudsterId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpEvaluateSessionInput(v *EvaluateSessionInput) error {
 	if v == nil {
 		return nil
@@ -758,6 +1046,21 @@ func validateOpListFraudsterRegistrationJobsInput(v *ListFraudsterRegistrationJo
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListFraudsterRegistrationJobsInput"}
+	if v.DomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListFraudstersInput(v *ListFraudstersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListFraudstersInput"}
 	if v.DomainId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
 	}
@@ -805,6 +1108,21 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListWatchlistsInput(v *ListWatchlistsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListWatchlistsInput"}
+	if v.DomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -952,6 +1270,24 @@ func validateOpUpdateDomainInput(v *UpdateDomainInput) error {
 		if err := validateServerSideEncryptionConfiguration(v.ServerSideEncryptionConfiguration); err != nil {
 			invalidParams.AddNested("ServerSideEncryptionConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateWatchlistInput(v *UpdateWatchlistInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateWatchlistInput"}
+	if v.DomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
+	}
+	if v.WatchlistId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WatchlistId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -40,18 +40,20 @@
             }
         },
         "com.amazonaws.ssmcontacts#AcceptCodeValidation": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "IGNORE",
-                        "name": "IGNORE"
-                    },
-                    {
-                        "value": "ENFORCE",
-                        "name": "ENFORCE"
+            "type": "enum",
+            "members": {
+                "IGNORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IGNORE"
                     }
-                ]
+                },
+                "ENFORCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENFORCE"
+                    }
+                }
             }
         },
         "com.amazonaws.ssmcontacts#AcceptPage": {
@@ -115,7 +117,7 @@
                 "AcceptCode": {
                     "target": "com.amazonaws.ssmcontacts#AcceptCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The accept code is a 6-digit code used to acknowledge the page.</p>",
+                        "smithy.api#documentation": "<p>A 6-digit code used to acknowledge the page.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -125,6 +127,9 @@
                         "smithy.api#documentation": "<p>An optional field that Incident Manager uses to <code>ENFORCE</code>\n            <code>AcceptCode</code> validation when acknowledging an page. Acknowledgement can occur by\n         replying to a page, or when entering the AcceptCode in the console. Enforcing AcceptCode\n         validation causes Incident Manager to verify that the code entered by the user matches the\n         code sent by Incident Manager with the page.</p>\n         <p>Incident Manager can also <code>IGNORE</code>\n            <code>AcceptCode</code> validation. Ignoring <code>AcceptCode</code> validation causes\n         Incident Manager to accept any value entered for the <code>AcceptCode</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ssmcontacts#AcceptPageResult": {
@@ -132,18 +137,20 @@
             "members": {}
         },
         "com.amazonaws.ssmcontacts#AcceptType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DELIVERED",
-                        "name": "DELIVERED"
-                    },
-                    {
-                        "value": "READ",
-                        "name": "READ"
+            "type": "enum",
+            "members": {
+                "DELIVERED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELIVERED"
                     }
-                ]
+                },
+                "READ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "READ"
+                    }
+                }
             }
         },
         "com.amazonaws.ssmcontacts#AccessDeniedException": {
@@ -204,10 +211,13 @@
                 "ActivationCode": {
                     "target": "com.amazonaws.ssmcontacts#ActivationCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The code sent to the contact channel when it was created in the contact. </p>",
+                        "smithy.api#documentation": "<p>The code sent to the contact channel when it was created in the contact.</p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ssmcontacts#ActivateContactChannelResult": {
@@ -225,18 +235,20 @@
             }
         },
         "com.amazonaws.ssmcontacts#ActivationStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ACTIVATED",
-                        "name": "ACTIVATED"
-                    },
-                    {
-                        "value": "NOT_ACTIVATED",
-                        "name": "NOT_ACTIVATED"
+            "type": "enum",
+            "members": {
+                "ACTIVATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVATED"
                     }
-                ]
+                },
+                "NOT_ACTIVATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_ACTIVATED"
+                    }
+                }
             }
         },
         "com.amazonaws.ssmcontacts#AmazonResourceName": {
@@ -280,22 +292,26 @@
             }
         },
         "com.amazonaws.ssmcontacts#ChannelType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SMS",
-                        "name": "SMS"
-                    },
-                    {
-                        "value": "VOICE",
-                        "name": "VOICE"
-                    },
-                    {
-                        "value": "EMAIL",
-                        "name": "EMAIL"
+            "type": "enum",
+            "members": {
+                "SMS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMS"
                     }
-                ]
+                },
+                "VOICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VOICE"
+                    }
+                },
+                "EMAIL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EMAIL"
+                    }
+                }
             }
         },
         "com.amazonaws.ssmcontacts#ConflictException": {
@@ -317,8 +333,14 @@
                 "ResourceType": {
                     "target": "com.amazonaws.ssmcontacts#String",
                     "traits": {
-                        "smithy.api#documentation": "ype of the resource in use",
+                        "smithy.api#documentation": "Type of the resource in use",
                         "smithy.api#required": {}
+                    }
+                },
+                "DependentEntities": {
+                    "target": "com.amazonaws.ssmcontacts#DependentEntityList",
+                    "traits": {
+                        "smithy.api#documentation": "List of dependent entities containing information on relation type and resourceArns linked to the resource in use"
                     }
                 }
             },
@@ -413,7 +435,7 @@
                 "ActivationStatus": {
                     "target": "com.amazonaws.ssmcontacts#ActivationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean value describing if the contact channel has been activated or not. If the\n         contact channel isn't activated, Incident Manager can't engage the contact through it. </p>",
+                        "smithy.api#documentation": "<p>A Boolean value describing if the contact channel has been activated or not. If the\n         contact channel isn't activated, Incident Manager can't engage the contact through it.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -433,7 +455,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The details that Incident Manager uses when trying to engage the contact channel. </p>"
+                "smithy.api#documentation": "<p>The details that Incident Manager uses when trying to engage the contact channel.</p>"
             }
         },
         "com.amazonaws.ssmcontacts#ContactChannelList": {
@@ -474,18 +496,26 @@
             }
         },
         "com.amazonaws.ssmcontacts#ContactType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PERSONAL",
-                        "name": "PERSONAL"
-                    },
-                    {
-                        "value": "ESCALATION",
-                        "name": "ESCALATION"
+            "type": "enum",
+            "members": {
+                "PERSONAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PERSONAL"
                     }
-                ]
+                },
+                "ESCALATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ESCALATION"
+                    }
+                },
+                "ONCALL_SCHEDULE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ONCALL_SCHEDULE"
+                    }
+                }
             }
         },
         "com.amazonaws.ssmcontacts#ContactsList": {
@@ -502,6 +532,32 @@
                     "max": 8192
                 },
                 "smithy.api#pattern": "^[.\\s\\S]*$"
+            }
+        },
+        "com.amazonaws.ssmcontacts#CoverageTime": {
+            "type": "structure",
+            "members": {
+                "Start": {
+                    "target": "com.amazonaws.ssmcontacts#HandOffTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about when the on-call rotation shift begins.</p>"
+                    }
+                },
+                "End": {
+                    "target": "com.amazonaws.ssmcontacts#HandOffTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about when the on-call rotation shift ends.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about when an on-call shift begins and ends.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#CoverageTimes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmcontacts#CoverageTime"
             }
         },
         "com.amazonaws.ssmcontacts#CreateContact": {
@@ -536,7 +592,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Contacts are either the contacts that Incident Manager engages during an incident or the\n         escalation plans that Incident Manager uses to engage contacts in phases during an\n         incident. </p>"
+                "smithy.api#documentation": "<p>Contacts are either the contacts that Incident Manager engages during an incident or the\n         escalation plans that Incident Manager uses to engage contacts in phases during an\n         incident.</p>"
             }
         },
         "com.amazonaws.ssmcontacts#CreateContactChannel": {
@@ -577,7 +633,7 @@
                 "ContactId": {
                     "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the contact you are adding the contact channel to.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the contact you are adding the contact channel\n         to.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -615,6 +671,9 @@
                         "smithy.api#idempotencyToken": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ssmcontacts#CreateContactChannelResult": {
@@ -635,14 +694,14 @@
                 "Alias": {
                     "target": "com.amazonaws.ssmcontacts#ContactAlias",
                     "traits": {
-                        "smithy.api#documentation": "<p>The short name to quickly identify a contact or escalation plan. The contact alias must\n         be unique and identifiable. </p>",
+                        "smithy.api#documentation": "<p>The short name to quickly identify a contact or escalation plan. The contact alias must\n         be unique and identifiable.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DisplayName": {
                     "target": "com.amazonaws.ssmcontacts#ContactName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The full name of the contact or escalation plan.  </p>"
+                        "smithy.api#documentation": "<p>The full name of the contact or escalation plan.</p>"
                     }
                 },
                 "Type": {
@@ -655,14 +714,14 @@
                 "Plan": {
                     "target": "com.amazonaws.ssmcontacts#Plan",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of stages. A contact has an engagement plan with stages that contact specified\n         contact channels. An escalation plan uses stages that contact specified contacts. </p>",
+                        "smithy.api#documentation": "<p>A list of stages. A contact has an engagement plan with stages that contact specified\n         contact channels. An escalation plan uses stages that contact specified contacts.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.ssmcontacts#TagsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Adds a tag to the target. You can only tag resources created in the first Region of your\n         replication set. </p>"
+                        "smithy.api#documentation": "<p>Adds a tag to the target. You can only tag resources created in the first Region of your\n         replication set.</p>"
                     }
                 },
                 "IdempotencyToken": {
@@ -672,6 +731,9 @@
                         "smithy.api#idempotencyToken": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ssmcontacts#CreateContactResult": {
@@ -684,6 +746,196 @@
                         "smithy.api#required": {}
                     }
                 }
+            }
+        },
+        "com.amazonaws.ssmcontacts#CreateRotation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#CreateRotationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#CreateRotationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a rotation in an on-call schedule.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#CreateRotationOverride": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#CreateRotationOverrideRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#CreateRotationOverrideResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an override for a rotation in an on-call schedule.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#CreateRotationOverrideRequest": {
+            "type": "structure",
+            "members": {
+                "RotationId": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the rotation to create an override for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NewContactIds": {
+                    "target": "com.amazonaws.ssmcontacts#RotationOverrideContactsArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the contacts to replace those in the current on-call\n         rotation with.</p>\n         <p>If you want to include any current team members in the override shift, you must include\n         their ARNs in the new contact ID list.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.ssmcontacts#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the override goes into effect.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.ssmcontacts#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the override ends.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IdempotencyToken": {
+                    "target": "com.amazonaws.ssmcontacts#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that ensures that the operation is called only once with the specified\n         details.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssmcontacts#CreateRotationOverrideResult": {
+            "type": "structure",
+            "members": {
+                "RotationOverrideId": {
+                    "target": "com.amazonaws.ssmcontacts#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the created rotation override.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#CreateRotationRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.ssmcontacts#RotationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the rotation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactIds": {
+                    "target": "com.amazonaws.ssmcontacts#RotationContactsArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the contacts to add to the rotation.</p>\n         <p>The order that you list the contacts in is their shift order in the rotation schedule.\n         To change the order of the contact's shifts, use the <a>UpdateRotation</a>\n         operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.ssmcontacts#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the rotation goes into effect.</p>"
+                    }
+                },
+                "TimeZoneId": {
+                    "target": "com.amazonaws.ssmcontacts#TimeZoneId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time zone to base the rotation’s activity on in Internet Assigned Numbers Authority\n         (IANA) format. For example: \"America/Los_Angeles\", \"UTC\", or \"Asia/Seoul\". For more\n         information, see the <a href=\"https://www.iana.org/time-zones\">Time Zone\n            Database</a> on the IANA website.</p>\n         <note>\n            <p>Designators for time zones that don’t support Daylight Savings Time rules, such as\n            Pacific Standard Time (PST) and Pacific Daylight Time (PDT), are not supported.</p>\n         </note>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Recurrence": {
+                    "target": "com.amazonaws.ssmcontacts#RecurrenceSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the rule that specifies when a shift's team members rotate.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.ssmcontacts#TagsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional metadata to assign to the rotation. Tags enable you to categorize a resource in\n         different ways, such as by purpose, owner, or environment. For more information, see <a href=\"https://docs.aws.amazon.com/incident-manager/latest/userguide/tagging.html\">Tagging\n            Incident Manager resources</a> in the <i>Incident Manager User\n            Guide</i>.</p>"
+                    }
+                },
+                "IdempotencyToken": {
+                    "target": "com.amazonaws.ssmcontacts#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that ensures that the operation is called only once with the specified\n         details.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssmcontacts#CreateRotationResult": {
+            "type": "structure",
+            "members": {
+                "RotationArn": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the created rotation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#DailySettings": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmcontacts#HandOffTime"
             }
         },
         "com.amazonaws.ssmcontacts#DataEncryptionException": {
@@ -704,6 +956,62 @@
         },
         "com.amazonaws.ssmcontacts#DateTime": {
             "type": "timestamp"
+        },
+        "com.amazonaws.ssmcontacts#DayOfMonth": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 31
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#DayOfWeek": {
+            "type": "enum",
+            "members": {
+                "MON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MON"
+                    }
+                },
+                "TUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TUE"
+                    }
+                },
+                "WED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WED"
+                    }
+                },
+                "THU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "THU"
+                    }
+                },
+                "FRI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FRI"
+                    }
+                },
+                "SAT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SAT"
+                    }
+                },
+                "SUN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUN"
+                    }
+                }
+            }
         },
         "com.amazonaws.ssmcontacts#DeactivateContactChannel": {
             "type": "operation",
@@ -744,6 +1052,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ssmcontacts#DeactivateContactChannelResult": {
@@ -764,6 +1075,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.ssmcontacts#InternalServerException"
@@ -821,6 +1135,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ssmcontacts#DeleteContactChannelResult": {
@@ -837,11 +1154,148 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ssmcontacts#DeleteContactResult": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.ssmcontacts#DeleteRotation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#DeleteRotationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#DeleteRotationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a rotation from the system. If a rotation belongs to more than one on-call\n         schedule, this operation deletes it from all of them.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#DeleteRotationOverride": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#DeleteRotationOverrideRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#DeleteRotationOverrideResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an existing override for an on-call rotation.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#DeleteRotationOverrideRequest": {
+            "type": "structure",
+            "members": {
+                "RotationId": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the rotation that was overridden.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RotationOverrideId": {
+                    "target": "com.amazonaws.ssmcontacts#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the on-call rotation override to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssmcontacts#DeleteRotationOverrideResult": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ssmcontacts#DeleteRotationRequest": {
+            "type": "structure",
+            "members": {
+                "RotationId": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the on-call rotation to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssmcontacts#DeleteRotationResult": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ssmcontacts#DependentEntity": {
+            "type": "structure",
+            "members": {
+                "RelationType": {
+                    "target": "com.amazonaws.ssmcontacts#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of relationship between one resource and the other resource that it is related\n         to or depends on.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DependentResourceIds": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the dependent resources.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a resource that another resource is related to or depends on.</p>\n         <p>For example, if a contact is a member of a rotation, the rotation is a dependent entity\n         of the contact.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#DependentEntityList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmcontacts#DependentEntity"
+            }
         },
         "com.amazonaws.ssmcontacts#DescribeEngagement": {
             "type": "operation",
@@ -885,6 +1339,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ssmcontacts#DescribeEngagementResult": {
@@ -999,6 +1456,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ssmcontacts#DescribePageResult": {
@@ -1211,6 +1671,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ssmcontacts#GetContactChannelResult": {
@@ -1247,7 +1710,7 @@
                 "DeliveryAddress": {
                     "target": "com.amazonaws.ssmcontacts#ContactChannelAddress",
                     "traits": {
-                        "smithy.api#documentation": "<p>The details that Incident Manager uses when trying to engage the contact channel. </p>",
+                        "smithy.api#documentation": "<p>The details that Incident Manager uses when trying to engage the contact channel.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1298,6 +1761,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ssmcontacts#GetContactPolicyResult": {
@@ -1327,6 +1793,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ssmcontacts#GetContactResult": {
@@ -1355,7 +1824,7 @@
                 "Type": {
                     "target": "com.amazonaws.ssmcontacts#ContactType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of contact, either <code>PERSONAL</code> or <code>ESCALATION</code>. </p>",
+                        "smithy.api#documentation": "<p>The type of contact, either <code>PERSONAL</code> or <code>ESCALATION</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1365,6 +1834,223 @@
                         "smithy.api#documentation": "<p>Details about the specific timing or stages and targets of the escalation plan or\n         engagement plan.</p>",
                         "smithy.api#required": {}
                     }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#GetRotation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#GetRotationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#GetRotationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves information about an on-call rotation.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#GetRotationOverride": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#GetRotationOverrideRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#GetRotationOverrideResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves information about an override to an on-call rotation.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#GetRotationOverrideRequest": {
+            "type": "structure",
+            "members": {
+                "RotationId": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the overridden rotation to retrieve information\n         about.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RotationOverrideId": {
+                    "target": "com.amazonaws.ssmcontacts#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the on-call rotation override to retrieve information\n         about.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssmcontacts#GetRotationOverrideResult": {
+            "type": "structure",
+            "members": {
+                "RotationOverrideId": {
+                    "target": "com.amazonaws.ssmcontacts#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the override to an on-call rotation.</p>"
+                    }
+                },
+                "RotationArn": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the on-call rotation that was overridden.</p>"
+                    }
+                },
+                "NewContactIds": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the contacts assigned to the override of the on-call\n         rotation.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.ssmcontacts#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the override goes into effect.</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.ssmcontacts#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the override ends.</p>"
+                    }
+                },
+                "CreateTime": {
+                    "target": "com.amazonaws.ssmcontacts#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the override was created.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#GetRotationRequest": {
+            "type": "structure",
+            "members": {
+                "RotationId": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the on-call rotation to retrieve information\n         about.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssmcontacts#GetRotationResult": {
+            "type": "structure",
+            "members": {
+                "RotationArn": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the on-call rotation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.ssmcontacts#RotationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the on-call rotation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactIds": {
+                    "target": "com.amazonaws.ssmcontacts#RotationContactsArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the contacts assigned to the on-call rotation\n         team.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.ssmcontacts#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specified start time for the on-call rotation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TimeZoneId": {
+                    "target": "com.amazonaws.ssmcontacts#TimeZoneId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time zone that the rotation’s activity is based on, in Internet Assigned Numbers\n         Authority (IANA) format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Recurrence": {
+                    "target": "com.amazonaws.ssmcontacts#RecurrenceSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how long a rotation lasts before restarting at the beginning of the shift\n         order.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#HandOffTime": {
+            "type": "structure",
+            "members": {
+                "HourOfDay": {
+                    "target": "com.amazonaws.ssmcontacts#HourOfDay",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The hour when an on-call rotation shift begins or ends.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MinuteOfHour": {
+                    "target": "com.amazonaws.ssmcontacts#MinuteOfHour",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The minute when an on-call rotation shift begins or ends.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about when an on-call rotation shift begins or ends.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#HourOfDay": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 23
                 }
             }
         },
@@ -1407,7 +2093,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Unexpected error occurred while\n         processing the request.</p>",
+                "smithy.api#documentation": "<p>Unexpected error occurred while processing the request.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
             }
@@ -1459,7 +2145,7 @@
                 "ContactId": {
                     "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the contact. </p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the contact.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1475,6 +2161,9 @@
                         "smithy.api#documentation": "<p>The maximum number of contact channels per page.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ssmcontacts#ListContactChannelsResult": {
@@ -1554,6 +2243,9 @@
                         "smithy.api#documentation": "<p>The type of contact. A contact is type <code>PERSONAL</code> and an escalation plan is\n         type <code>ESCALATION</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ssmcontacts#ListContactsResult": {
@@ -1632,6 +2324,9 @@
                         "smithy.api#documentation": "<p>The time range to lists engagements for an incident.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ssmcontacts#ListEngagementsResult": {
@@ -1678,7 +2373,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all of the engagements to contact channels that have been acknowledged. </p>",
+                "smithy.api#documentation": "<p>Lists all of the engagements to contact channels that have been acknowledged.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1709,6 +2404,9 @@
                         "smithy.api#documentation": "<p>The maximum number of acknowledgements per page of results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ssmcontacts#ListPageReceiptsResult": {
@@ -1724,6 +2422,79 @@
                     "target": "com.amazonaws.ssmcontacts#ReceiptsList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of each acknowledgement.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#ListPageResolutions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#ListPageResolutionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#ListPageResolutionsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the resolution path of an engagement. For example, the escalation plan engaged\n         in an incident might target an on-call schedule that includes several contacts in a\n         rotation, but just one contact on-call when the incident starts. The resolution path\n         indicates the hierarchy of <i>escalation plan > on-call schedule >\n            contact</i>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "PageResolutions"
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#ListPageResolutionsRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.ssmcontacts#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to start the list. Use this token to get the next set of results.</p>"
+                    }
+                },
+                "PageId": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the contact engaged for the incident.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssmcontacts#ListPageResolutionsResult": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.ssmcontacts#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. Use this token to get the next set of\n         results.</p>"
+                    }
+                },
+                "PageResolutions": {
+                    "target": "com.amazonaws.ssmcontacts#ResolutionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the resolution for an engagement.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             }
@@ -1782,9 +2553,12 @@
                 "MaxResults": {
                     "target": "com.amazonaws.ssmcontacts#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of engagements to contact channels to list per page of results. </p>"
+                        "smithy.api#documentation": "<p>The maximum number of engagements to contact channels to list per page of results.\n      </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ssmcontacts#ListPagesByContactResult": {
@@ -1862,6 +2636,9 @@
                         "smithy.api#documentation": "<p>The maximum number of engagements to contact channels to list per page of\n         results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ssmcontacts#ListPagesByEngagementResult": {
@@ -1877,6 +2654,388 @@
                     "target": "com.amazonaws.ssmcontacts#PagesList",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of engagements to contact channels.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#ListPreviewRotationShifts": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#ListPreviewRotationShiftsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#ListPreviewRotationShiftsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of shifts based on rotation configuration parameters.</p>\n         <note>\n            <p>The Incident Manager primarily uses this operation to populate the <b>Preview</b> calendar. It is not typically run by end users.</p>\n         </note>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "RotationShifts",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#ListPreviewRotationShiftsRequest": {
+            "type": "structure",
+            "members": {
+                "RotationStartTime": {
+                    "target": "com.amazonaws.ssmcontacts#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time a rotation would begin. The first shift is calculated from this date\n         and time.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.ssmcontacts#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Used to filter the range of calculated shifts before sending the response back to the\n         user. </p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.ssmcontacts#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time a rotation shift would end.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Members": {
+                    "target": "com.amazonaws.ssmcontacts#RotationPreviewMemberList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contacts that would be assigned to a rotation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TimeZoneId": {
+                    "target": "com.amazonaws.ssmcontacts#TimeZoneId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time zone the rotation’s activity would be based on, in Internet Assigned Numbers\n         Authority (IANA) format. For example: \"America/Los_Angeles\", \"UTC\", or \"Asia/Seoul\".\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Recurrence": {
+                    "target": "com.amazonaws.ssmcontacts#RecurrenceSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about how long a rotation would last before restarting at the beginning of\n         the shift order.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Overrides": {
+                    "target": "com.amazonaws.ssmcontacts#OverrideList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about changes that would be made in a rotation override.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ssmcontacts#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to start the list. This token is used to get the next set of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ssmcontacts#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that\n         can be specified in a subsequent call to get the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssmcontacts#ListPreviewRotationShiftsResult": {
+            "type": "structure",
+            "members": {
+                "RotationShifts": {
+                    "target": "com.amazonaws.ssmcontacts#RotationShifts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about a rotation shift, including times, types, and contacts.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ssmcontacts#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. This token is used to get the next set of\n         results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#ListRotationOverrides": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#ListRotationOverridesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#ListRotationOverridesResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list of overrides currently specified for an on-call rotation.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "RotationOverrides",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#ListRotationOverridesRequest": {
+            "type": "structure",
+            "members": {
+                "RotationId": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the rotation to retrieve information about.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.ssmcontacts#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time for the beginning of a time range for listing overrides.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.ssmcontacts#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time for the end of a time range for listing overrides.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ssmcontacts#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to start the list. Use this token to get the next set of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ssmcontacts#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that\n         you can specify in a subsequent call to get the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssmcontacts#ListRotationOverridesResult": {
+            "type": "structure",
+            "members": {
+                "RotationOverrides": {
+                    "target": "com.amazonaws.ssmcontacts#RotationOverrides",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of rotation overrides in the specified time range.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ssmcontacts#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. Use this token to get the next set of\n         results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#ListRotationShifts": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#ListRotationShiftsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#ListRotationShiftsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of shifts generated by an existing rotation in the system.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "RotationShifts",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#ListRotationShiftsRequest": {
+            "type": "structure",
+            "members": {
+                "RotationId": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the rotation to retrieve shift information about.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.ssmcontacts#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time for the beginning of the time range to list shifts for.</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.ssmcontacts#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time for the end of the time range to list shifts for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ssmcontacts#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to start the list. Use this token to get the next set of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ssmcontacts#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that\n         you can specify in a subsequent call to get the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssmcontacts#ListRotationShiftsResult": {
+            "type": "structure",
+            "members": {
+                "RotationShifts": {
+                    "target": "com.amazonaws.ssmcontacts#RotationShifts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about shifts that meet the filter criteria.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ssmcontacts#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. Use this token to get the next set of\n         results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#ListRotations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#ListRotationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#ListRotationsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list of on-call rotations.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Rotations",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#ListRotationsRequest": {
+            "type": "structure",
+            "members": {
+                "RotationNamePrefix": {
+                    "target": "com.amazonaws.ssmcontacts#RotationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter to include rotations in list results based on their common prefix. For example,\n         entering prod returns a list of all rotation names that begin with <code>prod</code>, such\n         as <code>production</code> and <code>prod-1</code>.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ssmcontacts#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to start the list. Use this token to get the next set of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ssmcontacts#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that\n         you can specify in a subsequent call to get the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssmcontacts#ListRotationsResult": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.ssmcontacts#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. Use this token to get the next set of\n         results.</p>"
+                    }
+                },
+                "Rotations": {
+                    "target": "com.amazonaws.ssmcontacts#Rotations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about rotations that meet the filter criteria.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1921,6 +3080,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ssmcontacts#ListTagsForResourceResult": {
@@ -1941,6 +3103,68 @@
                     "min": 0,
                     "max": 1024
                 }
+            }
+        },
+        "com.amazonaws.ssmcontacts#Member": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "\\S"
+            }
+        },
+        "com.amazonaws.ssmcontacts#MinuteOfHour": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 59
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#MonthlySetting": {
+            "type": "structure",
+            "members": {
+                "DayOfMonth": {
+                    "target": "com.amazonaws.ssmcontacts#DayOfMonth",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The day of the month when monthly recurring on-call rotations begin.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HandOffTime": {
+                    "target": "com.amazonaws.ssmcontacts#HandOffTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time of day when a monthly recurring on-call shift rotation begins.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about on-call rotations that recur monthly.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#MonthlySettings": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmcontacts#MonthlySetting"
+            }
+        },
+        "com.amazonaws.ssmcontacts#NumberOfOnCalls": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#OverrideList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmcontacts#PreviewOverride"
             }
         },
         "com.amazonaws.ssmcontacts#Page": {
@@ -2025,13 +3249,18 @@
                 "Stages": {
                     "target": "com.amazonaws.ssmcontacts#StagesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of stages that the escalation plan or engagement plan uses to engage contacts and\n         contact methods.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>A list of stages that the escalation plan or engagement plan uses to engage contacts and\n         contact methods.</p>"
+                    }
+                },
+                "RotationIds": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the on-call rotations associated with the plan.\n      </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The stages that an escalation plan or engagement plan engages contacts and contact\n         methods in.</p>"
+                "smithy.api#documentation": "<p>Information about the stages and on-call rotation teams associated with an escalation\n         plan or engagement plan.\n         </p>"
             }
         },
         "com.amazonaws.ssmcontacts#Policy": {
@@ -2042,6 +3271,32 @@
                     "max": 395000
                 },
                 "smithy.api#pattern": "\\S"
+            }
+        },
+        "com.amazonaws.ssmcontacts#PreviewOverride": {
+            "type": "structure",
+            "members": {
+                "NewMembers": {
+                    "target": "com.amazonaws.ssmcontacts#RotationOverridePreviewMemberList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about contacts to add to an on-call rotation override.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.ssmcontacts#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the time a rotation override would begin.</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.ssmcontacts#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the time a rotation override would end.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about contacts and times that an on-call override replaces.</p>"
             }
         },
         "com.amazonaws.ssmcontacts#PublicContent": {
@@ -2113,6 +3368,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ssmcontacts#PutContactPolicyResult": {
@@ -2164,36 +3422,134 @@
             }
         },
         "com.amazonaws.ssmcontacts#ReceiptType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DELIVERED",
-                        "name": "DELIVERED"
-                    },
-                    {
-                        "value": "ERROR",
-                        "name": "ERROR"
-                    },
-                    {
-                        "value": "READ",
-                        "name": "READ"
-                    },
-                    {
-                        "value": "SENT",
-                        "name": "SENT"
-                    },
-                    {
-                        "value": "STOP",
-                        "name": "STOP"
+            "type": "enum",
+            "members": {
+                "DELIVERED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELIVERED"
                     }
-                ]
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                },
+                "READ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "READ"
+                    }
+                },
+                "SENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SENT"
+                    }
+                },
+                "STOP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOP"
+                    }
+                }
             }
         },
         "com.amazonaws.ssmcontacts#ReceiptsList": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.ssmcontacts#Receipt"
+            }
+        },
+        "com.amazonaws.ssmcontacts#RecurrenceMultiplier": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#RecurrenceSettings": {
+            "type": "structure",
+            "members": {
+                "MonthlySettings": {
+                    "target": "com.amazonaws.ssmcontacts#MonthlySettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about on-call rotations that recur monthly.</p>"
+                    }
+                },
+                "WeeklySettings": {
+                    "target": "com.amazonaws.ssmcontacts#WeeklySettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about on-call rotations that recur weekly.</p>"
+                    }
+                },
+                "DailySettings": {
+                    "target": "com.amazonaws.ssmcontacts#DailySettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about on-call rotations that recur daily.</p>"
+                    }
+                },
+                "NumberOfOnCalls": {
+                    "target": "com.amazonaws.ssmcontacts#NumberOfOnCalls",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of contacts, or shift team members designated to be on call concurrently\n         during a shift. For example, in an on-call schedule containing ten contacts, a value of\n            <code>2</code> designates that two of them are on call at any given time.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ShiftCoverages": {
+                    "target": "com.amazonaws.ssmcontacts#ShiftCoveragesMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the days of the week included in on-call rotation coverage.</p>"
+                    }
+                },
+                "RecurrenceMultiplier": {
+                    "target": "com.amazonaws.ssmcontacts#RecurrenceMultiplier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of days, weeks, or months a single rotation lasts.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about when an on-call rotation is in effect and how long the rotation period\n         lasts.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#ResolutionContact": {
+            "type": "structure",
+            "members": {
+                "ContactArn": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a contact in the engagement resolution process.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.ssmcontacts#ContactType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of contact for a resolution step.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StageIndex": {
+                    "target": "com.amazonaws.ssmcontacts#StageIndex",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The stage in the escalation plan that resolves to this contact.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the engagement resolution steps. The resolution starts from the first\n         contact, which can be an escalation plan, then resolves to an on-call rotation, and finally\n         to a personal contact.</p>\n         <p>The <code>ResolutionContact</code> structure describes the information for each node or\n         step in that process. It contains information about different contact types, such as the\n         escalation, rotation, and personal contacts.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#ResolutionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmcontacts#ResolutionContact"
             }
         },
         "com.amazonaws.ssmcontacts#ResourceNotFoundException": {
@@ -2241,6 +3597,211 @@
                 }
             }
         },
+        "com.amazonaws.ssmcontacts#Rotation": {
+            "type": "structure",
+            "members": {
+                "RotationArn": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the rotation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.ssmcontacts#RotationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the rotation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactIds": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the contacts assigned to the rotation team.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.ssmcontacts#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the rotation becomes active.</p>"
+                    }
+                },
+                "TimeZoneId": {
+                    "target": "com.amazonaws.ssmcontacts#TimeZoneId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time zone the rotation’s activity is based on, in Internet Assigned Numbers\n         Authority (IANA) format. For example: \"America/Los_Angeles\", \"UTC\", or \"Asia/Seoul\".\n      </p>"
+                    }
+                },
+                "Recurrence": {
+                    "target": "com.amazonaws.ssmcontacts#RecurrenceSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about when an on-call rotation is in effect and how long the rotation period\n         lasts.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a rotation in an on-call schedule.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#RotationContactsArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmcontacts#SsmContactsArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 30
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#RotationName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_\\-\\s\\.]*$"
+            }
+        },
+        "com.amazonaws.ssmcontacts#RotationOverride": {
+            "type": "structure",
+            "members": {
+                "RotationOverrideId": {
+                    "target": "com.amazonaws.ssmcontacts#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the override to an on-call rotation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NewContactIds": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the contacts assigned to the override of the on-call\n         rotation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.ssmcontacts#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time a rotation override begins.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.ssmcontacts#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time a rotation override ends.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreateTime": {
+                    "target": "com.amazonaws.ssmcontacts#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time a rotation override was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an override specified for an on-call rotation.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#RotationOverrideContactsArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmcontacts#SsmContactsArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 30
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#RotationOverridePreviewMemberList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmcontacts#Member"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 30
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#RotationOverrides": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmcontacts#RotationOverride"
+            }
+        },
+        "com.amazonaws.ssmcontacts#RotationPreviewMemberList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmcontacts#Member"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 30
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#RotationShift": {
+            "type": "structure",
+            "members": {
+                "ContactIds": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the contacts who are part of the shift rotation.\n      </p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.ssmcontacts#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time a shift rotation begins.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.ssmcontacts#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time a shift rotation ends.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.ssmcontacts#ShiftType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of shift rotation.</p>"
+                    }
+                },
+                "ShiftDetails": {
+                    "target": "com.amazonaws.ssmcontacts#ShiftDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional information about an on-call rotation shift.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a shift that belongs to an on-call rotation.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#RotationShifts": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmcontacts#RotationShift"
+            }
+        },
+        "com.amazonaws.ssmcontacts#Rotations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmcontacts#Rotation"
+            }
+        },
         "com.amazonaws.ssmcontacts#SSMContacts": {
             "type": "service",
             "version": "2021-05-03",
@@ -2258,6 +3819,12 @@
                     "target": "com.amazonaws.ssmcontacts#CreateContactChannel"
                 },
                 {
+                    "target": "com.amazonaws.ssmcontacts#CreateRotation"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#CreateRotationOverride"
+                },
+                {
                     "target": "com.amazonaws.ssmcontacts#DeactivateContactChannel"
                 },
                 {
@@ -2265,6 +3832,12 @@
                 },
                 {
                     "target": "com.amazonaws.ssmcontacts#DeleteContactChannel"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#DeleteRotation"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#DeleteRotationOverride"
                 },
                 {
                     "target": "com.amazonaws.ssmcontacts#DescribeEngagement"
@@ -2282,6 +3855,12 @@
                     "target": "com.amazonaws.ssmcontacts#GetContactPolicy"
                 },
                 {
+                    "target": "com.amazonaws.ssmcontacts#GetRotation"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#GetRotationOverride"
+                },
+                {
                     "target": "com.amazonaws.ssmcontacts#ListContactChannels"
                 },
                 {
@@ -2294,10 +3873,25 @@
                     "target": "com.amazonaws.ssmcontacts#ListPageReceipts"
                 },
                 {
+                    "target": "com.amazonaws.ssmcontacts#ListPageResolutions"
+                },
+                {
                     "target": "com.amazonaws.ssmcontacts#ListPagesByContact"
                 },
                 {
                     "target": "com.amazonaws.ssmcontacts#ListPagesByEngagement"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ListPreviewRotationShifts"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ListRotationOverrides"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ListRotations"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ListRotationShifts"
                 },
                 {
                     "target": "com.amazonaws.ssmcontacts#ListTagsForResource"
@@ -2325,6 +3919,9 @@
                 },
                 {
                     "target": "com.amazonaws.ssmcontacts#UpdateContactChannel"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#UpdateRotation"
                 }
             ],
             "traits": {
@@ -2339,7 +3936,7 @@
                     "name": "ssm-contacts"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>Systems Manager Incident Manager is an incident management console designed to help users\n         mitigate and recover from incidents affecting their Amazon Web Services-hosted applications.\n         An incident is any unplanned interruption or reduction in quality of services. </p>\n         <p>Incident Manager increases incident resolution by notifying responders of impact,\n         highlighting relevant troubleshooting data, and providing collaboration tools to get\n         services back up and running. To achieve the primary goal of reducing the\n         time-to-resolution of critical incidents, Incident Manager automates response plans\n         and enables responder team escalation. </p>",
+                "smithy.api#documentation": "<p>Systems Manager Incident Manager is an incident management console designed to help users\n         mitigate and recover from incidents affecting their Amazon Web Services-hosted applications.\n         An incident is any unplanned interruption or reduction in quality of services.</p>\n         <p>Incident Manager increases incident resolution by notifying responders of\n         impact, highlighting relevant troubleshooting data, and providing collaboration tools to\n         get services back up and running. To achieve the primary goal of reducing the\n         time-to-resolution of critical incidents, Incident Manager automates response plans\n         and enables responder team escalation.</p>",
                 "smithy.api#title": "AWS Systems Manager Incident Manager Contacts",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -3002,6 +4599,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ssmcontacts#SendActivationCodeResult": {
@@ -3060,6 +4660,47 @@
                 "smithy.api#httpError": 402
             }
         },
+        "com.amazonaws.ssmcontacts#ShiftCoveragesMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.ssmcontacts#DayOfWeek"
+            },
+            "value": {
+                "target": "com.amazonaws.ssmcontacts#CoverageTimes"
+            }
+        },
+        "com.amazonaws.ssmcontacts#ShiftDetails": {
+            "type": "structure",
+            "members": {
+                "OverriddenContactIds": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resources Names (ARNs) of the contacts who were replaced in a shift when an\n         override was created. If the override is deleted, these contacts are restored to the\n         shift.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about overrides to an on-call rotation shift.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#ShiftType": {
+            "type": "enum",
+            "members": {
+                "REGULAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REGULAR"
+                    }
+                },
+                "OVERRIDDEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OVERRIDDEN"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ssmcontacts#SimpleAddress": {
             "type": "string",
             "traits": {
@@ -3077,6 +4718,18 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^arn:(aws|aws-cn|aws-us-gov):ssm-contacts:[-\\w+=\\/,.@]*:[0-9]+:([\\w+=\\/,.@:-]+)*$"
+            }
+        },
+        "com.amazonaws.ssmcontacts#SsmContactsArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmcontacts#SsmContactsArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 25
+                }
             }
         },
         "com.amazonaws.ssmcontacts#Stage": {
@@ -3107,6 +4760,16 @@
                 "smithy.api#range": {
                     "min": 0,
                     "max": 30
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#StageIndex": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 100
                 }
             }
         },
@@ -3204,6 +4867,9 @@
                         "smithy.api#idempotencyToken": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ssmcontacts#StartEngagementResult": {
@@ -3260,9 +4926,12 @@
                 "Reason": {
                     "target": "com.amazonaws.ssmcontacts#StopReason",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reason that you're stopping the engagement. </p>"
+                        "smithy.api#documentation": "<p>The reason that you're stopping the engagement.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ssmcontacts#StopEngagementResult": {
@@ -3298,7 +4967,7 @@
                 "Key": {
                     "target": "com.amazonaws.ssmcontacts#TagKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name of the\n         object\n         key.</p>"
+                        "smithy.api#documentation": "<p>Name of the object key.</p>"
                     }
                 },
                 "Value": {
@@ -3363,7 +5032,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Tags a contact or escalation plan. You can tag only contacts and escalation plans in the\n         first region of your replication set. </p>"
+                "smithy.api#documentation": "<p>Tags a contact or escalation plan. You can tag only contacts and escalation plans in the\n         first region of your replication set.</p>"
             }
         },
         "com.amazonaws.ssmcontacts#TagResourceRequest": {
@@ -3383,6 +5052,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ssmcontacts#TagResourceResult": {
@@ -3493,6 +5165,16 @@
                 "smithy.api#documentation": "<p>A range of between two set times</p>"
             }
         },
+        "com.amazonaws.ssmcontacts#TimeZoneId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[:a-zA-Z0-9_\\-\\s\\.\\\\/]*$"
+            }
+        },
         "com.amazonaws.ssmcontacts#UntagResource": {
             "type": "operation",
             "input": {
@@ -3519,7 +5201,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes tags from the specified resource. </p>"
+                "smithy.api#documentation": "<p>Removes tags from the specified resource.</p>"
             }
         },
         "com.amazonaws.ssmcontacts#UntagResourceRequest": {
@@ -3539,6 +5221,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ssmcontacts#UntagResourceResult": {
@@ -3577,7 +5262,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the contact or escalation plan specified. </p>"
+                "smithy.api#documentation": "<p>Updates the contact or escalation plan specified.</p>"
             }
         },
         "com.amazonaws.ssmcontacts#UpdateContactChannel": {
@@ -3634,9 +5319,12 @@
                 "DeliveryAddress": {
                     "target": "com.amazonaws.ssmcontacts#ContactChannelAddress",
                     "traits": {
-                        "smithy.api#documentation": "<p>The details that Incident Manager uses when trying to engage the contact channel. </p>"
+                        "smithy.api#documentation": "<p>The details that Incident Manager uses when trying to engage the contact channel.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ssmcontacts#UpdateContactChannelResult": {
@@ -3662,14 +5350,103 @@
                 "Plan": {
                     "target": "com.amazonaws.ssmcontacts#Plan",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of stages. A contact has an engagement plan with stages for specified contact\n         channels. An escalation plan uses these stages to contact specified contacts. </p>"
+                        "smithy.api#documentation": "<p>A list of stages. A contact has an engagement plan with stages for specified contact\n         channels. An escalation plan uses these stages to contact specified contacts.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.ssmcontacts#UpdateContactResult": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.ssmcontacts#UpdateRotation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#UpdateRotationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#UpdateRotationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the information specified for an on-call rotation.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#UpdateRotationRequest": {
+            "type": "structure",
+            "members": {
+                "RotationId": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the rotation to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactIds": {
+                    "target": "com.amazonaws.ssmcontacts#RotationContactsArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the contacts to include in the updated rotation. </p>\n         <p>The order in which you list the contacts is their shift order in the rotation\n         schedule.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.ssmcontacts#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the rotation goes into effect.</p>"
+                    }
+                },
+                "TimeZoneId": {
+                    "target": "com.amazonaws.ssmcontacts#TimeZoneId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time zone to base the updated rotation’s activity on, in Internet Assigned Numbers\n         Authority (IANA) format. For example: \"America/Los_Angeles\", \"UTC\", or \"Asia/Seoul\". For\n         more information, see the <a href=\"https://www.iana.org/time-zones\">Time Zone\n            Database</a> on the IANA website.</p>\n         <note>\n            <p>Designators for time zones that don’t support Daylight Savings Time Rules, such as\n            Pacific Standard Time (PST) and Pacific Daylight Time (PDT), aren't supported.</p>\n         </note>"
+                    }
+                },
+                "Recurrence": {
+                    "target": "com.amazonaws.ssmcontacts#RecurrenceSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about how long the updated rotation lasts before restarting at the beginning\n         of the shift order.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssmcontacts#UpdateRotationResult": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ssmcontacts#Uuid": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 39
+                },
+                "smithy.api#pattern": "^([a-fA-Z0-9]{8,11}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}){1}$"
+            }
         },
         "com.amazonaws.ssmcontacts#ValidationException": {
             "type": "structure",
@@ -3728,26 +5505,60 @@
             }
         },
         "com.amazonaws.ssmcontacts#ValidationExceptionReason": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "UNKNOWN_OPERATION",
-                        "name": "UNKNOWN_OPERATION"
-                    },
-                    {
-                        "value": "CANNOT_PARSE",
-                        "name": "CANNOT_PARSE"
-                    },
-                    {
-                        "value": "FIELD_VALIDATION_FAILED",
-                        "name": "FIELD_VALIDATION_FAILED"
-                    },
-                    {
-                        "value": "OTHER",
-                        "name": "OTHER"
+            "type": "enum",
+            "members": {
+                "UNKNOWN_OPERATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNKNOWN_OPERATION"
                     }
-                ]
+                },
+                "CANNOT_PARSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANNOT_PARSE"
+                    }
+                },
+                "FIELD_VALIDATION_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIELD_VALIDATION_FAILED"
+                    }
+                },
+                "OTHER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OTHER"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#WeeklySetting": {
+            "type": "structure",
+            "members": {
+                "DayOfWeek": {
+                    "target": "com.amazonaws.ssmcontacts#DayOfWeek",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The day of the week when weekly recurring on-call shift rotations begins.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "HandOffTime": {
+                    "target": "com.amazonaws.ssmcontacts#HandOffTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time of day when a weekly recurring on-call shift rotation begins.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about rotations that recur weekly.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#WeeklySettings": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmcontacts#WeeklySetting"
             }
         }
     }

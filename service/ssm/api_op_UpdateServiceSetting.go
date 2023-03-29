@@ -41,44 +41,67 @@ func (c *Client) UpdateServiceSetting(ctx context.Context, params *UpdateService
 // The request body of the UpdateServiceSetting API operation.
 type UpdateServiceSettingInput struct {
 
-	// The Amazon Resource Name (ARN) of the service setting to reset. For example,
+	// The Amazon Resource Name (ARN) of the service setting to update. For example,
 	// arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled.
 	// The setting ID can be one of the following.
-	// -
+	//
+	// *
 	// /ssm/managed-instance/default-ec2-instance-management-role
-	// -
+	//
+	// *
 	// /ssm/automation/customer-script-log-destination
-	// -
+	//
+	// *
 	// /ssm/automation/customer-script-log-group-name
-	// -
+	//
+	// *
 	// /ssm/documents/console/public-sharing-permission
-	// -
+	//
+	// *
 	// /ssm/managed-instance/activation-tier
-	// - /ssm/opsinsights/opscenter
-	// -
+	//
+	// * /ssm/opsinsights/opscenter
+	//
+	// *
 	// /ssm/parameter-store/default-parameter-tier
-	// -
+	//
+	// *
 	// /ssm/parameter-store/high-throughput-enabled
+	//
+	// Permissions to update the
+	// /ssm/managed-instance/default-ec2-instance-management-role setting should only
+	// be provided to administrators. Implement least privilege access when allowing
+	// individuals to configure or modify the Default Host Management Configuration.
 	//
 	// This member is required.
 	SettingId *string
 
 	// The new value to specify for the service setting. The following list specifies
 	// the available values for each setting.
-	// -
-	// /ssm/automation/customer-script-log-destination: CloudWatch
-	// -
-	// /ssm/automation/customer-script-log-group-name: the name of an Amazon CloudWatch
+	//
+	// *
+	// /ssm/managed-instance/default-ec2-instance-management-role: The name of an IAM
+	// role
+	//
+	// * /ssm/automation/customer-script-log-destination: CloudWatch
+	//
+	// *
+	// /ssm/automation/customer-script-log-group-name: The name of an Amazon CloudWatch
 	// Logs log group
-	// - /ssm/documents/console/public-sharing-permission: Enable or
+	//
+	// * /ssm/documents/console/public-sharing-permission: Enable or
 	// Disable
-	// - /ssm/managed-instance/activation-tier: standard or advanced
-	// -
+	//
+	// * /ssm/managed-instance/activation-tier: standard or advanced
+	//
+	// *
 	// /ssm/opsinsights/opscenter: Enabled or Disabled
-	// -
+	//
+	// *
 	// /ssm/parameter-store/default-parameter-tier: Standard, Advanced,
 	// Intelligent-Tiering
-	// - /ssm/parameter-store/high-throughput-enabled: true or
+	//
+	// * /ssm/parameter-store/high-throughput-enabled: true or
 	// false
 	//
 	// This member is required.

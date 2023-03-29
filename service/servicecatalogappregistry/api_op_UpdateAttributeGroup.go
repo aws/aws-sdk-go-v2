@@ -29,8 +29,8 @@ func (c *Client) UpdateAttributeGroup(ctx context.Context, params *UpdateAttribu
 
 type UpdateAttributeGroupInput struct {
 
-	// The name or ID of the attribute group that holds the attributes to describe the
-	// application.
+	// The name, ID, or ARN of the attribute group that holds the attributes to
+	// describe the application.
 	//
 	// This member is required.
 	AttributeGroup *string

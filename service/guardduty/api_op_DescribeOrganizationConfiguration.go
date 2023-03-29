@@ -55,17 +55,32 @@ type DescribeOrganizationConfigurationInput struct {
 
 type DescribeOrganizationConfigurationOutput struct {
 
-	// Indicates whether GuardDuty is automatically enabled for accounts added to the
-	// organization.
-	//
-	// This member is required.
-	AutoEnable bool
-
 	// Indicates whether the maximum number of allowed member accounts are already
 	// associated with the delegated administrator account for your organization.
 	//
 	// This member is required.
 	MemberAccountLimitReached bool
+
+	// Indicates whether GuardDuty is automatically enabled for accounts added to the
+	// organization.
+	//
+	// Deprecated: This field is deprecated, use AutoEnableOrganizationMembers instead
+	AutoEnable bool
+
+	// Indicates the auto-enablement configuration of GuardDuty for the member accounts
+	// in the organization.
+	//
+	// * NEW: Indicates that new accounts joining the
+	// organization are configured to have GuardDuty enabled automatically.
+	//
+	// * ALL:
+	// Indicates that all accounts (new and existing members) in the organization are
+	// configured to have GuardDuty enabled automatically.
+	//
+	// * NONE: Indicates that no
+	// account in the organization will be configured to have GuardDuty enabled
+	// automatically.
+	AutoEnableOrganizationMembers types.AutoEnableMembers
 
 	// Describes which data sources are enabled automatically for member accounts.
 	//

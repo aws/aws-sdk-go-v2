@@ -1,3 +1,7 @@
+# v1.34.0 (2023-03-23)
+
+* **Feature**: AWS Elemental MediaConvert SDK now supports passthrough of ID3v2 tags for audio inputs to audio-only HLS outputs.
+
 # v1.33.2 (2023-03-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

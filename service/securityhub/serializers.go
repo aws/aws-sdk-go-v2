@@ -4364,6 +4364,75 @@ func awsRestjson1_serializeDocumentAssociatedStandardsList(v []types.AssociatedS
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAssociationSetDetails(v *types.AssociationSetDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AssociationState != nil {
+		ok := object.Key("AssociationState")
+		if err := awsRestjson1_serializeDocumentAssociationStateDetails(v.AssociationState, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.GatewayId != nil {
+		ok := object.Key("GatewayId")
+		ok.String(*v.GatewayId)
+	}
+
+	if v.Main {
+		ok := object.Key("Main")
+		ok.Boolean(v.Main)
+	}
+
+	if v.RouteTableAssociationId != nil {
+		ok := object.Key("RouteTableAssociationId")
+		ok.String(*v.RouteTableAssociationId)
+	}
+
+	if v.RouteTableId != nil {
+		ok := object.Key("RouteTableId")
+		ok.String(*v.RouteTableId)
+	}
+
+	if v.SubnetId != nil {
+		ok := object.Key("SubnetId")
+		ok.String(*v.SubnetId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssociationSetList(v []types.AssociationSetDetails, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAssociationSetDetails(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssociationStateDetails(v *types.AssociationStateDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.State != nil {
+		ok := object.Key("State")
+		ok.String(*v.State)
+	}
+
+	if v.StatusMessage != nil {
+		ok := object.Key("StatusMessage")
+		ok.String(*v.StatusMessage)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAvailabilityZone(v *types.AvailabilityZone, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7983,6 +8052,13 @@ func awsRestjson1_serializeDocumentAwsEc2InstanceDetails(v *types.AwsEc2Instance
 		}
 	}
 
+	if v.Monitoring != nil {
+		ok := object.Key("Monitoring")
+		if err := awsRestjson1_serializeDocumentAwsEc2InstanceMonitoringDetails(v.Monitoring, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.NetworkInterfaces != nil {
 		ok := object.Key("NetworkInterfaces")
 		if err := awsRestjson1_serializeDocumentAwsEc2InstanceNetworkInterfacesList(v.NetworkInterfaces, ok); err != nil {
@@ -8040,6 +8116,18 @@ func awsRestjson1_serializeDocumentAwsEc2InstanceMetadataOptions(v *types.AwsEc2
 	if v.InstanceMetadataTags != nil {
 		ok := object.Key("InstanceMetadataTags")
 		ok.String(*v.InstanceMetadataTags)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2InstanceMonitoringDetails(v *types.AwsEc2InstanceMonitoringDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.State != nil {
+		ok := object.Key("State")
+		ok.String(*v.State)
 	}
 
 	return nil
@@ -9631,6 +9719,49 @@ func awsRestjson1_serializeDocumentAwsEc2NetworkInterfaceSecurityGroupList(v []t
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2RouteTableDetails(v *types.AwsEc2RouteTableDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AssociationSet != nil {
+		ok := object.Key("AssociationSet")
+		if err := awsRestjson1_serializeDocumentAssociationSetList(v.AssociationSet, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OwnerId != nil {
+		ok := object.Key("OwnerId")
+		ok.String(*v.OwnerId)
+	}
+
+	if v.PropagatingVgwSet != nil {
+		ok := object.Key("PropagatingVgwSet")
+		if err := awsRestjson1_serializeDocumentPropagatingVgwSetList(v.PropagatingVgwSet, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RouteSet != nil {
+		ok := object.Key("RouteSet")
+		if err := awsRestjson1_serializeDocumentRouteSetList(v.RouteSet, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RouteTableId != nil {
+		ok := object.Key("RouteTableId")
+		ok.String(*v.RouteTableId)
+	}
+
+	if v.VpcId != nil {
+		ok := object.Key("VpcId")
+		ok.String(*v.VpcId)
+	}
+
 	return nil
 }
 
@@ -12903,6 +13034,11 @@ func awsRestjson1_serializeDocumentAwsEksClusterLoggingDetails(v *types.AwsEksCl
 func awsRestjson1_serializeDocumentAwsEksClusterResourcesVpcConfigDetails(v *types.AwsEksClusterResourcesVpcConfigDetails, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.EndpointPublicAccess {
+		ok := object.Key("EndpointPublicAccess")
+		ok.Boolean(v.EndpointPublicAccess)
+	}
 
 	if v.SecurityGroupIds != nil {
 		ok := object.Key("SecurityGroupIds")
@@ -18245,6 +18381,13 @@ func awsRestjson1_serializeDocumentAwsS3BucketDetails(v *types.AwsS3BucketDetail
 		ok.String(*v.CreatedAt)
 	}
 
+	if v.ObjectLockConfiguration != nil {
+		ok := object.Key("ObjectLockConfiguration")
+		if err := awsRestjson1_serializeDocumentAwsS3BucketObjectLockConfiguration(v.ObjectLockConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.OwnerAccountId != nil {
 		ok := object.Key("OwnerAccountId")
 		ok.String(*v.OwnerAccountId)
@@ -18418,6 +18561,61 @@ func awsRestjson1_serializeDocumentAwsS3BucketNotificationConfigurationS3KeyFilt
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsS3BucketObjectLockConfiguration(v *types.AwsS3BucketObjectLockConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ObjectLockEnabled != nil {
+		ok := object.Key("ObjectLockEnabled")
+		ok.String(*v.ObjectLockEnabled)
+	}
+
+	if v.Rule != nil {
+		ok := object.Key("Rule")
+		if err := awsRestjson1_serializeDocumentAwsS3BucketObjectLockConfigurationRuleDetails(v.Rule, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsS3BucketObjectLockConfigurationRuleDefaultRetentionDetails(v *types.AwsS3BucketObjectLockConfigurationRuleDefaultRetentionDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Days != 0 {
+		ok := object.Key("Days")
+		ok.Integer(v.Days)
+	}
+
+	if v.Mode != nil {
+		ok := object.Key("Mode")
+		ok.String(*v.Mode)
+	}
+
+	if v.Years != 0 {
+		ok := object.Key("Years")
+		ok.Integer(v.Years)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsS3BucketObjectLockConfigurationRuleDetails(v *types.AwsS3BucketObjectLockConfigurationRuleDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DefaultRetention != nil {
+		ok := object.Key("DefaultRetention")
+		if err := awsRestjson1_serializeDocumentAwsS3BucketObjectLockConfigurationRuleDefaultRetentionDetails(v.DefaultRetention, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -22722,6 +22920,31 @@ func awsRestjson1_serializeDocumentProcessDetails(v *types.ProcessDetails, value
 	return nil
 }
 
+func awsRestjson1_serializeDocumentPropagatingVgwSetDetails(v *types.PropagatingVgwSetDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GatewayId != nil {
+		ok := object.Key("GatewayId")
+		ok.String(*v.GatewayId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPropagatingVgwSetList(v []types.PropagatingVgwSetDetails, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentPropagatingVgwSetDetails(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentRange(v *types.Range, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -23059,6 +23282,13 @@ func awsRestjson1_serializeDocumentResourceDetails(v *types.ResourceDetails, val
 	if v.AwsEc2NetworkInterface != nil {
 		ok := object.Key("AwsEc2NetworkInterface")
 		if err := awsRestjson1_serializeDocumentAwsEc2NetworkInterfaceDetails(v.AwsEc2NetworkInterface, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AwsEc2RouteTable != nil {
+		ok := object.Key("AwsEc2RouteTable")
+		if err := awsRestjson1_serializeDocumentAwsEc2RouteTableDetails(v.AwsEc2RouteTable, ok); err != nil {
 			return err
 		}
 	}
@@ -23507,6 +23737,106 @@ func awsRestjson1_serializeDocumentResourceList(v []types.Resource, value smithy
 	for i := range v {
 		av := array.Value()
 		if err := awsRestjson1_serializeDocumentResource(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRouteSetDetails(v *types.RouteSetDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CarrierGatewayId != nil {
+		ok := object.Key("CarrierGatewayId")
+		ok.String(*v.CarrierGatewayId)
+	}
+
+	if v.CoreNetworkArn != nil {
+		ok := object.Key("CoreNetworkArn")
+		ok.String(*v.CoreNetworkArn)
+	}
+
+	if v.DestinationCidrBlock != nil {
+		ok := object.Key("DestinationCidrBlock")
+		ok.String(*v.DestinationCidrBlock)
+	}
+
+	if v.DestinationIpv6CidrBlock != nil {
+		ok := object.Key("DestinationIpv6CidrBlock")
+		ok.String(*v.DestinationIpv6CidrBlock)
+	}
+
+	if v.DestinationPrefixListId != nil {
+		ok := object.Key("DestinationPrefixListId")
+		ok.String(*v.DestinationPrefixListId)
+	}
+
+	if v.EgressOnlyInternetGatewayId != nil {
+		ok := object.Key("EgressOnlyInternetGatewayId")
+		ok.String(*v.EgressOnlyInternetGatewayId)
+	}
+
+	if v.GatewayId != nil {
+		ok := object.Key("GatewayId")
+		ok.String(*v.GatewayId)
+	}
+
+	if v.InstanceId != nil {
+		ok := object.Key("InstanceId")
+		ok.String(*v.InstanceId)
+	}
+
+	if v.InstanceOwnerId != nil {
+		ok := object.Key("InstanceOwnerId")
+		ok.String(*v.InstanceOwnerId)
+	}
+
+	if v.LocalGatewayId != nil {
+		ok := object.Key("LocalGatewayId")
+		ok.String(*v.LocalGatewayId)
+	}
+
+	if v.NatGatewayId != nil {
+		ok := object.Key("NatGatewayId")
+		ok.String(*v.NatGatewayId)
+	}
+
+	if v.NetworkInterfaceId != nil {
+		ok := object.Key("NetworkInterfaceId")
+		ok.String(*v.NetworkInterfaceId)
+	}
+
+	if v.Origin != nil {
+		ok := object.Key("Origin")
+		ok.String(*v.Origin)
+	}
+
+	if v.State != nil {
+		ok := object.Key("State")
+		ok.String(*v.State)
+	}
+
+	if v.TransitGatewayId != nil {
+		ok := object.Key("TransitGatewayId")
+		ok.String(*v.TransitGatewayId)
+	}
+
+	if v.VpcPeeringConnectionId != nil {
+		ok := object.Key("VpcPeeringConnectionId")
+		ok.String(*v.VpcPeeringConnectionId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRouteSetList(v []types.RouteSetDetails, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentRouteSetDetails(&v[i], av); err != nil {
 			return err
 		}
 	}

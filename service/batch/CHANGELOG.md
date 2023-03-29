@@ -1,3 +1,7 @@
+# v1.22.0 (2023-03-23)
+
+* **Feature**: This feature allows Batch to support configuration of ephemeral storage size for jobs running on FARGATE
+
 # v1.21.7 (2023-03-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

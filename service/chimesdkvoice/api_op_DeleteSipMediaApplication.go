@@ -10,6 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Deletes a SIP media application.
 func (c *Client) DeleteSipMediaApplication(ctx context.Context, params *DeleteSipMediaApplicationInput, optFns ...func(*Options)) (*DeleteSipMediaApplicationOutput, error) {
 	if params == nil {
 		params = &DeleteSipMediaApplicationInput{}
@@ -27,6 +28,8 @@ func (c *Client) DeleteSipMediaApplication(ctx context.Context, params *DeleteSi
 
 type DeleteSipMediaApplicationInput struct {
 
+	// The SIP media application ID.
+	//
 	// This member is required.
 	SipMediaApplicationId *string
 

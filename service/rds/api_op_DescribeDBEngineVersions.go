@@ -32,7 +32,8 @@ type DescribeDBEngineVersionsInput struct {
 
 	// The name of a specific DB parameter group family to return details for.
 	// Constraints:
-	// - If supplied, must match an existing DBParameterGroupFamily.
+	//
+	// * If supplied, must match an existing DBParameterGroupFamily.
 	DBParameterGroupFamily *string
 
 	// A value that indicates whether only the default version of the specified engine
@@ -40,24 +41,36 @@ type DescribeDBEngineVersionsInput struct {
 	DefaultOnly bool
 
 	// The database engine to return. Valid Values:
-	// - aurora (for MySQL 5.6-compatible
-	// Aurora)
-	// - aurora-mysql (for MySQL 5.7-compatible and MySQL 8.0-compatible
-	// Aurora)
-	// - aurora-postgresql
-	// - mariadb
-	// - mysql
-	// - oracle-ee
-	// - oracle-ee-cdb
-	// -
-	// oracle-se2
-	// - oracle-se2-cdb
-	// - postgres
-	// - sqlserver-ee
-	// - sqlserver-se
-	// -
-	// sqlserver-ex
-	// - sqlserver-web
+	//
+	// * aurora-mysql (for MySQL
+	// 5.7-compatible and MySQL 8.0-compatible Aurora)
+	//
+	// * aurora-postgresql
+	//
+	// *
+	// mariadb
+	//
+	// * mysql
+	//
+	// * oracle-ee
+	//
+	// * oracle-ee-cdb
+	//
+	// * oracle-se2
+	//
+	// *
+	// oracle-se2-cdb
+	//
+	// * postgres
+	//
+	// * sqlserver-ee
+	//
+	// * sqlserver-se
+	//
+	// * sqlserver-ex
+	//
+	// *
+	// sqlserver-web
 	Engine *string
 
 	// The database engine version to return. Example: 5.1.49
@@ -65,30 +78,41 @@ type DescribeDBEngineVersionsInput struct {
 
 	// A filter that specifies one or more DB engine versions to describe. Supported
 	// filters:
-	// - db-parameter-group-family - Accepts parameter groups family names.
+	//
+	// * db-parameter-group-family - Accepts parameter groups family names.
 	// The results list only includes information about the DB engine versions for
 	// these parameter group families.
-	// - engine - Accepts engine names. The results
-	// list only includes information about the DB engine versions for these engines.
-	// -
-	// engine-mode - Accepts DB engine modes. The results list only includes
-	// information about the DB engine versions for these engine modes. Valid DB engine
-	// modes are the following:
-	// - global
-	// - multimaster
-	// - parallelquery
-	// - provisioned
-	// -
-	// serverless
 	//
-	// - engine-version - Accepts engine versions. The results list only
-	// includes information about the DB engine versions for these engine versions.
-	// -
-	// status - Accepts engine version statuses. The results list only includes
-	// information about the DB engine versions for these statuses. Valid statuses are
-	// the following:
-	// - available
-	// - deprecated
+	// * engine - Accepts engine names. The results
+	// list only includes information about the DB engine versions for these
+	// engines.
+	//
+	// * engine-mode - Accepts DB engine modes. The results list only
+	// includes information about the DB engine versions for these engine modes. Valid
+	// DB engine modes are the following:
+	//
+	// * global
+	//
+	// * multimaster
+	//
+	// * parallelquery
+	//
+	// *
+	// provisioned
+	//
+	// * serverless
+	//
+	// * engine-version - Accepts engine versions. The
+	// results list only includes information about the DB engine versions for these
+	// engine versions.
+	//
+	// * status - Accepts engine version statuses. The results list
+	// only includes information about the DB engine versions for these statuses. Valid
+	// statuses are the following:
+	//
+	// * available
+	//
+	// * deprecated
 	Filters []types.Filter
 
 	// A value that indicates whether to include engine versions that aren't available

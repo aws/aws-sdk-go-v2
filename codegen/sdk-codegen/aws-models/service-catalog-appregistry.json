@@ -505,9 +505,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "af-south-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "af-south-1"
                             }
                         },
                         {
@@ -518,9 +518,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-east-1"
                             }
                         },
                         {
@@ -531,9 +531,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -544,9 +544,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -557,9 +557,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-3",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-northeast-3"
                             }
                         },
                         {
@@ -570,9 +570,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-south-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-south-1"
                             }
                         },
                         {
@@ -583,9 +583,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -596,9 +596,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -609,9 +609,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-3",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-southeast-3"
                             }
                         },
                         {
@@ -622,9 +622,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ca-central-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -635,9 +635,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ca-central-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -648,9 +648,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-central-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -661,9 +661,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-north-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-north-1"
                             }
                         },
                         {
@@ -674,9 +674,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-south-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-south-1"
                             }
                         },
                         {
@@ -687,9 +687,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -700,9 +700,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -713,9 +713,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-3",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-west-3"
                             }
                         },
                         {
@@ -726,9 +726,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "me-south-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "me-south-1"
                             }
                         },
                         {
@@ -739,9 +739,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "sa-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "sa-east-1"
                             }
                         },
                         {
@@ -752,9 +752,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -765,9 +765,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -778,9 +778,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -791,9 +791,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-2",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -804,9 +804,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-west-1"
                             }
                         },
                         {
@@ -817,9 +817,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-west-1"
                             }
                         },
                         {
@@ -830,9 +830,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -843,9 +843,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-2",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -856,9 +856,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -869,9 +869,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -882,9 +882,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -895,9 +895,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -908,9 +908,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -921,9 +921,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -934,9 +934,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -947,9 +947,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-west-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-gov-west-1"
                             }
                         },
                         {
@@ -960,9 +960,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -973,9 +973,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -986,9 +986,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -999,9 +1010,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -1012,9 +1034,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -1025,9 +1058,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -1038,9 +1082,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -1051,9 +1095,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1065,8 +1109,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1076,9 +1120,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1088,10 +1132,16 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -1110,7 +1160,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      Includes all \n      of the Service Catalog AppRegistry settings.\n    </p>"
+                "smithy.api#documentation": "<p>\n      Includes all \n      of the AppRegistry settings.\n    </p>"
             }
         },
         "com.amazonaws.servicecatalogappregistry#Application": {
@@ -1186,7 +1236,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "^[-.\\w]+$"
+                "smithy.api#pattern": "^([-.\\w]+)|(arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/applications/[-.\\w]+)$"
             }
         },
         "com.amazonaws.servicecatalogappregistry#ApplicationSummaries": {
@@ -1289,7 +1339,7 @@
                 "application": {
                     "target": "com.amazonaws.servicecatalogappregistry#ApplicationSpecifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name or ID of the application.</p>",
+                        "smithy.api#documentation": "<p>\n       The name, ID, or ARN \n       of the application.\n     </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1297,11 +1347,14 @@
                 "attributeGroup": {
                     "target": "com.amazonaws.servicecatalogappregistry#AttributeGroupSpecifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name or ID of the attribute group that holds the attributes to describe the application.</p>",
+                        "smithy.api#documentation": "<p>\n       The name, ID, or ARN \n       of the attribute group \n       that holds the attributes \n       to describe the application.\n     </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#AssociateAttributeGroupResponse": {
@@ -1319,6 +1372,9 @@
                         "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the attribute group that contains the application's new attributes.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#AssociateResource": {
@@ -1343,11 +1399,14 @@
                     "target": "com.amazonaws.servicecatalogappregistry#ServiceQuotaExceededException"
                 },
                 {
+                    "target": "com.amazonaws.servicecatalogappregistry#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.servicecatalogappregistry#ValidationException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates a resource with an application. Both the resource and the application can be specified either by ID or name.</p>",
+                "smithy.api#documentation": "<p>\n       Associates a resource \n       with an application. \n       The resource can be specified \n       by its ARN or name. \n       The application can be specified \n       by ARN, ID, or name.\n     </p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/applications/{application}/resources/{resourceType}/{resource}",
@@ -1361,7 +1420,7 @@
                 "application": {
                     "target": "com.amazonaws.servicecatalogappregistry#ApplicationSpecifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name or ID of the application.</p>",
+                        "smithy.api#documentation": "<p>\n       The name, ID, or ARN \n       of the application.\n     </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1382,6 +1441,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#AssociateResourceResponse": {
@@ -1399,6 +1461,9 @@
                         "smithy.api#documentation": "<p>The Amazon resource name (ARN) that specifies the resource.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#AssociationCount": {
@@ -1463,7 +1528,7 @@
         "com.amazonaws.servicecatalogappregistry#AttributeGroupArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/attribute-groups/[a-z0-9]+$"
+                "smithy.api#pattern": "^arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/attribute-groups/[-.\\w]+$"
             }
         },
         "com.amazonaws.servicecatalogappregistry#AttributeGroupDetails": {
@@ -1489,6 +1554,12 @@
                         },
                         "smithy.api#documentation": "<important>\n            <p>\n        This field is no longer supported.\n        We recommend\n        you don't use the field when using <code>ListAttributeGroupsForApplication</code>.\n      </p>\n         </important>\n         <p>\n      The name of the attribute group.\n    </p>"
                     }
+                },
+                "createdBy": {
+                    "target": "com.amazonaws.servicecatalogappregistry#CreatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service principal that created the attribute group.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1505,10 +1576,10 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 26,
-                    "max": 26
+                    "min": 1,
+                    "max": 256
                 },
-                "smithy.api#pattern": "^[a-z0-9]+$"
+                "smithy.api#pattern": "^[-.\\w]+$"
             }
         },
         "com.amazonaws.servicecatalogappregistry#AttributeGroupIds": {
@@ -1522,9 +1593,9 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 256
+                    "max": 512
                 },
-                "smithy.api#pattern": "^[-.\\w]+$"
+                "smithy.api#pattern": "^([-.\\w]+)|(arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/attribute-groups/[-.\\w]+)$"
             }
         },
         "com.amazonaws.servicecatalogappregistry#AttributeGroupSummaries": {
@@ -1570,6 +1641,12 @@
                     "target": "com.amazonaws.servicecatalogappregistry#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The ISO-8601 formatted timestamp of the moment the attribute group was last updated. This time is the same as the creationTime for a newly created attribute group.</p>"
+                    }
+                },
+                "createdBy": {
+                    "target": "com.amazonaws.servicecatalogappregistry#CreatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service principal that created the attribute group.</p>"
                     }
                 }
             },
@@ -1629,6 +1706,9 @@
                     "target": "com.amazonaws.servicecatalogappregistry#ServiceQuotaExceededException"
                 },
                 {
+                    "target": "com.amazonaws.servicecatalogappregistry#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.servicecatalogappregistry#ValidationException"
                 }
             ],
@@ -1671,6 +1751,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#CreateApplicationResponse": {
@@ -1682,6 +1765,9 @@
                         "smithy.api#documentation": "<p>Information about the application.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#CreateAttributeGroup": {
@@ -1752,6 +1838,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#CreateAttributeGroupResponse": {
@@ -1763,6 +1852,19 @@
                         "smithy.api#documentation": "<p>Information about the attribute group.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.servicecatalogappregistry#CreatedBy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(?!-)([a-z0-9-]+\\.)+(aws\\.internal|amazonaws\\.com(\\.cn)?)$"
             }
         },
         "com.amazonaws.servicecatalogappregistry#DeleteApplication": {
@@ -1785,7 +1887,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an application that is specified either by its application ID or name. All associated attribute groups and resources must be disassociated from it before deleting an application.</p>",
+                "smithy.api#documentation": "<p>Deletes an application that is specified either by its application ID, name, or ARN. All associated attribute groups and resources must be disassociated from it before deleting an application.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/applications/{application}",
@@ -1799,11 +1901,14 @@
                 "application": {
                     "target": "com.amazonaws.servicecatalogappregistry#ApplicationSpecifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name or ID of the application.</p>",
+                        "smithy.api#documentation": "<p>\n       The name, ID, or ARN \n       of the application.\n     </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#DeleteApplicationResponse": {
@@ -1815,6 +1920,9 @@
                         "smithy.api#documentation": "<p>Information about the deleted application.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#DeleteAttributeGroup": {
@@ -1837,7 +1945,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an attribute group, specified either by its attribute group ID or name.</p>",
+                "smithy.api#documentation": "<p>Deletes an attribute group, specified either by its attribute group ID, name, or ARN.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/attribute-groups/{attributeGroup}",
@@ -1851,11 +1959,14 @@
                 "attributeGroup": {
                     "target": "com.amazonaws.servicecatalogappregistry#AttributeGroupSpecifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name or ID of the attribute group that holds the attributes to describe the application.</p>",
+                        "smithy.api#documentation": "<p>\n       The name, ID, or ARN \n       of the attribute group \n       that holds the attributes \n       to describe the application.\n     </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#DeleteAttributeGroupResponse": {
@@ -1867,6 +1978,9 @@
                         "smithy.api#documentation": "<p>Information about the deleted attribute group.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#Description": {
@@ -1912,7 +2026,7 @@
                 "application": {
                     "target": "com.amazonaws.servicecatalogappregistry#ApplicationSpecifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name or ID of the application.</p>",
+                        "smithy.api#documentation": "<p>\n       The name, ID, or ARN \n       of the application.\n     </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1920,11 +2034,14 @@
                 "attributeGroup": {
                     "target": "com.amazonaws.servicecatalogappregistry#AttributeGroupSpecifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name or ID of the attribute group that holds the attributes to describe the application.</p>",
+                        "smithy.api#documentation": "<p>\n       The name, ID, or ARN \n       of the attribute group \n       that holds the attributes \n       to describe the application.\n     </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#DisassociateAttributeGroupResponse": {
@@ -1942,6 +2059,9 @@
                         "smithy.api#documentation": "<p>The Amazon resource name (ARN) that specifies the attribute group.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#DisassociateResource": {
@@ -1958,6 +2078,9 @@
                 },
                 {
                     "target": "com.amazonaws.servicecatalogappregistry#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.servicecatalogappregistry#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.servicecatalogappregistry#ValidationException"
@@ -1999,6 +2122,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#DisassociateResourceResponse": {
@@ -2016,6 +2142,9 @@
                         "smithy.api#documentation": "<p>The Amazon resource name (ARN) that specifies the resource.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#GetApplication": {
@@ -2041,7 +2170,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves metadata information about one of your applications. The application can be specified either by its unique ID or by its name (which is unique within one account in one region at a given point in time). Specify by ID in automated workflows if you want to make sure that the exact same application is returned or a <code>ResourceNotFoundException</code> is thrown, avoiding the ABA addressing problem.</p>",
+                "smithy.api#documentation": "<p>\n       Retrieves metadata information \n       about one \n       of your applications. \n       The application can be specified \n       by its ARN, ID, or name \n       (which is unique \n       within one account \n       in one region \n       at a given point \n       in time). \n       Specify \n       by ARN or ID \n       in automated workflows \n       if you want \n       to make sure \n       that the exact same application is returned or a <code>ResourceNotFoundException</code> is thrown, \n       avoiding the ABA addressing problem.\n     </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/applications/{application}",
@@ -2055,11 +2184,14 @@
                 "application": {
                     "target": "com.amazonaws.servicecatalogappregistry#ApplicationSpecifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name or ID of the application.</p>",
+                        "smithy.api#documentation": "<p>\n       The name, ID, or ARN \n       of the application.\n     </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#GetApplicationResponse": {
@@ -2120,6 +2252,9 @@
                         "smithy.api#documentation": "<p>\n       The information \n       about the integration \n       of the application \n       with other services, \n       such as\n        Resource Groups.\n     </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#GetAssociatedResource": {
@@ -2157,7 +2292,7 @@
                 "application": {
                     "target": "com.amazonaws.servicecatalogappregistry#ApplicationSpecifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name or ID of the application.</p>",
+                        "smithy.api#documentation": "<p>\n       The name, ID, or ARN \n       of the application.\n     </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2178,6 +2313,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#GetAssociatedResourceResponse": {
@@ -2189,6 +2327,9 @@
                         "smithy.api#documentation": "<p>The resource associated with the application.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#GetAttributeGroup": {
@@ -2214,7 +2355,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves an attribute group, either by its name or its ID. The attribute group can be specified either by its unique ID or by its name.</p>",
+                "smithy.api#documentation": "<p>\n       Retrieves an attribute group\n       by its ARN, ID, or name. \n       The attribute group can be specified \n       by its ARN, ID, or name.\n     </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/attribute-groups/{attributeGroup}",
@@ -2228,11 +2369,14 @@
                 "attributeGroup": {
                     "target": "com.amazonaws.servicecatalogappregistry#AttributeGroupSpecifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name or ID of the attribute group that holds the attributes to describe the application.</p>",
+                        "smithy.api#documentation": "<p>\n       The name, ID, or ARN \n       of the attribute group \n       that holds the attributes \n       to describe the application.\n     </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#GetAttributeGroupResponse": {
@@ -2285,7 +2429,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Key-value pairs associated with the attribute group.</p>"
                     }
+                },
+                "createdBy": {
+                    "target": "com.amazonaws.servicecatalogappregistry#CreatedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service principal that created the attribute group.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#GetConfiguration": {
@@ -2319,6 +2472,9 @@
                         "smithy.api#documentation": "<p>\n      Retrieves <code>TagKey</code> configuration \n      from an account.\n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#Integrations": {
@@ -2398,6 +2554,9 @@
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#ListApplicationsResponse": {
@@ -2415,6 +2574,9 @@
                         "smithy.api#documentation": "<p>The token to use to get the next page of results after a previous API call. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#ListAssociatedAttributeGroups": {
@@ -2478,6 +2640,9 @@
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#ListAssociatedAttributeGroupsResponse": {
@@ -2495,6 +2660,9 @@
                         "smithy.api#documentation": "<p>The token to use to get the next page of results after a previous API call. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#ListAssociatedResources": {
@@ -2538,7 +2706,7 @@
                 "application": {
                     "target": "com.amazonaws.servicecatalogappregistry#ApplicationSpecifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name or ID of the application.</p>",
+                        "smithy.api#documentation": "<p>\n       The name, ID, or ARN \n       of the application.\n     </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2558,6 +2726,9 @@
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#ListAssociatedResourcesResponse": {
@@ -2575,6 +2746,9 @@
                         "smithy.api#documentation": "<p>The token to use to get the next page of results after a previous API call. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#ListAttributeGroups": {
@@ -2670,6 +2844,9 @@
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#ListAttributeGroupsForApplicationResponse": {
@@ -2687,6 +2864,9 @@
                         "smithy.api#documentation": "<p>The token to use to get the next page of results after a previous API call.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#ListAttributeGroupsRequest": {
@@ -2707,6 +2887,9 @@
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#ListAttributeGroupsResponse": {
@@ -2724,6 +2907,9 @@
                         "smithy.api#documentation": "<p>The token to use to get the next page of results after a previous API call. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#ListTagsForResource": {
@@ -2765,6 +2951,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#ListTagsForResourceResponse": {
@@ -2776,6 +2965,9 @@
                         "smithy.api#documentation": "<p>The tags on the resource.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#MaxResults": {
@@ -2846,6 +3038,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#Resource": {
@@ -3061,7 +3256,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The maximum number of resources per account has been reached.</p>",
+                "smithy.api#documentation": "<p>\n      The maximum number \n      of resources per account \n      has been reached.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
             }
@@ -3109,10 +3304,16 @@
                 },
                 {
                     "target": "com.amazonaws.servicecatalogappregistry#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.servicecatalogappregistry#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.servicecatalogappregistry#ValidationException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Syncs the resource with current AppRegistry records.</p> \n         <p>Specifically, the resource’s AppRegistry system tags sync with its associated application. We remove the resource's AppRegistry system tags if it does not associate with the application. The caller must have permissions to read and update the resource.</p>",
+                "smithy.api#documentation": "<p>Syncs the resource with current AppRegistry records.</p>\n         <p>Specifically, the resource’s AppRegistry system tags sync with its associated application. We remove the resource's AppRegistry system tags if it does not associate with the application. The caller must have permissions to read and update the resource.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/sync/{resourceType}/{resource}",
@@ -3139,6 +3340,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#SyncResourceResponse": {
@@ -3162,6 +3366,9 @@
                         "smithy.api#documentation": "<p>The results of the output if an application is associated with an ARN value, which could be <code>syncStarted</code> or None.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#TagKey": {
@@ -3256,11 +3463,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#TagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.servicecatalogappregistry#TagValue": {
             "type": "string",
@@ -3285,6 +3498,29 @@
                     "min": 0,
                     "max": 50
                 }
+            }
+        },
+        "com.amazonaws.servicecatalogappregistry#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.servicecatalogappregistry#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message associated with the Throttling exception.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceCode": {
+                    "target": "com.amazonaws.servicecatalogappregistry#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The originating service code.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      The maximum number \n      of API requests \n      has been exceeded.\n    </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
             }
         },
         "com.amazonaws.servicecatalogappregistry#Timestamp": {
@@ -3340,11 +3576,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#UntagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.servicecatalogappregistry#UpdateApplication": {
             "type": "operation",
@@ -3365,6 +3607,9 @@
                     "target": "com.amazonaws.servicecatalogappregistry#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.servicecatalogappregistry#ThrottlingException"
+                },
+                {
                     "target": "com.amazonaws.servicecatalogappregistry#ValidationException"
                 }
             ],
@@ -3383,7 +3628,7 @@
                 "application": {
                     "target": "com.amazonaws.servicecatalogappregistry#ApplicationSpecifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name or ID of the application that will be updated.</p>",
+                        "smithy.api#documentation": "<p>\n       The name, ID, or ARN \n       of the application \n       that will be updated.\n     </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3403,6 +3648,9 @@
                         "smithy.api#documentation": "<p>The new description of the application.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#UpdateApplicationResponse": {
@@ -3414,6 +3662,9 @@
                         "smithy.api#documentation": "<p>The updated information of the application.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#UpdateAttributeGroup": {
@@ -3453,7 +3704,7 @@
                 "attributeGroup": {
                     "target": "com.amazonaws.servicecatalogappregistry#AttributeGroupSpecifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name or ID of the attribute group that holds the attributes to describe the application.</p>",
+                        "smithy.api#documentation": "<p>\n       The name, ID, or ARN \n       of the attribute group \n       that holds the attributes \n       to describe the application.\n     </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3479,6 +3730,9 @@
                         "smithy.api#documentation": "<p>A JSON string in the form of nested key-value pairs that represent the attributes in the group and describes an application and its components.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#UpdateAttributeGroupResponse": {
@@ -3490,6 +3744,9 @@
                         "smithy.api#documentation": "<p>The updated information of the attribute group.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.servicecatalogappregistry#ValidationException": {

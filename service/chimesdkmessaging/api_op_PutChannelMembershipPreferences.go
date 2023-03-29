@@ -11,11 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the membership preferences of an AppInstanceUser for the specified channel.
-// The AppInstanceUser must be a member of the channel. Only the AppInstanceUser
-// who owns the membership can set preferences. Users in the AppInstanceAdmin and
-// channel moderator roles can't set preferences for other users. Banned users
-// can't set membership preferences for the channel from which they are banned.
+// Sets the membership preferences of an AppInstanceUser or AppIntanceBot for the
+// specified channel. The user or bot must be a member of the channel. Only the
+// user or bot who owns the membership can set preferences. Users or bots in the
+// AppInstanceAdmin and channel moderator roles can't set preferences for other
+// users or users. Banned users or bots can't set membership preferences for the
+// channel from which they are banned. The x-amz-chime-bearer request header is
+// mandatory. Use the ARN of an AppInstanceUser or AppInstanceBot that makes the
+// API call as the value in the header.
 func (c *Client) PutChannelMembershipPreferences(ctx context.Context, params *PutChannelMembershipPreferencesInput, optFns ...func(*Options)) (*PutChannelMembershipPreferencesOutput, error) {
 	if params == nil {
 		params = &PutChannelMembershipPreferencesInput{}
@@ -38,12 +41,12 @@ type PutChannelMembershipPreferencesInput struct {
 	// This member is required.
 	ChannelArn *string
 
-	// The AppInstanceUserARN of the user making the API call.
+	// The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
 	//
 	// This member is required.
 	ChimeBearer *string
 
-	// The AppInstanceUserArn of the member setting the preferences.
+	// The ARN of the member setting the preferences.
 	//
 	// This member is required.
 	MemberArn *string

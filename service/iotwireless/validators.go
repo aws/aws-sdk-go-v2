@@ -510,6 +510,26 @@ func (m *validateOpDeleteServiceProfile) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteWirelessDeviceImportTask struct {
+}
+
+func (*validateOpDeleteWirelessDeviceImportTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteWirelessDeviceImportTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteWirelessDeviceImportTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteWirelessDeviceImportTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteWirelessDevice struct {
 }
 
@@ -585,6 +605,26 @@ func (m *validateOpDeleteWirelessGatewayTask) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteWirelessGatewayTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeregisterWirelessDevice struct {
+}
+
+func (*validateOpDeregisterWirelessDevice) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeregisterWirelessDevice) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeregisterWirelessDeviceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeregisterWirelessDeviceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1010,6 +1050,26 @@ func (m *validateOpGetServiceProfile) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetWirelessDeviceImportTask struct {
+}
+
+func (*validateOpGetWirelessDeviceImportTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetWirelessDeviceImportTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetWirelessDeviceImportTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetWirelessDeviceImportTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetWirelessDevice struct {
 }
 
@@ -1165,6 +1225,26 @@ func (m *validateOpGetWirelessGatewayTask) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetWirelessGatewayTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListDevicesForWirelessDeviceImportTask struct {
+}
+
+func (*validateOpListDevicesForWirelessDeviceImportTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDevicesForWirelessDeviceImportTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDevicesForWirelessDeviceImportTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDevicesForWirelessDeviceImportTaskInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1430,6 +1510,46 @@ func (m *validateOpStartMulticastGroupSession) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartSingleWirelessDeviceImportTask struct {
+}
+
+func (*validateOpStartSingleWirelessDeviceImportTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartSingleWirelessDeviceImportTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartSingleWirelessDeviceImportTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartSingleWirelessDeviceImportTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartWirelessDeviceImportTask struct {
+}
+
+func (*validateOpStartWirelessDeviceImportTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartWirelessDeviceImportTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartWirelessDeviceImportTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartWirelessDeviceImportTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -1670,6 +1790,26 @@ func (m *validateOpUpdateResourcePosition) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateWirelessDeviceImportTask struct {
+}
+
+func (*validateOpUpdateWirelessDeviceImportTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateWirelessDeviceImportTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateWirelessDeviceImportTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateWirelessDeviceImportTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateWirelessDevice struct {
 }
 
@@ -1810,6 +1950,10 @@ func addOpDeleteServiceProfileValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpDeleteServiceProfile{}, middleware.After)
 }
 
+func addOpDeleteWirelessDeviceImportTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteWirelessDeviceImportTask{}, middleware.After)
+}
+
 func addOpDeleteWirelessDeviceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteWirelessDevice{}, middleware.After)
 }
@@ -1824,6 +1968,10 @@ func addOpDeleteWirelessGatewayTaskDefinitionValidationMiddleware(stack *middlew
 
 func addOpDeleteWirelessGatewayTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteWirelessGatewayTask{}, middleware.After)
+}
+
+func addOpDeregisterWirelessDeviceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeregisterWirelessDevice{}, middleware.After)
 }
 
 func addOpDisassociateAwsAccountFromPartnerAccountValidationMiddleware(stack *middleware.Stack) error {
@@ -1910,6 +2058,10 @@ func addOpGetServiceProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetServiceProfile{}, middleware.After)
 }
 
+func addOpGetWirelessDeviceImportTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetWirelessDeviceImportTask{}, middleware.After)
+}
+
 func addOpGetWirelessDeviceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetWirelessDevice{}, middleware.After)
 }
@@ -1940,6 +2092,10 @@ func addOpGetWirelessGatewayTaskDefinitionValidationMiddleware(stack *middleware
 
 func addOpGetWirelessGatewayTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetWirelessGatewayTask{}, middleware.After)
+}
+
+func addOpListDevicesForWirelessDeviceImportTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDevicesForWirelessDeviceImportTask{}, middleware.After)
 }
 
 func addOpListEventConfigurationsValidationMiddleware(stack *middleware.Stack) error {
@@ -1994,6 +2150,14 @@ func addOpStartMulticastGroupSessionValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpStartMulticastGroupSession{}, middleware.After)
 }
 
+func addOpStartSingleWirelessDeviceImportTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartSingleWirelessDeviceImportTask{}, middleware.After)
+}
+
+func addOpStartWirelessDeviceImportTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartWirelessDeviceImportTask{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
@@ -2040,6 +2204,10 @@ func addOpUpdateResourceEventConfigurationValidationMiddleware(stack *middleware
 
 func addOpUpdateResourcePositionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateResourcePosition{}, middleware.After)
+}
+
+func addOpUpdateWirelessDeviceImportTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateWirelessDeviceImportTask{}, middleware.After)
 }
 
 func addOpUpdateWirelessDeviceValidationMiddleware(stack *middleware.Stack) error {
@@ -3458,6 +3626,21 @@ func validateOpDeleteServiceProfileInput(v *DeleteServiceProfileInput) error {
 	}
 }
 
+func validateOpDeleteWirelessDeviceImportTaskInput(v *DeleteWirelessDeviceImportTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteWirelessDeviceImportTaskInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteWirelessDeviceInput(v *DeleteWirelessDeviceInput) error {
 	if v == nil {
 		return nil
@@ -3510,6 +3693,21 @@ func validateOpDeleteWirelessGatewayTaskInput(v *DeleteWirelessGatewayTaskInput)
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteWirelessGatewayTaskInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeregisterWirelessDeviceInput(v *DeregisterWirelessDeviceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeregisterWirelessDeviceInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3880,6 +4078,21 @@ func validateOpGetServiceProfileInput(v *GetServiceProfileInput) error {
 	}
 }
 
+func validateOpGetWirelessDeviceImportTaskInput(v *GetWirelessDeviceImportTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetWirelessDeviceImportTaskInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetWirelessDeviceInput(v *GetWirelessDeviceInput) error {
 	if v == nil {
 		return nil
@@ -3996,6 +4209,21 @@ func validateOpGetWirelessGatewayTaskInput(v *GetWirelessGatewayTaskInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetWirelessGatewayTaskInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListDevicesForWirelessDeviceImportTaskInput(v *ListDevicesForWirelessDeviceImportTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDevicesForWirelessDeviceImportTaskInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
@@ -4248,6 +4476,52 @@ func validateOpStartMulticastGroupSessionInput(v *StartMulticastGroupSessionInpu
 	}
 }
 
+func validateOpStartSingleWirelessDeviceImportTaskInput(v *StartSingleWirelessDeviceImportTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartSingleWirelessDeviceImportTaskInput"}
+	if v.DestinationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationName"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Sidewalk == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Sidewalk"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartWirelessDeviceImportTaskInput(v *StartWirelessDeviceImportTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartWirelessDeviceImportTaskInput"}
+	if v.DestinationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationName"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Sidewalk == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Sidewalk"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpTagResourceInput(v *TagResourceInput) error {
 	if v == nil {
 		return nil
@@ -4455,6 +4729,24 @@ func validateOpUpdateResourcePositionInput(v *UpdateResourcePositionInput) error
 	}
 	if len(v.ResourceType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateWirelessDeviceImportTaskInput(v *UpdateWirelessDeviceImportTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateWirelessDeviceImportTaskInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.Sidewalk == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Sidewalk"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

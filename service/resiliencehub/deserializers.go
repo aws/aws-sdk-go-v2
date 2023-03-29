@@ -4031,6 +4031,11 @@ func awsRestjson1_deserializeOpDocumentImportResourcesToDraftAppVersionOutput(v 
 				sv.AppVersion = ptr.String(jtv)
 			}
 
+		case "eksSources":
+			if err := awsRestjson1_deserializeDocumentEksSourceList(&sv.EksSources, value); err != nil {
+				return err
+			}
+
 		case "sourceArns":
 			if err := awsRestjson1_deserializeDocumentArnList(&sv.SourceArns, value); err != nil {
 				return err
@@ -10165,6 +10170,11 @@ func awsRestjson1_deserializeDocumentAppInputSource(v **types.AppInputSource, va
 
 	for key, value := range shape {
 		switch key {
+		case "eksSourceClusterNamespace":
+			if err := awsRestjson1_deserializeDocumentEksSourceClusterNamespace(&sv.EksSourceClusterNamespace, value); err != nil {
+				return err
+			}
+
 		case "importType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11202,6 +11212,170 @@ func awsRestjson1_deserializeDocumentDisruptionResiliencyScore(v *map[string]flo
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentEksNamespaceList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected EksNamespace to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEksSource(v **types.EksSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EksSource
+	if *v == nil {
+		sv = &types.EksSource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "eksClusterArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.EksClusterArn = ptr.String(jtv)
+			}
+
+		case "namespaces":
+			if err := awsRestjson1_deserializeDocumentEksNamespaceList(&sv.Namespaces, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEksSourceClusterNamespace(v **types.EksSourceClusterNamespace, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EksSourceClusterNamespace
+	if *v == nil {
+		sv = &types.EksSourceClusterNamespace{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "eksClusterArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.EksClusterArn = ptr.String(jtv)
+			}
+
+		case "namespace":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EksNamespace to be of type string, got %T instead", value)
+				}
+				sv.Namespace = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEksSourceList(v *[]types.EksSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.EksSource
+	if *v == nil {
+		cv = []types.EksSource{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.EksSource
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentEksSource(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentFailurePolicy(v **types.FailurePolicy, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11321,6 +11495,15 @@ func awsRestjson1_deserializeDocumentLogicalResourceId(v **types.LogicalResource
 
 	for key, value := range shape {
 		switch key {
+		case "eksSourceName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String255 to be of type string, got %T instead", value)
+				}
+				sv.EksSourceName = ptr.String(jtv)
+			}
+
 		case "identifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12409,6 +12592,15 @@ func awsRestjson1_deserializeDocumentResourceMapping(v **types.ResourceMapping, 
 				sv.AppRegistryAppName = ptr.String(jtv)
 			}
 
+		case "eksSourceName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String255 to be of type string, got %T instead", value)
+				}
+				sv.EksSourceName = ptr.String(jtv)
+			}
+
 		case "logicalStackName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13176,6 +13368,15 @@ func awsRestjson1_deserializeDocumentUnsupportedResource(v **types.UnsupportedRe
 					return fmt.Errorf("expected String255 to be of type string, got %T instead", value)
 				}
 				sv.ResourceType = ptr.String(jtv)
+			}
+
+		case "unsupportedResourceStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String255 to be of type string, got %T instead", value)
+				}
+				sv.UnsupportedResourceStatus = ptr.String(jtv)
 			}
 
 		default:

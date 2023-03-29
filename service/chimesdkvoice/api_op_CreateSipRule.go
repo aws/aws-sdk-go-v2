@@ -11,6 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Creates a SIP rule, which can be used to run a SIP media application as a target
+// for a specific trigger type. For more information about SIP rules, see Managing
+// SIP media applications and rules
+// (https://docs.aws.amazon.com/chime-sdk/latest/ag/manage-sip-applications.html)
+// in the Amazon Chime SDK Administrator Guide.
 func (c *Client) CreateSipRule(ctx context.Context, params *CreateSipRuleInput, optFns ...func(*Options)) (*CreateSipRuleOutput, error) {
 	if params == nil {
 		params = &CreateSipRuleInput{}
@@ -28,23 +33,42 @@ func (c *Client) CreateSipRule(ctx context.Context, params *CreateSipRuleInput, 
 
 type CreateSipRuleInput struct {
 
+	// The name of the SIP rule.
+	//
 	// This member is required.
 	Name *string
 
+	// The type of trigger assigned to the SIP rule in TriggerValue, currently
+	// RequestUriHostname or ToPhoneNumber.
+	//
 	// This member is required.
 	TriggerType types.SipRuleTriggerType
 
+	// If TriggerType is RequestUriHostname, the value can be the outbound host name of
+	// a Voice Connector. If TriggerType is ToPhoneNumber, the value can be a
+	// customer-owned phone number in the E164 format. The SipMediaApplication
+	// specified in the SipRule is triggered if the request URI in an incoming SIP
+	// request matches the RequestUriHostname, or if the To header in the incoming SIP
+	// request matches the ToPhoneNumber value.
+	//
 	// This member is required.
 	TriggerValue *string
 
+	// Disables or enables a SIP rule. You must disable SIP rules before you can delete
+	// them.
 	Disabled *bool
 
+	// List of SIP media applications, with priority and AWS Region. Only one SIP
+	// application per AWS Region can be used.
 	TargetApplications []types.SipRuleTargetApplication
 
 	noSmithyDocumentSerde
 }
 
 type CreateSipRuleOutput struct {
+
+	// The SIP rule information, including the rule ID, triggers, and target
+	// applications.
 	SipRule *types.SipRule
 
 	// Metadata pertaining to the operation's result.

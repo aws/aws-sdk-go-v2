@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the input source and all of its imported resources from the AWS
-// Resilience Hub application.
+// Deletes the input source and all of its imported resources from the Resilience
+// Hub application.
 func (c *Client) DeleteAppInputSource(ctx context.Context, params *DeleteAppInputSourceInput, optFns ...func(*Options)) (*DeleteAppInputSourceOutput, error) {
 	if params == nil {
 		params = &DeleteAppInputSourceInput{}
@@ -45,15 +45,19 @@ type DeleteAppInputSourceInput struct {
 	// other API requests.
 	ClientToken *string
 
+	// The namespace on your Amazon Elastic Kubernetes Service cluster that you want to
+	// delete from the Resilience Hub application.
+	EksSourceClusterNamespace *types.EksSourceClusterNamespace
+
 	// The Amazon Resource Name (ARN) of the imported resource you want to remove from
-	// the AWS Resilience Hub application. For more information about ARNs, see  Amazon
+	// the Resilience Hub application. For more information about ARNs, see  Amazon
 	// Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference guide.
 	SourceArn *string
 
-	// The imported Terraform s3 state ﬁle you want to remove from the AWS Resilience
-	// Hub application.
+	// The imported Terraform s3 state ﬁle you want to remove from the Resilience Hub
+	// application.
 	TerraformSource *types.TerraformSource
 
 	noSmithyDocumentSerde

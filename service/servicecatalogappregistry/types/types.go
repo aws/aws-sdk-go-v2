@@ -63,7 +63,7 @@ type ApplicationSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Includes all of the Service Catalog AppRegistry settings.
+// Includes all of the AppRegistry settings.
 type AppRegistryConfiguration struct {
 
 	// Includes the definition of a tagQuery.
@@ -109,6 +109,9 @@ type AttributeGroupDetails struct {
 	// The Amazon resource name (ARN) that specifies the attribute group.
 	Arn *string
 
+	// The service principal that created the attribute group.
+	CreatedBy *string
+
 	// The unique identifier of the attribute group.
 	Id *string
 
@@ -128,6 +131,9 @@ type AttributeGroupSummary struct {
 	// The Amazon resource name (ARN) that specifies the attribute group across
 	// services.
 	Arn *string
+
+	// The service principal that created the attribute group.
+	CreatedBy *string
 
 	// The ISO-8601 formatted timestamp of the moment the attribute group was created.
 	CreationTime *time.Time

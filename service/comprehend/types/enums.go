@@ -461,13 +461,14 @@ type ModelStatus string
 
 // Enum values for ModelStatus
 const (
-	ModelStatusSubmitted     ModelStatus = "SUBMITTED"
-	ModelStatusTraining      ModelStatus = "TRAINING"
-	ModelStatusDeleting      ModelStatus = "DELETING"
-	ModelStatusStopRequested ModelStatus = "STOP_REQUESTED"
-	ModelStatusStopped       ModelStatus = "STOPPED"
-	ModelStatusInError       ModelStatus = "IN_ERROR"
-	ModelStatusTrained       ModelStatus = "TRAINED"
+	ModelStatusSubmitted          ModelStatus = "SUBMITTED"
+	ModelStatusTraining           ModelStatus = "TRAINING"
+	ModelStatusDeleting           ModelStatus = "DELETING"
+	ModelStatusStopRequested      ModelStatus = "STOP_REQUESTED"
+	ModelStatusStopped            ModelStatus = "STOPPED"
+	ModelStatusInError            ModelStatus = "IN_ERROR"
+	ModelStatusTrained            ModelStatus = "TRAINED"
+	ModelStatusTrainedWithWarning ModelStatus = "TRAINED_WITH_WARNING"
 )
 
 // Values returns all known values for ModelStatus. Note that this can be expanded
@@ -482,6 +483,7 @@ func (ModelStatus) Values() []ModelStatus {
 		"STOPPED",
 		"IN_ERROR",
 		"TRAINED",
+		"TRAINED_WITH_WARNING",
 	}
 }
 

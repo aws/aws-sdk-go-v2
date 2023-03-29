@@ -29,7 +29,7 @@ func (c *Client) AcceptPage(ctx context.Context, params *AcceptPageInput, optFns
 
 type AcceptPageInput struct {
 
-	// The accept code is a 6-digit code used to acknowledge the page.
+	// A 6-digit code used to acknowledge the page.
 	//
 	// This member is required.
 	AcceptCode *string

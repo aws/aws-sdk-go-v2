@@ -1381,8 +1381,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "af-south-1",
                                 "UseDualStack": false,
+                                "Region": "af-south-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1394,8 +1394,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-1",
                                 "UseDualStack": false,
+                                "Region": "ap-northeast-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1407,8 +1407,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-2",
                                 "UseDualStack": false,
+                                "Region": "ap-northeast-2",
                                 "UseFIPS": false
                             }
                         },
@@ -1420,8 +1420,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-1",
                                 "UseDualStack": false,
+                                "Region": "ap-southeast-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1433,8 +1433,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-2",
                                 "UseDualStack": false,
+                                "Region": "ap-southeast-2",
                                 "UseFIPS": false
                             }
                         },
@@ -1446,8 +1446,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "ca-central-1",
                                 "UseDualStack": false,
+                                "Region": "ca-central-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1459,8 +1459,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-central-1",
                                 "UseDualStack": false,
+                                "Region": "eu-central-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1472,8 +1472,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-2",
                                 "UseDualStack": false,
+                                "Region": "eu-west-2",
                                 "UseFIPS": false
                             }
                         },
@@ -1485,8 +1485,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1498,8 +1498,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-2",
                                 "UseDualStack": false,
+                                "Region": "us-west-2",
                                 "UseFIPS": false
                             }
                         },
@@ -1511,8 +1511,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": true
                             }
                         },
@@ -1524,8 +1524,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": true
                             }
                         },
@@ -1537,8 +1537,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1550,8 +1550,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": true,
+                                "Region": "cn-north-1",
                                 "UseFIPS": true
                             }
                         },
@@ -1563,8 +1563,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": false,
+                                "Region": "cn-north-1",
                                 "UseFIPS": true
                             }
                         },
@@ -1576,8 +1576,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": true,
+                                "Region": "cn-north-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1589,8 +1589,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": false,
+                                "Region": "cn-north-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1602,8 +1602,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-west-1",
                                 "UseDualStack": false,
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1615,8 +1615,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-west-1",
                                 "UseDualStack": false,
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": true
                             }
                         },
@@ -1628,8 +1628,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true
                             }
                         },
@@ -1641,8 +1641,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true
                             }
                         },
@@ -1654,8 +1654,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1667,9 +1667,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1680,9 +1691,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1693,9 +1715,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1706,9 +1739,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1719,8 +1763,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -1732,8 +1776,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
@@ -1757,8 +1801,8 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
                                 "Endpoint": "https://example.com"
                             }
@@ -1769,10 +1813,16 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -9646,7 +9696,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets metric data from the specified Amazon Connect instance. </p>\n         <p>\n            <code>GetMetricDataV2</code> offers more features than <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_GetMetricData.html\">GetMetricData</a>, the previous\n   version of this API. It has new metrics, offers filtering at a metric level, and offers the\n   ability to filter and group data by channels, queues, routing profiles, agents, and agent\n   hierarchy levels. It can retrieve historical data for last the 14 days, in 24-hour\n   intervals.</p>\n         <p>For a description of the historical metrics that are supported by\n    <code>GetMetricDataV2</code> and <code>GetMetricData</code>, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html\">Historical metrics\n    definitions</a> in the <i>Amazon Connect Administrator's Guide</i>.\n  </p>\n         <p>This API is not available in the Amazon Web Services GovCloud (US) Regions.</p>",
+                "smithy.api#documentation": "<p>Gets metric data from the specified Amazon Connect instance. </p>\n         <p>\n            <code>GetMetricDataV2</code> offers more features than <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_GetMetricData.html\">GetMetricData</a>, the previous\n   version of this API. It has new metrics, offers filtering at a metric level, and offers the\n   ability to filter and group data by channels, queues, routing profiles, agents, and agent\n   hierarchy levels. It can retrieve historical data for the last 14 days, in 24-hour\n   intervals.</p>\n         <p>For a description of the historical metrics that are supported by\n    <code>GetMetricDataV2</code> and <code>GetMetricData</code>, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html\">Historical metrics\n    definitions</a> in the <i>Amazon Connect Administrator's Guide</i>. </p>\n         <p>This API is not available in the Amazon Web Services GovCloud (US) Regions.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/metrics/data",
@@ -20087,19 +20137,25 @@
                 "ChatDurationInMinutes": {
                     "target": "com.amazonaws.connect#ChatDurationInMinutes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total duration of the newly started chat session. If not specified, the chat session\n   duration defaults to 25 hour. The minumum configurable time is 60 minutes. The maximum\n   configurable time is 10,080 minutes (7 days).</p>"
+                        "smithy.api#documentation": "<p>The total duration of the newly started chat session. If not specified, the chat session\n   duration defaults to 25 hour. The minimum configurable time is 60 minutes. The maximum\n   configurable time is 10,080 minutes (7 days).</p>"
                     }
                 },
                 "SupportedMessagingContentTypes": {
                     "target": "com.amazonaws.connect#SupportedMessagingContentTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The supported chat message content types. Content types must always contain\n    <code>text/plain</code>. You can then put any other supported type in the list. For example, all\n   the following lists are valid because they contain <code>text/plain</code>: <code>[text/plain,\n    text/markdown, application/json]</code>, <code>[text/markdown, text/plain]</code>,\n    <code>[text/plain, application/json]</code>.</p>"
+                        "smithy.api#documentation": "<p>The supported chat message content types. \n   Supported types are <code>text/plain</code>,\n   <code>text/markdown</code>, <code>application/json</code>,  <code>application/vnd.amazonaws.connect.message.interactive</code>, and \n   <code>application/vnd.amazonaws.connect.message.interactive.response</code>. </p>\n         <p>Content types must always contain\n    <code>text/plain</code>. You can then put any other supported type in the list. For example, all\n   the following lists are valid because they contain <code>text/plain</code>: <code>[text/plain,\n    text/markdown, application/json]</code>, <code>[text/markdown, text/plain]</code>,\n    <code>[text/plain, application/json,\n    application/vnd.amazonaws.connect.message.interactive.response]</code>. </p>\n         <note>\n            <p>The type <code>application/vnd.amazonaws.connect.message.interactive</code> is required to\n    use the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/show-view-block.html\">Show\n     view</a> flow block.</p>\n         </note>"
                     }
                 },
                 "PersistentChat": {
                     "target": "com.amazonaws.connect#PersistentChat",
                     "traits": {
                         "smithy.api#documentation": "<p>Enable persistent chats. For more information about enabling persistent chat, and for\n   example use cases and how to configure for them, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html\">Enable persistent chat</a>.</p>"
+                    }
+                },
+                "RelatedContactId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for an Amazon Connect contact. This identifier is related to the chat\n   starting.</p>\n         <note>\n            <p>You cannot provide data for both RelatedContactId and PersistentChat. </p>\n         </note>"
                     }
                 }
             },
@@ -20537,7 +20593,7 @@
                 "RelatedContactId": {
                     "target": "com.amazonaws.connect#ContactId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The contactId that is <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/tasks.html#linked-tasks\">related</a> to this\n   contact.</p>"
+                        "smithy.api#documentation": "<p>The contactId that is <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/tasks.html#linked-tasks\">related</a> to this contact.</p>"
                     }
                 }
             },

@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Updates a Voice Connector's termination credentials.
 func (c *Client) PutVoiceConnectorTerminationCredentials(ctx context.Context, params *PutVoiceConnectorTerminationCredentialsInput, optFns ...func(*Options)) (*PutVoiceConnectorTerminationCredentialsOutput, error) {
 	if params == nil {
 		params = &PutVoiceConnectorTerminationCredentialsInput{}
@@ -28,9 +29,12 @@ func (c *Client) PutVoiceConnectorTerminationCredentials(ctx context.Context, pa
 
 type PutVoiceConnectorTerminationCredentialsInput struct {
 
+	// The Voice Connector ID.
+	//
 	// This member is required.
 	VoiceConnectorId *string
 
+	// The termination credentials being updated.
 	Credentials []types.Credential
 
 	noSmithyDocumentSerde

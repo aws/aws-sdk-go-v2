@@ -12,10 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all channels that a particular AppInstanceUser is a part of. Only an
-// AppInstanceAdmin can call the API with a user ARN that is not their own. The
-// x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of
-// the user that makes the API call as the value in the header.
+// Lists all channels that anr AppInstanceUser or AppInstanceBot is a part of. Only
+// an AppInstanceAdmin can call the API with a user ARN that is not their own. The
+// x-amz-chime-bearer request header is mandatory. Use the ARN of the
+// AppInstanceUser or AppInstanceBot that makes the API call as the value in the
+// header.
 func (c *Client) ListChannelMembershipsForAppInstanceUser(ctx context.Context, params *ListChannelMembershipsForAppInstanceUserInput, optFns ...func(*Options)) (*ListChannelMembershipsForAppInstanceUserOutput, error) {
 	if params == nil {
 		params = &ListChannelMembershipsForAppInstanceUserInput{}
@@ -33,12 +34,12 @@ func (c *Client) ListChannelMembershipsForAppInstanceUser(ctx context.Context, p
 
 type ListChannelMembershipsForAppInstanceUserInput struct {
 
-	// The AppInstanceUserArn of the user that makes the API call.
+	// The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
 	//
 	// This member is required.
 	ChimeBearer *string
 
-	// The ARN of the AppInstanceUsers
+	// The ARN of the user or bot.
 	AppInstanceUserArn *string
 
 	// The maximum number of users that you want returned.

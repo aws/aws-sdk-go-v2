@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the compliances for an AWS Resilience Hub Application Component.
+// Lists the compliances for an Resilience Hub Application Component.
 func (c *Client) ListAppComponentCompliances(ctx context.Context, params *ListAppComponentCompliancesInput, optFns ...func(*Options)) (*ListAppComponentCompliancesOutput, error) {
 	if params == nil {
 		params = &ListAppComponentCompliancesInput{}
@@ -52,7 +52,7 @@ type ListAppComponentCompliancesInput struct {
 
 type ListAppComponentCompliancesOutput struct {
 
-	// The compliances for an AWS Resilience Hub Application Component, returned as an
+	// The compliances for an Resilience Hub Application Component, returned as an
 	// object. This object contains the names of the Application Components,
 	// compliances, costs, resiliency scores, outage scores, and more.
 	//

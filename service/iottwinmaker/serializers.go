@@ -439,6 +439,13 @@ func awsRestjson1_serializeOpDocumentCreateSceneInput(v *CreateSceneInput, value
 		ok.String(*v.SceneId)
 	}
 
+	if v.SceneMetadata != nil {
+		ok := object.Key("sceneMetadata")
+		if err := awsRestjson1_serializeDocumentSceneMetadataMap(v.SceneMetadata, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
@@ -2846,6 +2853,13 @@ func awsRestjson1_serializeOpDocumentUpdateSceneInput(v *UpdateSceneInput, value
 		ok.String(*v.Description)
 	}
 
+	if v.SceneMetadata != nil {
+		ok := object.Key("sceneMetadata")
+		if err := awsRestjson1_serializeDocumentSceneMetadataMap(v.SceneMetadata, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -3803,6 +3817,17 @@ func awsRestjson1_serializeDocumentSceneCapabilities(v []string, value smithyjso
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSceneMetadataMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
 	}
 	return nil
 }

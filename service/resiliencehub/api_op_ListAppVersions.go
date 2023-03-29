@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the different versions for the AWS Resilience Hub applications.
+// Lists the different versions for the Resilience Hub applications.
 func (c *Client) ListAppVersions(ctx context.Context, params *ListAppVersionsInput, optFns ...func(*Options)) (*ListAppVersionsOutput, error) {
 	if params == nil {
 		params = &ListAppVersionsInput{}

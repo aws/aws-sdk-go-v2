@@ -8,15 +8,15 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.19.1
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.15.6
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.20.6
-	github.com/aws/aws-sdk-go-v2/service/athena v1.23.2
+	github.com/aws/aws-sdk-go-v2/service/athena v1.24.0
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.27.4
-	github.com/aws/aws-sdk-go-v2/service/batch v1.21.7
+	github.com/aws/aws-sdk-go-v2/service/batch v1.22.0
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.26.6
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.26.2
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.14.6
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.14.5
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.24.4
-	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.25.6
+	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.25.7
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.20.7
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.14.8
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.16.7
@@ -48,7 +48,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.14.7
 	github.com/aws/aws-sdk-go-v2/service/glue v1.43.4
 	github.com/aws/aws-sdk-go-v2/service/health v1.16.6
-	github.com/aws/aws-sdk-go-v2/service/iam v1.19.7
+	github.com/aws/aws-sdk-go-v2/service/iam v1.19.8
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.13.6
 	github.com/aws/aws-sdk-go-v2/service/iot v1.35.2
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.17.8
@@ -60,7 +60,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.14.6
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.12.6
 	github.com/aws/aws-sdk-go-v2/service/polly v1.25.5
-	github.com/aws/aws-sdk-go-v2/service/rds v1.40.7
+	github.com/aws/aws-sdk-go-v2/service/rds v1.42.0
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.27.7
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.23.6
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.27.5
@@ -69,7 +69,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.31.0
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.31.1
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.19.1
-	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.16.7
+	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.16.9
 	github.com/aws/aws-sdk-go-v2/service/ses v1.15.5
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.17.7
 	github.com/aws/aws-sdk-go-v2/service/shield v1.18.6
@@ -77,7 +77,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.18.5
 	github.com/aws/aws-sdk-go-v2/service/sns v1.20.6
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.20.6
-	github.com/aws/aws-sdk-go-v2/service/ssm v1.35.7
+	github.com/aws/aws-sdk-go-v2/service/ssm v1.36.0
 	github.com/aws/aws-sdk-go-v2/service/sts v1.18.7
 	github.com/aws/aws-sdk-go-v2/service/support v1.14.7
 	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.16.2

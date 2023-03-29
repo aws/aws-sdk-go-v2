@@ -1,3 +1,7 @@
+# v1.21.0 (2023-03-28)
+
+* **Feature**: Increased maximum length of "TriggerDetails.rawData" to 10K characters and "IncidentSummary" to 8K characters.
+
 # v1.20.6 (2023-03-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

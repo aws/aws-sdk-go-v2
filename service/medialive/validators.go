@@ -2256,21 +2256,6 @@ func validateHlsGroupSettings(v *types.HlsGroupSettings) error {
 	}
 }
 
-func validateHlsId3SegmentTaggingScheduleActionSettings(v *types.HlsId3SegmentTaggingScheduleActionSettings) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "HlsId3SegmentTaggingScheduleActionSettings"}
-	if v.Tag == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Tag"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateHlsOutputSettings(v *types.HlsOutputSettings) error {
 	if v == nil {
 		return nil
@@ -2917,11 +2902,6 @@ func validateScheduleActionSettings(v *types.ScheduleActionSettings) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ScheduleActionSettings"}
-	if v.HlsId3SegmentTaggingSettings != nil {
-		if err := validateHlsId3SegmentTaggingScheduleActionSettings(v.HlsId3SegmentTaggingSettings); err != nil {
-			invalidParams.AddNested("HlsId3SegmentTaggingSettings", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.HlsTimedMetadataSettings != nil {
 		if err := validateHlsTimedMetadataScheduleActionSettings(v.HlsTimedMetadataSettings); err != nil {
 			invalidParams.AddNested("HlsTimedMetadataSettings", err.(smithy.InvalidParamsError))

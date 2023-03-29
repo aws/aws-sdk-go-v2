@@ -12,18 +12,23 @@ import (
 )
 
 // Creates a new ChannelModerator. A channel moderator can:
-// - Add and remove other
-// members of the channel.
-// - Add and remove other moderators of the channel.
-// - Add
-// and remove user bans for the channel.
-// - Redact messages in the channel.
-// - List
-// messages in the channel.
 //
-// The x-amz-chime-bearer request header is mandatory.
-// Use the AppInstanceUserArn of the user that makes the API call as the value in
-// the header.
+// * Add and remove other
+// members of the channel.
+//
+// * Add and remove other moderators of the channel.
+//
+// *
+// Add and remove user bans for the channel.
+//
+// * Redact messages in the channel.
+//
+// *
+// List messages in the channel.
+//
+// The x-amz-chime-bearer request header is
+// mandatory. Use the ARN of the AppInstanceUser or AppInstanceBotof the user that
+// makes the API call as the value in the header.
 func (c *Client) CreateChannelModerator(ctx context.Context, params *CreateChannelModeratorInput, optFns ...func(*Options)) (*CreateChannelModeratorOutput, error) {
 	if params == nil {
 		params = &CreateChannelModeratorInput{}
@@ -51,7 +56,7 @@ type CreateChannelModeratorInput struct {
 	// This member is required.
 	ChannelModeratorArn *string
 
-	// The AppInstanceUserArn of the user that makes the API call.
+	// The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
 	//
 	// This member is required.
 	ChimeBearer *string

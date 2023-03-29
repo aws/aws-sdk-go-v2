@@ -596,6 +596,11 @@ func validateContainerProperties(v *types.ContainerProperties) error {
 			invalidParams.AddNested("Secrets", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.EphemeralStorage != nil {
+		if err := validateEphemeralStorage(v.EphemeralStorage); err != nil {
+			invalidParams.AddNested("EphemeralStorage", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -920,6 +925,21 @@ func validateEksVolumes(v []types.EksVolume) error {
 		if err := validateEksVolume(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEphemeralStorage(v *types.EphemeralStorage) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EphemeralStorage"}
+	if v.SizeInGiB == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SizeInGiB"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

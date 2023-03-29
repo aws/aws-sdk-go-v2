@@ -43,7 +43,7 @@ type BatchPutPropertyErrorEntry struct {
 	noSmithyDocumentSerde
 }
 
-// Information about pricing bundle.
+// Information about the pricing bundle.
 type BundleInformation struct {
 
 	// The bundle names.
@@ -69,6 +69,7 @@ type ColumnDescription struct {
 	noSmithyDocumentSerde
 }
 
+// The component property group request.
 type ComponentPropertyGroupRequest struct {
 
 	// The group type.
@@ -542,7 +543,7 @@ type PricingPlan struct {
 	// This member is required.
 	UpdateDateTime *time.Time
 
-	// The update reason, for changing a pricing plan.
+	// The update reason for changing a pricing plan.
 	//
 	// This member is required.
 	UpdateReason UpdateReason
@@ -699,7 +700,7 @@ type PropertyGroupResponse struct {
 // The latest value of the property.
 type PropertyLatestValue struct {
 
-	// An object that specifies information about a property.>
+	// An object that specifies information about a property.
 	//
 	// This member is required.
 	PropertyReference *EntityPropertyReference
@@ -934,7 +935,7 @@ type SyncResourceFilter interface {
 	isSyncResourceFilter()
 }
 
-// The external Id.
+// The external ID.
 type SyncResourceFilterMemberExternalId struct {
 	Value string
 
@@ -943,7 +944,7 @@ type SyncResourceFilterMemberExternalId struct {
 
 func (*SyncResourceFilterMemberExternalId) isSyncResourceFilter() {}
 
-// The sync resource filter resource Id.
+// The sync resource filter resource ID.
 type SyncResourceFilterMemberResourceId struct {
 	Value string
 
@@ -952,7 +953,7 @@ type SyncResourceFilterMemberResourceId struct {
 
 func (*SyncResourceFilterMemberResourceId) isSyncResourceFilter() {}
 
-// The sync resource filter resoucre type
+// The sync resource filter resource type
 type SyncResourceFilterMemberResourceType struct {
 	Value SyncResourceType
 
@@ -985,10 +986,10 @@ type SyncResourceStatus struct {
 // The sync resource summary.
 type SyncResourceSummary struct {
 
-	// The external Id.
+	// The external ID.
 	ExternalId *string
 
-	// The resource Id.
+	// The resource ID.
 	ResourceId *string
 
 	// The resource type.

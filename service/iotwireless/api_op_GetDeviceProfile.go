@@ -51,6 +51,9 @@ type GetDeviceProfileOutput struct {
 	// The name of the resource.
 	Name *string
 
+	// Information about the Sidewalk parameters in the device profile.
+	Sidewalk *types.SidewalkGetDeviceProfile
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

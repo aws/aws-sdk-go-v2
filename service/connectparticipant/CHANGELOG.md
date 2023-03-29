@@ -1,3 +1,7 @@
+# v1.15.7 (2023-03-27)
+
+* **Documentation**: This release provides an update to the SendMessage API to handle interactive message response content-types.
+
 # v1.15.6 (2023-03-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -43,26 +43,34 @@ type CreateDBClusterInput struct {
 
 	// The DB cluster identifier. This parameter is stored as a lowercase string.
 	// Constraints:
-	// - Must contain from 1 to 63 letters, numbers, or hyphens.
-	// - First
-	// character must be a letter.
-	// - Can't end with a hyphen or contain two consecutive
-	// hyphens.
 	//
-	// Example: my-cluster1 Valid for: Aurora DB clusters and Multi-AZ DB
-	// clusters
+	// * Must contain from 1 to 63 letters, numbers, or hyphens.
+	//
+	// * First
+	// character must be a letter.
+	//
+	// * Can't end with a hyphen or contain two
+	// consecutive hyphens.
+	//
+	// Example: my-cluster1 Valid for: Aurora DB clusters and
+	// Multi-AZ DB clusters
 	//
 	// This member is required.
 	DBClusterIdentifier *string
 
 	// The name of the database engine to be used for this DB cluster. Valid Values:
-	// -
+	//
+	// *
 	// aurora (for MySQL 5.6-compatible Aurora)
-	// - aurora-mysql (for MySQL
+	//
+	// * aurora-mysql (for MySQL
 	// 5.7-compatible and MySQL 8.0-compatible Aurora)
-	// - aurora-postgresql
-	// - mysql
-	// -
+	//
+	// * aurora-postgresql
+	//
+	// * mysql
+	//
+	// *
 	// postgres
 	//
 	// Valid for: Aurora DB clusters and Multi-AZ DB clusters
@@ -89,15 +97,17 @@ type CreateDBClusterInput struct {
 
 	// The target backtrack window, in seconds. To disable backtracking, set this value
 	// to 0. Default: 0 Constraints:
-	// - If specified, this value must be set to a number
-	// from 0 to 259,200 (72 hours).
+	//
+	// * If specified, this value must be set to a
+	// number from 0 to 259,200 (72 hours).
 	//
 	// Valid for: Aurora MySQL DB clusters only
 	BacktrackWindow *int64
 
 	// The number of days for which automated backups are retained. Default: 1
 	// Constraints:
-	// - Must be a value from 1 to 35
+	//
+	// * Must be a value from 1 to 35
 	//
 	// Valid for: Aurora DB clusters and
 	// Multi-AZ DB clusters
@@ -124,7 +134,8 @@ type CreateDBClusterInput struct {
 	// The name of the DB cluster parameter group to associate with this DB cluster. If
 	// you do not specify a value, then the default DB cluster parameter group for the
 	// specified DB engine and version is used. Constraints:
-	// - If supplied, must match
+	//
+	// * If supplied, must match
 	// the name of an existing DB cluster parameter group.
 	//
 	// Valid for: Aurora DB
@@ -225,18 +236,23 @@ type CreateDBClusterInput struct {
 	// engine modes currently aren't supported. Limitations and requirements apply to
 	// some DB engine modes. For more information, see the following sections in the
 	// Amazon Aurora User Guide:
-	// - Limitations of Aurora Serverless v1
+	//
+	// * Limitations of Aurora Serverless v1
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html#aurora-serverless.limitations)
-	// -
+	//
+	// *
 	// Requirements for Aurora Serverless v2
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.requirements.html)
-	// -
+	//
+	// *
 	// Limitations of Parallel Query
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-mysql-parallel-query.html#aurora-mysql-parallel-query-limitations)
-	// -
+	//
+	// *
 	// Limitations of Aurora Global Databases
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html#aurora-global-database.limitations)
-	// -
+	//
+	// *
 	// Limitations of Multi-Master Clusters
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-multi-master.html#aurora-multi-master-limitations)
 	//
@@ -293,10 +309,12 @@ type CreateDBClusterInput struct {
 	// alias name for the KMS key. To use a KMS key in a different Amazon Web Services
 	// account, specify the key ARN or alias ARN. When a KMS key isn't specified in
 	// KmsKeyId:
-	// - If ReplicationSourceIdentifier identifies an encrypted source, then
+	//
+	// * If ReplicationSourceIdentifier identifies an encrypted source, then
 	// Amazon RDS will use the KMS key used to encrypt the source. Otherwise, Amazon
 	// RDS will use your default KMS key.
-	// - If the StorageEncrypted parameter is
+	//
+	// * If the StorageEncrypted parameter is
 	// enabled and ReplicationSourceIdentifier isn't specified, then Amazon RDS will
 	// use your default KMS key.
 	//
@@ -317,7 +335,8 @@ type CreateDBClusterInput struct {
 	// Secrets Manager
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-secrets-manager.html)
 	// in the Amazon Aurora User Guide. Constraints:
-	// - Can't manage the master user
+	//
+	// * Can't manage the master user
 	// password with Amazon Web Services Secrets Manager if MasterUserPassword is
 	// specified.
 	//
@@ -326,9 +345,11 @@ type CreateDBClusterInput struct {
 
 	// The password for the master database user. This password can contain any
 	// printable ASCII character except "/", """, or "@". Constraints:
-	// - Must contain
+	//
+	// * Must contain
 	// from 8 to 41 characters.
-	// - Can't be specified if ManageMasterUserPassword is
+	//
+	// * Can't be specified if ManageMasterUserPassword is
 	// turned on.
 	//
 	// Valid for: Aurora DB clusters and Multi-AZ DB clusters
@@ -350,10 +371,13 @@ type CreateDBClusterInput struct {
 	MasterUserSecretKmsKeyId *string
 
 	// The name of the master user for the DB cluster. Constraints:
-	// - Must be 1 to 16
+	//
+	// * Must be 1 to 16
 	// letters or numbers.
-	// - First character must be a letter.
-	// - Can't be a reserved
+	//
+	// * First character must be a letter.
+	//
+	// * Can't be a reserved
 	// word for the chosen database engine.
 	//
 	// Valid for: Aurora DB clusters and Multi-AZ
@@ -377,8 +401,10 @@ type CreateDBClusterInput struct {
 	MonitoringRoleArn *string
 
 	// The network type of the DB cluster. Valid values:
-	// - IPV4
-	// - DUAL
+	//
+	// * IPV4
+	//
+	// * DUAL
 	//
 	// The network
 	// type is determined by the DBSubnetGroup specified for the DB cluster. A
@@ -404,21 +430,28 @@ type CreateDBClusterInput struct {
 
 	// The number of days to retain Performance Insights data. The default is 7 days.
 	// The following values are valid:
-	// - 7
-	// - month * 31, where month is a number of
+	//
+	// * 7
+	//
+	// * month * 31, where month is a number of
 	// months from 1-23
-	// - 731
+	//
+	// * 731
 	//
 	// For example, the following values are valid:
-	// - 93 (3
-	// months * 31)
-	// - 341 (11 months * 31)
-	// - 589 (19 months * 31)
-	// - 731
 	//
-	// If you specify
-	// a retention period such as 94, which isn't a valid value, RDS issues an error.
-	// Valid for: Multi-AZ DB clusters only
+	// * 93 (3
+	// months * 31)
+	//
+	// * 341 (11 months * 31)
+	//
+	// * 589 (19 months * 31)
+	//
+	// * 731
+	//
+	// If you
+	// specify a retention period such as 94, which isn't a valid value, RDS issues an
+	// error. Valid for: Multi-AZ DB clusters only
 	PerformanceInsightsRetentionPeriod *int32
 
 	// The port number on which the instances in the DB cluster accept connections. RDS
@@ -436,14 +469,17 @@ type CreateDBClusterInput struct {
 	// can run in the source Amazon Web Services Region that contains the encrypted DB
 	// cluster to copy. The presigned URL request must contain the following parameter
 	// values:
-	// - KmsKeyId - The KMS key identifier for the KMS key to use to encrypt
+	//
+	// * KmsKeyId - The KMS key identifier for the KMS key to use to encrypt
 	// the copy of the DB cluster in the destination Amazon Web Services Region. This
 	// should refer to the same KMS key for both the CreateDBCluster operation that is
 	// called in the destination Amazon Web Services Region, and the operation
 	// contained in the presigned URL.
-	// - DestinationRegion - The name of the Amazon Web
-	// Services Region that Aurora read replica will be created in.
-	// -
+	//
+	// * DestinationRegion - The name of the Amazon
+	// Web Services Region that Aurora read replica will be created in.
+	//
+	// *
 	// ReplicationSourceIdentifier - The DB cluster identifier for the encrypted DB
 	// cluster to be copied. This identifier must be in the Amazon Resource Name (ARN)
 	// format for the source Amazon Web Services Region. For example, if you are
@@ -470,12 +506,16 @@ type CreateDBClusterInput struct {
 	// Web Services Region. To view the time blocks available, see  Backup window
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.Backups.BackupWindow)
 	// in the Amazon Aurora User Guide. Constraints:
-	// - Must be in the format
+	//
+	// * Must be in the format
 	// hh24:mi-hh24:mi.
-	// - Must be in Universal Coordinated Time (UTC).
-	// - Must not
+	//
+	// * Must be in Universal Coordinated Time (UTC).
+	//
+	// * Must not
 	// conflict with the preferred maintenance window.
-	// - Must be at least 30
+	//
+	// * Must be at least 30
 	// minutes.
 	//
 	// Valid for: Aurora DB clusters and Multi-AZ DB clusters
@@ -503,18 +543,22 @@ type CreateDBClusterInput struct {
 	// private IP address. Default: The default behavior varies depending on whether
 	// DBSubnetGroupName is specified. If DBSubnetGroupName isn't specified, and
 	// PubliclyAccessible isn't specified, the following applies:
-	// - If the default VPC
+	//
+	// * If the default VPC
 	// in the target Region doesn’t have an internet gateway attached to it, the DB
 	// cluster is private.
-	// - If the default VPC in the target Region has an internet
+	//
+	// * If the default VPC in the target Region has an internet
 	// gateway attached to it, the DB cluster is public.
 	//
 	// If DBSubnetGroupName is
 	// specified, and PubliclyAccessible isn't specified, the following applies:
-	// - If
+	//
+	// * If
 	// the subnets are part of a VPC that doesn’t have an internet gateway attached to
 	// it, the DB cluster is private.
-	// - If the subnets are part of a VPC that has an
+	//
+	// * If the subnets are part of a VPC that has an
 	// internet gateway attached to it, the DB cluster is public.
 	//
 	// Valid for: Multi-AZ

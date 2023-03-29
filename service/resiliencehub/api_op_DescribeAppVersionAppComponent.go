@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes an Application Component in the AWS Resilience Hub application.
+// Describes an Application Component in the Resilience Hub application.
 func (c *Client) DescribeAppVersionAppComponent(ctx context.Context, params *DescribeAppVersionAppComponentInput, optFns ...func(*Options)) (*DescribeAppVersionAppComponentOutput, error) {
 	if params == nil {
 		params = &DescribeAppVersionAppComponentInput{}
@@ -67,7 +67,7 @@ type DescribeAppVersionAppComponentOutput struct {
 	// This member is required.
 	AppVersion *string
 
-	// Defines an Application Component.
+	// The list of Application Components that belong to this resource.
 	AppComponent *types.AppComponent
 
 	// Metadata pertaining to the operation's result.

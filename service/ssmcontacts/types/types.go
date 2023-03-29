@@ -121,6 +121,37 @@ type ContactTargetInfo struct {
 	noSmithyDocumentSerde
 }
 
+// Information about when an on-call shift begins and ends.
+type CoverageTime struct {
+
+	// Information about when the on-call rotation shift ends.
+	End *HandOffTime
+
+	// Information about when the on-call rotation shift begins.
+	Start *HandOffTime
+
+	noSmithyDocumentSerde
+}
+
+// Information about a resource that another resource is related to or depends on.
+// For example, if a contact is a member of a rotation, the rotation is a dependent
+// entity of the contact.
+type DependentEntity struct {
+
+	// The Amazon Resource Names (ARNs) of the dependent resources.
+	//
+	// This member is required.
+	DependentResourceIds []string
+
+	// The type of relationship between one resource and the other resource that it is
+	// related to or depends on.
+	//
+	// This member is required.
+	RelationType *string
+
+	noSmithyDocumentSerde
+}
+
 // Incident Manager reaching out to a contact or escalation plan to engage contact
 // during an incident.
 type Engagement struct {
@@ -148,6 +179,38 @@ type Engagement struct {
 
 	// The time that the engagement ended.
 	StopTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Details about when an on-call rotation shift begins or ends.
+type HandOffTime struct {
+
+	// The hour when an on-call rotation shift begins or ends.
+	//
+	// This member is required.
+	HourOfDay int32
+
+	// The minute when an on-call rotation shift begins or ends.
+	//
+	// This member is required.
+	MinuteOfHour int32
+
+	noSmithyDocumentSerde
+}
+
+// Information about on-call rotations that recur monthly.
+type MonthlySetting struct {
+
+	// The day of the month when monthly recurring on-call rotations begin.
+	//
+	// This member is required.
+	DayOfMonth *int32
+
+	// The time of day when a monthly recurring on-call shift rotation begins.
+	//
+	// This member is required.
+	HandOffTime *HandOffTime
 
 	noSmithyDocumentSerde
 }
@@ -190,15 +253,32 @@ type Page struct {
 	noSmithyDocumentSerde
 }
 
-// The stages that an escalation plan or engagement plan engages contacts and
-// contact methods in.
+// Information about the stages and on-call rotation teams associated with an
+// escalation plan or engagement plan.
 type Plan struct {
+
+	// The Amazon Resource Names (ARNs) of the on-call rotations associated with the
+	// plan.
+	RotationIds []string
 
 	// A list of stages that the escalation plan or engagement plan uses to engage
 	// contacts and contact methods.
-	//
-	// This member is required.
 	Stages []Stage
+
+	noSmithyDocumentSerde
+}
+
+// Information about contacts and times that an on-call override replaces.
+type PreviewOverride struct {
+
+	// Information about the time a rotation override would end.
+	EndTime *time.Time
+
+	// Information about contacts to add to an on-call rotation override.
+	NewMembers []string
+
+	// Information about the time a rotation override would begin.
+	StartTime *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -221,6 +301,165 @@ type Receipt struct {
 
 	// Information provided during the page acknowledgement.
 	ReceiptInfo *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about when an on-call rotation is in effect and how long the
+// rotation period lasts.
+type RecurrenceSettings struct {
+
+	// The number of contacts, or shift team members designated to be on call
+	// concurrently during a shift. For example, in an on-call schedule containing ten
+	// contacts, a value of 2 designates that two of them are on call at any given
+	// time.
+	//
+	// This member is required.
+	NumberOfOnCalls *int32
+
+	// The number of days, weeks, or months a single rotation lasts.
+	//
+	// This member is required.
+	RecurrenceMultiplier *int32
+
+	// Information about on-call rotations that recur daily.
+	DailySettings []HandOffTime
+
+	// Information about on-call rotations that recur monthly.
+	MonthlySettings []MonthlySetting
+
+	// Information about the days of the week included in on-call rotation coverage.
+	ShiftCoverages map[string][]CoverageTime
+
+	// Information about on-call rotations that recur weekly.
+	WeeklySettings []WeeklySetting
+
+	noSmithyDocumentSerde
+}
+
+// Information about the engagement resolution steps. The resolution starts from
+// the first contact, which can be an escalation plan, then resolves to an on-call
+// rotation, and finally to a personal contact. The ResolutionContact structure
+// describes the information for each node or step in that process. It contains
+// information about different contact types, such as the escalation, rotation, and
+// personal contacts.
+type ResolutionContact struct {
+
+	// The Amazon Resource Name (ARN) of a contact in the engagement resolution
+	// process.
+	//
+	// This member is required.
+	ContactArn *string
+
+	// The type of contact for a resolution step.
+	//
+	// This member is required.
+	Type ContactType
+
+	// The stage in the escalation plan that resolves to this contact.
+	StageIndex *int32
+
+	noSmithyDocumentSerde
+}
+
+// Information about a rotation in an on-call schedule.
+type Rotation struct {
+
+	// The name of the rotation.
+	//
+	// This member is required.
+	Name *string
+
+	// The Amazon Resource Name (ARN) of the rotation.
+	//
+	// This member is required.
+	RotationArn *string
+
+	// The Amazon Resource Names (ARNs) of the contacts assigned to the rotation team.
+	ContactIds []string
+
+	// Information about when an on-call rotation is in effect and how long the
+	// rotation period lasts.
+	Recurrence *RecurrenceSettings
+
+	// The date and time the rotation becomes active.
+	StartTime *time.Time
+
+	// The time zone the rotation’s activity is based on, in Internet Assigned Numbers
+	// Authority (IANA) format. For example: "America/Los_Angeles", "UTC", or
+	// "Asia/Seoul".
+	TimeZoneId *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about an override specified for an on-call rotation.
+type RotationOverride struct {
+
+	// The time a rotation override was created.
+	//
+	// This member is required.
+	CreateTime *time.Time
+
+	// The time a rotation override ends.
+	//
+	// This member is required.
+	EndTime *time.Time
+
+	// The Amazon Resource Names (ARNs) of the contacts assigned to the override of the
+	// on-call rotation.
+	//
+	// This member is required.
+	NewContactIds []string
+
+	// The Amazon Resource Name (ARN) of the override to an on-call rotation.
+	//
+	// This member is required.
+	RotationOverrideId *string
+
+	// The time a rotation override begins.
+	//
+	// This member is required.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Information about a shift that belongs to an on-call rotation.
+type RotationShift struct {
+
+	// The time a shift rotation ends.
+	//
+	// This member is required.
+	EndTime *time.Time
+
+	// The time a shift rotation begins.
+	//
+	// This member is required.
+	StartTime *time.Time
+
+	// The Amazon Resource Names (ARNs) of the contacts who are part of the shift
+	// rotation.
+	ContactIds []string
+
+	// Additional information about an on-call rotation shift.
+	ShiftDetails *ShiftDetails
+
+	// The type of shift rotation.
+	Type ShiftType
+
+	noSmithyDocumentSerde
+}
+
+// Information about overrides to an on-call rotation shift.
+type ShiftDetails struct {
+
+	// The Amazon Resources Names (ARNs) of the contacts who were replaced in a shift
+	// when an override was created. If the override is deleted, these contacts are
+	// restored to the shift.
+	//
+	// This member is required.
+	OverriddenContactIds []string
 
 	noSmithyDocumentSerde
 }
@@ -292,6 +531,22 @@ type ValidationExceptionField struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about rotations that recur weekly.
+type WeeklySetting struct {
+
+	// The day of the week when weekly recurring on-call shift rotations begins.
+	//
+	// This member is required.
+	DayOfWeek DayOfWeek
+
+	// The time of day when a weekly recurring on-call shift rotation begins.
+	//
+	// This member is required.
+	HandOffTime *HandOffTime
 
 	noSmithyDocumentSerde
 }

@@ -12,6 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Lists the phone numbers for an administrator's Amazon Chime SDK account.
 func (c *Client) ListPhoneNumberOrders(ctx context.Context, params *ListPhoneNumberOrdersInput, optFns ...func(*Options)) (*ListPhoneNumberOrdersOutput, error) {
 	if params == nil {
 		params = &ListPhoneNumberOrdersInput{}
@@ -28,16 +29,22 @@ func (c *Client) ListPhoneNumberOrders(ctx context.Context, params *ListPhoneNum
 }
 
 type ListPhoneNumberOrdersInput struct {
+
+	// The maximum number of results to return in a single call.
 	MaxResults *int32
 
+	// The token used to retrieve the next page of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
 }
 
 type ListPhoneNumberOrdersOutput struct {
+
+	// The token used to retrieve the next page of results.
 	NextToken *string
 
+	// The phone number order details.
 	PhoneNumberOrders []types.PhoneNumberOrder
 
 	// Metadata pertaining to the operation's result.
@@ -117,6 +124,7 @@ var _ ListPhoneNumberOrdersAPIClient = (*Client)(nil)
 // ListPhoneNumberOrdersPaginatorOptions is the paginator options for
 // ListPhoneNumberOrders
 type ListPhoneNumberOrdersPaginatorOptions struct {
+	// The maximum number of results to return in a single call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

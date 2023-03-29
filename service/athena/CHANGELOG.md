@@ -1,3 +1,7 @@
+# v1.24.0 (2023-03-27)
+
+* **Feature**: Enforces a minimal level of encryption for the workgroup for query and calculation results that are written to Amazon S3. When enabled, workgroup users can set encryption only to the minimum level set by the administrator or higher when they submit queries.
+
 # v1.23.2 (2023-03-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

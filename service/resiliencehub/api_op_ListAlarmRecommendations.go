@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the alarm recommendations for an AWS Resilience Hub application.
+// Lists the alarm recommendations for an Resilience Hub application.
 func (c *Client) ListAlarmRecommendations(ctx context.Context, params *ListAlarmRecommendationsInput, optFns ...func(*Options)) (*ListAlarmRecommendationsOutput, error) {
 	if params == nil {
 		params = &ListAlarmRecommendationsInput{}
@@ -52,7 +52,7 @@ type ListAlarmRecommendationsInput struct {
 
 type ListAlarmRecommendationsOutput struct {
 
-	// The alarm recommendations for an AWS Resilience Hub application, returned as an
+	// The alarm recommendations for an Resilience Hub application, returned as an
 	// object. This object includes Application Component names, descriptions,
 	// information about whether a recommendation has already been implemented or not,
 	// prerequisites, and more.

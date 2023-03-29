@@ -23,12 +23,12 @@
                 "ssmAutomation": {
                     "target": "com.amazonaws.ssmincidents#SsmAutomation",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Systems Manager automation document to start as the runbook at the beginning of\n         the incident.</p>"
+                        "smithy.api#documentation": "<p>The Systems Manager automation document to start as the runbook at the beginning of the\n      incident.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The action that starts at the beginning of an incident. The response plan defines the\n         action.</p>"
+                "smithy.api#documentation": "<p>The action that starts at the beginning of an incident. The response plan defines the\n      action.</p>"
             }
         },
         "com.amazonaws.ssmincidents#ActionsList": {
@@ -63,7 +63,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines the Amazon Web Services Region and KMS key to add to the\n         replication set. </p>"
+                "smithy.api#documentation": "<p>Defines the Amazon Web Services Region and KMS key to add to the replication\n      set. </p>"
             }
         },
         "com.amazonaws.ssmincidents#Arn": {
@@ -109,7 +109,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Systems Manager automation document process to start as the runbook at the\n         beginning of the incident.</p>"
+                "smithy.api#documentation": "<p>The Systems Manager automation document process to start as the runbook at the\n      beginning of the incident.</p>"
             }
         },
         "com.amazonaws.ssmincidents#AutomationExecutionSet": {
@@ -135,12 +135,12 @@
                 "chatbotSns": {
                     "target": "com.amazonaws.ssmincidents#ChatbotSnsConfigurationSet",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon SNS targets that Chatbot uses to notify the chat channel\n         of updates to an incident. You can also make updates to the incident through the chat\n         channel by using the Amazon SNS topics. </p>"
+                        "smithy.api#documentation": "<p>The Amazon SNS targets that Chatbot uses to notify the chat channel of\n      updates to an incident. You can also make updates to the incident through the chat channel by\n      using the Amazon SNS topics. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Chatbot chat channel used for collaboration during an\n         incident.</p>"
+                "smithy.api#documentation": "<p>The Chatbot chat channel used for collaboration during an incident.</p>"
             }
         },
         "com.amazonaws.ssmincidents#ChatbotSnsConfigurationSet": {
@@ -198,7 +198,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A conditional statement with which to compare a value, after a timestamp, before a\n         timestamp, or equal to a string or integer. If multiple conditions are specified, the\n         conditionals become an <code>AND</code>ed statement. If multiple values are specified for a\n         conditional, the values are <code>OR</code>d.</p>"
+                "smithy.api#documentation": "<p>A conditional statement with which to compare a value, after a timestamp, before a\n      timestamp, or equal to a string or integer. If multiple conditions are specified, the\n      conditionals become an <code>AND</code>ed statement. If multiple values are specified for a\n      conditional, the values are <code>OR</code>d.</p>"
             }
         },
         "com.amazonaws.ssmincidents#ConflictException": {
@@ -264,7 +264,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>A replication set replicates and encrypts your data to the provided Regions with the\n            provided KMS key. </p>",
+                "smithy.api#documentation": "<p>A replication set replicates and encrypts your data to the provided Regions with the\n      provided KMS key. </p>",
                 "smithy.api#http": {
                     "code": 201,
                     "method": "POST",
@@ -278,14 +278,14 @@
                 "regions": {
                     "target": "com.amazonaws.ssmincidents#RegionMapInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Regions that Incident Manager replicates your data to. You can have up to three Regions\n            in your replication set.</p>",
+                        "smithy.api#documentation": "<p>The Regions that Incident Manager replicates your data to. You can have up to three Regions in\n      your replication set.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "clientToken": {
                     "target": "com.amazonaws.ssmincidents#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that ensures that the operation is called only once with the specified\n            details.</p>",
+                        "smithy.api#documentation": "<p>A token that ensures that the operation is called only once with the specified\n      details.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#tags": [
                             "logs_investigations"
@@ -341,7 +341,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a response plan that automates the initial response to incidents. A response\n            plan engages contacts, starts chat channel collaboration, and initiates runbooks at the\n            beginning of an incident.</p>",
+                "smithy.api#documentation": "<p>Creates a response plan that automates the initial response to incidents. A response plan\n      engages contacts, starts chat channel collaboration, and initiates runbooks at the beginning\n      of an incident.</p>",
                 "smithy.api#http": {
                     "code": 201,
                     "method": "POST",
@@ -356,7 +356,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.ssmincidents#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token ensuring that the operation is called only once with the specified\n            details.</p>",
+                        "smithy.api#documentation": "<p>A token ensuring that the operation is called only once with the specified details.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#tags": [
                             "logs_investigations"
@@ -389,13 +389,13 @@
                 "chatChannel": {
                     "target": "com.amazonaws.ssmincidents#ChatChannel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Chatbot chat channel used for collaboration during an\n            incident.</p>"
+                        "smithy.api#documentation": "<p>The Chatbot chat channel used for collaboration during an incident.</p>"
                     }
                 },
                 "engagements": {
                     "target": "com.amazonaws.ssmincidents#EngagementSet",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the contacts and escalation plans that the response\n            plan engages during an incident.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the contacts and escalation plans that the response\n      plan engages during an incident.</p>"
                     }
                 },
                 "actions": {
@@ -459,7 +459,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a custom timeline event on the incident details page of an incident record.\n            Timeline events are automatically created by Incident Manager, marking key moment during an\n            incident. You can create custom timeline events to mark important events that are\n            automatically detected by Incident Manager.</p>",
+                "smithy.api#documentation": "<p>Creates a custom timeline event on the incident details page of an incident record.\n      Incident Manager automatically creates timeline events that mark key moments during an incident.\n      You can create custom timeline events to mark important events that Incident Manager can detect\n      automatically.</p>",
                 "smithy.api#http": {
                     "code": 201,
                     "method": "POST",
@@ -474,7 +474,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.ssmincidents#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token ensuring that the action is called only once with the specified\n            details.</p>",
+                        "smithy.api#documentation": "<p>A token that ensures that a client calls the action only once with the specified\n      details.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#tags": [
                             "logs_investigations"
@@ -484,7 +484,7 @@
                 "incidentRecordArn": {
                     "target": "com.amazonaws.ssmincidents#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the incident record to which the event will be\n            added.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the incident record that the action adds the incident\n      to.</p>",
                         "smithy.api#required": {},
                         "smithy.api#tags": [
                             "logs_required"
@@ -504,7 +504,7 @@
                 "eventType": {
                     "target": "com.amazonaws.ssmincidents#TimelineEventType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the event. You can create timeline events of type <code>Custom\n                Event</code>.</p>",
+                        "smithy.api#documentation": "<p>The type of event. You can create timeline events of type <code>Custom\n      Event</code>.</p>",
                         "smithy.api#required": {},
                         "smithy.api#tags": [
                             "logs_investigations"
@@ -521,7 +521,7 @@
                 "eventReferences": {
                     "target": "com.amazonaws.ssmincidents#EventReferenceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Adds one or more references to the <code>TimelineEvent</code>. A reference can be an\n                Amazon Web Services resource involved in the incident or in some way associated with\n            it. When you specify a reference, you enter the Amazon Resource Name (ARN) of the\n            resource. You can also specify a related item. As an example, you could specify the ARN\n            of an Amazon DynamoDB (DynamoDB) table. The table for this example is\n            the resource. You could also specify a Amazon CloudWatch metric for that table. The\n            metric is the related item.</p>"
+                        "smithy.api#documentation": "<p>Adds one or more references to the <code>TimelineEvent</code>. A reference is an Amazon Web Services resource involved or associated with the incident. To specify a reference, enter\n      its Amazon Resource Name (ARN). You can also specify a related item associated with a\n      resource. For example, to specify an Amazon DynamoDB (DynamoDB) table as a\n      resource, use the table's ARN. You can also specify an Amazon CloudWatch metric associated\n      with the DynamoDB table as a related item.</p>"
                     }
                 }
             }
@@ -610,7 +610,7 @@
                 "regionName": {
                     "target": "com.amazonaws.ssmincidents#RegionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Amazon Web Services Region you're deleting from the replication\n         set.</p>",
+                        "smithy.api#documentation": "<p>The name of the Amazon Web Services Region you're deleting from the replication set.</p>",
                         "smithy.api#required": {},
                         "smithy.api#tags": [
                             "logs_investigations"
@@ -619,7 +619,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines the information about the Amazon Web Services Region you're deleting from your\n         replication set.</p>"
+                "smithy.api#documentation": "<p>Defines the information about the Amazon Web Services Region you're deleting from your\n      replication set.</p>"
             }
         },
         "com.amazonaws.ssmincidents#DeleteReplicationSet": {
@@ -648,7 +648,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes all Regions in your replication set. Deleting the replication set deletes all\n            Incident Manager data.</p>",
+                "smithy.api#documentation": "<p>Deletes all Regions in your replication set. Deleting the replication set deletes all\n      Incident Manager data.</p>",
                 "smithy.api#http": {
                     "code": 204,
                     "method": "POST",
@@ -702,7 +702,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the resource policy that Resource Access Manager uses to share your Incident Manager\n            resource.</p>",
+                "smithy.api#documentation": "<p>Deletes the resource policy that Resource Access Manager uses to share your Incident Manager\n      resource.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -762,7 +762,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified response plan. Deleting a response plan stops all linked CloudWatch alarms and EventBridge events from creating an incident with this\n            response plan.</p>",
+                "smithy.api#documentation": "<p>Deletes the specified response plan. Deleting a response plan stops all linked CloudWatch alarms and EventBridge events from creating an incident with this response\n      plan.</p>",
                 "smithy.api#http": {
                     "code": 204,
                     "method": "POST",
@@ -828,7 +828,7 @@
                 "incidentRecordArn": {
                     "target": "com.amazonaws.ssmincidents#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the incident that includes the timeline\n            event.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the incident that includes the timeline event.</p>",
                         "smithy.api#required": {},
                         "smithy.api#tags": [
                             "logs_required"
@@ -838,7 +838,7 @@
                 "eventId": {
                     "target": "com.amazonaws.ssmincidents#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the event you are updating. You can find this by using\n                <code>ListTimelineEvents</code>.</p>",
+                        "smithy.api#documentation": "<p>The ID of the event to update. You can use <code>ListTimelineEvents</code> to find an\n      event's ID.</p>",
                         "smithy.api#required": {},
                         "smithy.api#tags": [
                             "logs_required"
@@ -857,7 +857,7 @@
                 "variable": {
                     "target": "com.amazonaws.ssmincidents#VariableType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Variable dynamic parameters. A parameter value is determined when an incident is\n         created.</p>",
+                        "smithy.api#documentation": "<p>Variable dynamic parameters. A parameter value is determined when an incident is\n      created.</p>",
                         "smithy.api#tags": [
                             "logs_investigations"
                         ]
@@ -927,7 +927,7 @@
                 "resource": {
                     "target": "com.amazonaws.ssmincidents#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Amazon Web Services resource referenced in a\n            <code>TimelineEvent</code>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Amazon Web Services resource referenced in a\n        <code>TimelineEvent</code>.</p>",
                         "smithy.api#tags": [
                             "logs_investigations"
                         ]
@@ -944,7 +944,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An item referenced in a <code>TimelineEvent</code> that is involved in or somehow\n         associated with an incident. You can specify an Amazon Resource Name (ARN) for an Amazon Web Services resource or a <code>RelatedItem</code> ID.</p>"
+                "smithy.api#documentation": "<p>An item referenced in a <code>TimelineEvent</code> that is involved in or somehow\n      associated with an incident. You can specify an Amazon Resource Name (ARN) for an Amazon Web Services resource or a <code>RelatedItem</code> ID.</p>"
             }
         },
         "com.amazonaws.ssmincidents#EventReferenceList": {
@@ -1040,7 +1040,7 @@
                 "condition": {
                     "target": "com.amazonaws.ssmincidents#Condition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The condition accepts before or after a specified time, equal to a string, or equal to\n         an integer.</p>",
+                        "smithy.api#documentation": "<p>The condition accepts before or after a specified time, equal to a string, or equal to an\n      integer.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1324,7 +1324,7 @@
                 "resourceArn": {
                     "target": "com.amazonaws.ssmincidents#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the response plan with the attached resource policy.\n        </p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the response plan with the attached resource policy.\n    </p>",
                         "smithy.api#httpQuery": "resourceArn",
                         "smithy.api#required": {},
                         "smithy.api#tags": [
@@ -1454,13 +1454,13 @@
                 "chatChannel": {
                     "target": "com.amazonaws.ssmincidents#ChatChannel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Chatbot chat channel used for collaboration during an\n            incident.</p>"
+                        "smithy.api#documentation": "<p>The Chatbot chat channel used for collaboration during an incident.</p>"
                     }
                 },
                 "engagements": {
                     "target": "com.amazonaws.ssmincidents#EngagementSet",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the contacts and escalation plans that the response\n            plan engages during an incident.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the contacts and escalation plans that the response\n      plan engages during an incident.</p>"
                     }
                 },
                 "actions": {
@@ -1472,7 +1472,7 @@
                 "integrations": {
                     "target": "com.amazonaws.ssmincidents#Integrations",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about third-party services integrated into the Incident Manager response\n            plan.</p>"
+                        "smithy.api#documentation": "<p>Information about third-party services integrated into the Incident Manager response\n      plan.</p>"
                     }
                 }
             }
@@ -1518,7 +1518,7 @@
                 "incidentRecordArn": {
                     "target": "com.amazonaws.ssmincidents#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the incident that includes the timeline\n            event.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the incident that includes the timeline event.</p>",
                         "smithy.api#httpQuery": "incidentRecordArn",
                         "smithy.api#required": {},
                         "smithy.api#tags": [
@@ -1529,7 +1529,7 @@
                 "eventId": {
                     "target": "com.amazonaws.ssmincidents#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the event. You can get an event's ID when you create it, or by using\n                <code>ListTimelineEvents</code>.</p>",
+                        "smithy.api#documentation": "<p>The ID of the event. You can get an event's ID when you create it, or by using\n        <code>ListTimelineEvents</code>.</p>",
                         "smithy.api#httpQuery": "eventId",
                         "smithy.api#required": {},
                         "smithy.api#tags": [
@@ -1580,7 +1580,7 @@
                 "summary": {
                     "target": "com.amazonaws.ssmincidents#IncidentSummary",
                     "traits": {
-                        "smithy.api#documentation": "<p>The summary of the incident. The summary is a brief synopsis of what occurred, what's\n         currently happening, and context of the incident.</p>"
+                        "smithy.api#documentation": "<p>The summary of the incident. The summary is a brief synopsis of what occurred, what's\n      currently happening, and context of the incident.</p>"
                     }
                 },
                 "status": {
@@ -1640,7 +1640,7 @@
                 "dedupeString": {
                     "target": "com.amazonaws.ssmincidents#DedupeString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The string Incident Manager uses to prevent duplicate incidents from being created by the\n         same incident in the same account.</p>",
+                        "smithy.api#documentation": "<p>The string Incident Manager uses to prevent duplicate incidents from being created by the same\n      incident in the same account.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1653,7 +1653,7 @@
                 "notificationTargets": {
                     "target": "com.amazonaws.ssmincidents#NotificationTargetSet",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon SNS targets that are notified when updates are made to an\n         incident.</p>"
+                        "smithy.api#documentation": "<p>The Amazon SNS targets that are notified when updates are made to an\n      incident.</p>"
                     }
                 }
             },
@@ -1677,7 +1677,7 @@
                 "invokedBy": {
                     "target": "com.amazonaws.ssmincidents#ServicePrincipal",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service principal that assumed the role specified in <code>createdBy</code>. If no\n         service principal assumed the role this will be left blank.</p>",
+                        "smithy.api#documentation": "<p>The service principal that assumed the role specified in <code>createdBy</code>. If no\n      service principal assumed the role this will be left blank.</p>",
                         "smithy.api#tags": [
                             "logs_investigations"
                         ]
@@ -1695,7 +1695,7 @@
                 "source": {
                     "target": "com.amazonaws.ssmincidents#IncidentSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service that started the incident. This can be manually created from Incident Manager,\n         automatically created using an Amazon CloudWatch alarm, or Amazon EventBridge\n         event.</p>",
+                        "smithy.api#documentation": "<p>The service that started the incident. This can be manually created from Incident Manager,\n      automatically created using an Amazon CloudWatch alarm, or Amazon EventBridge\n      event.</p>",
                         "smithy.api#required": {},
                         "smithy.api#tags": [
                             "logs_investigations"
@@ -1735,7 +1735,7 @@
                 "title": {
                     "target": "com.amazonaws.ssmincidents#IncidentTitle",
                     "traits": {
-                        "smithy.api#documentation": "<p>The title of the incident. This value is either provided by the response plan or\n         overwritten on creation.</p>",
+                        "smithy.api#documentation": "<p>The title of the incident. This value is either provided by the response plan or\n      overwritten on creation.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1801,7 +1801,7 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "max": 4000
+                    "max": 8000
                 }
             }
         },
@@ -1825,13 +1825,13 @@
                 "summary": {
                     "target": "com.amazonaws.ssmincidents#IncidentSummary",
                     "traits": {
-                        "smithy.api#documentation": "<p>The summary of the incident. The summary is a brief synopsis of what occurred, what's\n         currently happening, and context.</p>"
+                        "smithy.api#documentation": "<p>The summary of the incident. The summary is a brief synopsis of what occurred, what's\n      currently happening, and context.</p>"
                     }
                 },
                 "dedupeString": {
                     "target": "com.amazonaws.ssmincidents#DedupeString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Used to stop Incident Manager from creating multiple incident records for the same incident.\n      </p>",
+                        "smithy.api#documentation": "<p>Used to stop Incident Manager from creating multiple incident records for the same incident.\n    </p>",
                         "smithy.api#tags": [
                             "logs_investigations"
                         ]
@@ -1840,18 +1840,18 @@
                 "notificationTargets": {
                     "target": "com.amazonaws.ssmincidents#NotificationTargetSet",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon SNS targets that are notified when updates are made to an\n         incident.</p>"
+                        "smithy.api#documentation": "<p>The Amazon SNS targets that are notified when updates are made to an\n      incident.</p>"
                     }
                 },
                 "incidentTags": {
                     "target": "com.amazonaws.ssmincidents#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags to assign to the template. When the <code>StartIncident</code> API action is\n         called, Incident Manager assigns the tags specified in the template to the incident.</p>"
+                        "smithy.api#documentation": "<p>Tags to assign to the template. When the <code>StartIncident</code> API action is called,\n      Incident Manager assigns the tags specified in the template to the incident.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Basic details used in creating a response plan. The response plan is then used to create\n         an incident record.</p>"
+                "smithy.api#documentation": "<p>Basic details used in creating a response plan. The response plan is then used to create\n      an incident record.</p>"
             }
         },
         "com.amazonaws.ssmincidents#IncidentTitle": {
@@ -1884,7 +1884,7 @@
                 "pagerDutyConfiguration": {
                     "target": "com.amazonaws.ssmincidents#PagerDutyConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the PagerDuty service where the response plan creates an\n            incident.</p>"
+                        "smithy.api#documentation": "<p>Information about the PagerDuty service where the response plan creates an\n      incident.</p>"
                     }
                 }
             },
@@ -1993,7 +1993,7 @@
                 "arn": {
                     "target": "com.amazonaws.ssmincidents#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the related item, if the related item is an Amazon\n         resource.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the related item, if the related item is an Amazon\n      resource.</p>",
                         "smithy.api#tags": [
                             "logs_investigations"
                         ]
@@ -2045,7 +2045,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all incident records in your account. Use this command to retrieve the Amazon\n            Resource Name (ARN) of the incident record you want to update. </p>",
+                "smithy.api#documentation": "<p>Lists all incident records in your account. Use this command to retrieve the Amazon\n      Resource Name (ARN) of the incident record you want to update. </p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -2066,7 +2066,7 @@
                 "filters": {
                     "target": "com.amazonaws.ssmincidents#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters the list of incident records through which you are searching. You can filter\n            on the following keys:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>creationTime</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>impact</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>status</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>createdBy</code>\n               </p>\n            </li>\n         </ul>\n        <p>Note the following when deciding how to use Filters:</p>\n        <ul>\n            <li>\n                <p>If you don't specify a Filter, the response includes all incident\n                    records.</p>\n            </li>\n            <li>\n                <p>If you specify more than one filter in a single request, the response returns\n                    incident records that match all filters.</p>\n            </li>\n            <li>\n                <p>If you specify a filter with more than one value, the response returns\n                    incident records that match any of the values provided.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Filters the list of incident records you want to search through. You can filter on the\n      following keys:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>creationTime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>impact</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>status</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>createdBy</code>\n               </p>\n            </li>\n         </ul>\n         <p>Note the following when when you use Filters:</p>\n         <ul>\n            <li>\n               <p>If you don't specify a Filter, the response includes all incident records.</p>\n            </li>\n            <li>\n               <p>If you specify more than one filter in a single request, the response returns incident\n          records that match all filters.</p>\n            </li>\n            <li>\n               <p>If you specify a filter with more than one value, the response returns incident\n          records that match any of the values provided.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "maxResults": {
@@ -2151,7 +2151,7 @@
                 "incidentRecordArn": {
                     "target": "com.amazonaws.ssmincidents#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the incident record containing the listed related\n            items.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the incident record containing the listed related\n      items.</p>",
                         "smithy.api#required": {},
                         "smithy.api#tags": [
                             "logs_required"
@@ -2461,7 +2461,7 @@
                 "incidentRecordArn": {
                     "target": "com.amazonaws.ssmincidents#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the incident that includes the timeline\n            event.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the incident that includes the timeline event.</p>",
                         "smithy.api#required": {},
                         "smithy.api#tags": [
                             "logs_required"
@@ -2471,13 +2471,13 @@
                 "filters": {
                     "target": "com.amazonaws.ssmincidents#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters the timeline events based on the provided conditional values. You can filter\n            timeline events using the following keys:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>eventTime</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>eventType</code>\n               </p>\n            </li>\n         </ul>\n        <p>Note the following when deciding how to use Filters:</p>\n        <ul>\n            <li>\n                <p>If you don't specify a Filter, the response includes all timeline\n                    events.</p>\n            </li>\n            <li>\n                <p>If you specify more than one filter in a single request, the response returns\n                    timeline events that match all filters.</p>\n            </li>\n            <li>\n                <p>If you specify a filter with more than one value, the response returns\n                    timeline events that match any of the values provided.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Filters the timeline events based on the provided conditional values. You can filter\n      timeline events with the following keys:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>eventTime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>eventType</code>\n               </p>\n            </li>\n         </ul>\n         <p>Note the following when deciding how to use Filters:</p>\n         <ul>\n            <li>\n               <p>If you don't specify a Filter, the response includes all timeline events.</p>\n            </li>\n            <li>\n               <p>If you specify more than one filter in a single request, the response returns timeline\n          events that match all filters.</p>\n            </li>\n            <li>\n               <p>If you specify a filter with more than one value, the response returns timeline events\n          that match any of the values provided.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "sortBy": {
                     "target": "com.amazonaws.ssmincidents#TimelineEventSort",
                     "traits": {
-                        "smithy.api#documentation": "<p>Sort by the specified key value pair.</p>",
+                        "smithy.api#documentation": "<p>Sort timeline events by the specified key value pair.</p>",
                         "smithy.api#tags": [
                             "logs_investigations"
                         ]
@@ -2486,7 +2486,7 @@
                 "sortOrder": {
                     "target": "com.amazonaws.ssmincidents#SortOrder",
                     "traits": {
-                        "smithy.api#documentation": "<p>Sorts the order of timeline events by the value specified in the <code>sortBy</code>\n            field.</p>",
+                        "smithy.api#documentation": "<p>Sorts the order of timeline events by the value specified in the <code>sortBy</code>\n      field.</p>",
                         "smithy.api#tags": [
                             "logs_investigations"
                         ]
@@ -2601,7 +2601,7 @@
                 "secretId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services Secrets Manager secret that stores your PagerDuty key, either a General Access REST API Key or\n            User Token REST API Key, and other user credentials.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services Secrets Manager secret that stores your PagerDuty key, either a General Access REST API Key or\n      User Token REST API Key, and other user credentials.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 512
@@ -2627,7 +2627,7 @@
                 "serviceId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the PagerDuty service that the response plan associates with an incident\n            when it launches.</p>",
+                        "smithy.api#documentation": "<p>The ID of the PagerDuty service that the response plan associates with an incident when it\n      launches.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 200
@@ -2637,7 +2637,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about the PagerDuty service where the response plan creates an\n            incident.</p>"
+                "smithy.api#documentation": "<p>Details about the PagerDuty service where the response plan creates an incident.</p>"
             }
         },
         "com.amazonaws.ssmincidents#PagerDutyIncidentDetail": {
@@ -2646,7 +2646,7 @@
                 "id": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the incident associated with the PagerDuty service for the response\n            plan.</p>",
+                        "smithy.api#documentation": "<p>The ID of the incident associated with the PagerDuty service for the response plan.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 200
@@ -2657,13 +2657,13 @@
                 "autoResolve": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether to resolve the PagerDuty incident when you resolve the associated\n            Incident Manager incident.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether to resolve the PagerDuty incident when you resolve the associated\n      Incident Manager incident.</p>"
                     }
                 },
                 "secretId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services Secrets Manager secret that stores your PagerDuty key, either a General Access REST API Key or\n            User Token REST API Key, and other user credentials.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services Secrets Manager secret that stores your PagerDuty key, either a General Access REST API Key or\n      User Token REST API Key, and other user credentials.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 512
@@ -2672,7 +2672,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about the PagerDuty incident associated with an incident created by an\n            Incident Manager response plan.</p>"
+                "smithy.api#documentation": "<p>Details about the PagerDuty incident associated with an incident created by an Incident Manager\n      response plan.</p>"
             }
         },
         "com.amazonaws.ssmincidents#Policy": {
@@ -2717,7 +2717,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds a resource policy to the specified response plan. The resource policy is used to\n            share the response plan using Resource Access Manager (RAM). For more\n            information about cross-account sharing, see <a href=\"https://docs.aws.amazon.com/incident-manager/latest/userguide/incident-manager-cross-account-cross-region.html\">Cross-Region and cross-account incident\n            management</a>.</p>",
+                "smithy.api#documentation": "<p>Adds a resource policy to the specified response plan. The resource policy is used to\n      share the response plan using Resource Access Manager (RAM). For more\n      information about cross-account sharing, see <a href=\"https://docs.aws.amazon.com/incident-manager/latest/userguide/incident-manager-cross-account-cross-region.html\">Cross-Region and cross-account incident management</a>.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -2731,7 +2731,7 @@
                 "resourceArn": {
                     "target": "com.amazonaws.ssmincidents#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the response plan to add the resource policy\n            to.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the response plan to add the resource policy to.</p>",
                         "smithy.api#required": {},
                         "smithy.api#tags": [
                             "logs_required"
@@ -2766,7 +2766,7 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "max": 4000
+                    "max": 10000
                 }
             }
         },
@@ -2844,7 +2844,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The mapping between a Amazon Web Services Region and the key that's used to encrypt the\n         data.</p>"
+                "smithy.api#documentation": "<p>The mapping between a Amazon Web Services Region and the key that's used to encrypt the\n      data.</p>"
             }
         },
         "com.amazonaws.ssmincidents#RegionName": {
@@ -2904,7 +2904,7 @@
                 "generatedId": {
                     "target": "com.amazonaws.ssmincidents#GeneratedId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique ID for a <code>RelatedItem</code>.</p>\n         <important>\n            <p>Don't specify this parameter when you add a <code>RelatedItem</code> by using the\n               <a>UpdateRelatedItems</a> API action.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>A unique ID for a <code>RelatedItem</code>.</p>\n         <important>\n            <p>Don't specify this parameter when you add a <code>RelatedItem</code> by using the <a>UpdateRelatedItems</a> API action.</p>\n         </important>"
                     }
                 }
             },
@@ -2962,14 +2962,14 @@
                 "status": {
                     "target": "com.amazonaws.ssmincidents#ReplicationSetStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the replication set. If the replication set is still pending, you can't\n         use Incident Manager functionality.</p>",
+                        "smithy.api#documentation": "<p>The status of the replication set. If the replication set is still pending, you can't use\n      Incident Manager functionality.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "deletionProtected": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Determines if the replication set deletion protection is enabled or not. If deletion\n         protection is enabled, you can't delete the last Amazon Web Services Region in the\n         replication set. </p>",
+                        "smithy.api#documentation": "<p>Determines if the replication set deletion protection is enabled or not. If deletion\n      protection is enabled, you can't delete the last Amazon Web Services Region in the replication\n      set. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3003,7 +3003,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The set of Amazon Web Services Region that your Incident Manager data will be replicated to\n         and the KMS key used to encrypt the data. </p>"
+                "smithy.api#documentation": "<p>The set of Amazon Web Services Region that your Incident Manager data will be replicated to and\n      the KMS key used to encrypt the data. </p>"
             }
         },
         "com.amazonaws.ssmincidents#ReplicationSetArnList": {
@@ -3098,7 +3098,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The resource policy that allows Incident Manager to perform actions on resources on your\n         behalf.</p>"
+                "smithy.api#documentation": "<p>The resource policy that allows Incident Manager to perform actions on resources on your\n      behalf.</p>"
             }
         },
         "com.amazonaws.ssmincidents#ResourcePolicyList": {
@@ -3681,9 +3681,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -3694,9 +3694,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -3707,9 +3707,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-south-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-south-1"
                             }
                         },
                         {
@@ -3720,9 +3720,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -3733,9 +3733,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -3746,9 +3746,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ca-central-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -3759,9 +3759,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-central-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -3772,9 +3772,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-north-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-north-1"
                             }
                         },
                         {
@@ -3785,9 +3785,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -3798,9 +3798,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -3811,9 +3811,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-3",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-west-3"
                             }
                         },
                         {
@@ -3824,9 +3824,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "sa-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "sa-east-1"
                             }
                         },
                         {
@@ -3837,9 +3837,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -3850,9 +3850,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -3863,9 +3863,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-west-1"
                             }
                         },
                         {
@@ -3876,9 +3876,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -3889,9 +3889,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -3902,9 +3902,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -3915,9 +3915,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -3928,9 +3928,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -3941,9 +3941,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -3954,9 +3954,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -3967,9 +3967,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -3980,9 +3980,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -3993,9 +3993,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -4006,9 +4006,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -4019,9 +4019,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -4032,9 +4043,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -4045,9 +4067,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -4058,9 +4091,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -4071,9 +4115,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -4084,9 +4128,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4098,8 +4142,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4109,9 +4153,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4121,10 +4165,16 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -4233,7 +4283,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.ssmincidents#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role that the automation document will assume when\n         running commands.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role that the automation document will assume when\n      running commands.</p>",
                         "smithy.api#required": {},
                         "smithy.api#tags": [
                             "logs_investigations"
@@ -4266,7 +4316,7 @@
                 "targetAccount": {
                     "target": "com.amazonaws.ssmincidents#SsmTargetAccount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account that the automation document will be run in. This can be in either the\n         management account or an application account.</p>",
+                        "smithy.api#documentation": "<p>The account that the automation document will be run in. This can be in either the\n      management account or an application account.</p>",
                         "smithy.api#tags": [
                             "logs_investigations"
                         ]
@@ -4281,12 +4331,12 @@
                 "dynamicParameters": {
                     "target": "com.amazonaws.ssmincidents#DynamicSsmParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key-value pair to resolve dynamic parameter values when processing a Systems Manager\n         Automation runbook.</p>"
+                        "smithy.api#documentation": "<p>The key-value pair to resolve dynamic parameter values when processing a Systems Manager Automation\n      runbook.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about the Systems Manager automation document that will be used as a runbook\n         during an incident.</p>"
+                "smithy.api#documentation": "<p>Details about the Systems Manager automation document that will be used as a runbook\n      during an incident.</p>"
             }
         },
         "com.amazonaws.ssmincidents#SsmContactsArn": {
@@ -4381,7 +4431,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Used to start an incident from CloudWatch alarms, EventBridge events, or\n            manually. </p>",
+                "smithy.api#documentation": "<p>Used to start an incident from CloudWatch alarms, EventBridge events, or\n      manually. </p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -4396,7 +4446,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.ssmincidents#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token ensuring that the operation is called only once with the specified\n            details.</p>",
+                        "smithy.api#documentation": "<p>A token ensuring that the operation is called only once with the specified details.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#tags": [
                             "logs_investigations"
@@ -4406,7 +4456,7 @@
                 "responsePlanArn": {
                     "target": "com.amazonaws.ssmincidents#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the response plan that pre-defines summary, chat\n            channels, Amazon SNS topics, runbooks, title, and impact of the incident.\n        </p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the response plan that pre-defines summary, chat\n      channels, Amazon SNS topics, runbooks, title, and impact of the incident. </p>",
                         "smithy.api#required": {},
                         "smithy.api#tags": [
                             "logs_investigations"
@@ -4416,13 +4466,13 @@
                 "title": {
                     "target": "com.amazonaws.ssmincidents#IncidentTitle",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provide a title for the incident. Providing a title overwrites the title provided by\n            the response plan. </p>"
+                        "smithy.api#documentation": "<p>Provide a title for the incident. Providing a title overwrites the title provided by the\n      response plan. </p>"
                     }
                 },
                 "impact": {
                     "target": "com.amazonaws.ssmincidents#Impact",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the impact to the customers. Providing an impact overwrites the impact\n            provided by a response plan.</p>\n        <p class=\"title\">\n            <b>Possible impacts:</b>\n         </p>\n         <ul>\n            <li>\n                <p>\n                  <code>1</code> - Critical impact, this typically relates to full application\n                    failure that impacts many to all customers. </p>\n            </li>\n            <li>\n                <p>\n                  <code>2</code> - High impact, partial application failure with impact to many\n                    customers.</p>\n            </li>\n            <li>\n                <p>\n                  <code>3</code> - Medium impact, the application is providing reduced service\n                    to customers.</p>\n            </li>\n            <li>\n                <p>\n                  <code>4</code> - Low impact, customer might aren't impacted by the problem\n                    yet.</p>\n            </li>\n            <li>\n                <p>\n                  <code>5</code> - No impact, customers aren't currently impacted but urgent\n                    action is needed to avoid impact.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Defines the impact to the customers. Providing an impact overwrites the impact provided by\n      a response plan.</p>\n         <p class=\"title\">\n            <b>Possible impacts:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>1</code> - Critical impact, this typically relates to full application failure\n          that impacts many to all customers. </p>\n            </li>\n            <li>\n               <p>\n                  <code>2</code> - High impact, partial application failure with impact to many\n          customers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>3</code> - Medium impact, the application is providing reduced service to\n          customers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>4</code> - Low impact, customer might aren't impacted by the problem yet.</p>\n            </li>\n            <li>\n               <p>\n                  <code>5</code> - No impact, customers aren't currently impacted but urgent action is\n          needed to avoid impact.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "triggerDetails": {
@@ -4434,7 +4484,7 @@
                 "relatedItems": {
                     "target": "com.amazonaws.ssmincidents#RelatedItemList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Add related items to the incident for other responders to use. Related items are AWS\n            resources, external links, or files uploaded to an Amazon S3 bucket. </p>"
+                        "smithy.api#documentation": "<p>Add related items to the incident for other responders to use. Related items are Amazon Web Services\n      resources, external links, or files uploaded to an Amazon S3 bucket. </p>"
                     }
                 }
             }
@@ -4682,7 +4732,7 @@
                 "eventType": {
                     "target": "com.amazonaws.ssmincidents#TimelineEventType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of event that occurred. Currently Incident Manager supports only the <code>Custom\n            Event</code> type.</p>",
+                        "smithy.api#documentation": "<p>The type of event that occurred. Currently Incident Manager supports only the <code>Custom\n        Event</code> type.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4729,7 +4779,7 @@
                 "source": {
                     "target": "com.amazonaws.ssmincidents#IncidentSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>Identifies the service that sourced the event. All events sourced from within Amazon Web Services begin with \"<code>aws.</code>\" Customer-generated events can have any value\n         here, as long as it doesn't begin with \"<code>aws.</code>\" We recommend the use of Java\n         package-name style reverse domain-name strings. </p>",
+                        "smithy.api#documentation": "<p>Identifies the service that sourced the event. All events sourced from within Amazon Web Services begin with \"<code>aws.</code>\" Customer-generated events can have any value here,\n      as long as it doesn't begin with \"<code>aws.</code>\" We recommend the use of Java package-name\n      style reverse domain-name strings. </p>",
                         "smithy.api#required": {},
                         "smithy.api#tags": [
                             "logs_investigations"
@@ -4872,7 +4922,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Update deletion protection to either allow or deny deletion of the final Region in a\n            replication set.</p>",
+                "smithy.api#documentation": "<p>Update deletion protection to either allow or deny deletion of the final Region in a\n      replication set.</p>",
                 "smithy.api#http": {
                     "code": 204,
                     "method": "POST",
@@ -4906,7 +4956,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.ssmincidents#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that ensures that the operation is called only once with the specified\n            details.</p>",
+                        "smithy.api#documentation": "<p>A token that ensures that the operation is called only once with the specified\n      details.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#tags": [
                             "logs_investigations"
@@ -4948,7 +4998,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Update the details of an incident record. You can use this operation to update an\n            incident record from the defined chat channel. For more information about using actions\n            in chat channels, see <a href=\"https://docs.aws.amazon.com/incident-manager/latest/userguide/chat.html#chat-interact\">Interacting through chat</a>.</p>",
+                "smithy.api#documentation": "<p>Update the details of an incident record. You can use this operation to update an incident\n      record from the defined chat channel. For more information about using actions in chat\n      channels, see <a href=\"https://docs.aws.amazon.com/incident-manager/latest/userguide/chat.html#chat-interact\">Interacting through chat</a>.</p>",
                 "smithy.api#http": {
                     "code": 204,
                     "method": "POST",
@@ -4963,7 +5013,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.ssmincidents#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that ensures that the operation is called only once with the specified\n            details.</p>",
+                        "smithy.api#documentation": "<p>A token that ensures that a client calls the operation only once with the specified\n      details.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#tags": [
                             "logs_investigations"
@@ -4995,13 +5045,13 @@
                 "impact": {
                     "target": "com.amazonaws.ssmincidents#Impact",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the impact of the incident to customers and applications. Providing an impact\n            overwrites the impact provided by the response plan.</p>\n        <p class=\"title\">\n            <b>Possible impacts:</b>\n         </p>\n         <ul>\n            <li>\n                <p>\n                  <code>1</code> - Critical impact, full application failure that impacts many\n                    to all customers. </p>\n            </li>\n            <li>\n                <p>\n                  <code>2</code> - High impact, partial application failure with impact to many\n                    customers.</p>\n            </li>\n            <li>\n                <p>\n                  <code>3</code> - Medium impact, the application is providing reduced service\n                    to customers.</p>\n            </li>\n            <li>\n                <p>\n                  <code>4</code> - Low impact, customer aren't impacted by the problem\n                    yet.</p>\n            </li>\n            <li>\n                <p>\n                  <code>5</code> - No impact, customers aren't currently impacted but urgent\n                    action is needed to avoid impact.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Defines the impact of the incident to customers and applications. If you provide an impact\n      for an incident, it overwrites the impact provided by the response plan.</p>\n         <p class=\"title\">\n            <b>Possible impacts:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>1</code> - Critical impact, full application failure that impacts many to all\n          customers. </p>\n            </li>\n            <li>\n               <p>\n                  <code>2</code> - High impact, partial application failure with impact to many\n          customers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>3</code> - Medium impact, the application is providing reduced service to\n          customers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>4</code> - Low impact, customer aren't impacted by the problem yet.</p>\n            </li>\n            <li>\n               <p>\n                  <code>5</code> - No impact, customers aren't currently impacted but urgent action is\n          needed to avoid impact.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.ssmincidents#IncidentRecordStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the incident. An incident can be <code>Open</code> or\n                <code>Resolved</code>.</p>",
+                        "smithy.api#documentation": "<p>The status of the incident. Possible statuses are <code>Open</code> or\n        <code>Resolved</code>.</p>",
                         "smithy.api#tags": [
                             "logs_investigations"
                         ]
@@ -5016,7 +5066,7 @@
                 "notificationTargets": {
                     "target": "com.amazonaws.ssmincidents#NotificationTargetSet",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon SNS targets that are notified when updates are made to an\n            incident.</p>\n        <p>Using multiple SNS topics creates redundancy in the event that a Region is down during\n            the incident.</p>"
+                        "smithy.api#documentation": "<p>The Amazon SNS targets that Incident Manager notifies when a client updates an\n      incident.</p>\n         <p>Using multiple SNS topics creates redundancy in the event that a Region is down during the\n      incident.</p>"
                     }
                 }
             }
@@ -5069,7 +5119,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.ssmincidents#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token ensuring that the operation is called only once with the specified\n            details.</p>",
+                        "smithy.api#documentation": "<p>A token that ensures that a client calls the operation only once with the specified\n      details.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#tags": [
                             "logs_investigations"
@@ -5079,7 +5129,7 @@
                 "incidentRecordArn": {
                     "target": "com.amazonaws.ssmincidents#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the incident record containing the related items you\n            are updating.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the incident record that contains the related items that\n      you update.</p>",
                         "smithy.api#required": {},
                         "smithy.api#tags": [
                             "logs_required"
@@ -5089,7 +5139,7 @@
                 "relatedItemsUpdate": {
                     "target": "com.amazonaws.ssmincidents#RelatedItemsUpdate",
                     "traits": {
-                        "smithy.api#documentation": "<p>Details about the item you are adding or deleting.</p>",
+                        "smithy.api#documentation": "<p>Details about the item that you are add to, or delete from, an incident.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5142,13 +5192,13 @@
                 "addRegionAction": {
                     "target": "com.amazonaws.ssmincidents#AddRegionAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>Details about the Amazon Web Services Region that you're adding to the replication\n         set.</p>"
+                        "smithy.api#documentation": "<p>Details about the Amazon Web Services Region that you're adding to the replication\n      set.</p>"
                     }
                 },
                 "deleteRegionAction": {
                     "target": "com.amazonaws.ssmincidents#DeleteRegionAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>Details about the Amazon Web Services Region that you're deleting to the replication\n         set.</p>"
+                        "smithy.api#documentation": "<p>Details about the Amazon Web Services Region that you're deleting to the replication\n      set.</p>"
                     }
                 }
             },
@@ -5183,7 +5233,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.ssmincidents#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that ensures that the operation is called only once with the specified\n            details.</p>",
+                        "smithy.api#documentation": "<p>A token that ensures that the operation is called only once with the specified\n      details.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#tags": [
                             "logs_investigations"
@@ -5240,7 +5290,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.ssmincidents#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token ensuring that the operation is called only once with the specified\n            details.</p>",
+                        "smithy.api#documentation": "<p>A token ensuring that the operation is called only once with the specified details.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#tags": [
                             "logs_investigations"
@@ -5260,7 +5310,7 @@
                 "displayName": {
                     "target": "com.amazonaws.ssmincidents#ResponsePlanDisplayName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The long format name of the response plan. The display name can't contain\n            spaces.</p>"
+                        "smithy.api#documentation": "<p>The long format name of the response plan. The display name can't contain spaces.</p>"
                     }
                 },
                 "incidentTemplateTitle": {
@@ -5272,19 +5322,19 @@
                 "incidentTemplateImpact": {
                     "target": "com.amazonaws.ssmincidents#Impact",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the impact to the customers. Providing an impact overwrites the impact\n            provided by a response plan.</p>\n        <p class=\"title\">\n            <b>Possible impacts:</b>\n         </p>\n         <ul>\n            <li>\n                <p>\n                  <code>5</code> - Severe impact</p>\n            </li>\n            <li>\n                <p>\n                  <code>4</code> - High impact</p>\n            </li>\n            <li>\n                <p>\n                  <code>3</code> - Medium impact</p>\n            </li>\n            <li>\n                <p>\n                  <code>2</code> - Low impact</p>\n            </li>\n            <li>\n                <p>\n                  <code>1</code> - No impact</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Defines the impact to the customers. Providing an impact overwrites the impact provided by\n      a response plan.</p>\n         <p class=\"title\">\n            <b>Possible impacts:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>5</code> - Severe impact</p>\n            </li>\n            <li>\n               <p>\n                  <code>4</code> - High impact</p>\n            </li>\n            <li>\n               <p>\n                  <code>3</code> - Medium impact</p>\n            </li>\n            <li>\n               <p>\n                  <code>2</code> - Low impact</p>\n            </li>\n            <li>\n               <p>\n                  <code>1</code> - No impact</p>\n            </li>\n         </ul>"
                     }
                 },
                 "incidentTemplateSummary": {
                     "target": "com.amazonaws.ssmincidents#IncidentSummary",
                     "traits": {
-                        "smithy.api#documentation": "<p>A brief summary of the incident. This typically contains what has happened, what's\n            currently happening, and next steps.</p>"
+                        "smithy.api#documentation": "<p>A brief summary of the incident. This typically contains what has happened, what's\n      currently happening, and next steps.</p>"
                     }
                 },
                 "incidentTemplateDedupeString": {
                     "target": "com.amazonaws.ssmincidents#DedupeString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The string Incident Manager uses to prevent duplicate incidents from being created by the\n            same incident in the same account.</p>",
+                        "smithy.api#documentation": "<p>The string Incident Manager uses to prevent duplicate incidents from being created by the same\n      incident in the same account.</p>",
                         "smithy.api#tags": [
                             "logs_investigations"
                         ]
@@ -5293,19 +5343,19 @@
                 "incidentTemplateNotificationTargets": {
                     "target": "com.amazonaws.ssmincidents#NotificationTargetSet",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon SNS targets that are notified when updates are made to an\n            incident.</p>"
+                        "smithy.api#documentation": "<p>The Amazon SNS targets that are notified when updates are made to an\n      incident.</p>"
                     }
                 },
                 "chatChannel": {
                     "target": "com.amazonaws.ssmincidents#ChatChannel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Chatbot chat channel used for collaboration during an\n            incident.</p>\n        <p>Use the empty structure to remove the chat channel from the response plan.</p>"
+                        "smithy.api#documentation": "<p>The Chatbot chat channel used for collaboration during an incident.</p>\n         <p>Use the empty structure to remove the chat channel from the response plan.</p>"
                     }
                 },
                 "engagements": {
                     "target": "com.amazonaws.ssmincidents#EngagementSet",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the contacts and escalation plans that the response\n            plan engages during an incident.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the contacts and escalation plans that the response\n      plan engages during an incident.</p>"
                     }
                 },
                 "actions": {
@@ -5317,7 +5367,7 @@
                 "incidentTemplateTags": {
                     "target": "com.amazonaws.ssmincidents#TagMapUpdate",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags to assign to the template. When the <code>StartIncident</code> API action is\n            called, Incident Manager assigns the tags specified in the template to the\n            incident. To call this action, you must also have permission to call the\n                <code>TagResource</code> API action for the incident record resource.</p>"
+                        "smithy.api#documentation": "<p>Tags to assign to the template. When the <code>StartIncident</code> API action is called,\n      Incident Manager assigns the tags specified in the template to the incident. To call this action,\n      you must also have permission to call the <code>TagResource</code> API action for the incident\n      record resource.</p>"
                     }
                 },
                 "integrations": {
@@ -5361,7 +5411,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a timeline event. You can update events of type <code>Custom\n            Event</code>.</p>",
+                "smithy.api#documentation": "<p>Updates a timeline event. You can update events of type <code>Custom Event</code>.</p>",
                 "smithy.api#http": {
                     "code": 204,
                     "method": "POST",
@@ -5376,7 +5426,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.ssmincidents#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token ensuring that the operation is called only once with the specified\n            details.</p>",
+                        "smithy.api#documentation": "<p>A token that ensures that a client calls the operation only once with the specified\n      details.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#tags": [
                             "logs_investigations"
@@ -5386,7 +5436,7 @@
                 "incidentRecordArn": {
                     "target": "com.amazonaws.ssmincidents#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the incident that includes the timeline\n            event.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the incident that includes the timeline event.</p>",
                         "smithy.api#required": {},
                         "smithy.api#tags": [
                             "logs_required"
@@ -5396,7 +5446,7 @@
                 "eventId": {
                     "target": "com.amazonaws.ssmincidents#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the event you are updating. You can find this by using\n                <code>ListTimelineEvents</code>.</p>",
+                        "smithy.api#documentation": "<p>The ID of the event to update. You can use <code>ListTimelineEvents</code> to find an\n      event's ID.</p>",
                         "smithy.api#required": {},
                         "smithy.api#tags": [
                             "logs_required"
@@ -5415,7 +5465,7 @@
                 "eventType": {
                     "target": "com.amazonaws.ssmincidents#TimelineEventType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the event. You can update events of type <code>Custom Event</code>.</p>",
+                        "smithy.api#documentation": "<p>The type of event. You can update events of type <code>Custom Event</code>.</p>",
                         "smithy.api#tags": [
                             "logs_investigations"
                         ]
@@ -5430,7 +5480,7 @@
                 "eventReferences": {
                     "target": "com.amazonaws.ssmincidents#EventReferenceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Updates all existing references in a <code>TimelineEvent</code>. A reference can be an\n                Amazon Web Services resource involved in the incident or in some way associated with\n            it. When you specify a reference, you enter the Amazon Resource Name (ARN) of the\n            resource. You can also specify a related item. As an example, you could specify the ARN\n            of an Amazon DynamoDB (DynamoDB) table. The table for this example is\n            the resource. You could also specify a Amazon CloudWatch metric for that table. The\n            metric is the related item.</p>\n        <important>\n            <p>This update action overrides all existing references. If you want to keep existing\n                references, you must specify them in the call. If you don't, this action removes\n                them and enters only new references.</p>\n        </important>"
+                        "smithy.api#documentation": "<p>Updates all existing references in a <code>TimelineEvent</code>. A reference is an Amazon Web Services resource involved or associated with the incident. To specify a reference, enter\n      its Amazon Resource Name (ARN). You can also specify a related item associated with that\n      resource. For example, to specify an Amazon DynamoDB (DynamoDB) table as a\n      resource, use its ARN. You can also specify an Amazon CloudWatch metric associated with\n      the DynamoDB table as a related item.</p>\n         <important>\n            <p>This update action overrides all existing references. If you want to keep existing\n        references, you must specify them in the call. If you don't, this action removes any\n        existing references and enters only new references.</p>\n         </important>"
                     }
                 }
             }

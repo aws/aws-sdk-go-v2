@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Updates the details for the specified Amazon Chime SDK Voice Connector.
 func (c *Client) UpdateVoiceConnector(ctx context.Context, params *UpdateVoiceConnectorInput, optFns ...func(*Options)) (*UpdateVoiceConnectorOutput, error) {
 	if params == nil {
 		params = &UpdateVoiceConnectorInput{}
@@ -28,12 +29,18 @@ func (c *Client) UpdateVoiceConnector(ctx context.Context, params *UpdateVoiceCo
 
 type UpdateVoiceConnectorInput struct {
 
+	// The name of the Voice Connector.
+	//
 	// This member is required.
 	Name *string
 
+	// When enabled, requires encryption for the Voice Connector.
+	//
 	// This member is required.
 	RequireEncryption *bool
 
+	// The Voice Connector ID.
+	//
 	// This member is required.
 	VoiceConnectorId *string
 
@@ -41,6 +48,8 @@ type UpdateVoiceConnectorInput struct {
 }
 
 type UpdateVoiceConnectorOutput struct {
+
+	// The updated Voice Connector details.
 	VoiceConnector *types.VoiceConnector
 
 	// Metadata pertaining to the operation's result.

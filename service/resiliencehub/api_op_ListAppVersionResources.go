@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the resources in an AWS Resilience Hub application.
+// Lists all the resources in an Resilience Hub application.
 func (c *Client) ListAppVersionResources(ctx context.Context, params *ListAppVersionResourcesInput, optFns ...func(*Options)) (*ListAppVersionResourcesOutput, error) {
 	if params == nil {
 		params = &ListAppVersionResourcesInput{}

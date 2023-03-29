@@ -12,8 +12,10 @@ import (
 )
 
 // Creates an Autopilot job. Find the best-performing model after you run an
-// Autopilot job by calling . For information about how to use Autopilot, see
-// Automate Model Development with Amazon SageMaker Autopilot
+// Autopilot job by calling DescribeAutoMLJob
+// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJob.html).
+// For information about how to use Autopilot, see Automate Model Development with
+// Amazon SageMaker Autopilot
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development.html).
 func (c *Client) CreateAutoMLJob(ctx context.Context, params *CreateAutoMLJobInput, optFns ...func(*Options)) (*CreateAutoMLJobOutput, error) {
 	if params == nil {
@@ -39,7 +41,9 @@ type CreateAutoMLJobInput struct {
 	AutoMLJobName *string
 
 	// An array of channel objects that describes the input data and its location. Each
-	// channel is a named input source. Similar to InputDataConfig supported by .
+	// channel is a named input source. Similar to InputDataConfig supported by
+	// HyperParameterTrainingJobDefinition
+	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html).
 	// Format(s) supported: CSV, Parquet. A minimum of 500 rows is required for the
 	// training dataset. There is not a minimum number of rows required for the
 	// validation dataset.
@@ -62,8 +66,11 @@ type CreateAutoMLJobInput struct {
 	AutoMLJobConfig *types.AutoMLJobConfig
 
 	// Defines the objective metric used to measure the predictive quality of an AutoML
-	// job. You provide an AutoMLJobObjective$MetricName and Autopilot infers whether
-	// to minimize or maximize it.
+	// job. You provide an AutoMLJobObjective$MetricName
+	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobObjective.html)
+	// and Autopilot infers whether to minimize or maximize it. For CreateAutoMLJobV2
+	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html),
+	// only Accuracy is supported.
 	AutoMLJobObjective *types.AutoMLJobObjective
 
 	// Generates possible candidates without training the models. A candidate is a
@@ -74,13 +81,16 @@ type CreateAutoMLJobInput struct {
 	// model deployment.
 	ModelDeployConfig *types.ModelDeployConfig
 
-	// Defines the type of supervised learning available for the candidates. For more
-	// information, see  Amazon SageMaker Autopilot problem types and algorithm support
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-problem-types.html).
+	// Defines the type of supervised learning problem available for the candidates.
+	// For more information, see  Amazon SageMaker Autopilot problem types
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-datasets-problem-types.html#autopilot-problem-types).
 	ProblemType types.ProblemType
 
-	// Each tag consists of a key and an optional value. Tag keys must be unique per
-	// resource.
+	// An array of key-value pairs. You can use tags to categorize your Amazon Web
+	// Services resources in different ways, for example, by purpose, owner, or
+	// environment. For more information, see Tagging Amazon Web ServicesResources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html). Tag keys must
+	// be unique per resource.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

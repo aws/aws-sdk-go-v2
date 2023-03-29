@@ -39,8 +39,9 @@ type ConflictException struct {
 
 	ErrorCodeOverride *string
 
-	ResourceId   *string
-	ResourceType *string
+	ResourceId        *string
+	ResourceType      *string
+	DependentEntities []DependentEntity
 
 	noSmithyDocumentSerde
 }

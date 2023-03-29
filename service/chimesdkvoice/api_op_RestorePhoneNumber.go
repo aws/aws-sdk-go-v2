@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Restores a deleted phone number.
 func (c *Client) RestorePhoneNumber(ctx context.Context, params *RestorePhoneNumberInput, optFns ...func(*Options)) (*RestorePhoneNumberOutput, error) {
 	if params == nil {
 		params = &RestorePhoneNumberInput{}
@@ -28,6 +29,8 @@ func (c *Client) RestorePhoneNumber(ctx context.Context, params *RestorePhoneNum
 
 type RestorePhoneNumberInput struct {
 
+	// The ID of the phone number being restored.
+	//
 	// This member is required.
 	PhoneNumberId *string
 
@@ -35,6 +38,8 @@ type RestorePhoneNumberInput struct {
 }
 
 type RestorePhoneNumberOutput struct {
+
+	// The restored phone number.
 	PhoneNumber *types.PhoneNumber
 
 	// Metadata pertaining to the operation's result.

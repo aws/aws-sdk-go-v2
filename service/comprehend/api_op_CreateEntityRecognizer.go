@@ -32,14 +32,14 @@ func (c *Client) CreateEntityRecognizer(ctx context.Context, params *CreateEntit
 
 type CreateEntityRecognizerInput struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role that grants Amazon Comprehend read access to your input data.
+	// The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend
+	// read access to your input data.
 	//
 	// This member is required.
 	DataAccessRoleArn *string
 
 	// Specifies the format and location of the input data. The S3 bucket containing
-	// the input data must be located in the same region as the entity recognizer being
+	// the input data must be located in the same Region as the entity recognizer being
 	// created.
 	//
 	// This member is required.
@@ -56,7 +56,7 @@ type CreateEntityRecognizerInput struct {
 
 	// The name given to the newly created recognizer. Recognizer names can be a
 	// maximum of 256 characters. Alphanumeric characters, hyphens (-) and underscores
-	// (_) are allowed. The name must be unique in the account/region.
+	// (_) are allowed. The name must be unique in the account/Region.
 	//
 	// This member is required.
 	RecognizerName *string
@@ -65,24 +65,27 @@ type CreateEntityRecognizerInput struct {
 	// Amazon Comprehend generates one.
 	ClientRequestToken *string
 
-	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
-	// encrypt trained custom models. The ModelKmsKeyId can be either of the following
-	// formats:
-	// - KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
-	// - Amazon Resource
-	// Name (ARN) of a KMS Key:
+	// ID for the KMS key that Amazon Comprehend uses to encrypt trained custom models.
+	// The ModelKmsKeyId can be either of the following formats:
+	//
+	// * KMS Key ID:
+	// "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//
+	// * Amazon Resource Name (ARN) of a KMS
+	// Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	ModelKmsKeyId *string
 
 	// The JSON resource-based policy to attach to your custom entity recognizer model.
-	// You can use this policy to allow another AWS account to import your custom
-	// model. Provide your JSON as a UTF-8 encoded string without line breaks. To
-	// provide valid JSON for your policy, enclose the attribute names and values in
-	// double quotes. If the JSON body is also enclosed in double quotes, then you must
-	// escape the double quotes that are inside the policy: "{\"attribute\": \"value\",
-	// \"attribute\": [\"value\"]}" To avoid escaping quotes, you can use single quotes
-	// to enclose the policy and double quotes to enclose the JSON names and values:
-	// '{"attribute": "value", "attribute": ["value"]}'
+	// You can use this policy to allow another Amazon Web Services account to import
+	// your custom model. Provide your JSON as a UTF-8 encoded string without line
+	// breaks. To provide valid JSON for your policy, enclose the attribute names and
+	// values in double quotes. If the JSON body is also enclosed in double quotes,
+	// then you must escape the double quotes that are inside the policy:
+	// "{\"attribute\": \"value\", \"attribute\": [\"value\"]}" To avoid escaping
+	// quotes, you can use single quotes to enclose the policy and double quotes to
+	// enclose the JSON names and values: '{"attribute": "value", "attribute":
+	// ["value"]}'
 	ModelPolicy *string
 
 	// Tags to associate with the entity recognizer. A tag is a key-value pair that
@@ -94,16 +97,18 @@ type CreateEntityRecognizerInput struct {
 	// The version name given to the newly created recognizer. Version names can be a
 	// maximum of 256 characters. Alphanumeric characters, hyphens (-) and underscores
 	// (_) are allowed. The version name must be unique among all models with the same
-	// recognizer name in the account/ AWS Region.
+	// recognizer name in the account/Region.
 	VersionName *string
 
-	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
-	// encrypt data on the storage volume attached to the ML compute instance(s) that
-	// process the analysis job. The VolumeKmsKeyId can be either of the following
-	// formats:
-	// - KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
-	// - Amazon Resource
-	// Name (ARN) of a KMS Key:
+	// ID for the Amazon Web Services Key Management Service (KMS) key that Amazon
+	// Comprehend uses to encrypt data on the storage volume attached to the ML compute
+	// instance(s) that process the analysis job. The VolumeKmsKeyId can be either of
+	// the following formats:
+	//
+	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//
+	// *
+	// Amazon Resource Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 

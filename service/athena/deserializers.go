@@ -11801,6 +11801,15 @@ func awsAwsjson11_deserializeDocumentWorkGroupConfiguration(v **types.WorkGroupC
 				return err
 			}
 
+		case "EnableMinimumEncryptionConfiguration":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.EnableMinimumEncryptionConfiguration = ptr.Bool(jtv)
+			}
+
 		case "EnforceWorkGroupConfiguration":
 			if value != nil {
 				jtv, ok := value.(bool)

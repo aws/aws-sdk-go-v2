@@ -482,6 +482,77 @@
                 "target": "com.amazonaws.securityhub#AssociatedStandard"
             }
         },
+        "com.amazonaws.securityhub#AssociationSetDetails": {
+            "type": "structure",
+            "members": {
+                "AssociationState": {
+                    "target": "com.amazonaws.securityhub#AssociationStateDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The state of the association between a route table and a subnet or gateway.\n      </p>"
+                    }
+                },
+                "GatewayId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The ID of the internet gateway or virtual private gateway.\n      </p>"
+                    }
+                },
+                "Main": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>\n         Indicates whether this is the main route table.\n      </p>"
+                    }
+                },
+                "RouteTableAssociationId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The ID of the association.\n      </p>"
+                    }
+                },
+                "RouteTableId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The ID of the route table.\n      </p>"
+                    }
+                },
+                "SubnetId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The ID of the subnet. A subnet ID is not returned for an implicit association.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         The associations between a route table and one or more subnets or a gateway.\n      </p>"
+            }
+        },
+        "com.amazonaws.securityhub#AssociationSetList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#AssociationSetDetails"
+            }
+        },
+        "com.amazonaws.securityhub#AssociationStateDetails": {
+            "type": "structure",
+            "members": {
+                "State": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The state of the association.\n      </p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The status message, if applicable.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Describes the state of an association between a route table and a subnet or gateway.\n      </p>"
+            }
+        },
         "com.amazonaws.securityhub#AssociationStatus": {
             "type": "enum",
             "members": {
@@ -4359,6 +4430,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Details about the metadata options for the Amazon EC2 instance.\n      </p>"
                     }
+                },
+                "Monitoring": {
+                    "target": "com.amazonaws.securityhub#AwsEc2InstanceMonitoringDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Describes the type of monitoring that’s turned on for an instance.\n      </p>"
+                    }
                 }
             },
             "traits": {
@@ -4402,6 +4479,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Metadata options that allow you to configure and secure the Amazon EC2 instance.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsEc2InstanceMonitoringDetails": {
+            "type": "structure",
+            "members": {
+                "State": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Indicates whether detailed monitoring is turned on. Otherwise, basic monitoring is turned on.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         The type of monitoring that’s turned on for an Amazon EC2 instance.\n      </p>"
             }
         },
         "com.amazonaws.securityhub#AwsEc2InstanceNetworkInterfacesDetails": {
@@ -6016,6 +6107,50 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.securityhub#AwsEc2NetworkInterfaceSecurityGroup"
+            }
+        },
+        "com.amazonaws.securityhub#AwsEc2RouteTableDetails": {
+            "type": "structure",
+            "members": {
+                "AssociationSet": {
+                    "target": "com.amazonaws.securityhub#AssociationSetList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The associations between a route table and one or more subnets or a gateway.\n      </p>"
+                    }
+                },
+                "OwnerId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The ID of the Amazon Web Services account that owns the route table.\n      </p>"
+                    }
+                },
+                "PropagatingVgwSet": {
+                    "target": "com.amazonaws.securityhub#PropagatingVgwSetList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Describes a virtual private gateway propagating route.\n      </p>"
+                    }
+                },
+                "RouteTableId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The ID of the route table.\n      </p>"
+                    }
+                },
+                "RouteSet": {
+                    "target": "com.amazonaws.securityhub#RouteSetList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The routes in the route table.\n      </p>"
+                    }
+                },
+                "VpcId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The ID of the virtual private cloud (VPC).\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Provides details about a route table for the specified VPC. \n      </p>"
             }
         },
         "com.amazonaws.securityhub#AwsEc2SecurityGroupDetails": {
@@ -9342,6 +9477,13 @@
                     "target": "com.amazonaws.securityhub#NonEmptyStringList",
                     "traits": {
                         "smithy.api#documentation": "<p>The subnets that are associated with the cluster.</p>"
+                    }
+                },
+                "EndpointPublicAccess": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>\n         Indicates whether the Amazon EKS public API server endpoint is turned on. If the Amazon EKS public API \n         server endpoint is turned off, your cluster's Kubernetes API server can only receive requests that originate from within \n         the cluster VPC.\n      </p>"
                     }
                 }
             },
@@ -15061,6 +15203,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The versioning state of an S3 bucket.</p>"
                     }
+                },
+                "ObjectLockConfiguration": {
+                    "target": "com.amazonaws.securityhub#AwsS3BucketObjectLockConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Specifies which rule Amazon S3 applies by default to every new object placed in the specified bucket. \n      </p>"
+                    }
                 }
             },
             "traits": {
@@ -15214,6 +15362,68 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.securityhub#AwsS3BucketNotificationConfigurationS3KeyFilterRule"
+            }
+        },
+        "com.amazonaws.securityhub#AwsS3BucketObjectLockConfiguration": {
+            "type": "structure",
+            "members": {
+                "ObjectLockEnabled": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Indicates whether the bucket has an Object Lock configuration enabled. \n      </p>"
+                    }
+                },
+                "Rule": {
+                    "target": "com.amazonaws.securityhub#AwsS3BucketObjectLockConfigurationRuleDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Specifies the Object Lock rule for the specified object. \n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         The container element for S3 Object Lock configuration parameters. In Amazon S3, Object Lock can help prevent objects from being deleted or overwritten for a fixed amount of time or indefinitely.\n      </p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsS3BucketObjectLockConfigurationRuleDefaultRetentionDetails": {
+            "type": "structure",
+            "members": {
+                "Days": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\n         The number of days that you want to specify for the default retention period.\n      </p>"
+                    }
+                },
+                "Mode": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The default Object Lock retention mode you want to apply to new objects placed in the specified bucket.\n      </p>"
+                    }
+                },
+                "Years": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>\n         The number of years that you want to specify for the default retention period.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         The default S3 Object Lock retention mode and period that you want to apply to new objects placed in the specified Amazon S3 bucket. \n      </p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsS3BucketObjectLockConfigurationRuleDetails": {
+            "type": "structure",
+            "members": {
+                "DefaultRetention": {
+                    "target": "com.amazonaws.securityhub#AwsS3BucketObjectLockConfigurationRuleDefaultRetentionDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The default Object Lock retention mode and period that you want to apply to new objects placed in the specified bucket. \n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Specifies the S3 Object Lock rule for the specified object. In Amazon S3, Object Lock can help prevent objects from being deleted or overwritten for a fixed amount of time or indefinitely.\n      </p>"
             }
         },
         "com.amazonaws.securityhub#AwsS3BucketServerSideEncryptionByDefault": {
@@ -16192,7 +16402,7 @@
                 "ProcessParentPid": {
                     "target": "com.amazonaws.securityhub#NumberFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parent process ID.</p>"
+                        "smithy.api#documentation": "<p>The parent process ID. This field accepts positive integers between <code>O</code> and <code>2147483647</code>.</p>"
                     }
                 },
                 "ProcessLaunchedAt": {
@@ -19382,7 +19592,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Declines invitations to become a member account.</p>\n         <p>This operation is only used by accounts that are not part of an organization.\n         Organization accounts do not receive invitations.</p>",
+                "smithy.api#documentation": "<p>Declines invitations to become a member account.</p>\n         <p>A prospective member account uses this operation to decline an invitation to become a member.</p>\n         <p>This operation is only called by member accounts that aren't part of an organization.\n         Organization accounts don't receive invitations.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/invitations/decline",
@@ -19396,7 +19606,7 @@
                 "AccountIds": {
                     "target": "com.amazonaws.securityhub#AccountIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of account IDs for the accounts from which to decline the invitations to\n         Security Hub.</p>",
+                        "smithy.api#documentation": "<p>The list of prospective member account IDs for which to decline an invitation.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -19632,7 +19842,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes invitations received by the Amazon Web Services account to become a member account.</p>\n         <p>This operation is only used by accounts that are not part of an organization.\n         Organization accounts do not receive invitations.</p>",
+                "smithy.api#documentation": "<p>Deletes invitations received by the Amazon Web Services account to become a member account.</p>\n         <p>A Security Hub administrator account can use this operation to delete invitations sent to one or more member accounts.</p>\n         <p>This operation is only used to delete invitations that are sent to member accounts that aren't part of an organization.\n         Organization accounts don't receive invitations.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/invitations/delete",
@@ -19646,7 +19856,7 @@
                 "AccountIds": {
                     "target": "com.amazonaws.securityhub#AccountIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of the account IDs that sent the invitations to delete.</p>",
+                        "smithy.api#documentation": "<p>The list of member account IDs that received the invitations you want to delete.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -19891,7 +20101,7 @@
                 "ControlFindingGenerator": {
                     "target": "com.amazonaws.securityhub#ControlFindingGenerator",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the calling account has consolidated control findings turned on. If the value for this field is set to \n         <code>SECURITY_CONTROL</code>, Security Hub generates a single finding for a control check even when the check \n         applies to multiple enabled standards.</p>\n         <p>If the value for this field is set to <code>STANDARD_CONTROL</code>, Security Hub generates separate findings \n         for a control check when the check applies to multiple enabled standards.</p>\n         <p>The value for this field in a member account matches the value in the administrator\n         account. For accounts that aren't part of an organization, the default value of this field\n         is <code>SECURITY_CONTROL</code> if you enabled Security Hub on or after February 9,\n         2023.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the calling account has consolidated control findings turned on. If the value for this field is set to \n         <code>SECURITY_CONTROL</code>, Security Hub generates a single finding for a control check even when the check \n         applies to multiple enabled standards.</p>\n         <p>If the value for this field is set to <code>STANDARD_CONTROL</code>, Security Hub generates separate findings \n         for a control check when the check applies to multiple enabled standards.</p>\n         <p>The value for this field in a member account matches the value in the administrator\n         account. For accounts that aren't part of an organization, the default value of this field\n         is <code>SECURITY_CONTROL</code> if you enabled Security Hub on or after February 23,\n         2023.</p>"
                     }
                 }
             },
@@ -20730,7 +20940,7 @@
                 "ControlFindingGenerator": {
                     "target": "com.amazonaws.securityhub#ControlFindingGenerator",
                     "traits": {
-                        "smithy.api#documentation": "<p>This field, used when enabling Security Hub, specifies whether the calling account has consolidated control findings turned on. \n      If the value for this field is set to \n      <code>SECURITY_CONTROL</code>, Security Hub generates a single finding for a control check even when the check \n      applies to multiple enabled standards.</p>\n         <p>If the value for this field is set to <code>STANDARD_CONTROL</code>, Security Hub generates separate findings \n      for a control check when the check applies to multiple enabled standards.</p>\n         <p>The value for this field in a member account matches the value in the administrator\n         account. For accounts that aren't part of an organization, the default value of this field\n         is <code>SECURITY_CONTROL</code> if you enabled Security Hub on or after February 9,\n         2023.</p>"
+                        "smithy.api#documentation": "<p>This field, used when enabling Security Hub, specifies whether the calling account has consolidated control findings turned on. \n      If the value for this field is set to \n      <code>SECURITY_CONTROL</code>, Security Hub generates a single finding for a control check even when the check \n      applies to multiple enabled standards.</p>\n         <p>If the value for this field is set to <code>STANDARD_CONTROL</code>, Security Hub generates separate findings \n      for a control check when the check applies to multiple enabled standards.</p>\n         <p>The value for this field in a member account matches the value in the administrator\n         account. For accounts that aren't part of an organization, the default value of this field\n         is <code>SECURITY_CONTROL</code> if you enabled Security Hub on or after February 23,\n         2023.</p>"
                     }
                 }
             },
@@ -23695,7 +23905,7 @@
                     "target": "com.amazonaws.securityhub#Integer",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The parent process ID.</p>"
+                        "smithy.api#documentation": "<p>The parent process ID. This field accepts positive integers between <code>O</code> and <code>2147483647</code>.</p>"
                     }
                 },
                 "LaunchedAt": {
@@ -23788,6 +23998,26 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.securityhub#Product"
+            }
+        },
+        "com.amazonaws.securityhub#PropagatingVgwSetDetails": {
+            "type": "structure",
+            "members": {
+                "GatewayId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The ID of the virtual private gateway.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Describes a virtual private gateway propagating route.\n      </p>"
+            }
+        },
+        "com.amazonaws.securityhub#PropagatingVgwSetList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#PropagatingVgwSetDetails"
             }
         },
         "com.amazonaws.securityhub#Range": {
@@ -24532,6 +24762,12 @@
                 },
                 "AwsWafv2RuleGroup": {
                     "target": "com.amazonaws.securityhub#AwsWafv2RuleGroupDetails"
+                },
+                "AwsEc2RouteTable": {
+                    "target": "com.amazonaws.securityhub#AwsEc2RouteTableDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Provides details about a route table. A route table contains a set of rules, called routes, that \n         determine where to direct network traffic from your subnet or gateway. \n      </p>"
+                    }
                 }
             },
             "traits": {
@@ -24584,6 +24820,116 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.securityhub#Result"
+            }
+        },
+        "com.amazonaws.securityhub#RouteSetDetails": {
+            "type": "structure",
+            "members": {
+                "CarrierGatewayId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The ID of the carrier gateway.\n      </p>"
+                    }
+                },
+                "CoreNetworkArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of the core network.\n      </p>"
+                    }
+                },
+                "DestinationCidrBlock": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The IPv4 CIDR block used for the destination match.\n      </p>"
+                    }
+                },
+                "DestinationIpv6CidrBlock": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The IPv6 CIDR block used for the destination match.\n      </p>"
+                    }
+                },
+                "DestinationPrefixListId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The prefix of the destination Amazon Web Service.\n      </p>"
+                    }
+                },
+                "EgressOnlyInternetGatewayId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The ID of the egress-only internet gateway.\n      </p>"
+                    }
+                },
+                "GatewayId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The ID of a gateway attached to your VPC.\n      </p>"
+                    }
+                },
+                "InstanceId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The ID of a NAT instance in your VPC.\n      </p>"
+                    }
+                },
+                "InstanceOwnerId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The ID of the Amazon Web Services account that owns the instance.\n      </p>"
+                    }
+                },
+                "LocalGatewayId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The ID of the local gateway.\n      </p>"
+                    }
+                },
+                "NatGatewayId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The ID of a NAT gateway.\n      </p>"
+                    }
+                },
+                "NetworkInterfaceId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The ID of the network interface.\n      </p>"
+                    }
+                },
+                "Origin": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Describes how the route was created. \n      </p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The state of the route.\n      </p>"
+                    }
+                },
+                "TransitGatewayId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The ID of a transit gateway.\n      </p>"
+                    }
+                },
+                "VpcPeeringConnectionId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The ID of a VPC peering connection.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Provides details about the routes in the route table.\n      </p>"
+            }
+        },
+        "com.amazonaws.securityhub#RouteSetList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#RouteSetDetails"
             }
         },
         "com.amazonaws.securityhub#RuleGroupDetails": {
@@ -25772,8 +26118,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "af-south-1"
                             }
                         },
@@ -25785,8 +26131,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "ap-east-1"
                             }
                         },
@@ -25798,8 +26144,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "ap-northeast-1"
                             }
                         },
@@ -25811,8 +26157,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "ap-northeast-2"
                             }
                         },
@@ -25824,8 +26170,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "ap-northeast-3"
                             }
                         },
@@ -25837,8 +26183,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "ap-south-1"
                             }
                         },
@@ -25850,8 +26196,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "ap-southeast-1"
                             }
                         },
@@ -25863,8 +26209,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "ap-southeast-2"
                             }
                         },
@@ -25876,8 +26222,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "ap-southeast-3"
                             }
                         },
@@ -25889,8 +26235,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "ca-central-1"
                             }
                         },
@@ -25902,8 +26248,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "eu-central-1"
                             }
                         },
@@ -25915,8 +26261,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "eu-north-1"
                             }
                         },
@@ -25928,8 +26274,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "eu-south-1"
                             }
                         },
@@ -25941,8 +26287,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "eu-west-1"
                             }
                         },
@@ -25954,8 +26300,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "eu-west-2"
                             }
                         },
@@ -25967,8 +26313,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "eu-west-3"
                             }
                         },
@@ -25980,8 +26326,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "me-south-1"
                             }
                         },
@@ -25993,8 +26339,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "sa-east-1"
                             }
                         },
@@ -26006,8 +26352,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "us-east-1"
                             }
                         },
@@ -26019,8 +26365,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "us-east-1"
                             }
                         },
@@ -26032,8 +26378,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "us-east-2"
                             }
                         },
@@ -26045,8 +26391,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "us-east-2"
                             }
                         },
@@ -26058,8 +26404,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "us-west-1"
                             }
                         },
@@ -26071,8 +26417,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "us-west-1"
                             }
                         },
@@ -26084,8 +26430,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "us-west-2"
                             }
                         },
@@ -26097,8 +26443,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "us-west-2"
                             }
                         },
@@ -26110,8 +26456,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "us-east-1"
                             }
                         },
@@ -26123,8 +26469,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "us-east-1"
                             }
                         },
@@ -26136,8 +26482,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "cn-north-1"
                             }
                         },
@@ -26149,8 +26495,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "cn-northwest-1"
                             }
                         },
@@ -26162,8 +26508,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "cn-north-1"
                             }
                         },
@@ -26175,8 +26521,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "cn-north-1"
                             }
                         },
@@ -26188,8 +26534,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "cn-north-1"
                             }
                         },
@@ -26201,8 +26547,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "us-gov-east-1"
                             }
                         },
@@ -26214,8 +26560,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "us-gov-east-1"
                             }
                         },
@@ -26227,8 +26573,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "us-gov-west-1"
                             }
                         },
@@ -26240,8 +26586,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "us-gov-west-1"
                             }
                         },
@@ -26253,8 +26599,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "us-gov-east-1"
                             }
                         },
@@ -26266,8 +26612,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "us-gov-east-1"
                             }
                         },
@@ -26279,8 +26625,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "us-iso-east-1"
                             }
                         },
@@ -26292,8 +26638,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "us-iso-east-1"
                             }
                         },
@@ -26305,8 +26651,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "us-isob-east-1"
                             }
                         },
@@ -26318,8 +26664,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "us-isob-east-1"
                             }
                         },
@@ -26331,8 +26677,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
@@ -26345,8 +26691,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -26356,8 +26702,8 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
@@ -26368,8 +26714,8 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }

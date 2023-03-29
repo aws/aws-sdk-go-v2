@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the AWS Resilience Hub application version. This API updates the AWS
-// Resilience Hub application draft version. To use this information for running
-// resiliency assessments, you must publish the AWS Resilience Hub application
-// using the PublishAppVersion API.
+// Updates the Resilience Hub application version. This API updates the Resilience
+// Hub application draft version. To use this information for running resiliency
+// assessments, you must publish the Resilience Hub application using the
+// PublishAppVersion API.
 func (c *Client) UpdateAppVersion(ctx context.Context, params *UpdateAppVersionInput, optFns ...func(*Options)) (*UpdateAppVersionOutput, error) {
 	if params == nil {
 		params = &UpdateAppVersionInput{}

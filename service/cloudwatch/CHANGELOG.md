@@ -1,3 +1,7 @@
+# v1.25.7 (2023-03-24)
+
+* **Documentation**: Doc-only update to correct alarm actions list
+
 # v1.25.6 (2023-03-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -11,6 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Creates an Amazon Chime SDK Voice Connector. For more information about Voice
+// Connectors, see Managing Amazon Chime SDK Voice Connector groups
+// (https://docs.aws.amazon.com/chime-sdk/latest/ag/voice-connector-groups.html) in
+// the Amazon Chime SDK Administrator Guide.
 func (c *Client) CreateVoiceConnector(ctx context.Context, params *CreateVoiceConnectorInput, optFns ...func(*Options)) (*CreateVoiceConnectorOutput, error) {
 	if params == nil {
 		params = &CreateVoiceConnectorInput{}
@@ -28,18 +32,26 @@ func (c *Client) CreateVoiceConnector(ctx context.Context, params *CreateVoiceCo
 
 type CreateVoiceConnectorInput struct {
 
+	// The name of the Voice Connector.
+	//
 	// This member is required.
 	Name *string
 
+	// Enables or disables encryption for the Voice Connector.
+	//
 	// This member is required.
 	RequireEncryption *bool
 
+	// The AWS Region in which the Amazon Chime SDK Voice Connector is created. Default
+	// value: us-east-1 .
 	AwsRegion types.VoiceConnectorAwsRegion
 
 	noSmithyDocumentSerde
 }
 
 type CreateVoiceConnectorOutput struct {
+
+	// The details of the Voice Connector.
 	VoiceConnector *types.VoiceConnector
 
 	// Metadata pertaining to the operation's result.

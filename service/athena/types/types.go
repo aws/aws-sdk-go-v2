@@ -33,7 +33,8 @@ type AclConfiguration struct {
 // Contains the application runtime IDs and their supported DPU sizes.
 type ApplicationDPUSizes struct {
 
-	// The name of the supported application runtime (for example, Jupyter 1.0).
+	// The name of the supported application runtime (for example, Athena notebook
+	// version 1).
 	ApplicationRuntimeId *string
 
 	// A list of the supported DPU sizes that the application runtime supports.
@@ -312,8 +313,8 @@ type Datum struct {
 	noSmithyDocumentSerde
 }
 
-// If query results are encrypted in Amazon S3, indicates the encryption option
-// used (for example, SSE_KMS or CSE_KMS) and key information.
+// If query and calculation results are encrypted in Amazon S3, indicates the
+// encryption option used (for example, SSE_KMS or CSE_KMS) and key information.
 type EncryptionConfiguration struct {
 
 	// Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys
@@ -342,10 +343,10 @@ type EngineConfiguration struct {
 	MaxConcurrentDpus int32
 
 	// Contains additional notebook engine MAP parameter mappings in the form of
-	// key-value pairs. To specify an Amazon S3 URI that the Jupyter server will
+	// key-value pairs. To specify an Athena notebook that the Jupyter server will
 	// download and serve, specify a value for the StartSessionRequest$NotebookVersion
-	// field, and then add a key named NotebookFileURI to AdditionalConfigs that has
-	// value of the Amazon S3 URI.
+	// field, and then add a key named NotebookId to AdditionalConfigs that has the
+	// value of the Athena notebook ID.
 	AdditionalConfigs map[string]string
 
 	// The number of DPUs to use for the coordinator. A coordinator is a special
@@ -541,11 +542,11 @@ type QueryExecution struct {
 	// The unique identifier for each query execution.
 	QueryExecutionId *string
 
-	// The location in Amazon S3 where query results were stored and the encryption
-	// option, if any, used for query results. These are known as "client-side
-	// settings". If workgroup settings override client-side settings, then the query
-	// uses the location for the query results and the encryption configuration that
-	// are specified for the workgroup.
+	// The location in Amazon S3 where query and calculation results are stored and the
+	// encryption option, if any, used for query results. These are known as
+	// "client-side settings". If workgroup settings override client-side settings,
+	// then the query uses the location for the query results and the encryption
+	// configuration that are specified for the workgroup.
 	ResultConfiguration *ResultConfiguration
 
 	// Specifies the query result reuse behavior that was used for the query.
@@ -781,10 +782,10 @@ type QueryStagePlanNode struct {
 	noSmithyDocumentSerde
 }
 
-// The location in Amazon S3 where query results are stored and the encryption
-// option, if any, used for query results. These are known as "client-side
-// settings". If workgroup settings override client-side settings, then the query
-// uses the workgroup settings.
+// The location in Amazon S3 where query and calculation results are stored and the
+// encryption option, if any, used for query and calculation results. These are
+// known as "client-side settings". If workgroup settings override client-side
+// settings, then the query uses the workgroup settings.
 type ResultConfiguration struct {
 
 	// Indicates that an Amazon S3 canned ACL should be set to control ownership of
@@ -798,13 +799,13 @@ type ResultConfiguration struct {
 	// (https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html).
 	AclConfiguration *AclConfiguration
 
-	// If query results are encrypted in Amazon S3, indicates the encryption option
-	// used (for example, SSE_KMS or CSE_KMS) and key information. This is a
-	// client-side setting. If workgroup settings override client-side settings, then
-	// the query uses the encryption configuration that is specified for the workgroup,
-	// and also uses the location for storing query results specified in the workgroup.
-	// See WorkGroupConfiguration$EnforceWorkGroupConfiguration and Workgroup Settings
-	// Override Client-Side Settings
+	// If query and calculation results are encrypted in Amazon S3, indicates the
+	// encryption option used (for example, SSE_KMS or CSE_KMS) and key information.
+	// This is a client-side setting. If workgroup settings override client-side
+	// settings, then the query uses the encryption configuration that is specified for
+	// the workgroup, and also uses the location for storing query results specified in
+	// the workgroup. See WorkGroupConfiguration$EnforceWorkGroupConfiguration and
+	// Workgroup Settings Override Client-Side Settings
 	// (https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html).
 	EncryptionConfiguration *EncryptionConfiguration
 
@@ -822,12 +823,13 @@ type ResultConfiguration struct {
 	// (https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html).
 	ExpectedBucketOwner *string
 
-	// The location in Amazon S3 where your query results are stored, such as
-	// s3://path/to/query/bucket/. To run the query, you must specify the query results
-	// location using one of the ways: either for individual queries using either this
-	// setting (client-side), or in the workgroup, using WorkGroupConfiguration. If
-	// none of them is set, Athena issues an error that no output location is provided.
-	// For more information, see Query Results
+	// The location in Amazon S3 where your query and calculation results are stored,
+	// such as s3://path/to/query/bucket/. To run the query, you must specify the query
+	// results location using one of the ways: either for individual queries using
+	// either this setting (client-side), or in the workgroup, using
+	// WorkGroupConfiguration. If none of them is set, Athena issues an error that no
+	// output location is provided. For more information, see Working with query
+	// results, recent queries, and output files
 	// (https://docs.aws.amazon.com/athena/latest/ug/querying.html). If workgroup
 	// settings override client-side settings, then the query uses the settings
 	// specified for the workgroup. See
@@ -844,7 +846,7 @@ type ResultConfigurationUpdates struct {
 	// The ACL configuration for the query results.
 	AclConfiguration *AclConfiguration
 
-	// The encryption configuration for the query results.
+	// The encryption configuration for query and calculation results.
 	EncryptionConfiguration *EncryptionConfiguration
 
 	// The Amazon Web Services account ID that you expect to be the owner of the Amazon
@@ -861,9 +863,10 @@ type ResultConfigurationUpdates struct {
 	// (https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html).
 	ExpectedBucketOwner *string
 
-	// The location in Amazon S3 where your query results are stored, such as
-	// s3://path/to/query/bucket/. For more information, see Query Results
-	// (https://docs.aws.amazon.com/athena/latest/ug/querying.html) If workgroup
+	// The location in Amazon S3 where your query and calculation results are stored,
+	// such as s3://path/to/query/bucket/. For more information, see Working with query
+	// results, recent queries, and output files
+	// (https://docs.aws.amazon.com/athena/latest/ug/querying.html). If workgroup
 	// settings override client-side settings, then the query uses the location for the
 	// query results and the encryption configuration that are specified for the
 	// workgroup. The "workgroup settings override" is specified in
@@ -988,8 +991,8 @@ type Row struct {
 // Contains session configuration information.
 type SessionConfiguration struct {
 
-	// If query results are encrypted in Amazon S3, indicates the encryption option
-	// used (for example, SSE_KMS or CSE_KMS) and key information.
+	// If query and calculation results are encrypted in Amazon S3, indicates the
+	// encryption option used (for example, SSE_KMS or CSE_KMS) and key information.
 	EncryptionConfiguration *EncryptionConfiguration
 
 	// The ARN of the execution role used for the session.
@@ -1004,7 +1007,7 @@ type SessionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Contains statistics for a notebook session.
+// Contains statistics for a session.
 type SessionStatistics struct {
 
 	// The data processing unit execution time for a session in milliseconds.
@@ -1013,7 +1016,7 @@ type SessionStatistics struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about the status of a notebook session.
+// Contains information about the status of a session.
 type SessionStatus struct {
 
 	// The date and time that the session ended.
@@ -1046,7 +1049,7 @@ type SessionStatus struct {
 	noSmithyDocumentSerde
 }
 
-// Contains summary information about a notebook session.
+// Contains summary information about a session.
 type SessionSummary struct {
 
 	// The session description.
@@ -1102,12 +1105,12 @@ type TableMetadata struct {
 // data catalogs by purpose, owner, or environment. Use a consistent set of tag
 // keys to make it easier to search and filter workgroups or data catalogs in your
 // account. For best practices, see Tagging Best Practices
-// (https://aws.amazon.com/answers/account-management/aws-tagging-strategies/). Tag
-// keys can be from 1 to 128 UTF-8 Unicode characters, and tag values can be from 0
-// to 256 UTF-8 Unicode characters. Tags can use letters and numbers representable
-// in UTF-8, and the following characters: + - = . _ : / @. Tag keys and values are
-// case-sensitive. Tag keys must be unique per resource. If you specify more than
-// one tag, separate them by commas.
+// (https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html).
+// Tag keys can be from 1 to 128 UTF-8 Unicode characters, and tag values can be
+// from 0 to 256 UTF-8 Unicode characters. Tags can use letters and numbers
+// representable in UTF-8, and the following characters: + - = . _ : / @. Tag keys
+// and values are case-sensitive. Tag keys must be unique per resource. If you
+// specify more than one tag, separate them by commas.
 type Tag struct {
 
 	// A tag key. The tag key length is from 1 to 128 Unicode characters in UTF-8. You
@@ -1198,12 +1201,12 @@ type WorkGroup struct {
 	Name *string
 
 	// The configuration of the workgroup, which includes the location in Amazon S3
-	// where query results are stored, the encryption configuration, if any, used for
-	// query results; whether the Amazon CloudWatch Metrics are enabled for the
-	// workgroup; whether workgroup settings override client-side settings; and the
-	// data usage limits for the amount of data scanned per query or per workgroup. The
-	// workgroup settings override is specified in EnforceWorkGroupConfiguration
-	// (true/false) in the WorkGroupConfiguration. See
+	// where query and calculation results are stored, the encryption configuration, if
+	// any, used for query and calculation results; whether the Amazon CloudWatch
+	// Metrics are enabled for the workgroup; whether workgroup settings override
+	// client-side settings; and the data usage limits for the amount of data scanned
+	// per query or per workgroup. The workgroup settings override is specified in
+	// EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration. See
 	// WorkGroupConfiguration$EnforceWorkGroupConfiguration.
 	Configuration *WorkGroupConfiguration
 
@@ -1220,12 +1223,12 @@ type WorkGroup struct {
 }
 
 // The configuration of the workgroup, which includes the location in Amazon S3
-// where query results are stored, the encryption option, if any, used for query
-// results, whether the Amazon CloudWatch Metrics are enabled for the workgroup and
-// whether workgroup settings override query settings, and the data usage limits
-// for the amount of data scanned per query or per workgroup. The workgroup
-// settings override is specified in EnforceWorkGroupConfiguration (true/false) in
-// the WorkGroupConfiguration. See
+// where query and calculation results are stored, the encryption option, if any,
+// used for query and calculation results, whether the Amazon CloudWatch Metrics
+// are enabled for the workgroup and whether workgroup settings override query
+// settings, and the data usage limits for the amount of data scanned per query or
+// per workgroup. The workgroup settings override is specified in
+// EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration. See
 // WorkGroupConfiguration$EnforceWorkGroupConfiguration.
 type WorkGroupConfiguration struct {
 
@@ -1239,6 +1242,16 @@ type WorkGroupConfiguration struct {
 	// Specifies the KMS key that is used to encrypt the user's data stores in Athena.
 	CustomerContentEncryptionConfiguration *CustomerContentEncryptionConfiguration
 
+	// Enforces a minimal level of encryption for the workgroup for query and
+	// calculation results that are written to Amazon S3. When enabled, workgroup users
+	// can set encryption only to the minimum level set by the administrator or higher
+	// when they submit queries. The EnforceWorkGroupConfiguration setting takes
+	// precedence over the EnableMinimumEncryptionConfiguration flag. This means that
+	// if EnforceWorkGroupConfiguration is true, the
+	// EnableMinimumEncryptionConfiguration flag is ignored, and the workgroup
+	// configuration for encryption is used.
+	EnableMinimumEncryptionConfiguration *bool
+
 	// If set to "true", the settings for the workgroup override client-side settings.
 	// If set to "false", client-side settings are used. For more information, see
 	// Workgroup Settings Override Client-Side Settings
@@ -1250,7 +1263,7 @@ type WorkGroupConfiguration struct {
 	// of this setting.
 	EngineVersion *EngineVersion
 
-	// Role used in a notebook session for accessing the user's resources.
+	// Role used in a session for accessing the user's resources.
 	ExecutionRole *string
 
 	// Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.
@@ -1266,12 +1279,13 @@ type WorkGroupConfiguration struct {
 	RequesterPaysEnabled *bool
 
 	// The configuration for the workgroup, which includes the location in Amazon S3
-	// where query results are stored and the encryption option, if any, used for query
-	// results. To run the query, you must specify the query results location using one
-	// of the ways: either in the workgroup using this setting, or for individual
-	// queries (client-side), using ResultConfiguration$OutputLocation. If none of them
-	// is set, Athena issues an error that no output location is provided. For more
-	// information, see Query Results
+	// where query and calculation results are stored and the encryption option, if
+	// any, used for query and calculation results. To run the query, you must specify
+	// the query results location using one of the ways: either in the workgroup using
+	// this setting, or for individual queries (client-side), using
+	// ResultConfiguration$OutputLocation. If none of them is set, Athena issues an
+	// error that no output location is provided. For more information, see Working
+	// with query results, recent queries, and output files
 	// (https://docs.aws.amazon.com/athena/latest/ug/querying.html).
 	ResultConfiguration *ResultConfiguration
 
@@ -1279,11 +1293,11 @@ type WorkGroupConfiguration struct {
 }
 
 // The configuration information that will be updated for this workgroup, which
-// includes the location in Amazon S3 where query results are stored, the
-// encryption option, if any, used for query results, whether the Amazon CloudWatch
-// Metrics are enabled for the workgroup, whether the workgroup settings override
-// the client-side settings, and the data usage limit for the amount of bytes
-// scanned per query, if it is specified.
+// includes the location in Amazon S3 where query and calculation results are
+// stored, the encryption option, if any, used for query results, whether the
+// Amazon CloudWatch Metrics are enabled for the workgroup, whether the workgroup
+// settings override the client-side settings, and the data usage limit for the
+// amount of bytes scanned per query, if it is specified.
 type WorkGroupConfigurationUpdates struct {
 
 	// Contains a user defined string in JSON format for a Spark-enabled workgroup.
@@ -1295,6 +1309,16 @@ type WorkGroupConfigurationUpdates struct {
 
 	// Specifies the KMS key that is used to encrypt the user's data stores in Athena.
 	CustomerContentEncryptionConfiguration *CustomerContentEncryptionConfiguration
+
+	// Enforces a minimal level of encryption for the workgroup for query and
+	// calculation results that are written to Amazon S3. When enabled, workgroup users
+	// can set encryption only to the minimum level set by the administrator or higher
+	// when they submit queries. This setting does not apply to Spark-enabled
+	// workgroups. The EnforceWorkGroupConfiguration setting takes precedence over the
+	// EnableMinimumEncryptionConfiguration flag. This means that if
+	// EnforceWorkGroupConfiguration is true, the EnableMinimumEncryptionConfiguration
+	// flag is ignored, and the workgroup configuration for encryption is used.
+	EnableMinimumEncryptionConfiguration *bool
 
 	// If set to "true", the settings for the workgroup override client-side settings.
 	// If set to "false" client-side settings are used. For more information, see

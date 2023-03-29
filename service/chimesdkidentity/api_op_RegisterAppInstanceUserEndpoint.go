@@ -37,7 +37,8 @@ type RegisterAppInstanceUserEndpointInput struct {
 	// This member is required.
 	AppInstanceUserArn *string
 
-	// The idempotency token for each client request.
+	// The unique ID assigned to the request. Use different tokens to register other
+	// endpoints.
 	//
 	// This member is required.
 	ClientRequestToken *string

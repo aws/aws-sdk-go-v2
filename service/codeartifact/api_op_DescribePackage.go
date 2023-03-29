@@ -57,14 +57,18 @@ type DescribePackageInput struct {
 
 	// The namespace of the requested package. The package component that specifies its
 	// namespace depends on its type. For example:
-	// - The namespace of a Maven package
+	//
+	// * The namespace of a Maven package
 	// is its groupId. The namespace is required when requesting Maven packages.
-	// - The
+	//
+	// * The
 	// namespace of an npm package is its scope.
-	// - Python and NuGet packages do not
+	//
+	// * Python and NuGet packages do not
 	// contain a corresponding component, packages of those formats do not have a
 	// namespace.
-	// - The namespace of a generic package is it’s namespace.
+	//
+	// * The namespace of a generic package is its namespace.
 	Namespace *string
 
 	noSmithyDocumentSerde

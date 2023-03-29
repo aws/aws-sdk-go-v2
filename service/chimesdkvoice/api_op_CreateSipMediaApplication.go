@@ -11,6 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Creates a SIP media application. For more information about SIP media
+// applications, see Managing SIP media applications and rules
+// (https://docs.aws.amazon.com/chime-sdk/latest/ag/manage-sip-applications.html)
+// in the Amazon Chime SDK Administrator Guide.
 func (c *Client) CreateSipMediaApplication(ctx context.Context, params *CreateSipMediaApplicationInput, optFns ...func(*Options)) (*CreateSipMediaApplicationOutput, error) {
 	if params == nil {
 		params = &CreateSipMediaApplicationInput{}
@@ -28,12 +32,18 @@ func (c *Client) CreateSipMediaApplication(ctx context.Context, params *CreateSi
 
 type CreateSipMediaApplicationInput struct {
 
+	// The AWS Region assigned to the SIP media application.
+	//
 	// This member is required.
 	AwsRegion *string
 
+	// List of endpoints (Lambda ARNs) specified for the SIP media application.
+	//
 	// This member is required.
 	Endpoints []types.SipMediaApplicationEndpoint
 
+	// The SIP media application's name.
+	//
 	// This member is required.
 	Name *string
 
@@ -41,6 +51,8 @@ type CreateSipMediaApplicationInput struct {
 }
 
 type CreateSipMediaApplicationOutput struct {
+
+	// The SIP media application details.
 	SipMediaApplication *types.SipMediaApplication
 
 	// Metadata pertaining to the operation's result.

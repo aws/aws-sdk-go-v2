@@ -1,3 +1,11 @@
+# v1.11.1 (2023-03-23)
+
+* No change notes available for this release.
+
+# v1.11.0 (2023-03-22)
+
+* **Feature**: This release adds support of adding metadata when creating a new scene or updating an existing scene.
+
 # v1.10.6 (2023-03-21)
 
 * **Dependency Update**: Updated to the latest SDK module versions

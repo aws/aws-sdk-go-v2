@@ -19,7 +19,7 @@ import (
 // the previous version of this API. It has new metrics, offers filtering at a
 // metric level, and offers the ability to filter and group data by channels,
 // queues, routing profiles, agents, and agent hierarchy levels. It can retrieve
-// historical data for last the 14 days, in 24-hour intervals. For a description of
+// historical data for the last 14 days, in 24-hour intervals. For a description of
 // the historical metrics that are supported by GetMetricDataV2 and GetMetricData,
 // see Historical metrics definitions
 // (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html)

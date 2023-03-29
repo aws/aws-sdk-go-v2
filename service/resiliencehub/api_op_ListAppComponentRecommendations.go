@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the recommendations for an AWS Resilience Hub Application Component.
+// Lists the recommendations for an Resilience Hub Application Component.
 func (c *Client) ListAppComponentRecommendations(ctx context.Context, params *ListAppComponentRecommendationsInput, optFns ...func(*Options)) (*ListAppComponentRecommendationsOutput, error) {
 	if params == nil {
 		params = &ListAppComponentRecommendationsInput{}
@@ -52,8 +52,8 @@ type ListAppComponentRecommendationsInput struct {
 
 type ListAppComponentRecommendationsOutput struct {
 
-	// The recommendations for an AWS Resilience Hub Application Component, returned as
-	// an object. This object contains the names of the Application Components,
+	// The recommendations for an Resilience Hub Application Component, returned as an
+	// object. This object contains the names of the Application Components,
 	// configuration recommendations, and recommendation statuses.
 	//
 	// This member is required.

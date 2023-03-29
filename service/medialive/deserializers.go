@@ -4425,6 +4425,11 @@ func awsRestjson1_deserializeOpDocumentDescribeInputDeviceOutput(v **DescribeInp
 				sv.SerialNumber = ptr.String(jtv)
 			}
 
+		case "tags":
+			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
+				return err
+			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10194,6 +10199,11 @@ func awsRestjson1_deserializeOpDocumentUpdateInputDeviceOutput(v **UpdateInputDe
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.SerialNumber = ptr.String(jtv)
+			}
+
+		case "tags":
+			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
+				return err
 			}
 
 		case "type":
@@ -19795,6 +19805,15 @@ func awsRestjson1_deserializeDocumentHlsId3SegmentTaggingScheduleActionSettings(
 
 	for key, value := range shape {
 		switch key {
+		case "id3":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Id3 = ptr.String(jtv)
+			}
+
 		case "tag":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -21133,6 +21152,11 @@ func awsRestjson1_deserializeDocumentInputDeviceSummary(v **types.InputDeviceSum
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.SerialNumber = ptr.String(jtv)
+			}
+
+		case "tags":
+			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
+				return err
 			}
 
 		case "type":

@@ -31,8 +31,8 @@ func (c *Client) StartDocumentClassificationJob(ctx context.Context, params *Sta
 
 type StartDocumentClassificationJobInput struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role that grants Amazon Comprehend read access to your input data.
+	// The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend
+	// read access to your input data.
 	//
 	// This member is required.
 	DataAccessRoleArn *string
@@ -68,13 +68,15 @@ type StartDocumentClassificationJobInput struct {
 	// the sales department.
 	Tags []types.Tag
 
-	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
-	// encrypt data on the storage volume attached to the ML compute instance(s) that
-	// process the analysis job. The VolumeKmsKeyId can be either of the following
-	// formats:
-	// - KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
-	// - Amazon Resource
-	// Name (ARN) of a KMS Key:
+	// ID for the Amazon Web Services Key Management Service (KMS) key that Amazon
+	// Comprehend uses to encrypt data on the storage volume attached to the ML compute
+	// instance(s) that process the analysis job. The VolumeKmsKeyId can be either of
+	// the following formats:
+	//
+	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//
+	// *
+	// Amazon Resource Name (ARN) of a KMS Key:
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 
@@ -93,10 +95,10 @@ type StartDocumentClassificationJobOutput struct {
 	DocumentClassifierArn *string
 
 	// The Amazon Resource Name (ARN) of the document classification job. It is a
-	// unique, fully qualified identifier for the job. It includes the AWS account,
-	// Region, and the job ID. The format of the ARN is as follows:
-	// arn::comprehend:::document-classification-job/ The following is an example job
-	// ARN:
+	// unique, fully qualified identifier for the job. It includes the Amazon Web
+	// Services account, Amazon Web Services Region, and the job ID. The format of the
+	// ARN is as follows: arn::comprehend:::document-classification-job/ The following
+	// is an example job ARN:
 	// arn:aws:comprehend:us-west-2:111122223333:document-classification-job/1234abcd12ab34cd56ef1234567890ab
 	JobArn *string
 
@@ -105,18 +107,24 @@ type StartDocumentClassificationJobOutput struct {
 	JobId *string
 
 	// The status of the job:
-	// - SUBMITTED - The job has been received and queued for
+	//
+	// * SUBMITTED - The job has been received and queued for
 	// processing.
-	// - IN_PROGRESS - Amazon Comprehend is processing the job.
-	// - COMPLETED
-	// - The job was successfully completed and the output is available.
-	// - FAILED - The
-	// job did not complete. For details, use the DescribeDocumentClassificationJob
-	// operation.
-	// - STOP_REQUESTED - Amazon Comprehend has received a stop request for
-	// the job and is processing the request.
-	// - STOPPED - The job was successfully
-	// stopped without completing.
+	//
+	// * IN_PROGRESS - Amazon Comprehend is processing the job.
+	//
+	// *
+	// COMPLETED - The job was successfully completed and the output is available.
+	//
+	// *
+	// FAILED - The job did not complete. For details, use the
+	// DescribeDocumentClassificationJob operation.
+	//
+	// * STOP_REQUESTED - Amazon
+	// Comprehend has received a stop request for the job and is processing the
+	// request.
+	//
+	// * STOPPED - The job was successfully stopped without completing.
 	JobStatus types.JobStatus
 
 	// Metadata pertaining to the operation's result.

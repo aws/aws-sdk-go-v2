@@ -69,14 +69,18 @@ type ListPackageVersionAssetsInput struct {
 	// The namespace of the package version that contains the requested package version
 	// assets. The package version component that specifies its namespace depends on
 	// its type. For example:
-	// - The namespace of a Maven package version is its
+	//
+	// * The namespace of a Maven package version is its
 	// groupId.
-	// - The namespace of an npm package version is its scope.
-	// - Python and
+	//
+	// * The namespace of an npm package version is its scope.
+	//
+	// * Python and
 	// NuGet package versions do not contain a corresponding component, package
 	// versions of those formats do not have a namespace.
-	// - The namespace of a generic
-	// package is it’s namespace.
+	//
+	// * The namespace of a generic
+	// package is its namespace.
 	Namespace *string
 
 	// The token for the next set of results. Use the value returned in the previous
@@ -99,10 +103,13 @@ type ListPackageVersionAssetsOutput struct {
 	// The namespace of the package version that contains the requested package version
 	// assets. The package version component that specifies its namespace depends on
 	// its type. For example:
-	// - The namespace of a Maven package version is its
+	//
+	// * The namespace of a Maven package version is its
 	// groupId.
-	// - The namespace of an npm package version is its scope.
-	// - Python and
+	//
+	// * The namespace of an npm package version is its scope.
+	//
+	// * Python and
 	// NuGet package versions do not contain a corresponding component, package
 	// versions of those formats do not have a namespace.
 	Namespace *string

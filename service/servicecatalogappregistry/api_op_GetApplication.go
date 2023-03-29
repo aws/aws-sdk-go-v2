@@ -13,8 +13,8 @@ import (
 )
 
 // Retrieves metadata information about one of your applications. The application
-// can be specified either by its unique ID or by its name (which is unique within
-// one account in one region at a given point in time). Specify by ID in automated
+// can be specified by its ARN, ID, or name (which is unique within one account in
+// one region at a given point in time). Specify by ARN or ID in automated
 // workflows if you want to make sure that the exact same application is returned
 // or a ResourceNotFoundException is thrown, avoiding the ABA addressing problem.
 func (c *Client) GetApplication(ctx context.Context, params *GetApplicationInput, optFns ...func(*Options)) (*GetApplicationOutput, error) {
@@ -34,7 +34,7 @@ func (c *Client) GetApplication(ctx context.Context, params *GetApplicationInput
 
 type GetApplicationInput struct {
 
-	// The name or ID of the application.
+	// The name, ID, or ARN of the application.
 	//
 	// This member is required.
 	Application *string

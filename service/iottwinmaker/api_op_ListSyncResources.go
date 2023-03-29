@@ -30,7 +30,7 @@ func (c *Client) ListSyncResources(ctx context.Context, params *ListSyncResource
 
 type ListSyncResourcesInput struct {
 
-	// The sync soucre. Currently the only supported syncSoucre is SITEWISE .
+	// The sync source. Currently the only supported syncSource is SITEWISE .
 	//
 	// This member is required.
 	SyncSource *string
@@ -40,7 +40,15 @@ type ListSyncResourcesInput struct {
 	// This member is required.
 	WorkspaceId *string
 
-	// A list of objects that filter the request.
+	// A list of objects that filter the request. The following filter combinations are
+	// supported:
+	//
+	// * Filter with state
+	//
+	// * Filter with ResourceType and ResourceId
+	//
+	// *
+	// Filter with ResourceType and ExternalId
 	Filters []types.SyncResourceFilter
 
 	// The maximum number of results to return at one time. The default is 50. Valid

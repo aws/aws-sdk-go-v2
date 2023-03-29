@@ -10,6 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Deletes a SIP rule.
 func (c *Client) DeleteSipRule(ctx context.Context, params *DeleteSipRuleInput, optFns ...func(*Options)) (*DeleteSipRuleOutput, error) {
 	if params == nil {
 		params = &DeleteSipRuleInput{}
@@ -27,6 +28,8 @@ func (c *Client) DeleteSipRule(ctx context.Context, params *DeleteSipRuleInput, 
 
 type DeleteSipRuleInput struct {
 
+	// The SIP rule ID.
+	//
 	// This member is required.
 	SipRuleId *string
 

@@ -51,7 +51,7 @@ type DescribeHubOutput struct {
 	// when the check applies to multiple enabled standards. The value for this field
 	// in a member account matches the value in the administrator account. For accounts
 	// that aren't part of an organization, the default value of this field is
-	// SECURITY_CONTROL if you enabled Security Hub on or after February 9, 2023.
+	// SECURITY_CONTROL if you enabled Security Hub on or after February 23, 2023.
 	ControlFindingGenerator types.ControlFindingGenerator
 
 	// The ARN of the Hub resource that was retrieved.

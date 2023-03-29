@@ -11,6 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Retrieves the logging configuration settings for the specified Voice Connector.
+// Shows whether SIP message logs are enabled for sending to Amazon CloudWatch
+// Logs.
 func (c *Client) GetVoiceConnectorLoggingConfiguration(ctx context.Context, params *GetVoiceConnectorLoggingConfigurationInput, optFns ...func(*Options)) (*GetVoiceConnectorLoggingConfigurationOutput, error) {
 	if params == nil {
 		params = &GetVoiceConnectorLoggingConfigurationInput{}
@@ -28,6 +31,8 @@ func (c *Client) GetVoiceConnectorLoggingConfiguration(ctx context.Context, para
 
 type GetVoiceConnectorLoggingConfigurationInput struct {
 
+	// The Voice Connector ID.
+	//
 	// This member is required.
 	VoiceConnectorId *string
 
@@ -35,6 +40,8 @@ type GetVoiceConnectorLoggingConfigurationInput struct {
 }
 
 type GetVoiceConnectorLoggingConfigurationOutput struct {
+
+	// The logging configuration details .
 	LoggingConfiguration *types.LoggingConfiguration
 
 	// Metadata pertaining to the operation's result.

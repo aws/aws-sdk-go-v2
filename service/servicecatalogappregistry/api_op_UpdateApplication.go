@@ -29,7 +29,7 @@ func (c *Client) UpdateApplication(ctx context.Context, params *UpdateApplicatio
 
 type UpdateApplicationInput struct {
 
-	// The name or ID of the application that will be updated.
+	// The name, ID, or ARN of the application that will be updated.
 	//
 	// This member is required.
 	Application *string

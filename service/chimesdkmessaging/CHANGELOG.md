@@ -1,3 +1,7 @@
+# v1.14.0 (2023-03-23)
+
+* **Feature**: ExpirationSettings provides automatic resource deletion for Channels.
+
 # v1.13.0 (2023-03-21)
 
 * **Feature**: Amazon Chime SDK messaging customers can now manage streaming configuration for messaging data for archival and analysis.

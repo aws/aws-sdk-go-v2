@@ -50,7 +50,7 @@ type EvaluateSessionOutput struct {
 	// decision and authentication score.
 	AuthenticationResult *types.AuthenticationResult
 
-	// The identifier of the domain containing the session.
+	// The identifier of the domain that contains the session.
 	DomainId *string
 
 	// Details resulting from the fraud detection process, such as fraud detection

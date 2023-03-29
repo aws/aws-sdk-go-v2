@@ -44,7 +44,7 @@ type ListAccessPoliciesInput struct {
 	// which returns results in the next page.
 	NextToken *string
 
-	// Resource filters (can be collection or indexes) that policies can apply to.
+	// Resource filters (can be collections or indexes) that policies can apply to.
 	Resource []string
 
 	noSmithyDocumentSerde

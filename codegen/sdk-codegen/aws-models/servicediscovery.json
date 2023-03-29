@@ -98,9 +98,6 @@
                     "target": "com.amazonaws.servicediscovery#NamespaceAlreadyExists"
                 },
                 {
-                    "target": "com.amazonaws.servicediscovery#RequestLimitExceeded"
-                },
-                {
                     "target": "com.amazonaws.servicediscovery#ResourceLimitExceeded"
                 },
                 {
@@ -176,9 +173,6 @@
                 },
                 {
                     "target": "com.amazonaws.servicediscovery#NamespaceAlreadyExists"
-                },
-                {
-                    "target": "com.amazonaws.servicediscovery#RequestLimitExceeded"
                 },
                 {
                     "target": "com.amazonaws.servicediscovery#ResourceLimitExceeded"
@@ -271,9 +265,6 @@
                     "target": "com.amazonaws.servicediscovery#NamespaceAlreadyExists"
                 },
                 {
-                    "target": "com.amazonaws.servicediscovery#RequestLimitExceeded"
-                },
-                {
                     "target": "com.amazonaws.servicediscovery#ResourceLimitExceeded"
                 },
                 {
@@ -352,9 +343,6 @@
                 },
                 {
                     "target": "com.amazonaws.servicediscovery#NamespaceNotFound"
-                },
-                {
-                    "target": "com.amazonaws.servicediscovery#RequestLimitExceeded"
                 },
                 {
                     "target": "com.amazonaws.servicediscovery#ResourceLimitExceeded"
@@ -497,9 +485,6 @@
                     "target": "com.amazonaws.servicediscovery#NamespaceNotFound"
                 },
                 {
-                    "target": "com.amazonaws.servicediscovery#RequestLimitExceeded"
-                },
-                {
                     "target": "com.amazonaws.servicediscovery#ResourceInUse"
                 }
             ],
@@ -547,9 +532,6 @@
             "errors": [
                 {
                     "target": "com.amazonaws.servicediscovery#InvalidInput"
-                },
-                {
-                    "target": "com.amazonaws.servicediscovery#RequestLimitExceeded"
                 },
                 {
                     "target": "com.amazonaws.servicediscovery#ResourceInUse"
@@ -601,9 +583,6 @@
                 },
                 {
                     "target": "com.amazonaws.servicediscovery#InvalidInput"
-                },
-                {
-                    "target": "com.amazonaws.servicediscovery#RequestLimitExceeded"
                 },
                 {
                     "target": "com.amazonaws.servicediscovery#ResourceInUse"
@@ -937,9 +916,6 @@
                     "target": "com.amazonaws.servicediscovery#InvalidInput"
                 },
                 {
-                    "target": "com.amazonaws.servicediscovery#RequestLimitExceeded"
-                },
-                {
                     "target": "com.amazonaws.servicediscovery#ServiceNotFound"
                 }
             ],
@@ -997,9 +973,6 @@
                 },
                 {
                     "target": "com.amazonaws.servicediscovery#InvalidInput"
-                },
-                {
-                    "target": "com.amazonaws.servicediscovery#RequestLimitExceeded"
                 },
                 {
                     "target": "com.amazonaws.servicediscovery#ServiceNotFound"
@@ -1130,9 +1103,6 @@
                 },
                 {
                     "target": "com.amazonaws.servicediscovery#OperationNotFound"
-                },
-                {
-                    "target": "com.amazonaws.servicediscovery#RequestLimitExceeded"
                 }
             ],
             "traits": {
@@ -1179,9 +1149,6 @@
             "errors": [
                 {
                     "target": "com.amazonaws.servicediscovery#InvalidInput"
-                },
-                {
-                    "target": "com.amazonaws.servicediscovery#RequestLimitExceeded"
                 },
                 {
                     "target": "com.amazonaws.servicediscovery#ServiceNotFound"
@@ -1540,9 +1507,6 @@
                     "target": "com.amazonaws.servicediscovery#InvalidInput"
                 },
                 {
-                    "target": "com.amazonaws.servicediscovery#RequestLimitExceeded"
-                },
-                {
                     "target": "com.amazonaws.servicediscovery#ServiceNotFound"
                 }
             ],
@@ -1613,9 +1577,6 @@
             "errors": [
                 {
                     "target": "com.amazonaws.servicediscovery#InvalidInput"
-                },
-                {
-                    "target": "com.amazonaws.servicediscovery#RequestLimitExceeded"
                 }
             ],
             "traits": {
@@ -1684,9 +1645,6 @@
             "errors": [
                 {
                     "target": "com.amazonaws.servicediscovery#InvalidInput"
-                },
-                {
-                    "target": "com.amazonaws.servicediscovery#RequestLimitExceeded"
                 }
             ],
             "traits": {
@@ -1755,9 +1713,6 @@
             "errors": [
                 {
                     "target": "com.amazonaws.servicediscovery#InvalidInput"
-                },
-                {
-                    "target": "com.amazonaws.servicediscovery#RequestLimitExceeded"
                 }
             ],
             "traits": {
@@ -1826,9 +1781,6 @@
             "errors": [
                 {
                     "target": "com.amazonaws.servicediscovery#InvalidInput"
-                },
-                {
-                    "target": "com.amazonaws.servicediscovery#RequestLimitExceeded"
                 },
                 {
                     "target": "com.amazonaws.servicediscovery#ResourceNotFoundException"
@@ -2687,9 +2639,6 @@
                     "target": "com.amazonaws.servicediscovery#InvalidInput"
                 },
                 {
-                    "target": "com.amazonaws.servicediscovery#RequestLimitExceeded"
-                },
-                {
                     "target": "com.amazonaws.servicediscovery#ResourceInUse"
                 },
                 {
@@ -3292,9 +3241,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "af-south-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "af-south-1"
                             }
                         },
                         {
@@ -3305,9 +3254,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-east-1"
                             }
                         },
                         {
@@ -3318,9 +3267,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -3331,9 +3280,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-northeast-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -3344,9 +3293,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-south-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-south-1"
                             }
                         },
                         {
@@ -3357,9 +3306,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -3370,9 +3319,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ap-southeast-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -3383,9 +3332,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ca-central-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -3396,9 +3345,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "ca-central-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -3409,9 +3358,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-central-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -3422,9 +3371,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-north-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-north-1"
                             }
                         },
                         {
@@ -3435,9 +3384,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-south-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-south-1"
                             }
                         },
                         {
@@ -3448,9 +3397,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -3461,9 +3410,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -3474,9 +3423,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-west-3",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "eu-west-3"
                             }
                         },
                         {
@@ -3487,9 +3436,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "me-south-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "me-south-1"
                             }
                         },
                         {
@@ -3500,9 +3449,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "sa-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "sa-east-1"
                             }
                         },
                         {
@@ -3513,9 +3462,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -3526,9 +3475,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -3539,9 +3488,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -3552,9 +3501,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-2",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -3565,9 +3514,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-west-1"
                             }
                         },
                         {
@@ -3578,9 +3527,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-west-1"
                             }
                         },
                         {
@@ -3591,9 +3540,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-2",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -3604,9 +3553,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-west-2",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -3617,9 +3566,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -3630,9 +3579,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -3643,9 +3592,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -3656,9 +3605,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-northwest-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "cn-northwest-1"
                             }
                         },
                         {
@@ -3669,9 +3618,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -3682,9 +3631,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -3695,9 +3644,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -3708,9 +3657,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -3721,9 +3670,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -3734,9 +3683,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-west-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-gov-west-1"
                             }
                         },
                         {
@@ -3747,9 +3696,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-west-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-gov-west-1"
                             }
                         },
                         {
@@ -3760,9 +3709,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "UseFIPS": true
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -3773,9 +3722,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "UseFIPS": false
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -3786,9 +3746,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -3799,9 +3770,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -3812,9 +3794,20 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "UseFIPS": true
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -3825,9 +3818,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "UseFIPS": false
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -3838,9 +3831,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3852,8 +3845,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3863,9 +3856,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3875,10 +3868,16 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -4307,9 +4306,6 @@
                     "target": "com.amazonaws.servicediscovery#InvalidInput"
                 },
                 {
-                    "target": "com.amazonaws.servicediscovery#RequestLimitExceeded"
-                },
-                {
                     "target": "com.amazonaws.servicediscovery#ResourceNotFoundException"
                 },
                 {
@@ -4393,9 +4389,6 @@
                     "target": "com.amazonaws.servicediscovery#InvalidInput"
                 },
                 {
-                    "target": "com.amazonaws.servicediscovery#RequestLimitExceeded"
-                },
-                {
                     "target": "com.amazonaws.servicediscovery#ResourceNotFoundException"
                 }
             ],
@@ -4449,9 +4442,6 @@
                 },
                 {
                     "target": "com.amazonaws.servicediscovery#NamespaceNotFound"
-                },
-                {
-                    "target": "com.amazonaws.servicediscovery#RequestLimitExceeded"
                 },
                 {
                     "target": "com.amazonaws.servicediscovery#ResourceInUse"
@@ -4523,9 +4513,6 @@
                     "target": "com.amazonaws.servicediscovery#InvalidInput"
                 },
                 {
-                    "target": "com.amazonaws.servicediscovery#RequestLimitExceeded"
-                },
-                {
                     "target": "com.amazonaws.servicediscovery#ServiceNotFound"
                 }
             ],
@@ -4579,9 +4566,6 @@
                 },
                 {
                     "target": "com.amazonaws.servicediscovery#NamespaceNotFound"
-                },
-                {
-                    "target": "com.amazonaws.servicediscovery#RequestLimitExceeded"
                 },
                 {
                     "target": "com.amazonaws.servicediscovery#ResourceInUse"
@@ -4653,9 +4637,6 @@
                     "target": "com.amazonaws.servicediscovery#NamespaceNotFound"
                 },
                 {
-                    "target": "com.amazonaws.servicediscovery#RequestLimitExceeded"
-                },
-                {
                     "target": "com.amazonaws.servicediscovery#ResourceInUse"
                 }
             ],
@@ -4720,9 +4701,6 @@
                 },
                 {
                     "target": "com.amazonaws.servicediscovery#InvalidInput"
-                },
-                {
-                    "target": "com.amazonaws.servicediscovery#RequestLimitExceeded"
                 },
                 {
                     "target": "com.amazonaws.servicediscovery#ServiceNotFound"

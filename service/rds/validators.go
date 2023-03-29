@@ -3679,9 +3679,6 @@ func validateOpCreateDBInstanceReadReplicaInput(v *CreateDBInstanceReadReplicaIn
 	if v.DBInstanceIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DBInstanceIdentifier"))
 	}
-	if v.SourceDBInstanceIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceDBInstanceIdentifier"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

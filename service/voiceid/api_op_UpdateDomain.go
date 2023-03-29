@@ -51,7 +51,7 @@ type UpdateDomainInput struct {
 	// This member is required.
 	ServerSideEncryptionConfiguration *types.ServerSideEncryptionConfiguration
 
-	// A brief description of the domain.
+	// A brief description about this domain.
 	Description *string
 
 	noSmithyDocumentSerde

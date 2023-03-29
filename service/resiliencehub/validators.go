@@ -1180,6 +1180,59 @@ func validateDisruptionPolicy(v map[string]types.FailurePolicy) error {
 	}
 }
 
+func validateEksSource(v *types.EksSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EksSource"}
+	if v.EksClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EksClusterArn"))
+	}
+	if v.Namespaces == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Namespaces"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEksSourceClusterNamespace(v *types.EksSourceClusterNamespace) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EksSourceClusterNamespace"}
+	if v.EksClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EksClusterArn"))
+	}
+	if v.Namespace == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEksSourceList(v []types.EksSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EksSourceList"}
+	for i := range v {
+		if err := validateEksSource(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFailurePolicy(v *types.FailurePolicy) error {
 	if v == nil {
 		return nil
@@ -1474,6 +1527,11 @@ func validateOpDeleteAppInputSourceInput(v *DeleteAppInputSourceInput) error {
 			invalidParams.AddNested("TerraformSource", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.EksSourceClusterNamespace != nil {
+		if err := validateEksSourceClusterNamespace(v.EksSourceClusterNamespace); err != nil {
+			invalidParams.AddNested("EksSourceClusterNamespace", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1718,6 +1776,11 @@ func validateOpImportResourcesToDraftAppVersionInput(v *ImportResourcesToDraftAp
 	if v.TerraformSources != nil {
 		if err := validateTerraformSourceList(v.TerraformSources); err != nil {
 			invalidParams.AddNested("TerraformSources", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EksSources != nil {
+		if err := validateEksSourceList(v.EksSources); err != nil {
+			invalidParams.AddNested("EksSources", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

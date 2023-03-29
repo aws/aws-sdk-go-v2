@@ -45,7 +45,7 @@ type AlarmRecommendation struct {
 	noSmithyDocumentSerde
 }
 
-// Defines an AWS Resilience Hub application.
+// Defines an Resilience Hub application.
 type App struct {
 
 	// The Amazon Resource Name (ARN) of the AWS Resilience Hub application. The format
@@ -276,7 +276,7 @@ type AppComponentCompliance struct {
 	noSmithyDocumentSerde
 }
 
-// The list of AWS Resilience Hub application input sources.
+// The list of Resilience Hub application input sources.
 type AppInputSource struct {
 
 	// The resource type of the input source.
@@ -284,7 +284,10 @@ type AppInputSource struct {
 	// This member is required.
 	ImportType ResourceMappingType
 
-	// The number of resources that were imported.
+	// The namespace on your Amazon Elastic Kubernetes Service cluster.
+	EksSourceClusterNamespace *EksSourceClusterNamespace
+
+	// The number of resources.
 	ResourceCount int32
 
 	// The Amazon Resource Name (ARN) of the input source. For more information about
@@ -353,9 +356,9 @@ type AppVersionSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Defines recommendations for an AWS Resilience Hub Application Component,
-// returned as an object. This object contains component names, configuration
-// recommendations, and recommendation statuses.
+// Defines recommendations for an Resilience Hub Application Component, returned as
+// an object. This object contains component names, configuration recommendations,
+// and recommendation statuses.
 type ComponentRecommendation struct {
 
 	// The name of the Application Component.
@@ -479,6 +482,49 @@ type DisruptionCompliance struct {
 	noSmithyDocumentSerde
 }
 
+// The input source of the Amazon Elastic Kubernetes Service cluster.
+type EksSource struct {
+
+	// The Amazon Resource Name (ARN) of the Amazon Elastic Kubernetes Service cluster.
+	// The format for this ARN is: arn:aws:eks:region:account-id:cluster/cluster-name.
+	// For more information about ARNs, see  Amazon Resource Names (ARNs)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
+	// the AWS General Reference guide.
+	//
+	// This member is required.
+	EksClusterArn *string
+
+	// The list of namespaces located on your Amazon Elastic Kubernetes Service
+	// cluster.
+	//
+	// This member is required.
+	Namespaces []string
+
+	noSmithyDocumentSerde
+}
+
+// The input source of the namespace that is located on your Amazon Elastic
+// Kubernetes Service cluster.
+type EksSourceClusterNamespace struct {
+
+	// The Amazon Resource Name (ARN) of the Amazon Elastic Kubernetes Service cluster.
+	// The format for this ARN is: arn:aws:eks:region:account-id:cluster/cluster-name.
+	// For more information about ARNs, see  Amazon Resource Names (ARNs)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
+	// the AWS General Reference guide.
+	//
+	// This member is required.
+	EksClusterArn *string
+
+	// Name of the namespace that is located on your Amazon Elastic Kubernetes Service
+	// cluster.
+	//
+	// This member is required.
+	Namespace *string
+
+	noSmithyDocumentSerde
+}
+
 // Defines a failure policy.
 type FailurePolicy struct {
 
@@ -503,6 +549,11 @@ type LogicalResourceId struct {
 	// This member is required.
 	Identifier *string
 
+	// The name of the Amazon Elastic Kubernetes Service cluster and namespace this
+	// resource belongs to. This parameter accepts values in "eks-cluster/namespace"
+	// format.
+	EksSourceName *string
+
 	// The name of the CloudFormation stack this resource belongs to.
 	LogicalStackName *string
 
@@ -516,7 +567,7 @@ type LogicalResourceId struct {
 }
 
 // Defines a physical resource. A physical resource is a resource that exists in
-// your account. It can be identified using an Amazon Resource Name (ARN) or an AWS
+// your account. It can be identified using an Amazon Resource Name (ARN) or an
 // Resilience Hub-native identifier.
 type PhysicalResource struct {
 
@@ -562,7 +613,7 @@ type PhysicalResourceId struct {
 	Identifier *string
 
 	// Specifies the type of physical resource identifier. Arn The resource identifier
-	// is an Amazon Resource Name (ARN) . Native The resource identifier is an AWS
+	// is an Amazon Resource Name (ARN) . Native The resource identifier is an
 	// Resilience Hub-native identifier.
 	//
 	// This member is required.
@@ -787,7 +838,7 @@ type ResourceMapping struct {
 	// stack. The name of the CloudFormation stack is contained in the logicalStackName
 	// property. Resource The resource is mapped to another resource. The name of the
 	// resource is contained in the resourceName property. ResourceGroup The resource
-	// is mapped to a resource group. The name of the resource group is contained in
+	// is mapped to an Resource Groups. The name of the resource group is contained in
 	// the resourceGroupName property.
 	//
 	// This member is required.
@@ -800,6 +851,11 @@ type ResourceMapping struct {
 
 	// The name of the application this resource is mapped to.
 	AppRegistryAppName *string
+
+	// The name of the Amazon Elastic Kubernetes Service cluster and namespace this
+	// resource belongs to. This parameter accepts values in "eks-cluster/namespace"
+	// format.
+	EksSourceName *string
 
 	// The name of the CloudFormation stack this resource is mapped to.
 	LogicalStackName *string
@@ -867,7 +923,7 @@ type SopRecommendation struct {
 // The Terraform s3 state file you need to import.
 type TerraformSource struct {
 
-	// The Terraform s3 state file you need to import.
+	// The URL of the Terraform s3 state file you need to import.
 	//
 	// This member is required.
 	S3StateFileUrl *string
@@ -917,7 +973,7 @@ type TestRecommendation struct {
 	noSmithyDocumentSerde
 }
 
-// Defines a resource that is not supported by AWS Resilience Hub.
+// Defines a resource that is not supported by Resilience Hub.
 type UnsupportedResource struct {
 
 	// The logical resource identifier for the unsupported resource.
@@ -934,6 +990,9 @@ type UnsupportedResource struct {
 	//
 	// This member is required.
 	ResourceType *string
+
+	// The status of unsupported resource.
+	UnsupportedResourceStatus *string
 
 	noSmithyDocumentSerde
 }

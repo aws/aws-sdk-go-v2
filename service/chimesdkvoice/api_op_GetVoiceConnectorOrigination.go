@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Retrieves the origination settings for the specified Voice Connector.
 func (c *Client) GetVoiceConnectorOrigination(ctx context.Context, params *GetVoiceConnectorOriginationInput, optFns ...func(*Options)) (*GetVoiceConnectorOriginationOutput, error) {
 	if params == nil {
 		params = &GetVoiceConnectorOriginationInput{}
@@ -28,6 +29,8 @@ func (c *Client) GetVoiceConnectorOrigination(ctx context.Context, params *GetVo
 
 type GetVoiceConnectorOriginationInput struct {
 
+	// The Voice Connector ID.
+	//
 	// This member is required.
 	VoiceConnectorId *string
 
@@ -35,6 +38,8 @@ type GetVoiceConnectorOriginationInput struct {
 }
 
 type GetVoiceConnectorOriginationOutput struct {
+
+	// The origination setting details.
 	Origination *types.Origination
 
 	// Metadata pertaining to the operation's result.

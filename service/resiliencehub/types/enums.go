@@ -433,6 +433,7 @@ const (
 	ResourceMappingTypeAppRegistryApp ResourceMappingType = "AppRegistryApp"
 	ResourceMappingTypeResourceGroup  ResourceMappingType = "ResourceGroup"
 	ResourceMappingTypeTerraform      ResourceMappingType = "Terraform"
+	ResourceMappingTypeEks            ResourceMappingType = "EKS"
 )
 
 // Values returns all known values for ResourceMappingType. Note that this can be
@@ -445,6 +446,7 @@ func (ResourceMappingType) Values() []ResourceMappingType {
 		"AppRegistryApp",
 		"ResourceGroup",
 		"Terraform",
+		"EKS",
 	}
 }
 

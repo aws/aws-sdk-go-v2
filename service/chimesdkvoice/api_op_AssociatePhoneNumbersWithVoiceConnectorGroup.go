@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Associates phone numbers with the specified Amazon Chime SDK Voice Connector
+// group.
 func (c *Client) AssociatePhoneNumbersWithVoiceConnectorGroup(ctx context.Context, params *AssociatePhoneNumbersWithVoiceConnectorGroupInput, optFns ...func(*Options)) (*AssociatePhoneNumbersWithVoiceConnectorGroupOutput, error) {
 	if params == nil {
 		params = &AssociatePhoneNumbersWithVoiceConnectorGroupInput{}
@@ -28,18 +30,29 @@ func (c *Client) AssociatePhoneNumbersWithVoiceConnectorGroup(ctx context.Contex
 
 type AssociatePhoneNumbersWithVoiceConnectorGroupInput struct {
 
+	// List of phone numbers, in E.164 format.
+	//
 	// This member is required.
 	E164PhoneNumbers []string
 
+	// The Amazon Chime SDK Voice Connector group ID.
+	//
 	// This member is required.
 	VoiceConnectorGroupId *string
 
+	// If true, associates the provided phone numbers with the provided Amazon Chime
+	// SDK Voice Connector Group and removes any previously existing associations. If
+	// false, does not associate any phone numbers that have previously existing
+	// associations.
 	ForceAssociate *bool
 
 	noSmithyDocumentSerde
 }
 
 type AssociatePhoneNumbersWithVoiceConnectorGroupOutput struct {
+
+	// If the action fails for one or more of the phone numbers in the request, a list
+	// of the phone numbers is returned, along with error codes and error messages.
 	PhoneNumberErrors []types.PhoneNumberError
 
 	// Metadata pertaining to the operation's result.

@@ -119,3 +119,35 @@ func (ErrorCode) Values() []ErrorCode {
 		"PhoneNumberAssociationsExist",
 	}
 }
+
+type ExpirationCriterion string
+
+// Enum values for ExpirationCriterion
+const (
+	ExpirationCriterionCreatedTimestamp ExpirationCriterion = "CREATED_TIMESTAMP"
+)
+
+// Values returns all known values for ExpirationCriterion. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExpirationCriterion) Values() []ExpirationCriterion {
+	return []ExpirationCriterion{
+		"CREATED_TIMESTAMP",
+	}
+}
+
+type RespondsTo string
+
+// Enum values for RespondsTo
+const (
+	RespondsToStandardMessages RespondsTo = "STANDARD_MESSAGES"
+)
+
+// Values returns all known values for RespondsTo. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (RespondsTo) Values() []RespondsTo {
+	return []RespondsTo{
+		"STANDARD_MESSAGES",
+	}
+}

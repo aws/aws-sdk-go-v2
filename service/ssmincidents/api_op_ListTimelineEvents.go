@@ -36,18 +36,23 @@ type ListTimelineEventsInput struct {
 	IncidentRecordArn *string
 
 	// Filters the timeline events based on the provided conditional values. You can
-	// filter timeline events using the following keys:
-	// - eventTime
-	// - eventType
+	// filter timeline events with the following keys:
+	//
+	// * eventTime
+	//
+	// * eventType
 	//
 	// Note
 	// the following when deciding how to use Filters:
-	// - If you don't specify a Filter,
-	// the response includes all timeline events.
-	// - If you specify more than one filter
-	// in a single request, the response returns timeline events that match all
-	// filters.
-	// - If you specify a filter with more than one value, the response
+	//
+	// * If you don't specify a
+	// Filter, the response includes all timeline events.
+	//
+	// * If you specify more than
+	// one filter in a single request, the response returns timeline events that match
+	// all filters.
+	//
+	// * If you specify a filter with more than one value, the response
 	// returns timeline events that match any of the values provided.
 	Filters []types.Filter
 
@@ -57,7 +62,7 @@ type ListTimelineEventsInput struct {
 	// The pagination token to continue to the next page of results.
 	NextToken *string
 
-	// Sort by the specified key value pair.
+	// Sort timeline events by the specified key value pair.
 	SortBy types.TimelineEventSort
 
 	// Sorts the order of timeline events by the value specified in the sortBy field.

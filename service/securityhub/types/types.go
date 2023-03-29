@@ -179,6 +179,43 @@ type AssociatedStandard struct {
 	noSmithyDocumentSerde
 }
 
+// The associations between a route table and one or more subnets or a gateway.
+type AssociationSetDetails struct {
+
+	// The state of the association between a route table and a subnet or gateway.
+	AssociationState *AssociationStateDetails
+
+	// The ID of the internet gateway or virtual private gateway.
+	GatewayId *string
+
+	// Indicates whether this is the main route table.
+	Main bool
+
+	// The ID of the association.
+	RouteTableAssociationId *string
+
+	// The ID of the route table.
+	RouteTableId *string
+
+	// The ID of the subnet. A subnet ID is not returned for an implicit association.
+	SubnetId *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the state of an association between a route table and a subnet or
+// gateway.
+type AssociationStateDetails struct {
+
+	// The state of the association.
+	State *string
+
+	// The status message, if applicable.
+	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about an Availability Zone.
 type AvailabilityZone struct {
 
@@ -2701,6 +2738,9 @@ type AwsEc2InstanceDetails struct {
 	// Details about the metadata options for the Amazon EC2 instance.
 	MetadataOptions *AwsEc2InstanceMetadataOptions
 
+	// Describes the type of monitoring that’s turned on for an instance.
+	Monitoring *AwsEc2InstanceMonitoringDetails
+
 	// The identifiers of the network interfaces for the EC2 instance. The details for
 	// each network interface are in a corresponding AwsEc2NetworkInterfacesDetails
 	// object.
@@ -2740,6 +2780,16 @@ type AwsEc2InstanceMetadataOptions struct {
 
 	// Specifies whether to allow access to instance tags from the instance metadata.
 	InstanceMetadataTags *string
+
+	noSmithyDocumentSerde
+}
+
+// The type of monitoring that’s turned on for an Amazon EC2 instance.
+type AwsEc2InstanceMonitoringDetails struct {
+
+	// Indicates whether detailed monitoring is turned on. Otherwise, basic monitoring
+	// is turned on.
+	State *string
 
 	noSmithyDocumentSerde
 }
@@ -3704,6 +3754,30 @@ type AwsEc2NetworkInterfaceSecurityGroup struct {
 
 	// The name of the security group.
 	GroupName *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about a route table for the specified VPC.
+type AwsEc2RouteTableDetails struct {
+
+	// The associations between a route table and one or more subnets or a gateway.
+	AssociationSet []AssociationSetDetails
+
+	// The ID of the Amazon Web Services account that owns the route table.
+	OwnerId *string
+
+	// Describes a virtual private gateway propagating route.
+	PropagatingVgwSet []PropagatingVgwSetDetails
+
+	// The routes in the route table.
+	RouteSet []RouteSetDetails
+
+	// The ID of the route table.
+	RouteTableId *string
+
+	// The ID of the virtual private cloud (VPC).
+	VpcId *string
 
 	noSmithyDocumentSerde
 }
@@ -5755,6 +5829,11 @@ type AwsEksClusterLoggingDetails struct {
 
 // Information about the VPC configuration used by the cluster control plane.
 type AwsEksClusterResourcesVpcConfigDetails struct {
+
+	// Indicates whether the Amazon EKS public API server endpoint is turned on. If the
+	// Amazon EKS public API server endpoint is turned off, your cluster's Kubernetes
+	// API server can only receive requests that originate from within the cluster VPC.
+	EndpointPublicAccess bool
 
 	// The security groups that are associated with the cross-account elastic network
 	// interfaces that are used to allow communication between your nodes and the
@@ -9150,6 +9229,10 @@ type AwsS3BucketDetails struct {
 	// 2020-03-22T13:22:13.933Z.
 	CreatedAt *string
 
+	// Specifies which rule Amazon S3 applies by default to every new object placed in
+	// the specified bucket.
+	ObjectLockConfiguration *AwsS3BucketObjectLockConfiguration
+
 	// The Amazon Web Services account identifier of the account that owns the S3
 	// bucket.
 	OwnerAccountId *string
@@ -9244,6 +9327,49 @@ type AwsS3BucketNotificationConfigurationS3KeyFilterRule struct {
 
 	// The filter value.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// The container element for S3 Object Lock configuration parameters. In Amazon S3,
+// Object Lock can help prevent objects from being deleted or overwritten for a
+// fixed amount of time or indefinitely.
+type AwsS3BucketObjectLockConfiguration struct {
+
+	// Indicates whether the bucket has an Object Lock configuration enabled.
+	ObjectLockEnabled *string
+
+	// Specifies the Object Lock rule for the specified object.
+	Rule *AwsS3BucketObjectLockConfigurationRuleDetails
+
+	noSmithyDocumentSerde
+}
+
+// The default S3 Object Lock retention mode and period that you want to apply to
+// new objects placed in the specified Amazon S3 bucket.
+type AwsS3BucketObjectLockConfigurationRuleDefaultRetentionDetails struct {
+
+	// The number of days that you want to specify for the default retention period.
+	Days int32
+
+	// The default Object Lock retention mode you want to apply to new objects placed
+	// in the specified bucket.
+	Mode *string
+
+	// The number of years that you want to specify for the default retention period.
+	Years int32
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the S3 Object Lock rule for the specified object. In Amazon S3, Object
+// Lock can help prevent objects from being deleted or overwritten for a fixed
+// amount of time or indefinitely.
+type AwsS3BucketObjectLockConfigurationRuleDetails struct {
+
+	// The default Object Lock retention mode and period that you want to apply to new
+	// objects placed in the specified bucket.
+	DefaultRetention *AwsS3BucketObjectLockConfigurationRuleDefaultRetentionDetails
 
 	noSmithyDocumentSerde
 }
@@ -9927,7 +10053,8 @@ type AwsSecurityFindingFilters struct {
 	// The name of the process.
 	ProcessName []StringFilter
 
-	// The parent process ID.
+	// The parent process ID. This field accepts positive integers between O and
+	// 2147483647.
 	ProcessParentPid []NumberFilter
 
 	// The path to the process executable.
@@ -12220,7 +12347,8 @@ type ProcessDetails struct {
 	// The name of the process.
 	Name *string
 
-	// The parent process ID.
+	// The parent process ID. This field accepts positive integers between O and
+	// 2147483647.
 	ParentPid int32
 
 	// The path to the process executable.
@@ -12282,6 +12410,15 @@ type Product struct {
 
 	// The resource policy associated with the product.
 	ProductSubscriptionResourcePolicy *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a virtual private gateway propagating route.
+type PropagatingVgwSetDetails struct {
+
+	// The ID of the virtual private gateway.
+	GatewayId *string
 
 	noSmithyDocumentSerde
 }
@@ -12474,6 +12611,11 @@ type ResourceDetails struct {
 
 	// Details for an EC2 network interface.
 	AwsEc2NetworkInterface *AwsEc2NetworkInterfaceDetails
+
+	// Provides details about a route table. A route table contains a set of rules,
+	// called routes, that determine where to direct network traffic from your subnet
+	// or gateway.
+	AwsEc2RouteTable *AwsEc2RouteTableDetails
 
 	// Details for an EC2 security group.
 	AwsEc2SecurityGroup *AwsEc2SecurityGroupDetails
@@ -12688,6 +12830,60 @@ type Result struct {
 
 	// The reason that the account was not processed.
 	ProcessingResult *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about the routes in the route table.
+type RouteSetDetails struct {
+
+	// The ID of the carrier gateway.
+	CarrierGatewayId *string
+
+	// The Amazon Resource Name (ARN) of the core network.
+	CoreNetworkArn *string
+
+	// The IPv4 CIDR block used for the destination match.
+	DestinationCidrBlock *string
+
+	// The IPv6 CIDR block used for the destination match.
+	DestinationIpv6CidrBlock *string
+
+	// The prefix of the destination Amazon Web Service.
+	DestinationPrefixListId *string
+
+	// The ID of the egress-only internet gateway.
+	EgressOnlyInternetGatewayId *string
+
+	// The ID of a gateway attached to your VPC.
+	GatewayId *string
+
+	// The ID of a NAT instance in your VPC.
+	InstanceId *string
+
+	// The ID of the Amazon Web Services account that owns the instance.
+	InstanceOwnerId *string
+
+	// The ID of the local gateway.
+	LocalGatewayId *string
+
+	// The ID of a NAT gateway.
+	NatGatewayId *string
+
+	// The ID of the network interface.
+	NetworkInterfaceId *string
+
+	// Describes how the route was created.
+	Origin *string
+
+	// The state of the route.
+	State *string
+
+	// The ID of a transit gateway.
+	TransitGatewayId *string
+
+	// The ID of a VPC peering connection.
+	VpcPeeringConnectionId *string
 
 	noSmithyDocumentSerde
 }

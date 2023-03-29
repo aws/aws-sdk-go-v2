@@ -19,10 +19,10 @@ import (
 // snapshot data to Amazon S3
 // (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ExportSnapshot.html)
 // in the Amazon RDS User Guide or Exporting DB cluster snapshot data to Amazon S3
-// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/aurora-export-snapshot.html)
+// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-export-snapshot.html)
 // in the Amazon Aurora User Guide. For more information on exporting DB cluster
 // data, see Exporting DB cluster data to Amazon S3
-// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/export-cluster-data.html)
+// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/export-cluster-data.html)
 // in the Amazon Aurora User Guide.
 func (c *Client) StartExportTask(ctx context.Context, params *StartExportTaskInput, optFns ...func(*Options)) (*StartExportTaskOutput, error) {
 	if params == nil {
@@ -48,7 +48,30 @@ type StartExportTaskInput struct {
 	ExportTaskIdentifier *string
 
 	// The name of the IAM role to use for writing to the Amazon S3 bucket when
-	// exporting a snapshot or cluster.
+	// exporting a snapshot or cluster. In the IAM policy attached to your IAM role,
+	// include the following required actions to allow the transfer of files from
+	// Amazon RDS or Amazon Aurora to an S3 bucket:
+	//
+	// * s3:PutObject*
+	//
+	// *
+	// s3:GetObject*
+	//
+	// * s3:ListBucket
+	//
+	// * s3:DeleteObject*
+	//
+	// * s3:GetBucketLocation
+	//
+	// In
+	// the policy, include the resources to identify the S3 bucket and objects in the
+	// bucket. The following list of resources shows the Amazon Resource Name (ARN)
+	// format for accessing S3:
+	//
+	// * arn:aws:s3:::your-s3-bucket
+	//
+	// *
+	// arn:aws:s3:::your-s3-bucket/*
 	//
 	// This member is required.
 	IamRoleArn *string

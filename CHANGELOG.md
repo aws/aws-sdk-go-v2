@@ -1,3 +1,96 @@
+# Release (2023-03-29)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/opensearchserverless`: [v1.2.0](service/opensearchserverless/CHANGELOG.md#v120-2023-03-29)
+  * **Feature**: This release includes two new exception types "ServiceQuotaExceededException" and "OcuLimitExceededException".
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.42.0](service/rds/CHANGELOG.md#v1420-2023-03-29)
+  * **Feature**: Add support for creating a read replica DB instance from a Multi-AZ DB cluster.
+
+# Release (2023-03-28)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ssmcontacts`: [v1.15.0](service/ssmcontacts/CHANGELOG.md#v1150-2023-03-28)
+  * **Feature**: This release adds 12 new APIs as part of Oncall Schedule feature release, adds support for a new contact type: ONCALL_SCHEDULE. Check public documentation for AWS ssm-contacts for more information
+* `github.com/aws/aws-sdk-go-v2/service/ssmincidents`: [v1.21.0](service/ssmincidents/CHANGELOG.md#v1210-2023-03-28)
+  * **Feature**: Increased maximum length of "TriggerDetails.rawData" to 10K characters and "IncidentSummary" to 8K characters.
+
+# Release (2023-03-27)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.24.0](service/athena/CHANGELOG.md#v1240-2023-03-27)
+  * **Feature**: Enforces a minimal level of encryption for the workgroup for query and calculation results that are written to Amazon S3. When enabled, workgroup users can set encryption only to the minimum level set by the administrator or higher when they submit queries.
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkvoice`: [v1.4.0](service/chimesdkvoice/CHANGELOG.md#v140-2023-03-27)
+  * **Feature**: Documentation updates for Amazon Chime SDK Voice.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.50.0](service/connect/CHANGELOG.md#v1500-2023-03-27)
+  * **Feature**: This release introduces support for RelatedContactId in the StartChatContact API. Interactive message and interactive message response have been added to the list of supported message content types for this API as well.
+* `github.com/aws/aws-sdk-go-v2/service/connectparticipant`: [v1.15.7](service/connectparticipant/CHANGELOG.md#v1157-2023-03-27)
+  * **Documentation**: This release provides an update to the SendMessage API to handle interactive message response content-types.
+* `github.com/aws/aws-sdk-go-v2/service/iotwireless`: [v1.26.0](service/iotwireless/CHANGELOG.md#v1260-2023-03-27)
+  * **Feature**: Introducing new APIs that enable Sidewalk devices to communicate with AWS IoT Core through Sidewalk gateways. This will empower AWS customers to connect Sidewalk devices with other AWS IoT Services, creating  possibilities for seamless integration and advanced device management.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.31.0](service/medialive/CHANGELOG.md#v1310-2023-03-27)
+  * **Feature**: AWS Elemental MediaLive now supports ID3 tag insertion for audio only HLS output groups. AWS Elemental Link devices now support tagging.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.72.1](service/sagemaker/CHANGELOG.md#v1721-2023-03-27)
+  * **Documentation**: Fixed some improperly rendered links in SDK documentation.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.30.0](service/securityhub/CHANGELOG.md#v1300-2023-03-27)
+  * **Feature**: Added new resource detail objects to ASFF, including resources for AwsEksCluster, AWSS3Bucket, AwsEc2RouteTable and AwsEC2Instance.
+* `github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry`: [v1.17.0](service/servicecatalogappregistry/CHANGELOG.md#v1170-2023-03-27)
+  * **Feature**: In this release, we started supporting ARN in applicationSpecifier and attributeGroupSpecifier. GetAttributeGroup, ListAttributeGroups and ListAttributeGroupsForApplication APIs will now have CreatedBy field in the response.
+* `github.com/aws/aws-sdk-go-v2/service/voiceid`: [v1.13.0](service/voiceid/CHANGELOG.md#v1130-2023-03-27)
+  * **Feature**: Amazon Connect Voice ID now supports multiple fraudster watchlists. Every domain has a default watchlist where all existing fraudsters are placed by default. Custom watchlists may now be created, managed, and evaluated against for known fraudster detection.
+
+# Release (2023-03-24)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.25.7](service/cloudwatch/CHANGELOG.md#v1257-2023-03-24)
+  * **Documentation**: Doc-only update to correct alarm actions list
+* `github.com/aws/aws-sdk-go-v2/service/comprehend`: [v1.23.0](service/comprehend/CHANGELOG.md#v1230-2023-03-24)
+  * **Feature**: This release adds a new field (FlywheelArn) to the EntitiesDetectionJobProperties object. The FlywheelArn field is returned in the DescribeEntitiesDetectionJob and ListEntitiesDetectionJobs responses when the EntitiesDetection job is started with a FlywheelArn instead of an EntityRecognizerArn .
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.41.0](service/rds/CHANGELOG.md#v1410-2023-03-24)
+  * **Feature**: Added error code CreateCustomDBEngineVersionFault for when the create custom engine version for Custom engines fails.
+
+# Release (2023-03-23)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.22.0](service/batch/CHANGELOG.md#v1220-2023-03-23)
+  * **Feature**: This feature allows Batch to support configuration of ephemeral storage size for jobs running on FARGATE
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkidentity`: [v1.11.0](service/chimesdkidentity/CHANGELOG.md#v1110-2023-03-23)
+  * **Feature**: AppInstanceBots can be used to add a bot powered by Amazon Lex to chat channels.  ExpirationSettings provides automatic resource deletion for AppInstanceUsers.
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines`: [v1.3.0](service/chimesdkmediapipelines/CHANGELOG.md#v130-2023-03-23)
+  * **Feature**: This release adds Amazon Chime SDK call analytics. Call analytics include voice analytics, which provides speaker search and voice tone analysis. These capabilities can be used with Amazon Transcribe and Transcribe Call Analytics to generate machine-learning-powered insights from real-time audio.
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging`: [v1.14.0](service/chimesdkmessaging/CHANGELOG.md#v1140-2023-03-23)
+  * **Feature**: ExpirationSettings provides automatic resource deletion for Channels.
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkvoice`: [v1.3.0](service/chimesdkvoice/CHANGELOG.md#v130-2023-03-23)
+  * **Feature**: This release adds Amazon Chime SDK call analytics. Call analytics include voice analytics, which provides speaker search and voice tone analysis. These capabilities can be used with Amazon Transcribe and Transcribe Call Analytics to generate machine-learning-powered insights from real-time audio.
+* `github.com/aws/aws-sdk-go-v2/service/codeartifact`: [v1.18.0](service/codeartifact/CHANGELOG.md#v1180-2023-03-23)
+  * **Feature**: Repository CreationTime is added to the CreateRepository and ListRepositories API responses.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.19.0](service/guardduty/CHANGELOG.md#v1190-2023-03-23)
+  * **Feature**: Adds AutoEnableOrganizationMembers attribute to DescribeOrganizationConfiguration and UpdateOrganizationConfiguration APIs.
+* `github.com/aws/aws-sdk-go-v2/service/ivsrealtime`: [v1.0.0](service/ivsrealtime/CHANGELOG.md#v100-2023-03-23)
+  * **Release**: New AWS service client module
+  * **Feature**: Initial release of the Amazon Interactive Video Service RealTime API.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.34.0](service/mediaconvert/CHANGELOG.md#v1340-2023-03-23)
+  * **Feature**: AWS Elemental MediaConvert SDK now supports passthrough of ID3v2 tags for audio inputs to audio-only HLS outputs.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.72.0](service/sagemaker/CHANGELOG.md#v1720-2023-03-23)
+  * **Feature**: Amazon SageMaker Autopilot adds two new APIs - CreateAutoMLJobV2 and DescribeAutoMLJobV2. Amazon SageMaker Notebook Instances now supports the ml.geospatial.interactive instance type.
+* `github.com/aws/aws-sdk-go-v2/service/servicediscovery`: [v1.21.0](service/servicediscovery/CHANGELOG.md#v1210-2023-03-23)
+  * **Feature**: Reverted the throttling exception RequestLimitExceeded for AWS Cloud Map APIs introduced in SDK version 1.12.424 2023-03-09 to previous exception specified in the ErrorCode.
+* `github.com/aws/aws-sdk-go-v2/service/textract`: [v1.21.0](service/textract/CHANGELOG.md#v1210-2023-03-23)
+  * **Feature**: The AnalyzeDocument - Tables feature adds support for new elements in the API: table titles, footers, section titles, summary cells/tables, and table type.
+
+# Release (2023-03-22)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.19.8](service/iam/CHANGELOG.md#v1198-2023-03-22)
+  * **Documentation**: Documentation updates for AWS Identity and Access Management (IAM).
+* `github.com/aws/aws-sdk-go-v2/service/iottwinmaker`: [v1.11.0](service/iottwinmaker/CHANGELOG.md#v1110-2023-03-22)
+  * **Feature**: This release adds support of adding metadata when creating a new scene or updating an existing scene.
+* `github.com/aws/aws-sdk-go-v2/service/networkmanager`: [v1.17.8](service/networkmanager/CHANGELOG.md#v1178-2023-03-22)
+  * **Documentation**: This release includes an update to create-transit-gateway-route-table-attachment, showing example usage for TransitGatewayRouteTableArn.
+* `github.com/aws/aws-sdk-go-v2/service/resiliencehub`: [v1.10.0](service/resiliencehub/CHANGELOG.md#v1100-2023-03-22)
+  * **Feature**: This release provides customers with the ability to import resources from within an EKS cluster and assess the resiliency of EKS cluster workloads.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.36.0](service/ssm/CHANGELOG.md#v1360-2023-03-22)
+  * **Feature**: This Patch Manager release supports creating, updating, and deleting Patch Baselines for AmazonLinux2023, AlmaLinux.
+
 # Release (2023-03-21)
 
 ## General Highlights

@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Creates a proxy session for the specified Amazon Chime SDK Voice Connector for
+// the specified participant phone numbers.
 func (c *Client) CreateProxySession(ctx context.Context, params *CreateProxySessionInput, optFns ...func(*Options)) (*CreateProxySessionOutput, error) {
 	if params == nil {
 		params = &CreateProxySessionInput{}
@@ -28,29 +30,44 @@ func (c *Client) CreateProxySession(ctx context.Context, params *CreateProxySess
 
 type CreateProxySessionInput struct {
 
+	// The proxy session's capabilities.
+	//
 	// This member is required.
 	Capabilities []types.Capability
 
+	// The participant phone numbers.
+	//
 	// This member is required.
 	ParticipantPhoneNumbers []string
 
+	// The Voice Connector ID.
+	//
 	// This member is required.
 	VoiceConnectorId *string
 
+	// The number of minutes allowed for the proxy session.
 	ExpiryMinutes *int32
 
+	// The preference for matching the country or area code of the proxy phone number
+	// with that of the first participant.
 	GeoMatchLevel types.GeoMatchLevel
 
+	// The country and area code for the proxy phone number.
 	GeoMatchParams *types.GeoMatchParams
 
+	// The name of the proxy session.
 	Name *string
 
+	// The preference for proxy phone number reuse, or stickiness, between the same
+	// participants across sessions.
 	NumberSelectionBehavior types.NumberSelectionBehavior
 
 	noSmithyDocumentSerde
 }
 
 type CreateProxySessionOutput struct {
+
+	// The proxy session details.
 	ProxySession *types.ProxySession
 
 	// Metadata pertaining to the operation's result.

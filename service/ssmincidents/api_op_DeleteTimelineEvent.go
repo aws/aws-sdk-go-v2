@@ -28,8 +28,8 @@ func (c *Client) DeleteTimelineEvent(ctx context.Context, params *DeleteTimeline
 
 type DeleteTimelineEventInput struct {
 
-	// The ID of the event you are updating. You can find this by using
-	// ListTimelineEvents.
+	// The ID of the event to update. You can use ListTimelineEvents to find an event's
+	// ID.
 	//
 	// This member is required.
 	EventId *string

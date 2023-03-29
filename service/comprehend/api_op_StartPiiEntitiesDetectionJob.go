@@ -30,8 +30,8 @@ func (c *Client) StartPiiEntitiesDetectionJob(ctx context.Context, params *Start
 
 type StartPiiEntitiesDetectionJobInput struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role that grants Amazon Comprehend read access to your input data.
+	// The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend
+	// read access to your input data.
 	//
 	// This member is required.
 	DataAccessRoleArn *string
@@ -82,10 +82,10 @@ type StartPiiEntitiesDetectionJobInput struct {
 type StartPiiEntitiesDetectionJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the PII entity detection job. It is a unique,
-	// fully qualified identifier for the job. It includes the AWS account, Region, and
-	// the job ID. The format of the ARN is as follows:
-	// arn::comprehend:::pii-entities-detection-job/ The following is an example job
-	// ARN:
+	// fully qualified identifier for the job. It includes the Amazon Web Services
+	// account, Amazon Web Services Region, and the job ID. The format of the ARN is as
+	// follows: arn::comprehend:::pii-entities-detection-job/ The following is an
+	// example job ARN:
 	// arn:aws:comprehend:us-west-2:111122223333:pii-entities-detection-job/1234abcd12ab34cd56ef1234567890ab
 	JobArn *string
 

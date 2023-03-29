@@ -121,23 +121,30 @@ type PackageDependency struct {
 
 	// The type of a package dependency. The possible values depend on the package
 	// type.
-	// - npm: regular, dev, peer, optional
-	// - maven: optional, parent, compile,
+	//
+	// * npm: regular, dev, peer, optional
+	//
+	// * maven: optional, parent, compile,
 	// runtime, test, system, provided. Note that parent is not a regular Maven
 	// dependency type; instead this is extracted from the  element if one is defined
 	// in the package version's POM file.
-	// - nuget: The dependencyType field is never
+	//
+	// * nuget: The dependencyType field is never
 	// set for NuGet packages.
-	// - pypi: Requires-Dist
+	//
+	// * pypi: Requires-Dist
 	DependencyType *string
 
 	// The namespace of the package that this package depends on. The package component
 	// that specifies its namespace depends on its type. For example:
-	// - The namespace
+	//
+	// * The namespace
 	// of a Maven package is its groupId.
-	// - The namespace of an npm package is its
+	//
+	// * The namespace of an npm package is its
 	// scope.
-	// - Python and NuGet packages do not contain a corresponding component,
+	//
+	// * Python and NuGet packages do not contain a corresponding component,
 	// packages of those formats do not have a namespace.
 	Namespace *string
 
@@ -163,13 +170,17 @@ type PackageDescription struct {
 
 	// The namespace of the package. The package component that specifies its namespace
 	// depends on its type. For example:
-	// - The namespace of a Maven package is its
+	//
+	// * The namespace of a Maven package is its
 	// groupId.
-	// - The namespace of an npm package is its scope.
-	// - Python and NuGet
+	//
+	// * The namespace of an npm package is its scope.
+	//
+	// * Python and NuGet
 	// packages do not contain a corresponding component, packages of those formats do
 	// not have a namespace.
-	// - The namespace of a generic package is it’s namespace.
+	//
+	// * The namespace of a generic package is its namespace.
 	Namespace *string
 
 	// The package origin configuration for the package.
@@ -216,13 +227,17 @@ type PackageSummary struct {
 
 	// The namespace of the package. The package component that specifies its namespace
 	// depends on its type. For example:
-	// - The namespace of a Maven package is its
+	//
+	// * The namespace of a Maven package is its
 	// groupId.
-	// - The namespace of an npm package is its scope.
-	// - Python and NuGet
+	//
+	// * The namespace of an npm package is its scope.
+	//
+	// * Python and NuGet
 	// packages do not contain a corresponding component, packages of those formats do
 	// not have a namespace.
-	// - The namespace of a generic package is it’s namespace.
+	//
+	// * The namespace of a generic package is its namespace.
 	Namespace *string
 
 	// A PackageOriginConfiguration
@@ -258,14 +273,18 @@ type PackageVersionDescription struct {
 
 	// The namespace of the package version. The package version component that
 	// specifies its namespace depends on its type. For example:
-	// - The namespace of a
+	//
+	// * The namespace of a
 	// Maven package version is its groupId.
-	// - The namespace of an npm package version
+	//
+	// * The namespace of an npm package version
 	// is its scope.
-	// - Python and NuGet package versions do not contain a corresponding
-	// component, package versions of those formats do not have a namespace.
-	// - The
-	// namespace of a generic package is it’s namespace.
+	//
+	// * Python and NuGet package versions do not contain a
+	// corresponding component, package versions of those formats do not have a
+	// namespace.
+	//
+	// * The namespace of a generic package is its namespace.
 	Namespace *string
 
 	// A PackageVersionOrigin
@@ -305,14 +324,20 @@ type PackageVersionDescription struct {
 type PackageVersionError struct {
 
 	// The error code associated with the error. Valid error codes are:
-	// -
+	//
+	// *
 	// ALREADY_EXISTS
-	// - MISMATCHED_REVISION
-	// - MISMATCHED_STATUS
-	// - NOT_ALLOWED
-	// -
+	//
+	// * MISMATCHED_REVISION
+	//
+	// * MISMATCHED_STATUS
+	//
+	// * NOT_ALLOWED
+	//
+	// *
 	// NOT_FOUND
-	// - SKIPPED
+	//
+	// * SKIPPED
 	ErrorCode PackageVersionErrorCode
 
 	// The error message associated with the error.
@@ -383,6 +408,9 @@ type RepositoryDescription struct {
 	// The Amazon Resource Name (ARN) of the repository.
 	Arn *string
 
+	// A timestamp that represents the date and time the repository was created.
+	CreatedTime *time.Time
+
 	// A text description of the repository.
 	Description *string
 
@@ -417,12 +445,16 @@ type RepositoryExternalConnectionInfo struct {
 
 	// The package format associated with a repository's external connection. The valid
 	// package formats are:
-	// - npm: A Node Package Manager (npm) package.
-	// - pypi: A
+	//
+	// * npm: A Node Package Manager (npm) package.
+	//
+	// * pypi: A
 	// Python Package Index (PyPI) package.
-	// - maven: A Maven package that contains
+	//
+	// * maven: A Maven package that contains
 	// compiled code in a distributable format, such as a JAR file.
-	// - nuget: A NuGet
+	//
+	// * nuget: A NuGet
 	// package.
 	PackageFormat PackageFormat
 
@@ -444,6 +476,9 @@ type RepositorySummary struct {
 
 	// The ARN of the repository.
 	Arn *string
+
+	// A timestamp that represents the date and time the repository was created.
+	CreatedTime *time.Time
 
 	// The description of the repository.
 	Description *string

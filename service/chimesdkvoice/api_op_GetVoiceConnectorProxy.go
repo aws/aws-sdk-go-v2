@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Retrieves the proxy configuration details for the specified Amazon Chime SDK
+// Voice Connector.
 func (c *Client) GetVoiceConnectorProxy(ctx context.Context, params *GetVoiceConnectorProxyInput, optFns ...func(*Options)) (*GetVoiceConnectorProxyOutput, error) {
 	if params == nil {
 		params = &GetVoiceConnectorProxyInput{}
@@ -28,6 +30,8 @@ func (c *Client) GetVoiceConnectorProxy(ctx context.Context, params *GetVoiceCon
 
 type GetVoiceConnectorProxyInput struct {
 
+	// The Voice Connector ID.
+	//
 	// This member is required.
 	VoiceConnectorId *string
 
@@ -35,6 +39,8 @@ type GetVoiceConnectorProxyInput struct {
 }
 
 type GetVoiceConnectorProxyOutput struct {
+
+	// The proxy configuration details.
 	Proxy *types.Proxy
 
 	// Metadata pertaining to the operation's result.

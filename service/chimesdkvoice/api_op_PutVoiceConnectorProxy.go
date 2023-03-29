@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Puts the specified proxy configuration to the specified Amazon Chime SDK Voice
+// Connector.
 func (c *Client) PutVoiceConnectorProxy(ctx context.Context, params *PutVoiceConnectorProxyInput, optFns ...func(*Options)) (*PutVoiceConnectorProxyOutput, error) {
 	if params == nil {
 		params = &PutVoiceConnectorProxyInput{}
@@ -28,23 +30,34 @@ func (c *Client) PutVoiceConnectorProxy(ctx context.Context, params *PutVoiceCon
 
 type PutVoiceConnectorProxyInput struct {
 
+	// The default number of minutes allowed for proxy session.
+	//
 	// This member is required.
 	DefaultSessionExpiryMinutes *int32
 
+	// The countries for proxy phone numbers to be selected from.
+	//
 	// This member is required.
 	PhoneNumberPoolCountries []string
 
+	// The Voice Connector ID.
+	//
 	// This member is required.
 	VoiceConnectorId *string
 
+	// When true, stops proxy sessions from being created on the specified Amazon Chime
+	// SDK Voice Connector.
 	Disabled *bool
 
+	// The phone number to route calls to after a proxy session expires.
 	FallBackPhoneNumber *string
 
 	noSmithyDocumentSerde
 }
 
 type PutVoiceConnectorProxyOutput struct {
+
+	// The proxy configuration details.
 	Proxy *types.Proxy
 
 	// Metadata pertaining to the operation's result.

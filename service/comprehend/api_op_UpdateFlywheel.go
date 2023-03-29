@@ -37,8 +37,8 @@ type UpdateFlywheelInput struct {
 	// The Amazon Resource Number (ARN) of the active model version.
 	ActiveModelArn *string
 
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role that grants Amazon Comprehend permission to access the flywheel data.
+	// The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend
+	// permission to access the flywheel data.
 	DataAccessRoleArn *string
 
 	// Flywheel data security configuration.

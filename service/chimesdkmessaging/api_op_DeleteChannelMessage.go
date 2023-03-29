@@ -13,8 +13,8 @@ import (
 // Deletes a channel message. Only admins can perform this action. Deletion makes
 // messages inaccessible immediately. A background process deletes any revisions
 // created by UpdateChannelMessage. The x-amz-chime-bearer request header is
-// mandatory. Use the AppInstanceUserArn of the user that makes the API call as the
-// value in the header.
+// mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the
+// API call as the value in the header.
 func (c *Client) DeleteChannelMessage(ctx context.Context, params *DeleteChannelMessageInput, optFns ...func(*Options)) (*DeleteChannelMessageOutput, error) {
 	if params == nil {
 		params = &DeleteChannelMessageInput{}
@@ -37,7 +37,7 @@ type DeleteChannelMessageInput struct {
 	// This member is required.
 	ChannelArn *string
 
-	// The AppInstanceUserArn of the user that makes the API call.
+	// The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
 	//
 	// This member is required.
 	ChimeBearer *string
