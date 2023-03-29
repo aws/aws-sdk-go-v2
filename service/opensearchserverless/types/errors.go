@@ -7,9 +7,9 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// When creating a collection, thrown when a collection with the same name already
-// exists or is being created. When deleting a collection, thrown when the
-// collection is not in the ACTIVE or FAILED state.
+// When creating a resource, thrown when a resource with the same name already
+// exists or is being created. When deleting a resource, thrown when the resource
+// is not in the ACTIVE or FAILED state.
 type ConflictException struct {
 	Message *string
 
@@ -61,6 +61,32 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
+// OCU Limit Exceeded for service limits
+type OcuLimitExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *OcuLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *OcuLimitExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *OcuLimitExceededException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "OcuLimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *OcuLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // Thrown when accessing or deleting a resource that does not exist.
 type ResourceNotFoundException struct {
 	Message *string
@@ -86,6 +112,38 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// Thrown when you attempt to create more resources than the service allows based
+// on service quotas.
+type ServiceQuotaExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	ResourceId   *string
+	ResourceType *string
+	ServiceCode  *string
+	QuotaCode    *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ServiceQuotaExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServiceQuotaExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServiceQuotaExceededException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ServiceQuotaExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Thrown when the HTTP request contains invalid input or is missing required
 // input.

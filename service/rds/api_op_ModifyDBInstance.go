@@ -286,9 +286,11 @@ type ModifyDBInstanceInput struct {
 	// that DB parameter group family. If you specify only a major version, Amazon RDS
 	// will update the DB instance to the default minor version if the current minor
 	// version is lower. For information about valid engine versions, see
-	// CreateDBInstance, or call DescribeDBEngineVersions. In RDS Custom for Oracle,
-	// this parameter is supported for read replicas only if they are in the
-	// PATCH_DB_FAILURE lifecycle.
+	// CreateDBInstance, or call DescribeDBEngineVersions. If the instance that you're
+	// modifying is acting as a read replica, the engine version that you specify must
+	// be the same or later than the version that the source DB instance or cluster is
+	// running. In RDS Custom for Oracle, this parameter is supported for read replicas
+	// only if they are in the PATCH_DB_FAILURE lifecycle.
 	EngineVersion *string
 
 	// The new Provisioned IOPS (I/O operations per second) value for the RDS instance.

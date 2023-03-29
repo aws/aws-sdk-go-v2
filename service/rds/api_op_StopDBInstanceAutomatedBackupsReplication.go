@@ -34,7 +34,7 @@ func (c *Client) StopDBInstanceAutomatedBackupsReplication(ctx context.Context, 
 type StopDBInstanceAutomatedBackupsReplicationInput struct {
 
 	// The Amazon Resource Name (ARN) of the source DB instance for which to stop
-	// replicating automated backups, for example,
+	// replicating automate backups, for example,
 	// arn:aws:rds:us-west-2:123456789012:db:mydatabase.
 	//
 	// This member is required.

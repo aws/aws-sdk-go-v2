@@ -1663,6 +1663,10 @@ type DBInstance struct {
 	// instance.
 	ReadReplicaDBInstanceIdentifiers []string
 
+	// Contains the identifier of the source DB cluster if this DB instance is a read
+	// replica.
+	ReadReplicaSourceDBClusterIdentifier *string
+
 	// Contains the identifier of the source DB instance if this DB instance is a read
 	// replica.
 	ReadReplicaSourceDBInstanceIdentifier *string

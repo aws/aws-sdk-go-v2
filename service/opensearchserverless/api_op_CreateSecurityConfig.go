@@ -48,7 +48,8 @@ type CreateSecurityConfigInput struct {
 	// A description of the security configuration.
 	Description *string
 
-	// Describes SAML options in in the form of a key-value map.
+	// Describes SAML options in in the form of a key-value map. This field is required
+	// if you specify saml for the type parameter.
 	SamlOptions *types.SamlConfigOptions
 
 	noSmithyDocumentSerde

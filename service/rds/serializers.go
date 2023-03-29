@@ -10915,6 +10915,11 @@ func awsAwsquery_serializeOpDocumentCreateDBInstanceReadReplicaInput(v *CreateDB
 		objectKey.String(string(v.ReplicaMode))
 	}
 
+	if v.SourceDBClusterIdentifier != nil {
+		objectKey := object.Key("SourceDBClusterIdentifier")
+		objectKey.String(*v.SourceDBClusterIdentifier)
+	}
+
 	if v.SourceDBInstanceIdentifier != nil {
 		objectKey := object.Key("SourceDBInstanceIdentifier")
 		objectKey.String(*v.SourceDBInstanceIdentifier)

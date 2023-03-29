@@ -1,0 +1,8 @@
+{
+    "id": "c3dce342-2f97-4d53-be26-9b5ff14c3e81",
+    "type": "feature",
+    "description": "This release includes two new exception types \"ServiceQuotaExceededException\" and \"OcuLimitExceededException\".",
+    "modules": [
+        "service/opensearchserverless"
+    ]
+}

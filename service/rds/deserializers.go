@@ -2461,6 +2461,9 @@ func awsAwsquery_deserializeOpErrorCreateDBInstanceReadReplica(response *smithyh
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
+	case strings.EqualFold("DBClusterNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorDBClusterNotFoundFault(response, errorBody)
+
 	case strings.EqualFold("DBInstanceAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorDBInstanceAlreadyExistsFault(response, errorBody)
 
@@ -2490,6 +2493,9 @@ func awsAwsquery_deserializeOpErrorCreateDBInstanceReadReplica(response *smithyh
 
 	case strings.EqualFold("InsufficientDBInstanceCapacity", errorCode):
 		return awsAwsquery_deserializeErrorInsufficientDBInstanceCapacityFault(response, errorBody)
+
+	case strings.EqualFold("InvalidDBClusterStateFault", errorCode):
+		return awsAwsquery_deserializeErrorInvalidDBClusterStateFault(response, errorBody)
 
 	case strings.EqualFold("InvalidDBInstanceState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBInstanceStateFault(response, errorBody)
@@ -28563,6 +28569,19 @@ func awsAwsquery_deserializeDocumentDBInstance(v **types.DBInstance, decoder smi
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentReadReplicaDBInstanceIdentifierList(&sv.ReadReplicaDBInstanceIdentifiers, nodeDecoder); err != nil {
 				return err
+			}
+
+		case strings.EqualFold("ReadReplicaSourceDBClusterIdentifier", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ReadReplicaSourceDBClusterIdentifier = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("ReadReplicaSourceDBInstanceIdentifier", t.Name.Local):

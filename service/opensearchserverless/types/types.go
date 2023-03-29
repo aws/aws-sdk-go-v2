@@ -72,8 +72,9 @@ type AccountSettingsDetail struct {
 
 	// The maximum capacity limits for all OpenSearch Serverless collections, in
 	// OpenSearch Compute Units (OCUs). These limits are used to scale your collections
-	// based on the current workload. For more information, see Autoscaling
-	// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-overview.html#serverless-scaling).
+	// based on the current workload. For more information, see Managing capacity
+	// limits for Amazon OpenSearch Serverless
+	// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html).
 	CapacityLimits *CapacityLimits
 
 	noSmithyDocumentSerde
@@ -81,8 +82,9 @@ type AccountSettingsDetail struct {
 
 // The maximum capacity limits for all OpenSearch Serverless collections, in
 // OpenSearch Compute Units (OCUs). These limits are used to scale your collections
-// based on the current workload. For more information, see Autoscaling
-// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-overview.html#serverless-scaling).
+// based on the current workload. For more information, see Managing capacity
+// limits for Amazon OpenSearch Serverless
+// (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html).
 type CapacityLimits struct {
 
 	// The maximum indexing capacity for collections.
@@ -280,8 +282,7 @@ type SamlConfigOptions struct {
 	// The group attribute for this SAML integration.
 	GroupAttribute *string
 
-	// The session timeout, in minutes. Minimum is 15 minutes and maximum is 1440
-	// minutes (24 hours or 1 day). Default is 60 minutes.
+	// The session timeout, in minutes. Default is 60 minutes (12 hours).
 	SessionTimeout *int32
 
 	// A user attribute for this SAML integration.
@@ -506,7 +507,7 @@ type VpcEndpointDetail struct {
 	// The ID of the subnets from which you access OpenSearch Serverless.
 	SubnetIds []string
 
-	// The ID of the VPC from which you access OpenSearch Serverless
+	// The ID of the VPC from which you access OpenSearch Serverless.
 	VpcId *string
 
 	noSmithyDocumentSerde
